@@ -6,14 +6,16 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AppRoutingModule, routing } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
-import { NewevaluationComponent } from './newevaluation/newevaluation.component'
+import { NewevaluationComponent } from './newevaluation/newevaluation.component';
+import { PreviousevaluationComponent } from './previousevaluation/previousevaluation.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    NewevaluationComponent
+    NewevaluationComponent,
+    PreviousevaluationComponent
   ],
   imports: [
     BrowserModule,

@@ -6,12 +6,14 @@ import {ModuleWithProviders} from '@angular/core';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { NewevaluationComponent } from './newevaluation/newevaluation.component';
+import { PreviousevaluationComponent } from './previousevaluation/previousevaluation.component';
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'nuevaevaluacion', component: NewevaluationComponent },
+  { path: 'evaluacionprevia', component: PreviousevaluationComponent },
   { path: '**', component: LoginComponent }
 ];
 
