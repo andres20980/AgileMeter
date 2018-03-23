@@ -7,7 +7,8 @@ import { LoginComponent } from './login/login.component';
 import { AppRoutingModule, routing } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 import { NewevaluationComponent } from './newevaluation/newevaluation.component';
-import { PreviousevaluationComponent } from './previousevaluation/previousevaluation.component'
+import { PreviousevaluationComponent } from './previousevaluation/previousevaluation.component';
+import { MenunewevaluationComponent } from './menunewevaluation/menunewevaluation.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { PreviousevaluationComponent } from './previousevaluation/previousevalua
     LoginComponent,
     HomeComponent,
     NewevaluationComponent,
-    PreviousevaluationComponent
+    PreviousevaluationComponent,
+    MenunewevaluationComponent
   ],
   imports: [
     BrowserModule,
