@@ -14,10 +14,7 @@
           <div class="form-group">
           <label for="sel1">Proyecto:</label>
           <select class="form-control form-control-sm">
-              <option selected>Seleccione un proyecto</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              <option *ngFor="let proyecto of ListaDeProyectos">{{proyecto.nombre}}</option>
           </select>
           </div>
       </div>

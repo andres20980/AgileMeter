@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AppComponent } from '../app.component';
+import { User } from '../login/User';
+import { Proyecto } from '../login/Proyecto';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+    public ListaDeProyectos:Array<Proyecto>;
+
+  constructor(private _app: AppComponent) { }
 
   ngOnInit() {
+      this.ListaDeProyectos = this._app._storageDataService.UserData.proyectosDeUsuario;
   }
 
 }
