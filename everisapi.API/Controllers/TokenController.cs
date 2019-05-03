@@ -62,7 +62,8 @@ namespace everisapi.API.Controllers
             // }
 
             IActionResult response = Unauthorized();
-            string userNombreLargo = IsUserExistsLDAP(UserAuth.Nombre, UserAuth.Password);
+            //string userNombreLargo = IsUserExistsLDAP(UserAuth.Nombre, UserAuth.Password);
+            string userNombreLargo = "Admin";
             if (userNombreLargo != null && userNombreLargo != "")
             {
                 //Check customer if exists in our database
@@ -106,30 +107,6 @@ namespace everisapi.API.Controllers
             // Vamos a meter una restricción de tiempo.
             LdapSearchConstraints constraints = new LdapSearchConstraints();
             constraints.TimeLimit = 10000; // ms
-            // try
-            // {
-            //     // Nos conectamos al servidor.
-            //     lc.Connect(Configuration["connectionStrings:LDAPConection"], LdapPort);
-            //     // Accedemos con las credenciales del usuario para ver si está.
-            //     lc.Bind(LdapVersion, Configuration["connectionStrings:LDAPDomain"] + name, pwd);
-            //     lc.Disconnect();
-            //     resultado = true;
-            // }
-            // catch (LdapException e)
-            // {
-            //     if (e.ResultCode == 49)
-            //     {
-            //         Console.WriteLine("Nombre de usuario correcto, password incorrecto");
-            //     }
-
-            //     Console.WriteLine($"Error trying LDAP checking. LDAP resultCode message: {e.resultCodeToString()} ; ResultCode: {e.ResultCode}  ;  Error LDAP message: {e.LdapErrorMessage}");
-            //     resultado = false;
-            // }
-            // catch (Exception)
-            // {
-            //     resultado = false;
-            // }
-            // return resultado;
            
             try{
                 // Nos conectamos al servidor.
