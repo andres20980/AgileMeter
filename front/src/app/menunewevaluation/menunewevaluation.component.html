@@ -1,0 +1,122 @@
+<div class="corregir position-relative">
+  <div class="position-absolute error-msg">
+    <div *ngIf="(ErrorMessage != null || ErrorMessage != undefined )" class="alert alert-danger" id="danger">
+      <strong>{{ErrorMessage}}</strong>
+    </div>
+    <div *ngIf="anadeNota != null" class=" alert alert-success">
+      {{anadeNota}}
+    </div>
+
+    <!-- <div *ngIf="cargar">
+      <app-loading></app-loading>
+    </div> -->
+  </div>
+
+  <div class="container">
+      <app-breadcrumb></app-breadcrumb>
+      <div class="ng-card-box p-5 br-2 mat-elevation-z5">
+    <!-- <div class="row m-0">
+      <div class="col-3"></div>
+      <h3 class="col-6 text-center mb-5">Secciones de evaluación</h3>
+
+    </div> -->
+
+    <div class="row">
+      <div class="col">
+        <h3>Secciones de evaluación</h3>
+      </div>
+    </div>
+
+    <div *ngIf="ListaDeDatos.length == 0" class="loading mt-4">
+        <app-loading></app-loading>
+    </div>
+
+    <div class="row mt-0" *ngFor="let dato of ListaDeDatos; let i = index" id="bajar">
+      <div class="col-1">
+      </div>
+
+      <div class="col-xs-6 col-sm-1 col-md-1" id="barraespacio" *ngIf="ScreenWidth >= 576">
+        <img class="icon" *ngIf="dato.progreso!=100 && dato.progreso > 0" src="assets/green_no.png" title="No completado"
+          alt="No completado">
+        <img class="icon" *ngIf="dato.progreso==100" src="assets/green_si.png" alt="Completado" title="Completado">
+      </div>
+
+      <div class="col-4 btn-container">
+
+        <div class="main-button section-btn mat-elevation-z5 w-85 m-auto" (click)="RedirectToAsignaciones(dato,i)">
+          <a>{{dato.nombre}} </a>
+          <!-- <span *ngIf="ScreenWidth <= 576">
+            <img class="icon" *ngIf="dato.progreso!=100 && dato.progreso > 0" src="assets/green_no.png" alt="No completado">
+            <img class="icon" *ngIf="dato.progreso==100" src="assets/green_si.png" alt="Completado">
+          </span> -->
+        </div>
+
+      </div>
+
+      <div class="col-4 mt-4 pt-0" id="barraespacio">
+        <ngb-progressbar type="success" [value]="dato.progreso" *ngIf="dato.progreso==100">
+          <span class="progress-text">{{dato.progreso}}%</span>
+        </ngb-progressbar>
+
+        <ngb-progressbar type="warning" [value]="dato.progreso" *ngIf="dato.progreso!=100">
+          <span class="progress-text">{{dato.progreso}}%</span>
+        </ngb-progressbar>
+
+        <p class="mt-1 font-italic">Respondidas {{dato.contestadas}} de {{dato.preguntas}} </p>
+      </div>
+
+
+      <div class="col-1">
+        <button class="transparente" (click)="AbrirModalNotas(notas, i)">
+          <img class="comment" *ngIf="dato.notas != null" src="assets/comment filled.png" title="Hay notas" />
+          <img class="comment" *ngIf="dato.notas == null" src="assets/comment empty.png" title="No hay notas" />
+        </button>
+      </div>
+
+    </div>
+
+    <div class="row m-0 mt-3 centered" *ngIf="ListaDeDatos.length != 0">
+        <!-- <div class="col-3"></div> -->
+        <!-- <div class="col-6 p-0"> -->
+          <app-btn-finalize-evaluation [evaluacion]="Evaluacion"></app-btn-finalize-evaluation>
+        <!-- </div> -->
+        <!-- <div class="col-3"></div> -->
+    </div>
+  </div>
+</div>
+  <!-- <div *ngIf="ListaDeDatos.length == 0">
+    <app-loading></app-loading>
+  </div> -->
+
+  <ng-template #notas let-cl="close" let-di="dismiss">
+    <div class="modal-content mat-elevation-z8 border-0">
+      <div class="modal-header custom-modal-header">
+        <h5 class="modal-title">Notas de la Sección</h5> 
+        <!-- <button type="button" class="close" (click)="cl('Cerrar')">
+          <span aria-hidden="true">×</span>
+        </button> -->
+      </div>
+      <div class="modal-body">
+        <textarea class="form-control custom-text-area" maxlength="4000" placeholder="Inserte aquí el texto" rows="10" [(ngModel)]="textoModal"></textarea>
+        <p id="numletras" class="mr-2 mt-2 mb-0">{{textoModal.length}}/4000</p>
+
+      </div>
+      <div class="container-fluid p-3 bt-1">
+        <!-- <div class="row mx-0">
+          <div class="col">
+          </div>
+        </div> -->
+        <div class="row p-0">
+          <div class="col">
+            <button type="button" class="main-button w-100 modal-btns border-curve" (click)="di('Guardar')">Guardar</button>
+          </div>
+          <div class="col">
+            <button type="button" class="secondary-button w-100 modal-btns border-curve" (click)="cl('Cerrar')">Cancelar</button>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>
+<br />

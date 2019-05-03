@@ -1,0 +1,56 @@
+@import'theme.scss';
+
+#infopro {
+    border: 1px solid #99AD00;
+    margin: 0 auto;
+    padding: 15px 15px;
+    text-align: left;
+    max-width: 1100px;
+    font-size: 16px;
+  
+    &.main-button {
+      text-align: center !important;
+    }
+  }
+
+.finish-disable{
+    pointer-events: none;
+    opacity: 0.10 !important;
+    user-select: none;
+  }
+
+.m-finish {
+    // height: 39px;
+    // width: 170.531px;
+    // margin-left: 40%;
+    // border-radius: .25rem;
+
+    height: 46px;
+    width: 220px;
+    border-radius: 5px;
+  }
+
+.finish:hover {
+    background-color: #428442 !important;
+  }
+
+  .modal-content{
+    border:none;
+  }
+
+  .modal-btns {
+    height: 50px;
+    padding-top: 11px;
+  }
+
+  .custom-modal-header {
+    background: linear-gradient(to right, mat-color($mat-everis, 200) , mat-color($mat-everis, 50), mat-color($mat-everis, 500),  mat-color($mat-everis, 400));
+    //background: linear-gradient(to right, #87a900, #59971c, #2a8a41, #317daf);
+    color: white;
+    font-weight: bold;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  .border-curve{
+    border-radius: .25rem;
+  }

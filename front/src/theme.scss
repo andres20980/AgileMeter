@@ -1,0 +1,63 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+
+
+$mat-everis:(
+    50:#5c981b,
+    100: #c8e6c9,
+    200: #87a900,
+    300: #03a8c0,
+    400: #317daf,
+    500: #2a8a41,
+    600: #43a047,
+    700: #388e3c,
+    800: #2e7d32,
+    900: #1b5e20,
+    A100: #ffffff,
+    A200: #69f0ae,
+    A400: #00e676,
+    A700: #00c853,
+    contrast: (
+      50: #5c981b,
+      100: $dark-primary-text,
+      200: $dark-primary-text,
+      300: $dark-primary-text,
+      400: $dark-primary-text,
+      500: $dark-primary-text,
+      600: $light-primary-text,
+      700: $light-primary-text,
+      800: $light-primary-text,
+      900: $light-primary-text,
+      A100: $dark-primary-text,
+      A200: $dark-primary-text,
+      A400: $dark-primary-text,
+      A700: $dark-primary-text,
+    )
+  );
+
+  $mat-light-theme-background: (
+  status-bar: map_get($mat-grey, 300),
+  app-bar:    map_get($mat-grey, 100),
+  background: map_get($mat-everis, A100),
+  hover:      rgba(map_get($mat-everis, 50), 0.05), // TODO(kara): check style with Material Design UX
+  card:       white,
+  dialog:     white,
+  disabled-button: $black-12-opacity,
+  raised-button: white,
+  focused-button: $black-6-opacity,
+  selected-button: map_get($mat-grey, 300),
+  selected-disabled-button: map_get($mat-grey, 400),
+  disabled-button-toggle: map_get($mat-grey, 200),
+  unselected-chip: map_get($mat-grey, 300),
+  disabled-list-option: map_get($mat-grey, 200),
+);
+
+$my-app-primary: mat-palette($mat-everis, 50);
+$my-app-accent:  mat-palette($mat-everis, 50);
+$my-app-warn:    mat-palette($mat-deep-orange);
+$my-app-background: mat-palette($mat-everis, 50);
+
+$my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
+
+@include angular-material-theme($my-app-theme);

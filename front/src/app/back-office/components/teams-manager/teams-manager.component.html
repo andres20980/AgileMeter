@@ -1,0 +1,42 @@
+
+  <div class="team-table">
+    <div>
+      <mat-table [dataSource]="dataSource" multiTemplateDataRows matSort aria-label="Elements">
+        <!-- oficina  -->
+        <ng-container matColumnDef="officeName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Oficina</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.officeName}}</mat-cell>
+        </ng-container>
+          
+        <!-- unidad  -->
+        <ng-container matColumnDef="unityName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Unidad</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.unityName}}</mat-cell>
+        </ng-container>
+
+        <!-- proyecto  -->
+        <ng-container matColumnDef="nombre">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Proyecto</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.nombre}}</mat-cell>
+        </ng-container>
+        
+        <!-- equipo  -->
+        <ng-container matColumnDef="teamName">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Equipo</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.teamName}}</mat-cell>
+        </ng-container>
+
+        <!-- tamaño  -->
+        <ng-container matColumnDef="projectSize">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Tamaño</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.projectSize}}</mat-cell>
+        </ng-container>
+        
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+
+      <mat-paginator #paginator [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[10, 20, 50]">
+      </mat-paginator>
+    </div>
+  </div>

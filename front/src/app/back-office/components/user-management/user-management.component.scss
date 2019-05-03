@@ -1,0 +1,67 @@
+@import 'theme.scss';
+
+.segmented-control input[type="radio"] {
+	display: none;
+	cursor: pointer;
+}
+
+.segmented-control{
+	display: inline-block;
+}
+
+
+.segmented-control .list-group-item {
+	margin-bottom: 0;
+	margin-left:-4px;
+	margin-right: 0;
+}
+
+  .segmented-control label {
+	display: inline-block;
+	background-color: white;
+	cursor: pointer;
+	border-radius: 0px !important;
+
+	&.seleccionado{
+		background-color: #99AD01;
+		z-index: 1000;
+		color: white;
+	}
+  }
+
+  .mat-form-field {
+    display: inline-block;
+    position: relative;
+    text-align: left;
+    width: 300px;
+}
+
+.modal-btns {
+  height: 50px;
+  padding-top: 11px;
+}
+
+.custom-modal-header {
+  //background: linear-gradient(to right, mat-color($mat-everis, 50) , mat-color($mat-everis, 50),  mat-color($mat-everis, 50),   mat-color($mat-everis, 400));
+	background: linear-gradient(to right, mat-color($mat-everis, 200) , mat-color($mat-everis, 50), mat-color($mat-everis, 500),  mat-color($mat-everis, 400));
+	color: white;
+  font-weight: bold;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+button.transparente{
+	background-color: Transparent;
+	background-repeat: no-repeat;
+	border: none;
+	cursor: pointer;
+	overflow: hidden;
+	outline: none;
+	width: 60px;
+}
+
+i.delete{
+	color: red;
+}
+
+

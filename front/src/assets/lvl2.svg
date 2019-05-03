@@ -1,0 +1,13 @@
+<svg width="76" height="76" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid" class="lds-blank">
+ <g>
+  <title>background</title>
+  <rect x="-1" y="-1" width="78" height="78" id="canvas_background" fill="none"/>
+ </g>
+
+ <g>
+  <title>Layer 1</title>
+  <circle cx="38" cy="38" fill="none" r="35" stroke-width="3" id="svg_1" stroke="#37bf59"/>
+  <circle cx="38.000175" cy="37.999932" fill="none" r="30" stroke="#c1de5d" stroke-width="3" id="svg_2"/>
+  <circle opacity="0" cx="38.000175" cy="37.749827" fill="none" r="21" stroke="#c1de5d" stroke-width="5" id="svg_3"/>
+ </g>
+</svg>

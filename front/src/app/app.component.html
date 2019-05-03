@@ -1,0 +1,108 @@
+<!--Ventana mas grande-->
+<div class="container-fluid p-0">
+  <div class="no-print" id='cssmenu' *ngIf="_router.url != '/login' && _router.url != '/' && ScreenWidth > 776">
+    <div class="text-centerc row p-0 m-0">
+
+      <div class="col-3 p-0">
+        <div class="row p-0 m-0">
+            <div *ngIf="this._storageDataService.RoleAdmin == true" class="col p-0 us-none" id="backoffice">
+                <a routerLink="/backoffice" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Backoffice</a>
+              </div>
+              
+          <div class="col-5 p-0 us-none" id="inicio">
+            <!-- <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a> -->
+          </div>
+          
+
+          <div class="text-center col evaluacion p-0" *ngIf="this._storageDataService.RoleAdmin != true && AssessmentName != null && NombreDeProyecto != null">
+            <!-- <strong>
+              {{NombreDeProyecto}} - {{this._storageDataService.AssessmentSelected.assessmentName}}
+            </strong> -->
+          </div>
+
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="row p-0">
+          <div *ngIf="AssessmentName == null || NombreDeProyecto == null || this._storageDataService.RoleAdmin != true" class="col-3"></div>
+                 
+          <div class="text-center col-3 evaluacion p-0" *ngIf="AssessmentName != null && NombreDeProyecto != null && this._storageDataService.RoleAdmin == true">
+            <!-- <strong>
+              {{NombreDeProyecto}} - {{this._storageDataService.AssessmentSelected.assessmentName}}
+            </strong> -->
+          </div>
+          <!-- <div class="text-center col-6 title-center us-none title-agile">AgileMeter</div> -->
+          <div class="col-6 col-centered"> 
+            <div class="logo-container"> 
+              <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <img  src="assets/logo.png" style="width: 17rem;"/>
+              </a>
+            </div>
+          </div>
+
+          <div class="col-3"></div>
+        </div>
+      </div>
+      <!--       
+      <div class="proyecto text-center col" *ngIf="AssessmentName != null">Evaluación:
+        {{this._storageDataService.AssessmentSelected.assessmentName}}</div>
+       
+
+      
+      <div class="proyecto text-center col" *ngIf="NombreDeProyecto != null">Proyecto: {{NombreDeProyecto}}</div> -->
+
+
+      <div class="col-3 p-0 right-navbar">
+        <div class="row p-0 m-0">
+          <div class="text-right col p-0 hello-customer" *ngIf="NombreDeUsuario != null">Hola, <b>{{UserLongName}}</b></div>
+          <div class="text-right col-2 p-0" id="cerrarsesion"><a routerLink="/login"><i class="material-icons icon35">
+                exit_to_app
+              </i></a></div>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>
+
+<!--Ventana mediana-->
+<div class="no-print text-center" id='cssmenu' *ngIf="_router.url != '/login' && _router.url != '/' && ScreenWidth <= 776 && ScreenWidth > 537">
+
+  <ul class="text-center">
+    <li class="active text-center top2" id="inicio"><a routerLink="/home">Inicio</a></li>
+    <li class="active text-center" id="backoffice"><a routerLink="/backoffice">Backoffice</a></li>
+    <li class="text-center margen2" [ngClass]="{'solo': NombreDeProyecto==null}">
+
+      <p class="text-center titulo2 noSelect">AgileMeter</p>
+      <p>
+        <span class="proyecto2" *ngIf="NombreDeProyecto != null">Proyecto: {{NombreDeProyecto}} |</span>
+        <span class="usuario2 noSelect" *ngIf="NombreDeUsuario != null">Usuario: <b>{{NombreDeUsuario}}</b></span>
+      </p>
+
+    </li>
+    <li class="text-center active top2" id="cerrarsesion"><a routerLink="/login">Cerrar sesi&oacute;n</a></li>
+  </ul>
+</div>
+
+<!--Ventana pequeña-->
+<div class="no-print text-center" id='cssmenu' *ngIf="_router.url != '/login' && _router.url != '/' && ScreenWidth <= 537">
+
+  <p class="text-center titulo3 noSelect">AgileMeter</p>
+  <p>
+    <span class="proyecto3" *ngIf="NombreDeProyecto != null">Proyecto: {{NombreDeProyecto}} |</span>
+    <span class="usuario3 noSelect" *ngIf="NombreDeUsuario != null">Usuario: <b>{{NombreDeUsuario}}</b></span>
+  </p>
+
+  <ul class="text-center">
+    <li class="active text-center" id="inicio"><a routerLink="/home">Inicio</a></li>
+    <li class="text-center active" id="cerrarsesion"><a routerLink="/login"><i class="material-icons">
+          exit_to_app
+        </i></a></li>
+  </ul>
+</div>
+
+
+<router-outlet></router-outlet>

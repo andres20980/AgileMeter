@@ -1,0 +1,401 @@
+<div class="corregir position-relative">
+  <div class="position-absolute error-msg">
+    <div *ngIf="(ErrorMessage != null || ErrorMessage != undefined )" class="alert alert-danger" id="danger">
+      <strong>{{ErrorMessage}}</strong>
+    </div>
+    <div *ngIf="anadeNota != null" class=" alert alert-success">
+      {{anadeNota}}
+    </div>
+  </div>
+
+  <div class="container" [ngClass]="('' + (Deshabilitar ? 'disabled' : ''))" *ngIf="InfoAsignacion.preguntas !=  null">
+      <app-breadcrumb></app-breadcrumb>
+    <!-- <div class="row m-0" hidden>
+      <div class="col-xs-12 col-sm-2 col-md-1 offset-md-2 p-0">
+        <div class="main-button rounded-back-btn position-relative" title="Volver a secciones" (click)="NextPreviousButton(0)">
+          
+         
+          <svg class="position-absolute b-icon" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512.001 512.001" style="enable-background:new 0 0 512.001 512.001;"
+            xml:space="preserve">
+            <g>
+              <g>
+                <path d="M384.834,180.699c-0.698,0-348.733,0-348.733,0l73.326-82.187c4.755-5.33,4.289-13.505-1.041-18.26
+                  c-5.328-4.754-13.505-4.29-18.26,1.041l-82.582,92.56c-10.059,11.278-10.058,28.282,0.001,39.557l82.582,92.561
+                  c2.556,2.865,6.097,4.323,9.654,4.323c3.064,0,6.139-1.083,8.606-3.282c5.33-4.755,5.795-12.93,1.041-18.26l-73.326-82.188
+                  c0,0,348.034,0,348.733,0c55.858,0,101.3,45.444,101.3,101.3s-45.443,101.3-101.3,101.3h-61.58
+                  c-7.143,0-12.933,5.791-12.933,12.933c0,7.142,5.79,12.933,12.933,12.933h61.58c70.12,0,127.166-57.046,127.166-127.166
+                  C512,237.745,454.954,180.699,384.834,180.699z" />
+              </g>
+            </g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+            <g></g>
+          </svg>
+
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-8 col-md-6 text-center">
+        <div class="container-fluid">
+          <div class="row justify-content-md-center">
+            <div class="col"></div>
+            <div class="col-md-auto">
+              <h2 class="d-inline">{{SectionSelected.nombre}}</h2>
+            </div>
+            <div class="col mt-1 position-relative">
+              <div class="position-absolute btn-ab">
+                <button class="transparente ml-4 position-relative" (click)="AbrirModalSec(notasSec)" title="Añadir notas">
+                  <span *ngIf="SectionSelected.notas != null" class="one-badge">1</span>
+                  <i *ngIf="SectionSelected.notas != null" class="material-icons comment-added" title="Añadir notas">
+                    fiber_manual_record
+                  </i>
+                  <i class="material-icons add-comment" alt="Añadir comentario">add_circle</i>
+                </button></div>
+
+            </div>
+
+          </div>
+        </div>
+
+
+      </div>
+      <div *ngIf="PageNow == NumMax" class="col-xs-12 col-sm-2 col-md-1 w-100 position-relative">
+        <div *ngIf="nextSection != null" class="secondary-button rounded-btn position-absolute next-section-box" title="Ir a la siguiente sección: {{nextSection.nombre}}"
+          (click)="redirectToNextSection()">
+          <i class="material-icons position-absolute next-section-icon">
+            arrow_forward
+          </i>
+        </div>
+      </div>
+    </div> -->
+    <!-- End of Section title  -->
+
+    <div class="ng-card-box p-5 br-2 mat-elevation-z5">
+        <div class="row">
+            <div class="col section-title">
+              <h3>{{SectionSelected.nombre}}</h3>
+              <button class="transparente" (click)="AbrirModalSec(notasSec)" title="Añadir notas">
+                  <img class="comment" *ngIf="SectionSelected.notas != null" src="assets/comment filled.png" title="Hay notas" />
+                  <img class="comment" *ngIf="SectionSelected.notas == null" src="assets/comment empty.png" title="No hay notas" />  
+                </button>
+                <h3 style="padding: 0em 1em 0em 1em;"> > </h3>
+                <h3>{{InfoAsignacion.nombre}}</h3>
+                <button class="transparente" (click)="AbrirModalAsig(notasAsset)" title="Añadir notas">
+                    <img class="comment" *ngIf="InfoAsignacion.notas != null" src="assets/comment filled.png" title="Hay notas" />
+                    <img class="comment" *ngIf="InfoAsignacion.notas == null" src="assets/comment empty.png" title="No hay notas" />  
+                  </button>
+            </div>
+        </div>
+    <!-- <div class="row m-0 mt-4" id="content-questions">
+      <div class="col p-0">
+        <div class="row m-0" id="content-questions-body">
+          <div class="col-8 offset-md-2 p-0 mat-elevation-z5" id="content-questions-box"> -->
+
+
+            <!-- <div class="row m-0 p-0 mb-3 py-3" id="module-title-row"> 
+              <div class="col-xs-12 col-sm-2 col-md-3"></div>
+              <div class="col-xs-12 col-sm-8 col-md-6">
+                <div class="container-fluid">
+                  <div class="row justify-content-md-center">
+                    <div class="col"></div>
+                    <div class="col-md-auto">
+                      <h4 class="d-inline">{{InfoAsignacion.nombre}}</h4>
+                    </div>
+                    <div class="col mt-1 position-relative">
+                      <div class="position-absolute btn-ab" id="module-notes">
+                        <button class="transparente ml-4 position-relative asignacion-notas" (click)="AbrirModalAsig(notasAsset)">
+                          <span *ngIf="InfoAsignacion.notas != null" class="one-badge">1</span>
+                          <i *ngIf="InfoAsignacion.notas != null" class="material-icons comment-added" title="Añadir notas">
+                            fiber_manual_record
+                          </i>
+                          <i class="material-icons add-comment" alt="Añadir comentario">add_circle</i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-2 col-md-3"></div>
+            </div> -->
+            <!-- End of module title  -->
+
+            <!-- Start of pagination -->
+            <div class="row dots m-4 ">
+              <div class="col">
+                <div class="d-flex justify-content-center">
+                  <div class="position-relative">
+                    <ul class="d-flex justify-content-center">
+                      <li *ngFor="let page of pagesArray; let i = index" [class.current]="i==PageNow-1"><a title="{{ListaAsignaciones[i].nombre}}">x</a></li>
+                     
+                    </ul>
+                    <i class="material-icons pointer b-f-buttons position-absolute back-btn" [ngClass]="{'disabled': PageNow == 1}"
+                      (click)="NextPreviousButton(2)" [attr.title]="PageNow == 1 ? '': 'Módulo anterior: '+ListaAsignaciones[PageNow-1].nombre">
+                     <img class="dots-icon" src="assets/round_navigate_before.png">
+                    </i>
+
+                    <i class="material-icons pointer b-f-buttons position-absolute next-btn" [ngClass]="{'disabled': PageNow == NumMax}"
+                      (click)="NextPreviousButton(1)" [attr.title]="PageNow == NumMax ? '': 'Siguiente módulo: '+ListaAsignaciones[PageNow].nombre">
+                      <img class="dots-icon" src="assets/round_navigate_next.png">
+                    </i>
+
+                    <i *ngIf="nextSection != null" class="material-icons pointer b-f-buttons position-absolute next-sec-btn"
+                      (click)="redirectToNextSection()" title="Siguiente sección: {{nextSection.nombre}}" >
+                      <img class="dots-icon" src="assets/round_navigate_next_double.png">
+                    </i>
+
+                    <i *ngIf="prevSection != null" class="material-icons pointer b-f-buttons position-absolute back-sec-btn" 
+                      (click)="redirectToPrevSection()" title="Sección anterior: {{prevSection.nombre}}">
+                      <img class="dots-icon" src="assets/round_navigate_before_double.png">
+                    </i>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End of pagination -->
+
+
+            <div class="container-fluid p-0 pt-0 px-5 pb-0">
+              <!-- Inicio preguntas  -->
+              <div class="questions-box mt-1">
+                <div class="row m-0" [class.mb-3]="i == (InfoAsignacion.preguntas.length-1)" id="preguntas{{i}}" *ngFor="let preguntaDada of InfoAsignacion.preguntas; let i = index">
+                  <div class="col-1"></div>
+                  <div class="col-xs-12 col-sm-5 col-md-7 pt-1 pb-2">
+                    {{i + 1}}. {{preguntaDada.pregunta}}
+                  </div>
+                  <div class="col-md-2 yes-no-centered" id="yes_no_btn_{{i}}">
+                    <div class="row m-0 yes-no-width">
+                      <div class="col p-0">
+                        <button class="w-100 h-100 questions-yes-btn mat-elevation-z3 item-not-selected"
+                          [class.first-item]="preguntaDada.esHabilitante"
+                          [class.item-full-disabled]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
+                          [class.item-not-selected]="(preguntaDada.respuesta.estado == 2) || (preguntaDada.respuesta.estado == 0 )"
+                          [class.item-disable-no-color]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
+                          (click)="AnswerQuestion(preguntaDada,i,1)">Sí</button>
+                      </div>
+                      <div class="col p-0">
+                        <button class="w-100 h-100 questions-no-btn mat-elevation-z3" 
+                          [class.first-item]="preguntaDada.esHabilitante"
+                          [class.item-full-disabled]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
+                          [class.item-not-selected]="(preguntaDada.respuesta.estado == 1) || (preguntaDada.respuesta.estado == 0)"
+                          [class.item-disable-no-color]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
+                          (click)="AnswerQuestion(preguntaDada,i,2)">No</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-xs-12 col-sm-1 col-md-1 pb-1 pl-13 yes-no-centered">
+                    <button *ngIf="checkHabilitante(preguntaDada)"
+                      class="transparente position-relative" (click)="AbrirModalPreg(notasPreg, i)">
+                      
+                      <!-- <span *ngIf="preguntaDada.respuesta.notas != null" class="one-badge">1</span>
+                      <i *ngIf="preguntaDada.respuesta.notas != null" class="material-icons comment-added" title="Añadir notas">
+                        fiber_manual_record
+                      </i>
+
+                      <i class="material-icons add-comment" alt="Añadir comentario">add_circle</i> -->
+
+                      <img class="comment-yes-no" *ngIf="preguntaDada.respuesta.notas != null" src="assets/comment filled.png" title="Hay notas" />
+                      <img class="comment-yes-no" *ngIf="preguntaDada.respuesta.notas == null" src="assets/comment empty.png" title="No hay notas" />  
+
+                    </button>
+
+                    <!-- <button *ngIf="preguntaDada.respuesta.notas == null &&  checkHabilitante(preguntaDada)"
+                      class="transparente" (click)="AbrirModalPreg(notasPreg, i)">
+                      <i class="material-icons add-comment" alt="Añadir comentario">add_circle</i>
+                    </button> -->
+
+                    <button *ngIf="!checkHabilitante(preguntaDada)"
+                      class="transparente position-relative disabled">
+                      
+                      <!-- <span *ngIf="preguntaDada.respuesta.notas != null" class="one-badge">1</span>
+                      <i *ngIf="preguntaDada.respuesta.notas != null" class="material-icons comment-added" title="Añadir notas">
+                        fiber_manual_record
+                      </i>
+                      <i class="material-icons add-comment" alt="Añadir comentario">add_circle</i> -->
+
+                      <img class="comment-yes-no" *ngIf="preguntaDada.respuesta.notas != null" src="assets/comment filled.png" title="Hay notas" />
+                      <img class="comment-yes-no" *ngIf="preguntaDada.respuesta.notas == null" src="assets/comment empty.png" title="No hay notas" />  
+
+                    </button>
+
+                    <!-- <button *ngIf="preguntaDada.respuesta.notas == null && !checkHabilitante(preguntaDada)"
+                      class="transparente disabled">
+                     <i class="material-icons add-comment" alt="Añadir comentario">add_circle</i>
+                    </button> -->
+                  </div>
+
+                  <br />
+                </div>
+                
+              </div>
+              <!-- Fin de preguntas -->
+
+                  <!-- Start of pagination -->
+            <div class="row dots m-0 ">
+                <div class="col">
+                  <div class="d-flex justify-content-center">
+                    <div class="position-relative">
+                      <ul class="d-flex justify-content-center">
+                        <li *ngFor="let page of pagesArray; let i = index" [class.current]="i==PageNow-1" ><a title="{{ListaAsignaciones[i].nombre}}">x</a></li>
+                       
+                      </ul>
+                      <i class="material-icons pointer b-f-buttons position-absolute back-btn" [ngClass]="{'disabled': PageNow == 1}"
+                      (click)="NextPreviousButton(2)" [attr.title]="PageNow == 1 ? '': 'Módulo anterior: '+ListaAsignaciones[PageNow-1].nombre">
+                        <img class="dots-icon" src="assets/round_navigate_before.png">
+                      </i>
+
+                      <i class="material-icons pointer b-f-buttons position-absolute next-btn" [ngClass]="{'disabled': PageNow == NumMax}"
+                      (click)="NextPreviousButton(1)" [attr.title]="PageNow == NumMax ? '': 'Siguiente módulo: '+ListaAsignaciones[PageNow].nombre">
+                        <img class="dots-icon" src="assets/round_navigate_next.png">
+                      </i>
+
+                      <i *ngIf="nextSection != null" class="material-icons pointer b-f-buttons position-absolute next-sec-btn"
+                        (click)="redirectToNextSection()" title="Siguiente sección: {{nextSection.nombre}}" >
+                        <img class="dots-icon" src="assets/round_navigate_next_double.png">
+                      </i>
+
+                      <i *ngIf="prevSection != null" class="material-icons pointer b-f-buttons position-absolute back-sec-btn" 
+                        (click)="redirectToPrevSection()" title="Sección anterior: {{prevSection.nombre}}">
+                        <img class="dots-icon" src="assets/round_navigate_before_double.png">
+                      </i>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- End of pagination -->
+            </div>
+
+            <div class="row m-0 mt-3 centered">
+                <div class="col-1" >
+                    <!-- <div class="secondary-button rounded-btn next-section-box" title="Volver a secciones" (click)="NextPreviousButton(0)">
+                        <mat-icon class="next-section-icon">
+                            keyboard_return       
+                          </mat-icon>
+                      </div> -->
+                </div>
+                <div class="col-3" >
+                    <app-btn-finalize-evaluation 
+                      [evaluacion]="Evaluation" 
+                      [changedQuestion]="changedQuestion" 
+                      [changedAnswer]="changedAnswer">
+                    </app-btn-finalize-evaluation>
+                  </div>
+                  <div class="col-1" >
+                  <!-- <div *ngIf="PageNow == NumMax">
+                      <div *ngIf="nextSection != null" class="secondary-button rounded-btn next-section-box" title="Siguiente sección: {{nextSection.nombre}}"
+                        (click)="redirectToNextSection()">
+                        <mat-icon class="next-section-icon">
+                            arrow_forward                                        
+                        </mat-icon>
+                      </div>
+                  </div> -->
+                </div>
+            </div>
+              
+            </div>
+          <!-- End of questions box -->
+
+        </div>
+        <!-- End of content-body -->
+      <!-- </div>
+    </div>
+  </div> -->
+  <ng-template #notasPreg let-cl="close" let-di="dismiss">
+    <div class="modal-content">
+      <div class="modal-header custom-modal-header">
+        <h5 class="modal-title">Notas de la Pregunta</h5> 
+        <!-- <button type="button" class="close" (click)="cl('Cerrar')">
+          <span aria-hidden="true">×</span>
+        </button> -->
+      </div>
+      <div class="modal-body">
+        <textarea class="form-control custom-text-area" maxlength="4000" placeholder="Inserte aquí el texto" rows="10"
+          [(ngModel)]="textoModal"></textarea>
+        <p id="numletras" class="mr-2 mt-2 mb-0">{{textoModal.length}}/4000</p>
+
+      </div>
+      <div class="container-fluid p-3 bt-1">
+        <div class="row p-0">
+          <div class="col">
+            <button type="button" class="main-button w-100 modal-btns border-curve" (click)="di('Guardar')">Guardar</button>
+          </div>
+          <div class="col">
+            <button type="button" class="secondary-button w-100 modal-btns border-curve" (click)="cl('Cerrar')">Cancelar</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #notasAsset let-cl="close" let-di="dismiss">
+    <div class="modal-content">
+      <div class="modal-header custom-modal-header">
+        <h5 class="modal-title">Notas del Módulo</h5> 
+        <!-- <button type="button" class="close" (click)="cl('Cerrar')">
+          <span aria-hidden="true">×</span>
+        </button> -->
+      </div>
+      <div class="modal-body">
+        <textarea class="form-control custom-text-area" maxlength="4000" placeholder="Inserte aquí el texto" rows="10"
+          [(ngModel)]="textoModal"></textarea>
+        <p id="numletras" class="mr-2 mt-2 mb-0">{{textoModal.length}}/4000</p>
+
+      </div>
+      <div class="container-fluid p-3 bt-1">
+        <div class="row p-0">
+          <div class="col">
+            <button type="button" class="main-button w-100 modal-btns border-curve" (click)="di('Guardar')">Guardar</button>
+          </div>
+          <div class="col">
+            <button type="button" class="secondary-button w-100 modal-btns border-curve" (click)="cl('Cerrar')">Cancelar</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #notasSec let-cl="close" let-di="dismiss">
+    <div class="modal-content">
+      <div class="modal-header custom-modal-header">
+        <h5 class="modal-title">Notas de la Sección</h5> 
+        <!-- <button type="button" class="close" (click)="cl('Cerrar')">
+          <span aria-hidden="true">×</span>
+        </button> -->
+      </div>
+      <div class="modal-body">
+        <textarea class="form-control custom-text-area" maxlength="4000" placeholder="Inserte aquí el texto" rows="10"
+          [(ngModel)]="textoModal"></textarea>
+        <p id="numletras" class="mr-2 mt-2 mb-0">{{textoModal.length}}/4000</p>
+
+      </div>
+      <div class="container-fluid p-3 bt-1">
+        <div class="row p-0">
+          <div class="col">
+            <button type="button" class="main-button w-100 modal-btns border-curve" (click)="di('Guardar')">Guardar</button>
+          </div>
+          <div class="col">
+            <button type="button" class="secondary-button w-100 modal-btns border-curve" (click)="cl('Cerrar')">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+</div>
+<br />

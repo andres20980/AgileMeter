@@ -1,0 +1,126 @@
+@import 'theme.scss';
+
+.loadingapp {
+  text-align: center;
+  //vertical-align: central;
+  display: block;
+  margin-top:25%;
+}
+
+body{font-family: Raleway, sans-serif;}
+
+.us-none{
+  user-select: none;
+}
+
+.w-85{
+  width:85% !important;
+}
+
+
+
+
+.modal-content{
+  border:none !important;
+}
+
+.transition-animation{
+  -webkit-transition: all .8s ease !important;
+  -moz-transition: all .8s ease !important;
+  -ms-transition: all .8s ease !important;
+  -o-transition: all .8s ease !important;
+  transition: all .8s ease !important;
+}
+
+.br-2{
+  border-radius:2px !important;
+}
+
+.main-button{
+  width: 310px;
+  height: 70px;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  color: #FFF;
+  text-align: center;
+  // letter-spacing: 1px;
+  background: mat-color($mat-everis, 50);
+  padding: 15px 20px;
+  // transition: all .5s ease;
+  // border-radius: 3px;
+  cursor: pointer;
+  padding-top:22px;
+  border: 1px solid mat-color($mat-everis, 50);
+  @extend .transition-animation;
+  &:hover{
+    color: mat-color($mat-everis, 50);
+    background: white;/*rgba(153, 173, 0, 0.03137254901960784);;*/
+    @extend .transition-animation;
+  }
+
+  &:focus{
+    outline:none;
+  }
+}
+
+
+
+.secondary-button{
+  width: 310px;
+  height: 70px;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  color: #FFF;
+  text-align: center;
+  // letter-spacing: 1px;
+  //background: #3498b7;
+  background: mat-color($mat-everis, 300);
+  padding: 15px 20px;
+  // transition: all .5s ease;
+  // border-radius: 3px;
+  cursor: pointer;
+  padding-top:22px;
+  border-radius:0px;
+  border: 1px solid  mat-color($mat-everis, 300) !important;
+  @extend .transition-animation;
+  &:hover{
+    color: mat-color($mat-everis, 300);
+    background: white !important;/*rgba(153, 173, 0, 0.03137254901960784);;*/
+    @extend .transition-animation;
+  }
+
+  &:focus{
+    outline: none;
+  }
+}
+
+
+.progress{
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+}
+
+.error-msg{
+  top:0;
+  left:0;
+  width:100%;
+  border-radius:0px;
+  text-align:center;
+}
+
+@media only screen and (max-width: 535px) {
+  .loadingapp {
+    text-align: center;
+    //vertical-align: central;
+    display: block;
+    margin-top: 35%;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .loadingapp {
+    text-align: center;
+    //vertical-align: central;
+    display: block;
+    margin-top: 45%;
+  }
+}

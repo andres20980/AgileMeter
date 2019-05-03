@@ -1,0 +1,145 @@
+@import 'theme.scss';
+
+
+.corregir {
+  margin-right: 5%;
+}
+
+.loginmodal-container {
+  margin-left: 35px;
+  margin-right: 35px;
+
+  input{
+    border-radius:5px !important;
+  }
+}
+
+body, html {
+  height: 100%;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(#ffffff, #cbcbcb);
+}
+
+.card-container {
+  background: #fff;
+  /* just in case there no content*/
+  padding: 0px 0px 30px;
+  margin: 0 auto 25px;
+  /* shadows and rounded borders */
+  // -moz-border-radius: .25rem;
+  // -webkit-border-radius: .25rem;
+  border-radius: 5px;
+  overflow: hidden;
+  // -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+  // -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+  // box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);
+}
+
+.corporation {
+  max-width: 150px;
+}
+
+.btn-acceder{
+    color: #fff;
+    background-color: mat-color($mat-everis, 50);
+    border-color:mat-color($mat-everis, 50);
+    width: 100%;
+    height: 50px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 5px;
+
+    &:hover{
+      color:mat-color($mat-everis, 50);
+      background: white;/*rgba(153, 173, 0, 0.03137254901960784);;*/
+      border: 1px solid mat-color($mat-everis, 50);
+    }
+}
+
+h1 {
+  text-align: center;
+}
+
+#titulo{
+  margin-top:40px;
+  font-size: 40pt;
+}
+
+.check-label{
+  font-family: Raleway, sans-serif;
+}
+
+.form-field{
+  width: 100%;
+}
+
+.form-icon{
+  font-size: 30px;
+  top: 5px !important;
+  color: mat-color($mat-everis, 50);
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-thick  {
+  color: mat-color($mat-everis, 50);
+}
+
+.login-title {
+  font-size: 30px;
+  color: #fff;
+  line-height: 1.2;
+  text-align: center;
+  display: block;
+  //position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  //background-color: mat-color($mat-everis, 50);
+  background: linear-gradient(to right, mat-color($mat-everis, 200) , mat-color($mat-everis, 50), mat-color($mat-everis, 500),  mat-color($mat-everis, 400));
+  padding-top: 15px;
+  padding-bottom: 10px;
+}
+
+.row-centered{
+  display: flex;
+  justify-content: center;
+  margin-right: 0px; 
+  margin-left: 0px; 
+
+}
+
+.container{
+  width: 20em;
+  padding-top: 180px;
+}
+
+.main-container{
+  background-image: url("/assets/icons_cloud.png");
+  background-position: top;
+  background-repeat: no-repeat;
+  padding-bottom: 45px;
+
+}
+
+.alert-login{
+  margin-top: -4rem;
+  position: absolute;
+  padding: 0.75rem 1rem;
+  margin-left: -5rem;
+  width: 28rem;
+  text-align: center;
+}
+
+.footer{
+  border-top: mat-color($mat-everis, 300) solid 1px;
+  text-align: center;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  color: mat-color($mat-everis, 300);
+}
+
+.logo-container{
+  width: 22rem;
+  margin-left: -3rem;
+  margin-top: -8rem;
+}
+

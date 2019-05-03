@@ -1,0 +1,71 @@
+[
+	{
+		"assesmentId":"1",
+		"name":"SCRUM",
+		"sections":[
+			{
+				"sectionId":"1", "name":"equipo", 
+				"levels":[
+					{"level":"1", "value":"20"},
+					{"level":"2", "value":"80"},
+					{"level":"3", "value":"50"}
+				]
+			},
+			{
+				"sectionId":"2", "name":"eventos", 
+				"levels":[
+					{"level":"0", "value":"70"},
+					{"level":"1", "value":"70"},
+					{"level":"2", "value":"70"}
+				]
+			},
+			{
+				"sectionId":"3", "name":"herramientas", 
+				"levels":[
+					{"level":"0", "value":"5"},
+					{"level":"1", "value":"5"},
+					{"level":"2", "value":"80"}
+				]
+			},
+			{
+				"sectionId":"3", "name":"mindset", 
+				"levels":[
+					{"level":"0", "value":"5"},
+					{"level":"1", "value":"5"},
+					{"level":"2", "value":"80"}
+				]
+			},
+			{
+				"sectionId":"3", "name":"aplicación práctica", 
+				"levels":[
+					{"level":"0", "value":"5"},
+					{"level":"1", "value":"5"},
+					{"level":"2", "value":"80"}
+				]
+			}
+		]
+	},
+	{
+		"assesmentId":"2",
+		"name":"KANBAN",
+		"sections":[
+			{
+				"sectionId":"4", "name":"kanban-ceremonias", 
+				"levels":[
+					{"level":"0", "value":"50"},
+					{"level":"1", "value":"50"},
+					{"level":"2", "value":"50"}
+				]
+			},
+			{
+				"sectionId":"5", "name":"kanban-roles", 
+				"levels":[
+					{"level":"0", "value":"50"},
+					{"level":"1", "value":"70"},
+					{"level":"2", "value":"70"}
+				]
+			}
+		]
+	}
+
+]

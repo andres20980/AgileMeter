@@ -1,0 +1,160 @@
+﻿<!doctype html>
+<html>
+<head>
+
+  <meta charset="utf-8">
+  <title>AgileMeter</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet/scss" type="text/css" href="index.scss">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+
+
+</head>
+<body>
+  
+  <app-root>
+    <!-- <div class="loadingapp" style="text-align: center; vertical-align: central; display: block; margin-top:15%;"> -->
+      <!-- <svg width="20%" height="20%" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="lds-blank"><circle cx="50" cy="50" fill="none" ng-attr-r="{{config.r3}}" ng-attr-stroke="{{config.c3}}" ng-attr-stroke-width="{{config.width}}" r="28" stroke="#71e797" stroke-width="4"><animate attributeName="stroke-dasharray" calcMode="linear" values="0 0 0 87.96459430051421 0 87.96459430051421;0 0 87.96459430051421 0 0 87.96459430051421;0 0 87.96459430051421 0 0 87.96459430051421;0 87.96459430051421 0 87.96459430051421 0 87.96459430051421;0 87.96459430051421 0 87.96459430051421 0 87.96459430051421" keyTimes="0;0.2;0.4;0.6;1" dur="1.5" begin="-1.5s" repeatCount="indefinite"></animate></circle><circle cx="50" cy="50" fill="none" ng-attr-r="{{config.r2}}" ng-attr-stroke="{{config.c2}}" ng-attr-stroke-width="{{config.width}}" r="23" stroke="#ccfc7e" stroke-width="4"><animate attributeName="stroke-dasharray" calcMode="linear" values="0 0 0 72.25663103256524 0 72.25663103256524;0 0 72.25663103256524 0 0 72.25663103256524;0 0 72.25663103256524 0 0 72.25663103256524;0 72.25663103256524 0 72.25663103256524 0 72.25663103256524;0 72.25663103256524 0 72.25663103256524 0 72.25663103256524" keyTimes="0;0.2;0.4;0.6;1" dur="1.5" begin="-1.38s" repeatCount="indefinite"></animate></circle><circle cx="50" cy="50" fill="none" ng-attr-r="{{config.r1}}" ng-attr-stroke="{{config.c1}}" ng-attr-stroke-width="{{config.width}}" r="18" stroke="#ffd564" stroke-width="4"><animate attributeName="stroke-dasharray" calcMode="linear" values="0 0 0 56.548667764616276 0 56.548667764616276;0 0 56.548667764616276 0 0 56.548667764616276;0 0 56.548667764616276 0 0 56.548667764616276;0 56.548667764616276 0 56.548667764616276 0 56.548667764616276;0 56.548667764616276 0 56.548667764616276 0 56.548667764616276" keyTimes="0;0.2;0.4;0.6;1" dur="1.5" begin="-1.26s" repeatCount="indefinite"></animate></circle><g transform="rotate(180 50 50)"><circle cx="50" cy="50" fill="none" ng-attr-r="{{config.r3}}" ng-attr-stroke="{{config.c3}}" ng-attr-stroke-width="{{config.width}}" r="28" stroke="#71e797" stroke-width="4"><animate attributeName="stroke-dasharray" calcMode="linear" values="0 0 0 87.96459430051421 0 87.96459430051421;0 0 87.96459430051421 0 0 87.96459430051421;0 0 87.96459430051421 0 0 87.96459430051421;0 87.96459430051421 0 87.96459430051421 0 87.96459430051421;0 87.96459430051421 0 87.96459430051421 0 87.96459430051421" keyTimes="0;0.2;0.4;0.6;1" dur="1.5" begin="-0.6599999999999999s" repeatCount="indefinite"></animate></circle><circle cx="50" cy="50" fill="none" ng-attr-r="{{config.r2}}" ng-attr-stroke="{{config.c2}}" ng-attr-stroke-width="{{config.width}}" r="23" stroke="#ccfc7e" stroke-width="4"><animate attributeName="stroke-dasharray" calcMode="linear" values="0 0 0 72.25663103256524 0 72.25663103256524;0 0 72.25663103256524 0 0 72.25663103256524;0 0 72.25663103256524 0 0 72.25663103256524;0 72.25663103256524 0 72.25663103256524 0 72.25663103256524;0 72.25663103256524 0 72.25663103256524 0 72.25663103256524" keyTimes="0;0.2;0.4;0.6;1" dur="1.5" begin="-0.78s" repeatCount="indefinite"></animate></circle><circle cx="50" cy="50" fill="none" ng-attr-r="{{config.r1}}" ng-attr-stroke="{{config.c1}}" ng-attr-stroke-width="{{config.width}}" r="18" stroke="#ffd564" stroke-width="4"><animate attributeName="stroke-dasharray" calcMode="linear" values="0 0 0 56.548667764616276 0 56.548667764616276;0 0 56.548667764616276 0 0 56.548667764616276;0 0 56.548667764616276 0 0 56.548667764616276;0 56.548667764616276 0 56.548667764616276 0 56.548667764616276;0 56.548667764616276 0 56.548667764616276 0 56.548667764616276" keyTimes="0;0.2;0.4;0.6;1" dur="1.5" begin="-0.96s" repeatCount="indefinite"></animate></circle></g></svg> -->
+      <!-- <img src="assets/spinner2.svg" style="width:20%; height:20%" /> -->
+    <!-- </div> -->
+    <style>
+       
+       .lds-ring {
+  display: inline-block;
+  position: absolute;
+  width: 150px;
+  height: 150px;
+
+  left: 50%;
+  margin-left: -75px;
+  top: 50%;
+  margin-top: -75px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  margin: 6px;
+  border: 10px solid #fff;
+  border-radius: 50%;
+  animation: lds-ring 1.4s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #0fb3d4 transparent transparent transparent;
+  /* border-color: #87a900 transparent transparent transparent; */
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.lds-ring2 {
+  display: inline-block;
+  position: absolute;
+  width: 120px;
+  height: 120px;
+
+  left: 50%;
+  margin-left: -60px;
+  top: 50%;
+  margin-top: -60px;
+}
+.lds-ring2 div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  margin: 6px;
+  border: 10px solid #fff;
+  border-radius: 50%;
+  animation: lds-ring2 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #37bf59 transparent transparent transparent;
+  /* border-color: #5c981b transparent transparent transparent; */
+}
+.lds-ring2 div:nth-child(1) {
+  animation-delay: -0.35s;
+}
+.lds-ring2 div:nth-child(2) {
+  animation-delay: -0.2s;
+}
+.lds-ring2 div:nth-child(3) {
+  animation-delay: -0.05s;
+}
+@keyframes lds-ring2 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.lds-ring3 {
+  display: inline-block;
+  position: absolute;
+  width: 90px;
+  height: 90px;
+
+  left: 50%;
+  margin-left: -45px;
+  top: 50%;
+  margin-top: -45px;
+}
+
+.lds-ring3 div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 90px;
+  height: 90px;
+  margin: 6px;
+  border: 10px solid #fff;
+  border-radius: 50%;
+  animation: lds-ring3 1s cubic-bezier(0.3, 0, 0.5, 1) infinite;
+  border-color: #c1de5d transparent transparent transparent;
+  /* border-color: #03a8c0 transparent transparent transparent; */
+}
+.lds-ring3 div:nth-child(1) {
+  animation-delay: -0.25s;
+}
+.lds-ring3 div:nth-child(2) {
+  animation-delay: -0.1s;
+}
+.lds-ring3 div:nth-child(3) {
+  animation-delay: 0.05s;
+}
+@keyframes lds-ring3 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+    </style>
+      
+      <div class="lds-ring" ><div></div><div></div><div></div><div></div></div>
+      <div class="lds-ring2" ><div></div><div></div><div></div><div></div></div>
+      <div class="lds-ring3" ><div></div><div></div><div></div><div></div></div>
+  </app-root>
+</body>
+</html>
