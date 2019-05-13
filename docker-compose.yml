@@ -34,7 +34,7 @@ services:
     container_name: agilemeterfront
     hostname: agilemeterfront
     ports:
-      - "4200:4200"
+      - "80:4200"
  
 # API
   agilemeter:
@@ -51,7 +51,7 @@ services:
     container_name: agilemeter
     hostname: agilemeter
     ports:
-      - "60406:60406"
+      - "81:60406"
 
 volumes:
   mysql:

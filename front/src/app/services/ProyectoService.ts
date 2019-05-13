@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 
 import { AppComponent } from '../app.component';
 import { UserWithRole } from 'app/Models/UserWithRole';
+import { StaticHelper } from './Helper';
 
 @Injectable()
 export class ProyectoService {
@@ -20,20 +21,8 @@ export class ProyectoService {
   constructor(private _http: Http,
     private _appComponent: AppComponent) {
 
-    /*if (isDevMode()) {
-      this.url = "http://localhost:60406/api/";
-    } else {
-      var loc = window.location.href;
-      var index = 0;
-      for (var i = 0; i < 3; i++) {
-        index = loc.indexOf("/", index + 1);
-      }
-
-      this.url = loc.substring(0, index) + "/api/";
-    }*/
-    this.url = window.location.protocol+"//"+ window.location.hostname + ":60406/api/";
-
-
+    //this.url = window.location.protocol +"//"+ window.location.hostname + ":60406/api/";    
+    this.url = StaticHelper.ReturnUrlByEnvironment();
   }
 
   //Este metdo nos permite verificar si el usuario ya esta logeado en la web

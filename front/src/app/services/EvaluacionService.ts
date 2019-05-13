@@ -15,6 +15,7 @@ import { User } from 'app/Models/User';
 import { AppComponent } from 'app/app.component';
 import { ProyectoService } from './ProyectoService';
 import { EvaluacionInfoWithProgress } from 'app/Models/EvaluacionInfoWithProgress';
+import { StaticHelper } from './Helper';
 
 @Injectable()
 export class EvaluacionService {
@@ -26,19 +27,8 @@ export class EvaluacionService {
     private _appComponent: AppComponent,
     private _proyectoService: ProyectoService) {
 
-    /*if (isDevMode()) {
-      this.url = "http://localhost:60406/api/";
-    } else {
-      var loc = window.location.href;
-      var index = 0;
-      for (var i = 0; i < 3; i++) {
-        index = loc.indexOf("/", index + 1);
-      }
-
-      this.url = loc.substring(0, index) + "/api/";
-    }*/
-    this.url = window.location.protocol+"//"+ window.location.hostname + ":60406/api/";
-
+    //this.url = window.location.protocol +"//"+ window.location.hostname + ":60406/api/";    
+    this.url = StaticHelper.ReturnUrlByEnvironment();
   }
 
   //Este metodo recoge todas las evaluaciones de la base de datos

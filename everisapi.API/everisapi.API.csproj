@@ -3,6 +3,12 @@
         <TargetFramework>netcoreapp2.1</TargetFramework>
     </PropertyGroup>
     <ItemGroup>
+      <Compile Remove="e2e\**" />
+      <Content Remove="e2e\**" />
+      <EmbeddedResource Remove="e2e\**" />
+      <None Remove="e2e\**" />
+    </ItemGroup>
+    <ItemGroup>
         <None Remove="src\app\services\global.ts" />
     </ItemGroup>
     <ItemGroup>

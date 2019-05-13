@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { AppComponent } from '../app.component';
 import { AsignacionUpdate } from 'app/Models/AsignacionUpdate';
 import { Respuesta } from 'app/Models/Respuesta';
+import { StaticHelper } from './Helper';
 
 @Injectable()
 export class RespuestasService {
@@ -20,18 +21,8 @@ export class RespuestasService {
 
   constructor(private _http: Http,
     private _appComponent: AppComponent) {
-    /*if (isDevMode()) {
-      this.url = "http://localhost:60406/api/";
-    } else {
-      var loc = window.location.href;
-      var index = 0;
-      for (var i = 0; i < 3; i++) {
-        index = loc.indexOf("/", index + 1);
-      }
-
-      this.url = loc.substring(0, index) + "/api/";
-    }*/
-    this.url = window.location.protocol+"//"+ window.location.hostname + ":60406/api/";
+        //this.url = window.location.protocol +"//"+ window.location.hostname + ":60406/api/";    
+        this.url = StaticHelper.ReturnUrlByEnvironment();
   }
 
 
