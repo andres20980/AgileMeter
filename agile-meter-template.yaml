@@ -1,0 +1,467 @@
+kind: Template
+apiVersion: v1
+metadata:
+  annotations:
+    description: Template to instantiate Agile Meter
+    openshift.io/display-name: Agile Meter project
+    tags: mysql, nodejs
+  name: agile-meter-project
+parameters:
+- name: APPLICATION_NAME
+  description: mysql root user
+  required: true
+  value: agile-meter
+- name: MYSQL_USER
+  description: mysql root user
+  required: true
+  value: root
+- name: MYSQL_DATABASE
+  description: mysql database name
+  required: true
+  value: agilemeter
+- name: MYSQL_USER
+  description: mysql root user
+  required: true
+  value: root
+- name: MYSQL_ROOT_PASSWORD
+  description: mysql root password
+  required: false
+  value:
+- name: MYSQL_PASSWORD
+  description: mysql password
+  required: false
+  value:
+- name: MYSQL_CAPACITY
+  description: mysql storage capacity
+  required: true
+  value: 15Gi
+- name: REPO_USER
+  description: Git user name
+  required: true
+- name: REPO_PASS
+  description: Git user password
+  required: true
+- name: SRC_BRANCH
+  description: Git source code branch
+  required: true
+  value: master
+- name: BACK_SRC_BRANCH
+  description: Git source code branch
+  required: true
+  value: openshift
+- name: OPENSHIFT_DOMAIN
+  description: Public domain
+  required: true
+  value: 23.97.158.29.nip.io
+- name: FULL_DOMAIN
+  description: Public domain
+  required: true
+  value: agilemeter.everis.com
+- name: MYSQL_CPU_LIMIT
+  description: limit of CPU for cad-api
+  required: true
+  value: 1000m
+- name: MYSQL_MEMORY_LIMIT
+  description: limit of MEMORY for cad-api
+  required: true
+  value: 1Gi
+- name: MYSQL_CPU_REQUEST
+  description: requests limit for cpu cad-api
+  required: true
+  value: 300m
+- name: MYSQL_MEMORY_REQUEST
+  description: request limit for memory cad-api
+  required: true
+  value: 512Mi
+- name: BACKEND_CPU_LIMIT
+  description: limit of CPU for cad-api
+  required: true
+  value: 1000m
+- name: BACKEND_MEMORY_LIMIT
+  description: limit of MEMORY for cad-api
+  required: true
+  value: 1Gi
+- name: BACKEND_CPU_REQUEST
+  description: requests limit for cpu cad-api
+  required: true
+  value: 300m
+- name: BACKEND_MEMORY_REQUEST
+  description: request limit for memory cad-api
+  required: true
+  value: 512Mi
+- name: FRONTEND_CPU_LIMIT
+  description: limit of CPU for cad-api
+  required: true
+  value: 1000m
+- name: FRONTEND_MEMORY_LIMIT
+  description: limit of MEMORY for cad-api
+  required: true
+  value: 1Gi
+- name: FRONTEND_CPU_REQUEST
+  description: requests limit for cpu cad-api
+  required: true
+  value: 300m
+- name: FRONTEND_MEMORY_REQUEST
+  description: request limit for memory cad-api
+  required: true
+  value: 512Mi
+objects:
+- kind: PersistentVolumeClaim
+  apiVersion: v1
+  metadata:
+    tags:
+      app: ${APPLICATION_NAME}
+    name: ${APPLICATION_NAME}-mysql
+  spec:
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: ${MYSQL_CAPACITY}
+- kind: ImageStream
+  apiVersion: v1
+  metadata:
+    tags:
+      app: ${APPLICATION_NAME}
+    name: ${APPLICATION_NAME}-mysql
+  spec: {}
+- kind: ImageStream
+  apiVersion: v1
+  metadata:
+    tags:
+      app: ${APPLICATION_NAME}
+    name: ${APPLICATION_NAME}-frontend
+  spec: {}
+- kind: ImageStream
+  apiVersion: v1
+  metadata:
+    tags:
+      app: ${APPLICATION_NAME}
+    name: ${APPLICATION_NAME}-backend
+  spec: {}
+- kind: BuildConfig
+  apiVersion: v1
+  metadata:
+    tags:
+      app: ${APPLICATION_NAME}
+    name: ${APPLICATION_NAME}-mysql
+    annotations:
+      template.alpha.openshift.io/wait-for-ready: 'true'
+  spec:
+    successfulBuildsHistoryLimit: 1
+    failedBuildsHistoryLimit: 3
+    source:
+      type: Git
+      git:
+        uri: https://${REPO_USER}:${REPO_PASS}@steps.everis.com/git/INNOVASEV/ScrumMeter.git
+        ref: "${SRC_BRANCH}"
+      contextDir: "AutoDumperAgile"
+    strategy:
+      type: Docker
+    output:
+      to:
+        kind: ImageStreamTag
+        name: ${APPLICATION_NAME}-mysql:latest
+    resources:
+      limits:
+        cpu: 500m
+        memory: 1Gi
+      requests:
+        cpu: 300m
+    triggers:
+      - type: ConfigChange
+- kind: BuildConfig
+  apiVersion: v1
+  metadata:
+    tags:
+      app: ${APPLICATION_NAME}
+    name: ${APPLICATION_NAME}-backend
+    annotations:
+      template.alpha.openshift.io/wait-for-ready: 'true'
+  spec:
+    successfulBuildsHistoryLimit: 1
+    failedBuildsHistoryLimit: 3
+    source:
+      type: Git
+      git:
+        uri: https://${REPO_USER}:${REPO_PASS}@steps.everis.com/git/INNOVASEV/ScrumMeter.git
+        ref: "${BACK_SRC_BRANCH}"
+      contextDir: "everisapi.API"
+    strategy:
+      type: Docker
+    output:
+      to:
+        kind: ImageStreamTag
+        name: ${APPLICATION_NAME}-backend:latest
+    resources:
+      limits:
+        cpu: 500m
+        memory: 1Gi
+      requests:
+        cpu: 300m
+    triggers:
+      - type: ConfigChange
+- kind: BuildConfig
+  apiVersion: v1
+  metadata:
+    tags:
+      app: ${APPLICATION_NAME}
+    name: ${APPLICATION_NAME}-frontend
+    annotations:
+      template.alpha.openshift.io/wait-for-ready: 'true'
+  spec:
+    successfulBuildsHistoryLimit: 1
+    failedBuildsHistoryLimit: 3
+    source:
+      type: Git
+      git:
+        uri: https://${REPO_USER}:${REPO_PASS}@steps.everis.com/git/INNOVASEV/ScrumMeter.git
+        ref: "${SRC_BRANCH}"
+      contextDir: "front"
+    strategy:
+      type: Docker
+    output:
+      to:
+        kind: ImageStreamTag
+        name: ${APPLICATION_NAME}-frontend:latest
+    resources:
+      limits:
+        cpu: 500m
+        memory: 1Gi
+      requests:
+        cpu: 300m
+    triggers:
+      - type: ConfigChange
+- kind: DeploymentConfig
+  apiVersion: v1
+  metadata:
+    name: ${APPLICATION_NAME}-mysql
+    labels:
+      app: ${APPLICATION_NAME}
+    annotations:
+      template.alpha.openshift.io/wait-for-ready: 'true'
+  spec:
+    strategy:
+      type: Recreate
+    replicas: 1
+    selector:
+      name: ${APPLICATION_NAME}-mysql
+    template:
+      metadata:
+        labels:
+          name: ${APPLICATION_NAME}-mysql
+      spec:
+        containers:
+        - name: ${APPLICATION_NAME}-mysql
+          args:
+            - '--ignore-db-dir=lost+found'
+          image: " "
+          ports:
+          - containerPort: 3306
+            protocol: TCP
+          resources:
+            limits:
+              cpu: ${MYSQL_CPU_LIMIT}
+              memory: ${MYSQL_MEMORY_LIMIT}
+            requests:
+              cpu: ${MYSQL_CPU_REQUEST}
+              memory: ${MYSQL_MEMORY_REQUEST}
+          env:
+          - name: MYSQL_ROOT_PASSWORD
+            value: ${MYSQL_ROOT_PASSWORD}
+          - name: MYSQL_USER
+            value: ${MYSQL_USER}
+          - name: MYSQL_PASSWORD
+            value: ${MYSQL_PASSWORD}
+          - name: MYSQL_DATABASE
+            value: ${MYSQL_DATABASE}
+          volumeMounts:
+          - mountPath: "/var/lib/mysql"
+            name: mysql-data
+          terminationMessagePath: "/dev/termination-log"
+          imagePullPolicy: IfNotPresent
+        volumes:
+        - name: mysql-data
+          persistentVolumeClaim:
+            claimName: ${APPLICATION_NAME}-mysql
+        restartPolicy: Always
+        dnsPolicy: ClusterFirst
+    triggers:
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+        - ${APPLICATION_NAME}-mysql
+        from:
+          kind: ImageStreamTag
+          name: ${APPLICATION_NAME}-mysql:latest
+    - type: ConfigChange
+- kind: DeploymentConfig
+  apiVersion: v1
+  metadata:
+    name: ${APPLICATION_NAME}-backend
+    labels:
+      app: ${APPLICATION_NAME}
+    annotations:
+      template.alpha.openshift.io/wait-for-ready: 'true'
+  spec:
+    strategy:
+      type: Recreate
+    replicas: 1
+    selector:
+      name: ${APPLICATION_NAME}-backend
+    template:
+      metadata:
+        labels:
+          name: ${APPLICATION_NAME}-backend
+      spec:
+        containers:
+        - name: ${APPLICATION_NAME}-backend
+          image: " "
+          ports:
+          - containerPort: 60406
+            protocol: TCP
+          resources:
+            limits:
+              cpu: ${BACKEND_CPU_LIMIT}
+              memory: ${BACKEND_MEMORY_LIMIT}
+            requests:
+              cpu: ${BACKEND_CPU_REQUEST}
+              memory: ${BACKEND_MEMORY_REQUEST}
+          terminationMessagePath: "/dev/termination-log"
+          imagePullPolicy: IfNotPresent
+        restartPolicy: Always
+        dnsPolicy: ClusterFirst
+    triggers:
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+        - ${APPLICATION_NAME}-backend
+        from:
+          kind: ImageStreamTag
+          name: ${APPLICATION_NAME}-backend:latest
+    - type: ConfigChange
+- kind: DeploymentConfig
+  apiVersion: v1
+  metadata:
+    name: ${APPLICATION_NAME}-frontend
+    labels:
+      app: ${APPLICATION_NAME}
+    annotations:
+      template.alpha.openshift.io/wait-for-ready: 'true'
+  spec:
+    strategy:
+      type: Recreate
+    replicas: 1
+    selector:
+      name: ${APPLICATION_NAME}-frontend
+    template:
+      metadata:
+        labels:
+          name: ${APPLICATION_NAME}-frontend
+      spec:
+        containers:
+        - name: ${APPLICATION_NAME}-frontend
+          image: " "
+          env:
+          - name: BACKEND_HOST
+            value: agilemeter.${OPENSHIFT_DOMAIN}
+          - name: BACKEND_PORT
+            value: "80"
+          ports:
+          - containerPort: 4200
+            protocol: TCP
+          resources:
+            limits:
+              cpu: ${FRONTEND_CPU_LIMIT}
+              memory: ${FRONTEND_MEMORY_LIMIT}
+            requests:
+              cpu: ${FRONTEND_CPU_REQUEST}
+              memory: ${FRONTEND_MEMORY_REQUEST}
+          terminationMessagePath: "/dev/termination-log"
+          imagePullPolicy: IfNotPresent
+        restartPolicy: Always
+        dnsPolicy: ClusterFirst
+    triggers:
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+        - ${APPLICATION_NAME}-frontend
+        from:
+          kind: ImageStreamTag
+          name: ${APPLICATION_NAME}-frontend:latest
+    - type: ConfigChange
+- kind: Service
+  apiVersion: v1
+  metadata:
+    name: agiledatabase
+    labels:
+      app: ${APPLICATION_NAME}
+  spec:
+    ports:
+    - name: 3306-tcp
+      protocol: TCP
+      port: 3306
+      targetPort: 3306
+    selector:
+      name: ${APPLICATION_NAME}-mysql
+    type: ClusterIP
+    sessionAffinity: None
+- kind: Service
+  apiVersion: v1
+  metadata:
+    name: agilemeter
+    labels:
+      app: ${APPLICATION_NAME}
+  spec:
+    ports:
+    - name: 60406-tcp
+      protocol: TCP
+      port: 60406
+      targetPort: 60406
+    selector:
+      name: ${APPLICATION_NAME}-backend
+    type: ClusterIP
+    sessionAffinity: None
+- kind: Service
+  apiVersion: v1
+  metadata:
+    name: agilemeterfront
+    labels:
+      app: ${APPLICATION_NAME}
+  spec:
+    ports:
+    - name: 4200-tcp
+      protocol: TCP
+      port: 4200
+      targetPort: 4200
+    selector:
+      name: ${APPLICATION_NAME}-frontend
+    type: ClusterIP
+    sessionAffinity: None
+- kind: Route
+  apiVersion: v1
+  metadata:
+    annotations:
+      description: Route for backend application.
+    labels:
+      app: ${APPLICATION_NAME}
+    name: ${APPLICATION_NAME}-backend
+  spec:
+    host: agilemeter.${OPENSHIFT_DOMAIN}
+    to:
+      name: agilemeter
+- kind: Route
+  apiVersion: v1
+  metadata:
+    annotations:
+      description: Route for web application.
+    labels:
+      app: ${APPLICATION_NAME}
+    name: ${APPLICATION_NAME}-frontend
+  spec:
+    host: ${FULL_DOMAIN}
+    to:
+      name: agilemeterfront
