@@ -4,11 +4,11 @@
 // The list of which env maps to which file can be found in `angular-cli.json`.
 
 
-//para Dev y pre: window.location.hostname
-//para Prod: agilemeter
+//para Dev y pre: window.location.hostname:81
+//para Prod: agilemeter:80
 
 export const environment = {
   production: false,
   backendHost: "agilemeter", 
-  backendPort: 81,
+  backendPort: 80,
 };
