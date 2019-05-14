@@ -106,6 +106,18 @@ parameters:
   required: true
   value: 512Mi
 objects:
+- kind: ConfigMap
+  apiVersion: v1
+  metadata:
+    labels:
+      app: ${APPLICATION_NAME}
+      role: mysql
+      template: ${APPLICATION_NAME}-mysql
+    name: mysql-agilemeter
+  data:
+    agilemeter.cnf: |-
+      [mysqld]
+      lower_case_table_names = 1
 - kind: PersistentVolumeClaim
   apiVersion: v1
   metadata:
@@ -278,12 +290,21 @@ objects:
           volumeMounts:
           - mountPath: "/var/lib/mysql"
             name: mysql-data
+          - mountPath: /etc/mysql/mysql.conf.d/agilemeter.cnf
+            name: mysql-agilemeter
+            subPath: agilemeter.cnf
           terminationMessagePath: "/dev/termination-log"
           imagePullPolicy: IfNotPresent
         volumes:
         - name: mysql-data
           persistentVolumeClaim:
             claimName: ${APPLICATION_NAME}-mysql
+        - name: mysql-agilemeter
+          configMap:
+            defaultMode: 420
+            items:
+              - key: agilemeter.cnf
+                path: agilemeter.cnf
         restartPolicy: Always
         dnsPolicy: ClusterFirst
     triggers:
