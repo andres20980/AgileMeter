@@ -172,8 +172,7 @@ namespace everisapi.API.Controllers
         }
 
         //Creamos un proyecto nuevo con los  datos estrictamente necesarios
-        var ProyectoEncontrado = Mapper.Map<ProyectoWithEvaluacionesDto>(proyectoDeUsuario);
-
+        var ProyectoEncontrado = Mapper.Map<ProyectoWithEvaluacionesDto>(proyectoDeUsuario);        
         return Ok(ProyectoEncontrado);
       }
       catch (Exception ex)
@@ -237,9 +236,11 @@ namespace everisapi.API.Controllers
     }
 
     /*DELETE PROYECTOS*/
-    [HttpDelete("proyectos/delete")]
+    [HttpPost("proyectos/delete")]
     public IActionResult DeleteProyecto([FromBody] ProyectoDto ProyectoDelete)
-    {
+    {  
+      UserEntity u= _usersInfoRepository.GetUser(ProyectoDelete.UserNombre,false);
+      ProyectoDelete.UserEntity= Mapper.Map<UsersDto>(u);
       //Si los datos son validos los guardara
       if (ProyectoDelete == null || !_usersInfoRepository.ProyectoExiste(ProyectoDelete.Id))
       {
@@ -261,6 +262,24 @@ namespace everisapi.API.Controllers
         return BadRequest();
       }
     }
+
+    /*ADD-TEAMS */
+  [HttpPost("proyectos/addTeam")]
+    public IActionResult AddTeam([FromBody] Equipos equipo)
+    {
+       try
+      {  
+        var results =_usersInfoRepository.AddTeam(equipo);
+        _logger.LogInformation("Returns equipo OK");
+        return Ok(results);
+      }
+      catch (Exception ex)
+      {        
+        _logger.LogCritical($"Se recogio un error al insertar el equipo: " + ex);
+        return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
+      }
+    }
+
 
   }
 }

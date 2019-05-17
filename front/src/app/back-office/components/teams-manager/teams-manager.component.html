@@ -1,29 +1,37 @@
-
+  <div class="row">
+      <div class="col-10">
+        <h3>Gestión de Equipos</h3>
+      </div>
+      
+        <!--<div class="col-2"> 
+          <a class="btn btn-success btn-lg btn-block col-12" routerLink="/backoffice/teamsmanager" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Alta Equipo</a>                   
+      </div>-->
+  </div>
   <div class="team-table">
     <div>
       <mat-table [dataSource]="dataSource" multiTemplateDataRows matSort aria-label="Elements">
         <!-- oficina  -->
         <ng-container matColumnDef="officeName">
           <mat-header-cell *matHeaderCellDef mat-sort-header>Oficina</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{row.officeName}}</mat-cell>
+          <mat-cell *matCellDef="let row">{{row.oficinaEntity.oficinaNombre}} </mat-cell>
         </ng-container>
           
         <!-- unidad  -->
         <ng-container matColumnDef="unityName">
           <mat-header-cell *matHeaderCellDef mat-sort-header>Unidad</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{row.unityName}}</mat-cell>
+          <mat-cell *matCellDef="let row">{{row.unidadEntity.unidadNombre}}</mat-cell>
         </ng-container>
 
         <!-- proyecto  -->
-        <ng-container matColumnDef="nombre">
+        <ng-container matColumnDef="linea">
           <mat-header-cell *matHeaderCellDef mat-sort-header>Proyecto</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{row.nombre}}</mat-cell>
+          <mat-cell *matCellDef="let row">{{row.lineaEntity.lineaNombre}}</mat-cell>
         </ng-container>
         
         <!-- equipo  -->
         <ng-container matColumnDef="teamName">
           <mat-header-cell *matHeaderCellDef mat-sort-header>Equipo</mat-header-cell>
-          <mat-cell *matCellDef="let row">{{row.teamName}}</mat-cell>
+          <mat-cell *matCellDef="let row">{{row.nombre}}</mat-cell>
         </ng-container>
 
         <!-- tamaño  -->
@@ -31,7 +39,20 @@
           <mat-header-cell *matHeaderCellDef mat-sort-header>Tamaño</mat-header-cell>
           <mat-cell *matCellDef="let row">{{row.projectSize}}</mat-cell>
         </ng-container>
-        
+
+         <!-- Acciones  -->
+         <ng-container matColumnDef="acciones">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <button class="transparente" (click)="modificarEquipo(row)">
+              <img class="edit" src="assets/edit.png" title="Modificar equipo" />
+            </button>
+            <button class="transparente" (click)="AbrirModal(content, row)">
+              <img class="informe" src="assets/delete.png" title="Eliminar equipo" />
+            </button>
+          </mat-cell>
+        </ng-container>
+
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
       </mat-table>
@@ -40,3 +61,25 @@
       </mat-paginator>
     </div>
   </div>
+
+  <ng-template #content let-cl="close" let-di="dismiss">
+      <div class="modal-content border-0">
+        <div class="modal-header custom-modal-header border-curve">
+          <h5 class="modal-title">Importante</h5> 
+        </div>
+        <div class="modal-body">
+          <p>El equipo {{selectedTeam.nombre}} se va a eliminar y por tanto sus {{selectedTeam.evaluaciones.length}} evaluaciones se borrarán. ¿Desea continuar?</p>
+        </div>
+        <div class="container-fluid p-3 bt-1">
+          <div class="row p-0">
+            <div class="col">
+                <button type="button" class="main-button mat-elevation-z4 w-100 modal-btns border-curve" (click)="di('Finish');">Aceptar</button>    
+            </div>
+            <div class="col">
+                <button type="button" class="secondary-button mat-elevation-z4 w-100 modal-btns border-curve" (click)="cl('Cerrar')">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    

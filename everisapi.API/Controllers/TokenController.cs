@@ -63,7 +63,7 @@ namespace everisapi.API.Controllers
 
             IActionResult response = Unauthorized();
             //string userNombreLargo = IsUserExistsLDAP(UserAuth.Nombre, UserAuth.Password);
-            string userNombreLargo = "Admin";
+            string userNombreLargo = UserAuth.Nombre;
             if (userNombreLargo != null && userNombreLargo != "")
             {
                 //Check customer if exists in our database

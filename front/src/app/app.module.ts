@@ -39,6 +39,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { SectionResultsComponent } from './pdfgenerator/section-results/section-results.component';
 import { TeamsManagerComponent } from './back-office/components/teams-manager/teams-manager.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
+import { AddTeamComponent } from './back-office/components/teams-manager/add-team/add-team.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,7 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
     SectionResultsComponent,
     TeamsManagerComponent,
     BreadcrumbComponent,
-
+    AddTeamComponent,  
   ],
   imports: [
     BrowserModule,

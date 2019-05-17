@@ -31,3 +31,40 @@ mat-cell:first-child, mat-footer-cell:first-child, mat-header-cell:first-child {
 mat-cell:last-child, mat-footer-cell:last-child, mat-header-cell:last-child {
   padding-right: 0px;
 }
+
+
+img.estado, img.comment, img.informe{
+  width: 40px;
+  height: 40px;
+}
+img.edit{
+  width: 37px;
+  height: 37px;
+}
+
+button.transparente{
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  width: 60px;
+}
+.border-curve{
+  border-radius: .25rem;
+}
+
+.modal-btns {
+  height: 50px;
+  padding-top: 11px;
+}
+
+.custom-modal-header {
+  background: linear-gradient(to right, mat-color($mat-everis, 200) , mat-color($mat-everis, 50), mat-color($mat-everis, 500),  mat-color($mat-everis, 400));
+  //background: linear-gradient(to right, #87a900, #59971c, #2a8a41, #317daf);
+  color: white;
+  font-weight: bold;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}

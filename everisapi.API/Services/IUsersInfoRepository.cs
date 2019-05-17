@@ -82,6 +82,9 @@ namespace everisapi.API.Services
 
     //Asigna un nuevo proyecto test a un nuevo usuario
     bool AddProjectTest(string userNombre);
+    
+    //Añade un nuevo equipo
+    bool AddTeam(Equipos equipo);
   }
 
   

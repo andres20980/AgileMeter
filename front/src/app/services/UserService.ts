@@ -20,8 +20,10 @@ export class UserService {
 
   constructor(private _http: Http,
     private _appComponent: AppComponent) {
-    //this.url = window.location.protocol +"//"+ window.location.hostname + ":60406/api/";    
-    this.url = StaticHelper.ReturnUrlByEnvironment();    
+	
+      //this.url = window.location.protocol +"//"+ window.location.hostname + ":60406/api/";    
+    this.url = StaticHelper.ReturnUrlByEnvironment();
+
   }
 
   //Este metodo recoge todos los usuarios de la base de datos

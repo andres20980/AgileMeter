@@ -39,4 +39,12 @@ export class BackOfficeComponent implements OnInit {
 
   }
 
+  teamsOptions(){
+    var x = document.getElementById("addteam");
+    if( x.style.display == "block")
+      x.style.display = "none";
+    else
+      x.style.display = "block";
+  }
+
 }

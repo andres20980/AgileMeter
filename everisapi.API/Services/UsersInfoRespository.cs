@@ -37,11 +37,11 @@ namespace everisapi.API.Services
       
       if(usuario.RoleId != (int)Roles.User)
       {
-        var proyectosE = _context.Proyectos.Where(p => p.TestProject == false || p.UserNombre == userNombre).OrderBy(p => p.Nombre).ToList();
+        var proyectosE = _context.Proyectos.Include(r=>r.LineaEntity).Where(p => p.TestProject == false || p.UserNombre == userNombre).OrderBy(p => p.Nombre).ToList();
         foreach (ProyectoEntity pe in proyectosE){
           ProyectoDto p = new ProyectoDto();
           p.Id = pe.Id;
-          p.Nombre = pe.TestProject ? pe.Nombre : String.Concat(pe.Nombre, " - " , pe.TeamName);
+          p.Nombre = pe.TestProject ? pe.Nombre : String.Concat(pe.Nombre, " - " , pe.LineaEntity.LineaNombre);
           p.Fecha = pe.Fecha;
           p.numFinishedEvals = _context.Evaluaciones.Where(e => e.ProyectoId == pe.Id && e.Estado).Count();
           p.numPendingEvals = _context.Evaluaciones.Where(e => e.ProyectoId == pe.Id && !e.Estado).Count();
@@ -77,7 +77,12 @@ namespace everisapi.API.Services
     //Devuelve un listado con todos los proyectos dados de alta en el sistema que no pertenezcan al grupo de pruebas de usuario
     public IEnumerable<ProyectoEntity> GetAllNotTestProjects()
     {
-      return _context.Proyectos.Where(p => !p.TestProject).ToList();
+      return _context.Proyectos            
+            .Include(r=>r.OficinaEntity)
+            .Include(r=>r.UnidadEntity)
+            .Include(r=>r.LineaEntity)
+            .Include(r=>r.Evaluaciones)            
+            .Where(p => !p.TestProject).ToList();
     }
 
     public IEnumerable<AssessmentEntity> GetAllAssessments(){
@@ -133,9 +138,13 @@ namespace everisapi.API.Services
     //Devuelve una lista con todos los datos del proyecto por su id
     public ProyectoEntity GetFullProject(int id)
     {
-      return _context.Proyectos.Include(p => p.Evaluaciones).
-               ThenInclude(Evaluacion => Evaluacion.Respuestas).
-               Where(p => p.Id == id).FirstOrDefault();
+      return _context.Proyectos
+              .Include(r=>r.OficinaEntity)
+              .Include(r=>r.UnidadEntity)
+              .Include(r=>r.LineaEntity)
+              .Include(p => p.Evaluaciones)
+              .ThenInclude(Evaluacion => Evaluacion.Respuestas)
+              .Where(p => p.Id == id).FirstOrDefault();
     }
 
     //Devuelve si el usuario esta bien logeado o no
@@ -216,14 +225,14 @@ namespace everisapi.API.Services
     public bool AddProjectTest(string userNombre)
     {
       ProyectoEntity proyecto = new ProyectoEntity();
+      proyecto.OficinaEntity = _context.Oficina.Where(o => o.OficinaId == 1).FirstOrDefault();     
+      proyecto.UnidadEntity = _context.Unidad.Where(u => u.UnidadId == 1).FirstOrDefault();
+      proyecto.LineaEntity = _context.Linea.Where(l => l.LineaId == 1).FirstOrDefault();
       proyecto.Fecha = System.DateTime.Now;
       proyecto.Nombre = string.Format("Equipo de pruebas de {0}",userNombre);
       proyecto.UserNombre = userNombre;
       proyecto.ProjectSize = 1;
-      proyecto.TestProject = true; 
-      proyecto.OfficeName = "";
-      proyecto.TeamName = "";
-      proyecto.UnityName = "";
+      proyecto.TestProject = true;       
       //Creamos el nuevo proyecto test
       _context.Proyectos.Add(proyecto);
       SaveChanges();
@@ -240,8 +249,12 @@ namespace everisapi.API.Services
       var AlterProject = _context.Proyectos.Where(p => p.Id == proyecto.Id).FirstOrDefault();
 
       AlterProject.Nombre = proyecto.Nombre;
-      AlterProject.Fecha = proyecto.Fecha;
+      AlterProject.Fecha = System.DateTime.Now;
       AlterProject.UserNombre = proyecto.UserNombre;
+      AlterProject.OficinaEntity = _context.Oficina.Where(o => o.OficinaId == proyecto.OficinaEntity.OficinaId).FirstOrDefault();     
+      AlterProject.UnidadEntity = _context.Unidad.Where(u => u.UnidadId == proyecto.UnidadEntity.UnidadId).FirstOrDefault();
+      AlterProject.LineaEntity = _context.Linea.Where(l => l.LineaId == proyecto.LineaEntity.LineaId).FirstOrDefault();      
+      AlterProject.ProjectSize = proyecto.ProjectSize;
 
       return SaveChanges();
     }
@@ -289,6 +302,25 @@ namespace everisapi.API.Services
       }
       
       _context.UserProyectos.Remove(removed);
+
+      return SaveChanges();
+    }
+
+     public bool AddTeam(Equipos equipo) 
+    {  
+      ProyectoEntity proyecto = new ProyectoEntity();
+      proyecto.Fecha = System.DateTime.Now;
+      proyecto.Nombre = equipo.Nombre;
+      proyecto.UserNombre = equipo.UserNombre;
+      proyecto.ProjectSize = equipo.ProjectSize;
+      proyecto.TestProject = false;      
+      proyecto.OficinaEntity = _context.Oficina.Where(o => o.OficinaId == equipo.OficinaEntity.OficinaId).FirstOrDefault();     
+      proyecto.UnidadEntity = _context.Unidad.Where(u => u.UnidadId == equipo.UnidadEntity.UnidadId).FirstOrDefault();
+      proyecto.LineaEntity = _context.Linea.Where(l => l.LineaId == equipo.LineaEntity.LineaId).FirstOrDefault();
+      
+      //Creamos el nuevo team
+      _context.Proyectos.Add(proyecto);
+      SaveChanges();
 
       return SaveChanges();
     }

@@ -1,0 +1,89 @@
+<form [formGroup]="addTeamsForm" autocomplete="off" class="col-12">
+  <div class="row justify-content-center">
+
+    <div class="col-12">
+      <h3 *ngIf="idEquipo== 0">Alta de Equipo</h3>
+      <h3 *ngIf="idEquipo != 0">Modificar Equipo</h3>
+    </div>
+
+    <!--COMBO PARA LAS OFICINAS-->
+    <div class="col-4">
+      <mat-form-field class="col-12">
+        <mat-select [compareWith]="compareOficina" [value]="oficina" formControlName="OficinaEntity">
+          <mat-option *ngFor="let office of officeList" [value]="office" (click)="getAllUnidadesDe(office)">
+            {{ office.oficinaNombre }}
+          </mat-option>
+        </mat-select>
+        <mat-label>Oficina</mat-label>
+        <mat-error *ngIf="hasError('OficinaEntity','required')">Debe seleccionar una Oficina</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!--COMBO PARA LAS UNIDADES-->
+    <div class="col-4">
+      <mat-form-field class="col-12">
+        <mat-select [compareWith]="compareUnidad" [value]="unidad" formControlName="UnidadEntity"
+          [disabled]="(addTeamsForm.get('OficinaEntity').untouched || addTeamsForm.get('OficinaEntity').invalid) && (this.idEquipo ==0)">
+          <mat-option *ngFor="let unidad of unityList" [value]="unidad" (click)="getAllLineasDe(unidad)">
+            {{ unidad.unidadNombre }}
+          </mat-option>
+        </mat-select>
+        <mat-label>Unidad</mat-label>
+        <mat-error *ngIf="hasError('UnidadEntity','required')">Debe seleccionar una Unidad</mat-error>
+      </mat-form-field>
+    </div>
+
+
+    <!--COMBO PARA LAS LINEAS-->
+    <div class="col-4">
+      <mat-form-field class="col-12">
+        <mat-select [compareWith]="compareLinea" [value]="linea" formControlName="LineaEntity"
+          [disabled]="(addTeamsForm.get('UnidadEntity').untouched || addTeamsForm.get('UnidadEntity').invalid) && (this.idEquipo ==0)">
+          <mat-option *ngFor="let linea of lineaList" [value]="linea">
+            {{ linea.lineaNombre }}
+          </mat-option>
+        </mat-select>
+        <mat-label>Linea</mat-label>
+        <mat-error *ngIf="hasError('LineaEntity','required')">Debe seleccionar una Linea</mat-error>
+      </mat-form-field>
+    </div>
+
+    <!--INPUT TEXT PARA LOS EQUIPOS-->
+    <div class="col-8">
+      <mat-form-field class="col-12">
+        <input matInput type="text" formControlName="Nombre" id="Nombre" placeholder="Equipo"
+          value="{{this.equipo?.nombre}}">
+        <mat-error *ngIf="hasError('Nombre','required')">El campo equipo no puede estar vacio. </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!--INPUT NUMBER PARA EL TAMAÑO-->
+    <div class="col-4">
+      <mat-form-field class="col-12">
+        <input matInput type="text" formControlName="ProjectSize" id="ProjectSize" placeholder="Tamaño"
+          value="{{this.equipo?.projectSize}}">
+        <mat-error *ngIf="hasError('ProjectSize','required')">El campo tamaño no puede estar vacio. </mat-error>
+        <mat-error *ngIf="hasError('ProjectSize','pattern')">El campo tamaño solo puede contener entre 1 y 6 números
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!--BUTTONS-->
+    <div class="row btns col-12 justify-content-center">
+      <div *ngIf="idEquipo==0" class="main-button border-curve mat-elevation-z5 new-eval w-85 m-auto col-3 btns"
+        [class.card-disabled]="addTeamsForm.invalid" (click)="altaEquipo()">
+        <a>GUARDAR</a>
+      </div>
+
+      <div *ngIf="idEquipo!=0" class="main-button border-curve mat-elevation-z5 new-eval w-85 m-auto col-3 btns"
+        [class.card-disabled]="addTeamsForm.invalid" (click)="updateEquipo()">
+        <a>GUARDAR</a>
+      </div>
+    </div>
+
+    <!--<div class="col-3"> BOTON VOLVER POR SI HICIERA FALTA
+        <a class="btn btn-danger btn-lg btn-block col-12" routerLink="/backoffice/teamsmanager" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Volver</a>           
+      </div>-->
+
+  </div>
+</form>
