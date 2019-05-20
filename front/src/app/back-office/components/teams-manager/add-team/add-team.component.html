@@ -2,8 +2,8 @@
   <div class="row justify-content-center">
 
     <div class="col-12">
-      <h3 *ngIf="idEquipo== 0">Alta de Equipo</h3>
-      <h3 *ngIf="idEquipo != 0">Modificar Equipo</h3>
+      <h3 *ngIf="this._teamsService.equipo == undefined">Alta de Equipo</h3>
+      <h3 *ngIf="this._teamsService.equipo != undefined">Modificar Equipo</h3>
     </div>
 
     <!--COMBO PARA LAS OFICINAS-->
@@ -23,7 +23,7 @@
     <div class="col-4">
       <mat-form-field class="col-12">
         <mat-select [compareWith]="compareUnidad" [value]="unidad" formControlName="UnidadEntity"
-          [disabled]="(addTeamsForm.get('OficinaEntity').untouched || addTeamsForm.get('OficinaEntity').invalid) && (this.idEquipo ==0)">
+          [disabled]="(addTeamsForm.get('OficinaEntity').untouched || addTeamsForm.get('OficinaEntity').invalid) && (this._teamsService.equipo == undefined)">
           <mat-option *ngFor="let unidad of unityList" [value]="unidad" (click)="getAllLineasDe(unidad)">
             {{ unidad.unidadNombre }}
           </mat-option>
@@ -38,7 +38,7 @@
     <div class="col-4">
       <mat-form-field class="col-12">
         <mat-select [compareWith]="compareLinea" [value]="linea" formControlName="LineaEntity"
-          [disabled]="(addTeamsForm.get('UnidadEntity').untouched || addTeamsForm.get('UnidadEntity').invalid) && (this.idEquipo ==0)">
+          [disabled]="(addTeamsForm.get('UnidadEntity').untouched || addTeamsForm.get('UnidadEntity').invalid) && (this._teamsService.equipo == undefined)">
           <mat-option *ngFor="let linea of lineaList" [value]="linea">
             {{ linea.lineaNombre }}
           </mat-option>
@@ -70,12 +70,14 @@
 
     <!--BUTTONS-->
     <div class="row btns col-12 justify-content-center">
-      <div *ngIf="idEquipo==0" class="main-button border-curve mat-elevation-z5 new-eval w-85 m-auto col-3 btns"
+      <div *ngIf="this._teamsService.equipo == undefined"
+        class="main-button border-curve mat-elevation-z5 new-eval w-85 m-auto col-3 btns"
         [class.card-disabled]="addTeamsForm.invalid" (click)="altaEquipo()">
         <a>GUARDAR</a>
       </div>
 
-      <div *ngIf="idEquipo!=0" class="main-button border-curve mat-elevation-z5 new-eval w-85 m-auto col-3 btns"
+      <div *ngIf="this._teamsService.equipo != undefined"
+        class="main-button border-curve mat-elevation-z5 new-eval w-85 m-auto col-3 btns"
         [class.card-disabled]="addTeamsForm.invalid" (click)="updateEquipo()">
         <a>GUARDAR</a>
       </div>

@@ -1,9 +1,12 @@
 import { Component, OnInit, ViewChild, Input, ViewEncapsulation } from '@angular/core';
-import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatSort, MatTableDataSource, MatPaginator, Sort } from '@angular/material';
 import { AppComponent } from 'app/app.component';
 import { ProyectoService } from 'app/services/ProyectoService';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
+import { Equipo } from 'app/Models/Equipo';
+import { DataSource } from '@angular/cdk/table';
+import { Team } from 'app/Models/Team';
 
 @Component({
   selector: 'app-teams-manager',
@@ -16,31 +19,37 @@ export class TeamsManagerComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   public ErrorMessage: string = null;
   dataSource: MatTableDataSource<any>;
-  displayedColumns = ['officeName', 'unityName', 'linea', "teamName", "projectSize","acciones"];  
+  displayedColumns = ['oficina', 'unidad', 'linea', "nombre", "projectSize", "acciones"];
   encapsulation: ViewEncapsulation.None;
-  selectedTeam;  
+  selectedTeam;
   public nTeams: number = 0;
-  pa: any;  
+  pa: any;
+  public teamList: Equipo[];
+  public teamsListString = new Array();
+  public teamString: Team;
+
 
   constructor(
     private _proyectoService: ProyectoService,
     private modalService: NgbModal,
-    private router:Router,
+    private router: Router,
   ) { }
 
   ngOnInit() {
     this.getTeams();
   }
-  public getTeams(){
+  public getTeams() {
+    this.teamsListString = [];
     this._proyectoService.GetAllNotTestProjects().subscribe(
       res => {
-        this.dataSource = new MatTableDataSource(res);
+        this.teamList = res;
+        this.teamsListString = this.getTeamsString(res);
+        this.dataSource = new MatTableDataSource(this.teamsListString);
         this.dataSource.paginator = this.paginator;
-        if((res.length/this.paginator.pageSize) <= this.paginator.pageIndex ){
-          this.paginator.pageIndex--; 
+        if ((res.length / this.paginator.pageSize) <= this.paginator.pageIndex) {
+          this.paginator.pageIndex--;
         }
-        this.dataSource.sort= this.sort; 
-                 
+        this.dataSource.sort = this.sort;
       },
       error => {
         if (error == 404) {
@@ -53,29 +62,44 @@ export class TeamsManagerComponent implements OnInit {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
       }
-      );
+    );
   }
-  
+
   // Metodo encargado de abrir la ventana confirmando la eliminacion del equipo
   public AbrirModal(content, row) {
-    this.selectedTeam = row;
+    var equipo = this.teamList.filter(t => t.id == row.id);
+    this.selectedTeam = equipo[0];
     this.modalService.open(content).result.then(
       (closeResult) => {
         //Esto realiza la acción de cerrar la ventana
       }, (dismissReason) => {
-          if (dismissReason == 'Finish') {
+        if (dismissReason == 'Finish') {
           //Si decide finalizarlo usaremos el metodo para finalizar la evaluación
           this.deleteTeam(row);
         }
       })
   }
 
- public refresh(){
+  public refresh() {
     this.getTeams();
   }
-    
+  public getTeamsString(equipos: Equipo[]) {
+    equipos.forEach(element => {
+      this.teamString = new Team(
+        element.id, element.nombre,
+        element.oficinaEntity.oficinaNombre,
+        element.unidadEntity.unidadNombre,
+        element.lineaEntity.lineaNombre,
+        element.projectSize
+      );
+      this.teamsListString.push(this.teamString);
+    });
+    return this.teamsListString;
+  }
+
   public deleteTeam(team) {
-    this._proyectoService.deleteTeam(team).subscribe(
+    this.selectedTeam = this.teamList.filter(t => t.id == team.id);
+    this._proyectoService.deleteTeam(this.selectedTeam[0]).subscribe(
       res => {
         this.refresh();
       },
@@ -90,13 +114,18 @@ export class TeamsManagerComponent implements OnInit {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
       });
-  }  
+  }
 
-  public modificarEquipo(row){
+  public modificarEquipo(row) {
+    this.selectedTeam = this.teamList.filter(team => team.id == row.id);
     var x = document.getElementById("addteam");
-    if( x.style.display == "block"){
+    if (x.style.display == "block") {
       x.style.display = "none";
     }
-    this.router.navigate(['backoffice/addteam/'+row.id]);
+    this._proyectoService.modificarEquipo(this.selectedTeam[0]);
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

@@ -66,13 +66,14 @@ export class AddTeamComponent implements OnInit {
     }
     this.getUserNombre();
     this.getAllOficinas();
-    this.getEquipo();
     this.formValidate();
+    if (this._teamsService.equipo != undefined) {
+      this.getEquipo();
+    }
   }// end onInit
 
   public getUserNombre() {
     this.UserNombre = new User(this._teamsService.UsuarioLogeado);
-    console.log(this.UserNombre);
   }
 
   public formValidate() {//form validate
@@ -181,45 +182,25 @@ export class AddTeamComponent implements OnInit {
   }
 
   public getEquipo() {
-    // 1º obtenemos el id del equipo (lo mandamos en la url )
-    this.idEquipo = this._routeParams.snapshot.params.idEquipo;
+    // 1º Recogemos el equipo
+    this.equipo = this._teamsService.equipo;
+    // 2º Cargamos los combos para ese equipo
+    this.cargarCombosUnidadesYLineas();
 
-    // 2º Con ese id Obtenemos el equipo completo
-    if (this.idEquipo != 0) {
-      this._teamsService.getProyecto(this._routeParams.snapshot.params.idEquipo).subscribe(
-        res => {
-          this.equipo = res;
+    // 3º Creamos el form control para las validaciones
+    this.addTeamsForm.get('OficinaEntity').setValue(this.equipo.oficinaEntity);
+    this.addTeamsForm.get('UnidadEntity').setValue(this.equipo.unidadEntity);
+    this.addTeamsForm.get('LineaEntity').setValue(this.equipo.lineaEntity);
+    this.addTeamsForm.get('Nombre').setValue(this.equipo.nombre);
+    this.addTeamsForm.get('ProjectSize').setValue(this.equipo.projectSize);
+    this.addTeamsForm.addControl('Id', new FormControl(this.equipo.id));
+    this.addTeamsForm.addControl('TestProject', new FormControl(this.equipo.testProject));
+    this.addTeamsForm.addControl('Evaluaciones', new FormControl(this.equipo.evaluaciones));
 
-          // 3º Cargamos los combos para ese equipo
-          this.cargarCombosUnidadesYLineas();
-
-          // 4º Creamos el form control para las validaciones
-          this.addTeamsForm.get('OficinaEntity').setValue(this.equipo.oficinaEntity);
-          this.addTeamsForm.get('UnidadEntity').setValue(this.equipo.unidadEntity);
-          this.addTeamsForm.get('LineaEntity').setValue(this.equipo.lineaEntity);
-          this.addTeamsForm.get('Nombre').setValue(this.equipo.nombre);
-          this.addTeamsForm.get('ProjectSize').setValue(this.equipo.projectSize);
-          this.addTeamsForm.addControl('Id', new FormControl(this.equipo.id));
-          this.addTeamsForm.addControl('TestProject', new FormControl(this.equipo.testProject));
-          this.addTeamsForm.addControl('Evaluaciones', new FormControl(this.equipo.evaluaciones));
-
-          //5º recogemos los objetos que marcaremos por defecto en los select
-          this.oficina = this.equipo.oficinaEntity;
-          this.unidad = this.equipo.unidadEntity;
-          this.linea = this.equipo.lineaEntity;
-        },
-        error => {
-          if (error == 404) {
-            this.ErrorMessage = "Error: " + error + " No se pudo encontrar la información solicitada.";
-          } else if (error == 500) {
-            this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
-          } else if (error == 401) {
-            this.ErrorMessage = "Error: " + error + " El usuario es incorrecto o no tiene permisos, intente introducir su usuario nuevamente.";
-          } else {
-            this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
-          }
-        });
-    }
+    //4º recogemos los objetos que marcaremos por defecto en los select
+    this.oficina = this.equipo.oficinaEntity;
+    this.unidad = this.equipo.unidadEntity;
+    this.linea = this.equipo.lineaEntity;
   }
 
   public updateEquipo() {

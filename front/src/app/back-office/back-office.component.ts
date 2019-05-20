@@ -20,31 +20,34 @@ export class BackOfficeComponent implements OnInit {
   constructor(
     private _proyectoService: ProyectoService,
     public _router: Router,
-    private _eventService: EventEmitterService, 
+    private _eventService: EventEmitterService,
     private _appComponent: AppComponent) {
-      this._eventService.eventEmitter.subscribe(
-        (data) => {
-            this.updateUser= data,
-            setTimeout(()=>{this.updateUser = null},2000)
-        }
-        );
-     }
-    
+    this._eventService.eventEmitter.subscribe(
+      (data) => {
+        this.updateUser = data,
+          setTimeout(() => { this.updateUser = null }, 2000)
+      }
+    );
+  }
+
 
   ngOnInit() {
 
     if (!this._proyectoService.verificarUsuario()) {
       this._router.navigate(['/login']);
-    }    
+    }
 
   }
 
-  teamsOptions(){
+  teamsOptions() {
     var x = document.getElementById("addteam");
-    if( x.style.display == "block")
+    if (x.style.display == "block")
       x.style.display = "none";
     else
       x.style.display = "block";
   }
 
+  altaEquipo() {
+    this._proyectoService.equipo = null;
+  }
 }

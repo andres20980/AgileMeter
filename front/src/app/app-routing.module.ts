@@ -27,7 +27,7 @@ const appRoutes: Routes = [
       { path: 'usermanagement', component: UserManagementComponent },
       { path: 'adduserproject', component: AddUserProjectComponent },
       { path: 'teamsmanager', component: TeamsManagerComponent },
-      { path: 'addteam/:idEquipo', component: AddTeamComponent },      
+      { path: 'addteam', component: AddTeamComponent },      
       { path: 'questions', component: QuestionsManagerComponent }
     ]
   },
