@@ -151,7 +151,7 @@ namespace everisapi.API.Services
     public bool UserAuth(UsersSinProyectosDto UserForAuth)
     {
       //return _context.Users.Any(u => u.Nombre.Equals(UserForAuth.Nombre));
-       return _context.Users.Any(u => u.Nombre == UserForAuth.Nombre && u.Password == UserForAuth.Password);
+       return _context.Users.Any(u => u.Nombre == UserForAuth.Nombre && u.Password == UserForAuth.Password && u.Activo);
     }
 
     /*GUARDAR DATOS EN USUARIO*/
@@ -159,6 +159,7 @@ namespace everisapi.API.Services
     public bool AddUser(UserEntity usuario)
     {
       usuario.Role = _context.Roles.Where(r => r.Id == usuario.Role.Id).FirstOrDefault();
+      usuario.Activo = true;
       _context.Users.Add(usuario);
       this.AddProjectTest(usuario.Nombre);
       return SaveChanges();

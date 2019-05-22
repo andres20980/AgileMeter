@@ -1,96 +1,87 @@
 <div class="row">
-    <div class="col ml-5 mb-3 mt-4">
-      <h3>Gestión de usuarios</h3>
-    </div>
+  <div class="col ml-5 mb-3 mt-4">
+    <h3>Gestión de usuarios</h3>
+  </div>
 </div>
 <div class="col-12 ng-card-box p-5 br-2 mat-elevation-z5 mx-0">
-<div class="container">
-  <div class="row">
-    <div class="col-6">
-      <mat-form-field>
-        <mat-select [formControl]="userCtrl" placeholder="Usuario" #singleSelect>
-          <ngx-mat-select-search [placeholderLabel]="'Buscar...'"
-            [noEntriesFoundLabel]="'No se han encontrado resultados'" [formControl]="userFilterCtrl">
-          </ngx-mat-select-search>
-          <mat-option *ngFor="let user of filteredUsers | async" [value]="user">
-            {{user.nombre}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field>
+          <mat-select [formControl]="userCtrl" placeholder="Usuario" #singleSelect>
+            <ngx-mat-select-search [placeholderLabel]="'Buscar...'"
+              [noEntriesFoundLabel]="'No se han encontrado resultados'" [formControl]="userFilterCtrl">
+            </ngx-mat-select-search>
+            <mat-option *ngFor="let user of filteredUsers | async" [value]="user">
+              {{user.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
 
-    <div *ngIf="userCtrl.value != null ; else ofset" class="col-5">
-      <div *ngFor="let role of ListaDeRoles" class="list-group segmented-control">
-        <label for="{{role.id}}" class="list-group-item" [class.seleccionado]="role.id == userCtrl.value?.role.id">
-          <input id="{{role.id}}" [checked]="role?.id == userCtrl.value?.role.id" [value]='role' type="radio"
-            name="roles" (click)="showModal(content, role)">
-          {{role.role}}
-        </label>
+      <div *ngIf="userCtrl.value != null" class="col-6">
+        <div *ngFor="let role of ListaDeRoles" class="list-group segmented-control">
+          <label for="{{role.id}}" class="list-group-item" [class.seleccionado]="role.id == userCtrl.value?.role.id">
+            <input id="{{role.id}}" [checked]="role?.id == userCtrl.value?.role.id" [value]='role' type="radio"
+              name="roles" (click)="showModal(content, role)">
+            {{role.role}}
+          </label>
+        </div>
       </div>
     </div>
 
-    <ng-template #ofset>
-      <div class="col-5"></div>
-    </ng-template>
-    
-    <div class=col-1>
-      <a routerLink="addUser" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><img class="addUser"
-          src="assets/user_add.png" title="Alta de usuario" /></a>
-    </div>
-  </div>
+    <div *ngIf="userCtrl.value != null && showProjects" class="row" style="margin-top:30px">
+      <div class="col-6">
+        <mat-form-field *ngIf="showProjects">
+          <mat-select placeholder="Equipos" multiple [(value)]="projectsSelected" #multiSelect>
+            <ngx-mat-select-search [placeholderLabel]="'Buscar...'"
+              [noEntriesFoundLabel]="'No se han encontrado resultados'" [formControl]="projectMultiFilterCtrl">
+            </ngx-mat-select-search>
+            <mat-option *ngFor="let project of filteredProjectsMulti | async" value={{project.id}}
+              (click)="manageUserProjects(project)">
+              {{project.nombre}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-6">
 
-  <div *ngIf="userCtrl.value != null && showProjects" class="row" style="margin-top:30px">
-    <div class="col-6">
-      <mat-form-field *ngIf="showProjects">
-        <mat-select placeholder="Equipos" multiple [(value)]="projectsSelected" #multiSelect>
-          <ngx-mat-select-search [placeholderLabel]="'Buscar...'"
-            [noEntriesFoundLabel]="'No se han encontrado resultados'" [formControl]="projectMultiFilterCtrl">
-          </ngx-mat-select-search>
-          <mat-option *ngFor="let project of filteredProjectsMulti | async" value={{project.id}}
-            (click)="manageUserProjects(project)">
-            {{project.nombre}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <div class="col-6">
-
-      <!-- <mat-selection-list >
+        <!-- <mat-selection-list >
         <h3 matSubheader>Equipos asociados al usuario:</h3>
         <mat-list-option *ngFor="let proyecto of ListaDeProyectosUsuario"> {{proyecto.nombre}} </mat-list-option>
       </mat-selection-list> -->
 
-      <mat-list role="list">
-        <h3 matSubheader>Equipos asociados al usuario:</h3>
-        <mat-list-item role="listitem" *ngFor="let proyecto of ListaDeProyectosUsuario"> {{proyecto.nombre}}
-          <button mat-button class="transparente" (click)="deleteSingleUserProjects(proyecto)">
-            <i class="material-icons delete">delete</i>
-          </button>
+        <mat-list role="list">
+          <h3 matSubheader>Equipos asociados al usuario:</h3>
+          <mat-list-item role="listitem" *ngFor="let proyecto of ListaDeProyectosUsuario"> {{proyecto.nombre}}
+            <button mat-button class="transparente" (click)="deleteSingleUserProjects(proyecto)">
+              <i class="material-icons delete">delete</i>
+            </button>
 
-        </mat-list-item>
+          </mat-list-item>
 
 
-      </mat-list>
+        </mat-list>
 
-      <!-- <mat-action-list>
+        <!-- <mat-action-list>
           <button mat-list-item *ngFor="let proyecto of ListaDeProyectosUsuario"> {{proyecto.nombre}} </button>
       </mat-action-list>   -->
+      </div>
     </div>
-  </div>
 
-  <div *ngIf="userCtrl.value != null && userCtrl.value.role.id != 1" class="row" style="margin-top:30px">
-    <div class="col">
-      <p>El usuario seleccionado podrá evaluar cualquier equipo.</p>
+    <div *ngIf="userCtrl.value != null && userCtrl.value.role.id != 1" class="row" style="margin-top:30px">
+      <div class="col">
+        <p>El usuario seleccionado podrá evaluar cualquier equipo.</p>
+      </div>
     </div>
   </div>
-</div>
 </div>
 
 <!-- User List-->
 <div class="col-12 ng-card-box p-5 br-2 mat-elevation-z5 mx-0 mt-4">
   <div class="row">
     <div class="col-12">
-        <app-user-list></app-user-list>
+      <app-user-list></app-user-list>
     </div>
   </div>
 </div>
@@ -99,7 +90,7 @@
 <ng-template #content let-cl="close" let-di="dismiss">
   <div class="modal-content">
     <div class="modal-header custom-modal-header">
-      <h5 class="modal-title">Importante</h5> 
+      <h5 class="modal-title">Importante</h5>
       <!-- <button type="button" class="close" (click)="cl('Cerrar')">
         <span aria-hidden="true">×</span>
       </button> -->
@@ -110,10 +101,12 @@
     <div class="container-fluid p-3 bt-1">
       <div class="row p-0">
         <div class="col">
-          <button type="button" class="main-button mat-elevation-z4 w-100 modal-btns" (click)="di('Aceptar')">Aceptar</button>
+          <button type="button" class="main-button mat-elevation-z4 w-100 modal-btns"
+            (click)="di('Aceptar')">Aceptar</button>
         </div>
         <div class="col">
-          <button type="button" class="secondary-button mat-elevation-z4 w-100 modal-btns" (click)="cl('Cerrar')">Cancelar</button>
+          <button type="button" class="secondary-button mat-elevation-z4 w-100 modal-btns"
+            (click)="cl('Cerrar')">Cancelar</button>
         </div>
       </div>
     </div>

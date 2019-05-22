@@ -37,7 +37,7 @@ btnEditClick= function () {
 };
 
 btnAddClick= function () {
-  //this._router.navigateByUrl('/backoffice/teamsmanager');
+  this._router.navigateByUrl('/backoffice/usermanagement/addUser');
 };
 
 //Método para el filtrado
