@@ -1,3 +1,9 @@
+<div class="row">
+    <div class="col ml-5 mb-3 mt-4">
+      <h3>Gestión de usuarios</h3>
+    </div>
+</div>
+<div class="col-12 ng-card-box p-5 br-2 mat-elevation-z5 mx-0">
 <div class="container">
   <div class="row">
     <div class="col-6">
@@ -77,29 +83,39 @@
       <p>El usuario seleccionado podrá evaluar cualquier equipo.</p>
     </div>
   </div>
+</div>
+</div>
 
-  <ng-template #content let-cl="close" let-di="dismiss">
-    <div class="modal-content">
-      <div class="modal-header custom-modal-header">
-        <h5 class="modal-title">Importante</h5>
-        <!-- <button type="button" class="close" (click)="cl('Cerrar')">
-          <span aria-hidden="true">×</span>
-        </button> -->
-      </div>
-      <div class="modal-body">
-        <p>Si realiza esta acción perderá los permisos de administrador y sera redireccionado al login.</p>
-      </div>
-      <div class="container-fluid p-3 bt-1">
-        <div class="row p-0">
-          <div class="col">
-            <button type="button" class="main-button mat-elevation-z4 w-100 modal-btns"
-              (click)="di('Aceptar')">Aceptar</button>
-          </div>
-          <div class="col">
-            <button type="button" class="secondary-button mat-elevation-z4 w-100 modal-btns"
-              (click)="cl('Cerrar')">Cancelar</button>
-          </div>
+<!-- User List-->
+<div class="col-12 ng-card-box p-5 br-2 mat-elevation-z5 mx-0 mt-4">
+  <div class="row">
+    <div class="col-12">
+        <app-user-list></app-user-list>
+    </div>
+  </div>
+</div>
+<!---->
+
+<ng-template #content let-cl="close" let-di="dismiss">
+  <div class="modal-content">
+    <div class="modal-header custom-modal-header">
+      <h5 class="modal-title">Importante</h5> 
+      <!-- <button type="button" class="close" (click)="cl('Cerrar')">
+        <span aria-hidden="true">×</span>
+      </button> -->
+    </div>
+    <div class="modal-body">
+      <p>Si realiza esta acción perderá los permisos de administrador y sera redireccionado al login.</p>
+    </div>
+    <div class="container-fluid p-3 bt-1">
+      <div class="row p-0">
+        <div class="col">
+          <button type="button" class="main-button mat-elevation-z4 w-100 modal-btns" (click)="di('Aceptar')">Aceptar</button>
+        </div>
+        <div class="col">
+          <button type="button" class="secondary-button mat-elevation-z4 w-100 modal-btns" (click)="cl('Cerrar')">Cancelar</button>
         </div>
       </div>
     </div>
-  </ng-template>
+  </div>
+</ng-template>

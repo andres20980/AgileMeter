@@ -53,6 +53,9 @@ export class UserService {
   updateUser(User: UserWithRole) {
     let Token = this._appComponent.ComprobarUserYToken();
     let params = JSON.stringify(User);
+
+    //console.log(params)
+
     let headers = new Headers({
       'Content-Type': 'application/json',
       'Authorization': Token

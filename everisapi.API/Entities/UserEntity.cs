@@ -14,7 +14,13 @@ namespace everisapi.API.Entities
         public string Nombre { get; set; }
 
         [Required]
+        public string NombreCompleto { get; set; }
+
+        [Required]
         public string Password { get; set; }
+
+        [Required]
+        public bool Activo { get; set; }
 
         [Required]
         public ICollection<ProyectoEntity> ProyectosDeUsuario { get; set; }

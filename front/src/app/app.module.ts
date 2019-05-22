@@ -41,6 +41,10 @@ import { TeamsManagerComponent } from './back-office/components/teams-manager/te
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { AddTeamComponent } from './back-office/components/teams-manager/add-team/add-team.component';
 import { AddUpdateUserComponent } from './back-office/components/user-management/add-update-user/add-update-user.component';
+import { UserListComponent } from './back-office/components/user-management/user-list/user-list.component';
+
+import { MatPaginatorIntl } from '@angular/material';
+import { CustomPaginator } from 'app/CustomPaginatorConfiguration';
 
 @NgModule({
   declarations: [
@@ -68,6 +72,7 @@ import { AddUpdateUserComponent } from './back-office/components/user-management
     BreadcrumbComponent,
     AddTeamComponent,
     AddUpdateUserComponent,  
+    UserListComponent,
   ],
   imports: [
     BrowserModule,
@@ -96,6 +101,8 @@ import { AddUpdateUserComponent } from './back-office/components/user-management
     provide: HTTP_INTERCEPTORS,
     useClass: RequestInterceptorService,
     multi: true
+  },
+  { provide: MatPaginatorIntl, useValue: CustomPaginator() 
   }],
   bootstrap: [AppComponent]
 })

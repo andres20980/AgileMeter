@@ -175,6 +175,7 @@ namespace everisapi.API.Controllers
 
       UserEntity userEntity= new UserEntity{
         Nombre = UsuarioUpdate.Nombre,
+        Activo = UsuarioUpdate.Activo,
         RoleId = UsuarioUpdate.Role.Id
         };
 
