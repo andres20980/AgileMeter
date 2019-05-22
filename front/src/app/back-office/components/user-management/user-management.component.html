@@ -9,8 +9,9 @@
     <div class="col-6">
       <mat-form-field>
         <mat-select [formControl]="userCtrl" placeholder="Usuario" #singleSelect>
-          <ngx-mat-select-search [placeholderLabel]="'Buscar...'" [noEntriesFoundLabel]="'No se han encontrado resultados'"
-            [formControl]="userFilterCtrl"></ngx-mat-select-search>
+          <ngx-mat-select-search [placeholderLabel]="'Buscar...'"
+            [noEntriesFoundLabel]="'No se han encontrado resultados'" [formControl]="userFilterCtrl">
+          </ngx-mat-select-search>
           <mat-option *ngFor="let user of filteredUsers | async" [value]="user">
             {{user.nombre}}
           </mat-option>
@@ -18,26 +19,35 @@
       </mat-form-field>
     </div>
 
-    <div *ngIf="userCtrl.value != null" class="col-6">
+    <div *ngIf="userCtrl.value != null ; else ofset" class="col-5">
       <div *ngFor="let role of ListaDeRoles" class="list-group segmented-control">
         <label for="{{role.id}}" class="list-group-item" [class.seleccionado]="role.id == userCtrl.value?.role.id">
-          <input id="{{role.id}}" [checked]="role?.id == userCtrl.value?.role.id" [value]='role' type="radio" name="roles"
-            (click)="showModal(content, role)">
+          <input id="{{role.id}}" [checked]="role?.id == userCtrl.value?.role.id" [value]='role' type="radio"
+            name="roles" (click)="showModal(content, role)">
           {{role.role}}
         </label>
       </div>
     </div>
 
-
+    <ng-template #ofset>
+      <div class="col-5"></div>
+    </ng-template>
+    
+    <div class=col-1>
+      <a routerLink="addUser" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><img class="addUser"
+          src="assets/user_add.png" title="Alta de usuario" /></a>
+    </div>
   </div>
 
   <div *ngIf="userCtrl.value != null && showProjects" class="row" style="margin-top:30px">
     <div class="col-6">
       <mat-form-field *ngIf="showProjects">
         <mat-select placeholder="Equipos" multiple [(value)]="projectsSelected" #multiSelect>
-          <ngx-mat-select-search [placeholderLabel]="'Buscar...'" [noEntriesFoundLabel]="'No se han encontrado resultados'"
-            [formControl]="projectMultiFilterCtrl"></ngx-mat-select-search>
-          <mat-option *ngFor="let project of filteredProjectsMulti | async" value={{project.id}} (click)="manageUserProjects(project)">
+          <ngx-mat-select-search [placeholderLabel]="'Buscar...'"
+            [noEntriesFoundLabel]="'No se han encontrado resultados'" [formControl]="projectMultiFilterCtrl">
+          </ngx-mat-select-search>
+          <mat-option *ngFor="let project of filteredProjectsMulti | async" value={{project.id}}
+            (click)="manageUserProjects(project)">
             {{project.nombre}}
           </mat-option>
         </mat-select>
@@ -49,17 +59,17 @@
         <h3 matSubheader>Equipos asociados al usuario:</h3>
         <mat-list-option *ngFor="let proyecto of ListaDeProyectosUsuario"> {{proyecto.nombre}} </mat-list-option>
       </mat-selection-list> -->
-      
-      <mat-list role="list">
-      <h3 matSubheader>Equipos asociados al usuario:</h3>
-      <mat-list-item role="listitem" *ngFor="let proyecto of ListaDeProyectosUsuario"> {{proyecto.nombre}}
-          <button mat-button class="transparente" (click)= "deleteSingleUserProjects(proyecto)">
-              <i class="material-icons delete">delete</i>
-          </button>
-         
-      </mat-list-item>
 
-      
+      <mat-list role="list">
+        <h3 matSubheader>Equipos asociados al usuario:</h3>
+        <mat-list-item role="listitem" *ngFor="let proyecto of ListaDeProyectosUsuario"> {{proyecto.nombre}}
+          <button mat-button class="transparente" (click)="deleteSingleUserProjects(proyecto)">
+            <i class="material-icons delete">delete</i>
+          </button>
+
+        </mat-list-item>
+
+
       </mat-list>
 
       <!-- <mat-action-list>

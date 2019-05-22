@@ -85,6 +85,8 @@ namespace everisapi.API.Services
     
     //Añade un nuevo equipo
     bool AddTeam(Equipos equipo);
+
+    string getNombreCompleto(string usuario);
   }
 
   

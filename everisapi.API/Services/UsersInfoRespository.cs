@@ -150,14 +150,17 @@ namespace everisapi.API.Services
     //Devuelve si el usuario esta bien logeado o no
     public bool UserAuth(UsersSinProyectosDto UserForAuth)
     {
-      return _context.Users.Any(u => u.Nombre.Equals(UserForAuth.Nombre));
+      //return _context.Users.Any(u => u.Nombre.Equals(UserForAuth.Nombre));
+       return _context.Users.Any(u => u.Nombre == UserForAuth.Nombre && u.Password == UserForAuth.Password);
     }
 
     /*GUARDAR DATOS EN USUARIO*/
     //Aqui introducimos un nuevo usuario
     public bool AddUser(UserEntity usuario)
     {
+      usuario.Role = _context.Roles.Where(r => r.Id == usuario.Role.Id).FirstOrDefault();
       _context.Users.Add(usuario);
+      this.AddProjectTest(usuario.Nombre);
       return SaveChanges();
     }
 
@@ -326,6 +329,18 @@ namespace everisapi.API.Services
       SaveChanges();
 
       return SaveChanges();
+    }
+
+    public string getNombreCompleto(string nombre){
+      string res = "";
+      UserEntity user = new UserEntity();
+      user = _context.Users.Where(u => u.Nombre == nombre).FirstOrDefault();
+      if (user.NombreCompleto == null || user.NombreCompleto == "" ){
+        res = user.Nombre;
+      }else{
+        res = user.NombreCompleto;
+      }
+      return res;
     }
 
   }

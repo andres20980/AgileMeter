@@ -31,5 +31,10 @@ namespace everisapi.API.Entities
         [ForeignKey("RoleId")]
         public RoleEntity Role { get; set; }
 
+        public string NombreCompleto { get; set; }
+
+        [Required]
+        public bool Activo { get; set; }
+
     }
 }
