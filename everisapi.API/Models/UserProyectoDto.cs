@@ -11,8 +11,9 @@ namespace everisapi.API.Models
         //public int Id { get; set; }
 
         public string UserNombre { get; set; }
-        
+
         public int ProyectoId { get; set; }
+        public string NombreCompleto { get; set; }
 
     }
 }

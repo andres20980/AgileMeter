@@ -51,19 +51,19 @@ namespace everisapi.API.Controllers
             }
 
             //Encriptamos la contraseña
-            // using (var sha256 = SHA256.Create())
-            // {
-            //     // Le damos la contraseña
-            //     var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(UserAuth.Password));
-            //     // Recogemos el hash como string
-            //     var hash = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
-            //     // Y se lo damos 
-            //     UserAuth.Password = hash;
-            // }
+             using (var sha256 = SHA256.Create())
+             {
+                 // Le damos la contraseña
+                 var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(UserAuth.Password));
+                 // Recogemos el hash como string
+                 var hash = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+                 // Y se lo damos 
+                 UserAuth.Password = hash;
+             }
 
             IActionResult response = Unauthorized();
             //string userNombreLargo = IsUserExistsLDAP(UserAuth.Nombre, UserAuth.Password);
-            string userNombreLargo = UserAuth.Nombre;
+            /*string userNombreLargo = UserAuth.Nombre;
             if (userNombreLargo != null && userNombreLargo != "")
             {
                 //Check customer if exists in our database
@@ -79,8 +79,17 @@ namespace everisapi.API.Controllers
                     response = Ok(new { access_token = jwtToken, user_long_name = userNombreLargo});
                   
                 }
+            }*/
+             if (UserAuth.Nombre != null && UserAuth.Nombre != "")
+            { //Check customer if exists in our database
+                if (_usersInfoRespository.UserAuth(UserAuth))
+                {
+                    string userNombreLargo = _usersInfoRespository.getNombreCompleto(UserAuth.Nombre);
+                    //create jwt token here and send it with response
+                    var jwtToken = JwtTokenBuilder();
+                    response = Ok(new { access_token = jwtToken, user_long_name = userNombreLargo });
+                }
             }
-            
             return response;
         }
 

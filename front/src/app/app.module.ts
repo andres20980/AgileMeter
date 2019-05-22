@@ -40,6 +40,7 @@ import { SectionResultsComponent } from './pdfgenerator/section-results/section-
 import { TeamsManagerComponent } from './back-office/components/teams-manager/teams-manager.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { AddTeamComponent } from './back-office/components/teams-manager/add-team/add-team.component';
+import { AddUpdateUserComponent } from './back-office/components/user-management/add-update-user/add-update-user.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { AddTeamComponent } from './back-office/components/teams-manager/add-tea
     SectionResultsComponent,
     TeamsManagerComponent,
     BreadcrumbComponent,
-    AddTeamComponent,  
+    AddTeamComponent,
+    AddUpdateUserComponent,  
   ],
   imports: [
     BrowserModule,

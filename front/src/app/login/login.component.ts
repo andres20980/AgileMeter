@@ -78,6 +78,7 @@ export class LoginComponent implements OnInit {
           //Si el servidor tiene algún tipo de problema mostraremos este error
           if (error == 401) {
             this.ErrorMessage = "El nombre de usuario o contraseña no son correctos";
+            this.passwordDeUsuario = "";
           } else if (error == 500) {
             this.ErrorMessage = "Ocurrio un error en el servidor";
           } else {

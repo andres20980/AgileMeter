@@ -3,12 +3,13 @@ import { Router } from "@angular/router";
 import { AppComponent } from '../app.component';
 import { ProyectoService } from '../services/ProyectoService';
 import { EventEmitterService } from 'app/services/event-emitter.service';
+import { UserService } from 'app/services/UserService';
 
 @Component({
   selector: 'app-back-office',
   templateUrl: './back-office.component.html',
   styleUrls: ['./back-office.component.scss'],
-  providers: [ProyectoService]
+  providers: [ProyectoService,UserService]
 })
 
 

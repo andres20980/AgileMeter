@@ -11,6 +11,7 @@ import { AppComponent } from 'app/app.component';
 import { UserWithRole } from 'app/Models/UserWithRole';
 import { UserProject } from 'app/Models/UserProject';
 import { StaticHelper } from './Helper';
+import { UserCreateUpdate } from 'app/Models/UserCreateUpdate';
 
 @Injectable()
 export class UserService {
@@ -101,6 +102,19 @@ export class UserService {
   //Implementamos este metodo para permitir la recogida de los errores y su gestión
   errorHandler(error: Response) {
     return observableThrowError(error.status);
+  }
+
+  addUser(user:UserCreateUpdate){console.log(user);
+    let Token = this._appComponent.ComprobarUserYToken();
+    let params = JSON.stringify(user);
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': Token
+    });
+    
+    return this._http.post(this.url + 'users/add', params, { headers: headers }).pipe(
+      map(res => res),
+      catchError(this.errorHandler));
   }
 
 }

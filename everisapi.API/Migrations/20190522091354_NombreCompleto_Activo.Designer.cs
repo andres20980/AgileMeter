@@ -11,9 +11,10 @@ using System;
 namespace everisapi.API.Migrations
 {
     [DbContext(typeof(AsignacionInfoContext))]
-    partial class AsignacionInfoContextModelSnapshot : ModelSnapshot
+    [Migration("20190522091354_NombreCompleto_Activo")]
+    partial class NombreCompleto_Activo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -338,8 +339,8 @@ namespace everisapi.API.Migrations
 
                     b.Property<bool>("Activo");
 
-                    b.Property<string>("NombreCompleto")
-                        .IsRequired();
+                    b.Property<string>("NombreCompleto");
+                        //.IsRequired();
 
                     b.Property<string>("Password")
                         .IsRequired();
