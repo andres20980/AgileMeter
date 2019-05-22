@@ -265,10 +265,3 @@ __pycache__/
 
 #VisualCode Settings
 .vscode
-AutoDumperAgile/Dockerfile
-AutoDumperAgile/Dockerfile
-AutoDumperAgile/docker-entrypoint.sh
-everisapi.API/appsettings.json
-everisapi.API/package-lock.json
-front/package-lock.json
-front/src/environments/environment.ts
