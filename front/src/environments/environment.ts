@@ -10,5 +10,5 @@
 export const environment = {
   production: false,
   backendHost: window.location.hostname, 
-  backendPort: 81,
+  backendPort: 60406,
 };

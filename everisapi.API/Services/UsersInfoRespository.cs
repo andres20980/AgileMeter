@@ -109,8 +109,8 @@ namespace everisapi.API.Services
     //Recoge todos los usuarios
     public IEnumerable<UserEntity> GetUsers()
     {
-      //Devolvemos todos los usuarios ordenadas por Nombre
-      return _context.Users.Include(r => r.Role).OrderBy(c => c.Nombre).ToList();
+      //Devolvemos todos los usuarios activos ordenadas por Nombre 
+      return _context.Users.Include(r => r.Role).Where(u => u.Activo == true).OrderBy(c => c.Nombre).ToList();
     }
 
     //Devuelve si el usuario existe
@@ -173,6 +173,8 @@ namespace everisapi.API.Services
     {
       var UserAlter = _context.Users.Where(u => u.Nombre == usuario.Nombre).FirstOrDefault();
       UserAlter.Nombre = usuario.Nombre;
+      UserAlter.NombreCompleto = usuario.NombreCompleto;
+      UserAlter.Activo = usuario.Activo;
       UserAlter.Password = usuario.Password;
       
       return SaveChanges();
@@ -182,6 +184,7 @@ namespace everisapi.API.Services
     {
       var UserAlter = _context.Users.Where(u => u.Nombre == usuario.Nombre).FirstOrDefault();
       //UserAlter.Nombre = usuario.Nombre;
+      UserAlter.Activo = usuario.Activo;
       UserAlter.RoleId = usuario.RoleId;
       
       return SaveChanges();

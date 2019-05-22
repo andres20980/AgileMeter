@@ -40,6 +40,10 @@ import { SectionResultsComponent } from './pdfgenerator/section-results/section-
 import { TeamsManagerComponent } from './back-office/components/teams-manager/teams-manager.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { AddTeamComponent } from './back-office/components/teams-manager/add-team/add-team.component';
+import { UserListComponent } from './back-office/components/user-management/user-list/user-list.component';
+
+import { MatPaginatorIntl } from '@angular/material';
+import { CustomPaginator } from 'app/CustomPaginatorConfiguration';
 
 @NgModule({
   declarations: [
@@ -65,7 +69,8 @@ import { AddTeamComponent } from './back-office/components/teams-manager/add-tea
     SectionResultsComponent,
     TeamsManagerComponent,
     BreadcrumbComponent,
-    AddTeamComponent,  
+    AddTeamComponent,
+    UserListComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,6 +99,8 @@ import { AddTeamComponent } from './back-office/components/teams-manager/add-tea
     provide: HTTP_INTERCEPTORS,
     useClass: RequestInterceptorService,
     multi: true
+  },
+  { provide: MatPaginatorIntl, useValue: CustomPaginator() 
   }],
   bootstrap: [AppComponent]
 })
