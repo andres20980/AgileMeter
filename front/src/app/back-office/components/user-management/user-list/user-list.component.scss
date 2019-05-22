@@ -61,3 +61,21 @@ mat-nav-list.list-horizontal {
     outline: none;
     width: 60px;
   }
+
+  .border-curve{
+    border-radius: .25rem;
+  }
+  
+  .modal-btns {
+    height: 50px;
+    padding-top: 11px;
+  }
+  
+  .custom-modal-header {
+    background: linear-gradient(to right, mat-color($mat-everis, 200) , mat-color($mat-everis, 50), mat-color($mat-everis, 500),  mat-color($mat-everis, 400));
+    //background: linear-gradient(to right, #87a900, #59971c, #2a8a41, #317daf);
+    color: white;
+    font-weight: bold;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }

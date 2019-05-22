@@ -33,11 +33,11 @@ selectedUser;
 selectedUsuarioInfoWithProgress;
 
 btnEditClick= function () {
-  this._router.navigateByUrl('/backoffice/teamsmanager');
+  //this._router.navigateByUrl('/backoffice/teamsmanager');
 };
 
 btnAddClick= function () {
-  this._router.navigateByUrl('/backoffice/teamsmanager');
+  //this._router.navigateByUrl('/backoffice/teamsmanager');
 };
 
 //Método para el filtrado
@@ -75,6 +75,7 @@ public UsuarioDelete(usuario: string) {
 
   // Metodo encargado de abrir la ventana confirmando la eliminacion de la evaluacion
   public AbrirModal(content, row) {
+    console.log(row);
   this.selectedUsuarioInfoWithProgress = row;
   this.modalService.open(content).result.then(
     (closeResult) => {
