@@ -14,6 +14,9 @@ export class Equipo{
 		public lineaEntity:Linea,
 		public oficinaEntity: Office,
 		public unidadEntity: Unity,
-		public evaluaciones: Array<Evaluacion> = []
+		public evaluaciones: Array<Evaluacion> = [],
+		public oficina:string,
+		public unidad:string,
+		public proyecto:string,
 	){}
 }

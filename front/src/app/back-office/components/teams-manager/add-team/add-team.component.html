@@ -5,8 +5,8 @@
       <h3 *ngIf="this._teamsService.equipo == undefined">Alta de Equipo</h3>
       <h3 *ngIf="this._teamsService.equipo != undefined">Modificar Equipo</h3>
     </div>
-
-    <!--COMBO PARA LAS OFICINAS-->
+    <!-- 
+    <!--COMBO PARA LAS OFICINAS-- >
     <div class="col-4">
       <mat-form-field class="col-12">
         <mat-select [compareWith]="compareOficina" [value]="oficina" formControlName="OficinaEntity">
@@ -19,7 +19,7 @@
       </mat-form-field>
     </div>
 
-    <!--COMBO PARA LAS UNIDADES-->
+    <!--COMBO PARA LAS UNIDADES-- >
     <div class="col-4">
       <mat-form-field class="col-12">
         <mat-select [compareWith]="compareUnidad" [value]="unidad" formControlName="UnidadEntity"
@@ -34,7 +34,7 @@
     </div>
 
 
-    <!--COMBO PARA LAS LINEAS-->
+    <!--COMBO PARA LAS LINEAS-- >
     <div class="col-4">
       <mat-form-field class="col-12">
         <mat-select [compareWith]="compareLinea" [value]="linea" formControlName="LineaEntity"
@@ -43,10 +43,38 @@
             {{ linea.lineaNombre }}
           </mat-option>
         </mat-select>
-        <mat-label>Linea</mat-label>
-        <mat-error *ngIf="hasError('LineaEntity','required')">Debe seleccionar una Linea</mat-error>
+        <mat-label>Proyecto</mat-label>
+        <mat-error *ngIf="hasError('LineaEntity','required')">Debe seleccionar una Proyecto</mat-error>
       </mat-form-field>
     </div>
+  -->
+  <!--INPUT TEXT PARA LAS OFICINAS-->
+  <div class="col-4">
+    <mat-form-field class="col-12">
+      <input matInput type="text" formControlName="Oficina" id="Oficina" placeholder="Oficina"
+        value="{{this.equipo?.oficina}}">
+      <mat-error *ngIf="hasError('Oficina','required')">El campo oficina no puede estar vacio. </mat-error>
+    </mat-form-field>
+  </div>
+
+  <!--INPUT TEXT PARA LAS UNIDADES-->
+  <div class="col-4">
+    <mat-form-field class="col-12">
+      <input matInput type="text" formControlName="Unidad" id="Unidad" placeholder="Unidad"
+        value="{{this.equipo?.unidad}}">
+      <mat-error *ngIf="hasError('Unidad','required')">El campo unidad no puede estar vacio. </mat-error>
+    </mat-form-field>
+  </div>
+
+  <!--INPUT TEXT PARA LOS PROYECTOS-->
+  <div class="col-4">
+    <mat-form-field class="col-12">
+      <input matInput type="text" formControlName="Proyecto" id="Proyecto" placeholder="Proyecto"
+        value={{this.equipo?.proyecto}}>
+      <mat-error *ngIf="hasError('Proyecto','required')">El campo proyecto no puede estar vacio. </mat-error>
+    </mat-form-field>
+  </div>
+
 
     <!--INPUT TEXT PARA LOS EQUIPOS-->
     <div class="col-8">

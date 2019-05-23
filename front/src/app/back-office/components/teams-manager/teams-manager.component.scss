@@ -37,11 +37,24 @@ img.estado, img.comment, img.informe{
   width: 40px;
   height: 40px;
 }
+img.add{
+  width: 80px;
+  height: 40px;
+}
 img.edit{
   width: 37px;
   height: 37px;
 }
-
+button.transparenteAdd{
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  width: 80px;
+  margin-left:3em;
+}
 button.transparente{
   background-color: Transparent;
   background-repeat: no-repeat;

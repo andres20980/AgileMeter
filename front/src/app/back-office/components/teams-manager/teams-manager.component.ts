@@ -42,9 +42,12 @@ export class TeamsManagerComponent implements OnInit {
     this.teamsListString = [];
     this._proyectoService.GetAllNotTestProjects().subscribe(
       res => {
-        this.teamList = res;
-        this.teamsListString = this.getTeamsString(res);
-        this.dataSource = new MatTableDataSource(this.teamsListString);
+        //eliminado temporalmente hasta tener la lista de oficinas, unidades y proyectos 
+        //this.teamList = res;        
+        //this.teamsListString = this.getTeamsString(res);        
+        //this.dataSource = new MatTableDataSource(this.teamsListString);
+
+        this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
         if ((res.length / this.paginator.pageSize) <= this.paginator.pageIndex) {
           this.paginator.pageIndex--;
@@ -67,8 +70,9 @@ export class TeamsManagerComponent implements OnInit {
 
   // Metodo encargado de abrir la ventana confirmando la eliminacion del equipo
   public AbrirModal(content, row) {
-    var equipo = this.teamList.filter(t => t.id == row.id);
-    this.selectedTeam = equipo[0];
+    //var equipo = this.teamList.filter(t => t.id == row.id);
+    //this.selectedTeam = equipo[0];
+    this.selectedTeam = row;
     this.modalService.open(content).result.then(
       (closeResult) => {
         //Esto realiza la acción de cerrar la ventana
@@ -98,8 +102,9 @@ export class TeamsManagerComponent implements OnInit {
   }
 
   public deleteTeam(team) {
-    this.selectedTeam = this.teamList.filter(t => t.id == team.id);
-    this._proyectoService.deleteTeam(this.selectedTeam[0]).subscribe(
+    //this.selectedTeam = this.teamList.filter(t => t.id == team.id);
+    //this._proyectoService.deleteTeam(this.selectedTeam[0]).subscribe(
+      this._proyectoService.deleteTeam(team).subscribe(
       res => {
         this.refresh();
       },
@@ -117,12 +122,14 @@ export class TeamsManagerComponent implements OnInit {
   }
 
   public modificarEquipo(row) {
-    this.selectedTeam = this.teamList.filter(team => team.id == row.id);
+    //this.selectedTeam = this.teamList.filter(team => team.id == row.id);
     var x = document.getElementById("addteam");
     if (x.style.display == "block") {
       x.style.display = "none";
     }
-    this._proyectoService.modificarEquipo(this.selectedTeam[0]);
+    //this._proyectoService.modificarEquipo(this.selectedTeam[0]);
+    this._proyectoService.modificarEquipo(row);
+
   }
 
   applyFilter(filterValue: string) {

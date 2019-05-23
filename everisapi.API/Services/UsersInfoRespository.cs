@@ -258,9 +258,16 @@ namespace everisapi.API.Services
       AlterProject.Nombre = proyecto.Nombre;
       AlterProject.Fecha = System.DateTime.Now;
       AlterProject.UserNombre = proyecto.UserNombre;
-      AlterProject.OficinaEntity = _context.Oficina.Where(o => o.OficinaId == proyecto.OficinaEntity.OficinaId).FirstOrDefault();     
-      AlterProject.UnidadEntity = _context.Unidad.Where(u => u.UnidadId == proyecto.UnidadEntity.UnidadId).FirstOrDefault();
-      AlterProject.LineaEntity = _context.Linea.Where(l => l.LineaId == proyecto.LineaEntity.LineaId).FirstOrDefault();      
+      AlterProject.Oficina = proyecto.Oficina;
+      AlterProject.Unidad = proyecto.Unidad;
+      AlterProject.Proyecto = proyecto.Proyecto;
+      AlterProject.OficinaEntity = _context.Oficina.Where(o => o.OficinaId == 1).FirstOrDefault();     
+      AlterProject.UnidadEntity = _context.Unidad.Where(u => u.UnidadId == 1).FirstOrDefault();
+      AlterProject.LineaEntity = _context.Linea.Where(l => l.LineaId == 1).FirstOrDefault(); 
+
+      // AlterProject.OficinaEntity = _context.Oficina.Where(o => o.OficinaId == proyecto.OficinaEntity.OficinaId).FirstOrDefault();     
+      //AlterProject.UnidadEntity = _context.Unidad.Where(u => u.UnidadId == proyecto.UnidadEntity.UnidadId).FirstOrDefault();
+      //AlterProject.LineaEntity = _context.Linea.Where(l => l.LineaId == proyecto.LineaEntity.LineaId).FirstOrDefault();      
       AlterProject.ProjectSize = proyecto.ProjectSize;
 
       return SaveChanges();
@@ -320,10 +327,19 @@ namespace everisapi.API.Services
       proyecto.Nombre = equipo.Nombre;
       proyecto.UserNombre = equipo.UserNombre;
       proyecto.ProjectSize = equipo.ProjectSize;
-      proyecto.TestProject = false;      
+      proyecto.TestProject = false;
+      proyecto.Oficina = equipo.Oficina;
+      proyecto.Unidad = equipo.Unidad;
+      proyecto.Proyecto = equipo.Proyecto;
+
+      proyecto.OficinaEntity = _context.Oficina.Where(o => o.OficinaId == 1).FirstOrDefault();     
+      proyecto.UnidadEntity = _context.Unidad.Where(u => u.UnidadId == 1).FirstOrDefault();
+      proyecto.LineaEntity = _context.Linea.Where(l => l.LineaId == 1).FirstOrDefault();
+
+      /*//eliminado temporalmente hasta tener la lista de oficinas, unidades y proyectos
       proyecto.OficinaEntity = _context.Oficina.Where(o => o.OficinaId == equipo.OficinaEntity.OficinaId).FirstOrDefault();     
       proyecto.UnidadEntity = _context.Unidad.Where(u => u.UnidadId == equipo.UnidadEntity.UnidadId).FirstOrDefault();
-      proyecto.LineaEntity = _context.Linea.Where(l => l.LineaId == equipo.LineaEntity.LineaId).FirstOrDefault();
+      proyecto.LineaEntity = _context.Linea.Where(l => l.LineaId == equipo.LineaEntity.LineaId).FirstOrDefault();*/
       
       //Creamos el nuevo team
       _context.Proyectos.Add(proyecto);

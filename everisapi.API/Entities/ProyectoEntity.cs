@@ -16,19 +16,19 @@ namespace everisapi.API.Entities
         [Required]
         [MaxLength(50)]
         public string Nombre { get; set; }
-                
+
         [ForeignKey("LineaId")]
         [Required]        
         public LineaEntity LineaEntity { get; set; }
-                
+
         [ForeignKey("UnidadId")]
         [Required]        
         public UnidadEntity UnidadEntity { get; set; }
-        
+
         [ForeignKey("OficinaId")]
         [Required]        
         public OficinaEntity OficinaEntity { get; set; }
-        
+
         [Required]
         [DataType(DataType.Date)]
         public DateTime Fecha { get; set; }
@@ -47,6 +47,20 @@ namespace everisapi.API.Entities
         public int ProjectSize { get; set; }
 
         [Required]
-        public bool TestProject { get; set;}
+        public bool TestProject { get; set; }
+
+        //eliminado cuando tengamos la lista de oficinas, unidades y proyectos
+
+        [Required]
+        [MaxLength(50)]
+        public string Oficina { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        public string Unidad { get; set; }
+
+        [Required]
+        [MaxLength(50)]
+        public string Proyecto { get; set; }
     }
 }
