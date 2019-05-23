@@ -135,4 +135,9 @@ export class TeamsManagerComponent implements OnInit {
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+  
+  btnAddClick(){
+    this._proyectoService.equipo = null;
+    this.router.navigate(['backoffice/addteam']);
+  }
 }

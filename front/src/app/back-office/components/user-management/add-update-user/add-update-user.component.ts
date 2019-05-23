@@ -1,3 +1,4 @@
+import { UserCreateUpdate } from './../../../../Models/UserCreateUpdate';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Role } from 'app/Models/Role';
@@ -14,6 +15,7 @@ export class AddUpdateUserComponent implements OnInit {
   public ErrorMessage: string = null;
   public Error: string = null;
   public userForm: FormGroup;
+  public user: UserCreateUpdate;
 
   public rolList: Role[];
   rol: Role = { id: 1, role: "Usuario" };
@@ -23,8 +25,16 @@ export class AddUpdateUserComponent implements OnInit {
   constructor(private _UserService: UserService, private _router: Router, private _appComponent: AppComponent) { }
 
   ngOnInit() {
+    /*this._UserService.user = {    
+    nombre: "Acabado",
+    nombreCompleto: "asasas",
+    password: "59e5b121d61e0a4067892621df3b3be42853cf6d56abacf3351d319ef2a31124",    
+    role: {id: 2, role: "Administrador"}};*/
     this.getAllRol();
-    this.formValidate();
+    this.formValidate(); console.log(this._UserService.user);
+    if (this._UserService.user != undefined) {
+      this.getUser();
+    }
   }
 
   //form validate
@@ -68,12 +78,25 @@ export class AddUpdateUserComponent implements OnInit {
       error => {
         if (error == 400) {
           this.ErrorMessage = "Error : Ese usuario ya existe.";
-          this.Error ="400";
+          this.Error = "400";
         } else if (error == 500) {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         } else {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
       });
+  }
+
+  public getUser() {
+    // 1º Recogemos el user
+    this.user = this._UserService.user; 
+
+    // 2º Creamos el form control para las validaciones
+    this.userForm.get('Nombre').setValue(this.user.nombre);
+    this.userForm.get('Password').setValue("");
+    this.userForm.get('NombreCompleto').setValue(this.user.nombreCompleto);
+    //3º recogemos los objetos que marcaremos por defecto en los select
+    this.rol = this.user.role;
+
   }
 }

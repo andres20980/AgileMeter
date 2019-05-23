@@ -45,9 +45,9 @@
     <ng-container matColumnDef="acciones">
       <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
       <mat-cell *matCellDef="let row">
-            <button class="transparente" (click)="btnEditClick()">
+           <!--<button class="transparente" (click)="btnEditClick(row)">
                 <img class="informe" src="assets/edit.png" title="Editar usuario" />
-            </button>
+            </button>-->
             <button class="transparente" (click)="AbrirModal(content, row)">
                 <img class="informe" src="assets/delete.png" title="Eliminar usuario" />
               </button>

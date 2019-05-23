@@ -239,7 +239,11 @@ namespace everisapi.API.Services
       proyecto.Nombre = string.Format("Equipo de pruebas de {0}",userNombre);
       proyecto.UserNombre = userNombre;
       proyecto.ProjectSize = 1;
-      proyecto.TestProject = true;       
+      proyecto.TestProject = true;
+
+      proyecto.Oficina = "Oficina de prueba";
+      proyecto.Unidad = "Unidad de prueba";
+      proyecto.Proyecto = "Proyecto de prueba";
       //Creamos el nuevo proyecto test
       _context.Proyectos.Add(proyecto);
       SaveChanges();
