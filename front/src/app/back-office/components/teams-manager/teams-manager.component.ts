@@ -122,11 +122,7 @@ export class TeamsManagerComponent implements OnInit {
   }
 
   public modificarEquipo(row) {
-    //this.selectedTeam = this.teamList.filter(team => team.id == row.id);
-    var x = document.getElementById("addteam");
-    if (x.style.display == "block") {
-      x.style.display = "none";
-    }
+    //this.selectedTeam = this.teamList.filter(team => team.id == row.id);    
     //this._proyectoService.modificarEquipo(this.selectedTeam[0]);
     this._proyectoService.modificarEquipo(row);
 
