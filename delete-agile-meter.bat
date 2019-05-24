@@ -4,6 +4,7 @@
 @echo Erasing %1 project....
 
 oc delete route %1-frontend
+oc delete route %1-backend
 
 oc delete svc agilemeterfront
 oc delete svc agilemeter
@@ -22,6 +23,8 @@ oc delete is %1-backend
 oc delete is %1-mysql
 
 oc delete pvc %1-mysql
+
+oc delete cm %1-mysql-config
 
 @goto end
 

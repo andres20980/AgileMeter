@@ -113,7 +113,7 @@ objects:
       app: ${APPLICATION_NAME}
       role: mysql
       template: ${APPLICATION_NAME}-mysql
-    name: mysql-agilemeter
+    name: ${APPLICATION_NAME}-mysql-config
   data:
     agilemeter.cnf: |-
       [mysqld]
@@ -197,7 +197,7 @@ objects:
       type: Git
       git:
         uri: https://${REPO_USER}:${REPO_PASS}@steps.everis.com/git/INNOVASEV/ScrumMeter.git
-        ref: "${BACK_SRC_BRANCH}"
+        ref: "${SRC_BRANCH}"
       contextDir: "everisapi.API"
     strategy:
       type: Docker
@@ -301,7 +301,7 @@ objects:
             claimName: ${APPLICATION_NAME}-mysql
         - name: mysql-agilemeter
           configMap:
-            defaultMode: 420
+            name: ${APPLICATION_NAME}-mysql-config
             items:
               - key: agilemeter.cnf
                 path: agilemeter.cnf
