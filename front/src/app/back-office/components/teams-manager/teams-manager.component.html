@@ -1,18 +1,21 @@
+<div class="ng-card-box p-2 pt-4 br-2 mat-elevation-z5">
 <div class="row">
-  <div class="col-12">
+    <div class="col ml-5 mb-3 mt-4">
     <h3>Gestión de Equipos</h3>
   </div>
-
-  <div class="col-10">
+</div>
+<div class="row">
+    <div class="ml-5">
     <mat-form-field>
       <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
     </mat-form-field>
   </div>
-  <div class="col-2">
-    <button class="transparenteAdd pt-3" (click)="btnAddClick();">
+  <div class="col-9">
+    <button class="transparenteAdd col-3 float-right pt-3" (click)="btnAddClick();">
       <img class="add" src="assets/team_add.png" title="Alta Equipo" />
     </button>
   </div>
+</div>
 
   <div class="team-table col-12">
     <div>
@@ -69,6 +72,8 @@
       </mat-paginator>
     </div>
   </div>
+</div>
+<br>
 
   <ng-template #content let-cl="close" let-di="dismiss">
     <div class="modal-content border-0">

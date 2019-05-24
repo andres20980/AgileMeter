@@ -1,5 +1,5 @@
 @import 'theme.scss';
-
+@import 'src/app/home/home.component.scss';
 
 table {
   width: 100%;
@@ -52,7 +52,7 @@ button.transparenteAdd{
   cursor: pointer;
   overflow: hidden;
   outline: none;
-  width: 80px;
+  width: 95px;
   margin-left:3em;
 }
 button.transparente{

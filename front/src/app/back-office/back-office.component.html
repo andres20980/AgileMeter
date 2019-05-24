@@ -5,18 +5,48 @@
         </div>
     </div>
 </div>    
-<div class="row backOfficeContent">
-  
-    <div class="backOfficeMenu col-2">
+
+<div class="backOfficeContent">
+    <!-- <div class="backOfficeMenu col-2">
       <div class="list-group" id="list-tab" role="tablist">
         <a class="list-group-item list-group-item-action" id="list-home-list" data-toggle="list" routerLink="usermanagement" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" role="tab" aria-controls="Users">Usuarios</a>
         <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" routerLink="teamsmanager" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" role="tab" aria-controls="Projects">Equipos</a>        
         <a class="list-group-item list-group-item-action" id="list-questions-list" data-toggle="list" routerLink="questions" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" role="tab" aria-controls="Questions">Preguntas</a>
       </div>
+    </div> -->
+    <div class="container">
+  <div class="row icon-btns">
+
+    <div class="icon-button border-curve mat-elevation-z5 w-85 m-5 col-2"
+       routerLink="usermanagement" routerLinkActive="active">
+       <div class="icon-button-img"> <img  src="assets/users-management.png" style="width: 120px; margin-bottom: 12px; margin-top:10px;"/></div>  
+        <a>GESTIÓN DE USUARIOS</a>
+    </div>
+   
+
+    <!-- <div class="col1"></div> -->
+
+    <div class="icon-button border-curve mat-elevation-z5 w-85 m-5 col-2"
+       routerLink="teamsmanager" routerLinkActive="active">
+       <div class="icon-button-img"> <img  src="assets/teams-management.png" style="width: 120px;"/></div>  
+        <a>GESTIÓN DE EQUIPOS</a>
     </div>
 
-    <div *ngIf="_router.url !== '/backoffice'" class="col-9 ng-card-box p-5 br-2 mat-elevation-z5 mx-0 mb-4">
-      <router-outlet class="backOfficeComponents"></router-outlet>
-    </div>
-    
+    <div class="icon-button border-curve mat-elevation-z5 w-85 m-5 col-2"
+    routerLink="usermanagement" routerLinkActive="active" [class.card-disabled]="true">
+    <div class="icon-button-img"> <img  src="assets/assesments-management.png" style="width: 110px;"/></div>  
+     <a>GESTIÓN DE ASSESMENTS</a>
+ </div>
+
+  </div>
 </div>
+    
+    <div class="container">
+      <div *ngIf="_router.url !== '/backoffice'">
+        <router-outlet class="container22"></router-outlet>
+      </div>
+    </div>
+
+
+  </div>
+    

@@ -1,6 +1,8 @@
 <div *ngIf="Error =='400'" class="alert alert-danger alert-login" id="danger">
   <strong>{{ErrorMessage}}</strong>
 </div>
+
+<div  class="ng-card-box p-5 br-2 mat-elevation-z5">
 <form [formGroup]="userForm" autocomplete="off" class="col-12">
   <div class="row justify-content-center">
     <div class="col-12">
@@ -51,3 +53,5 @@
     </div>
   </div>
 </form>
+</div>
+<br />

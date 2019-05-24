@@ -1,5 +1,5 @@
 @import 'theme.scss';
-
+@import 'src/app/home/home.component.scss';
 
 table {
   width: 100%;
@@ -48,8 +48,8 @@ mat-nav-list.list-horizontal {
   }
 
   img.informe{
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
   }
 
   button.transparente{
