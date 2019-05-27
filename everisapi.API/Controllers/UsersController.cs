@@ -136,17 +136,16 @@ namespace everisapi.API.Controllers
       {
         return BadRequest(ModelState);
       }
-
       //Encriptamos la contraseña
-      // using (var sha256 = SHA256.Create())
-      // {
-      //   // Le damos la contraseña
-      //   var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(UsuarioAdd.Password));
-      //   // Recogemos el hash como string
-      //   var hash = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
-      //   // Y se lo damos 
-      //   UsuarioAdd.Password = hash;
-      // }
+       using (var sha256 = SHA256.Create())
+       {
+         // Le damos la contraseña
+         var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(UsuarioAdd.Password));
+         // Recogemos el hash como string
+         var hash = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+         // Y se lo damos 
+          UsuarioAdd.Password = hash;
+       }
 
       //Comprueba que se guardo bien y lo envia
       if (_userInfoRepository.AddUser(Mapper.Map<UserEntity>(UsuarioAdd)))
@@ -176,6 +175,7 @@ namespace everisapi.API.Controllers
 
       UserEntity userEntity= new UserEntity{
         Nombre = UsuarioUpdate.Nombre,
+        Activo = UsuarioUpdate.Activo,
         RoleId = UsuarioUpdate.Role.Id
         };
 

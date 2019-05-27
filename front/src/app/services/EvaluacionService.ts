@@ -29,6 +29,8 @@ export class EvaluacionService {
 
     //this.url = window.location.protocol +"//"+ window.location.hostname + ":60406/api/";    
     this.url = StaticHelper.ReturnUrlByEnvironment();
+
+
   }
 
   //Este metodo recoge todas las evaluaciones de la base de datos

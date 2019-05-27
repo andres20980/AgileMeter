@@ -1,0 +1,81 @@
+@import 'theme.scss';
+@import 'src/app/home/home.component.scss';
+
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+mat-table{
+width: 100%!important;
+min-width: 80%;
+}
+
+mat-cell {
+  font-size: 12px !important;
+  /* display:flex !important; */
+  justify-content: center !important;
+}
+
+.mat-header-cell {
+  font-weight: bold !important;
+  font-size: 12px !important;
+  color: #222222;
+  display: flex;
+  cursor: pointer;
+  //align-items: center;
+  justify-content: center;
+}
+
+mat-cell:first-child, mat-footer-cell:first-child, mat-header-cell:first-child {
+  padding-left: 0px;
+}
+mat-cell:last-child, mat-footer-cell:last-child, mat-header-cell:last-child {
+  padding-right: 0px;
+}
+
+mat-nav-list.list-horizontal {
+    padding: 0;
+    .mat-list-item {
+      display: inline-block;
+      height: auto;
+      width: auto;
+    }
+  }
+
+  img.informe{
+    width: 40px;
+    height: 40px;
+  }
+
+  button.transparente{
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    width: 60px;
+  }
+
+  .border-curve{
+    border-radius: .25rem;
+  }
+  
+  .modal-btns {
+    height: 50px;
+    padding-top: 11px;
+  }
+  
+  .custom-modal-header {
+    background: linear-gradient(to right, mat-color($mat-everis, 200) , mat-color($mat-everis, 50), mat-color($mat-everis, 500),  mat-color($mat-everis, 400));
+    //background: linear-gradient(to right, #87a900, #59971c, #2a8a41, #317daf);
+    color: white;
+    font-weight: bold;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }

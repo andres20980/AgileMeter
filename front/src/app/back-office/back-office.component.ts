@@ -3,12 +3,13 @@ import { Router } from "@angular/router";
 import { AppComponent } from '../app.component';
 import { ProyectoService } from '../services/ProyectoService';
 import { EventEmitterService } from 'app/services/event-emitter.service';
+import { UserService } from 'app/services/UserService';
 
 @Component({
   selector: 'app-back-office',
   templateUrl: './back-office.component.html',
   styleUrls: ['./back-office.component.scss'],
-  providers: [ProyectoService]
+  providers: [ProyectoService,UserService]
 })
 
 
@@ -20,23 +21,22 @@ export class BackOfficeComponent implements OnInit {
   constructor(
     private _proyectoService: ProyectoService,
     public _router: Router,
-    private _eventService: EventEmitterService, 
+    private _eventService: EventEmitterService,
     private _appComponent: AppComponent) {
-      this._eventService.eventEmitter.subscribe(
-        (data) => {
-            this.updateUser= data,
-            setTimeout(()=>{this.updateUser = null},2000)
-        }
-        );
-     }
-    
+    this._eventService.eventEmitter.subscribe(
+      (data) => {
+        this.updateUser = data,
+          setTimeout(() => { this.updateUser = null }, 2000)
+      }
+    );
+  }
+
 
   ngOnInit() {
 
     if (!this._proyectoService.verificarUsuario()) {
       this._router.navigate(['/login']);
-    }    
+    }
 
   }
-
 }

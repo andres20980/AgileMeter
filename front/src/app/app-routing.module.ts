@@ -15,6 +15,8 @@ import { UserManagementComponent } from './back-office/components/user-managemen
 import { AddUserProjectComponent } from './back-office/components/add-user-project/add-user-project.component';
 import { TeamsManagerComponent } from './back-office/components/teams-manager/teams-manager.component';
 import { QuestionsManagerComponent } from './back-office/components/questions-manager/questions-manager.component';
+import { AddTeamComponent } from './back-office/components/teams-manager/add-team/add-team.component';
+import { AddUpdateUserComponent } from './back-office/components/user-management/add-update-user/add-update-user.component';
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent },
@@ -24,8 +26,10 @@ const appRoutes: Routes = [
     path: 'backoffice', component: BackOfficeComponent,
     children: [
       { path: 'usermanagement', component: UserManagementComponent },
+      { path: 'usermanagement/addUser', component: AddUpdateUserComponent },
       { path: 'adduserproject', component: AddUserProjectComponent },
       { path: 'teamsmanager', component: TeamsManagerComponent },
+      { path: 'addteam', component: AddTeamComponent },
       { path: 'questions', component: QuestionsManagerComponent }
     ]
   },

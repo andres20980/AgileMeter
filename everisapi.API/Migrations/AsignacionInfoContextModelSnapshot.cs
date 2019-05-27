@@ -94,6 +94,25 @@ namespace everisapi.API.Migrations
                     b.ToTable("Evaluaciones");
                 });
 
+            modelBuilder.Entity("everisapi.API.Entities.LineaEntity", b =>
+                {
+                    b.Property<int>("LineaId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("LineaNombre")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<int>("UnidadId");
+
+                    b.HasKey("LineaId");
+
+                    b.HasIndex("UnidadId");
+
+                    b.ToTable("Linea");
+                });
+
             modelBuilder.Entity("everisapi.API.Entities.NotasAsignacionesEntity", b =>
                 {
                     b.Property<int>("Id")
@@ -138,6 +157,21 @@ namespace everisapi.API.Migrations
                     b.ToTable("NotasSections");
                 });
 
+            modelBuilder.Entity("everisapi.API.Entities.OficinaEntity", b =>
+                {
+                    b.Property<int>("OficinaId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("OficinaNombre")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("OficinaId");
+
+                    b.ToTable("Oficina");
+                });
+
             modelBuilder.Entity("everisapi.API.Entities.PreguntaEntity", b =>
                 {
                     b.Property<int>("Id")
@@ -177,15 +211,44 @@ namespace everisapi.API.Migrations
 
                     b.Property<DateTime>("Fecha");
 
+                    b.Property<int?>("LineaId")
+                        .IsRequired();
+
                     b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("Oficina")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<int?>("OficinaId")
+                        .IsRequired();
+
+                    b.Property<int>("ProjectSize");
+
+                    b.Property<string>("Proyecto")
                         .IsRequired()
                         .HasMaxLength(50);
 
                     b.Property<bool>("TestProject");
 
+                    b.Property<string>("Unidad")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<int?>("UnidadId")
+                        .IsRequired();
+
                     b.Property<string>("UserNombre");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("LineaId");
+
+                    b.HasIndex("OficinaId");
+
+                    b.HasIndex("UnidadId");
 
                     b.HasIndex("UserNombre");
 
@@ -262,9 +325,32 @@ namespace everisapi.API.Migrations
                     b.ToTable("Sections");
                 });
 
+            modelBuilder.Entity("everisapi.API.Entities.UnidadEntity", b =>
+                {
+                    b.Property<int>("UnidadId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("OficinaId");
+
+                    b.Property<string>("UnidadNombre")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("UnidadId");
+
+                    b.HasIndex("OficinaId");
+
+                    b.ToTable("Unidad");
+                });
+
             modelBuilder.Entity("everisapi.API.Entities.UserEntity", b =>
                 {
                     b.Property<string>("Nombre");
+
+                    b.Property<bool>("Activo");
+
+                    b.Property<string>("NombreCompleto");
 
                     b.Property<string>("Password")
                         .IsRequired();
@@ -328,6 +414,14 @@ namespace everisapi.API.Migrations
                         .HasForeignKey("UserNombre");
                 });
 
+            modelBuilder.Entity("everisapi.API.Entities.LineaEntity", b =>
+                {
+                    b.HasOne("everisapi.API.Entities.UnidadEntity", "UnidadEntity")
+                        .WithMany()
+                        .HasForeignKey("UnidadId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("everisapi.API.Entities.NotasAsignacionesEntity", b =>
                 {
                     b.HasOne("everisapi.API.Entities.AsignacionEntity", "AsignacionEntity")
@@ -368,6 +462,21 @@ namespace everisapi.API.Migrations
 
             modelBuilder.Entity("everisapi.API.Entities.ProyectoEntity", b =>
                 {
+                    b.HasOne("everisapi.API.Entities.LineaEntity", "LineaEntity")
+                        .WithMany()
+                        .HasForeignKey("LineaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("everisapi.API.Entities.OficinaEntity", "OficinaEntity")
+                        .WithMany()
+                        .HasForeignKey("OficinaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("everisapi.API.Entities.UnidadEntity", "UnidadEntity")
+                        .WithMany()
+                        .HasForeignKey("UnidadId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("everisapi.API.Entities.UserEntity", "UserEntity")
                         .WithMany("ProyectosDeUsuario")
                         .HasForeignKey("UserNombre");
@@ -391,6 +500,14 @@ namespace everisapi.API.Migrations
                     b.HasOne("everisapi.API.Entities.AssessmentEntity", "Assessment")
                         .WithMany()
                         .HasForeignKey("AssessmentId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("everisapi.API.Entities.UnidadEntity", b =>
+                {
+                    b.HasOne("everisapi.API.Entities.OficinaEntity", "OficinaEntity")
+                        .WithMany()
+                        .HasForeignKey("OficinaId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

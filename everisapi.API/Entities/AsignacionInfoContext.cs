@@ -44,6 +44,9 @@ namespace everisapi.API.Entities
         public DbSet<UserProyectoEntity> UserProyectos { get; set; }
 
         public DbSet<AssessmentEntity> Assessment {get;set;}
+        public DbSet<OficinaEntity> Oficina {get;set;}
+        public DbSet<UnidadEntity> Unidad {get;set;}
+        public DbSet<LineaEntity> Linea {get;set;}
 
 
   }

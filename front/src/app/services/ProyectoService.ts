@@ -1,3 +1,6 @@
+import { Proyecto } from './../Models/Proyecto';
+import { Unity } from './../Models/Unit';
+import { Office } from './../Models/Office';
 
 import { throwError as observableThrowError, Observable } from 'rxjs';
 
@@ -5,24 +8,25 @@ import { catchError, map } from 'rxjs/operators';
 import { Injectable, Inject, isDevMode } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Router } from '@angular/router';
-
-
-
 import { AppComponent } from '../app.component';
 import { UserWithRole } from 'app/Models/UserWithRole';
 import { StaticHelper } from './Helper';
+import { Equipo } from 'app/Models/Equipo';
 
 @Injectable()
 export class ProyectoService {
   public url: string;
   public UsuarioLogeado: string;
   public UserLongName: string;
+  public equipo:Equipo;
 
-  constructor(private _http: Http,
+  constructor(private _http: Http,private _router:Router,
     private _appComponent: AppComponent) {
 
     //this.url = window.location.protocol +"//"+ window.location.hostname + ":60406/api/";    
     this.url = StaticHelper.ReturnUrlByEnvironment();
+
+
   }
 
   //Este metdo nos permite verificar si el usuario ya esta logeado en la web
@@ -83,7 +87,7 @@ export class ProyectoService {
     });
     return this._http.get(this.url + 'users/' + user.nombre + "/proyectos", { headers: headers }).pipe(
       map((response: Response) => response.json()),
-      catchError(this.errorHandler),);
+      catchError(this.errorHandler));
   }
 
   //Este metodo recoge un proyecto de un usuario si existe mediante un nombre de usuario y su id de proyecto
@@ -124,4 +128,83 @@ export class ProyectoService {
     return observableThrowError(error.status);
   }
 
+  public getAllOficinas() {
+    let Token = this._appComponent.ComprobarUserYToken();
+    let headers = new Headers({
+      'Authorization': Token
+    });
+    return this._http.get(this.url + 'oficina/allOficina', { headers: headers }).pipe(
+      map((response: Response) => response.json()),
+      catchError(this.errorHandler));
+  }
+
+  public getAllUnitDe(oficina: Office) {//devuelve todas las unidades de la oficina seleccionada  
+    let Token = this._appComponent.ComprobarUserYToken();
+    let headers = new Headers({
+      'Authorization': Token
+    });
+    return this._http.get(this.url + 'unidad/allUnidad/' + oficina.oficinaId, { headers: headers }).pipe(
+      map((response: Response) => response.json()),
+      catchError(this.errorHandler));
+  }
+
+  public getAllLineasDe(unidad: Unity) {//devuelve todas las unidades de la unidad seleccionada
+    let Token = this._appComponent.ComprobarUserYToken();
+    let headers = new Headers({
+      'Authorization': Token
+    });
+    return this._http.get(this.url + 'linea/allLinea/' + unidad.unidadId, { headers: headers }).pipe(
+      map((response: Response) => response.json()),
+      catchError(this.errorHandler));
+  }
+
+  //add a team
+  setTeam(equipo: Proyecto) {
+    let params = JSON.stringify(equipo);
+    let Token = this._appComponent.ComprobarUserYToken();
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': Token
+    });
+    return this._http.post(this.url + 'users/proyectos/addTeam', params, { headers: headers }).pipe(
+      map(res => res));
+  }
+
+  //Delete Team
+  deleteTeam(team) {
+    let Token = this._appComponent.ComprobarUserYToken();
+    let params = JSON.stringify(team);
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': Token
+    });
+    return this._http.post(this.url + 'users/proyectos/delete', params, { headers: headers }).pipe(
+      map(res => res),
+      catchError(this.errorHandler));
+  }
+
+  getProyecto(idProyecto) {
+    let Token = this._appComponent.ComprobarUserYToken();
+    let headers = new Headers({
+      'Authorization': Token
+    });
+    return this._http.get(this.url + 'users/' + 'proyecto/' + idProyecto, { headers: headers }).pipe(
+      map((response: Response) => response.json()),
+      catchError(this.errorHandler));
+  }
+
+  updateTeam(equipo: Proyecto) {
+    let params = JSON.stringify(equipo);
+    let Token = this._appComponent.ComprobarUserYToken();
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': Token
+    });
+    return this._http.put(this.url + 'users/proyectos/update', params, { headers: headers }).pipe(
+      map(res => res));
+  }
+  modificarEquipo(row){
+    this.equipo = row;
+    this._router.navigate(['backoffice/addteam']);
+  }
 }
