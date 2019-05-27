@@ -245,6 +245,7 @@ export class NewevaluationComponent implements OnInit {
       if (optionAnswered != pregunta.respuesta.estado) {
         this.InfoAsignacion.preguntas[index].respuesta.estado = optionAnswered;
         let respuesta = this.InfoAsignacion.preguntas[index].respuesta;
+        respuesta.userName = this.UserName ;
         this._respuestasService.AlterRespuesta(respuesta).subscribe(
           res => {
             this.changedQuestion = index;
