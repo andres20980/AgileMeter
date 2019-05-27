@@ -124,7 +124,9 @@ export class TeamsManagerComponent implements OnInit {
   public modificarEquipo(row) {
     //this.selectedTeam = this.teamList.filter(team => team.id == row.id);    
     //this._proyectoService.modificarEquipo(this.selectedTeam[0]);
-    this._proyectoService.modificarEquipo(row);
+    //this._proyectoService.modificarEquipo(row);
+    this._proyectoService.equipo =row;   
+    this.router.navigate(['backoffice/teamsmanager/addteam']);
 
   }
 
@@ -134,6 +136,6 @@ export class TeamsManagerComponent implements OnInit {
   
   btnAddClick(){
     this._proyectoService.equipo = null;
-    this.router.navigate(['backoffice/addteam']);
+    this.router.navigate(['backoffice/teamsmanager/addteam']);
   }
 }

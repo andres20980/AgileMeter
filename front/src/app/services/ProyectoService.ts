@@ -202,9 +202,5 @@ export class ProyectoService {
     });
     return this._http.put(this.url + 'users/proyectos/update', params, { headers: headers }).pipe(
       map(res => res));
-  }
-  modificarEquipo(row){
-    this.equipo = row;
-    this._router.navigate(['backoffice/addteam']);
-  }
+  }  
 }
