@@ -42,8 +42,9 @@ namespace everisapi.API.Services
           ProyectoDto p = new ProyectoDto();
           p.Id = pe.Id;
           //p.Nombre = pe.TestProject ? pe.Nombre : String.Concat(pe.Nombre, " - " , pe.LineaEntity.LineaNombre);
-          p.Nombre = pe.TestProject ? pe.Nombre : String.Concat(pe.Proyecto, " - " , pe.Nombre);
+          p.Nombre = pe.Nombre;
           p.Fecha = pe.Fecha;
+          p.Proyecto = pe.Proyecto;
           p.numFinishedEvals = _context.Evaluaciones.Where(e => e.ProyectoId == pe.Id && e.Estado).Count();
           p.numPendingEvals = _context.Evaluaciones.Where(e => e.ProyectoId == pe.Id && !e.Estado).Count();
           proyectos.Add(p);
@@ -58,6 +59,7 @@ namespace everisapi.API.Services
           ProyectoDto p = new ProyectoDto();
           p.Id = pe.Id;
           p.Nombre = pe.Nombre;
+          p.Proyecto = pe.Proyecto;
           p.Fecha = pe.Fecha;
           p.numFinishedEvals = _context.Evaluaciones.Where(e => e.ProyectoId == pe.Id && e.Estado).Count();
           p.numPendingEvals = _context.Evaluaciones.Where(e => e.ProyectoId == pe.Id && !e.Estado).Count();
@@ -72,7 +74,7 @@ namespace everisapi.API.Services
     //Recoge todos los proyectos de todos los usuarios
     public IEnumerable<ProyectoEntity> GetFullProyectos(string userNombre)
     {
-      return _context.Proyectos.Where(p => p.TestProject == false || p.UserNombre == userNombre).OrderBy(p => p.Nombre).ToList();
+      return _context.Proyectos.Where(p => p.TestProject == false).OrderBy(p => p.Nombre).ToList();
     }
 
     //Devuelve un listado con todos los proyectos dados de alta en el sistema que no pertenezcan al grupo de pruebas de usuario

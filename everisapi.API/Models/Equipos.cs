@@ -15,7 +15,7 @@ namespace everisapi.API.Models
         public Unidad UnidadEntity { get; set; }
         public int ProjectSize { get; set; }
         public string UserNombre { get; set; }
-
+        
         public string Oficina { get; set; }
 
         public string Unidad { get; set; }
