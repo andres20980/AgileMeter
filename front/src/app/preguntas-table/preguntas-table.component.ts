@@ -190,7 +190,7 @@ export class PreguntasTableComponent implements OnInit {
     }
 
     saveNotas(model: RespuestaConNotas): void{
-      let resp: Respuesta  = new Respuesta(model.id, model.estado, 0, 0, model.notas, model.notasAdmin);
+      let resp: Respuesta  = new Respuesta(model.id, model.estado, 0, 0, model.notas, model.notasAdmin,"");
       if(this.userRole == "Administrador" || this.userRole == "Evaluador"){
         this._respuestasService.AlterRespuesta(resp).subscribe(
           res => {

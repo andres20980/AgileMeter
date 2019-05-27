@@ -29,7 +29,7 @@ export class SectionResultsComponent implements OnInit {
     ){
     }
     saveNotas(model: RespuestaConNotas): void{
-      let answer: Respuesta  = new Respuesta(model.id, model.estado, 0, 0, model.notas, model.notasAdmin);
+      let answer: Respuesta  = new Respuesta(model.id, model.estado, 0, 0, model.notas, model.notasAdmin,"");
       if(this.userRole == "Administrador" || this.userRole == "Evaluador"){
         this._respuestasService.AlterRespuesta(answer).subscribe();
       }

@@ -808,7 +808,7 @@ export class PdfgeneratorComponent implements OnInit {
           }
 
           var resp = new Respuesta(this.ListaDeRespuestas[i].id, this.ListaDeRespuestas[i].estado,
-            1, 1, this.ListaDeRespuestas[i].notas, this.ListaDeRespuestas[i].notasAdmin);
+            1, 1, this.ListaDeRespuestas[i].notas, this.ListaDeRespuestas[i].notasAdmin,this.UserName);
 
 
           this._respuestasService.AlterRespuesta(resp).subscribe(
