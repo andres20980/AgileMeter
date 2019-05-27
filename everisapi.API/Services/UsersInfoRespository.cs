@@ -122,6 +122,12 @@ namespace everisapi.API.Services
       return _context.Users.Any(u => u.Nombre == userNombre);
     }
 
+    //Devuelve si el usuario esta activo
+    public bool UserActivo(string userNombre)
+    {
+      return _context.Users.Any(u => u.Nombre == userNombre && u.Activo);
+    }
+
     //Devuelve todos los roles de usuario
     public RoleEntity GetRolesUsuario(UserEntity usuario)
     {
@@ -179,7 +185,7 @@ namespace everisapi.API.Services
     public bool AlterUser(UserEntity usuario)
     {
       var UserAlter = _context.Users.Where(u => u.Nombre == usuario.Nombre).FirstOrDefault();
-      UserAlter.Nombre = usuario.Nombre;
+      //UserAlter.Nombre = usuario.Nombre;
       UserAlter.NombreCompleto = usuario.NombreCompleto;
       UserAlter.Activo = usuario.Activo;
       UserAlter.Password = usuario.Password;
@@ -193,6 +199,8 @@ namespace everisapi.API.Services
       //UserAlter.Nombre = usuario.Nombre;
       UserAlter.Activo = usuario.Activo;
       UserAlter.RoleId = usuario.RoleId;
+      UserAlter.NombreCompleto = usuario.NombreCompleto;
+      UserAlter.Password = usuario.Password;
       
       return SaveChanges();
     }
