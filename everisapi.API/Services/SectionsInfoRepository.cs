@@ -313,7 +313,7 @@ namespace everisapi.API.Services
         ListadoSectionInformacion.Add(SectionAdd);
       }
 
-      return ListadoSectionInformacion;
+      return ListadoSectionInformacion.OrderBy(x => x.Id);
     }
 
     //Devolvemos las asignaciones de una section

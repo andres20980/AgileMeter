@@ -17,6 +17,8 @@ export class BackOfficeComponent implements OnInit {
 
   //public AdminOn = false;
   public updateUser: string = null;
+  public ActiveSection : string = null;
+  //public collapsedButtons : boolean = false;
 
   constructor(
     private _proyectoService: ProyectoService,
@@ -33,10 +35,15 @@ export class BackOfficeComponent implements OnInit {
 
 
   ngOnInit() {
-
+    //this.collapsedButtons = false;
+    this.ActiveSection = null;
     if (!this._proyectoService.verificarUsuario()) {
       this._router.navigate(['/login']);
     }
 
   }
+
+  // buttonClick(option :  string){
+  //   this.ActiveSection = option;
+  // }
 }
