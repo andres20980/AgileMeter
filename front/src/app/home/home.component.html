@@ -20,7 +20,10 @@
             <div class="col-4">
               <mat-form-field class ="dropdown-material">
               <mat-select [(value)]="ProyectoSeleccionado" placeholder="Seleccione un equipo"  (selectionChange)="SeleccionDeProyecto()">
-                <mat-option class="dropdown-content" *ngFor="let proyecto of ListaDeProyectos; let i = index" [value]="proyecto">{{proyecto.proyecto}} - {{proyecto.nombre}}</mat-option>
+                <mat-option class="dropdown-content" *ngFor="let proyecto of ListaDeProyectos; let i = index" [value]="proyecto">
+                  <div *ngIf="!proyecto.testProject" >{{proyecto.proyecto}} - {{proyecto.nombre}}</div>
+                  <div *ngIf="proyecto.testProject" >{{proyecto.nombre}}</div>
+                </mat-option>
               </mat-select>
             </mat-form-field>
         </div>

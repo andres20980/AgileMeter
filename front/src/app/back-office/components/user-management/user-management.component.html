@@ -58,7 +58,9 @@
 
         <mat-list role="list">
           <h3 matSubheader>Equipos asociados al usuario:</h3>
-          <mat-list-item role="listitem" *ngFor="let proyecto of ListaDeProyectosUsuario"> {{proyecto.proyecto}} - {{proyecto.nombre}}
+          <mat-list-item role="listitem" *ngFor="let proyecto of ListaDeProyectosUsuario"> 
+              <div *ngIf="!proyecto.testProject" >{{proyecto.proyecto}} - {{proyecto.nombre}}</div>
+              <div *ngIf="proyecto.testProject" >{{proyecto.nombre}}</div>
             <button mat-button class="transparente" (click)="deleteSingleUserProjects(proyecto)">
               <i class="material-icons delete">delete</i>
             </button>

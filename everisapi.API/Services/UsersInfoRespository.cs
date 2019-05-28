@@ -47,6 +47,7 @@ namespace everisapi.API.Services
           p.Proyecto = pe.Proyecto;
           p.numFinishedEvals = _context.Evaluaciones.Where(e => e.ProyectoId == pe.Id && e.Estado).Count();
           p.numPendingEvals = _context.Evaluaciones.Where(e => e.ProyectoId == pe.Id && !e.Estado).Count();
+          p.TestProject = pe.TestProject;
           proyectos.Add(p);
         }
       }
@@ -63,6 +64,7 @@ namespace everisapi.API.Services
           p.Fecha = pe.Fecha;
           p.numFinishedEvals = _context.Evaluaciones.Where(e => e.ProyectoId == pe.Id && e.Estado).Count();
           p.numPendingEvals = _context.Evaluaciones.Where(e => e.ProyectoId == pe.Id && !e.Estado).Count();
+          p.TestProject = pe.TestProject;
           proyectos.Add(p);         
         }  
       }
