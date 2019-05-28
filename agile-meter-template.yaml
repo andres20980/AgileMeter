@@ -1,3 +1,9 @@
+# c:\datos\corporativo\everis domain cert>oc create route edge agile-meter-frontend --service=agilemeterfront --cert=STAR.EVERIS.COM.crt --key=everis.com.key --ca-cert=OV_NetworkSolutionsOVServerCA2.crt --hostname=agilemeter.everis.com
+# route "agile-meter-frontend" created
+
+# c:\datos\corporativo\everis domain cert>oc create route edge agile-meter-backend --service=agilemeter --cert=STAR.EVERIS.COM.crt --key=everis.com.key --ca-cert=OV_NetworkSolutionsOVServerCA2.crt --hostname=agilemeterbackend.everis.com
+# route "agile-meter-backend" created 
+
 kind: Template
 apiVersion: v1
 metadata:
@@ -462,27 +468,27 @@ objects:
       name: ${APPLICATION_NAME}-frontend
     type: ClusterIP
     sessionAffinity: None
-- kind: Route
-  apiVersion: v1
-  metadata:
-    annotations:
-      description: Route for backend application.
-    labels:
-      app: ${APPLICATION_NAME}
-    name: ${APPLICATION_NAME}-backend
-  spec:
-    host: agilemeter.${OPENSHIFT_DOMAIN}
-    to:
-      name: agilemeter
-- kind: Route
-  apiVersion: v1
-  metadata:
-    annotations:
-      description: Route for web application.
-    labels:
-      app: ${APPLICATION_NAME}
-    name: ${APPLICATION_NAME}-frontend
-  spec:
-    host: ${FULL_DOMAIN}
-    to:
-      name: agilemeterfront
+# - kind: Route
+  # apiVersion: v1
+  # metadata:
+    # annotations:
+      # description: Route for backend application.
+    # labels:
+      # app: ${APPLICATION_NAME}
+    # name: ${APPLICATION_NAME}-backend
+  # spec:
+    # host: agilemeter.${OPENSHIFT_DOMAIN}
+    # to:
+      # name: agilemeter
+# - kind: Route
+  # apiVersion: v1
+  # metadata:
+    # annotations:
+      # description: Route for web application.
+    # labels:
+      # app: ${APPLICATION_NAME}
+    # name: ${APPLICATION_NAME}-frontend
+  # spec:
+    # host: ${FULL_DOMAIN}
+    # to:
+      # name: agilemeterfront
