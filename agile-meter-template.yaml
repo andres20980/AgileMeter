@@ -396,6 +396,10 @@ objects:
             value: agilemeter.${OPENSHIFT_DOMAIN}
           - name: BACKEND_PORT
             value: "80"
+          - name: BACKEND_PROTOCOL
+            value: https
+          - name: BACKEND_URL
+            value: "https://agilemeterbackend.everis.com"
           ports:
           - containerPort: 4200
             protocol: TCP
