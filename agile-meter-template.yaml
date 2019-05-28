@@ -111,6 +111,22 @@ parameters:
   description: request limit for memory cad-api
   required: true
   value: 512Mi
+- name: BACKEND_HOST
+  description: host to the backend url
+  required: true
+  value: agilemeter.${OPENSHIFT_DOMAIN}
+- name: BACKEND_PORT
+  description: port to the backend url
+  required: true
+  value: "80"
+- name: BACKEND_PROTOCOL
+  description: protocol to the backend url
+  required: true
+  value: https
+- name: BACKEND_URL
+  description: backend url
+  required: true
+  value: "https://agilemeterbackend.everis.com"
 objects:
 - kind: ConfigMap
   apiVersion: v1
@@ -393,13 +409,13 @@ objects:
           image: " "
           env:
           - name: BACKEND_HOST
-            value: agilemeter.${OPENSHIFT_DOMAIN}
+            value: ${BACKEND_HOST}
           - name: BACKEND_PORT
-            value: "80"
+            value: ${BACKEND_PORT}
           - name: BACKEND_PROTOCOL
-            value: https
+            value: ${BACKEND_PROTOCOL}
           - name: BACKEND_URL
-            value: "https://agilemeterbackend.everis.com"
+            value: ${BACKEND_URL}
           ports:
           - containerPort: 4200
             protocol: TCP
