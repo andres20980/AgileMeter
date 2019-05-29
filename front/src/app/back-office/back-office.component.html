@@ -20,7 +20,7 @@
 
     <div class="container">
   <div class="row icon-btns mb-5" [ngClass]="{'active-row mt-4': ActiveSection != null, 'mt-5': ActiveSection == null}">
-<div class="buttons-wrap" [ngClass]="{'mat-elevation-z5': ActiveSection != null}">
+<div class="buttons-wrap" [ngClass]="{'mat-elevation-z5': ActiveSection != null, 'buttons-wrap-disabled': ActiveSection == null}">
 
     <div class="icon-button border-curve mat-elevation-z5 mr-5 ml-5 col-2"
        routerLink="usermanagement" routerLinkActive="active" 

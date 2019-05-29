@@ -322,6 +322,13 @@
   display: flex;
 }
 
+.buttons-wrap-disabled{
+  //@extend .transition-animation;
+
+  transition: all .1s ease;
+
+}
+
 .a-users{
   @extend .transition-animation;
   border-radius: .25rem 0 0 .25rem;
