@@ -84,7 +84,6 @@ export class UserListComponent implements OnInit {
 
   // Metodo encargado de abrir la ventana confirmando la eliminacion de la evaluacion
   public AbrirModal(content, row) {
-    console.log(row);
     this.selectedUsuarioInfoWithProgress = row;
     this.modalService.open(content).result.then(
       (closeResult) => {
@@ -105,7 +104,6 @@ export class UserListComponent implements OnInit {
   public getUsers() {
     this._userService.getUsers().subscribe(
       res => {
-        //console.log(res);
         this.userList = [];
         this.userListString = [];
 

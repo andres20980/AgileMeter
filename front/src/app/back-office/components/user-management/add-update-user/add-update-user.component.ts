@@ -107,24 +107,25 @@ export class AddUpdateUserComponent implements OnInit {
     if (form.password == "") {
       form.password = null;
     }
-
-    if (this._proyectoService.UsuarioLogeado == form.nombre) {//comprobamos si el usuario a modificar es el mismo que el usuario logueado
-      if (this._userService.user.role.id == form.Role.id) { //si no se cambia el rol se modifica
-        this.updateUsuario(form);
-      } else {//si se cambia el rol se muestra una ventana modal de advertencia y si aceptas se modifica el usuario y te redirige al home
-        this.AbrirModal(content, form);
-      }
+    //si el usuario logueado es el usuario a modificar y le cambias el roll te muestra una ventana de advertencia indicando que te redirige al home
+    if (this._proyectoService.UsuarioLogeado == form.nombre && this._userService.user.role.id != form.Role.id) {
+      this.AbrirModal(content, form);
+    } 
+    //si no se modifica
+    else {
+      this.updateUsuario(form);
     }
   }
 
   public updateUsuario(form) {
     this._userService.updateUser(form).subscribe(
       res => {
-        if (this._userService.user.role.id == form.Role.id) { //si no se cambia el rol nos lleva a la gestion de usuarios
-          this._router.navigate(['/backoffice/usermanagement']);
-        } else {//si se cambia el rol se muestra una ventana modal nos redirige al home
+        //comprobamos si el usuario a modificar es el mismo que el usuario logueado y cambias el roll te redirige al home        
+        if (this._proyectoService.UsuarioLogeado == form.nombre && this._userService.user.role.id != form.Role.id) {
           this._router.navigate(["/home"]);
-        }        
+        } else {//si no te mantiene en el listado de usuarios
+          this._router.navigate(['/backoffice/usermanagement']);
+        }
       },
       error => {
         if (error == 400) {
@@ -153,7 +154,7 @@ export class AddUpdateUserComponent implements OnInit {
       }, (dismissReason) => {
         if (dismissReason == 'Finish') {
           //Si decide finalizarlo usaremos el metodo para finalizar la evaluación
-          this.updateUsuario(form);          
+          this.updateUsuario(form);
         }
       })
   }
