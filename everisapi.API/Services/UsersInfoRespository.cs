@@ -42,10 +42,12 @@ namespace everisapi.API.Services
           ProyectoDto p = new ProyectoDto();
           p.Id = pe.Id;
           //p.Nombre = pe.TestProject ? pe.Nombre : String.Concat(pe.Nombre, " - " , pe.LineaEntity.LineaNombre);
-          p.Nombre = pe.TestProject ? pe.Nombre : String.Concat(pe.Proyecto, " - " , pe.Nombre);
+          p.Nombre = pe.Nombre;
           p.Fecha = pe.Fecha;
+          p.Proyecto = pe.Proyecto;
           p.numFinishedEvals = _context.Evaluaciones.Where(e => e.ProyectoId == pe.Id && e.Estado).Count();
           p.numPendingEvals = _context.Evaluaciones.Where(e => e.ProyectoId == pe.Id && !e.Estado).Count();
+          p.TestProject = pe.TestProject;
           proyectos.Add(p);
         }
       }
@@ -58,9 +60,11 @@ namespace everisapi.API.Services
           ProyectoDto p = new ProyectoDto();
           p.Id = pe.Id;
           p.Nombre = pe.Nombre;
+          p.Proyecto = pe.Proyecto;
           p.Fecha = pe.Fecha;
           p.numFinishedEvals = _context.Evaluaciones.Where(e => e.ProyectoId == pe.Id && e.Estado).Count();
           p.numPendingEvals = _context.Evaluaciones.Where(e => e.ProyectoId == pe.Id && !e.Estado).Count();
+          p.TestProject = pe.TestProject;
           proyectos.Add(p);         
         }  
       }
@@ -72,7 +76,7 @@ namespace everisapi.API.Services
     //Recoge todos los proyectos de todos los usuarios
     public IEnumerable<ProyectoEntity> GetFullProyectos(string userNombre)
     {
-      return _context.Proyectos.Where(p => p.TestProject == false || p.UserNombre == userNombre).OrderBy(p => p.Nombre).ToList();
+      return _context.Proyectos.Where(p => p.TestProject == false).OrderBy(p => p.Nombre).ToList();
     }
 
     //Devuelve un listado con todos los proyectos dados de alta en el sistema que no pertenezcan al grupo de pruebas de usuario
@@ -118,6 +122,12 @@ namespace everisapi.API.Services
     public bool UserExiste(string userNombre)
     {
       return _context.Users.Any(u => u.Nombre == userNombre);
+    }
+
+    //Devuelve si el usuario esta activo
+    public bool UserActivo(string userNombre)
+    {
+      return _context.Users.Any(u => u.Nombre == userNombre && u.Activo);
     }
 
     //Devuelve todos los roles de usuario
@@ -177,7 +187,7 @@ namespace everisapi.API.Services
     public bool AlterUser(UserEntity usuario)
     {
       var UserAlter = _context.Users.Where(u => u.Nombre == usuario.Nombre).FirstOrDefault();
-      UserAlter.Nombre = usuario.Nombre;
+      //UserAlter.Nombre = usuario.Nombre;
       UserAlter.NombreCompleto = usuario.NombreCompleto;
       UserAlter.Activo = usuario.Activo;
       UserAlter.Password = usuario.Password;
@@ -191,6 +201,8 @@ namespace everisapi.API.Services
       //UserAlter.Nombre = usuario.Nombre;
       UserAlter.Activo = usuario.Activo;
       UserAlter.RoleId = usuario.RoleId;
+      UserAlter.NombreCompleto = usuario.NombreCompleto;
+      UserAlter.Password = usuario.Password;
       
       return SaveChanges();
     }

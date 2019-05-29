@@ -24,6 +24,9 @@ namespace everisapi.API.Services
     //Devuelve si un usuario existe o no
     bool UserExiste(string userNombre);
 
+    //Devuelve si un usuario esta activo o no
+    bool UserActivo(string userNombre);
+
     //Devuelve si un usuario existe o no y si esta bien logeado
     bool UserAuth(UsersSinProyectosDto UserForAuth);
 

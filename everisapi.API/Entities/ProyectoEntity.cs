@@ -49,8 +49,6 @@ namespace everisapi.API.Entities
         [Required]
         public bool TestProject { get; set; }
 
-        //eliminado cuando tengamos la lista de oficinas, unidades y proyectos
-
         [Required]
         [MaxLength(50)]
         public string Oficina { get; set; }

@@ -19,5 +19,7 @@ namespace everisapi.API.Models
 
     public string NotasAdmin { get; set; }
 
+    public string UserName { get; set; }
+
   }
 }

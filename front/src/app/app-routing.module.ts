@@ -29,7 +29,7 @@ const appRoutes: Routes = [
       { path: 'usermanagement/addUser', component: AddUpdateUserComponent },
       { path: 'adduserproject', component: AddUserProjectComponent },
       { path: 'teamsmanager', component: TeamsManagerComponent },
-      { path: 'addteam', component: AddTeamComponent },
+      { path: 'teamsmanager/addteam', component: AddTeamComponent },
       { path: 'questions', component: QuestionsManagerComponent }
     ]
   },
