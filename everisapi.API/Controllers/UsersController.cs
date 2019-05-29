@@ -151,7 +151,7 @@ namespace everisapi.API.Controllers
                 }
                 else
                 {//si no esta activo lo activamos
-                  UsuarioAdd.Activo = true;
+                    UsuarioAdd.Activo = true;
                     if (_userInfoRepository.AlterUserRole(Mapper.Map<UserEntity>(UsuarioAdd)))
                     {
                         return Ok("El usuario fue creado.");
@@ -196,14 +196,25 @@ namespace everisapi.API.Controllers
                 return BadRequest(ModelState);
             }
 
-            UserEntity userEntity = new UserEntity
+
+            UserEntity userEntity = _userInfoRepository.GetUser(UsuarioUpdate.Nombre, false);
+            userEntity.Activo = UsuarioUpdate.Activo;
+            userEntity.RoleId = UsuarioUpdate.Role.Id;
+            userEntity.NombreCompleto = UsuarioUpdate.NombreCompleto;
+
+            if (UsuarioUpdate.Password != null)
             {
-                Nombre = UsuarioUpdate.Nombre,
-                Activo = UsuarioUpdate.Activo,
-                RoleId = UsuarioUpdate.Role.Id,
-                Password = UsuarioUpdate.Password,
-                NombreCompleto = UsuarioUpdate.NombreCompleto
-            };
+                Console.WriteLine("per");                
+                using (var sha256 = SHA256.Create())
+                {
+                    // Le damos la contraseña
+                    var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(UsuarioUpdate.Password));
+                    // Recogemos el hash como string
+                    var hash = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+                    // Y se lo damos 
+                    userEntity.Password = hash;
+                }
+            }
 
             //Comprueba que se guardo bien y lo envia
             if (_userInfoRepository.AlterUserRole(userEntity))

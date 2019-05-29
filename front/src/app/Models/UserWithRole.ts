@@ -5,6 +5,7 @@ export class UserWithRole{
 		public nombre: string, 
 		public  nombreCompleto: string,
         public  activo: boolean,
-        public role: Role
+		public role: Role,
+		public password: string
 		){}
 }
