@@ -100,7 +100,7 @@ export class AddUpdateUserComponent implements OnInit {
       });
   }
 
-  public comprobarDatos(content) {console.log("hola");
+  public comprobarDatos(content) {
     var form = this.userForm.value;
     //le asignamos el nombre al form ( como el campo nombre esta deshabilitado se recoge como null)
     form.nombre = this._userService.user.nombre;
