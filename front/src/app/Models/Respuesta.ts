@@ -6,5 +6,6 @@ export class Respuesta {
     public evaluacionId: number,
     public notas: string,
     public notasAdmin: string,
+    public userName:string,
   ) { }
 }

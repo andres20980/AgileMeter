@@ -62,13 +62,16 @@ namespace everisapi.API.Services
             RespuestaEntity respuestaAnterior = _context.Respuestas.Where(r => r.Id == Respuesta.Id).FirstOrDefault();
             EvaluacionEntity currentEvaluation = _context.Evaluaciones.First(x => x.Id == respuestaAnterior.EvaluacionId);
 
+
             if (respuestaAnterior != null)
             {
                 respuestaAnterior.Estado = Respuesta.Estado;
                 respuestaAnterior.Notas = Respuesta.Notas;
                 respuestaAnterior.NotasAdmin = Respuesta.NotasAdmin;
-
+                
                 currentEvaluation.LastQuestionUpdated = respuestaAnterior.PreguntaId;
+                currentEvaluation.Fecha = DateTime.Now;
+                currentEvaluation.UserNombre = Respuesta.UserName;
 
                 return SaveChanges();
             }
