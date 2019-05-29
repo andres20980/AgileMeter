@@ -84,7 +84,6 @@ export class UserListComponent implements OnInit {
 
   // Metodo encargado de abrir la ventana confirmando la eliminacion de la evaluacion
   public AbrirModal(content, row) {
-    console.log(row);
     this.selectedUsuarioInfoWithProgress = row;
     this.modalService.open(content).result.then(
       (closeResult) => {
@@ -93,7 +92,7 @@ export class UserListComponent implements OnInit {
         if (dismissReason == 'Finish') {
           //Si decide finalizarlo usaremos el metodo para finalizar la evaluación
           this.UsuarioDelete(row.nombre);
-          if(this._proyectoService.UsuarioLogeado == row.nombre){
+          if (this._proyectoService.UsuarioLogeado == row.nombre) {
             this._router.navigate(['login']);
             localStorage.removeItem("user");
             localStorage.removeItem("userlongname");
@@ -105,7 +104,6 @@ export class UserListComponent implements OnInit {
   public getUsers() {
     this._userService.getUsers().subscribe(
       res => {
-        //console.log(res);
         this.userList = [];
         this.userListString = [];
 
