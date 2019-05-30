@@ -1,13 +1,11 @@
 import { Role } from "./Role";
 
-export class UserCreateUpdate{
+export class UserCreateUpdate {
 	constructor(
-		public  nombre: string, 
-        public  password: string,
-        public nombreCompleto : string,
-        public role : Role
-		){
-			
-		
-		}
+		public nombre: string,
+		public password: string,
+		public nombreCompleto: string,
+		public role: Role
+	) {
+	}
 }
