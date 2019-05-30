@@ -6,10 +6,10 @@
 
 //para Dev: window.location.hostname:81
 //para Pre: agilemeter-pre-back.23.97.158.29.nip.io:80
-//para Prod: agilemeterbackend.everis.com:80
+//para Prod: agilemeterbackend.everis.com:443
 
 export const environment = {
   production: false,
   backendHost: "agilemeterbackend.everis.com", 
-  backendPort: 80,
+  backendPort: 443,
 };
