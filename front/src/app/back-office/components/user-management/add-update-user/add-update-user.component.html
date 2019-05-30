@@ -2,79 +2,93 @@
   <strong>{{ErrorMessage}}</strong>
 </div>
 
-<div  class="ng-card-box p-5 br-2 mat-elevation-z5">
-<form [formGroup]="userForm" autocomplete="off" class="col-12">
-  <div class="row justify-content-center">
-    <div class="col-12">
-      <h3 *ngIf="this._userService.user == undefined">Alta de Usuarios</h3>
-      <h3 *ngIf="this._userService.user != undefined">Modificar Usuario</h3>
-    </div>
-
-    <div class="col-12">
-      <mat-form-field class="col-6">
-        <input matInput type="text" formControlName="Nombre" id="Nombre" placeholder="Usuario" value="{{this.user?.nombre}}">
-        <mat-error *ngIf="hasError('Nombre','required')">El campo usuario no puede estar vacio. </mat-error>
-      </mat-form-field>
-
-      <mat-form-field class="col-6">        
-        <input *ngIf="this._userService.user!=null" matInput type="password" formControlName="Password" id="Password" placeholder="Contraseña (Rellene solo para modificar)" value="®®®®®®®">
-        <input *ngIf="this._userService.user==null"matInput type="password" formControlName="Password" id="Password" placeholder="Contraseña" value="">
-        <mat-error *ngIf="hasError('Password','required')">El campo Contraseña no puede estar vacio. </mat-error>
-      </mat-form-field>
-
-      <mat-form-field class="col-8">
-        <input matInput type="text" formControlName="NombreCompleto" id="NombreCompleto" placeholder="Nombre" value="{{this.user?.nombreCompleto}}">
-        <mat-error *ngIf="hasError('NombreCompleto','required')">El campo nombre no puede estar vacio. </mat-error>
-      </mat-form-field>
-      
-      <!--COMBO PARA LOS ROL-->
-      <mat-form-field class="col-4">
-        <mat-select [compareWith]="compareRol" [value]="rol" formControlName="Role">
-          <mat-option *ngFor="let r of rolList" [value]="r">
-            {{ r.role }}
-          </mat-option>
-        </mat-select>
-        <mat-label>Rol</mat-label>
-      </mat-form-field>
-    </div>
-
-    <!--BUTTONS-->
-    <div class="row btns col-12 justify-content-center">
-      <div *ngIf="this._userService.user == undefined"
-       class="main-button border-curve mat-elevation-z5 new-eval w-85 m-auto col-3 btns"
-        [class.card-disabled]="userForm.invalid" (click)="altaUsuario()">
-        <a>GUARDAR</a>
+<div class="ng-card-box p-5 br-2 mat-elevation-z5">
+  <form [formGroup]="userForm" autocomplete="off" class="col-12">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <h3 *ngIf="this._userService.user == undefined">Alta de Usuarios</h3>
+        <h3 *ngIf="this._userService.user != undefined">Modificar Usuario</h3>
       </div>
 
-      <div *ngIf="this._userService.user != undefined"
-       class="main-button border-curve mat-elevation-z5 new-eval w-85 m-auto col-3 btns"
-        [class.card-disabled]="userForm.invalid" (click)="comprobarDatos(content)">
-        <a>GUARDAR</a>
+      <div class="col-12">
+        <mat-form-field class="col-6">
+          <input matInput type="text" formControlName="Nombre" id="Nombre" placeholder="Usuario"
+            value="{{this.user?.nombre}}">
+          <mat-error *ngIf="hasError('Nombre','required')">El campo usuario no puede estar vacio. </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-6">
+          <input *ngIf="this._userService.user!=null" matInput type="password" formControlName="Password" id="Password"
+            placeholder="Contraseña (Rellene solo para modificar)" value="®®®®®®®">
+          <input *ngIf="this._userService.user==null" matInput type="password" formControlName="Password" id="Password"
+            placeholder="Contraseña" value="">
+          <mat-error *ngIf="hasError('Password','required')">El campo Contraseña no puede estar vacio. </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-8">
+          <input matInput type="text" formControlName="NombreCompleto" id="NombreCompleto" placeholder="Nombre"
+            value="{{this.user?.nombreCompleto}}">
+          <mat-error *ngIf="hasError('NombreCompleto','required')">El campo nombre no puede estar vacio. </mat-error>
+        </mat-form-field>
+
+        <!--COMBO PARA LOS ROL-->
+        <mat-form-field class="col-4">
+          <mat-select [compareWith]="compareRol" [value]="rol" formControlName="Role">
+            <mat-option *ngFor="let r of rolList" [value]="r">
+              {{ r.role }}
+            </mat-option>
+          </mat-select>
+          <mat-label>Rol</mat-label>
+        </mat-form-field>
       </div>
-    </div>
-  </div>
-</form>
-</div>
-<br />
-<ng-template #content let-cl="close" let-di="dismiss">
-    <div class="modal-content border-0">
-      <div class="modal-header custom-modal-header border-curve">
-        <h5 class="modal-title">Importante</h5>
-      </div>
-      <div class="modal-body">
-        <p>Si realiza esta acción perderá los permisos de administrador y sera redireccionado al login.</p>
-      </div>
-      <div class="container-fluid p-3 bt-1">
-        <div class="row p-0">
-          <div class="col">
-            <button type="button" class="main-button mat-elevation-z4 w-100 modal-btns border-curve"
-              (click)="di('Finish');">Aceptar</button>
+
+      <!--BUTTONS-->
+      <div class="row btns col-12 justify-content-center">
+        <div _ngcontent-blt-c4="" *ngIf="this._userService.user == undefined" class="col-4">
+          <div _ngcontent-blt-c4="" class="main-button border-curve bajarmedia eval-ant mat-elevation-z5 w-85 m-auto"
+            [class.card-disabled]="userForm.invalid" (click)="altaUsuario()">
+            <a _ngcontent-blt-c4="">Guardar</a>
           </div>
-          <div class="col">
-            <button type="button" class="secondary-button mat-elevation-z4 w-100 modal-btns border-curve"
-              (click)="cl('Cerrar')">Cancelar</button>
+        </div>
+
+        <div _ngcontent-blt-c4="" *ngIf="this._userService.user != undefined" class="col-4">
+          <div _ngcontent-blt-c4="" class="main-button border-curve bajarmedia eval-ant mat-elevation-z5 w-85 m-auto"
+            [class.card-disabled]="userForm.invalid" (click)="comprobarDatos(content)">
+            <a _ngcontent-blt-c4="">Guardar</a>
+          </div>
+        </div>
+
+        <div _ngcontent-blt-c4="" class="col-4">
+          <div _ngcontent-blt-c4=""
+            class="secondary-button border-curve bajarmedia eval-ant mat-elevation-z5 w-85 m-auto" (click)="volver()">
+            <a _ngcontent-blt-c4="">Volver</a>
           </div>
         </div>
       </div>
+      
     </div>
-  </ng-template>
+  </form>
+</div>
+<br />
+<ng-template #content let-cl="close" let-di="dismiss">
+  <div class="modal-content border-0">
+    <div class="modal-header custom-modal-header border-curve">
+      <h5 class="modal-title">Importante</h5>
+    </div>
+    <div class="modal-body">
+      <p>Si realiza esta acción perderá los permisos de administrador y sera redireccionado al login.</p>
+    </div>
+    <div class="container-fluid p-3 bt-1">
+      <div class="row p-0">
+        <div class="col">
+          <button type="button" class="main-button mat-elevation-z4 w-100 modal-btns border-curve"
+            (click)="di('Finish');">Aceptar</button>
+        </div>
+        <div class="col">
+          <button type="button" class="secondary-button mat-elevation-z4 w-100 modal-btns border-curve"
+            (click)="cl('Cerrar')">Cancelar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -158,4 +158,8 @@ export class AddUpdateUserComponent implements OnInit {
         }
       })
   }
+
+  public volver() {
+    this._router.navigate(['/backoffice/usermanagement']);
+  }
 }
