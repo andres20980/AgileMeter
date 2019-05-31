@@ -44,16 +44,25 @@
 
       <!--BUTTONS-->
       <div class="row btns col-12 justify-content-center">
-        <div *ngIf="this.user == undefined"
-          class="main-button border-curve mat-elevation-z5 new-eval w-85 m-auto col-3 btns"
-          [class.card-disabled]="userForm.invalid" (click)="altaUsuario()">
-          <a>GUARDAR</a>
+        <div _ngcontent-blt-c4="" *ngIf="this.user == undefined" class="col-4">
+          <div _ngcontent-blt-c4="" class="main-button border-curve bajarmedia eval-ant mat-elevation-z5 w-85 m-auto"
+            [class.card-disabled]="userForm.invalid" (click)="altaUsuario()">
+            <a _ngcontent-blt-c4="">Guardar</a>
+          </div>
         </div>
 
-        <div *ngIf="this.user != undefined"
-          class="main-button border-curve mat-elevation-z5 new-eval w-85 m-auto col-3 btns"
-          [class.card-disabled]="userForm.invalid" (click)="comprobarDatos(content)">
-          <a>GUARDAR</a>
+        <div _ngcontent-blt-c4="" *ngIf="this._userService.user != undefined" class="col-4">
+          <div _ngcontent-blt-c4="" class="main-button border-curve bajarmedia eval-ant mat-elevation-z5 w-85 m-auto"
+            [class.card-disabled]="userForm.invalid" (click)="comprobarDatos(content)">
+            <a _ngcontent-blt-c4="">Guardar</a>
+          </div>
+        </div>
+
+        <div _ngcontent-blt-c4="" class="col-4">
+          <div _ngcontent-blt-c4=""
+            class="secondary-button border-curve bajarmedia eval-ant mat-elevation-z5 w-85 m-auto" (click)="volver()">
+            <a _ngcontent-blt-c4="">Volver</a>
+          </div>
         </div>
       </div>
     </div>
