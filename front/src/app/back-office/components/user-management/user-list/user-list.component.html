@@ -51,6 +51,9 @@
     <ng-container matColumnDef="acciones">
       <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
       <mat-cell *matCellDef="let row">
+          <button class="transparente" (click)="btnAsigTeamsClick(row)">
+              <img class="edit" src="assets/team_add.png" title="Asignación de equipos" />
+          </button>
            <button class="transparente" (click)="btnEditClick(row)">
                 <img class="edit" src="assets/edit.png" title="Editar usuario" />
             </button>

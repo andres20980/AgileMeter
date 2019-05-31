@@ -45,6 +45,7 @@ import { UserListComponent } from './back-office/components/user-management/user
 
 import { MatPaginatorIntl } from '@angular/material';
 import { CustomPaginator } from 'app/CustomPaginatorConfiguration';
+import { TeamManagementComponent } from './back-office/components/user-management/team-management/team-management.component';
 
 @NgModule({
   declarations: [
@@ -72,7 +73,8 @@ import { CustomPaginator } from 'app/CustomPaginatorConfiguration';
     BreadcrumbComponent,
     AddTeamComponent,
     AddUpdateUserComponent,  
-    UserListComponent,
+    UserListComponent, 
+    TeamManagementComponent,
   ],
   imports: [
     BrowserModule,

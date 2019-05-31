@@ -41,6 +41,13 @@ export class UserListComponent implements OnInit {
   ngOnInit() {
     this.getUsers();
   }
+
+  public btnAsigTeamsClick(row) {
+    this.selectedUser = this.userList.filter(u => u.nombre == row.nombre);
+    this._userService.user = this.selectedUser[0];
+    this._router.navigate(['backoffice/usermanagement/teamsManagement']);
+  };
+
   public btnEditClick(row) {
     this.selectedUser = this.userList.filter(u => u.nombre == row.nombre);
     this._userService.user = this.selectedUser[0];
