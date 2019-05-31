@@ -6,8 +6,8 @@
   <form [formGroup]="userForm" autocomplete="off" class="col-12">
     <div class="row justify-content-center">
       <div class="col-12">
-        <h3 *ngIf="this._userService.user == undefined">Alta de Usuarios</h3>
-        <h3 *ngIf="this._userService.user != undefined">Modificar Usuario</h3>
+        <h3 *ngIf="this.user == undefined">Alta de Usuarios</h3>
+        <h3 *ngIf="this.user != undefined">Modificar Usuario</h3>
       </div>
 
       <div class="col-12">
@@ -18,9 +18,9 @@
         </mat-form-field>
 
         <mat-form-field class="col-6">
-          <input *ngIf="this._userService.user!=null" matInput type="password" formControlName="Password" id="Password"
-            placeholder="Contraseña (Rellene solo para modificar)" value="®®®®®®®">
-          <input *ngIf="this._userService.user==null" matInput type="password" formControlName="Password" id="Password"
+          <input *ngIf="this.user!=null" matInput type="password" formControlName="Password" id="Password"
+            placeholder="Contraseña" value="®®®®®®®">
+          <input *ngIf="this.user==null" matInput type="password" formControlName="Password" id="Password"
             placeholder="Contraseña" value="">
           <mat-error *ngIf="hasError('Password','required')">El campo Contraseña no puede estar vacio. </mat-error>
         </mat-form-field>
@@ -44,28 +44,18 @@
 
       <!--BUTTONS-->
       <div class="row btns col-12 justify-content-center">
-        <div _ngcontent-blt-c4="" *ngIf="this._userService.user == undefined" class="col-4">
-          <div _ngcontent-blt-c4="" class="main-button border-curve bajarmedia eval-ant mat-elevation-z5 w-85 m-auto"
-            [class.card-disabled]="userForm.invalid" (click)="altaUsuario()">
-            <a _ngcontent-blt-c4="">Guardar</a>
-          </div>
+        <div *ngIf="this.user == undefined"
+          class="main-button border-curve mat-elevation-z5 new-eval w-85 m-auto col-3 btns"
+          [class.card-disabled]="userForm.invalid" (click)="altaUsuario()">
+          <a>GUARDAR</a>
         </div>
 
-        <div _ngcontent-blt-c4="" *ngIf="this._userService.user != undefined" class="col-4">
-          <div _ngcontent-blt-c4="" class="main-button border-curve bajarmedia eval-ant mat-elevation-z5 w-85 m-auto"
-            [class.card-disabled]="userForm.invalid" (click)="comprobarDatos(content)">
-            <a _ngcontent-blt-c4="">Guardar</a>
-          </div>
-        </div>
-
-        <div _ngcontent-blt-c4="" class="col-4">
-          <div _ngcontent-blt-c4=""
-            class="secondary-button border-curve bajarmedia eval-ant mat-elevation-z5 w-85 m-auto" (click)="volver()">
-            <a _ngcontent-blt-c4="">Volver</a>
-          </div>
+        <div *ngIf="this.user != undefined"
+          class="main-button border-curve mat-elevation-z5 new-eval w-85 m-auto col-3 btns"
+          [class.card-disabled]="userForm.invalid" (click)="comprobarDatos(content)">
+          <a>GUARDAR</a>
         </div>
       </div>
-      
     </div>
   </form>
 </div>
