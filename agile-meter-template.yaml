@@ -498,6 +498,9 @@ objects:
     # name: ${APPLICATION_NAME}-backend
   # spec:
     # host: agilemeter.${OPENSHIFT_DOMAIN}
+    # tls:
+    #   termination: edge
+    #   insecureEdgeTerminationPolicy: Redirect
     # to:
       # name: agilemeter
 # - kind: Route
@@ -510,5 +513,8 @@ objects:
     # name: ${APPLICATION_NAME}-frontend
   # spec:
     # host: ${FULL_DOMAIN}
+    # tls:
+    #   termination: edge
+    #   insecureEdgeTerminationPolicy: Redirect
     # to:
       # name: agilemeterfront
