@@ -12,8 +12,8 @@ COPY . .
 ENV PATH /app/node_modules/.bin:$PATH
 
 #Get host environment variables
-ARG BACKEND_HOST
-ARG BACKEND_PORT
+#ARG BACKEND_HOST
+#ARG BACKEND_PORT
 
 #Create environment.prod.ts file
 ENV JSON_FMT 'export const environment = { \n\t production:true, \n\t backendHost:"%s", \n\t backendPort: %s \n };'
