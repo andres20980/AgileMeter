@@ -17,7 +17,7 @@ ENV PATH /app/node_modules/.bin:$PATH
 
 #Create environment.prod.ts file
 ENV JSON_FMT 'export const environment = { \n\t production:true, \n\t backendHost:"%s", \n\t backendPort: %s \n };'
-RUN CHMOD +w src
+RUN chmod +w src
 RUN printf "$JSON_FMT" "$BACKEND_HOST" "$BACKEND_PORT" > src/environments/environment.prod.ts
 
 # Install and cache app dependencies
