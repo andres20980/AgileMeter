@@ -42,7 +42,7 @@ export class AddTeamComponent implements OnInit {
 */
   constructor(   //ProyectoService its teams service --> table proyectos its teams in DataBase
     private _teamsService: ProyectoService,
-    public _router: Router,
+    private _router: Router,
     private _eventService: EventEmitterService,
     private _appComponent: AppComponent,
     private _routeParams: ActivatedRoute,
@@ -242,5 +242,9 @@ export class AddTeamComponent implements OnInit {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
       });
+  }
+
+  public volver() {
+    this._router.navigate(['/backoffice/teamsmanager']);
   }
 }

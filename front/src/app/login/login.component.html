@@ -58,7 +58,7 @@
               <!-- <input *ngIf="recuerdameOnOff()" type="checkbox" id="recuerdame" checked (click)="recuerdameChange()" />
               <input *ngIf="!recuerdameOnOff()" type="checkbox" id="recuerdame" (click)="recuerdameChange()" />
               <strong class="ml-1">Recuérdame</strong> -->
-              <mat-checkbox [(ngModel)]="Recuerdame" id="recuerdame" (click)="recuerdameChange()">
+              <mat-checkbox [(ngModel)]="Recuerdame" [value]="Recuerdame" id="recuerdame" (change)="recuerdameChange()">
                 <span class="check-label">Recuérdame</span> 
               </mat-checkbox>
               <br>

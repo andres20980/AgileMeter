@@ -121,13 +121,4 @@ export class UserService {
       map(res => res),
       catchError(this.errorHandler));
   }
-  altaUsuario() {
-    this.user = null;
-    this._router.navigate[('backoffice/usermanagement/addUser')];
-  }
-  modificarUsuario(u: UserCreateUpdate) {
-    this.user = u;
-    this._router.navigateByUrl('backoffice/usermanagement/addUser');
-  }
-
 }

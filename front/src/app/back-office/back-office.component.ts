@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
+import { Router, ActivatedRoute } from "@angular/router";
 import { AppComponent } from '../app.component';
 import { ProyectoService } from '../services/ProyectoService';
 import { EventEmitterService } from 'app/services/event-emitter.service';
@@ -17,26 +17,44 @@ export class BackOfficeComponent implements OnInit {
 
   //public AdminOn = false;
   public updateUser: string = null;
+  public ActiveSection : string = null;
+  //public collapsedButtons : boolean = false;
 
   constructor(
     private _proyectoService: ProyectoService,
     public _router: Router,
     private _eventService: EventEmitterService,
-    private _appComponent: AppComponent) {
+    private _appComponent: AppComponent,
+    route:ActivatedRoute) {
     this._eventService.eventEmitter.subscribe(
       (data) => {
         this.updateUser = data,
           setTimeout(() => { this.updateUser = null }, 2000)
       }
     );
+
+    this._router.events.subscribe((e: any) => {
+      //console.log( e);
+      if(e.urlAfterRedirects == "/backoffice"){
+        this.ActiveSection = null;
+      }
+    });
   }
 
 
   ngOnInit() {
-
+    //this.collapsedButtons = false;
+    this.ActiveSection = null;
     if (!this._proyectoService.verificarUsuario()) {
       this._router.navigate(['/login']);
     }
-
+    //console.log(this._appComponent._storageDataService.Role);
+    if(this._appComponent._storageDataService.Role != "Administrador"){
+      this._router.navigate(['/home']);
+    }
   }
+
+  // buttonClick(option :  string){
+  //   this.ActiveSection = option;
+  // }
 }
