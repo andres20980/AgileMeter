@@ -16,19 +16,19 @@ ARG BACKEND_HOST
 ARG BACKEND_PORT
 
 #Create environment.prod.ts file
-ENV JSON_FMT 'export const environment = { \n\t production:true, \n\t backendHost:"%s", \n\t backendPort: %s \n };'
-RUN printf "$JSON_FMT" "$BACKEND_HOST" "$BACKEND_PORT" > src/environments/environment.prod.ts
+#ENV JSON_FMT 'export const environment = { \n\t production:true, \n\t backendHost:"%s", \n\t backendPort: %s \n };'
+#RUN printf "$JSON_FMT" "$BACKEND_HOST" "$BACKEND_PORT" > src/environments/environment.prod.ts
 
 # Install and cache app dependencies
 RUN npm config set registry http://registry.npmjs.org/
 RUN npm install -g http-server
-#RUN npm install
+RUN npm install
 
 # Prepare the port to be displayed
 EXPOSE 4200
 
 # start app (ng server), then prepare the listening port, and host; and then declare the file watching poll period
 #CMD ng serve --port 4200 --host 0.0.0.0 --disableHostCheck true
-#RUN npm run build --prod
+RUN npm run build --prod
 CMD ["http-server","-p80", "wwwroot"]
 
