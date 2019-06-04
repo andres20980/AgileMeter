@@ -133,8 +133,13 @@ export class TeamManagementComponent implements OnInit {
   public getTeamsUser(usuario: UserWithRole) {
     this._proyectoService.getProyectosDeUsuarioSeleccionado(usuario).subscribe(
       res => {
+        //#############################################################################################
+        this.proyectosAsig = res.filter(r => !r.testProject);//hay que añadirle el filtro porque el metodo este no distingue si el proyecto es de prueba o no
+        this.getEquiposAjenosAlUsuario();
+        //############################################################################################
+        /*te comento esto
         this.proyectosAsig = res;
-
+        
         //Quitamos el equipo de prueba
         if (this.proyectosAsig !== undefined)
           this.proyectosAsig = this.proyectosAsig.filter(this.noEsTestProyect);
@@ -162,7 +167,7 @@ export class TeamManagementComponent implements OnInit {
           } else if (this.proyectosAsig !== undefined) {
             this.proyectosPending = this.proyectosAll;
           }
-        }
+        }*/
 
       },
       error => {
@@ -178,6 +183,23 @@ export class TeamManagementComponent implements OnInit {
       }
     )
   };
+
+
+  //######################################################################
+  
+  public getEquiposAjenosAlUsuario() {
+    this.proyectosPending = this.proyectosAll.filter(equipo => !this.compararEquipos(equipo));    
+  }
+
+  public compararEquipos(e: Equipo) {
+    return this.proyectosAsig.find(eq =>eq.id ===e.id);
+  }  
+  //########################################################################
+  
+  
+
+
+
 
   public volver() {
     this._router.navigate(['/backoffice/usermanagement']);
