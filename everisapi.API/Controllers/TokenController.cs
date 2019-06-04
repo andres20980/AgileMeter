@@ -31,6 +31,13 @@ namespace everisapi.API.Controllers
             _usersInfoRespository = usersInfoRespository;
         }
 
+        [HttpGet("test")]
+        public IActionResult Test()
+        {
+            IActionResult response = Ok("Succesfull test!");
+            return response;
+        }
+
         [HttpPost()]
         public IActionResult CreateToken([FromBody] UsersSinProyectosDto UserAuth)
         {
