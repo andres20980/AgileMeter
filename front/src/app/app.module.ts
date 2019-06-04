@@ -45,6 +45,7 @@ import { UserListComponent } from './back-office/components/user-management/user
 
 import { MatPaginatorIntl } from '@angular/material';
 import { CustomPaginator } from 'app/CustomPaginatorConfiguration';
+import 'hammerjs'; 
 
 @NgModule({
   declarations: [
