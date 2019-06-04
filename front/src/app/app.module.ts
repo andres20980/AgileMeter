@@ -47,6 +47,8 @@ import { MatPaginatorIntl } from '@angular/material';
 import { CustomPaginator } from 'app/CustomPaginatorConfiguration';
 import { TeamManagementComponent } from './back-office/components/user-management/team-management/team-management.component';
 
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -97,6 +99,7 @@ import { TeamManagementComponent } from './back-office/components/user-managemen
     MatExpansionModule,
     MatCheckboxModule,
     MatIconModule,
+    DragDropModule,
 
   ],
   providers: [{
