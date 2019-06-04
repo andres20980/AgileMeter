@@ -1,8 +1,11 @@
-<div class="alert alert-danger alert-login" id="danger">
+<div class="alert alert-danger alert-login" id="danger" *ngIf="ErrorMessage">
   <strong>{{ErrorMessage}}</strong>
 </div>
+<div *ngIf="InfoMessage" class=" alert alert-success">
+  {{InfoMessage}}
+</div>
 
-<div class="ng-card-box p-5 br-2 mat-elevation-z5">
+<div class="col-12 ng-card-box p-5 br-2 mat-elevation-z5 mb-4">
   <div class="row justify-content-center">
     <div class="col-12">
       <h3>Asignación de equipos</h3>
@@ -13,18 +16,13 @@
     </div>
     <div class="col-12 d-flex flex-row">
       <div class="example-container col-6">
-          <h4>Equipos asignados</h4>
-        <div 
-          id="proyectosAsig" 
-          cdkDropList 
-          [cdkDropListData]="proyectosAsig"
-          cdkDropListConnectedTo="proyectosPending"
-          class="example-list" 
-          (cdkDropListDropped)="drop($event)">
+        <h4>Equipos asignados</h4>
+        <div id="proyectosAsig" cdkDropList [cdkDropListData]="proyectosAsig" cdkDropListConnectedTo="proyectosPending"
+          class="example-list" (cdkDropListDropped)="drop($event)">
           <div class="example-box" *ngFor="let proyecto of proyectosAsig" cdkDrag>
             <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
-              {{proyecto.proyecto + "-" + proyecto.nombre}}
-              <!-- {{proyecto}} -->
+            {{proyecto.proyecto + "-" + proyecto.nombre}}
+            <!-- {{proyecto}} -->
           </div>
         </div>
       </div>
@@ -32,31 +30,26 @@
       <div class="example-container col-6">
         <h4>Equipos</h4>
 
-        <div 
-          id="proyectosPending"  
-          cdkDropList
-          [cdkDropListData]="proyectosPending"
-          cdkDropListConnectedTo="proyectosAsig" 
-          class="example-list" (cdkDropListDropped)="drop($event)">
-            <div class="example-box" *ngFor="let proyecto of proyectosPending" cdkDrag>
-              <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
-              {{proyecto.proyecto + "-" + proyecto.nombre}}
-            </div>
+        <div id="proyectosPending" cdkDropList [cdkDropListData]="proyectosPending"
+          cdkDropListConnectedTo="proyectosAsig" class="example-list" (cdkDropListDropped)="drop($event)">
+          <div class="example-box" *ngFor="let proyecto of proyectosPending" cdkDrag>
+            <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+            {{proyecto.proyecto + "-" + proyecto.nombre}}
           </div>
+        </div>
       </div>
     </div>
 
     <!--BUTTONS-->
     <div class="row btns col-12 justify-content-center">
-        <div _ngcontent-blt-c4="" class="col-4">
-          <div _ngcontent-blt-c4=""
-            class="secondary-button border-curve bajarmedia eval-ant mat-elevation-z5 w-85 m-auto" (click)="volver()">
-            <a _ngcontent-blt-c4="">Volver</a>
-          </div>
+      <div _ngcontent-blt-c4="" class="col-4">
+        <div _ngcontent-blt-c4="" class="secondary-button border-curve bajarmedia eval-ant mat-elevation-z5 w-85 m-auto"
+          (click)="volver()">
+          <a _ngcontent-blt-c4="">Volver</a>
         </div>
       </div>
+    </div>
 
   </div>
 
 </div>
-  
