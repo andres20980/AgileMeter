@@ -1,25 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-
+import { CdkDragDrop, moveItemInArray, transferArrayItem, CdkDrag } from '@angular/cdk/drag-drop';
 import { UserService } from 'app/services/UserService';
 import { UserCreateUpdate } from 'app/Models/UserCreateUpdate';
 import { ProyectoService } from 'app/services/ProyectoService';
 import { Equipo } from 'app/Models/Equipo';
 import { UserWithRole } from 'app/Models/UserWithRole';
-// import { timingSafeEqual } from 'crypto';
-// import { IfStmt } from '@angular/compiler';
-// import { ConsoleReporter } from 'jasmine';
 import { UserProject } from 'app/Models/UserProject';
 
 @Component({
   selector: 'app-team-management',
   templateUrl: './team-management.component.html',
-  styleUrls: ['./team-management.component.scss']
+  styleUrls: ['./team-management.component.scss'],
 })
 export class TeamManagementComponent implements OnInit {
+
+  items = Array.from({ length: 100000 }).map((_, i) => `Item #${i}`);
 
   public proyectosAll: Equipo[] = [];
   public proyectosAsig: Equipo[] = [];
@@ -89,6 +85,8 @@ export class TeamManagementComponent implements OnInit {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         } else if (error == 401) {
           this.ErrorMessage = "Error: " + error + " El usuario es incorrecto o no tiene permisos, intente introducir su usuario nuevamente.";
+        } else if (error == 400) {
+          this.ErrorMessage = "El usuario seleccionado podrá evaluar cualquier equipo.";
         } else {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
@@ -134,12 +132,6 @@ export class TeamManagementComponent implements OnInit {
     )
   };
 
-  protected noEsTestProyect(proyecto: Equipo) {
-    if (!proyecto.testProject)
-      return true;
-    return false;
-  }
-
   private getTeamsUser(usuario: UserWithRole) {
     this._proyectoService.getProyectosDeUsuarioSeleccionado(usuario).subscribe(
       res => {
@@ -173,7 +165,12 @@ export class TeamManagementComponent implements OnInit {
     //Recogemos el usuario enviado desde la lista de usuarios
     this.user = this._userService.user;
 
-    if (this.user !== undefined)
+
+    if (this.user !== undefined) {
+
+      if (this.user.role.role === "Administrador")
+        this.InfoMessage = "El usuario seleccionado podrá evaluar cualquier equipo.";
+
       this.usuarioWithRole =
         {
           nombre: this.user.nombre,
@@ -181,5 +178,6 @@ export class TeamManagementComponent implements OnInit {
           activo: true, password: this.user.password,
           role: this.user.role
         };
+    }
   }
 }
