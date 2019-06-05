@@ -37,7 +37,7 @@ namespace everisapi.API.Services
       
       if(usuario.RoleId != (int)Roles.User)
       {
-        var proyectosE = _context.Proyectos.Include(r=>r.LineaEntity).Where(p => p.TestProject == false || p.UserNombre == userNombre).OrderBy(p => p.Nombre).ToList();
+        var proyectosE = _context.Proyectos.Include(r=>r.LineaEntity).Where(p => p.TestProject == false || p.UserNombre == userNombre).OrderBy(p => p.Proyecto).ToList();
         foreach (ProyectoEntity pe in proyectosE){
           ProyectoDto p = new ProyectoDto();
           p.Id = pe.Id;
@@ -66,7 +66,8 @@ namespace everisapi.API.Services
           p.numPendingEvals = _context.Evaluaciones.Where(e => e.ProyectoId == pe.Id && !e.Estado).Count();
           p.TestProject = pe.TestProject;
           proyectos.Add(p);         
-        }  
+        }
+        proyectos = proyectos.OrderBy(pro=>pro.Proyecto).ToList();    
       }
      
       return proyectos;
@@ -76,7 +77,7 @@ namespace everisapi.API.Services
     //Recoge todos los proyectos de todos los usuarios
     public IEnumerable<ProyectoEntity> GetFullProyectos(string userNombre)
     {
-      return _context.Proyectos.Where(p => p.TestProject == false).OrderBy(p => p.Nombre).ToList();
+      return _context.Proyectos.Where(p => p.TestProject == false).OrderBy(p => p.Proyecto).ToList();
     }
 
     //Devuelve un listado con todos los proyectos dados de alta en el sistema que no pertenezcan al grupo de pruebas de usuario
