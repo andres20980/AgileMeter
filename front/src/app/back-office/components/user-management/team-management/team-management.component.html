@@ -12,10 +12,10 @@
     </div>
 
     <div class="col-12 d-flex ml-4 p-3">
-      <div class="flex-row col-6 mh-50">
+      <div class="col-6">
         <h4>Equipos del usuario <strong *ngIf="user">{{user.nombreCompleto}}</strong></h4>
         <div id="proyectosAsig" cdkDropList [cdkDropListData]="proyectosAsig" cdkDropListConnectedTo="proyectosPending"
-          class="cdkDrop-list overflow-auto" (cdkDropListDropped)="drop($event)">
+          class="cdkDrop-list overflow-auto div-scroll" (cdkDropListDropped)="drop($event)">
           <div class="cdkDrag-box" *ngFor="let proyecto of proyectosAsig" cdkDrag [cdkDragData]="proyecto"
             [cdkDragDisabled]="user.role.role === 'Administrador'">
             <div class="cdkDrag-custom-placeholder " *cdkDragPlaceholder></div>
@@ -28,7 +28,7 @@
         <h4>Equipos</h4>
 
         <div id="proyectosPending" cdkDropList [cdkDropListData]="proyectosPending"
-          cdkDropListConnectedTo="proyectosAsig" class="cdkDrop-list overflow-auto" (cdkDropListDropped)="drop($event)">
+          cdkDropListConnectedTo="proyectosAsig" class="cdkDrop-list overflow-auto div-scroll" (cdkDropListDropped)="drop($event)">
           <div class="cdkDrag-box" *ngFor="let proyecto of proyectosPending" cdkDrag [cdkDragData]="proyecto">
             <div class="cdkDrag-custom-placeholder " *cdkDragPlaceholder></div>
             {{proyecto.proyecto + "-" + proyecto.nombre}}
