@@ -19,8 +19,8 @@
         <h4>Equipos asignados</h4>
         <div id="proyectosAsig" cdkDropList [cdkDropListData]="proyectosAsig" cdkDropListConnectedTo="proyectosPending"
           class="example-list" (cdkDropListDropped)="drop($event)">
-          <div class="example-box" *ngFor="let proyecto of proyectosAsig" cdkDrag>
-            <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
+          <div class="example-box" *ngFor="let proyecto of proyectosAsig" cdkDrag [cdkDragData]="proyecto">
+            <div class="example-custom-placeholder" *cdkDragPlaceholder>Esto que es??</div>
             {{proyecto.proyecto + "-" + proyecto.nombre}}
             <!-- {{proyecto}} -->
           </div>
@@ -32,7 +32,7 @@
 
         <div id="proyectosPending" cdkDropList [cdkDropListData]="proyectosPending"
           cdkDropListConnectedTo="proyectosAsig" class="example-list" (cdkDropListDropped)="drop($event)">
-          <div class="example-box" *ngFor="let proyecto of proyectosPending" cdkDrag>
+          <div class="example-box" *ngFor="let proyecto of proyectosPending" cdkDrag [cdkDragData]="proyecto">
             <div class="example-custom-placeholder" *cdkDragPlaceholder></div>
             {{proyecto.proyecto + "-" + proyecto.nombre}}
           </div>

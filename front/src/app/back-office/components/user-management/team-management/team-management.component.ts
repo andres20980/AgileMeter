@@ -9,8 +9,10 @@ import { UserCreateUpdate } from 'app/Models/UserCreateUpdate';
 import { ProyectoService } from 'app/services/ProyectoService';
 import { Equipo } from 'app/Models/Equipo';
 import { UserWithRole } from 'app/Models/UserWithRole';
-import { timingSafeEqual } from 'crypto';
-import { IfStmt } from '@angular/compiler';
+// import { timingSafeEqual } from 'crypto';
+// import { IfStmt } from '@angular/compiler';
+// import { ConsoleReporter } from 'jasmine';
+import { UserProject } from 'app/Models/UserProject';
 
 @Component({
   selector: 'app-team-management',
@@ -27,27 +29,6 @@ export class TeamManagementComponent implements OnInit {
   public usuarioWithRole: UserWithRole;
   public user: UserCreateUpdate;
 
-  drop(event: CdkDragDrop<string[]>) {
-    //moveItemInArray(this.moviesAll, event.previousIndex, event.currentIndex);
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    }
-    else {
-      transferArrayItem(event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex);
-
-      //Guardamos los proyectos asignados al usuario
-      this.guardarCambios();
-
-    }
-  }
-
-  private guardarCambios() {
-    this.InfoMessage = "Transferido";
-    setTimeout(() => { this.InfoMessage = null }, 2000);
-  }
 
   constructor(
     private _router: Router,
@@ -67,6 +48,71 @@ export class TeamManagementComponent implements OnInit {
     if (this.usuarioWithRole !== undefined) {
       this.getTeamsUser(this.usuarioWithRole);
     }
+  }
+
+
+  drop(event: CdkDragDrop<string[]>) {
+    //moveItemInArray(this.moviesAll, event.previousIndex, event.currentIndex);
+    if (event.previousContainer === event.container) {
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    }
+    else {
+      transferArrayItem(event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex);
+
+      var addUP = new UserProject(this.user.nombre, event.item.data.id);
+
+      if (event.container.connectedTo === "proyectosAsig") {
+        this.removeUserProyect(addUP, event);
+      }
+      else {
+        this.addUserProyect(addUP, event);
+      }
+    }
+  }
+
+  private removeUserProyect(usuarioProyecto, evento) {
+
+    this._userService.removeUserProject(usuarioProyecto).subscribe(
+      res => {
+        this.InfoMessage = "Quitamos el proyecto " + evento.item.data.proyecto + "-" + evento.item.data.nombre;
+        setTimeout(() => { this.InfoMessage = null }, 3000);
+      },
+      error => {
+        console.log("falla el borrar", error);
+        //Si el servidor tiene algún tipo de problema mostraremos este error
+        if (error == 404) {
+          this.ErrorMessage = "Error: " + error + " El usuario o proyecto autenticado no existe.";
+        } else if (error == 500) {
+          this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+        } else if (error == 401) {
+          this.ErrorMessage = "Error: " + error + " El usuario es incorrecto o no tiene permisos, intente introducir su usuario nuevamente.";
+        } else {
+          this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+        }
+      });
+  }
+
+  private addUserProyect(usuarioProyecto, evento) {
+    this._userService.addUserProject(usuarioProyecto).subscribe(
+      res => {
+        this.InfoMessage = "Añadimos el proyecto " + evento.item.data.proyecto + "-" + evento.item.data.nombre;
+        setTimeout(() => { this.InfoMessage = null }, 3000);
+      },
+      error => {
+        //Si el servidor tiene algún tipo de problema mostraremos este error
+        if (error == 404) {
+          this.ErrorMessage = "Error: " + error + " El usuario o proyecto autenticado no existe.";
+        } else if (error == 500) {
+          this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+        } else if (error == 401) {
+          this.ErrorMessage = "Error: " + error + " El usuario es incorrecto o no tiene permisos, intente introducir su usuario nuevamente.";
+        } else {
+          this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+        }
+      });
   }
 
   private getTeams() {
