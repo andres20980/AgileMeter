@@ -11,18 +11,15 @@
       <h3>Asignación de equipos</h3>
     </div>
 
-    <div class="col-12 ml-4 p-3">
-      <h4>Equipos del usuario <strong *ngIf="user">{{user.nombreCompleto}}</strong></h4>
-    </div>
-    <div class="col-12 d-flex">
+    <div class="col-12 d-flex ml-4 p-3">
       <div class="flex-row col-6 mh-50">
-        <h4>Equipos asignados</h4>
+        <h4>Equipos del usuario <strong *ngIf="user">{{user.nombreCompleto}}</strong></h4>
         <div id="proyectosAsig" cdkDropList [cdkDropListData]="proyectosAsig" cdkDropListConnectedTo="proyectosPending"
           class="cdkDrop-list overflow-auto" (cdkDropListDropped)="drop($event)">
-          <div class="cdkDrag-box" *ngFor="let proyecto of proyectosAsig" cdkDrag [cdkDragData]="proyecto" [cdkDragDisabled]="user.role.role === 'Administrador'">
+          <div class="cdkDrag-box" *ngFor="let proyecto of proyectosAsig" cdkDrag [cdkDragData]="proyecto"
+            [cdkDragDisabled]="user.role.role === 'Administrador'">
             <div class="cdkDrag-custom-placeholder " *cdkDragPlaceholder></div>
             {{proyecto.proyecto + "-" + proyecto.nombre}}
-            <!-- {{proyecto}} -->
           </div>
         </div>
       </div>
