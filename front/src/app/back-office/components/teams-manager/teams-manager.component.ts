@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Equipo } from 'app/Models/Equipo';
 import { DataSource } from '@angular/cdk/table';
 import { Team } from 'app/Models/Team';
+import { EventEmitterService } from 'app/services/event-emitter.service';
 
 @Component({
   selector: 'app-teams-manager',
@@ -18,6 +19,7 @@ export class TeamsManagerComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   public ErrorMessage: string = null;
+  public MensajeNotificacion: string = null;
   dataSource: MatTableDataSource<any>;
   displayedColumns = ['oficina', 'unidad', 'linea', "nombre", "projectSize", "acciones"];
   encapsulation: ViewEncapsulation.None;
@@ -33,6 +35,7 @@ export class TeamsManagerComponent implements OnInit {
     private _proyectoService: ProyectoService,
     private modalService: NgbModal,
     private router: Router,
+    private _eventService: EventEmitterService,
   ) { }
 
   ngOnInit() {
@@ -102,11 +105,12 @@ export class TeamsManagerComponent implements OnInit {
   }
 
   public deleteTeam(team) {
-    //this.selectedTeam = this.teamList.filter(t => t.id == team.id);
-    //this._proyectoService.deleteTeam(this.selectedTeam[0]).subscribe(
-      this._proyectoService.deleteTeam(team).subscribe(
+    this._proyectoService.deleteTeam(team).subscribe(
       res => {
         this.refresh();
+        this.MensajeNotificacion = "Equipo eliminado correctamente";
+        this._eventService.displayMessage(this.MensajeNotificacion,false);
+        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
       },
       error => {
         if (error == 404) {
@@ -118,6 +122,9 @@ export class TeamsManagerComponent implements OnInit {
         } else {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
+        this.MensajeNotificacion = "Ups , tuvimos problemas técnicos para eliminar el equipo, disculpe las molestias";
+        this._eventService.displayMessage(this.MensajeNotificacion,true);
+        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
       });
   }
 
@@ -125,7 +132,7 @@ export class TeamsManagerComponent implements OnInit {
     //this.selectedTeam = this.teamList.filter(team => team.id == row.id);    
     //this._proyectoService.modificarEquipo(this.selectedTeam[0]);
     //this._proyectoService.modificarEquipo(row);
-    this._proyectoService.equipo =row;   
+    this._proyectoService.equipo = row;
     this.router.navigate(['backoffice/teamsmanager/addteam']);
 
   }
@@ -133,8 +140,8 @@ export class TeamsManagerComponent implements OnInit {
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  
-  btnAddClick(){
+
+  btnAddClick() {
     this._proyectoService.equipo = null;
     this.router.navigate(['backoffice/teamsmanager/addteam']);
   }

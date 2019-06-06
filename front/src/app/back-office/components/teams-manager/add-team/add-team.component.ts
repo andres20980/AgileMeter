@@ -15,44 +15,38 @@ import { Equipo } from 'app/Models/Equipo';
   templateUrl: './add-team.component.html',
   styleUrls: ['./add-team.component.scss']
 })
-export class AddTeamComponent implements OnInit {
-  public updateUser: string = null;
+export class AddTeamComponent implements OnInit {  
   public addTeamsForm: FormGroup;
-/*eliminado temporalmente hasta tener la lista de oficinas, unidades y proyectos
-  public officeList: Office[];
-  public unityList: Unity[];
-  public lineaList: Linea[];*/
+  /*eliminado temporalmente hasta tener la lista de oficinas, unidades y proyectos
+    public officeList: Office[];
+    public unityList: Unity[];
+    public lineaList: Linea[];*/
   public UserNombre: User;
   public ErrorMessage: string = null;
+  public MensajeNotificacion: string = null;
   public idEquipo: number = 0;
   public equipo: Equipo;
-/*//eliminado temporalmente hasta tener la lista de oficinas, unidades y proyectos
-  oficina: Office;
-  compareOficina(o1: any, o2: any): boolean {
-    return o1.oficinaId === o2.oficinaId;
-  }
-  unidad: Unity;
-  compareUnidad(o1: any, o2: any): boolean {
-    return o1.unidadId === o2.unidadId;
-  }
-  linea: Linea;
-  compareLinea(o1: any, o2: any): boolean {
-    return o1.lineaId === o2.lineaId;
-  }
-*/
+  /*//eliminado temporalmente hasta tener la lista de oficinas, unidades y proyectos
+    oficina: Office;
+    compareOficina(o1: any, o2: any): boolean {
+      return o1.oficinaId === o2.oficinaId;
+    }
+    unidad: Unity;
+    compareUnidad(o1: any, o2: any): boolean {
+      return o1.unidadId === o2.unidadId;
+    }
+    linea: Linea;
+    compareLinea(o1: any, o2: any): boolean {
+      return o1.lineaId === o2.lineaId;
+    }
+  */
   constructor(   //ProyectoService its teams service --> table proyectos its teams in DataBase
     private _teamsService: ProyectoService,
     private _router: Router,
     private _eventService: EventEmitterService,
     private _appComponent: AppComponent,
     private _routeParams: ActivatedRoute,
-    fb: FormBuilder) {
-    this._eventService.eventEmitter.subscribe(
-      (data) => {
-        this.updateUser = data,
-          setTimeout(() => { this.updateUser = null }, 2000)
-      }
-    );
+    fb: FormBuilder) {    
     this.addTeamsForm = fb.group({
       hideRequired: false,
       floatLabel: 'auto',
@@ -99,81 +93,84 @@ export class AddTeamComponent implements OnInit {
   public hasError = (controlName: string, errorName: string) => {
     return this.addTeamsForm.controls[controlName].hasError(errorName);
   }
-/* eliminado temporalmente hasta tener la lista de oficinas, unidades y proyectos
-  //Solo se llama cuando se modifica un equipo
-  public cargarCombosUnidadesYLineas() {
-    this.getAllUnidadesDe(this.equipo.oficinaEntity);
-    this.getAllLineasDe(this.equipo.unidadEntity);
-  }
-
-  public getAllOficinas() {
-    this._teamsService.getAllOficinas().subscribe(
-      res => {
-        this.officeList = res;
-      },
-      error => {
-        if (error == 404) {
-          this.ErrorMessage = "Error: " + error + " Oficinas List Not Found.";
-        } else if (error == 500) {
-          this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
-        } else if (error == 401) {
-          this.ErrorMessage = "Error: " + error + " El usuario es incorrecto o no tiene permisos, intente introducir su usuario nuevamente.";
-        } else {
-          this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
-        }
-      });
-  }
-
-  public getAllUnidadesDe(oficina) {
-    this.addTeamsForm.removeControl('UnidadEntity');
-    this.addTeamsForm.addControl('UnidadEntity', new FormControl('', Validators.required));
-    //limpiamos el campo que hubiera en linea
-    this.addTeamsForm.removeControl('LineaEntity');
-    this.addTeamsForm.addControl('LineaEntity', new FormControl('', Validators.required));
-    //retur all unidades of a select oficina
-    this._teamsService.getAllUnitDe(oficina).subscribe(
-      res => {
-        this.unityList = res;
-      },
-      error => {
-        if (error == 404) {
-          this.ErrorMessage = "Error: " + error + " Unidades List Not Found.";
-        } else if (error == 500) {
-          this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
-        } else if (error == 401) {
-          this.ErrorMessage = "Error: " + error + " El usuario es incorrecto o no tiene permisos, intente introducir su usuario nuevamente.";
-        } else {
-          this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
-        }
-      });
-  }
-
-  public getAllLineasDe(unidades) {
-    this.addTeamsForm.removeControl('LineaEntity');
-    this.addTeamsForm.addControl('LineaEntity', new FormControl('', Validators.required));
-    //retur all unidades of a select oficina
-    this._teamsService.getAllLineasDe(unidades).subscribe(
-      res => {
-        this.lineaList = res;
-      },
-      error => {
-        if (error == 404) {
-          this.ErrorMessage = "Error: " + error + " Linea List Not Found.";
-        } else if (error == 500) {
-          this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
-        } else if (error == 401) {
-          this.ErrorMessage = "Error: " + error + " El usuario es incorrecto o no tiene permisos, intente introducir su usuario nuevamente.";
-        } else {
-          this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
-        }
-      });
-  }
-*/
+  /* eliminado temporalmente hasta tener la lista de oficinas, unidades y proyectos
+    //Solo se llama cuando se modifica un equipo
+    public cargarCombosUnidadesYLineas() {
+      this.getAllUnidadesDe(this.equipo.oficinaEntity);
+      this.getAllLineasDe(this.equipo.unidadEntity);
+    }
+  
+    public getAllOficinas() {
+      this._teamsService.getAllOficinas().subscribe(
+        res => {
+          this.officeList = res;
+        },
+        error => {
+          if (error == 404) {
+            this.ErrorMessage = "Error: " + error + " Oficinas List Not Found.";
+          } else if (error == 500) {
+            this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+          } else if (error == 401) {
+            this.ErrorMessage = "Error: " + error + " El usuario es incorrecto o no tiene permisos, intente introducir su usuario nuevamente.";
+          } else {
+            this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+          }
+        });
+    }
+  
+    public getAllUnidadesDe(oficina) {
+      this.addTeamsForm.removeControl('UnidadEntity');
+      this.addTeamsForm.addControl('UnidadEntity', new FormControl('', Validators.required));
+      //limpiamos el campo que hubiera en linea
+      this.addTeamsForm.removeControl('LineaEntity');
+      this.addTeamsForm.addControl('LineaEntity', new FormControl('', Validators.required));
+      //retur all unidades of a select oficina
+      this._teamsService.getAllUnitDe(oficina).subscribe(
+        res => {
+          this.unityList = res;
+        },
+        error => {
+          if (error == 404) {
+            this.ErrorMessage = "Error: " + error + " Unidades List Not Found.";
+          } else if (error == 500) {
+            this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+          } else if (error == 401) {
+            this.ErrorMessage = "Error: " + error + " El usuario es incorrecto o no tiene permisos, intente introducir su usuario nuevamente.";
+          } else {
+            this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+          }
+        });
+    }
+  
+    public getAllLineasDe(unidades) {
+      this.addTeamsForm.removeControl('LineaEntity');
+      this.addTeamsForm.addControl('LineaEntity', new FormControl('', Validators.required));
+      //retur all unidades of a select oficina
+      this._teamsService.getAllLineasDe(unidades).subscribe(
+        res => {
+          this.lineaList = res;
+        },
+        error => {
+          if (error == 404) {
+            this.ErrorMessage = "Error: " + error + " Linea List Not Found.";
+          } else if (error == 500) {
+            this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+          } else if (error == 401) {
+            this.ErrorMessage = "Error: " + error + " El usuario es incorrecto o no tiene permisos, intente introducir su usuario nuevamente.";
+          } else {
+            this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+          }
+        });
+    }
+  */
   public altaEquipo() {
     var form = this.addTeamsForm.value;
     this._teamsService.setTeam(form).subscribe(
       res => {
         this._router.navigate(['/backoffice/teamsmanager']);
+        this.MensajeNotificacion = "Equipo creado correctamente";
+        this._eventService.displayMessage(this.MensajeNotificacion,false);
+        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
       },
       error => {
         //Si el servidor tiene algún tipo de problema mostraremos este error
@@ -186,6 +183,9 @@ export class AddTeamComponent implements OnInit {
         } else {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
+        this.MensajeNotificacion = "Ups, lo sentimos, no pudimos crear el equipo";
+        this._eventService.displayMessage(this.MensajeNotificacion,true);
+        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
       });
   }
 
@@ -230,6 +230,9 @@ export class AddTeamComponent implements OnInit {
     this._teamsService.updateTeam(form).subscribe(
       res => {
         this._router.navigate(['/backoffice/teamsmanager']);
+        this.MensajeNotificacion = "Equipo modificado correctamente";
+        this._eventService.displayMessage(this.MensajeNotificacion,false);
+        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
       },
       error => {
         if (error == 404) {
@@ -241,6 +244,9 @@ export class AddTeamComponent implements OnInit {
         } else {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
+        this.MensajeNotificacion = "Ups, lo sentimos, no pudimos modificar el equipo.";
+        this._eventService.displayMessage(this.MensajeNotificacion,true);
+        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
       });
   }
 
