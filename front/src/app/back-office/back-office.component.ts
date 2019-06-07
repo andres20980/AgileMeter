@@ -9,15 +9,15 @@ import { UserService } from 'app/services/UserService';
   selector: 'app-back-office',
   templateUrl: './back-office.component.html',
   styleUrls: ['./back-office.component.scss'],
-  providers: [ProyectoService,UserService]
+  providers: [ProyectoService, UserService]
 })
-
 
 export class BackOfficeComponent implements OnInit {
 
   //public AdminOn = false;
-  public updateUser: string = null;
-  public ActiveSection : string = null;
+  public MensajeNotificacion: string = null;
+  public MensajeNotificacionError: boolean = false;
+  public ActiveSection: string = null;
   //public collapsedButtons : boolean = false;
 
   constructor(
@@ -25,22 +25,22 @@ export class BackOfficeComponent implements OnInit {
     public _router: Router,
     private _eventService: EventEmitterService,
     private _appComponent: AppComponent,
-    route:ActivatedRoute) {
+    route: ActivatedRoute) {
     this._eventService.eventEmitter.subscribe(
-      (data) => {
-        this.updateUser = data,
-          setTimeout(() => { this.updateUser = null }, 2000)
+      res => {
+        this.MensajeNotificacionError = res.error;
+        this.MensajeNotificacion = res.message,
+          setTimeout(() => { this.MensajeNotificacion = null }, 2000)
       }
     );
 
     this._router.events.subscribe((e: any) => {
       //console.log( e);
-      if(e.urlAfterRedirects == "/backoffice"){
+      if (e.urlAfterRedirects == "/backoffice") {
         this.ActiveSection = null;
       }
     });
   }
-
 
   ngOnInit() {
     //this.collapsedButtons = false;
@@ -49,12 +49,8 @@ export class BackOfficeComponent implements OnInit {
       this._router.navigate(['/login']);
     }
     //console.log(this._appComponent._storageDataService.Role);
-    if(this._appComponent._storageDataService.Role != "Administrador"){
+    if (this._appComponent._storageDataService.Role != "Administrador") {
       this._router.navigate(['/home']);
     }
   }
-
-  // buttonClick(option :  string){
-  //   this.ActiveSection = option;
-  // }
 }

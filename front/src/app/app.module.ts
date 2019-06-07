@@ -48,6 +48,7 @@ import { CustomPaginator } from 'app/CustomPaginatorConfiguration';
 import { TeamManagementComponent } from './back-office/components/user-management/team-management/team-management.component';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import 'hammerjs'; 
 
 @NgModule({
   declarations: [

@@ -7,6 +7,7 @@ import { UserService } from 'app/services/UserService';
 import { Router } from '@angular/router';
 import { AppComponent } from 'app/app.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { EventEmitterService } from 'app/services/event-emitter.service';
 
 @Component({
   selector: 'app-add-update-user',
@@ -18,6 +19,7 @@ export class AddUpdateUserComponent implements OnInit {
   public Error: string = null;
   public userForm: FormGroup;
   public user: UserCreateUpdate;
+  public MensajeNotificacion: string = null;
 
   public rolList: Role[];
   rol: Role = { id: 1, role: "Usuario" };
@@ -29,7 +31,8 @@ export class AddUpdateUserComponent implements OnInit {
     private _router: Router,
     private _proyectoService: ProyectoService,
     private modalService: NgbModal,
-    private _appComponent: AppComponent
+    private _appComponent: AppComponent,
+    private _eventService: EventEmitterService,
   ) { }
 
   ngOnInit() {
@@ -87,6 +90,9 @@ export class AddUpdateUserComponent implements OnInit {
     this._userService.addUser(form).subscribe(
       res => {
         this._router.navigate(['/backoffice/usermanagement']);
+        this.MensajeNotificacion = "Usuario creado correctamente";
+        this._eventService.displayMessage(this.MensajeNotificacion,false);
+        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
       },
       error => {
         if (error == 400) {
@@ -97,6 +103,9 @@ export class AddUpdateUserComponent implements OnInit {
         } else {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
+        this.MensajeNotificacion = "Ups, lo sentimos, no hemos podido crear el usuario";
+        this._eventService.displayMessage(this.MensajeNotificacion,true);
+        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
       });
   }
 
@@ -110,7 +119,7 @@ export class AddUpdateUserComponent implements OnInit {
     //si el usuario logueado es el usuario a modificar y le cambias el roll te muestra una ventana de advertencia indicando que te redirige al home
     if (this._proyectoService.UsuarioLogeado == form.nombre && this._userService.user.role.id != form.Role.id) {
       this.AbrirModal(content, form);
-    } 
+    }
     //si no se modifica
     else {
       this.updateUsuario(form);
@@ -126,16 +135,22 @@ export class AddUpdateUserComponent implements OnInit {
         } else {//si no te mantiene en el listado de usuarios
           this._router.navigate(['/backoffice/usermanagement']);
         }
+        this.MensajeNotificacion = "Usuario modificado correctamente";
+        this._eventService.displayMessage(this.MensajeNotificacion,false);
+        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
       },
       error => {
         if (error == 400) {
-          this.ErrorMessage = "No pudimos actualizar el usuario.";
+          this.ErrorMessage = "Ups, lo sentimos,no pudimos modificar el usuario.";
           this.Error = "400";
         } else if (error == 500) {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         } else {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
+        this.MensajeNotificacion = "Ups, lo sentimos , no hemosRol del usuario actualizado correctamente";
+        this._eventService.displayMessage(this.MensajeNotificacion,true);
+        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
       });
   }
 

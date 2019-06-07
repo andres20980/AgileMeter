@@ -7,6 +7,7 @@ import { ProyectoService } from 'app/services/ProyectoService';
 import { Equipo } from 'app/Models/Equipo';
 import { UserWithRole } from 'app/Models/UserWithRole';
 import { UserProject } from 'app/Models/UserProject';
+import { EventEmitterService } from 'app/services/event-emitter.service';
 
 @Component({
   selector: 'app-team-management',
@@ -21,7 +22,7 @@ export class TeamManagementComponent implements OnInit {
   public proyectosAsig: Equipo[] = [];
   public proyectosPending: Equipo[] = [];
   public ErrorMessage: string = null;
-  public InfoMessage: string = null;
+  public MensajeNotificacion: string = null;
   public usuarioWithRole: UserWithRole;
   public user: UserCreateUpdate;
 
@@ -30,6 +31,7 @@ export class TeamManagementComponent implements OnInit {
     private _router: Router,
     private _userService: UserService,
     private _proyectoService: ProyectoService,
+    private _eventService: EventEmitterService,
   ) { }
 
   ngOnInit() {
@@ -73,11 +75,11 @@ export class TeamManagementComponent implements OnInit {
 
     this._userService.removeUserProject(usuarioProyecto).subscribe(
       res => {
-        this.InfoMessage = "Quitamos el proyecto " + evento.item.data.proyecto + "-" + evento.item.data.nombre;
-        setTimeout(() => { this.InfoMessage = null }, 3000);
+        this.MensajeNotificacion = "Quitamos el proyecto " + evento.item.data.proyecto + "-" + evento.item.data.nombre;
+        this._eventService.displayMessage(this.MensajeNotificacion, false);
+        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
       },
       error => {
-        console.log("falla el borrar", error);
         //Si el servidor tiene algún tipo de problema mostraremos este error
         if (error == 404) {
           this.ErrorMessage = "Error: " + error + " El usuario o proyecto autenticado no existe.";
@@ -90,14 +92,20 @@ export class TeamManagementComponent implements OnInit {
         } else {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
+
+        this.MensajeNotificacion = this.ErrorMessage;
+        this._eventService.displayMessage(this.MensajeNotificacion, true);
+        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
+
       });
   }
 
   private addUserProyect(usuarioProyecto, evento) {
     this._userService.addUserProject(usuarioProyecto).subscribe(
       res => {
-        this.InfoMessage = "Añadimos el proyecto " + evento.item.data.proyecto + "-" + evento.item.data.nombre;
-        setTimeout(() => { this.InfoMessage = null }, 3000);
+        this.MensajeNotificacion = "Añadimos el proyecto " + evento.item.data.proyecto + "-" + evento.item.data.nombre;
+        this._eventService.displayMessage(this.MensajeNotificacion, false);
+        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
       },
       error => {
         //Si el servidor tiene algún tipo de problema mostraremos este error
@@ -111,6 +119,10 @@ export class TeamManagementComponent implements OnInit {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
       });
+
+    this.MensajeNotificacion = this.ErrorMessage
+    this._eventService.displayMessage(this.MensajeNotificacion, true);
+    setTimeout(() => { this.MensajeNotificacion = null }, 2000);
   }
 
   private getTeams() {
@@ -128,6 +140,10 @@ export class TeamManagementComponent implements OnInit {
         } else {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
+
+        this.MensajeNotificacion = this.ErrorMessage
+        this._eventService.displayMessage(this.MensajeNotificacion, true);
+        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
       }
     )
   };
@@ -153,6 +169,10 @@ export class TeamManagementComponent implements OnInit {
         } else {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
+
+        this.MensajeNotificacion = this.ErrorMessage
+        this._eventService.displayMessage(this.MensajeNotificacion, true);
+        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
       }
     )
   }
@@ -168,8 +188,11 @@ export class TeamManagementComponent implements OnInit {
 
     if (this.user !== undefined) {
 
-      if (this.user.role.role === "Administrador")
-        this.InfoMessage = "El usuario seleccionado podrá evaluar cualquier equipo.";
+      if (this.user.role.role === "Administrador") {
+        this.MensajeNotificacion = "El usuario seleccionado podrá evaluar cualquier equipo.";
+        this._eventService.displayMessage(this.MensajeNotificacion, false);
+        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
+      }
 
       this.usuarioWithRole =
         {
