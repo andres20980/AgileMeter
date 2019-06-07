@@ -1,27 +1,14 @@
-<!-- de esta forma el mensaje siempre se queda arriba y baja si haces scroll - -> siempre ves la notificación
-   <div class="position-float fixed-top">
-    <div class="position-absolute error-msg">
-        <div *ngIf="MensajeNotificacion != null" class="alert alert-success">
-            {{MensajeNotificacion}}
-        </div>
+<div class="d-flex justify-content-center notificacion">
+  <div *ngIf="!MensajeNotificacionError" class="position-fixed text-center notificacion">
+    <div *ngIf="MensajeNotificacion != null" class="alert alert-success">
+      <b>{{MensajeNotificacion}}</b>
     </div>
-</div>
--->
-<div class="position-relative">
-  <!--de esta forma si haces scroll no ves la notificacion y puedes no ver las notificaciones de algunas interacciones-->
-  <div class="position-relative error-msg">
-    <div *ngIf="!MensajeNotificacionError">
-      <div *ngIf="MensajeNotificacion != null" class="alert alert-success">
-        {{MensajeNotificacion}}
-      </div>
-    </div>
+  </div>
 
-    <div *ngIf="MensajeNotificacionError">
-      <div *ngIf="MensajeNotificacion != null" class="alert alert-danger">
-        {{MensajeNotificacion}}
-      </div>
+  <div *ngIf="MensajeNotificacionError" class="position-fixed text-center notificacion">
+    <div *ngIf="MensajeNotificacion != null" class="alert alert-danger">
+      <b>{{MensajeNotificacion}}</b>
     </div>
-
   </div>
 </div>
 

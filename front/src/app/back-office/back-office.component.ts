@@ -12,7 +12,6 @@ import { UserService } from 'app/services/UserService';
   providers: [ProyectoService, UserService]
 })
 
-
 export class BackOfficeComponent implements OnInit {
 
   //public AdminOn = false;
@@ -29,7 +28,6 @@ export class BackOfficeComponent implements OnInit {
     route: ActivatedRoute) {
     this._eventService.eventEmitter.subscribe(
       res => {
-        console.log(res);
         this.MensajeNotificacionError = res.error;
         this.MensajeNotificacion = res.message,
           setTimeout(() => { this.MensajeNotificacion = null }, 2000)
@@ -44,7 +42,6 @@ export class BackOfficeComponent implements OnInit {
     });
   }
 
-
   ngOnInit() {
     //this.collapsedButtons = false;
     this.ActiveSection = null;
@@ -56,8 +53,4 @@ export class BackOfficeComponent implements OnInit {
       this._router.navigate(['/home']);
     }
   }
-
-  // buttonClick(option :  string){
-  //   this.ActiveSection = option;
-  // }
 }
