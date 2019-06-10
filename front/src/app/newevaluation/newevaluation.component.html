@@ -87,14 +87,14 @@
             <div class="col section-title">
               <h3>{{SectionSelected.nombre}}</h3>
               <button class="transparente" (click)="AbrirModalSec(notasSec)" title="Añadir notas">
-                  <img class="comment" *ngIf="SectionSelected.notas != null" src="assets/comment filled.png" title="Hay notas" />
-                  <img class="comment" *ngIf="SectionSelected.notas == null" src="assets/comment empty.png" title="No hay notas" />  
+                  <img class="comment" *ngIf="SectionSelected.notas != null" src="assets/comment_filled.png" title="Hay notas" />
+                  <img class="comment" *ngIf="SectionSelected.notas == null" src="assets/comment_empty.png" title="No hay notas" />  
                 </button>
                 <h3 style="padding: 0em 1em 0em 1em;"> > </h3>
                 <h3>{{InfoAsignacion.nombre}}</h3>
                 <button class="transparente" (click)="AbrirModalAsig(notasAsset)" title="Añadir notas">
-                    <img class="comment" *ngIf="InfoAsignacion.notas != null" src="assets/comment filled.png" title="Hay notas" />
-                    <img class="comment" *ngIf="InfoAsignacion.notas == null" src="assets/comment empty.png" title="No hay notas" />  
+                    <img class="comment" *ngIf="InfoAsignacion.notas != null" src="assets/comment_filled.png" title="Hay notas" />
+                    <img class="comment" *ngIf="InfoAsignacion.notas == null" src="assets/comment_empty.png" title="No hay notas" />  
                   </button>
             </div>
         </div>
@@ -207,8 +207,8 @@
 
                       <i class="material-icons add-comment" alt="Añadir comentario">add_circle</i> -->
 
-                      <img class="comment-yes-no" *ngIf="preguntaDada.respuesta.notas != null" src="assets/comment filled.png" title="Hay notas" />
-                      <img class="comment-yes-no" *ngIf="preguntaDada.respuesta.notas == null" src="assets/comment empty.png" title="No hay notas" />  
+                      <img class="comment-yes-no" *ngIf="preguntaDada.respuesta.notas != null" src="assets/comment_filled.png" title="Hay notas" />
+                      <img class="comment-yes-no" *ngIf="preguntaDada.respuesta.notas == null" src="assets/comment_empty.png" title="No hay notas" />  
 
                     </button>
 
@@ -226,8 +226,8 @@
                       </i>
                       <i class="material-icons add-comment" alt="Añadir comentario">add_circle</i> -->
 
-                      <img class="comment-yes-no" *ngIf="preguntaDada.respuesta.notas != null" src="assets/comment filled.png" title="Hay notas" />
-                      <img class="comment-yes-no" *ngIf="preguntaDada.respuesta.notas == null" src="assets/comment empty.png" title="No hay notas" />  
+                      <img class="comment-yes-no" *ngIf="preguntaDada.respuesta.notas != null" src="assets/comment_filled.png" title="Hay notas" />
+                      <img class="comment-yes-no" *ngIf="preguntaDada.respuesta.notas == null" src="assets/comment_empty.png" title="No hay notas" />  
 
                     </button>
 
