@@ -75,7 +75,7 @@ export class TeamManagementComponent implements OnInit {
 
     this._userService.removeUserProject(usuarioProyecto).subscribe(
       res => {
-        this.MensajeNotificacion = "Quitamos el proyecto " + evento.item.data.proyecto + "-" + evento.item.data.nombre;
+        this.MensajeNotificacion = "Equipo " + evento.item.data.nombre + " desasignado al usuario " + this.user.nombre;
         this._eventService.displayMessage(this.MensajeNotificacion, false);
         setTimeout(() => { this.MensajeNotificacion = null }, 2000);
       },
@@ -103,7 +103,7 @@ export class TeamManagementComponent implements OnInit {
   private addUserProyect(usuarioProyecto, evento) {
     this._userService.addUserProject(usuarioProyecto).subscribe(
       res => {
-        this.MensajeNotificacion = "Añadimos el proyecto " + evento.item.data.proyecto + "-" + evento.item.data.nombre;
+        this.MensajeNotificacion = "Equipo " + evento.item.data.nombre + " asignado al usuario " + this.user.nombre;
         this._eventService.displayMessage(this.MensajeNotificacion, false);
         setTimeout(() => { this.MensajeNotificacion = null }, 2000);
       },
