@@ -219,9 +219,10 @@ export class NewevaluationComponent implements OnInit {
     //Si la pregunta es Habilitante y se ha respondido NO
     if (this.InfoAsignacion.preguntas[index].esHabilitante && optionAnswered == 2)
     {
-      this.InfoAsignacion.preguntas[index].respuesta.estado = optionAnswered;
+      
       this._respuestasService.updateRespuestasAsig(this.Evaluation.id, pregunta.id).subscribe(
         res => {
+          this.InfoAsignacion.preguntas[index].respuesta.estado = optionAnswered;
           //Se actualizan las respuestas de las preguntas dependientes de esta pregunta habilitante a NC
           this.InfoAsignacion.preguntas.forEach(p =>{
             if (this.InfoAsignacion.preguntas[index].id == p.preguntaHabilitanteId)
@@ -245,12 +246,12 @@ export class NewevaluationComponent implements OnInit {
         }
       );
     } else {
-      if (optionAnswered != pregunta.respuesta.estado) {
-        this.InfoAsignacion.preguntas[index].respuesta.estado = optionAnswered;
+      if (optionAnswered != pregunta.respuesta.estado) {        
         let respuesta = this.InfoAsignacion.preguntas[index].respuesta;
         respuesta.userName = this.UserName ;
         this._respuestasService.AlterRespuesta(respuesta).subscribe(
           res => {
+            this.InfoAsignacion.preguntas[index].respuesta.estado = optionAnswered;
             this.changedQuestion = index;
             this.changedAnswer = optionAnswered;
           },
