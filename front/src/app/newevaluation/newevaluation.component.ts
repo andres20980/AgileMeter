@@ -133,6 +133,7 @@ export class NewevaluationComponent implements OnInit {
           } else {
             this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
           }
+          setTimeout(() => { this.ErrorMessage = null }, 2000);
         }
       );
     } else {
@@ -162,6 +163,7 @@ export class NewevaluationComponent implements OnInit {
         } else {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
+        setTimeout(() => { this.ErrorMessage = null }, 2000);
       }
     );
   }
@@ -239,6 +241,7 @@ export class NewevaluationComponent implements OnInit {
           } else {
             this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
           }
+          setTimeout(() => { this.ErrorMessage = null }, 2000);
         }
       );
     } else {
@@ -261,6 +264,7 @@ export class NewevaluationComponent implements OnInit {
             } else {
               this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
             }
+            setTimeout(() => { this.ErrorMessage = null }, 2000);
         });
       }
     }
@@ -335,6 +339,7 @@ export class NewevaluationComponent implements OnInit {
               } else {
                 this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
               }
+              setTimeout(() => { this.ErrorMessage = null }, 2000);
             },
             () => {
               this.Deshabilitar = false;
@@ -390,6 +395,7 @@ export class NewevaluationComponent implements OnInit {
               } else {
                 this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
               }
+              setTimeout(() => { this.ErrorMessage = null }, 2000);
             },
             () => {
               this.Deshabilitar = false;
@@ -446,6 +452,7 @@ export class NewevaluationComponent implements OnInit {
               } else {
                 this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
               }
+              setTimeout(() => { this.ErrorMessage = null }, 2000);
             },
             () => {
               this.Deshabilitar = false;

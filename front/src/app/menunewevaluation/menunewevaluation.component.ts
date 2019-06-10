@@ -87,6 +87,7 @@ export class MenunewevaluationComponent implements OnInit {
           } else {
             this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
           }
+          setTimeout(() => { this.ErrorMessage = null }, 2000);
         }
       );
     } else {
@@ -168,6 +169,7 @@ export class MenunewevaluationComponent implements OnInit {
               } else {
                 this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
               }
+              setTimeout(() => { this.ErrorMessage = null }, 2000);
             },
             () => {
               this.cargar = false;
