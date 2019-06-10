@@ -90,7 +90,7 @@ namespace everisapi.API.Services
                   .Include(r => r.UnidadEntity)
                   .Include(r => r.LineaEntity)
                   .Include(r => r.Evaluaciones)
-                  .Where(p => !p.TestProject).ToList();
+                  .Where(p => !p.TestProject).OrderBy(p => p.Proyecto).ToList();
         }
 
         public IEnumerable<AssessmentEntity> GetAllAssessments()
