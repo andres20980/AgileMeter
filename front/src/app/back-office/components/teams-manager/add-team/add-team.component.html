@@ -99,22 +99,27 @@
 
     <!--BUTTONS-->
     <div class="row btns col-12 justify-content-center">
-      <div *ngIf="this._teamsService.equipo == undefined"
-        class="main-button border-curve mat-elevation-z5 new-eval w-85 m-auto col-3 btns"
-        [class.card-disabled]="addTeamsForm.invalid" (click)="altaEquipo()">
-        <a>GUARDAR</a>
+      <div _ngcontent-blt-c4="" *ngIf="this.equipo == undefined" class="col-4">
+        <div _ngcontent-blt-c4="" class="main-button border-curve bajarmedia eval-ant mat-elevation-z5 w-85 m-auto"
+          [class.card-disabled]="addTeamsForm.invalid" (click)="altaEquipo()">
+          <a _ngcontent-blt-c4="">Guardar</a>
+        </div>
       </div>
 
-      <div *ngIf="this._teamsService.equipo != undefined"
-        class="main-button border-curve mat-elevation-z5 new-eval w-85 m-auto col-3 btns"
-        [class.card-disabled]="addTeamsForm.invalid" (click)="updateEquipo()">
-        <a>GUARDAR</a>
+      <div _ngcontent-blt-c4="" *ngIf="this.equipo != undefined" class="col-4">
+        <div _ngcontent-blt-c4="" class="main-button border-curve bajarmedia eval-ant mat-elevation-z5 w-85 m-auto"
+          [class.card-disabled]="addTeamsForm.invalid" (click)="updateEquipo()">
+          <a _ngcontent-blt-c4="">Guardar</a>
+        </div>
+      </div>
+
+      <div _ngcontent-blt-c4="" class="col-4">
+        <div _ngcontent-blt-c4=""
+          class="secondary-button border-curve bajarmedia eval-ant mat-elevation-z5 w-85 m-auto" (click)="volver()">
+          <a _ngcontent-blt-c4="">Volver</a>
+        </div>
       </div>
     </div>
-
-    <!--<div class="col-3"> BOTON VOLVER POR SI HICIERA FALTA
-        <a class="btn btn-danger btn-lg btn-block col-12" routerLink="/backoffice/teamsmanager" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Volver</a>           
-      </div>-->
 
   </div>
 </form>
