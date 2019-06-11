@@ -15,6 +15,7 @@
           <input matInput type="text" formControlName="Nombre" id="Nombre" placeholder="Usuario"
             value="{{this.user?.nombre}}">
           <mat-error *ngIf="hasError('Nombre','required')">El campo usuario no puede estar vacio. </mat-error>
+          <mat-error *ngIf="hasError('Nombre','maxlength')">El campo usuario no puede tener mas de 127 caracteres. </mat-error>
         </mat-form-field>
 
         <mat-form-field class="col-6">
