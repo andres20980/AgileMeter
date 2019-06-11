@@ -330,7 +330,8 @@ export class NewevaluationComponent implements OnInit {
               setTimeout(() => { this.anadeNota = null }, 4000);
             },
             error => {
-
+              this.InfoAsignacion.preguntas[i].respuesta.notas = null
+              this.Deshabilitar = false;
               if (error == 404) {
                 this.ErrorMessage = "Error: " + error + "No pudimos realizar la actualización de la respuesta, lo sentimos.";
               } else if (error == 500) {
@@ -386,7 +387,8 @@ export class NewevaluationComponent implements OnInit {
               setTimeout(() => { this.anadeNota = null }, 4000);
             },
             error => {
-
+              this.InfoAsignacion.notas = null;
+              this.Deshabilitar = false;
               if (error == 404) {
                 this.ErrorMessage = "Error: " + error + "No pudimos realizar la actualización de la respuesta, lo sentimos.";
               } else if (error == 500) {
@@ -443,7 +445,8 @@ export class NewevaluationComponent implements OnInit {
               setTimeout(() => { this.anadeNota = null }, 4000);
             },
             error => {
-
+              this.SectionSelected.notas = null;
+              this.Deshabilitar = false;
               if (error == 404) {
                 this.ErrorMessage = "Error: " + error + "No pudimos realizar la actualización de la respuesta, lo sentimos.";
               } else if (error == 500) {
