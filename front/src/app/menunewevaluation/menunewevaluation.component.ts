@@ -87,7 +87,7 @@ export class MenunewevaluationComponent implements OnInit {
           } else {
             this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
           }
-          setTimeout(() => { this.ErrorMessage = null }, 2000);
+          setTimeout(() => { this.ErrorMessage = null }, 4000);
         }
       );
     } else {
@@ -156,7 +156,7 @@ export class MenunewevaluationComponent implements OnInit {
             res => {
 
               this.anadeNota = "Nota añadida correctamente";
-              setTimeout(()=>{this.anadeNota = null},2000);
+              setTimeout(()=>{this.anadeNota = null},4000);
             },
             error => {
 
@@ -169,7 +169,7 @@ export class MenunewevaluationComponent implements OnInit {
               } else {
                 this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
               }
-              setTimeout(() => { this.ErrorMessage = null }, 2000);
+              setTimeout(() => { this.ErrorMessage = null }, 4000);
             },
             () => {
               this.cargar = false;

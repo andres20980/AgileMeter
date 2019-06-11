@@ -133,7 +133,7 @@ export class NewevaluationComponent implements OnInit {
           } else {
             this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
           }
-          setTimeout(() => { this.ErrorMessage = null }, 2000);
+          setTimeout(() => { this.ErrorMessage = null }, 4000);
         }
       );
     } else {
@@ -163,7 +163,7 @@ export class NewevaluationComponent implements OnInit {
         } else {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
-        setTimeout(() => { this.ErrorMessage = null }, 2000);
+        setTimeout(() => { this.ErrorMessage = null }, 4000);
       }
     );
   }
@@ -242,7 +242,7 @@ export class NewevaluationComponent implements OnInit {
           } else {
             this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
           }
-          setTimeout(() => { this.ErrorMessage = null }, 2000);
+          setTimeout(() => { this.ErrorMessage = null }, 4000);
         }
       );
     } else {
@@ -265,7 +265,7 @@ export class NewevaluationComponent implements OnInit {
             } else {
               this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
             }
-            setTimeout(() => { this.ErrorMessage = null }, 2000);
+            setTimeout(() => { this.ErrorMessage = null }, 4000);
         });
       }
     }
@@ -327,7 +327,7 @@ export class NewevaluationComponent implements OnInit {
             res => {
 
               this.anadeNota = "Nota añadida correctamente";
-              setTimeout(() => { this.anadeNota = null }, 2000);
+              setTimeout(() => { this.anadeNota = null }, 4000);
             },
             error => {
 
@@ -340,7 +340,7 @@ export class NewevaluationComponent implements OnInit {
               } else {
                 this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
               }
-              setTimeout(() => { this.ErrorMessage = null }, 2000);
+              setTimeout(() => { this.ErrorMessage = null }, 4000);
             },
             () => {
               this.Deshabilitar = false;
@@ -383,7 +383,7 @@ export class NewevaluationComponent implements OnInit {
             res => {
 
               this.anadeNota = "Nota añadida correctamente";
-              setTimeout(() => { this.anadeNota = null }, 2000);
+              setTimeout(() => { this.anadeNota = null }, 4000);
             },
             error => {
 
@@ -396,7 +396,7 @@ export class NewevaluationComponent implements OnInit {
               } else {
                 this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
               }
-              setTimeout(() => { this.ErrorMessage = null }, 2000);
+              setTimeout(() => { this.ErrorMessage = null }, 4000);
             },
             () => {
               this.Deshabilitar = false;
@@ -440,7 +440,7 @@ export class NewevaluationComponent implements OnInit {
             res => {
 
               this.anadeNota = "Nota añadida correctamente";
-              setTimeout(() => { this.anadeNota = null }, 2000);
+              setTimeout(() => { this.anadeNota = null }, 4000);
             },
             error => {
 
@@ -453,7 +453,7 @@ export class NewevaluationComponent implements OnInit {
               } else {
                 this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
               }
-              setTimeout(() => { this.ErrorMessage = null }, 2000);
+              setTimeout(() => { this.ErrorMessage = null }, 4000);
             },
             () => {
               this.Deshabilitar = false;
