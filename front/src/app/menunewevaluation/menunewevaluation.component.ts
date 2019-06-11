@@ -159,7 +159,7 @@ export class MenunewevaluationComponent implements OnInit {
               setTimeout(()=>{this.anadeNota = null},4000);
             },
             error => {
-
+              this.ListaDeDatos[i].notas = null;
               if (error == 404) {
                 this.ErrorMessage = "Error: " + error + "No pudimos realizar la actualización de la respuesta, lo sentimos.";
               } else if (error == 500) {
