@@ -188,11 +188,11 @@ export class TeamManagementComponent implements OnInit {
 
     if (this.user !== undefined) {
 
-      if (this.user.role.role === "Administrador") {
-        this.MensajeNotificacion = "El usuario seleccionado podrá evaluar cualquier equipo.";
-        this._eventService.displayMessage(this.MensajeNotificacion, false);
-        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
-      }
+      // if (this.user.role.role === "Administrador") {
+      //   this.MensajeNotificacion = "El usuario seleccionado podrá evaluar cualquier equipo.";
+      //   this._eventService.displayMessage(this.MensajeNotificacion, false);
+      //   setTimeout(() => { this.MensajeNotificacion = null }, 2000);
+      // }
 
       this.usuarioWithRole =
         {
