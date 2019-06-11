@@ -16,7 +16,7 @@ import { EventEmitterService } from 'app/services/event-emitter.service';
 })
 export class TeamManagementComponent implements OnInit {
 
-  items = Array.from({ length: 100000 }).map((_, i) => `Item #${i}`);
+  //items = Array.from({ length: 100000 }).map((_, i) => `Item #${i}`);
 
   public proyectosAll: Equipo[] = [];
   public proyectosAsig: Equipo[] = [];
@@ -25,7 +25,8 @@ export class TeamManagementComponent implements OnInit {
   public MensajeNotificacion: string = null;
   public usuarioWithRole: UserWithRole;
   public user: UserCreateUpdate;
-
+  public MostrarPending : boolean = false;
+  public MostrarAsig : boolean = false;
 
   constructor(
     private _router: Router,
@@ -154,10 +155,24 @@ export class TeamManagementComponent implements OnInit {
         //hay que añadirle el filtro porque el metodo este no distingue si el proyecto es de prueba o no
         this.proyectosAsig = res.filter(r => !r.testProject);
 
+        console.log("Entramos en el filtrado");
+
+        // //Obtenemos los proyectos pendientes pero metermos un retardo para ver como se vería en la precarga
+        //setTimeout(() => { console.log("Retrasamos la salida");
+        // this.proyectosPending = this.proyectosAll.filter( e => function (proyecto: Equipo, proyestosAsignados: Equipo[]): boolean {
+        //   return !proyestosAsignados.find(eq => eq.id === proyecto.id);}(e, this.proyectosAsig));
+
+        // this.MostrarPending = true; 
+        // this.MostrarAsig = true; 
+        // }, 10000);
+
         //Obtenemos los proyectos pendientes
-        this.proyectosPending = this.proyectosAll.filter(e => function (proyecto: Equipo, proyestosAsignados: Equipo[]): boolean {
-          return !proyestosAsignados.find(eq => eq.id === proyecto.id);
-        }(e, this.proyectosAsig));
+        this.proyectosPending = this.proyectosAll.filter( e => function (proyecto: Equipo, proyestosAsignados: Equipo[]): boolean {
+          return !proyestosAsignados.find(eq => eq.id === proyecto.id);}(e, this.proyectosAsig));
+
+        this.MostrarPending = true; 
+        this.MostrarAsig = true; 
+        
       },
       error => {
         if (error == 404) {
