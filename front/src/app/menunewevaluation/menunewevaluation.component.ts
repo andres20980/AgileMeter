@@ -155,8 +155,8 @@ export class MenunewevaluationComponent implements OnInit {
           this._sectionService.addNota(SeccionModificada).subscribe(
             res => {
 
-              this.anadeNota = "Nota añadida correctamente";
-              setTimeout(()=>{this.anadeNota = null},4000);
+              // this.anadeNota = "Nota añadida correctamente";
+              // setTimeout(()=>{this.anadeNota = null},4000);
             },
             error => {
               this.ListaDeDatos[i].notas = null;

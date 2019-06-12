@@ -290,9 +290,9 @@ export class UserManagementComponent implements OnInit {
       res => {
         this.getUserProjects();
 
-        this.MensajeNotificacion = "Rol del usuario actualizado correctamente";
-        this._eventService.displayMessage(this.MensajeNotificacion,false);
-        setTimeout(() => { this.MensajeNotificacion = null }, 4000);
+        // this.MensajeNotificacion = "Rol del usuario actualizado correctamente";
+        // this._eventService.displayMessage(this.MensajeNotificacion,false);
+        // setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       },
       error => {
         //Si el servidor tiene algún tipo de problema mostraremos este error
@@ -315,9 +315,9 @@ export class UserManagementComponent implements OnInit {
     this._UserService.addUserProject(usuarioProyecto).subscribe(
       res => {
         this.getUserProjects();
-        this.MensajeNotificacion = "Equipo asignado correctamente";
-        this._eventService.displayMessage(this.MensajeNotificacion,false);
-        setTimeout(() => { this.MensajeNotificacion = null }, 4000);
+        // this.MensajeNotificacion = "Equipo asignado correctamente";
+        // this._eventService.displayMessage(this.MensajeNotificacion,false);
+        // setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       },
       error => {
         console.log(error);

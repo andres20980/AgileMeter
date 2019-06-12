@@ -327,8 +327,8 @@ export class NewevaluationComponent implements OnInit {
           this._respuestasService.AlterRespuesta(Respuesta).subscribe(
             res => {
 
-              this.anadeNota = "Nota añadida correctamente";
-              setTimeout(() => { this.anadeNota = null }, 4000);
+              // this.anadeNota = "Nota añadida correctamente";
+              // setTimeout(() => { this.anadeNota = null }, 4000);
             },
             error => {
               this.InfoAsignacion.preguntas[i].respuesta.notas = null
@@ -384,8 +384,8 @@ export class NewevaluationComponent implements OnInit {
           this._respuestasService.AddNotaAsig(asig).subscribe(
             res => {
 
-              this.anadeNota = "Nota añadida correctamente";
-              setTimeout(() => { this.anadeNota = null }, 4000);
+              // this.anadeNota = "Nota añadida correctamente";
+              // setTimeout(() => { this.anadeNota = null }, 4000);
             },
             error => {
               this.InfoAsignacion.notas = null;
@@ -442,8 +442,8 @@ export class NewevaluationComponent implements OnInit {
           this._sectionService.addNota(SeccionModificada).subscribe(
             res => {
 
-              this.anadeNota = "Nota añadida correctamente";
-              setTimeout(() => { this.anadeNota = null }, 4000);
+              // this.anadeNota = "Nota añadida correctamente";
+              // setTimeout(() => { this.anadeNota = null }, 4000);
             },
             error => {
               this.SectionSelected.notas = null;

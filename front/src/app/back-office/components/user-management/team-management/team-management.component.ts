@@ -71,9 +71,9 @@ export class TeamManagementComponent implements OnInit {
 
     this._userService.removeUserProject(usuarioProyecto).subscribe(
       res => {
-        this.MensajeNotificacion = "Equipo " + evento.item.data.nombre + " desasignado al usuario " + this.user.nombre;
-        this._eventService.displayMessage(this.MensajeNotificacion, false);
-        setTimeout(() => { this.MensajeNotificacion = null }, 4000);
+        // this.MensajeNotificacion = "Equipo " + evento.item.data.nombre + " desasignado al usuario " + this.user.nombre;
+        // this._eventService.displayMessage(this.MensajeNotificacion, false);
+        // setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       },
       error => {
         //Si el servidor tiene algún tipo de problema mostraremos este error
@@ -99,9 +99,9 @@ export class TeamManagementComponent implements OnInit {
   private addUserProyect(usuarioProyecto, evento) {
     this._userService.addUserProject(usuarioProyecto).subscribe(
       res => {
-        this.MensajeNotificacion = "Equipo " + evento.item.data.nombre + " asignado al usuario " + this.user.nombre;
-        this._eventService.displayMessage(this.MensajeNotificacion, false);
-        setTimeout(() => { this.MensajeNotificacion = null }, 4000);
+        // this.MensajeNotificacion = "Equipo " + evento.item.data.nombre + " asignado al usuario " + this.user.nombre;
+        // this._eventService.displayMessage(this.MensajeNotificacion, false);
+        // setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       },
       error => {
         //Si el servidor tiene algún tipo de problema mostraremos este error
