@@ -56,7 +56,7 @@ export class AddUpdateUserComponent implements OnInit {
       this.userForm.controls['Nombre'].disable();
     } else {
       this.userForm = new FormGroup({
-        Nombre: new FormControl('', Validators.required),
+        Nombre: new FormControl('', [Validators.required,Validators.maxLength(127)]),
         NombreCompleto: new FormControl('', Validators.required),
         Password: new FormControl('', Validators.required),
         Role: new FormControl(this.rol),

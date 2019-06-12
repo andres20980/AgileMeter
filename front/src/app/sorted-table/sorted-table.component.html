@@ -47,8 +47,8 @@
     <ng-container matColumnDef="notas">
       <th mat-header-cell *matHeaderCellDef mat-sort-header disabled>Notas</th>
       <td mat-cell *matCellDef="let row">
-        <img class="comment" *ngIf="(row.notasEvaluacion != null && row.notasEvaluacion != '') || (row.notasObjetivos != null && row.notasObjetivos != '')" src="assets/comment filled.png" title="Hay notas" />
-        <img class="comment" *ngIf="(row.notasEvaluacion == null || row.notasEvaluacion == '') && (row.notasObjetivos == null || row.notasObjetivos == '')" src="assets/comment empty.png" title="No hay notas" />
+        <img class="comment" *ngIf="(row.notasEvaluacion != null && row.notasEvaluacion != '') || (row.notasObjetivos != null && row.notasObjetivos != '')" src="assets/comment_filled.png" title="Hay notas" />
+        <img class="comment" *ngIf="(row.notasEvaluacion == null || row.notasEvaluacion == '') && (row.notasObjetivos == null || row.notasObjetivos == '')" src="assets/comment_empty.png" title="No hay notas" />
       </td>
     </ng-container>
 

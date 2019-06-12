@@ -1,5 +1,5 @@
-<div class="corregir position-relative">
-  <div class="position-absolute error-msg">
+<div class="d-flex justify-content-center notificacion">
+  <div class="position-fixed text-center notificacion">
     <div *ngIf="(ErrorMessage != null || ErrorMessage != undefined )" class="alert alert-danger" id="danger">
       <strong>{{ErrorMessage}}</strong>
     </div>
@@ -68,8 +68,8 @@
 
       <div class="col-1">
         <button class="transparente" (click)="AbrirModalNotas(notas, i)">
-          <img class="comment" *ngIf="dato.notas != null" src="assets/comment filled.png" title="Hay notas" />
-          <img class="comment" *ngIf="dato.notas == null" src="assets/comment empty.png" title="No hay notas" />
+          <img class="comment" *ngIf="dato.notas != null" src="assets/comment_filled.png" title="Hay notas" />
+          <img class="comment" *ngIf="dato.notas == null" src="assets/comment_empty.png" title="No hay notas" />
         </button>
       </div>
 
