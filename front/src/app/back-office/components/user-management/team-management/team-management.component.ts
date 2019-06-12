@@ -25,8 +25,8 @@ export class TeamManagementComponent implements OnInit {
   public MensajeNotificacion: string = null;
   public usuarioWithRole: UserWithRole;
   public user: UserCreateUpdate;
-  public MostrarPending : boolean = false;
-  public MostrarAsig : boolean = false;
+  public MostrarPending: boolean = false;
+  public MostrarAsig: boolean = false;
 
   constructor(
     private _router: Router,
@@ -42,11 +42,6 @@ export class TeamManagementComponent implements OnInit {
 
     //Obtenemos todos los proyectos
     this.getTeams();
-
-    //Obtenemos los proyectos asignados al usuario asignado
-    if (this.usuarioWithRole !== undefined) {
-      this.getTeamsUser(this.usuarioWithRole);
-    }
   }
 
 
@@ -130,6 +125,11 @@ export class TeamManagementComponent implements OnInit {
     this._proyectoService.GetAllNotTestProjects().subscribe(
       res => {
         this.proyectosAll = res;
+
+        //Obtenemos los proyectos asignados al usuario asignado
+        if (this.usuarioWithRole !== undefined) {
+          this.getTeamsUser(this.usuarioWithRole);
+        }
       },
       error => {
         if (error == 404) {
@@ -167,12 +167,17 @@ export class TeamManagementComponent implements OnInit {
         // }, 10000);
 
         //Obtenemos los proyectos pendientes
-        this.proyectosPending = this.proyectosAll.filter( e => function (proyecto: Equipo, proyestosAsignados: Equipo[]): boolean {
-          return !proyestosAsignados.find(eq => eq.id === proyecto.id);}(e, this.proyectosAsig));
+        this.proyectosPending = this.proyectosAll.filter(e => function (proyecto: Equipo, proyestosAsignados: Equipo[]): boolean {
+          return !proyestosAsignados.find(eq => eq.id === proyecto.id);
+        }(e, this.proyectosAsig));
 
-        this.MostrarPending = true; 
-        this.MostrarAsig = true; 
-        
+        console.log("ProyectosALL: " + this.proyectosAll.length);
+
+        if (this.proyectosAll.length > 0) {
+          this.MostrarPending = true;
+          this.MostrarAsig = true;
+        }
+
       },
       error => {
         if (error == 404) {
