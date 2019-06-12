@@ -179,7 +179,7 @@ export class EvaluacionService {
 
   //Nos permite realizar un update de una evaluacion en la base de datos
   updateEvaluacion(evaluacion: Evaluacion) {
-    evaluacion.userNombre = this._proyectoService.UsuarioLogeado;
+    //evaluacion.userNombre = this._proyectoService.UsuarioLogeado;
     let Token = this._appComponent.ComprobarUserYToken();
     let params = JSON.stringify(evaluacion);
     let headers = new Headers({
