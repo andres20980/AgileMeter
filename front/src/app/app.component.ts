@@ -3,7 +3,7 @@ import { StorageDataService } from './services/StorageDataService';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { ProyectoService } from './services/ProyectoService';
-
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -28,9 +28,19 @@ export class AppComponent {
 
   constructor(
     public _storageDataService: StorageDataService,
-    public _router: Router) {
+    public _router: Router,
+    public translate: TranslateService) {
     this.ScreenWidth = window.innerWidth;
 
+    translate.addLangs(['es', 'en']);
+    translate.setDefaultLang('es');
+
+    const browserLang = translate.getBrowserLang();
+    translate.use(browserLang.match(/es|en/) ? browserLang : 'es');
+  }
+
+  public ChangeLang(lang : string){
+    this.translate.use(lang);
   }
 
 

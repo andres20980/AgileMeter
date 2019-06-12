@@ -1,0 +1,11 @@
+﻿{
+  "HOME": {
+    "SELECT_TEAM": "Seleccione un equipo",
+    "SELECT_ASSESSMENT": "Seleccione un tipo de evaluación",
+	"FINISHED_ASSESSMENTS": "EVALUACIONES FINALIZADAS",
+	"PENDING_ASSESSMENTS": "EVALUACIONES PENDIENTES",
+	"NEW_ASSESSMENT": "NUEVA EVALUACIÓN",
+	"MODAL_HEADER": "Importante",
+	"MODAL_BODY": "Este equipo tiene evaluaciones pendientes, ¿Qué desea hacer?"
+  }
+}

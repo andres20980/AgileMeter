@@ -85,6 +85,12 @@ namespace everisapi.API.Controllers
                 if (_usersInfoRespository.UserAuth(UserAuth))
                 {
                     string userNombreLargo = _usersInfoRespository.getNombreCompleto(UserAuth.Nombre);
+                    string[] ss = userNombreLargo.Split(' ');
+                    string s2 = ss[0];
+                    if(ss.Length > 1){
+                        s2 += " " + ss[1];
+                    }
+                    userNombreLargo = s2;
                     //create jwt token here and send it with response
                     var jwtToken = JwtTokenBuilder();
                     response = Ok(new { access_token = jwtToken, user_long_name = userNombreLargo });

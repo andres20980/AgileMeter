@@ -15,7 +15,7 @@ import { MenunewevaluationComponent } from './menunewevaluation/menunewevaluatio
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { PdfgeneratorComponent } from './pdfgenerator/pdfgenerator.component';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { RequestInterceptorService } from './services/RequestInterceptor.service';
 import { BackOfficeComponent } from './back-office/back-office.component';
 import { UserManagementComponent } from './back-office/components/user-management/user-management.component';
@@ -49,6 +49,15 @@ import { TeamManagementComponent } from './back-office/components/user-managemen
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import 'hammerjs'; 
+
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { HttpClientTrans } from './translateHttp';
+
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   declarations: [
@@ -101,15 +110,23 @@ import 'hammerjs'; 
     MatCheckboxModule,
     MatIconModule,
     DragDropModule,
-
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClientTrans]
+      }
+    }),
   ],
-  providers: [{
+  providers: [
+    {
     provide: HTTP_INTERCEPTORS,
     useClass: RequestInterceptorService,
     multi: true
-  },
-  { provide: MatPaginatorIntl, useValue: CustomPaginator() 
-  }],
+    },
+    { provide: MatPaginatorIntl, useValue: CustomPaginator() }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -41,7 +41,9 @@
             </div>
           </div>
 
-          <div class="col-3"></div>
+          <div class="col-1"></div>
+          <div class="col-2"><a class="lang-select" [ngClass]="{'active-lang': translate.currentLang == 'es'}" (click)="ChangeLang('es')">ES</a> | 
+            <a class="lang-select" [ngClass]="{'active-lang': translate.currentLang == 'en'}"(click)="ChangeLang('en')">EN</a></div>
         </div>
       </div>
       <!--       

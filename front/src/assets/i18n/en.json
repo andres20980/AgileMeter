@@ -1,0 +1,11 @@
+{
+  "HOME": {
+    "SELECT_TEAM": "Select a team",
+    "SELECT_ASSESSMENT": "Select an assessment",
+	"FINISHED_ASSESSMENTS": "FINISHED ASSESSMENTS",
+	"PENDING_ASSESSMENTS": "PENDING ASSESSMENTS",
+	"NEW_ASSESSMENT": "NEW ASSESSMENT",
+	"MODAL_HEADER": "Important",
+	"MODAL_BODY": "This team has pending assessments, what you want to do?"
+  }
+}
