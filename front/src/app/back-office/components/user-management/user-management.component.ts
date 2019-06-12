@@ -249,7 +249,7 @@ export class UserManagementComponent implements OnInit {
         } else {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
-        setTimeout(() => this.ErrorMessage = "", 2000);
+        setTimeout(() => this.ErrorMessage = "", 4000);
       });
   }
 
@@ -292,7 +292,7 @@ export class UserManagementComponent implements OnInit {
 
         this.MensajeNotificacion = "Rol del usuario actualizado correctamente";
         this._eventService.displayMessage(this.MensajeNotificacion,false);
-        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
+        setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       },
       error => {
         //Si el servidor tiene algún tipo de problema mostraremos este error
@@ -307,7 +307,7 @@ export class UserManagementComponent implements OnInit {
         }
         this.MensajeNotificacion = "Ups, lo sentimos, no pudimos actualizar el rol del usuario";
         this._eventService.displayMessage(this.MensajeNotificacion,true);
-        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
+        setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       });
   }
 
@@ -317,7 +317,7 @@ export class UserManagementComponent implements OnInit {
         this.getUserProjects();
         this.MensajeNotificacion = "Equipo asignado correctamente";
         this._eventService.displayMessage(this.MensajeNotificacion,false);
-        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
+        setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       },
       error => {
         console.log(error);
@@ -333,7 +333,7 @@ export class UserManagementComponent implements OnInit {
         }
         this.MensajeNotificacion = "Ups , lo sentimos, no pudimos asignar el equipo";
         this._eventService.displayMessage(this.MensajeNotificacion,true);
-        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
+        setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       });
   }
 
@@ -343,7 +343,7 @@ export class UserManagementComponent implements OnInit {
         this.getUserProjects();
         this.MensajeNotificacion = "Proyecto eliminado correctamente";
         this._eventService.displayMessage(this.MensajeNotificacion,false);
-        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
+        setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       },
       error => {
         console.log("falla el borrar", error);
@@ -359,7 +359,7 @@ export class UserManagementComponent implements OnInit {
         }
         this.MensajeNotificacion = "Ups, lo sentimos, no pudimos eliminar el proyecto";
         this._eventService.displayMessage(this.MensajeNotificacion,true);
-        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
+        setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       });
   }
 

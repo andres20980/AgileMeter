@@ -30,7 +30,7 @@ export class BackOfficeComponent implements OnInit {
       res => {
         this.MensajeNotificacionError = res.error;
         this.MensajeNotificacion = res.message,
-          setTimeout(() => { this.MensajeNotificacion = null }, 2000)
+          setTimeout(() => { this.MensajeNotificacion = null }, 4000)
       }
     );
 

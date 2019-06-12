@@ -79,7 +79,7 @@ export class UserListComponent implements OnInit {
           this.getUsers();
           this.MensajeNotificacion = "Usuario eliminado correctamente";
           this._eventService.displayMessage(this.MensajeNotificacion,false);
-          setTimeout(() => { this.MensajeNotificacion = null }, 2000);
+          setTimeout(() => { this.MensajeNotificacion = null }, 4000);
         },
         error => {
           if (error == 404) {
@@ -93,7 +93,7 @@ export class UserListComponent implements OnInit {
           }
           this.MensajeNotificacion = "Ups, lo sentimos, no pudimos eliminar al usuario";
           this._eventService.displayMessage(this.MensajeNotificacion,true);
-          setTimeout(() => { this.MensajeNotificacion = null }, 2000);
+          setTimeout(() => { this.MensajeNotificacion = null }, 4000);
         });
     }
   }

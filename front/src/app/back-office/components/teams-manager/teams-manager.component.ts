@@ -110,7 +110,7 @@ export class TeamsManagerComponent implements OnInit {
         this.refresh();
         this.MensajeNotificacion = "Equipo eliminado correctamente";
         this._eventService.displayMessage(this.MensajeNotificacion,false);
-        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
+        setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       },
       error => {
         if (error == 404) {
@@ -124,7 +124,7 @@ export class TeamsManagerComponent implements OnInit {
         }
         this.MensajeNotificacion = "Ups , tuvimos problemas técnicos para eliminar el equipo, disculpe las molestias";
         this._eventService.displayMessage(this.MensajeNotificacion,true);
-        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
+        setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       });
   }
 

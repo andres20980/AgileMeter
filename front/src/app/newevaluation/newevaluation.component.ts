@@ -133,7 +133,7 @@ export class NewevaluationComponent implements OnInit {
           } else {
             this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
           }
-          setTimeout(() => { this.ErrorMessage = null }, 2000);
+          setTimeout(() => { this.ErrorMessage = null }, 4000);
         }
       );
     } else {
@@ -163,7 +163,7 @@ export class NewevaluationComponent implements OnInit {
         } else {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
-        setTimeout(() => { this.ErrorMessage = null }, 2000);
+        setTimeout(() => { this.ErrorMessage = null }, 4000);
       }
     );
   }
@@ -242,7 +242,7 @@ export class NewevaluationComponent implements OnInit {
           } else {
             this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
           }
-          setTimeout(() => { this.ErrorMessage = null }, 2000);
+          setTimeout(() => { this.ErrorMessage = null }, 4000);
         }
       );
     } else {
@@ -265,7 +265,7 @@ export class NewevaluationComponent implements OnInit {
             } else {
               this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
             }
-            setTimeout(() => { this.ErrorMessage = null }, 2000);
+            setTimeout(() => { this.ErrorMessage = null }, 4000);
         });
       }
     }
@@ -327,10 +327,11 @@ export class NewevaluationComponent implements OnInit {
             res => {
 
               this.anadeNota = "Nota añadida correctamente";
-              setTimeout(() => { this.anadeNota = null }, 2000);
+              setTimeout(() => { this.anadeNota = null }, 4000);
             },
             error => {
-
+              this.InfoAsignacion.preguntas[i].respuesta.notas = null
+              this.Deshabilitar = false;
               if (error == 404) {
                 this.ErrorMessage = "Error: " + error + "No pudimos realizar la actualización de la respuesta, lo sentimos.";
               } else if (error == 500) {
@@ -340,7 +341,7 @@ export class NewevaluationComponent implements OnInit {
               } else {
                 this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
               }
-              setTimeout(() => { this.ErrorMessage = null }, 2000);
+              setTimeout(() => { this.ErrorMessage = null }, 4000);
             },
             () => {
               this.Deshabilitar = false;
@@ -383,10 +384,11 @@ export class NewevaluationComponent implements OnInit {
             res => {
 
               this.anadeNota = "Nota añadida correctamente";
-              setTimeout(() => { this.anadeNota = null }, 2000);
+              setTimeout(() => { this.anadeNota = null }, 4000);
             },
             error => {
-
+              this.InfoAsignacion.notas = null;
+              this.Deshabilitar = false;
               if (error == 404) {
                 this.ErrorMessage = "Error: " + error + "No pudimos realizar la actualización de la respuesta, lo sentimos.";
               } else if (error == 500) {
@@ -396,7 +398,7 @@ export class NewevaluationComponent implements OnInit {
               } else {
                 this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
               }
-              setTimeout(() => { this.ErrorMessage = null }, 2000);
+              setTimeout(() => { this.ErrorMessage = null }, 4000);
             },
             () => {
               this.Deshabilitar = false;
@@ -440,10 +442,11 @@ export class NewevaluationComponent implements OnInit {
             res => {
 
               this.anadeNota = "Nota añadida correctamente";
-              setTimeout(() => { this.anadeNota = null }, 2000);
+              setTimeout(() => { this.anadeNota = null }, 4000);
             },
             error => {
-
+              this.SectionSelected.notas = null;
+              this.Deshabilitar = false;
               if (error == 404) {
                 this.ErrorMessage = "Error: " + error + "No pudimos realizar la actualización de la respuesta, lo sentimos.";
               } else if (error == 500) {
@@ -453,7 +456,7 @@ export class NewevaluationComponent implements OnInit {
               } else {
                 this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
               }
-              setTimeout(() => { this.ErrorMessage = null }, 2000);
+              setTimeout(() => { this.ErrorMessage = null }, 4000);
             },
             () => {
               this.Deshabilitar = false;

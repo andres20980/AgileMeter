@@ -92,7 +92,7 @@ export class AddUpdateUserComponent implements OnInit {
         this._router.navigate(['/backoffice/usermanagement']);
         this.MensajeNotificacion = "Usuario creado correctamente";
         this._eventService.displayMessage(this.MensajeNotificacion,false);
-        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
+        setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       },
       error => {
         if (error == 400) {
@@ -105,7 +105,7 @@ export class AddUpdateUserComponent implements OnInit {
         }
         this.MensajeNotificacion = "Ups, lo sentimos, no hemos podido crear el usuario";
         this._eventService.displayMessage(this.MensajeNotificacion,true);
-        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
+        setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       });
   }
 
@@ -137,7 +137,7 @@ export class AddUpdateUserComponent implements OnInit {
         }
         this.MensajeNotificacion = "Usuario modificado correctamente";
         this._eventService.displayMessage(this.MensajeNotificacion,false);
-        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
+        setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       },
       error => {
         if (error == 400) {
@@ -150,7 +150,7 @@ export class AddUpdateUserComponent implements OnInit {
         }
         this.MensajeNotificacion = "Ups, lo sentimos , no hemosRol del usuario actualizado correctamente";
         this._eventService.displayMessage(this.MensajeNotificacion,true);
-        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
+        setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       });
   }
 

@@ -78,7 +78,7 @@ export class TeamManagementComponent implements OnInit {
       res => {
         this.MensajeNotificacion = "Equipo " + evento.item.data.nombre + " desasignado al usuario " + this.user.nombre;
         this._eventService.displayMessage(this.MensajeNotificacion, false);
-        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
+        setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       },
       error => {
         //Si el servidor tiene algún tipo de problema mostraremos este error
@@ -96,7 +96,7 @@ export class TeamManagementComponent implements OnInit {
 
         this.MensajeNotificacion = this.ErrorMessage;
         this._eventService.displayMessage(this.MensajeNotificacion, true);
-        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
+        setTimeout(() => { this.MensajeNotificacion = null }, 4000);
 
       });
   }
@@ -106,7 +106,7 @@ export class TeamManagementComponent implements OnInit {
       res => {
         this.MensajeNotificacion = "Equipo " + evento.item.data.nombre + " asignado al usuario " + this.user.nombre;
         this._eventService.displayMessage(this.MensajeNotificacion, false);
-        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
+        setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       },
       error => {
         //Si el servidor tiene algún tipo de problema mostraremos este error
@@ -123,7 +123,7 @@ export class TeamManagementComponent implements OnInit {
 
     this.MensajeNotificacion = this.ErrorMessage
     this._eventService.displayMessage(this.MensajeNotificacion, true);
-    setTimeout(() => { this.MensajeNotificacion = null }, 2000);
+    setTimeout(() => { this.MensajeNotificacion = null }, 4000);
   }
 
   private getTeams() {
@@ -144,7 +144,7 @@ export class TeamManagementComponent implements OnInit {
 
         this.MensajeNotificacion = this.ErrorMessage
         this._eventService.displayMessage(this.MensajeNotificacion, true);
-        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
+        setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       }
     )
   };
@@ -187,7 +187,7 @@ export class TeamManagementComponent implements OnInit {
 
         this.MensajeNotificacion = this.ErrorMessage
         this._eventService.displayMessage(this.MensajeNotificacion, true);
-        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
+        setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       }
     )
   }
@@ -206,7 +206,7 @@ export class TeamManagementComponent implements OnInit {
       // if (this.user.role.role === "Administrador") {
       //   this.MensajeNotificacion = "El usuario seleccionado podrá evaluar cualquier equipo.";
       //   this._eventService.displayMessage(this.MensajeNotificacion, false);
-      //   setTimeout(() => { this.MensajeNotificacion = null }, 2000);
+      //   setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       // }
 
       this.usuarioWithRole =

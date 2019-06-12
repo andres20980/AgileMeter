@@ -170,7 +170,7 @@ export class AddTeamComponent implements OnInit {
         this._router.navigate(['/backoffice/teamsmanager']);
         this.MensajeNotificacion = "Equipo creado correctamente";
         this._eventService.displayMessage(this.MensajeNotificacion,false);
-        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
+        setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       },
       error => {
         //Si el servidor tiene algún tipo de problema mostraremos este error
@@ -185,7 +185,7 @@ export class AddTeamComponent implements OnInit {
         }
         this.MensajeNotificacion = "Ups, lo sentimos, no pudimos crear el equipo";
         this._eventService.displayMessage(this.MensajeNotificacion,true);
-        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
+        setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       });
   }
 
@@ -232,7 +232,7 @@ export class AddTeamComponent implements OnInit {
         this._router.navigate(['/backoffice/teamsmanager']);
         this.MensajeNotificacion = "Equipo modificado correctamente";
         this._eventService.displayMessage(this.MensajeNotificacion,false);
-        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
+        setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       },
       error => {
         if (error == 404) {
@@ -246,7 +246,7 @@ export class AddTeamComponent implements OnInit {
         }
         this.MensajeNotificacion = "Ups, lo sentimos, no pudimos modificar el equipo.";
         this._eventService.displayMessage(this.MensajeNotificacion,true);
-        setTimeout(() => { this.MensajeNotificacion = null }, 2000);
+        setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       });
   }
 
