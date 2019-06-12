@@ -322,6 +322,7 @@ export class NewevaluationComponent implements OnInit {
           }
 
           var Respuesta = this.InfoAsignacion.preguntas[i].respuesta;
+          Respuesta.userName = this.UserName; //le añadimos el usuario que hace la nota
 
           this._respuestasService.AlterRespuesta(Respuesta).subscribe(
             res => {
