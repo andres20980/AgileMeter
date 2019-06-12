@@ -8,6 +8,7 @@ import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from '../app.component';
 import { Proyecto } from 'app/Models/Proyecto';
 import { DatePipe } from '@angular/common';
+import { ProyectoService } from 'app/services/ProyectoService';
 
 @Component({
   selector: 'app-btn-finalize-evaluation',
@@ -35,7 +36,8 @@ export class BtnFinalizeEvaluationComponent {
     private _router: Router,
     private _evaluacionService: EvaluacionService,
     private _appComponent: AppComponent,
-    private modalService: NgbModal ) 
+    private modalService: NgbModal ,
+    private _proyectoService: ProyectoService) 
     {
       this.evaluacion = this._appComponent._storageDataService.Evaluacion;
       this.ProjectSelected = this._appComponent._storageDataService.UserProjectSelected;
@@ -53,6 +55,7 @@ export class BtnFinalizeEvaluationComponent {
 
   //Este metodo guarda la evaluacion y cambia su estado como finalizado
   public FinishEvaluation(evaluation: Evaluacion) {
+    evaluation.userNombre = this._proyectoService.UsuarioLogeado;
     this.evaluacion.estado = true;
     this._evaluacionService.updateEvaluacion(evaluation).subscribe(
       res => {
