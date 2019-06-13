@@ -8,6 +8,7 @@ import { Equipo } from 'app/Models/Equipo';
 import { DataSource } from '@angular/cdk/table';
 import { Team } from 'app/Models/Team';
 import { EventEmitterService } from 'app/services/event-emitter.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-teams-manager',
@@ -36,6 +37,7 @@ export class TeamsManagerComponent implements OnInit {
     private modalService: NgbModal,
     private router: Router,
     private _eventService: EventEmitterService,
+    private _translateService: TranslateService
   ) { }
 
   ngOnInit() {
@@ -108,8 +110,9 @@ export class TeamsManagerComponent implements OnInit {
     this._proyectoService.deleteTeam(team).subscribe(
       res => {
         this.refresh();
-        this.MensajeNotificacion = "Equipo eliminado correctamente";
-        this._eventService.displayMessage(this.MensajeNotificacion,false);
+        //this.MensajeNotificacion = "Equipo eliminado correctamente";
+        this._translateService.get('TEAM_MANAGER.NOTIFICATION_DELETE_TEAM').subscribe(value => { this.MensajeNotificacion = value; });
+        this._eventService.displayMessage(this.MensajeNotificacion, false);
         setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       },
       error => {
@@ -122,8 +125,9 @@ export class TeamsManagerComponent implements OnInit {
         } else {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
-        this.MensajeNotificacion = "Ups , tuvimos problemas técnicos para eliminar el equipo, disculpe las molestias";
-        this._eventService.displayMessage(this.MensajeNotificacion,true);
+        //this.MensajeNotificacion = "Ups , tuvimos problemas técnicos para eliminar el equipo, disculpe las molestias";
+        this._translateService.get('TEAM_MANAGER.NOTIFICATION_ERROR_DELETE_TEAM').subscribe(value => { this.MensajeNotificacion = value; });
+        this._eventService.displayMessage(this.MensajeNotificacion, true);
         setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       });
   }

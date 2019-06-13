@@ -8,6 +8,8 @@ import { Equipo } from 'app/Models/Equipo';
 import { UserWithRole } from 'app/Models/UserWithRole';
 import { UserProject } from 'app/Models/UserProject';
 import { EventEmitterService } from 'app/services/event-emitter.service';
+import { TranslateService } from '@ngx-translate/core';
+
 
 @Component({
   selector: 'app-team-management',
@@ -33,6 +35,7 @@ export class TeamManagementComponent implements OnInit {
     private _userService: UserService,
     private _proyectoService: ProyectoService,
     private _eventService: EventEmitterService,
+    private _translateService: TranslateService
   ) { }
 
   ngOnInit() {
@@ -89,7 +92,7 @@ export class TeamManagementComponent implements OnInit {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
 
-        this.MensajeNotificacion = this.ErrorMessage;
+        this._translateService.get('TEAM_MANAGEMENT.NOTIFICATION_ERROR_REMOVED_USER_TEAM').subscribe(value => { this.MensajeNotificacion = value; });
         this._eventService.displayMessage(this.MensajeNotificacion, true);
         setTimeout(() => { this.MensajeNotificacion = null }, 4000);
 
@@ -116,7 +119,7 @@ export class TeamManagementComponent implements OnInit {
         }
       });
 
-    this.MensajeNotificacion = this.ErrorMessage
+    this._translateService.get('TEAM_MANAGEMENT.NOTIFICATION_ERROR_ASSIGN_TEAM').subscribe(value => { this.MensajeNotificacion = value; });
     this._eventService.displayMessage(this.MensajeNotificacion, true);
     setTimeout(() => { this.MensajeNotificacion = null }, 4000);
   }
@@ -141,10 +144,6 @@ export class TeamManagementComponent implements OnInit {
         } else {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
-
-        this.MensajeNotificacion = this.ErrorMessage
-        this._eventService.displayMessage(this.MensajeNotificacion, true);
-        setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       }
     )
   };
@@ -176,10 +175,6 @@ export class TeamManagementComponent implements OnInit {
         } else {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
-
-        this.MensajeNotificacion = this.ErrorMessage
-        this._eventService.displayMessage(this.MensajeNotificacion, true);
-        setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       }
     )
   }

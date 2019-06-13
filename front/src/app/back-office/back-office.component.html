@@ -34,7 +34,7 @@
           [ngClass]="{'active-buttons a-users' : ActiveSection != null ,'active-users': ActiveSection == 'usermanagement' }"
           (click)="ActiveSection = 'usermanagement'">
           <div class="icon-button-img icon-users"> <img src="assets/users-management.png" /></div>
-          <div class="button-text"><a>GESTIÓN DE USUARIOS</a> </div>
+          <div class="button-text"><a>{{ 'BACKOFFICE.BTN_USER_MANAGEMENT' | translate }}</a> </div>
         </div>
 
         <div class="icon-button border-curve mat-elevation-z5 mr-5 ml-5 col-2" routerLink="teamsmanager"
@@ -42,7 +42,7 @@
           [ngClass]="{'active-buttons a-teams' : ActiveSection != null ,'active-teams': ActiveSection == 'teamsmanager' }"
           (click)="ActiveSection = 'teamsmanager'">
           <div class="icon-button-img icon-teams"> <img src="assets/teams-management.png" /></div>
-          <div class="button-text"><a>GESTIÓN DE EQUIPOS</a> </div>
+          <div class="button-text"><a>{{ 'BACKOFFICE.BTN_TEAM_MANAGEMENT' | translate }}</a> </div>
         </div>
 
         <div class="icon-button border-curve mat-elevation-z5  mr-5 ml-5 col-2" routerLink="assesmentmanagement"
@@ -50,7 +50,7 @@
           [ngClass]="{'active-buttons a-assesments' : ActiveSection != null ,'active-assesments': ActiveSection == 'assesmentmanagement' }"
           (click)="ActiveSection = 'assesmentmanagement'">
           <div class="icon-button-img icon-assesments"> <img src="assets/assesments-management.png" /></div>
-          <div class="button-text"><a>GESTIÓN DE ASSESMENTS</a> </div>
+          <div class="button-text"><a>{{ 'BACKOFFICE.BTN_ASSESMENT_MANAGEMENT' | translate }}</a> </div>
         </div>
       </div>
 

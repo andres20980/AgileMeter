@@ -1,18 +1,19 @@
 <div class="ng-card-box p-2 pt-4 br-2 mat-elevation-z5">
   <div class="row">
     <div class="col ml-5 mb-3 mt-4">
-      <h3>Gestión de usuarios</h3>
+      <h3>{{ 'USER_LIST.USER_MANAGEMENT' | translate }}</h3>
     </div>
   </div>
   <div class="row">
     <div class="ml-5">
       <mat-form-field>
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
+        <input matInput (keyup)="applyFilter($event.target.value)"
+          placeholder="{{ 'USER_LIST.LIST_FILTER' | translate }}">
       </mat-form-field>
     </div>
     <div class="col-9">
       <button class="transparente col-3 float-right pt-3" (click)="btnAddClick()">
-        <img class="informe" src="assets/user_add.png" title="Alta usuario" />
+        <img class="informe" src="assets/user_add.png" title="{{ 'USER_LIST.ICON_ADD_USER' | translate }}" />
       </button>
     </div>
   </div>
@@ -22,19 +23,22 @@
 
         <!-- usuario  == nombre en DB-->
         <ng-container matColumnDef="nombre">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>Usuario</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'USER_LIST.TABLE_COL_USER' | translate }}
+          </mat-header-cell>
           <mat-cell *matCellDef="let row">{{row.nombre}}</mat-cell>
         </ng-container>
 
         <!-- nombreCompleto  -->
         <ng-container matColumnDef="nombreCompleto">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'USER_LIST.TABLE_COL_NAME' | translate }}
+          </mat-header-cell>
           <mat-cell *matCellDef="let row">{{row.nombreCompleto}}</mat-cell>
         </ng-container>
 
         <!-- role  -->
         <ng-container matColumnDef="nombreRole">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>Role</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'USER_LIST.TABLE_COL_ROLE' | translate }}
+          </mat-header-cell>
           <mat-cell *matCellDef="let row">{{row.nombreRole}}</mat-cell>
         </ng-container>
 
@@ -47,18 +51,18 @@
         </mat-cell>
       </ng-container> -->
 
-     <!-- acciones  -->
-    <ng-container matColumnDef="acciones">
-      <mat-header-cell *matHeaderCellDef>Acciones</mat-header-cell>
-      <mat-cell *matCellDef="let row">
-          <button class="transparente" (click)="btnAsigTeamsClick(row)">
-              <img class="edit" src="assets/teams_assign.png" title="Asignar equipos" />
-          </button>
-           <button class="transparente" (click)="btnEditClick(row)">
-                <img class="edit" src="assets/edit.png" title="Editar usuario" />
+        <!-- acciones  -->
+        <ng-container matColumnDef="acciones">
+          <mat-header-cell *matHeaderCellDef>{{ 'USER_LIST.TABLE_COL_ACTIONS' | translate }}</mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <button class="transparente" (click)="btnAsigTeamsClick(row)">
+              <img class="edit" src="assets/teams_assign.png" title="{{ 'USER_LIST.ICON_TEAM_ASSIGN' | translate }}" />
+            </button>
+            <button class="transparente" (click)="btnEditClick(row)">
+              <img class="edit" src="assets/edit.png" title="{{ 'USER_LIST.ICON_EDIT_USER' | translate }}" />
             </button>
             <button class="transparente" (click)="AbrirModal(content, row)">
-              <img class="informe" src="assets/delete.png" title="Eliminar usuario" />
+              <img class="informe" src="assets/delete.png" title="{{ 'USER_LIST.ICON_REMOVED_USER' | translate }}" />
             </button>
           </mat-cell>
         </ng-container>
@@ -78,25 +82,27 @@
 <ng-template #content let-cl="close" let-di="dismiss">
   <div class="modal-content border-0">
     <div class="modal-header custom-modal-header border-curve">
-      <h5 class="modal-title">Importante</h5>
+      <h5 class="modal-title">{{ 'USER_LIST.MODAL_HEADER' | translate }}</h5>
     </div>
     <div class="modal-body">
-      <p *ngIf="this.selectedUsuarioInfoWithProgress.nombre!=this._proyectoService.UsuarioLogeado">Se va a proceder a
-        borrar el usuario <b>{{this.selectedUsuarioInfoWithProgress.nombre}}</b>. ¿Estás seguro de realizar esta acción?
+      <p *ngIf="this.selectedUsuarioInfoWithProgress.nombre!=this._proyectoService.UsuarioLogeado">
+        {{ 'USER_LIST.MODAL_BODY' | translate }} <b>{{this.selectedUsuarioInfoWithProgress.nombre}}</b>
+        {{ 'USER_LIST.MODAL_QUESTION' | translate }}
       </p>
-      <p *ngIf="this.selectedUsuarioInfoWithProgress.nombre==this._proyectoService.UsuarioLogeado">Se va a proceder a
-        borrar el usuario <b>{{this.selectedUsuarioInfoWithProgress.nombre}}</b>, como el usuario a eliminar es el mismo
-        con el que accedió se le redireccionará al login. ¿Estás seguro de realizar esta acción?</p>
+      <p *ngIf="this.selectedUsuarioInfoWithProgress.nombre==this._proyectoService.UsuarioLogeado">
+        {{ 'USER_LIST.MODAl_BODY' | translate }} <b>{{this.selectedUsuarioInfoWithProgress.nombre}}</b>,
+        {{ 'USER_LIST.MODAL_REMOVE_YOU' | translate }}{{ 'USER_LIST.MODAL_QUESTION' | translate }}
+      </p>
     </div>
     <div class="container-fluid p-3 bt-1">
       <div class="row p-0">
         <div class="col">
           <button type="button" class="main-button mat-elevation-z4 w-100 modal-btns border-curve"
-            (click)="di('Finish');">Aceptar</button>
+            (click)="di('Finish');">{{ 'USER_LIST.MODAL_BTN_ACCEPT' | translate }}</button>
         </div>
         <div class="col">
           <button type="button" class="secondary-button mat-elevation-z4 w-100 modal-btns border-curve"
-            (click)="cl('Cerrar')">Cancelar</button>
+            (click)="cl('Cerrar')">{{ 'USER_LIST.MODAL_BTN_CANCEL' | translate }}</button>
         </div>
       </div>
     </div>
