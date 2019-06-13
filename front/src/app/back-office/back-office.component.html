@@ -52,6 +52,16 @@
           <div class="icon-button-img icon-assesments"> <img src="assets/assesments-management.png" /></div>
           <div class="button-text"><a>{{ 'BACKOFFICE.BTN_ASSESMENT_MANAGEMENT' | translate }}</a> </div>
         </div>
+
+        <div class="icon-button border-curve mat-elevation-z5  mr-5 ml-5 col-2" routerLink="assesmentmanagement"
+          routerLinkActive="active" [class.card-disabled]="true"
+          [ngClass]="{'active-buttons a-control-panel' : ActiveSection != null ,'active-control-panel': ActiveSection == 'control-panel' }"
+          (click)="ActiveSection = 'control-panel'">
+          <div class="icon-button-img icon-control-panel"> <img src="assets/control-panel.png" /></div>
+          <div class="button-text"><a>{{ 'BACKOFFICE.BTN_METRICS' | translate }}</a> </div>
+        </div>
+
+
       </div>
 
     </div>
