@@ -35,7 +35,7 @@ namespace everisapi.API.Services
 
             UserEntity usuario = _context.Users.Where(u => u.Nombre == userNombre).FirstOrDefault();
 
-            if (usuario.RoleId == (int)Roles.Admin)
+            if (usuario.RoleId != (int)Roles.User)
             {
                 var proyectosE = _context.Proyectos.Include(r => r.LineaEntity).Where(p => p.TestProject == false /* || p.UserNombre == userNombre*/).OrderBy(p => p.Proyecto).ToList();
                 foreach (ProyectoEntity pe in proyectosE)
