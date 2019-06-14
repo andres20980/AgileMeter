@@ -109,5 +109,15 @@
 		"NOTIFICATION_ERROR_TEAM_ADD": "Ups, lo sentimos, no pudimos crear el equipo",
 		"NOTIFICATION_TEAM_MODIFY": "Equipo modificado correctamente",
 		"NOTIFICATION_ERROR_TEAM_MODIFY": "Ups, lo sentimos, no pudimos modificar el equipo."
+	},
+	"PENDING_EVALUATION": {
+		"PENDING_EVALUATION": "Evaluaciones pendientes",
+		"LOADING": "cargando",
+		"MODAL1_TITLE": "Notas Evaluación",
+		"MODAL1_BTN_SAVE": "Guardar",
+		"MODAL1_BTN_CANCEL": "Cancelar",
+		"MODAL2_TITLE": "Notas Objetivos",
+		"MODAL2_BTN_SAVE": "Guardar",
+		"MODAL2_BTN_CANCEL": "Cancelar"
 	}
 }

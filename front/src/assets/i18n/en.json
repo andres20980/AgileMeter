@@ -109,5 +109,15 @@
 		"NOTIFICATION_ERROR_TEAM_ADD": "Sorry, we couldn't add the team.",
 		"NOTIFICATION_TEAM_MODIFY": "Team modify successfully",
 		"NOTIFICATION_ERROR_TEAM_MODIFY": "Sorry, we couldn't modify the team."
+	},
+	"PENDING_EVALUATION": {
+		"PENDING_EVALUATION": "Pending evaluation",
+		"LOADING": "loading",
+		"MODAL1_TITLE": "Evaluation Notes",
+		"MODAL1_BTN_SAVE": "Save",
+		"MODAL1_BTN_CANCEL": "Cancel",
+		"MODAL2_TITLE": "Objetive Notes",
+		"MODAL2_BTN_SAVE": "Save",
+		"MODAL2_BTN_CANCEL": "Cancel"
 	}
 }
