@@ -32,8 +32,8 @@
           class="cdkDrop-list overflow-auto mat-elevation-z3" [ngClass]="{'div-scroll ': proyectosAsig.length > 5}"
           (cdkDropListDropped)="drop($event)" *ngIf="MostrarPending && MostrarAsig">
           <div class="cdkDrag-box" *ngFor="let proyecto of proyectosAsig" cdkDrag [cdkDragData]="proyecto"
-            [ngClass]="{'default': user.role.role === 'Administrador'}"
-            [cdkDragDisabled]="user.role.role === 'Administrador'">
+            [ngClass]="{'default': user.role.role === 'Administrador' || user.role.role === 'Evaluador'}"
+            [cdkDragDisabled]="user.role.role !== 'Administrador' || user.role.role === 'Evaluador'">
             <div class="cdkDrag-custom-placeholder" *cdkDragPlaceholder></div>
             {{proyecto.proyecto + "-" + proyecto.nombre}}
           </div>
