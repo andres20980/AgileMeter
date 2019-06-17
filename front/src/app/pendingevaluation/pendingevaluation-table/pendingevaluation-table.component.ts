@@ -52,7 +52,7 @@ export class PendingEvaluationTableComponent implements OnInit {
     private _router: Router,
     private _appComponent: AppComponent,
     private modalService: NgbModal,
-    private parent: PendingEvaluationComponent
+    private parent: PendingEvaluationComponent   
     ){
     }
 

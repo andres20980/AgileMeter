@@ -23,7 +23,7 @@
             </div>
         <div class="card-container mat-elevation-z8">
 
-          <span class="login-title">Inicia sesión </span>
+          <span class="login-title">{{ 'LOGIN.TITLE' | translate }} </span>
           <div class="loginmodal-container">
             <!-- <h2>Iniciar Sesión</h2> -->
  
@@ -33,7 +33,7 @@
                 <input id="email" type="email" class="form-control" name="name" placeholder="Usuario" [(ngModel)]="nombreDeUsuario">             
               </div> -->
               <!-- <mat-label>Usuario</mat-label>  appearance="outline" -->
-              <input matInput type="text" placeholder="Usuario" [(ngModel)]="nombreDeUsuario" (keydown)="TrySignUp($event)">
+              <input matInput type="text" placeholder="{{ 'LOGIN.USER' | translate }}" [(ngModel)]="nombreDeUsuario" (keydown)="TrySignUp($event)">
               <mat-icon matSuffix class="form-icon">person_outline</mat-icon>
               
             </mat-form-field>
@@ -41,13 +41,13 @@
             <mat-form-field   class="form-field">
 
               <!-- <mat-label>Contrase&ntilde;a</mat-label>  appearance="outline" -->
-              <input matInput type="password" placeholder="Contrase&ntilde;a" [(ngModel)]="passwordDeUsuario" (keydown)="TrySignUp($event)">
+              <input matInput type="password" placeholder="{{ 'LOGIN.PASS' | translate }}" [(ngModel)]="passwordDeUsuario" (keydown)="TrySignUp($event)">
               <mat-icon matSuffix class="form-icon">lock_outline</mat-icon>
             </mat-form-field>
 
             <br>
-            <input *ngIf="enviando" type="submit" name="login" class="main-button disabled btn-acceder mat-elevation-z4" value="Acceder">
-            <input *ngIf="!enviando" type="submit" name="login" class="main-button btn-acceder mat-elevation-z4" value="Acceder" (click)="SignUp()">
+            <input *ngIf="enviando" type="submit" name="login" class="main-button disabled btn-acceder mat-elevation-z4" value="{{ 'LOGIN.LOGIN' | translate }}">
+            <input *ngIf="!enviando" type="submit" name="login" class="main-button btn-acceder mat-elevation-z4" value="{{ 'LOGIN.LOGIN' | translate }}" (click)="SignUp()">
 
             <div *ngIf="enviando">
               <app-loading></app-loading>
@@ -59,7 +59,7 @@
               <input *ngIf="!recuerdameOnOff()" type="checkbox" id="recuerdame" (click)="recuerdameChange()" />
               <strong class="ml-1">Recuérdame</strong> -->
               <mat-checkbox [(ngModel)]="Recuerdame" [value]="Recuerdame" id="recuerdame" (change)="recuerdameChange()">
-                <span class="check-label">Recuérdame</span> 
+                <span class="check-label">{{ 'LOGIN.REMEMBER_ME' | translate }}</span> 
               </mat-checkbox>
               <br>
 
