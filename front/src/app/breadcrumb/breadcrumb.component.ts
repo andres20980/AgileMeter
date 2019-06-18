@@ -19,7 +19,7 @@ export class BreadcrumbComponent implements OnInit {
   }
 
   ngOnInit() {
-   
+   console.log(this.breadcrumbList);
   }
 
   navigateTo(i: number) {
