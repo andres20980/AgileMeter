@@ -303,11 +303,13 @@ namespace everisapi.API.Services
 
     //Modifica una evaluacion
     public bool ModificarEvaluacion(EvaluacionEntity evaluacion)
-    {
+    {      
       EvaluacionEntity evaluacionAnterior = _context.Evaluaciones.Where(e => e.Id == evaluacion.Id).FirstOrDefault();
       evaluacionAnterior.NotasEvaluacion = evaluacion.NotasEvaluacion;
       evaluacionAnterior.NotasObjetivos = evaluacion.NotasObjetivos;
-
+      evaluacionAnterior.UserNombre = evaluacion.UserNombre;
+      evaluacionAnterior.Fecha = DateTime.Now;
+     
       //Se finaliza una evaluacion y se calcula su puntuacion
       if (evaluacionAnterior.Estado == false && evaluacion.Estado == true)
       {
