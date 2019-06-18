@@ -109,5 +109,15 @@
 		"NOTIFICATION_ERROR_TEAM_ADD": "Sorry, we couldn't add the team.",
 		"NOTIFICATION_TEAM_MODIFY": "Team modify successfully",
 		"NOTIFICATION_ERROR_TEAM_MODIFY": "Sorry, we couldn't modify the team."
+	},
+	"CUSTOM_PAGINATOR": {
+		"ITEMS_PER_PAGE_LABEL": "Items per page:",
+		"NEXT_PAGE_LABEL": "Next page",
+		"PREVIOUS_PAGE_LABEL": "Previous page",
+		"FIRST_PAGE_LABEL": "First page",
+		"LAST_PAGE_LABEL": "Last page",
+		"RANGE_PAGE_LABEL_1": "0 of {{length}}",
+		"RANGE_PAGE_LABEL_2": "{{startIndex}} - {{endIndex}} of {{length}}",
+		"OF": "{{startIndex}} - {{endIndex}} of {{length}}"
 	}
 }

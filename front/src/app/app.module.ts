@@ -50,9 +50,11 @@ import { TeamManagementComponent } from './back-office/components/user-managemen
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import 'hammerjs'; 
 
-import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateModule, TranslateService, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { HttpClientTrans } from './translateHttp';
+
+import {PaginatorI18n} from './PaginatorI18n';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -126,6 +128,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     multi: true
     },
     { provide: MatPaginatorIntl, useValue: CustomPaginator() }
+    // {
+    //   provide: MatPaginatorIntl, deps: [TranslateService],
+    //   useFactory: (translateService: TranslateService) => new PaginatorI18n(translateService).getPaginatorIntl()
+    // }
   ],
   bootstrap: [AppComponent]
 })
