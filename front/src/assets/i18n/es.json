@@ -7,9 +7,11 @@
 		"SELECT_ASSESSMENT": "Seleccione un tipo de evaluación",
 		"FINISHED_ASSESSMENTS": "EVALUACIONES FINALIZADAS",
 		"PENDING_ASSESSMENTS": "EVALUACIONES PENDIENTES",
+		"PENDING_ASSESSMENTS_MODAL": "PENDIENTES",
 		"NEW_ASSESSMENT": "NUEVA EVALUACIÓN",
+		"NEW_ASSESSMENT_MODAL": "NUEVA",
 		"MODAL_HEADER": "Importante",
-		"MODAL_BODY": "Este equipo tiene evaluaciones pendientes, ¿Qué desea hacer?"
+		"MODAL_BODY": "Este equipo tiene evaluaciones pendientes, ¿Desea crear una nueva o gestionar las pendientes?"
 	},
 	"BACKOFFICE": {
 		"BTN_USER_MANAGEMENT": "GESTIÓN DE USUARIOS",
@@ -103,6 +105,8 @@
 		"FORM_SIZE": "Tamaño",
 		"FORM_SIZE_REQUIRED": "El campo tamaño no puede estar vacio.",
 		"FORM_SIZE_LENGHT": "El campo tamaño solo puede contener entre 1 y 6 números",
+		"FORM_CODIGO": "Código",
+		"FORM_CODIGO_MAX_LENGTH": "El campo código no puede tener más de 100 caracteres.",
 		"BTN_SAVE": "Guardar",
 		"BTN_BACK": "Volver",
 		"NOTIFICATION_TEAM_ADD": "Equipo creado correctamente",

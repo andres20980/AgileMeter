@@ -277,6 +277,7 @@ namespace everisapi.API.Services
             var AlterProject = _context.Proyectos.Where(p => p.Id == proyecto.Id).FirstOrDefault();
 
             AlterProject.Nombre = proyecto.Nombre;
+            AlterProject.Codigo = proyecto.Codigo;
             AlterProject.Fecha = System.DateTime.Now;
             AlterProject.UserNombre = proyecto.UserNombre;
             AlterProject.Oficina = proyecto.Oficina;
@@ -354,6 +355,7 @@ namespace everisapi.API.Services
             proyecto.Oficina = equipo.Oficina;
             proyecto.Unidad = equipo.Unidad;
             proyecto.Proyecto = equipo.Proyecto;
+            proyecto.Codigo = equipo.Codigo;
 
             proyecto.OficinaEntity = _context.Oficina.Where(o => o.OficinaId == 1).FirstOrDefault();
             proyecto.UnidadEntity = _context.Unidad.Where(u => u.UnidadId == 1).FirstOrDefault();

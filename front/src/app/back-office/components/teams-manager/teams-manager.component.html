@@ -19,43 +19,52 @@
   </div>
 
   <div class="team-table">
+    <div class="loading mt-5" *ngIf="!dataSource">
+      <app-loading></app-loading>
+    </div>
     <div>
       <mat-table [dataSource]="dataSource" multiTemplateDataRows matSort aria-label="Elements">
         <!-- oficina  -->
         <ng-container matColumnDef="oficina">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'TEAM_MANAGER.TABLE_COL_OFICCE' | translate }}</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'TEAM_MANAGER.TABLE_COL_OFICCE' | translate }}
+          </mat-header-cell>
           <mat-cell *matCellDef="let row">{{row.oficina}} </mat-cell>
         </ng-container>
 
         <!-- unidad  -->
         <ng-container matColumnDef="unidad">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'TEAM_MANAGER.TABLE_COL_UNIT' | translate }}</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'TEAM_MANAGER.TABLE_COL_UNIT' | translate }}
+          </mat-header-cell>
           <mat-cell *matCellDef="let row">{{row.unidad}} </mat-cell>
         </ng-container>
 
         <!-- proyecto  -->
         <ng-container matColumnDef="linea">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'TEAM_MANAGER.TABLE_COL_PROJECT' | translate }}</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'TEAM_MANAGER.TABLE_COL_PROJECT' | translate }}
+          </mat-header-cell>
           <!--<mat-cell *matCellDef="let row">{{row.linea}} </mat-cell>-->
           <mat-cell *matCellDef="let row">{{row.proyecto}} </mat-cell>
         </ng-container>
 
         <!-- equipo  -->
         <ng-container matColumnDef="nombre">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'TEAM_MANAGER.TABLE_COL_TEAM' | translate }}</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'TEAM_MANAGER.TABLE_COL_TEAM' | translate }}
+          </mat-header-cell>
           -->
           <mat-cell *matCellDef="let row">{{row.nombre}} </mat-cell>
         </ng-container>
 
         <!-- tamaño  -->
         <ng-container matColumnDef="projectSize">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'TEAM_MANAGER.TABLE_COL_SIZE' | translate }}</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'TEAM_MANAGER.TABLE_COL_SIZE' | translate }}
+          </mat-header-cell>
           <mat-cell *matCellDef="let row">{{row.projectSize}} </mat-cell>
         </ng-container>
 
         <!-- Acciones  -->
         <ng-container matColumnDef="acciones">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'TEAM_MANAGER.TABLE_COL_ACTIONS' | translate }}</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'TEAM_MANAGER.TABLE_COL_ACTIONS' | translate }}
+          </mat-header-cell>
           <mat-cell *matCellDef="let row">
             <button class="transparente" (click)="modificarEquipo(row)">
               <img class="edit" src="assets/edit.png" title="{{ 'TEAM_MANAGER.ICON_MODIFY_TEAM' | translate }}" />
