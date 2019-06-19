@@ -122,6 +122,6 @@
 		"LAST_PAGE_LABEL": "Última página",
 		"RANGE_PAGE_LABEL_1": "0 de {{length}}",
 		"RANGE_PAGE_LABEL_2": "{{startIndex}} - {{endIndex}} de {{length}}",
-		"OF": "{{startIndex}} - {{endIndex}} de {{length}}"
+		"OF": "de"
 	}
 }

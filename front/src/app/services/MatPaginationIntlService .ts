@@ -12,7 +12,7 @@ export class MatPaginationIntlService extends MatPaginatorIntl {
   previousPageLabel = 'Previous page';
 
   getRangeLabel = (page: number, pageSize: number, length: number): string => {
-    const of = this.translate ? this.translate.instant('APP.OF') : 'of';
+    const of = this.translate ? this.translate.instant('CUSTOM_PAGINATOR.OF') : 'of';
     if (length === 0 || pageSize === 0) {
       return '0 ' + of + ' ' + length;
     }
@@ -36,10 +36,13 @@ export class MatPaginationIntlService extends MatPaginatorIntl {
   }
 
   translateLabels() {
-    this.firstPageLabel = this.translate.instant('APP.FIRST_PAGE_LABEL');
-    this.itemsPerPageLabel = this.translate.instant('APP.ITEMS_PER_PAGE_LABEL');
-    this.lastPageLabel = this.translate.instant('APP.LAST_PAGE_LABEL');
-    this.nextPageLabel = this.translate.instant('APP.NEXT_PAGE_LABEL');
-    this.previousPageLabel = this.translate.instant('APP.PREVIOUS_PAGE_LABEL');
+    this.firstPageLabel = this.translate.instant('CUSTOM_PAGINATOR.FIRST_PAGE_LABEL');
+    this.itemsPerPageLabel = this.translate.instant('CUSTOM_PAGINATOR.ITEMS_PER_PAGE_LABEL');
+    this.lastPageLabel = this.translate.instant('CUSTOM_PAGINATOR.LAST_PAGE_LABEL');
+    this.nextPageLabel = this.translate.instant('CUSTOM_PAGINATOR.NEXT_PAGE_LABEL');
+    this.previousPageLabel = this.translate.instant('CUSTOM_PAGINATOR.PREVIOUS_PAGE_LABEL');
+
+    this.changes.next();
+
   }
 }
