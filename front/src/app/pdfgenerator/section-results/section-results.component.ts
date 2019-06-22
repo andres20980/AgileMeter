@@ -15,7 +15,7 @@ import { Respuesta } from 'app/Models/Respuesta';
 export class SectionResultsComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
-  @Input() lSectionConAsignacionesDto: any; //IEnumerable<SectionConAsignacionesDto>
+  @Input() SectionConAsignacionesDto: any; //IEnumerable<SectionConAsignacionesDto>
   userRole: string = this._appComponent._storageDataService.Role;
   dataSource: MatTableDataSource<any>;
   expandedElement: RespuestaConNotas;

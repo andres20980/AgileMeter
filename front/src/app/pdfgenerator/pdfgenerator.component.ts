@@ -32,7 +32,6 @@ import { Evaluacion } from 'app/Models/Evaluacion';
 
 
 export interface RespuestaConNotasTabla {
-
   id: number,
   estado: number,
   pregunta: string,
@@ -41,7 +40,6 @@ export interface RespuestaConNotasTabla {
   notasAdmin: string,
   section: string,
   asignacion: string
-
 }
 
 export interface SectionsLevel{
@@ -66,7 +64,7 @@ export interface SectionsLevel{
   ]
 })
 export class PdfgeneratorComponent implements OnInit {
-  public ListaDeDatos: Array<SectionInfo> = [];
+  // public ListaDeDatos: Array<SectionInfo> = [];
   public ListaSectionLevels: Array<SectionsLevel> = [];
   public ListaSectionConAsignaciones : any;
   public UserName: string = "";
@@ -103,6 +101,13 @@ export class PdfgeneratorComponent implements OnInit {
   public MostrarComentarios: boolean = false;
 
   //CircleProgress
+  public selectedSection: any = null;
+
+  scroll(el: HTMLElement) {
+   
+    setTimeout( () => {  el.scrollIntoView({behavior:'smooth'}); }, 200 );
+}
+
   public formatSubtitle  = (sc: any) : string => {
     if(sc.nivelAlcanzado == -1){
       return "del nivel mínimo"
@@ -318,32 +323,31 @@ export class PdfgeneratorComponent implements OnInit {
     if (this.Evaluacion != null && this.Evaluacion != undefined) {
       
       //if (this._appComponent._storageDataService.AssessmentSelected === undefined) { this._appComponent._storageDataService.AssessmentSelected.assessmentId = 1 }
-      this._sectionService.getSectionInfo(this.Evaluacion.id,this.Evaluacion.assessmentId).subscribe( //this._appComponent._storageDataService.AssessmentSelected.assessmentId
-        res => {
-          this.ListaDeDatos = res;
+      // this._sectionService.getSectionInfo(this.Evaluacion.id,this.Evaluacion.assessmentId).subscribe( //this._appComponent._storageDataService.AssessmentSelected.assessmentId
+      //   res => {
+      //     // this.ListaDeDatos = res;
        
-          //this.getSectionLevels();
-          this.cambiarMostrarNotasPreg();
-          //this.shareDataToChart();
+      //     //this.getSectionLevels();
+      //     //this.cambiarMostrarNotasPreg();
+      //     //this.shareDataToChart();
 
-        },
-        error => {
-          if (error == 404) {
-            this.ErrorMessage = "Error: " + error + "No pudimos recoger los datos de la sección lo sentimos.";
-          } else if (error == 500) {
-            this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
-          } else if (error == 401) {
-            this.ErrorMessage = "Error: " + error + " El usuario es incorrecto o no tiene permisos, intente introducir su usuario nuevamente.";
-          } else {
-            this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
-          }
-        }
-      );
+      //   },
+      //   error => {
+      //     if (error == 404) {
+      //       this.ErrorMessage = "Error: " + error + "No pudimos recoger los datos de la sección lo sentimos.";
+      //     } else if (error == 500) {
+      //       this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+      //     } else if (error == 401) {
+      //       this.ErrorMessage = "Error: " + error + " El usuario es incorrecto o no tiene permisos, intente introducir su usuario nuevamente.";
+      //     } else {
+      //       this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+      //     }
+      //   }
+      // );
 
       this._sectionService.GetPreguntasNivelOrganizadas(this.Evaluacion.id,this.Evaluacion.assessmentId).subscribe(
-        res => {
-         
-         this.ListaSectionConAsignaciones = res;
+        res => {         
+         this.ListaSectionConAsignaciones = res;      
         },
         error => {
           if (error == 404) {
@@ -369,13 +373,13 @@ export class PdfgeneratorComponent implements OnInit {
   }
 
   //Da los datos a las diferentes listas que usaremos para las graficas
-  public shareDataToChart() {
-    for (var i = 0; i < this.ListaDeDatos.length; i++) {
-      this.ListaNombres.push(this.ListaDeDatos[i].nombre);
-      this.ListaPuntuacion.push(this.ListaDeDatos[i].respuestasCorrectas);
-    }
-    this.Mostrar = true;
-  }
+  // public shareDataToChart() {
+  //   for (var i = 0; i < this.ListaDeDatos.length; i++) {
+  //     this.ListaNombres.push(this.ListaDeDatos[i].nombre);
+  //     this.ListaPuntuacion.push(this.ListaDeDatos[i].respuestasCorrectas);
+  //   }
+  //   this.Mostrar = true;
+  // }
 
   //Opciones para la grafica
   public barChartOptions: any = {
@@ -646,137 +650,137 @@ export class PdfgeneratorComponent implements OnInit {
   }
 
   //Para mostrar o no las notas de preguntas
-  public cambiarMostrarNotasPreg() {
+  // public cambiarMostrarNotasPreg() {
 
-    //No se ha hecho la peticion al servidor aun
-    if (!this.mostrarNotasPreg && this.ListaDeRespuestas.length == 0) {
-      this.cargandoNotas = true;
+  //   //No se ha hecho la peticion al servidor aun
+  //   if (!this.mostrarNotasPreg && this.ListaDeRespuestas.length == 0) {
+  //     this.cargandoNotas = true;
 
-      this._sectionService.getRespuestasConNotas(this.Evaluacion.id,this._appComponent._storageDataService.EvaluacionToPDF.assessmentId).subscribe(
-        res => {
-          this.ListaDeRespuestas = res;
-          this.cambiarMostrarNotasAsig();
+  //     this._sectionService.getRespuestasConNotas(this.Evaluacion.id,this._appComponent._storageDataService.EvaluacionToPDF.assessmentId).subscribe(
+  //       res => {
+  //         this.ListaDeRespuestas = res;
+  //         this.cambiarMostrarNotasAsig();
           
-          //this.cargandoNotas = false;
-          //this.mostrarNotasPreg = true;
-        },
-        error => {
-          if (error == 404) {
-            this.ErrorMessage = "Error: " + error + "No pudimos recoger los datos de las preguntas.";
-          } else if (error == 500) {
-            this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
-          } else if (error == 401) {
-            this.ErrorMessage = "Error: " + error + " El usuario es incorrecto o no tiene permisos, intente introducir su usuario nuevamente.";
-          } else {
-            this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
-          }
-        }
-      );
+  //         //this.cargandoNotas = false;
+  //         //this.mostrarNotasPreg = true;
+  //       },
+  //       error => {
+  //         if (error == 404) {
+  //           this.ErrorMessage = "Error: " + error + "No pudimos recoger los datos de las preguntas.";
+  //         } else if (error == 500) {
+  //           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+  //         } else if (error == 401) {
+  //           this.ErrorMessage = "Error: " + error + " El usuario es incorrecto o no tiene permisos, intente introducir su usuario nuevamente.";
+  //         } else {
+  //           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+  //         }
+  //       }
+  //     );
 
 
-    }
-    else {
-      this.mostrarNotasPreg = !this.mostrarNotasPreg;
-    }
-  }
+  //   }
+  //   else {
+  //     this.mostrarNotasPreg = !this.mostrarNotasPreg;
+  //   }
+  // }
 
-  checkRespuestaCorrecta(row): string {
-    //Pregunta correcta == null --> Si (habilitante)
-    //Pregunta correcta != null --> Si o No
+  // checkRespuestaCorrecta(row): string {
+  //   //Pregunta correcta == null --> Si (habilitante)
+  //   //Pregunta correcta != null --> Si o No
     
 
-    let classString: string;
-    let respuestaString: string = this.displayRespuesta(row);
+  //   let classString: string;
+  //   let respuestaString: string = this.displayRespuesta(row);
 
 
-    //Si (habilitante)
-    if (row.correcta == null) {
-      //Contestado -> Si
-      switch (row.estado) {
-        case 0:
-          classString = "respuesta-no-contestada";
-          break
-        case 1:
-          classString = "respuesta-correcta";
-          break
-        case 2:
-          classString = "respuesta-incorrecta";
-          break
-      }
-    } else {
-      if (respuestaString == row.correcta) {
-        classString = "respuesta-correcta";
-      } else {
-        //No contestada
-        if (row.estado == 0) {
-          classString = "respuesta-no-contestada";
-        } else {
-          classString = "respuesta-incorrecta";
-        }
-      }
-    }
+  //   //Si (habilitante)
+  //   if (row.correcta == null) {
+  //     //Contestado -> Si
+  //     switch (row.estado) {
+  //       case 0:
+  //         classString = "respuesta-no-contestada";
+  //         break
+  //       case 1:
+  //         classString = "respuesta-correcta";
+  //         break
+  //       case 2:
+  //         classString = "respuesta-incorrecta";
+  //         break
+  //     }
+  //   } else {
+  //     if (respuestaString == row.correcta) {
+  //       classString = "respuesta-correcta";
+  //     } else {
+  //       //No contestada
+  //       if (row.estado == 0) {
+  //         classString = "respuesta-no-contestada";
+  //       } else {
+  //         classString = "respuesta-incorrecta";
+  //       }
+  //     }
+  //   }
 
 
-    return "material-icons " + classString;
-  }
+  //   return "material-icons " + classString;
+  // }
 
-  displayRespuesta(row: RespuestaConNotasTabla): string {
-    let respuesta: string = "";
-    switch (row.estado) {
-      case 0:
-        respuesta = "No Contestada";
-        break
-      case 1:
-        respuesta = "Si";
-        break;
-      case 2:
-        respuesta = "No";
-        break;
+  // displayRespuesta(row: RespuestaConNotasTabla): string {
+  //   let respuesta: string = "";
+  //   switch (row.estado) {
+  //     case 0:
+  //       respuesta = "No Contestada";
+  //       break
+  //     case 1:
+  //       respuesta = "Si";
+  //       break;
+  //     case 2:
+  //       respuesta = "No";
+  //       break;
 
-      default:
-        break;
-    }
-    return respuesta;
-  }
+  //     default:
+  //       break;
+  //   }
+  //   return respuesta;
+  // }
 
 
   //Para mostrar o no las notas de asignacion
-  public cambiarMostrarNotasAsig() {
+  // public cambiarMostrarNotasAsig() {
 
-      //No se ha hecho la peticion al servidor aun
-      if (!this.mostrarNotasAsig && this.ListaDeAsignaciones.length == 0) {
-        this.cargandoNotas = true;
+  //     //No se ha hecho la peticion al servidor aun
+  //     if (!this.mostrarNotasAsig && this.ListaDeAsignaciones.length == 0) {
+  //       this.cargandoNotas = true;
 
-        this._sectionService.getAsignConNotas(this.Evaluacion.id).subscribe(
-          res => {
-            this.ListaDeAsignaciones = res;
+  //       this._sectionService.getAsignConNotas(this.Evaluacion.id).subscribe(
+  //         res => {
+  //           this.ListaDeAsignaciones = res;
             
-            this.ListaDeDatos.forEach(element => {
-              if(element.notas != null && element.notas.trim() != ""){
-                this.ListaDeAsignaciones.unshift(new AsignacionConNotas(element.nombre, "-", element.notas));
-              }
+  //           this.ListaDeDatos.forEach(element => {
+  //             if(element.notas != null && element.notas.trim() != ""){
+  //               this.ListaDeAsignaciones.unshift(new AsignacionConNotas(element.nombre, "-", element.notas));
+  //             }
               
-            });
-          },
-          error => {
-            if (error == 404) {
-              this.ErrorMessage = "Error: " + error + "No pudimos recoger los datos de las preguntas.";
-            } else if (error == 500) {
-              this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
-            } else if (error == 401) {
-              this.ErrorMessage = "Error: " + error + " El usuario es incorrecto o no tiene permisos, intente introducir su usuario nuevamente.";
-            } else {
-              this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
-            }
-          }
-        );
+  //           });
+  //         },
+  //         error => {
+  //           if (error == 404) {
+  //             this.ErrorMessage = "Error: " + error + "No pudimos recoger los datos de las preguntas.";
+  //           } else if (error == 500) {
+  //             this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+  //           } else if (error == 401) {
+  //             this.ErrorMessage = "Error: " + error + " El usuario es incorrecto o no tiene permisos, intente introducir su usuario nuevamente.";
+  //           } else {
+  //             this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+  //           }
+  //         }
+  //       );
 
-      }
-      else {
-        this.mostrarNotasAsig = !this.mostrarNotasAsig;
-      }
+  //     }
+  //     else {
+  //       this.mostrarNotasAsig = !this.mostrarNotasAsig;
+  //     }
     
-  }
+  // }
 
   //Para volver a la pantalla de evaluaciones
   public Volver(lugar) {

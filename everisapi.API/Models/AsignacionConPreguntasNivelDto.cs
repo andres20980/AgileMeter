@@ -19,6 +19,8 @@ namespace everisapi.API.Models
 
         public int NivelAlcanzado { get; set; }
 
+        public int NumNotas { get; set; }
+
         public ICollection<PreguntaRespuestaNivelDto> Preguntas { get; set; }
         = new List<PreguntaRespuestaNivelDto>();
   }

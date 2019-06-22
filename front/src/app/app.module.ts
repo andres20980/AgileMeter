@@ -42,6 +42,7 @@ import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
 import { AddTeamComponent } from './back-office/components/teams-manager/add-team/add-team.component';
 import { AddUpdateUserComponent } from './back-office/components/user-management/add-update-user/add-update-user.component';
 import { UserListComponent } from './back-office/components/user-management/user-list/user-list.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 import { MatPaginatorIntl } from '@angular/material';
 import { CustomPaginator } from 'app/CustomPaginatorConfiguration';
@@ -109,6 +110,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatExpansionModule,
     MatCheckboxModule,
     MatIconModule,
+    MatSidenavModule,
     DragDropModule,
     HttpClientModule,
     TranslateModule.forRoot({

@@ -173,6 +173,7 @@ namespace everisapi.API.Services
                 sectionConAsignacion.PesoNivel1 = s.section.PesoNivel1;
                 sectionConAsignacion.PesoNivel2 = s.section.PesoNivel2;
                 sectionConAsignacion.PesoNivel3 = s.section.PesoNivel3;
+                sectionConAsignacion.NumNotas = (s.notas == null || s.notas.Trim() == "") ? 0: 1;
 
                 List<AsignacionConPreguntaNivelDto> asignacionesConPreguntaNivel = new List<AsignacionConPreguntaNivelDto>();
                 //List<AsignacionEntity> asignaciones;
@@ -197,6 +198,7 @@ namespace everisapi.API.Services
                     asignacionConPreguntaNivel.Nombre = a.asignacion.Nombre;
                     asignacionConPreguntaNivel.Peso = a.asignacion.Peso;
                     asignacionConPreguntaNivel.Notas = a.notas;
+                    asignacionConPreguntaNivel.NumNotas = (a.notas == null || a.notas.Trim() == "") ? 0: 1;
 
                     List<PreguntaRespuestaNivelDto> preguntasRespuestaNivel = new List<PreguntaRespuestaNivelDto>();
                     List<RespuestaEntity> preguntas = new List<RespuestaEntity>();
@@ -216,8 +218,13 @@ namespace everisapi.API.Services
                          preguntaRespuestaNivel.Estado = p.Estado;
                          preguntaRespuestaNivel.Correcta = p.PreguntaEntity.Correcta;
 
+                         if(p.Notas != null && p.Notas.Trim() != "" ){
+                            asignacionConPreguntaNivel.NumNotas++;
+                         }
+
                          preguntasRespuestaNivel.Add(preguntaRespuestaNivel);
                     }
+                    sectionConAsignacion.NumNotas += asignacionConPreguntaNivel.NumNotas;
                     asignacionConPreguntaNivel.Preguntas = preguntasRespuestaNivel;
                     
                     asignacionesConPreguntaNivel.Add(asignacionConPreguntaNivel);
