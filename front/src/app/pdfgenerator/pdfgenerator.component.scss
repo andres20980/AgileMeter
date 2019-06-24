@@ -713,7 +713,8 @@ hr.textopdf {
   margin-top:15%;
   height: 12rem;
   min-width: 70%;
-  border-radius: 5px;
+  border-radius: 5px 0 0 5px;
+  padding-right: 1rem;
 }
 
 .comment{
@@ -821,7 +822,10 @@ hr.textopdf {
 
 .comments-button{
   position: fixed;
-  right: 0px;
+  //right: 0;
+  left:100vw;
+  margin-left: -54px;
+  border: 0;
   top: 45%;
   bottom: 55%;
   background-color: mat-color($mat-everis, 300);
