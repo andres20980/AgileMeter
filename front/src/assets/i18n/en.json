@@ -7,9 +7,11 @@
 		"SELECT_ASSESSMENT": "Select an assessment",
 		"FINISHED_ASSESSMENTS": "FINISHED ASSESSMENTS",
 		"PENDING_ASSESSMENTS": "PENDING ASSESSMENTS",
+		"PENDING_ASSESSMENTS_MODAL": "PENDING",
 		"NEW_ASSESSMENT": "NEW ASSESSMENT",
+		"NEW_ASSESSMENT_MODAL": "NEW",
 		"MODAL_HEADER": "Important",
-		"MODAL_BODY": "This team has pending assessments, what you want to do?"
+		"MODAL_BODY": "This team has pending assessments, do you want to create a new one or manage the pending ones?"
 	},
 	"BACKOFFICE": {
 		"BTN_USER_MANAGEMENT": "USER MANAGEMENT",
@@ -108,6 +110,18 @@
 		"NOTIFICATION_TEAM_ADD": "Team add successfully",
 		"NOTIFICATION_ERROR_TEAM_ADD": "Sorry, we couldn't add the team.",
 		"NOTIFICATION_TEAM_MODIFY": "Team modify successfully",
-		"NOTIFICATION_ERROR_TEAM_MODIFY": "Sorry, we couldn't modify the team."
+		"NOTIFICATION_ERROR_TEAM_MODIFY": "Sorry, we couldn't modify the team.",
+		"FORM_CODIGO": "Code",
+		"FORM_CODIGO_MAX_LENGTH": "Code field can't have more than 100 characters."
+	},
+	"CUSTOM_PAGINATOR": {
+		"ITEMS_PER_PAGE_LABEL": "Items per page:",
+		"NEXT_PAGE_LABEL": "Next page",
+		"PREVIOUS_PAGE_LABEL": "Previous page",
+		"FIRST_PAGE_LABEL": "First page",
+		"LAST_PAGE_LABEL": "Last page",
+		"RANGE_PAGE_LABEL_1": "0 of {{length}}",
+		"RANGE_PAGE_LABEL_2": "{{startIndex}} - {{endIndex}} of {{length}}",
+		"OF": "of"
 	}
 }

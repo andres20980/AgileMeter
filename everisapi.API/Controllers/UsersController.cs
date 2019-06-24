@@ -203,8 +203,7 @@ namespace everisapi.API.Controllers
             userEntity.NombreCompleto = UsuarioUpdate.NombreCompleto;
 
             if (UsuarioUpdate.Password != null)
-            {
-                Console.WriteLine("per");                
+            {             
                 using (var sha256 = SHA256.Create())
                 {
                     // Le damos la contraseña

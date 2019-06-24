@@ -7,9 +7,11 @@
 		"SELECT_ASSESSMENT": "Seleccione un tipo de evaluación",
 		"FINISHED_ASSESSMENTS": "EVALUACIONES FINALIZADAS",
 		"PENDING_ASSESSMENTS": "EVALUACIONES PENDIENTES",
+		"PENDING_ASSESSMENTS_MODAL": "PENDIENTES",
 		"NEW_ASSESSMENT": "NUEVA EVALUACIÓN",
+		"NEW_ASSESSMENT_MODAL": "NUEVA",
 		"MODAL_HEADER": "Importante",
-		"MODAL_BODY": "Este equipo tiene evaluaciones pendientes, ¿Qué desea hacer?"
+		"MODAL_BODY": "Este equipo tiene evaluaciones pendientes, ¿Desea crear una nueva o gestionar las pendientes?"
 	},
 	"BACKOFFICE": {
 		"BTN_USER_MANAGEMENT": "GESTIÓN DE USUARIOS",
@@ -103,11 +105,23 @@
 		"FORM_SIZE": "Tamaño",
 		"FORM_SIZE_REQUIRED": "El campo tamaño no puede estar vacio.",
 		"FORM_SIZE_LENGHT": "El campo tamaño solo puede contener entre 1 y 6 números",
+		"FORM_CODIGO": "Código",
+		"FORM_CODIGO_MAX_LENGTH": "El campo código no puede tener más de 100 caracteres.",
 		"BTN_SAVE": "Guardar",
 		"BTN_BACK": "Volver",
 		"NOTIFICATION_TEAM_ADD": "Equipo creado correctamente",
 		"NOTIFICATION_ERROR_TEAM_ADD": "Ups, lo sentimos, no pudimos crear el equipo",
 		"NOTIFICATION_TEAM_MODIFY": "Equipo modificado correctamente",
 		"NOTIFICATION_ERROR_TEAM_MODIFY": "Ups, lo sentimos, no pudimos modificar el equipo."
+	},
+	"CUSTOM_PAGINATOR": {
+		"ITEMS_PER_PAGE_LABEL": "Elementos por página:",
+		"NEXT_PAGE_LABEL": "Página siguiente",
+		"PREVIOUS_PAGE_LABEL": "Página anterior",
+		"FIRST_PAGE_LABEL": "Primera página",
+		"LAST_PAGE_LABEL": "Última página",
+		"RANGE_PAGE_LABEL_1": "0 de {{length}}",
+		"RANGE_PAGE_LABEL_2": "{{startIndex}} - {{endIndex}} de {{length}}",
+		"OF": "de"
 	}
 }

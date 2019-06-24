@@ -96,6 +96,8 @@ export class TeamManagementComponent implements OnInit {
         this._eventService.displayMessage(this.MensajeNotificacion, true);
         setTimeout(() => { this.MensajeNotificacion = null }, 4000);
 
+        this.MostrarPending = false;
+
       });
   }
 
@@ -117,11 +119,15 @@ export class TeamManagementComponent implements OnInit {
         } else {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
-      });
 
-    this._translateService.get('TEAM_MANAGEMENT.NOTIFICATION_ERROR_ASSIGN_TEAM').subscribe(value => { this.MensajeNotificacion = value; });
-    this._eventService.displayMessage(this.MensajeNotificacion, true);
-    setTimeout(() => { this.MensajeNotificacion = null }, 4000);
+        this._translateService.get('TEAM_MANAGEMENT.NOTIFICATION_ERROR_ASSIGN_TEAM').subscribe(value => { this.MensajeNotificacion = value; });
+        this._eventService.displayMessage(this.MensajeNotificacion, true);
+        setTimeout(() => { this.MensajeNotificacion = null }, 4000);
+
+        this.MostrarPending = false;
+
+
+      });
   }
 
   private getTeams() {

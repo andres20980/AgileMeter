@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
@@ -25,17 +25,17 @@ import { PreguntasTableComponent } from './preguntas-table/preguntas-table.compo
 import { MatTableModule, MatPaginatorModule, MatSortModule, MatInputModule } from '@angular/material';
 import { MatFormFieldModule, MatSelectModule } from '@angular/material';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
-import {MatListModule} from '@angular/material/list';
-import {DebounceDirective} from './debounceDirective';
+import { MatListModule } from '@angular/material/list';
+import { DebounceDirective } from './debounceDirective';
 import { QuestionsManagerComponent } from './back-office/components/questions-manager/questions-manager.component';
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { ComentariosTableComponent } from './comentarios-table/comentarios-table.component';
-import { MatExpansionModule} from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { PendingEvaluationComponent } from './pendingevaluation/pendingevaluation.component';
 import { PendingEvaluationTableComponent } from './pendingevaluation/pendingevaluation-table/pendingevaluation-table.component';
 import { BtnFinalizeEvaluationComponent } from './btn-finalize-evaluation/btn-finalize-evaluation.component';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatIconModule} from '@angular/material/icon';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
 import { SectionResultsComponent } from './pdfgenerator/section-results/section-results.component';
 import { TeamsManagerComponent } from './back-office/components/teams-manager/teams-manager.component';
 import { BreadcrumbComponent } from './breadcrumb/breadcrumb.component';
@@ -44,15 +44,17 @@ import { AddUpdateUserComponent } from './back-office/components/user-management
 import { UserListComponent } from './back-office/components/user-management/user-list/user-list.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 
+//Add custom paginator
 import { MatPaginatorIntl } from '@angular/material';
-import { CustomPaginator } from 'app/CustomPaginatorConfiguration';
+import { MatPaginationIntlService } from './services/MatPaginationIntlService ';
+
 import { TeamManagementComponent } from './back-office/components/user-management/team-management/team-management.component';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import 'hammerjs'; 
+import 'hammerjs';
 
-import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { TranslateModule, TranslateService, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientTrans } from './translateHttp';
 
 // AoT requires an exported function for factories
@@ -85,8 +87,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     TeamsManagerComponent,
     BreadcrumbComponent,
     AddTeamComponent,
-    AddUpdateUserComponent,  
-    UserListComponent, 
+    AddUpdateUserComponent,
+    UserListComponent,
     TeamManagementComponent,
   ],
   imports: [
@@ -123,11 +125,18 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   providers: [
     {
-    provide: HTTP_INTERCEPTORS,
-    useClass: RequestInterceptorService,
-    multi: true
+      provide: HTTP_INTERCEPTORS,
+      useClass: RequestInterceptorService,
+      multi: true
     },
-    { provide: MatPaginatorIntl, useValue: CustomPaginator() }
+    {
+      provide: MatPaginatorIntl,
+      useFactory: (translateService) => {
+        const service = new MatPaginationIntlService();
+        service.injectTranslateService(translateService);
+        return service;
+      }, deps: [TranslateService]
+    }
   ],
   bootstrap: [AppComponent]
 })

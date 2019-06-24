@@ -11,6 +11,8 @@ namespace everisapi.API.Models
 
         public string Nombre { get; set; }
 
+        public string Codigo { get; set; }
+
         public string teamName { get; set; }
 
         public Oficina OficinaEntity { get; set; }

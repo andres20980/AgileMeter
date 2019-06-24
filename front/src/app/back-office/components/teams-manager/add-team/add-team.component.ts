@@ -81,6 +81,8 @@ export class AddTeamComponent implements OnInit {
       LineaEntity: new FormControl('', Validators.required),//linea
       */
       Nombre: new FormControl('', Validators.required),//team
+      Codigo: new FormControl('',Validators.maxLength(100)),//team
+
       ProjectSize: new FormControl("", [Validators.pattern('[0-9 ]{1,6}'), Validators.required]),
 
       //campos temporales hasta tener la lista de oficinas, unidades y proyectos
@@ -211,6 +213,7 @@ export class AddTeamComponent implements OnInit {
     this.addTeamsForm.get('Proyecto').setValue("");
 
     this.addTeamsForm.get('Nombre').setValue(this.equipo.nombre);
+    this.addTeamsForm.get('Codigo').setValue(this.equipo.codigo);
     this.addTeamsForm.get('ProjectSize').setValue(this.equipo.projectSize);
     this.addTeamsForm.addControl('Id', new FormControl(this.equipo.id));
     this.addTeamsForm.addControl('TestProject', new FormControl(this.equipo.testProject));
