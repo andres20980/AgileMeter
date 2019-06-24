@@ -35,6 +35,14 @@ html{
 
 // }
 
+tr.example-element-row:not(.example-expanded-row):hover, mat-row.example-element-row:not(.example-expanded-row):hover  {
+  background: rgba(map_get($mat-everis, 50), 0.05) !important;
+}
+
+tr.example-element-row:not(.example-expanded-row):active, mat-row.example-element-row:not(.example-expanded-row):active {
+  background: rgba(map_get($mat-everis, 50), 0.005) !important;
+}
+
 .us-none{
   user-select: none;
 }
