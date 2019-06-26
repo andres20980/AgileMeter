@@ -3,8 +3,11 @@ Para el reportgenerator hay que incluir esto en el csproj del proyecto de test:
     <DotNetCliToolReference Include="dotnet-reportgenerator-cli" Version="4.0.0-alpha12" />
   </ItemGroup>
 
+Para la primera vez:  
+1 - Instalar .Net Core SDK 2.2  
+2 - Ejecutar el comando: dotnet tool install -g dotnet-reportgenerator-globaltool
 
-dotnet test everisapiTest.csproj /p:Language=cs --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="./TestResult/" /p:Exclude="[xunit*]*"
 
-
-reportgenerator "-reports:./TestResults/coverage.opencover.xml" -targetdir:"./TestResults/Reports" -reporttypes:HTML;HTMLSummary
+Para generar el informe:
+1 - dotnet test everisapiTest.csproj /p:Language=cs --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="./TestResult/" /p:Exclude="[xunit*]*"
+2 - reportgenerator "-reports:./TestResult/coverage.opencover.xml" -targetdir:"./TestResults/Reports" -reporttypes:HTML;HTMLSummary

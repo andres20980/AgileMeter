@@ -108,17 +108,11 @@ export class AppComponent {
   }
 
   public refreshBreadCrumb(){
-    let length: number = this._storageDataService.breadcrumbList.length;
-    for(var i = 0; i <  length ; i++){
-      this._storageDataService.breadcrumbList[i].name = this.translate.get(this._storageDataService.breadcrumbList[i].var);
-    }
-
     this._storageDataService.breadcrumbList.forEach((br, index) => {
       this.translate.get(br.var).subscribe((res: string) => {
         br.name= res;
       });
     });
-    
   }
 }
 
