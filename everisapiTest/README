@@ -7,4 +7,4 @@ Para el reportgenerator hay que incluir esto en el csproj del proyecto de test:
 dotnet test everisapiTest.csproj /p:Language=cs --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="./TestResult/" /p:Exclude="[xunit*]*"
 
 
-reportgenerator "-reports:./TestResults/coverage.opencover.xml" -targetdir:"./TestResults/Reports" -reporttypes:HTML;HTMLSummary
+reportgenerator "-reports:./TestResult/coverage.opencover.xml" -targetdir:"./TestResults/Reports" -reporttypes:HTML;HTMLSummary
