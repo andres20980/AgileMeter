@@ -1,5 +1,6 @@
 <div class="d-flex justify-content-center notificacion">
-  <div class="position-fixed text-center notificacion">
+  <!-- Mensajes de error y añadir notas
+    <div class="position-fixed text-center notificacion">
     <div *ngIf="(ErrorMessage != null || ErrorMessage != undefined )" class="alert alert-danger" id="danger">
       <strong>{{ErrorMessage}}</strong>
     </div>
@@ -7,10 +8,10 @@
       {{anadeNota}}
     </div>
 
-    <!-- <div *ngIf="cargar">
+    <! -- <div *ngIf="cargar">
       <app-loading></app-loading>
-    </div> -->
-  </div>
+    </div> -- >
+  </div> -->
 
   <div class="container">
       <app-breadcrumb></app-breadcrumb>
@@ -62,7 +63,7 @@
           <span class="progress-text">{{dato.progreso}}%</span>
         </ngb-progressbar>
 
-        <p class="mt-1 font-italic"> {{ 'MENU_EVALUATION.ANSWERED' | translate }}{{dato.contestadas}} {{ 'MENU_EVALUATION.OF' | translate }} {{dato.preguntas}} </p>
+        <p class="mt-1 font-italic"> {{ 'MENU_EVALUATION.ANSWERED' | translate }} {{dato.contestadas}} {{ 'MENU_EVALUATION.OF' | translate }} {{dato.preguntas}} </p>
       </div>
 
 
