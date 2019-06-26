@@ -4,7 +4,12 @@
 	},
 	"BREADCRUMB": {
 		"HOME": "Home",
-		"NEW_ASSESSMENT": "New assessment"
+		"NEW_ASSESSMENT": "New assessment",
+		"FINISHED_EVALUATIONS": "Evaluaciones finalizadas",
+		"RESULTS": "Results",
+		"SECTIONS": "Secciones",
+		"QUESTIONS": "Preguntas",
+		"PENDING_ASSESSMENTS": "Pending assessments"
 	},
 	"HOME": {
 		"SELECT_TEAM": "Select a team",
@@ -130,7 +135,7 @@
 	},
 	"PENDING_EVALUATION_TABLE": {
 		"TABLE_COL_DATE": "Fecha",
-		"TABLE_COL_USER": "Usuario",
+		"TABLE_COL_USER": "User",
 		"TABLE_COL_ASSESSMENT": "Evaluación",
 		"TABLE_COL_PROGRESS": "Progreso",
 		"TABLE_COL_ACTIONS": "Acciones",
@@ -184,7 +189,7 @@
 		"FILTER": " Filtro",
 		"EXCEL_EXPORT": "Exportar a Excel",
 		"DATE": "Fecha",
-		"USER": "Usuario",
+		"USER": "User",
 		"ASSESSMENT": "Evaluación",
 		"SCORE": "Puntuación",
 		"STATE": "Estado",
@@ -193,7 +198,7 @@
 		"NOTES": "Notas",
 		"ICONS_NOTES_FILLED": "Hay notas",
 		"ICONS_NOTES_EMPTY": "No hay notas",
-		"RESULTS": "Resultados",
+		"RESULTS": "Results",
 		"SHOW_RESULTS": "Ver Resultados",
 		"EVALUATION_NOTES": "Notas Evaluación",
 		"OBJETIVES_NOTES": "Notas Objetivos"
@@ -261,7 +266,7 @@
 	},
 	"LOGIN": {
 		"TITLE": "Inicia sesión",
-		"USER": "Usuario",
+		"USER": "User",
 		"PASS": "Contraseña",
 		"LOGIN": "Acceder",
 		"REMEMBER_ME": "Recuérdame"

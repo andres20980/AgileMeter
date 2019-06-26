@@ -158,7 +158,8 @@ export class PendingEvaluationComponent implements OnInit {
         //this.Restablecer();
       });
 
-      this._appComponent.pushBreadcrumb("Evaluaciones pendientes", "/pendingevaluations");
+      //this._appComponent.pushBreadcrumb("Evaluaciones pendientes", "/pendingevaluations");
+      this._appComponent.pushBreadcrumb("BREADCRUMB.PENDING_ASSESSMENTS", "/pendingevaluations");
       this._appComponent.pushBreadcrumb(this._appComponent._storageDataService.UserProjectSelected.nombre, null);
 
     if (this.Project.fecha != null) {

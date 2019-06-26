@@ -66,7 +66,8 @@ export class MenunewevaluationComponent implements OnInit {
     if(this.Evaluacion != null){
       //this._appComponent.pushBreadcrumb(this.ProjectSelected.nombre, null);
       //this._appComponent.pushBreadcrumb(this.Evaluacion.assessmentName, null);
-      this._appComponent.pushBreadcrumb("Secciones", "/evaluationsections");
+      //this._appComponent.pushBreadcrumb("Secciones", "/evaluationsections");
+      this._appComponent.pushBreadcrumb("BREADCRUMB.SECTIONS", "/evaluationsections");
     }
     
 

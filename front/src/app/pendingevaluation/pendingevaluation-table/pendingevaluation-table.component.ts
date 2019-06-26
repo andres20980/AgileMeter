@@ -170,7 +170,8 @@ export class PendingEvaluationTableComponent implements OnInit {
               this._appComponent.pushBreadcrumb(this._appComponent._storageDataService.Evaluacion.assessmentName, null);
               var pipe = new DatePipe('en-US');
               this._appComponent.pushBreadcrumb(pipe.transform(this._appComponent._storageDataService.Evaluacion.fecha, 'dd/MM/yyyy'), null);
-              this._appComponent.pushBreadcrumb("Secciones", "/evaluationsections");
+              //this._appComponent.pushBreadcrumb("Secciones", "/evaluationsections");
+              this._appComponent.pushBreadcrumb("BREADCRUMB.SECTIONS", "/evaluationsections");              
 
               this._router.navigate(['/evaluationquestions']); 
 

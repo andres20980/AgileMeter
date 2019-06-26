@@ -88,7 +88,8 @@ export class NewevaluationComponent implements OnInit {
     this.MostrarInfo = true;
 
     if (this.Evaluation != null) {
-      this._appComponent.pushBreadcrumb("Preguntas", "/evaluationquestions");
+      //this._appComponent.pushBreadcrumb("Preguntas", "/evaluationquestions");
+      this._appComponent.pushBreadcrumb("BREADCRUMB.QUESTIONS", "/evaluationquestions");
     }
 
     //Recoge todas las asignaciones de la section por id

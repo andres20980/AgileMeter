@@ -4,7 +4,12 @@
 	},
 	"BREADCRUMB": {
 		"HOME": "Inicio",
-		"NEW_ASSESSMENT": "Nueva evaluación"
+		"NEW_ASSESSMENT": "Nueva evaluación",
+		"FINISHED_EVALUATIONS": "Evaluaciones finalizadas",
+		"RESULTS": "Resultados",
+		"SECTIONS": "Secciones",
+		"QUESTIONS": "Preguntas",
+		"PENDING_ASSESSMENTS": "Evaluaciones pendientes"
 	},
 	"HOME": {
 		"SELECT_TEAM": "Seleccione un equipo",
