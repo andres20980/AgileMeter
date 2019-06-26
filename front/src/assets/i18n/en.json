@@ -137,7 +137,7 @@
 		"MODAL_BTN_CANCEL": "Cancelar"
 	},
 	"NEW_EVALUATION": {
-		"YES": "Sí",
+		"YES": "Yes",
 		"NO": "No",
 		"BTNS_ADD_NOTES": "Añadir notas",
 		"ICONS_NOTES_FILLED": "Hay notas",
@@ -257,5 +257,11 @@
 		"PASS": "Contraseña",
 		"LOGIN": "Acceder",
 		"REMEMBER_ME": "Recuérdame"
+	},
+	"BREADCRUMB": {
+		"Home": "Home",
+		"Secciones": "Sections",
+		"Preguntas": "Questions",
+		"Evaluacionespendientes": "Pending evaluation"
 	}
 }

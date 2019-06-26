@@ -257,5 +257,11 @@
 		"PASS": "Contraseña",
 		"LOGIN": "Acceder",
 		"REMEMBER_ME": "Recuérdame"
+	},
+	"BREADCRUMB": {
+		"Home": "Inicio",
+		"Secciones": "Secciones",
+		"Preguntas": "Preguntas",
+		"Evaluacionespendientes": "Evaluaciones pendientes"
 	}
 }
