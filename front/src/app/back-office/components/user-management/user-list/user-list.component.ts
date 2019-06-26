@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { UserWithRole } from 'app/Models/UserWithRole';
 import { UserString } from 'app/Models/UserString';
 import { EventEmitterService } from 'app/services/event-emitter.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-list',
@@ -39,6 +40,7 @@ export class UserListComponent implements OnInit {
     private _router: Router,
     private _proyectoService: ProyectoService,
     private _eventService: EventEmitterService,
+    private _translateService : TranslateService
   ) { }
 
   ngOnInit() {
@@ -76,8 +78,9 @@ export class UserListComponent implements OnInit {
       this.selectedUser[0].password = null;
       this._userService.updateUser(this.selectedUser[0]).subscribe(
         res => {
-          this.getUsers();
-          this.MensajeNotificacion = "Usuario eliminado correctamente";
+          this.getUsers();          
+          this._translateService.get('USER_LIST.NOTIFICATION_DELETE_USER').subscribe(value => {  this.MensajeNotificacion = value; } );
+
           this._eventService.displayMessage(this.MensajeNotificacion,false);
           setTimeout(() => { this.MensajeNotificacion = null }, 4000);
         },
@@ -91,7 +94,7 @@ export class UserListComponent implements OnInit {
           } else {
             this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
           }
-          this.MensajeNotificacion = "Ups, lo sentimos, no pudimos eliminar al usuario";
+          this._translateService.get('USER_LIST.NOTIFICATION_DELETE_USER_ERROR').subscribe(value => {  this.MensajeNotificacion = value; } );
           this._eventService.displayMessage(this.MensajeNotificacion,true);
           setTimeout(() => { this.MensajeNotificacion = null }, 4000);
         });

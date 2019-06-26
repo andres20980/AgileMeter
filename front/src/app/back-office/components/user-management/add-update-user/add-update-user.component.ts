@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { AppComponent } from 'app/app.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EventEmitterService } from 'app/services/event-emitter.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-update-user',
@@ -33,6 +34,7 @@ export class AddUpdateUserComponent implements OnInit {
     private modalService: NgbModal,
     private _appComponent: AppComponent,
     private _eventService: EventEmitterService,
+    private _translateService: TranslateService
   ) { }
 
   ngOnInit() {
@@ -56,7 +58,7 @@ export class AddUpdateUserComponent implements OnInit {
       this.userForm.controls['Nombre'].disable();
     } else {
       this.userForm = new FormGroup({
-        Nombre: new FormControl('', [Validators.required,Validators.maxLength(127)]),
+        Nombre: new FormControl('', [Validators.required, Validators.maxLength(127)]),
         NombreCompleto: new FormControl('', Validators.required),
         Password: new FormControl('', Validators.required),
         Role: new FormControl(this.rol),
@@ -90,8 +92,9 @@ export class AddUpdateUserComponent implements OnInit {
     this._userService.addUser(form).subscribe(
       res => {
         this._router.navigate(['/backoffice/usermanagement']);
-        this.MensajeNotificacion = "Usuario creado correctamente";
-        this._eventService.displayMessage(this.MensajeNotificacion,false);
+        this._translateService.get('ADD_UPDATE_USER.NOTIFICATION_ADD_USER').subscribe(value => { this.MensajeNotificacion = value; });
+        //this.MensajeNotificacion = "Usuario creado correctamente";
+        this._eventService.displayMessage(this.MensajeNotificacion, false);
         setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       },
       error => {
@@ -103,8 +106,9 @@ export class AddUpdateUserComponent implements OnInit {
         } else {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
-        this.MensajeNotificacion = "Ups, lo sentimos, no hemos podido crear el usuario";
-        this._eventService.displayMessage(this.MensajeNotificacion,true);
+        //this.MensajeNotificacion = "Ups, lo sentimos, no hemos podido crear el usuario";
+        this._translateService.get('ADD_UPDATE_USER.NOTIFICATION_ERROR_ADD_USER').subscribe(value => { this.MensajeNotificacion = value; });
+        this._eventService.displayMessage(this.MensajeNotificacion, true);
         setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       });
   }
@@ -135,8 +139,9 @@ export class AddUpdateUserComponent implements OnInit {
         } else {//si no te mantiene en el listado de usuarios
           this._router.navigate(['/backoffice/usermanagement']);
         }
-        this.MensajeNotificacion = "Usuario modificado correctamente";
-        this._eventService.displayMessage(this.MensajeNotificacion,false);
+        //this.MensajeNotificacion = "Usuario modificado correctamente";
+        this._translateService.get('ADD_UPDATE_USER.NOTIFICATION_UPDATE_USER').subscribe(value => { this.MensajeNotificacion = value; });
+        this._eventService.displayMessage(this.MensajeNotificacion, false);
         setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       },
       error => {
@@ -148,8 +153,9 @@ export class AddUpdateUserComponent implements OnInit {
         } else {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
-        this.MensajeNotificacion = "Ups, lo sentimos , no hemosRol del usuario actualizado correctamente";
-        this._eventService.displayMessage(this.MensajeNotificacion,true);
+        //this.MensajeNotificacion = "Ups, lo sentimos,no pudimos modificar el usuario.";
+        this._translateService.get('ADD_UPDATE_USER.NOTIFICATION_ERROR_UPDATE_USER').subscribe(value => { this.MensajeNotificacion = value; });
+        this._eventService.displayMessage(this.MensajeNotificacion, true);
         setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       });
   }

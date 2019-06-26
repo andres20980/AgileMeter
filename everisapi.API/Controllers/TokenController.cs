@@ -139,8 +139,8 @@ namespace everisapi.API.Controllers
                     if(msg is LdapSearchResult) {
                          LdapEntry nextEntry = ((LdapSearchResult)msg).Entry;
                          LdapAttributeSet attributeSet = nextEntry.getAttributeSet();
-                         Console.WriteLine("Nombre corto: "+attributeSet.getAttribute("samaccountname").StringValue);
-                         Console.WriteLine("Nombre Largo: "+attributeSet.getAttribute("displayName").StringValue);
+                         //Console.WriteLine("Nombre corto: "+attributeSet.getAttribute("samaccountname").StringValue);
+                         //Console.WriteLine("Nombre Largo: "+attributeSet.getAttribute("displayName").StringValue);
                          string[] ss = attributeSet.getAttribute("displayName").StringValue.Split(' ');
                          string s2 = ss[0];
                          if(ss.Length > 1){

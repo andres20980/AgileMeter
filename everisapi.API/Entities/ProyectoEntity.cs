@@ -17,6 +17,9 @@ namespace everisapi.API.Entities
         [MaxLength(50)]
         public string Nombre { get; set; }
 
+        [MaxLength(100)]
+        public string Codigo { get; set; }
+
         [ForeignKey("LineaId")]
         [Required]        
         public LineaEntity LineaEntity { get; set; }

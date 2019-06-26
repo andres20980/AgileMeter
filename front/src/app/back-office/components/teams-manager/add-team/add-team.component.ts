@@ -9,13 +9,14 @@ import { Unity } from 'app/Models/Unit';
 import { Linea } from 'app/Models/Linea';
 import { User } from 'app/Models/User';
 import { Equipo } from 'app/Models/Equipo';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-team',
   templateUrl: './add-team.component.html',
   styleUrls: ['./add-team.component.scss']
 })
-export class AddTeamComponent implements OnInit {  
+export class AddTeamComponent implements OnInit {
   public addTeamsForm: FormGroup;
   /*eliminado temporalmente hasta tener la lista de oficinas, unidades y proyectos
     public officeList: Office[];
@@ -45,8 +46,9 @@ export class AddTeamComponent implements OnInit {
     private _router: Router,
     private _eventService: EventEmitterService,
     private _appComponent: AppComponent,
+    private _translateService: TranslateService,
     private _routeParams: ActivatedRoute,
-    fb: FormBuilder) {    
+    fb: FormBuilder) {
     this.addTeamsForm = fb.group({
       hideRequired: false,
       floatLabel: 'auto',
@@ -79,6 +81,8 @@ export class AddTeamComponent implements OnInit {
       LineaEntity: new FormControl('', Validators.required),//linea
       */
       Nombre: new FormControl('', Validators.required),//team
+      Codigo: new FormControl('',Validators.maxLength(100)),//team
+
       ProjectSize: new FormControl("", [Validators.pattern('[0-9 ]{1,6}'), Validators.required]),
 
       //campos temporales hasta tener la lista de oficinas, unidades y proyectos
@@ -168,8 +172,9 @@ export class AddTeamComponent implements OnInit {
     this._teamsService.setTeam(form).subscribe(
       res => {
         this._router.navigate(['/backoffice/teamsmanager']);
-        this.MensajeNotificacion = "Equipo creado correctamente";
-        this._eventService.displayMessage(this.MensajeNotificacion,false);
+        //this.MensajeNotificacion = "Equipo creado correctamente";
+        this._translateService.get('ADD_TEAM.NOTIFICATION_TEAM_ADD').subscribe(value => { this.MensajeNotificacion = value; });
+        this._eventService.displayMessage(this.MensajeNotificacion, false);
         setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       },
       error => {
@@ -183,8 +188,9 @@ export class AddTeamComponent implements OnInit {
         } else {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
-        this.MensajeNotificacion = "Ups, lo sentimos, no pudimos crear el equipo";
-        this._eventService.displayMessage(this.MensajeNotificacion,true);
+        //this.MensajeNotificacion = "Ups, lo sentimos, no pudimos crear el equipo";
+        this._translateService.get('ADD_TEAM.NOTIFICATION_ERROR_TEAM_ADD').subscribe(value => { this.MensajeNotificacion = value; });
+        this._eventService.displayMessage(this.MensajeNotificacion, true);
         setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       });
   }
@@ -207,6 +213,7 @@ export class AddTeamComponent implements OnInit {
     this.addTeamsForm.get('Proyecto').setValue("");
 
     this.addTeamsForm.get('Nombre').setValue(this.equipo.nombre);
+    this.addTeamsForm.get('Codigo').setValue(this.equipo.codigo);
     this.addTeamsForm.get('ProjectSize').setValue(this.equipo.projectSize);
     this.addTeamsForm.addControl('Id', new FormControl(this.equipo.id));
     this.addTeamsForm.addControl('TestProject', new FormControl(this.equipo.testProject));
@@ -230,8 +237,9 @@ export class AddTeamComponent implements OnInit {
     this._teamsService.updateTeam(form).subscribe(
       res => {
         this._router.navigate(['/backoffice/teamsmanager']);
-        this.MensajeNotificacion = "Equipo modificado correctamente";
-        this._eventService.displayMessage(this.MensajeNotificacion,false);
+        //this.MensajeNotificacion = "Equipo modificado correctamente";
+        this._translateService.get('ADD_TEAM.NOTIFICATION_TEAM_MODIFY').subscribe(value => { this.MensajeNotificacion = value; });
+        this._eventService.displayMessage(this.MensajeNotificacion, false);
         setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       },
       error => {
@@ -244,8 +252,9 @@ export class AddTeamComponent implements OnInit {
         } else {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
-        this.MensajeNotificacion = "Ups, lo sentimos, no pudimos modificar el equipo.";
-        this._eventService.displayMessage(this.MensajeNotificacion,true);
+        //this.MensajeNotificacion = "Ups, lo sentimos, no pudimos modificar el equipo.";
+        this._translateService.get('ADD_TEAM.NOTIFICATION_ERROR_TEAM_MODIFY').subscribe(value => { this.MensajeNotificacion = value; });
+        this._eventService.displayMessage(this.MensajeNotificacion, true);
         setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       });
   }
