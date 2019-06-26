@@ -73,14 +73,20 @@ img.edit {
   height: 60%;
 }
 
-button.transparente {
+.transparente {
   background-color: Transparent;
   background-repeat: no-repeat;
   border: none;
-  //cursor: pointer;
+  cursor: pointer;
   overflow: hidden;
   outline: none;
-  width: 60px;
+  width: 40px;
+  margin-top: -10px;
+
+  img{
+    height:32px;
+    width:32px;
+  }
 }
 
 
@@ -661,15 +667,6 @@ hr.textopdf {
 .suspenso {
   font-weight: bold;
   color: red;
-}
-
-.transparente {
-  background-color: Transparent;
-  background-repeat: no-repeat;
-  border: none;
-  cursor: pointer;
-  overflow: hidden;
-  outline: none;
 }
 
 .circle-progress-container{

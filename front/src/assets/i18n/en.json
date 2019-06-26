@@ -2,6 +2,10 @@
 	"APP": {
 		"HI": "Hi"
 	},
+	"BREADCRUMB": {
+		"HOME": "Home",
+		"NEW_ASSESSMENT": "New assessment"
+	},
 	"HOME": {
 		"SELECT_TEAM": "Select a team",
 		"SELECT_ASSESSMENT": "Select an assessment",

@@ -58,8 +58,11 @@
     <app-breadcrumb></app-breadcrumb>
     <div class="ng-card-box p-2 p-2 pt-5 pb-5 br-2 mat-elevation-z5">
         <div class="row">
-            <div class="col ml-5">
+            <div class="col ml-5" style="display: inline-flex">
               <h3>Resultados de la evaluación</h3>
+              <button class="transparente" (click)="ExportToExcel()" hidden>
+                <img src="assets/excel.png" title="Exportar a Excel" />  
+              </button>
             </div>
         </div>
 
@@ -68,12 +71,12 @@
         </div>
 
   <div class="circle-progress-container" *ngIf="ListaSectionConAsignaciones && ListaSectionConAsignaciones.length>0">
-      <div *ngFor="let datos of ListaSectionConAsignaciones; let i = index" [attr.data-index]="i" (click)="selectedSection = datos; scroll(target);" [ngClass]="formatLevel(ListaSectionConAsignaciones[i])" class="circle-progress mat-elevation-z3 m-2">
-        <div *ngIf="datos.numNotas > 0" class="top-comment">
+      <div *ngFor="let datos of ListaSectionConAsignaciones; let i = index" [attr.data-index]="i" [attr.id]="datos.nombre" (click)="selectedSection = datos; scroll(target);" [ngClass]="formatLevel(ListaSectionConAsignaciones[i])" class="circle-progress mat-elevation-z3 m-2">
+        <div *ngIf="datos.numNotas > 0" class="top-comment" data-html2canvas-ignore="true">
           <img class="" src="assets/comment_empty.png" title="Notas"/>
           <p>{{datos.numNotas}}</p>
         </div>
-        <circle-progress
+        <circle-progress style="font-family: 'Raleway', sans-serif;"
   [percent]= "ListaSectionConAsignaciones[i].puntuacion"
   [toFixed] = "1"
   [subtitle] = "[formatSubtitle(ListaSectionConAsignaciones[i])]"
@@ -92,10 +95,10 @@
   [renderOnClick]="false"
   [animationDuration]="300"
     ></circle-progress>
-    <div class="text-center circle-progress-title"><b>{{datos.nombre}}</b></div>
+    <div class="text-center circle-progress-title" data-html2canvas-ignore="true"><b>{{datos.nombre}}</b></div>
     
   </div>
-   <div  [ngClass]="formatTotalLevel(ListaSectionConAsignaciones)" (click)="selectedSection = null" class="circle-progress mat-elevation-z3 m-2">
+   <div  [ngClass]="formatTotalLevel(ListaSectionConAsignaciones)" [attr.id]="'total'" (click)="selectedSection = null" class="circle-progress mat-elevation-z3 m-2">
         <circle-progress
       [percent]= "getTotalPercent(ListaSectionConAsignaciones)"
       [toFixed] = "1"
@@ -115,7 +118,7 @@
       [renderOnClick]="false"
       [animationDuration]="300"
         ></circle-progress>
-        <div class="text-center circle-progress-title"><b>VALORACIÓN GLOBAL</b></div>
+        <div class="text-center circle-progress-title" data-html2canvas-ignore="true"><b>VALORACIÓN GLOBAL</b></div>
         <!-- <div class="text-center"><b>GLOBAL</b></div> -->
   </div> 
 
