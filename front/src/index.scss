@@ -14,6 +14,7 @@ body{
 html{
   overflow-y: overlay;
   width: 100vw;
+  scroll-behavior: smooth;
 }
 
 ::-webkit-scrollbar {
@@ -33,6 +34,14 @@ html{
 // 	background-color: #F5F5F5;
 
 // }
+
+tr.example-element-row:not(.example-expanded-row):hover, mat-row.example-element-row:not(.example-expanded-row):hover  {
+  background: rgba(map_get($mat-everis, 50), 0.05) !important;
+}
+
+tr.example-element-row:not(.example-expanded-row):active, mat-row.example-element-row:not(.example-expanded-row):active {
+  background: rgba(map_get($mat-everis, 50), 0.005) !important;
+}
 
 .us-none{
   user-select: none;
@@ -55,6 +64,14 @@ html{
   -ms-transition: all .8s ease !important;
   -o-transition: all .8s ease !important;
   transition: all .8s ease !important;
+}
+
+.transition-animation-fast{
+  -webkit-transition: all .4s ease !important;
+  -moz-transition: all .4s ease !important;
+  -ms-transition: all .4s ease !important;
+  -o-transition: all .4s ease !important;
+  transition: all .4s ease !important;
 }
 
 .br-2{
@@ -148,4 +165,13 @@ html{
     display: block;
     margin-top: 45%;
   }
+}
+
+// .mat-drawer-backdrop {
+//   @extend .transition-animation-fast;
+//   background: rgba(0, 0, 0, 0.3) !important;
+// }
+
+.mat-drawer-backdrop.mat-drawer-shown {
+  background-color: rgba(0, 0, 0, 0.3) !important;
 }

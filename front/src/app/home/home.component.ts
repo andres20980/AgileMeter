@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
     //console.log(this._proyectoService.UserLongName);
 
     this._appComponent.popBreadcrumb(0);
-    this._appComponent.pushBreadcrumb("Home", "/home");
+    this._appComponent.pushBreadcrumb("BREADCRUMB.HOME", "/home");
     //console.log(this._breadcrumb.breadcrumbList);
 
     this.getUserRole();
@@ -59,7 +59,7 @@ export class HomeComponent implements OnInit {
     this.NombreDeUsuario = this._proyectoService.UsuarioLogeado;
 
     //Reiniciamos los proyectos seleccionados en el servicio
-    this._appComponent._storageDataService.UserProjectSelected = { id: -1, nombre: '', fecha: null, numFinishedEvals: 0, numPendingEvals: 0};
+    this._appComponent._storageDataService.UserProjectSelected = { id: -1, nombre: '',codigo:null, fecha: null, numFinishedEvals: 0, numPendingEvals: 0};
 
     //Intentamos recoger los roles de los usuarios
     this._proyectoService.getRolesUsuario().subscribe(
@@ -274,7 +274,7 @@ export class HomeComponent implements OnInit {
 
         this._appComponent.pushBreadcrumb(this._appComponent._storageDataService.UserProjectSelected.nombre, null);
         this._appComponent.pushBreadcrumb(this._appComponent._storageDataService.Evaluacion.assessmentName, null);
-        this._appComponent.pushBreadcrumb("Nueva evaluación", null);
+        this._appComponent.pushBreadcrumb("BREADCRUMB.NEW_ASSESSMENT", null);
         this._router.navigate(['/evaluationsections']);
       },
       error => {

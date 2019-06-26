@@ -18,6 +18,9 @@
     </div>
   </div>
   <div class="user-table">
+    <div class="loading mt-5" *ngIf="!dataSource">
+      <app-loading></app-loading>
+    </div>
     <div>
       <mat-table [dataSource]="dataSource" multiTemplateDataRows matSort aria-label="Elements">
 

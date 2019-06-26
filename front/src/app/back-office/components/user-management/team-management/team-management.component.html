@@ -19,10 +19,10 @@
 
 -->
 
-    <div class="col-12 d-flex ml-4 p-3" *ngIf="user.role.role === 'Administrador'">
+    <div class="col-12 d-flex ml-4 p-3" *ngIf="user.role.role === 'Administrador' || user.role.role === 'Evaluador'">
       <span class="text-danger"><strong>*</strong>{{ 'TEAM_MANAGEMENT.NO_USER_MESSAGE' | translate }}</span>
     </div>
-    <div class="col-12 d-flex ml-4 p-3" *ngIf="proyectosAsig || proyectosPending">
+    <div class="col-12 d-flex ml-4 p-3">
       <div class="col-6">
         <h4>{{ 'TEAM_MANAGEMENT.USER_TEAMS' | translate }} <strong *ngIf="user">{{user.nombre}}</strong></h4>
         <div class="loading mt-5" *ngIf="!MostrarPending || !MostrarAsig">
@@ -32,8 +32,8 @@
           class="cdkDrop-list overflow-auto mat-elevation-z3" [ngClass]="{'div-scroll ': proyectosAsig.length > 5}"
           (cdkDropListDropped)="drop($event)" *ngIf="MostrarPending && MostrarAsig">
           <div class="cdkDrag-box" *ngFor="let proyecto of proyectosAsig" cdkDrag [cdkDragData]="proyecto"
-            [ngClass]="{'default': user.role.role === 'Administrador'}"
-            [cdkDragDisabled]="user.role.role === 'Administrador'">
+            [ngClass]="{'default': user.role.role === 'Administrador' || user.role.role === 'Evaluador'}"
+            [cdkDragDisabled]="user.role.role === 'Administrador' || user.role.role === 'Evaluador'">
             <div class="cdkDrag-custom-placeholder" *cdkDragPlaceholder></div>
             {{proyecto.proyecto + "-" + proyecto.nombre}}
           </div>

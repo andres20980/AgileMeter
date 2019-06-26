@@ -73,14 +73,20 @@ img.edit {
   height: 60%;
 }
 
-button.transparente {
+.transparente {
   background-color: Transparent;
   background-repeat: no-repeat;
   border: none;
-  //cursor: pointer;
+  cursor: pointer;
   overflow: hidden;
   outline: none;
-  width: 60px;
+  width: 40px;
+  margin-top: -10px;
+
+  img{
+    height:32px;
+    width:32px;
+  }
 }
 
 
@@ -663,15 +669,6 @@ hr.textopdf {
   color: red;
 }
 
-.transparente {
-  background-color: Transparent;
-  background-repeat: no-repeat;
-  border: none;
-  cursor: pointer;
-  overflow: hidden;
-  outline: none;
-}
-
 .circle-progress-container{
   display: flex;
   justify-content: center;
@@ -680,35 +677,66 @@ hr.textopdf {
 }
 
 .circle-progress{
-  //display: flex;
+  max-width: 11rem;
+  border-radius: 3px; 
+  position: relative;
+  cursor: pointer;
+  @extend .transition-animation;
+  &:hover {
+    @extend .transition-animation;
+    box-shadow: 0 0 7px 1px mat-color($mat-everis, 300);
+  }
+}
+
+
+.circle-progress-title{
+  background-color: mat-color($mat-everis, 300);
+  color: white;
+  border-radius: 0 0 3px 3px; 
 }
 
 .notas-container {
   padding-left: 20px;
   padding-right: 20px;
   min-width: 50%;
-  margin-bottom: -15px;
-  margin-top: -10px;
-
-
+  margin-bottom: 0rem;
+  margin-top: 1rem;
 }
 .notas-row {
   display: flex;
 }
 .notas-panel {
-  overflow: hidden;
- 
-  margin-top:30px;
-  //margin-left: 10%;
-  //margin-right: 10%;
-  
+  //overflow: hidden;
+  margin-top:15%;
+  height: 12rem;
+  min-width: 70%;
+  border-radius: 5px 0 0 5px;
+  padding-right: 1rem;
 }
 
 .comment{
   margin-left: 90%;
 }
 
+.top-comment{
+  position: absolute;
+  left: 9rem;
+  top: 0.1rem;
+}
 
+.top-comment img{
+  width: 28px;
+  height: 28px;
+}
+
+.top-comment p{
+  text-align: center;
+  margin-top: -28px;
+  font-size: 15px !important;
+  font-weight: bold;
+  color:  mat-color($mat-everis, 300);
+  font-family: monospace;
+}
 
 .table-row{
   text-align: left;
@@ -741,19 +769,19 @@ hr.textopdf {
   background-image: url("/assets/lvl1.svg");
   background-repeat: no-repeat;
   background-size: 133px;
-  background-position-x: 22.5px;
+  background-position-x: 22px;
   background-position-y: 22.5px;
 }
 .lvl2{
   background-image: url("/assets/lvl2.svg");
   background-repeat: no-repeat;
   background-size: 133px;
-  background-position-x: 22.5px;
+  background-position-x: 22px;
   background-position-y: 22.5px;
 }
 
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-thick  {
-  color: mat-color($mat-everis, 50);
+  color: mat-color($mat-everis, 50) !important;
 }
 
 .button-disabled{
@@ -787,4 +815,39 @@ hr.textopdf {
   position: fixed;
   margin-top: 15%;
   margin-right: 5%;
+}
+
+.comments-button{
+  position: fixed;
+  //right: 0;
+  left:100vw;
+  margin-left: -54px;
+  border: 0;
+  top: 45%;
+  bottom: 55%;
+  background-color: mat-color($mat-everis, 300);
+  border-radius: 3px 0 0 3px;
+  height: 44px;
+  width: 54px;
+  padding-top: 5px;
+  padding-left: 5px;
+  cursor: pointer;
+  &:hover {
+    color: mat-color($mat-everis, 300);
+    background: white;
+    border: 1px solid mat-color($mat-everis, 300);
+    @extend .transition-animation;
+    .icon-notas {
+      @extend .transition-animation;
+      filter: invert(44%) sepia(84%) saturate(1914%) hue-rotate(155deg) brightness(96%) contrast(98%);
+    }
+  }
+
+  .icon-notas{
+    @extend .transition-animation;
+    width:36px;
+    height: 36px;
+    filter: none;
+  }
+  
 }

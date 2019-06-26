@@ -7,6 +7,7 @@ export class Equipo{
 	constructor(
 		public id: number, 
         public nombre: string,
+        public codigo: string,
 		public fecha: Date,		
 		public projectSize: number,
 		public testProject: boolean,

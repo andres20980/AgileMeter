@@ -1,169 +1,82 @@
-<div class="espacio">
+<!-- <div class="espacio">
   <div *ngIf="(ErrorMessage != null || ErrorMessage != undefined )" class="alert alert-danger" id="danger">
     <strong>{{ErrorMessage}}</strong>
   </div>
   <div *ngIf="anadeNota != null" class=" alert alert-success">
     {{anadeNota}}
   </div>
-</div>
+</div> -->
+<mat-sidenav-container>
+
+    <mat-sidenav class="notas-panel"  #sidenav [mode]="'over'" [position]="'end'" fixedInViewport="true">
+        <!-- <p><button mat-button (click)="sidenav.toggle()">Toggle</button></p> -->
+        <div class="notas-row">
+            <div class="notas-container">
+            <mat-form-field class="comments-form-field" appearance="outline">
+                <mat-label>Notas Evaluación</mat-label>
+                <textarea matInput 
+                cdkTextareaAutosize
+              #autosize="cdkTextareaAutosize"
+              cdkAutosizeMinRows="6"
+              cdkAutosizeMaxRows="6"
+              placeholder="Notas Evaluación" [(ngModel)]="Evaluacion.notasEvaluacion"
+              [debounce]="1000" 
+              (ngModelChange)="saveNotas(Evaluacion)"
+              [readonly] = "UserRole != 'Evaluador' && UserRole != 'Administrador'"> 
+              </textarea>
+              </mat-form-field>
+            </div>
+            <div class="notas-container">
+                <mat-form-field class="comments-form-field" appearance="outline">
+                    <mat-label>Notas Objetivos</mat-label>
+                    <textarea matInput 
+                    cdkTextareaAutosize
+                  #autosize="cdkTextareaAutosize"
+                  cdkAutosizeMinRows="6"
+                  cdkAutosizeMaxRows="6"
+                  placeholder="Notas Objetivos" [(ngModel)]="Evaluacion.notasObjetivos"
+                  [debounce]="1000" 
+                  (ngModelChange)="saveNotas(Evaluacion)"
+                  [readonly] = "UserRole != 'Evaluador' && UserRole != 'Administrador'"> 
+                  </textarea>
+                  </mat-form-field>
+                </div>
+        </div>
+      </mat-sidenav>
 
 
+<mat-sidenav-content>
 
-<div  class="container">
+<div class="comments-button mat-elevation-z5" (click)="sidenav.toggle()"> 
+  <div class="icon-notas">
+    <img *ngIf="(Evaluacion.notasEvaluacion != null && Evaluacion.notasEvaluacion != '') || (Evaluacion.notasObjetivos != null && Evaluacion.notasObjetivos != '')" src="assets/comment_filled_white.png" title="Notas"/>
+    <img *ngIf="(Evaluacion.notasEvaluacion == null || Evaluacion.notasEvaluacion == '') && (Evaluacion.notasObjetivos == null || Evaluacion.notasObjetivos == '')" src="assets/comment_empty_white.png" title="Notas"/>
+  </div>
+  </div>
+
+<div  class="container" >
     <app-breadcrumb></app-breadcrumb>
     <div class="ng-card-box p-2 p-2 pt-5 pb-5 br-2 mat-elevation-z5">
         <div class="row">
-            <div class="col ml-5">
+            <div class="col ml-5" style="display: inline-flex">
               <h3>{{ 'PDF_GENERATOR.ASSESSMENT_RESULTS' | translate }}</h3>
+              <button class="transparente" (click)="ExportToExcel()" hidden>
+                <img src="assets/excel.png" title="Exportar a Excel" />  
+              </button>
             </div>
         </div>
 
         <div *ngIf="!ListaSectionConAsignaciones" class="loading mt-4">
             <app-loading ></app-loading>
         </div>
-  <!-- <div class="row">
-    <div class="col-6 offset-md-3">
-      <h2 _ngcontent-c3>Resultado evaluación</h2>
-    </div>
-  </div> -->
-  <!-- <div class="row" hidden>
-    <div class="ml-2 pl-5 col-xs-12 col-sm-6 col-md-3 col-lg-4 col-xl-3 mt-3" *ngIf="mostrarCheckboxes">
-
-      <div class="checkbox">
-        <form>
-          <div>
-            <input type="checkbox" id="notasPreg" name="notasPreg" value="" (click)="cambiarMostrarNotasPreg()" />
-            <label for="notasPreg">
-              <span>
-                
-              Tabla de preguntas
-            </label>
-          </div>
-        </form>
-      </div>
-
-      <div class="checkbox">
-        <form>
-          <div>
-            <input type="checkbox" id="notasEv" name="notasEv" value="" [ngClass]="{'disableCheck': Evaluacion.notasEv == null || Evaluacion.notasEv.length == '0'}"
-              (click)="cambiarMostrarNotasEv()" />
-            <label for="notasEv" [ngClass]="{'disable': Evaluacion.notasEv == null || Evaluacion.notasEv.length == '0'}">
-              <span>
-               
-              Notas de evaluación
-            </label>
-          </div>
-        </form>
-      </div>
-
-      <div class="checkbox">
-        <form>
-          <div>
-            <input type="checkbox" id="notasOb" name="notasOb" value="" [ngClass]="{'disableCheck': Evaluacion.notasOb == null || Evaluacion.notasOb.length == '0'}"
-              (click)="cambiarMostrarNotasOb()" />
-            <label for="notasOb" [ngClass]="{'disable': Evaluacion.notasOb == null || Evaluacion.notasOb.length == '0'}">
-              <span>
-               
-              Notas de objetivos
-            </label>
-          </div>
-        </form>
-      </div>
-
-      <div class="checkbox">
-        <form>
-          <div>
-            <input type="checkbox" id="notasSec" name="notasSec" value="" [ngClass]="{'disableCheck': !Evaluacion.flagNotasSec}"
-              (click)="cambiarMostrarNotasSec()" />
-            <label for="notasSec" [ngClass]="{'disable': !Evaluacion.flagNotasSec}">
-              <span>
-               
-              Notas de secciones
-            </label>
-          </div>
-        </form>
-      </div>
-
-      <div class="checkbox">
-        <form>
-          <div>
-            <input type="checkbox" id="notasAsig" name="notasAsig" value="" [ngClass]="{'disableCheck': !Evaluacion.flagNotasAsig}"
-              (click)="cambiarMostrarNotasAsig()" />
-            <label for="notasAsig" [ngClass]="{'disable': !Evaluacion.flagNotasAsig}">
-              <span>
-               
-              Notas de módulos
-            </label>
-          </div>
-        </form>
-      </div>
-
-      <div class="mt-3">
-        <button type="button" class="btnpdf mt-1 mt-lg-0 ml-0" (click)="Volver('/evaluacionprevia')">Volver</button>
-        <button type="button" class="btnpdf mt-1 mt-lg-0" (click)="downloadPDF()">Generar PDF</button>
-      </div>
-
-    </div>
-
-   
-    <div class="col-xs-12 col-sm-5 col-md-4 col-lg-4 col-xl-5 mt-3 text-center" id="tablaPuntuaciones">
-
-      <div class="data mb-2">
-        Proyecto: <b>{{Evaluacion.nombre}}</b>
-        <br />
-        Fecha: <b>{{Evaluacion.fecha | date:'dd/MM/yyyy'}}</b>
-      </div>
-
-      <table class="table-fill mx-auto " style="overflow-x:auto;">
-        <thead>
-          <tr>
-            <th class="text-left">Secciones</th>
-            <th class="text-left">Puntuación</th>
-          </tr>
-        </thead>
-        <tbody class="table-hover">
-          <tr *ngFor="let datos of ListaDeDatos; let i = index">
-            <td class="text-left" [ngClass]="{'suspenso': datos.respuestasCorrectas < ListaSeccionesAgileCompliance[i]}">{{datos.nombre
-              | titlecase}}</td>
-            <td class="text-left" [ngClass]="{'suspenso': datos.respuestasCorrectas < ListaSeccionesAgileCompliance[i]}">{{datos.respuestasCorrectas}}%</td>
-          </tr>
-          <tr>
-            <td class="text-left total" [ngClass]="{'suspenso': Evaluacion.puntuacion < AgileComplianceTotal}"><strong>Total</strong></td>
-            <td class="text-left total" [ngClass]="{'suspenso': Evaluacion.puntuacion < AgileComplianceTotal}">{{Evaluacion.puntuacion}}%</td>
-          </tr>
-          <tr>
-            <td>Media</td>
-            <td class="media" *ngIf="Evaluacion.media == -1">No existen evaluaciones</td>
-
-            <td class="media" *ngIf="Evaluacion.media != -1" height="100%">{{Evaluacion.media | number:'1.0-1'}}%</td>
-          </tr>
-        </tbody>
-      </table>
-
-
-    </div>
-
-    <div class="col-xs-12 col-sm-12 col-md-3 col-lg-2 text-center mt-4">
-
-
-
-     
-      <div id="Grafica" class="mx-auto">
-        <canvas id="canvas" baseChart [datasets]="barChartData" [labels]="ListaNombres" [options]="barChartOptions"
-          [legend]="barChartLegend" [chartType]="barChartType" [colors]="chartColors"></canvas>
-      </div> 
-
-    </div>
-
-  </div>
-
-  <div class="data mb-2">
-    <b>{{Evaluacion.nombre}}</b> - <b>{{Evaluacion.fecha | date:'dd/MM/yyyy'}}</b>
-  </div> -->
 
   <div class="circle-progress-container" *ngIf="ListaSectionConAsignaciones && ListaSectionConAsignaciones.length>0">
-      <div *ngFor="let datos of ListaSectionConAsignaciones; let i = index" [attr.data-index]="i" [ngClass]="formatLevel(ListaSectionConAsignaciones[i])" class="circle-progress">
-    <circle-progress
+      <div *ngFor="let datos of ListaSectionConAsignaciones; let i = index" [attr.data-index]="i" [attr.id]="datos.nombre" (click)="selectedSection = datos; scroll(target);" [ngClass]="formatLevel(ListaSectionConAsignaciones[i])" class="circle-progress mat-elevation-z3 m-2">
+        <div *ngIf="datos.numNotas > 0" class="top-comment" data-html2canvas-ignore="true">
+          <img class="" src="assets/comment_empty.png" title="Notas"/>
+          <p>{{datos.numNotas}}</p>
+        </div>
+        <circle-progress style="font-family: 'Raleway', sans-serif;"
   [percent]= "ListaSectionConAsignaciones[i].puntuacion"
   [toFixed] = "1"
   [subtitle] = "[formatSubtitle(ListaSectionConAsignaciones[i])]"
@@ -177,14 +90,15 @@
 
   [innerStrokeColor]="getLevelColorInner(ListaSectionConAsignaciones[i])"
   [outerStrokeColor]="getLevelColorOuter(ListaSectionConAsignaciones[i])"
-  [outerStrokeLinecap]="'square'"
+  [outerStrokeLinecap]="'round'"
   [animation]="true"
   [renderOnClick]="false"
   [animationDuration]="300"
     ></circle-progress>
-    <div class="text-center"><b>{{datos.nombre}}</b></div>
+    <div class="text-center circle-progress-title" data-html2canvas-ignore="true"><b>{{datos.nombre}}</b></div>
+    
   </div>
-   <div  [ngClass]="formatTotalLevel(ListaSectionConAsignaciones)">
+   <div  [ngClass]="formatTotalLevel(ListaSectionConAsignaciones)" [attr.id]="'total'" (click)="selectedSection = null" class="circle-progress mat-elevation-z3 m-2">
         <circle-progress
       [percent]= "getTotalPercent(ListaSectionConAsignaciones)"
       [toFixed] = "1"
@@ -199,19 +113,22 @@
       [innerStrokeWidth]="10"
       [innerStrokeColor]="'#b8457a30'"
       [outerStrokeColor]="'#b8457a'"
-      [outerStrokeLinecap]="'square'"
+      [outerStrokeLinecap]="'round'"
       [animation]="true"
       [renderOnClick]="false"
       [animationDuration]="300"
         ></circle-progress>
-        <div class="text-center"><b>{{ 'PDF_GENERATOR.ASSESMENT' | translate }}</b></div>
-        <div class="text-center"><b>{{ 'PDF_GENERATOR.GLOBAL' | translate }}</b></div>
+        <div class="text-center circle-progress-title" data-html2canvas-ignore="true"><b>{{ 'PDF_GENERATOR.ASSESMENT' | translate }} {{ 'PDF_GENERATOR.GLOBAL' | translate }}</b></div>
+        <!-- <div class="text-center"><b>GLOBAL</b></div> -->      
   </div> 
-
 </div>
-
+<app-section-results *ngIf="selectedSection != null" [SectionConAsignacionesDto]="selectedSection" >
+    loading
+</app-section-results>
+<div #target></div>
   </div>
-  <mat-expansion-panel class="notas-panel">
+
+  <!-- <mat-expansion-panel class="notas-panel">
     <mat-expansion-panel-header>
       <mat-panel-title>
         {{ 'PDF_GENERATOR.NOTES' | translate }}
@@ -251,36 +168,15 @@
             </mat-form-field>
           </div>
   </div>
-  </mat-expansion-panel>
+  </mat-expansion-panel> -->
   
-  <div class="table-row" *ngIf="true">
-    <app-section-results *ngIf="MostrarPreguntas && ListaDeRespuestas && ListaDeRespuestas.length > 0" [lSectionConAsignacionesDto]="ListaSectionConAsignaciones" >
-      {{ 'PDF_GENERATOR.LOADING' | translate }}
-    </app-section-results>
+  <br>
 
-    <comentarios-table *ngIf="MostrarComentarios && ListaDeAsignaciones" [dataInput]="ListaDeAsignaciones">
-      {{ 'PDF_GENERATOR.LOADING' | translate }}
-    </comentarios-table>
-  </div>
-
-  <div class="row">
-
-    <div class="col-xs-0 col-sm-0 col-md-3 col-lg-3 mt-3 text-center"></div>
-
-    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-5 mt-3 text-center">
-
-
-
-    </div>
-
-    <div class="col-xs-0 col-sm-0 col-md-4 col-lg-3 mt-3 text-center"></div>
-
-
-
-  </div>
 </div>
+</mat-sidenav-content>
+</mat-sidenav-container>
 
-<div id="my_mm" style="height:1mm;display:none"></div>
+<!-- <div id="my_mm" style="height:1mm;display:none"></div>
 
 <ng-template #notasAdmin let-cl="close" let-di="dismiss">
   <div class="modal-content">
@@ -298,4 +194,4 @@
       <button type="button" class="btn btn-secondary" (click)="cl('Cerrar')">{{ 'PDF_GENERATOR.MODAL_BTN_CANCEL' | translate }}</button>
     </div>
   </div>
-</ng-template>
+</ng-template> -->

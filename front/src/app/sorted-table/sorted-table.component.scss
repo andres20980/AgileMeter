@@ -68,15 +68,20 @@ table {
 
    tr.example-detail-row {
     height: 0;
+    border-bottom: solid 1px;
+    border-color: #dfdfdf;
+  }
+  td.cdk-column-expandedDetail{
+    border:none;
   }
   
-  tr.example-element-row:not(.example-expanded-row):hover {
-    background: #f5f5f5;
-  }
+  // tr.example-element-row:not(.example-expanded-row):hover {
+  //   background: #f5f5f5;
+  // }
   
-  tr.example-element-row:not(.example-expanded-row):active {
-    background: #efefef;
-  }
+  // tr.example-element-row:not(.example-expanded-row):active {
+  //   background: #efefef;
+  // }
   
   .example-element-row td {
     border-bottom-width: 0;
