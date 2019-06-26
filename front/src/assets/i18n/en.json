@@ -237,7 +237,8 @@
 		"MODAL_TITLE": "Notas Respuestas Administrador",
 		"MODAL_PLACEHOLDER": "Inserte aquí el texto",
 		"MODAL_BTN_SAVE": "Guardar",
-		"MODAL_BTN_CANCEL": "Cancelar"
+		"MODAL_BTN_CANCEL": "Cancelar",
+		"EXCEL_EXPORT": "Exportar a Excel"
 	},
 	"SECTION_RESULTS": {
 		"SECTION_NOTES": "Notas",
