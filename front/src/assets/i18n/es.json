@@ -2,6 +2,10 @@
 	"APP": {
 		"HI": "Hola"
 	},
+	"BREADCRUMB": {
+		"HOME": "Inicio",
+		"NEW_ASSESSMENT": "Nueva evaluación"
+	},
 	"HOME": {
 		"SELECT_TEAM": "Seleccione un equipo",
 		"SELECT_ASSESSMENT": "Seleccione un tipo de evaluación",

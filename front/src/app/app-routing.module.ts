@@ -42,7 +42,7 @@ const appRoutes: Routes = [
   { path: 'evaluationresults', component: PdfgeneratorComponent },
   { path: 'finishedevaluations', component: PreviousevaluationComponent },
   { path: 'pendingevaluations', component: PendingEvaluationComponent },
-  { path: '**', component: LoginComponent }
+  { path: '**', component: HomeComponent }
 
 ];
 

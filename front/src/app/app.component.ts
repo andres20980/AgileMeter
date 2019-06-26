@@ -41,6 +41,7 @@ export class AppComponent {
 
   public ChangeLang(lang : string){
     this.translate.use(lang);
+    this.refreshBreadCrumb();
   }
 
 
@@ -80,14 +81,19 @@ export class AppComponent {
   }
 
 
-  public pushBreadcrumb(_name : string, _path:string){
-    var bc = this._storageDataService.breadcrumbList.find(x => x.name == _name && x.path == _path)
+  public pushBreadcrumb(_var : string, _path:string){
+    var bc = this._storageDataService.breadcrumbList.find(x => x.var == _var && x.path == _path)
 
     if(bc != null){
       let index: number = this._storageDataService.breadcrumbList.indexOf(bc);
       this.popBreadcrumb(index);
     }
-    this._storageDataService.breadcrumbList.push({name: _name, path: _path});
+    let _name = "";
+    this.translate.get(_var).subscribe((res: string) => {
+      _name= res;
+      this._storageDataService.breadcrumbList.push({name: _name, var: _var, path: _path});
+    });
+    
   }
 
   public popBreadcrumb(index: number){
@@ -99,6 +105,14 @@ export class AppComponent {
 
   public getBreadcrumb(index: number) : any{
     return this._storageDataService.breadcrumbList[index];
+  }
+
+  public refreshBreadCrumb(){
+    this._storageDataService.breadcrumbList.forEach((br, index) => {
+      this.translate.get(br.var).subscribe((res: string) => {
+        br.name= res;
+      });
+    });
   }
 }
 
