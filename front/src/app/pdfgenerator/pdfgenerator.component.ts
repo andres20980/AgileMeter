@@ -31,6 +31,7 @@ import { PreviousevaluationComponent } from 'app/previousevaluation/previouseval
 import { Evaluacion } from 'app/Models/Evaluacion';
 import { Workbook } from 'exceljs';
 import * as fs from 'file-saver';
+import { SectionResultsComponent } from './section-results/section-results.component';
 
 
 export interface RespuestaConNotasTabla {
@@ -104,6 +105,8 @@ export class PdfgeneratorComponent implements OnInit {
 
   //CircleProgress
   public selectedSection: any = null;
+
+  @ViewChild(SectionResultsComponent) sectionResult: SectionResultsComponent;
 
   scroll(el: HTMLElement) {
    
@@ -374,23 +377,92 @@ export class PdfgeneratorComponent implements OnInit {
     });
   }
 
-  public GetCaptures(id: string): any{
-    var elemento = document.getElementById(id);
-    html2canvas(elemento).then(canvas => {
-      //document.body.appendChild(canvas);
-      return canvas.toDataURL("image/png");
-              });
-  }
+  // public GetCaptures(id: string): any{
+  //   var elemento = document.getElementById(id);
+  //   html2canvas(elemento).then(canvas => {
+  //     //document.body.appendChild(canvas);
+  //     return canvas.toDataURL("image/png");
+  //             });
+  // }
 
   public ExportToExcel(){
-
     let workbook = new Workbook();
-    let worksheet = workbook.addWorksheet('Results');
 
-    let titleRow = worksheet.addRow(['', 'Resultados de la evaluación ' + this.Evaluacion.assessmentName + ' del ' + this.datePipe.transform(this.Evaluacion.fecha, 'dd-MM-yyyy') + ' del equipo ' +  this.Project.nombre]);
-    titleRow.font = { name: 'Arial', family: 4, size: 16, color: { argb: '5c981b' }, bold: true }
+    var correct = workbook.addImage({
+      base64: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAFoSURBVHja7NivTsQwHMDx7w5e4AQJ4kJIgIQ/AcsbnMEgwICAYDA8AAKHQOAwJOAgIRMoDJo7EKA4RUh4AEDgSYBifqK5rF23tewS+jNL2zT9rGv7a5YopRikaDBgEUERFEGhY7i/IrlfCTneEDAHvALvAGrxsrYZmgGegR7wBhzU+cnmgTtgQqvbBbbqAC0BN0Azo205dw15jjZwZXnxz7+coTZwbRlDAYdFQCPAguyMEJhN4MEVtC/bsgc8AbMBMGeuu2wd2NPKU8AtMO0BA3BqwphAqxl1TaCTgxp3wJwA20VTx4dlTXWASQOmWxVjAh0BPxZUVwD9mFZVjAn0KOvIdNke1VBeMbaDMZXnBZBktLfk9G34xOSd1HmoMUtf69YuC3JBmTBrWl/vF7RUBlChMUVymQuqMqZocrWhvGDKZPsU2AC+tLpvuWhVxpS9D50DL8COlI8l13mJJP5siKAI+m+g3wEASotSPg/rK5YAAAAASUVORK5CYII=",
+      extension: 'png',
+    });
+
+    var incorrect = workbook.addImage({
+      base64: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAH+SURBVHja7NfBS1RRFAbw5xhGBOJCAzH6mghaBK2MDyrDICRD/xHDcNEmKGgzY7toG7SITIkStHIrGOSydg1RYuEmhfhoEVTETJv74CHz7tx73gwEzeLw4M275/0G7j3vnKTRaCT/UiRdUBf034BEpHFIxGkR5zL3YuOwiFMizqf3LKCSS7Ai4p2IZyIqkZCSiHERz0W8FbEs4rYVdFzEaxENF7/ctRoBGhOxlcnx010nLaAzInYzybIRgjoh4qWIepP1ixYQMv8oFjUlYtuz9rEFdEDEC0/SPFRZxIZnzRcRV62nbEhELRDVJ+KKw9Q9z9+xbuo0hgNRoyLee57ZEzEvYqQoKBT1SsTvnN9+iJjL5iwKCkXlxX0RR9oNsqB2RFxzBTLpBChFbQWCKiJ6muVpJygRcTkQlJujXaAeERdEPAkE3ew06JKIz5EbutopEESsGU9ZtZ2gXhHTIj61eGktBlUEdFLEZotv01xERTeDekVcFLEu4o/nJbci61TFCiqLeONJ/E3EXRFHDcVzytqgfc1J+F3EbIvi6UMtWUDHPB/LeyIGWxRPH+qRdQ+t7uuHP4qYEXEwsKdOUfVMX/5BxIT1lA041AMRT0XcMIxAw25yeShiQcT1osd+QES/CO5vISJi0M1mZ10XWrhSlwoMiU1zdGf7LqhT8XcA/RsjSgptej8AAAAASUVORK5CYII=",
+      extension: 'png',
+    });
+
+    var nc = workbook.addImage({
+      base64: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAGiSURBVHja7Ni/S1VhHMfx1zHLIdCmgpAuIbq4FUTUErW0hFCY1D/g0hzhjSAKN4eWpv6BC5WLgw1pQwQFuYiD0WKYeAni2iZeuS7PXeRI+px75BnuZzuH8zy8+Zzvr+fJWq2WlNQjMXWB/qfeMjev1Or7X13CUvthbeJcOUCVWj3DVVzGDhbxI+fTJZzHRtkOncIbDKEPDaxgBnMBsq2N44ihExgMMHAG1/Ee7zB63EGdBag83cE8xlLKskHUcDultO/DawwXTvuc9I3VRUzjAZqpFMYx3EipUp/E49RaxxVcSAmoHzfLBDrqUJWV7dBuxJqzZQFleILTqcxDU3gWse5PGd3+KV5ExtyvTjtUjYSBf/gY7dD+ya5SqxeBge8HORTTy6p4WfBXv+pUUFfxvCDMJ3woOsL2hNQu6szfsM92UYeu4VFBmCYm8bUTdegnvkVW5PZgfx9vO1UYN4NDsxEwc2F0nT1sbBxW63iIu/gcjjoHqYEvGMc9LOd0+/w+FHP7EcrACG6Fg99A6Glb+I0FrB61vkUDdW8/ukApA+0NAOX3VWtrBPEFAAAAAElFTkSuQmCC",
+      extension: 'png',
+    });
+
+    let worksheet = workbook.addWorksheet('Resultados',{ views: [{showGridLines: false }], properties: {tabColor:{argb:'75c222'}} });
+
+    let titleRow = worksheet.addRow(['', 'Resultados de la evaluación del ' + this.datePipe.transform(this.Evaluacion.fecha, 'dd-MM-yyyy') + ' del equipo ' +  this.Project.nombre]);
+    titleRow.font = { name: 'Arial', family: 4, size: 16, color: { argb: '555555' }, bold: true }
     worksheet.addRow([]);
 
+    //// logo ////
+    worksheet.getRow(1).height = 45; 
+    var l = document.getElementById("logo");
+    html2canvas(l, {logging:false}).then(canvas => {
+
+      var logo = workbook.addImage({
+        base64: canvas.toDataURL("image/png"),
+        extension: 'png',
+      });
+     
+      worksheet.addImage(logo, {
+        tl: { col: (17.3), row: 0 },
+        br: { col: (22), row: 1 }
+    
+    });
+  });
+
+    //// GRADIENT LINE ////
+
+    worksheet.mergeCells(2, 1, 2, this.ListaSectionConAsignaciones.length * 3 + 7);
+    var cellLine = worksheet.getCell(2, 1);
+    cellLine.fill = {
+      type: 'gradient',
+      gradient: 'angle',
+      degree: 0,
+      stops: [
+        {position:0, color:{argb:'87a900'}},
+        {position:0.3333, color:{argb:'59971c'}},
+        {position:0.6666, color:{argb:'2a8a41'}},
+        {position:1, color:{argb:'317daf'}}
+      ]
+    };
+    worksheet.getRow(2).height = 3;
+
+    ////  ASSESSMENT NAME  ////
+    worksheet.mergeCells(4, 2, 4, this.ListaSectionConAsignaciones.length * 3 + 4);
+    var cellAss = worksheet.getCell(4, 2);
+    cellAss.fill = {
+      type: 'pattern',
+      pattern: 'solid',
+      fgColor: { argb: '5c981b' },
+      bgColor: { argb: '5c981b' }
+    };
+    cellAss.font = {
+      name: 'Arial',
+      color: { argb: 'ffffff' },
+      family: 2,
+      size: 14,
+      bold: true
+    };
+    cellAss.alignment = { vertical: 'top', horizontal: 'center', wrapText: true };
+    cellAss.value = this.Evaluacion.assessmentName ;
+
+    //// SECTIONS ////
       this.ListaSectionConAsignaciones.forEach((section, index) => {
       var elemento = document.getElementById(section.nombre);
       html2canvas(elemento, {logging:false}).then(canvas => {
@@ -401,15 +473,15 @@ export class PdfgeneratorComponent implements OnInit {
         });
        
         worksheet.addImage(imageId2, {
-          tl: { col: (index * 3 + 1), row: 3 },
-          br: { col: (index * 3 + 4), row: 13 }
+          tl: { col: (index * 3 + 1), row: 4 },
+          br: { col: (index * 3 + 4), row: 14 }
         });
 
-        var h = section.nombre.length > 19 ? 15: 14;
+        var h = section.nombre.length > 19 ? 16: 15;
 
-        worksheet.mergeCells(14, index * 3 + 2, h, index * 3 + 4);
+        worksheet.mergeCells(15, index * 3 + 2, h, index * 3 + 4);
 
-        var cell = worksheet.getCell(14, index * 3 + 2);
+        var cell = worksheet.getCell(15, index * 3 + 2);
 
         cell.fill = {
               type: 'pattern',
@@ -434,6 +506,193 @@ export class PdfgeneratorComponent implements OnInit {
         
         cell.value = section.nombre;
 
+        //// SECTION TAB ////
+        let worksheetSec = workbook.addWorksheet(section.nombre,{ views: [{showGridLines: false }], properties: {tabColor:{argb:'03bfda'}} });
+        worksheetSec.getColumn(2).width = 4;
+        worksheetSec.getColumn(19).width = 4;
+
+        /////// NOTAS SECCION /////
+        worksheetSec.mergeCells(2, 2, 2, 17); 
+      
+        var cellNotasSec = worksheetSec.getCell(2, 2);
+        cellNotasSec.fill = {
+          type: 'pattern',
+          pattern: 'solid',
+          fgColor: { argb: '5c981b' },
+          bgColor: { argb: '5c981b' }
+        };
+        cellNotasSec.font = cell.font;
+        cellNotasSec.alignment = { vertical: 'top', horizontal: 'left', wrapText: true, indent:2 };
+        cellNotasSec.border = {
+          top: {style:'medium', color: {argb:'5c981b'}},
+          left: {style:'medium', color: {argb:'5c981b'}},
+          bottom: {style:'medium', color: {argb:'5c981b'}},
+          right: {style:'medium', color: {argb:'5c981b'}}
+        };
+        cellNotasSec.value = "Notas";
+
+        worksheetSec.mergeCells(3, 2, 8, 17); 
+
+        var cellNotasSecC = worksheetSec.getCell(3, 2);
+        cellNotasSecC.font = {
+          name: 'Arial',
+          color: { argb: '555555' },
+          family: 2,
+          size: 11,
+          bold: false
+        };
+        cellNotasSecC.alignment = cellNotasSec.alignment;
+        cellNotasSecC.border = cellNotasSec.border;
+        cellNotasSecC.value = section.notas;
+
+
+        //// MODULOS ////
+
+        section.asignaciones.forEach((modulo, index) => {
+          
+          let offset = 12;
+          if(index > 0){
+            for(var i = 0; i < index; i++){
+              offset += section.asignaciones[i].preguntas.length + 14;
+            }
+          }
+          worksheetSec.mergeCells(offset, 2, offset, 19); 
+          var cellMod = worksheetSec.getCell(offset, 2);
+          cellMod.fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: '03a8c0' },
+            bgColor: { argb: '03a8c0' }
+          };
+          cellMod.font = cell.font;
+          cellMod.alignment = { vertical: 'top', horizontal: 'left', wrapText: true, indent: 2 };
+          cellMod.border = {
+            top: {style:'medium', color: {argb:'03a8c0'}},
+            left: {style:'medium', color: {argb:'03a8c0'}},
+            bottom: {style:'medium', color: {argb:'03a8c0'}},
+            right: {style:'medium', color: {argb:'03a8c0'}}
+          };
+          cellMod.value =  modulo.nombre;
+
+          this.createOuterBorder(offset+1, 2, offset + modulo.preguntas.length + 11, 19, worksheetSec, '03a8c0');
+
+          //// NOTAS MODULO ////
+          worksheetSec.mergeCells(offset+2, 3, offset+2, 18); 
+          var cellNotasMod = worksheetSec.getCell(offset+2, 3);
+          cellNotasMod.fill = cellNotasSec.fill ;
+          cellNotasMod.font = cellNotasSec.font;
+          cellNotasMod.alignment = cellNotasSec.alignment;
+          cellNotasMod.border = cellNotasSec.border;
+          cellNotasMod.value = "Notas";
+
+          worksheetSec.mergeCells(offset+3, 3, offset+8, 18);
+          var cellNotasModC = worksheetSec.getCell(offset+3, 3);
+          cellNotasModC.font = cellNotasSecC.font;
+          cellNotasModC.alignment = cellNotasSec.alignment;
+          cellNotasModC.border = cellNotasSec.border;
+          cellNotasModC.value = modulo.notas;
+
+
+          //// PREGUNTAS ////
+
+          //// Pregunta ////
+          worksheetSec.getRow(offset+10).height = 32;
+          worksheetSec.mergeCells(offset+10, 3, offset+10, 11);
+          var cellPreg = worksheetSec.getCell(offset+10, 3);
+          cellPreg.font = {
+            name: 'Arial',
+            color: { argb: '555555' },
+            family: 2,
+            size: 11,
+            bold: true
+          };
+          cellPreg.alignment = { vertical: 'middle', horizontal: 'left', wrapText: true, indent: 2 };
+          cellPreg.border = {
+            bottom: {style:'thin', color: {argb:'5c981b'}}
+          };
+          cellPreg.value = "Pregunta";
+
+          //// Respuesta ////
+          worksheetSec.mergeCells(offset+10, 12, offset+10, 13);
+          var cellRes = worksheetSec.getCell(offset+10, 12);
+          cellRes.font = cellPreg.font;
+          cellRes.alignment = cellPreg.alignment;
+          cellRes.border = cellPreg.border;
+          cellRes.value = "Respuesta";
+
+
+          //// Notas ////
+          worksheetSec.mergeCells(offset+10, 14, offset+10, 18);
+          var cellNot = worksheetSec.getCell(offset+10, 14);
+          cellNot.font = cellPreg.font;
+          cellNot.alignment = cellPreg.alignment;
+          cellNot.border = cellPreg.border;
+          cellNot.value = "Notas";
+
+          //// table content //
+          modulo.preguntas.forEach((pregunta, index) => {
+            //preg
+            worksheetSec.getRow(offset+11 + index).height = 32;
+            worksheetSec.mergeCells(offset+11 + index, 3, offset+11 + index, 11);
+            var cellPregC = worksheetSec.getCell(offset+11 + index, 3);
+            cellPregC.font = {
+              name: 'Arial',
+              color: { argb: '555555' },
+              family: 2,
+              size: 10,
+              bold: false
+            };
+            cellPregC.alignment = cellPreg.alignment;
+            cellPregC.border = {
+              bottom: {style:'thin', color: {argb:'5c981b'}}
+            };
+            cellPregC.value = pregunta.pregunta;
+
+            //resp
+            worksheetSec.mergeCells(offset+11 + index, 12, offset+11 + index, 13);
+            var cellResC = worksheetSec.getCell(offset+11 + index, 12);
+            cellResC.font =cellPregC.font;
+            cellResC.alignment = { vertical: 'middle', horizontal: 'left', wrapText: true, indent: 3 };
+            cellResC.border = cellPregC.border;
+            cellResC.value = this.displayRespuesta(pregunta);
+
+            let check = this.checkRespuestaCorrecta(pregunta);
+            if(check == 'respuesta-correcta'){
+              worksheetSec.addImage(correct, {
+                tl: { col: 12, row: offset+10.4+index },
+                ext: { width: 26, height: 26 },
+                editAs: 'oneCell'
+              });
+            }
+            else if(check == 'respuesta-incorrecta'){
+              worksheetSec.addImage(incorrect, {
+                tl: { col: 12, row: offset+10.4+index },
+                ext: { width: 26, height: 26 },
+                editAs: 'oneCell'
+              });
+            }
+            else if(check == 'respuesta-no-contestada'){
+              worksheetSec.addImage(nc, {
+                tl: { col: 12, row: offset+10.4+index },
+                ext: { width: 26, height: 26 },
+                editAs: 'oneCell'
+              });
+            }
+            
+
+            //notas
+            worksheetSec.mergeCells(offset+11 + index, 14, offset+11 + index, 18);
+            var cellNotC = worksheetSec.getCell(offset+11 + index, 14);
+            cellNotC.font =cellPregC.font;
+            cellNotC.alignment = cellPregC.alignment;
+            cellNotC.border = cellPregC.border;
+            cellNotC.value = pregunta.notas;
+
+          });
+
+        });
+        
+
         if(index == this.ListaSectionConAsignaciones.length - 1){
           var elementoT = document.getElementById("total");
           html2canvas(elementoT, {logging:false}).then(canvas => {
@@ -444,13 +703,13 @@ export class PdfgeneratorComponent implements OnInit {
             });
       
             worksheet.addImage(imageId, {
-              tl: { col: (this.ListaSectionConAsignaciones.length * 3 + 1), row: 3 },
-              br: { col: (this.ListaSectionConAsignaciones.length * 3 + 4), row: 13 }
+              tl: { col: (this.ListaSectionConAsignaciones.length * 3 + 1), row: 4 },
+              br: { col: (this.ListaSectionConAsignaciones.length * 3 + 4), row: 14 }
             });
 
-            worksheet.mergeCells(14, this.ListaSectionConAsignaciones.length * 3 + 2, 14, this.ListaSectionConAsignaciones.length * 3 + 4); 
+            worksheet.mergeCells(15, this.ListaSectionConAsignaciones.length * 3 + 2, 15, this.ListaSectionConAsignaciones.length * 3 + 4); 
       
-            var cell = worksheet.getCell(14, this.ListaSectionConAsignaciones.length * 3 + 2);
+            var cell = worksheet.getCell(15, this.ListaSectionConAsignaciones.length * 3 + 2);
 
             cell.fill = {
                   type: 'pattern',
@@ -477,7 +736,7 @@ export class PdfgeneratorComponent implements OnInit {
 
 
             /////// NOTAS EVALUACIÓN /////
-            worksheet.mergeCells(18, 2, 18, 10); 
+            worksheet.mergeCells(18, 2, 18, 11); 
       
             var cellNotasEv = worksheet.getCell(18, 2);
             cellNotasEv.fill = {
@@ -487,7 +746,7 @@ export class PdfgeneratorComponent implements OnInit {
               bgColor: { argb: '5c981b' }
             };
             cellNotasEv.font = cell.font;
-            cellNotasEv.alignment = { vertical: 'top', horizontal: 'left', wrapText: true };
+            cellNotasEv.alignment = { vertical: 'top', horizontal: 'left', wrapText: true, indent: 2 };
             cellNotasEv.border = {
               top: {style:'medium', color: {argb:'5c981b'}},
               left: {style:'medium', color: {argb:'5c981b'}},
@@ -496,14 +755,14 @@ export class PdfgeneratorComponent implements OnInit {
             };
             cellNotasEv.value = "Notas Evaluación";
 
-            worksheet.mergeCells(19, 2, 26, 10); 
+            worksheet.mergeCells(19, 2, 26, 11); 
 
             var cellNotasEvC = worksheet.getCell(19, 2);
             cellNotasEvC.font = {
               name: 'Arial',
-              color: { argb: '444444' },
+              color: { argb: '555555' },
               family: 2,
-              size: 12,
+              size: 11,
               bold: false
             };
             cellNotasEvC.alignment = cellNotasEv.alignment;
@@ -512,18 +771,18 @@ export class PdfgeneratorComponent implements OnInit {
 
 
             /////// NOTAS OBJETIVOS /////
-            worksheet.mergeCells(18, 12, 18, 20); 
+            worksheet.mergeCells(18, 13, 18, 22); 
       
-            var cellNotasOb = worksheet.getCell(18, 12);
+            var cellNotasOb = worksheet.getCell(18, 13);
             cellNotasOb.fill = cellNotasEv.fill;
             cellNotasOb.font = cell.font;
             cellNotasOb.alignment = cellNotasEv.alignment;
             cellNotasOb.border = cellNotasEv.border;
             cellNotasOb.value = "Notas Objetivos";
 
-            worksheet.mergeCells(19, 12, 26, 20); 
+            worksheet.mergeCells(19, 13, 26, 22); 
 
-            var cellNotasObC = worksheet.getCell(19, 12);
+            var cellNotasObC = worksheet.getCell(19, 13);
             cellNotasObC.font = cellNotasEvC.font;
             cellNotasObC.alignment = cellNotasEv.alignment;
             cellNotasObC.border = cellNotasEv.border;
@@ -579,6 +838,48 @@ export class PdfgeneratorComponent implements OnInit {
     //   fs.saveAs(blob, 'Evaluaciones_finalizadas_'+  this.Project.nombre+'.xlsx');
     // })
   }
+
+
+
+  createOuterBorder = (startR, startC, endR, endC, worksheet, color) => {
+
+    //const startColNumber = ExcelUtils.alphaToNum(start.column);
+    //const endColNumber = ExcelUtils.alphaToNum(end.column);
+    //const colRange = startC - endR + 1;
+    const borderStyle = {
+      style: 'medium',
+      color: {argb: color}
+    };
+    const leftBorder = { left: borderStyle };
+    const rightBorder = { right: borderStyle };
+    const topBorder = { top: borderStyle };
+    const bottomBorder = { bottom: borderStyle};
+    const lefttop = { left: borderStyle, top: borderStyle};
+    const righttop ={ right: borderStyle, top: borderStyle};
+    const letfbottom ={ left: borderStyle, bottom: borderStyle};
+    const rightbottom ={ right: borderStyle, bottom: borderStyle};
+
+
+    for (let i = startR; i <= endR; i++) {
+      const leftBorderCell = worksheet.getCell(i, startC);
+      const rightBorderCell = worksheet.getCell(i, endC);
+      leftBorderCell.border = leftBorder;
+      rightBorderCell.border = rightBorder;
+    }
+  
+    for (let i = startC; i <= endC; i++) {
+
+      const topBorderCell = worksheet.getCell(startR, i);
+      const bottomBorderCell = worksheet.getCell(endR, i);
+      topBorderCell.border = topBorder;
+      bottomBorderCell.border =  bottomBorder;
+    }
+
+    worksheet.getCell(startR, startC).border = lefttop;
+    worksheet.getCell(startR, endC).border = righttop;
+    worksheet.getCell(endR, startC).border = letfbottom;
+    worksheet.getCell(endR, endC).border = rightbottom;
+  };
 
   //Da los datos a las diferentes listas que usaremos para las graficas
   // public shareDataToChart() {
@@ -892,64 +1193,63 @@ export class PdfgeneratorComponent implements OnInit {
   //   }
   // }
 
-  // checkRespuestaCorrecta(row): string {
-  //   //Pregunta correcta == null --> Si (habilitante)
-  //   //Pregunta correcta != null --> Si o No
-    
+  checkRespuestaCorrecta(row): string {
+    let classString: string;
+    let respuestaString: string = this.displayRespuesta(row);
+    if (respuestaString == "Sí"){
+      respuestaString = "Si"}
 
-  //   let classString: string;
-  //   let respuestaString: string = this.displayRespuesta(row);
-
-
-  //   //Si (habilitante)
-  //   if (row.correcta == null) {
-  //     //Contestado -> Si
-  //     switch (row.estado) {
-  //       case 0:
-  //         classString = "respuesta-no-contestada";
-  //         break
-  //       case 1:
-  //         classString = "respuesta-correcta";
-  //         break
-  //       case 2:
-  //         classString = "respuesta-incorrecta";
-  //         break
-  //     }
-  //   } else {
-  //     if (respuestaString == row.correcta) {
-  //       classString = "respuesta-correcta";
-  //     } else {
-  //       //No contestada
-  //       if (row.estado == 0) {
-  //         classString = "respuesta-no-contestada";
-  //       } else {
-  //         classString = "respuesta-incorrecta";
-  //       }
-  //     }
-  //   }
+    //Si (habilitante)
+    if (row.correcta == null) {
+      //Contestado -> Si
+      switch (row.estado) {
+        case 0:
+          classString = "respuesta-no-contestada";
+          break
+        case 1:
+          classString = "respuesta-correcta";
+          break
+        case 2:
+          classString = "respuesta-incorrecta";
+          break
+      }
+    } else {
+      if (respuestaString == row.correcta) {
+        classString = "respuesta-correcta";
+      } else {
+                //No contestada
+        if (row.estado == 0) {
+          classString = "respuesta-no-contestada";
+        } else {
+          classString = "respuesta-incorrecta";
+        }
+      }
+    }
+    return classString;
+  }
 
 
   //   return "material-icons " + classString;
   // }
 
-  // displayRespuesta(row: RespuestaConNotasTabla): string {
-  //   let respuesta: string = "";
-  //   switch (row.estado) {
-  //     case 0:
-  //       respuesta = "No Contestada";
-  //       break
-  //     case 1:
-  //       respuesta = "Si";
-  //       break;
-  //     case 2:
-  //       respuesta = "No";
-  //       break;
+  displayRespuesta(row: RespuestaConNotasTabla): string {
+    let respuesta: string = "";
+    switch (row.estado) {
+      case 0:
+        respuesta = "NC";
+        break
+      case 1:
+        respuesta = "Sí";
+        break;
+      case 2:
+        respuesta = "No";
+        break;
 
-  //     default:
-  //       break;
-  //   }
-  //   return respuesta;
-  // }
+      default:
+        break;
+    }
+    return respuesta;
+  }
 
 
   //Para mostrar o no las notas de asignacion
