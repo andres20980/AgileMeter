@@ -2,27 +2,27 @@
   <button type="btn-finalize-evaluation" 
   class="main-button m-finish p-0 mat-elevation-z5"
   [class.finish-disable]="evaluationAnswered == false"
-  (click)="AbrirModal(content)" >Finalizar Evaluación</button>
+  (click)="AbrirModal(content)" >{{ 'BTN_FINALIZE_EVALUATION.FINALIZE_EVALUATION' | translate }}</button>
 </div>
 
 <ng-template #content let-cl="close" let-di="dismiss">
   <div class="modal-content border-0">
     <div class="modal-header custom-modal-header">
-      <h5 class="modal-title">Importante</h5> 
+      <h5 class="modal-title">{{ 'BTN_FINALIZE_EVALUATION.MODAL_TITLE' | translate }}</h5> 
       <!-- <button type="button" class="close" (click)="cl('Cerrar')">
         <span aria-hidden="true">×</span>
       </button> -->
     </div>
     <div class="modal-body">
-      <p>Al finalizar la evaluación no la podrá modificar o eliminar ¿está seguro de realizar esta acción?</p>
+      <p>{{ 'BTN_FINALIZE_EVALUATION.MODAL_BODY' | translate }}</p>
     </div>
     <div class="container-fluid p-3 bt-1">
       <div class="row p-0">
         <div class="col">
-            <button type="button" class="main-button mat-elevation-z4 w-100 modal-btns border-curve" (click)="di('Finish')">Finalizar</button>    
+            <button type="button" class="main-button mat-elevation-z4 w-100 modal-btns border-curve" (click)="di('Finish')">{{ 'BTN_FINALIZE_EVALUATION.MODAL_BTN_FINALIZE' | translate }}</button>    
         </div>
         <div class="col">
-            <button type="button" class="secondary-button mat-elevation-z4 w-100 modal-btns border-curve" (click)="cl('Cerrar')">Cancelar</button>
+            <button type="button" class="secondary-button mat-elevation-z4 w-100 modal-btns border-curve" (click)="cl('Cerrar')">{{ 'BTN_FINALIZE_EVALUATION.MODAL_BTN_CANCEL' | translate }}</button>
         </div>
       </div>
     </div>

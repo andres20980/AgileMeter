@@ -18,8 +18,7 @@ export class BreadcrumbComponent implements OnInit {
     this.breadcrumbList = this._appComponent._storageDataService.breadcrumbList;
   }
 
-  ngOnInit() {
-   
+  ngOnInit() {  
   }
 
   navigateTo(i: number) {

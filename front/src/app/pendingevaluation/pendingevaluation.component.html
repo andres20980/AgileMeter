@@ -1,20 +1,21 @@
-<div class="espacio">
+<!-- mensajes de error y al añadir notas
+  <div class="espacio">
   <div *ngIf="(ErrorMessage != null || ErrorMessage != undefined )" class="alert alert-danger" id="danger">
     <strong>{{ErrorMessage}}</strong>
   </div>
   <div *ngIf="anadeNota != null" class=" alert alert-success">
     {{anadeNota}}
   </div>
-</div>
+</div> -->
 
 <div class="container">
-    <app-breadcrumb></app-breadcrumb>
-    <div class="ng-card-box p-2 pt-4 br-2 mat-elevation-z5">
-        <div class="row">
-            <div class="col ml-5 mt-4">
-              <h3>Evaluaciones pendientes</h3>
-            </div>
-          </div>
+  <app-breadcrumb></app-breadcrumb>
+  <div class="ng-card-box p-2 pt-4 br-2 mat-elevation-z5">
+    <div class="row">
+      <div class="col ml-5 mt-4">
+        <h3>{{ 'PENDING_EVALUATION.PENDING_EVALUATION' | translate }}</h3>
+      </div>
+    </div>
 
 
     <!-- <div class="botonesTablaOGrafica">
@@ -27,14 +28,15 @@
     </div> -->
 
     <div *ngIf="!ListaDeEvaluacionesPaginada" class="loading mt-4">
-        <app-loading></app-loading>
+      <app-loading></app-loading>
     </div>
 
     <div id="sortedtable" *ngIf="MostrarTabla">
-      <pendingevaluation-table *ngIf="ListaDeEvaluacionesPaginada && ListaDeEvaluacionesPaginada.length >= 0" [ListaDeEvaluacionesPaginada]="ListaDeEvaluacionesPaginada">
-        loading
+      <pendingevaluation-table *ngIf="ListaDeEvaluacionesPaginada && ListaDeEvaluacionesPaginada.length >= 0"
+        [ListaDeEvaluacionesPaginada]="ListaDeEvaluacionesPaginada">
+        {{ 'PENDING_EVALUATION.LOADING' | translate }}
       </pendingevaluation-table>
-      
+
     </div>
 
     <!--Grafica-->
@@ -68,41 +70,49 @@
 
 
 
-</div>
-
-
-<ng-template #notasEv let-cl="close" let-di="dismiss">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title">Notas Evaluación</h5> <button type="button" class="close" (click)="cl('Cerrar')">
-        <span aria-hidden="true">×</span>
-      </button>
-    </div>
-    <div class="modal-body">
-      <textarea class="form-control" maxlength="4000" placeholder="Inserte aquí el texto" rows="10" [(ngModel)]="textoModal"></textarea>
-    </div>
-    <div class="modal-footer">
-      <p id="numletras" class="mr-2 mt-2">{{textoModal.length}}/4000</p>
-      <button type="button" class="btn btn-success cambiar" (click)="di('Guardar')">Guardar</button>
-      <button type="button" class="btn btn-secondary" (click)="cl('Cerrar')">Cancelar</button>
-    </div>
   </div>
-</ng-template>
 
-<ng-template #notasOb let-cl="close" let-di="dismiss">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h5 class="modal-title">Notas Objetivos</h5> <button type="button" class="close" (click)="cl('Cerrar')">
-        <span aria-hidden="true">×</span>
-      </button>
+
+  <ng-template #notasEv let-cl="close" let-di="dismiss">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ 'PENDING_EVALUATION.MODAL1_TITLE' | translate }}</h5> <button type="button"
+          class="close" (click)="cl('Cerrar')">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <textarea class="form-control" maxlength="4000" placeholder="Inserte aquí el texto" rows="10"
+          [(ngModel)]="textoModal"></textarea>
+      </div>
+      <div class="modal-footer">
+        <p id="numletras" class="mr-2 mt-2">{{textoModal.length}}/4000</p>
+        <button type="button" class="btn btn-success cambiar"
+          (click)="di('Guardar')">{{ 'PENDING_EVALUATION.MODAL1_BTN_SAVE' | translate }}</button>
+        <button type="button" class="btn btn-secondary"
+          (click)="cl('Cerrar')">{{ 'PENDING_EVALUATION.MODAL1_BTN_CANCEL' | translate }}</button>
+      </div>
     </div>
-    <div class="modal-body">
-      <textarea class="form-control" maxlength="4000" placeholder="Inserte aquí el texto" rows="10" [(ngModel)]="textoModal"></textarea>
+  </ng-template>
+
+  <ng-template #notasOb let-cl="close" let-di="dismiss">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ 'PENDING_EVALUATION.MODAL2_TITLE' | translate }}</h5> <button type="button"
+          class="close" (click)="cl('Cerrar')">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <textarea class="form-control" maxlength="4000" placeholder="Inserte aquí el texto" rows="10"
+          [(ngModel)]="textoModal"></textarea>
+      </div>
+      <div class="modal-footer">
+        <p id="numletras" class="mr-2 mt-2">{{textoModal.length}}/4000</p>
+        <button type="button" class="btn btn-success cambiar"
+          (click)="di('Guardar')">{{ 'PENDING_EVALUATION.MODAL2_BTN_SAVE' | translate }}</button>
+        <button type="button" class="btn btn-secondary"
+          (click)="cl('Cerrar')">{{ 'PENDING_EVALUATION.MODAL2_BTN_CANCEL' | translate }}</button>
+      </div>
     </div>
-    <div class="modal-footer">
-      <p id="numletras" class="mr-2 mt-2">{{textoModal.length}}/4000</p>
-      <button type="button" class="btn btn-success cambiar" (click)="di('Guardar')">Guardar</button>
-      <button type="button" class="btn btn-secondary" (click)="cl('Cerrar')">Cancelar</button>
-    </div>
-  </div>
-</ng-template>
+  </ng-template>

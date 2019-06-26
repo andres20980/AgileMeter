@@ -1,12 +1,13 @@
 <div class="d-flex justify-content-center notificacion">
-  <div class="position-fixed text-center notificacion">
+  <!-- Mensajes de error y al añadir notas
+    <div class="position-fixed text-center notificacion">
     <div *ngIf="(ErrorMessage != null || ErrorMessage != undefined )" class="alert alert-danger" id="danger">
       <strong>{{ErrorMessage}}</strong>
     </div>
     <div *ngIf="anadeNota != null" class=" alert alert-success">
       {{anadeNota}}
     </div>
-  </div>
+  </div> -->
 
   <div class="container" [ngClass]="('' + (Deshabilitar ? 'disabled' : ''))" *ngIf="InfoAsignacion.preguntas !=  null">
       <app-breadcrumb></app-breadcrumb>
@@ -86,15 +87,15 @@
         <div class="row">
             <div class="col section-title">
               <h3>{{SectionSelected.nombre}}</h3>
-              <button class="transparente" (click)="AbrirModalSec(notasSec)" title="Añadir notas">
-                  <img class="comment" *ngIf="SectionSelected.notas != null" src="assets/comment_filled.png" title="Hay notas" />
-                  <img class="comment" *ngIf="SectionSelected.notas == null" src="assets/comment_empty.png" title="No hay notas" />  
+              <button class="transparente" (click)="AbrirModalSec(notasSec)" title="{{ 'NEW_EVALUATION.BTNS_ADD_NOTES' | translate }}">
+                  <img class="comment" *ngIf="SectionSelected.notas != null" src="assets/comment_filled.png" title="{{ 'NEW_EVALUATION.ICONS_NOTES_FILLED' | translate }}" />
+                  <img class="comment" *ngIf="SectionSelected.notas == null" src="assets/comment_empty.png" title="{{ 'NEW_EVALUATION.ICONS_NOTES_EMPTY' | translate }}" />  
                 </button>
                 <h3 style="padding: 0em 1em 0em 1em;"> > </h3>
                 <h3>{{InfoAsignacion.nombre}}</h3>
-                <button class="transparente" (click)="AbrirModalAsig(notasAsset)" title="Añadir notas">
-                    <img class="comment" *ngIf="InfoAsignacion.notas != null" src="assets/comment_filled.png" title="Hay notas" />
-                    <img class="comment" *ngIf="InfoAsignacion.notas == null" src="assets/comment_empty.png" title="No hay notas" />  
+                <button class="transparente" (click)="AbrirModalAsig(notasAsset)" title="{{ 'NEW_EVALUATION.BTNS_ADD_NOTES' | translate }}">
+                    <img class="comment" *ngIf="InfoAsignacion.notas != null" src="assets/comment_filled.png" title="{{ 'NEW_EVALUATION.ICONS_NOTES_FILLED' | translate }}" />
+                    <img class="comment" *ngIf="InfoAsignacion.notas == null" src="assets/comment_empty.png" title="{{ 'NEW_EVALUATION.ICONS_NOTES_EMPTY' | translate }}" />  
                   </button>
             </div>
         </div>
@@ -183,7 +184,7 @@
                           [class.item-full-disabled]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
                           [class.item-not-selected]="(preguntaDada.respuesta.estado == 2) || (preguntaDada.respuesta.estado == 0 )"
                           [class.item-disable-no-color]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
-                          (click)="AnswerQuestion(preguntaDada,i,1)">Sí</button>
+                          (click)="AnswerQuestion(preguntaDada,i,1)">{{ 'NEW_EVALUATION.YES' | translate }}</button>
                       </div>
                       <div class="col p-0">
                         <button class="w-100 h-100 questions-no-btn mat-elevation-z3" 
@@ -191,7 +192,7 @@
                           [class.item-full-disabled]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
                           [class.item-not-selected]="(preguntaDada.respuesta.estado == 1) || (preguntaDada.respuesta.estado == 0)"
                           [class.item-disable-no-color]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
-                          (click)="AnswerQuestion(preguntaDada,i,2)">No</button>
+                          (click)="AnswerQuestion(preguntaDada,i,2)">{{ 'NEW_EVALUATION.NO' | translate }}</button>
                       </div>
                     </div>
                   </div>
@@ -207,8 +208,8 @@
 
                       <i class="material-icons add-comment" alt="Añadir comentario">add_circle</i> -->
 
-                      <img class="comment-yes-no" *ngIf="preguntaDada.respuesta.notas != null" src="assets/comment_filled.png" title="Hay notas" />
-                      <img class="comment-yes-no" *ngIf="preguntaDada.respuesta.notas == null" src="assets/comment_empty.png" title="No hay notas" />  
+                      <img class="comment-yes-no" *ngIf="preguntaDada.respuesta.notas != null" src="assets/comment_filled.png" title="{{ 'NEW_EVALUATION.ICONS_NOTES_FILLED' | translate }}" />
+                      <img class="comment-yes-no" *ngIf="preguntaDada.respuesta.notas == null" src="assets/comment_empty.png" title="{{ 'NEW_EVALUATION.ICONS_NOTES_EMPTY' | translate }}" />  
 
                     </button>
 
@@ -226,8 +227,8 @@
                       </i>
                       <i class="material-icons add-comment" alt="Añadir comentario">add_circle</i> -->
 
-                      <img class="comment-yes-no" *ngIf="preguntaDada.respuesta.notas != null" src="assets/comment_filled.png" title="Hay notas" />
-                      <img class="comment-yes-no" *ngIf="preguntaDada.respuesta.notas == null" src="assets/comment_empty.png" title="No hay notas" />  
+                      <img class="comment-yes-no" *ngIf="preguntaDada.respuesta.notas != null" src="assets/comment_filled.png" title="{{ 'NEW_EVALUATION.ICONS_NOTES_FILLED' | translate }}" />
+                      <img class="comment-yes-no" *ngIf="preguntaDada.respuesta.notas == null" src="assets/comment_empty.png" title="{{ 'NEW_EVALUATION.ICONS_NOTES_EMPTY' | translate }}" />  
 
                     </button>
 
@@ -317,13 +318,13 @@
   <ng-template #notasPreg let-cl="close" let-di="dismiss">
     <div class="modal-content">
       <div class="modal-header custom-modal-header">
-        <h5 class="modal-title">Notas de la Pregunta</h5> 
+        <h5 class="modal-title">{{ 'NEW_EVALUATION.MODAL_NOTES_PREGUNTA_TITLE' | translate }}</h5> 
         <!-- <button type="button" class="close" (click)="cl('Cerrar')">
           <span aria-hidden="true">×</span>
         </button> -->
       </div>
       <div class="modal-body">
-        <textarea class="form-control custom-text-area" maxlength="4000" placeholder="Inserte aquí el texto" rows="10"
+        <textarea class="form-control custom-text-area" maxlength="4000" placeholder="{{ 'NEW_EVALUATION.MODAL_NOTES_PREGUNTA_PLACEHOLDER' | translate }}" rows="10"
           [(ngModel)]="textoModal"></textarea>
         <p id="numletras" class="mr-2 mt-2 mb-0">{{textoModal.length}}/4000</p>
 
@@ -331,10 +332,10 @@
       <div class="container-fluid p-3 bt-1">
         <div class="row p-0">
           <div class="col">
-            <button type="button" class="main-button w-100 modal-btns border-curve" (click)="di('Guardar')">Guardar</button>
+            <button type="button" class="main-button w-100 modal-btns border-curve" (click)="di('Guardar')">{{ 'NEW_EVALUATION.MODALS_BTN_SAVE' | translate }}</button>
           </div>
           <div class="col">
-            <button type="button" class="secondary-button w-100 modal-btns border-curve" (click)="cl('Cerrar')">Cancelar</button>
+            <button type="button" class="secondary-button w-100 modal-btns border-curve" (click)="cl('Cerrar')">{{ 'NEW_EVALUATION.MODALS_BTN_CANCEL' | translate }}</button>
           </div>
 
         </div>
@@ -345,13 +346,13 @@
   <ng-template #notasAsset let-cl="close" let-di="dismiss">
     <div class="modal-content">
       <div class="modal-header custom-modal-header">
-        <h5 class="modal-title">Notas del Módulo</h5> 
+        <h5 class="modal-title">{{ 'NEW_EVALUATION.MODAL_NOTES_ASSESSMENT_TITLE' | translate }}</h5> 
         <!-- <button type="button" class="close" (click)="cl('Cerrar')">
           <span aria-hidden="true">×</span>
         </button> -->
       </div>
       <div class="modal-body">
-        <textarea class="form-control custom-text-area" maxlength="4000" placeholder="Inserte aquí el texto" rows="10"
+        <textarea class="form-control custom-text-area" maxlength="4000" placeholder="{{ 'NEW_EVALUATION.MODAL_NOTES_ASSESSMENT_PLACEHOLDER' | translate }}" rows="10"
           [(ngModel)]="textoModal"></textarea>
         <p id="numletras" class="mr-2 mt-2 mb-0">{{textoModal.length}}/4000</p>
 
@@ -359,10 +360,10 @@
       <div class="container-fluid p-3 bt-1">
         <div class="row p-0">
           <div class="col">
-            <button type="button" class="main-button w-100 modal-btns border-curve" (click)="di('Guardar')">Guardar</button>
+            <button type="button" class="main-button w-100 modal-btns border-curve" (click)="di('Guardar')">{{ 'NEW_EVALUATION.MODALS_BTN_SAVE' | translate }}</button>
           </div>
           <div class="col">
-            <button type="button" class="secondary-button w-100 modal-btns border-curve" (click)="cl('Cerrar')">Cancelar</button>
+            <button type="button" class="secondary-button w-100 modal-btns border-curve" (click)="cl('Cerrar')">{{ 'NEW_EVALUATION.MODALS_BTN_CANCEL' | translate }}</button>
           </div>
 
         </div>
@@ -373,13 +374,13 @@
   <ng-template #notasSec let-cl="close" let-di="dismiss">
     <div class="modal-content">
       <div class="modal-header custom-modal-header">
-        <h5 class="modal-title">Notas de la Sección</h5> 
+        <h5 class="modal-title">{{ 'NEW_EVALUATION.MODAL_NOTES_SECTION_TITLE' | translate }}</h5> 
         <!-- <button type="button" class="close" (click)="cl('Cerrar')">
           <span aria-hidden="true">×</span>
         </button> -->
       </div>
       <div class="modal-body">
-        <textarea class="form-control custom-text-area" maxlength="4000" placeholder="Inserte aquí el texto" rows="10"
+        <textarea class="form-control custom-text-area" maxlength="4000" placeholder="{{ 'NEW_EVALUATION.MODAL_NOTES_SECTION_PLACEHOLDER' | translate }}" rows="10"
           [(ngModel)]="textoModal"></textarea>
         <p id="numletras" class="mr-2 mt-2 mb-0">{{textoModal.length}}/4000</p>
 
@@ -387,10 +388,10 @@
       <div class="container-fluid p-3 bt-1">
         <div class="row p-0">
           <div class="col">
-            <button type="button" class="main-button w-100 modal-btns border-curve" (click)="di('Guardar')">Guardar</button>
+            <button type="button" class="main-button w-100 modal-btns border-curve" (click)="di('Guardar')">{{ 'NEW_EVALUATION.MODALS_BTN_SAVE' | translate }}</button>
           </div>
           <div class="col">
-            <button type="button" class="secondary-button w-100 modal-btns border-curve" (click)="cl('Cerrar')">Cancelar</button>
+            <button type="button" class="secondary-button w-100 modal-btns border-curve" (click)="cl('Cerrar')">{{ 'NEW_EVALUATION.MODALS_BTN_CANCEL' | translate }}</button>
           </div>
         </div>
       </div>

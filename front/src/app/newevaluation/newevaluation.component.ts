@@ -53,7 +53,8 @@ export class NewevaluationComponent implements OnInit {
     private _router: Router,
     private _appComponent: AppComponent,
     private modalService: NgbModal,
-    private _proyectoService: ProyectoService) {
+    private _proyectoService: ProyectoService,
+    private _evaluacionService: EvaluacionService) {
     this.InitialiseComponent();
   }
 
@@ -88,7 +89,8 @@ export class NewevaluationComponent implements OnInit {
     this.MostrarInfo = true;
 
     if (this.Evaluation != null) {
-      this._appComponent.pushBreadcrumb("Preguntas", "/evaluationquestions");
+      //this._appComponent.pushBreadcrumb("Preguntas", "/evaluationquestions");
+      this._appComponent.pushBreadcrumb("BREADCRUMB.QUESTIONS", "/evaluationquestions");
     }
 
     //Recoge todas las asignaciones de la section por id
@@ -378,14 +380,31 @@ export class NewevaluationComponent implements OnInit {
           } else {
             this.InfoAsignacion.notas = null;
           }
-
           var asig = new AsignacionUpdate(this.Evaluation.id, this.InfoAsignacion.id, this.InfoAsignacion.notas);
 
           this._respuestasService.AddNotaAsig(asig).subscribe(
             res => {
-
               // this.anadeNota = "Nota añadida correctamente";
               // setTimeout(() => { this.anadeNota = null }, 4000);
+
+              this.Evaluation.userNombre = this.UserName;
+              this._evaluacionService.updateEvaluacion(this.Evaluation).subscribe(
+                res => {
+                  //usuario modificado correctamente                  
+                },
+                error => {
+                  this.InfoAsignacion.notas = null;
+                  this.Deshabilitar = false;
+                  if (error == 404) {
+                    this.ErrorMessage = "Error: " + error + "No pudimos realizar la actualización del usuario, lo sentimos.";
+                  } else if (error == 500) {
+                    this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+                  } else if (error == 401) {
+                    this.ErrorMessage = "Error: " + error + " El usuario es incorrecto o no tiene permisos, intente introducir su usuario nuevamente.";
+                  } else {
+                    this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+                  }
+                });
             },
             error => {
               this.InfoAsignacion.notas = null;
@@ -444,6 +463,26 @@ export class NewevaluationComponent implements OnInit {
 
               // this.anadeNota = "Nota añadida correctamente";
               // setTimeout(() => { this.anadeNota = null }, 4000);
+
+              this.Evaluation.userNombre = this.UserName;
+              this._evaluacionService.updateEvaluacion(this.Evaluation).subscribe(
+                res => {
+                  //usuario modificado correctamente
+                },
+                error => {
+                  this.InfoAsignacion.notas = null;
+                  this.Deshabilitar = false;
+                  if (error == 404) {
+                    this.ErrorMessage = "Error: " + error + "No pudimos realizar la actualización del usuario, lo sentimos.";
+                  } else if (error == 500) {
+                    this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+                  } else if (error == 401) {
+                    this.ErrorMessage = "Error: " + error + " El usuario es incorrecto o no tiene permisos, intente introducir su usuario nuevamente.";
+                  } else {
+                    this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+                  }
+                });
+
             },
             error => {
               this.SectionSelected.notas = null;

@@ -24,6 +24,7 @@ import { SectionsLevel } from 'app/pdfgenerator/pdfgenerator.component';
 import { Assessment } from 'app/Models/Assessment';
 import { EvaluacionInfoWithProgress } from 'app/Models/EvaluacionInfoWithProgress';
 import { EvaluacionInfoWithSections } from 'app/Models/EvaluacionInfoWithSections';
+import {TranslateService} from '@ngx-translate/core';
 
 export interface ComplianceLevels {
 
@@ -100,7 +101,8 @@ export class PendingEvaluationComponent implements OnInit {
     private _proyectoService: ProyectoService,
     private _sectionService: SectionService,
     private modalService: NgbModal,
-    private http: Http
+    private http: Http,
+    private _translateService : TranslateService
   ) { }
 
   ngOnInit() {
@@ -156,7 +158,8 @@ export class PendingEvaluationComponent implements OnInit {
         //this.Restablecer();
       });
 
-      this._appComponent.pushBreadcrumb("Evaluaciones pendientes", "/pendingevaluations");
+      //this._appComponent.pushBreadcrumb("Evaluaciones pendientes", "/pendingevaluations");
+      this._appComponent.pushBreadcrumb("BREADCRUMB.PENDING_ASSESSMENTS", "/pendingevaluations");
       this._appComponent.pushBreadcrumb(this._appComponent._storageDataService.UserProjectSelected.nombre, null);
 
     if (this.Project.fecha != null) {
