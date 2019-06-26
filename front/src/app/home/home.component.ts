@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
     //console.log(this._proyectoService.UserLongName);
 
     this._appComponent.popBreadcrumb(0);
-    this._appComponent.pushBreadcrumb("Home", "/home");
+    this._appComponent.pushBreadcrumb("BREADCRUMB.HOME", "/home");
     //console.log(this._breadcrumb.breadcrumbList);
 
     this.getUserRole();
@@ -274,7 +274,7 @@ export class HomeComponent implements OnInit {
 
         this._appComponent.pushBreadcrumb(this._appComponent._storageDataService.UserProjectSelected.nombre, null);
         this._appComponent.pushBreadcrumb(this._appComponent._storageDataService.Evaluacion.assessmentName, null);
-        this._appComponent.pushBreadcrumb("Nueva evaluación", null);
+        this._appComponent.pushBreadcrumb("BREADCRUMB.NEW_ASSESSMENT", null);
         this._router.navigate(['/evaluationsections']);
       },
       error => {
