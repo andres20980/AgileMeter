@@ -60,9 +60,16 @@
         <div class="row">
             <div class="col ml-5" style="display: inline-flex">
               <h3>{{ 'PDF_GENERATOR.ASSESSMENT_RESULTS' | translate }}</h3>
-              <button class="transparente" (click)="ExportToExcel()">
+              <div>
+              <button class="transparente" (click)="ExportToExcel();">
                 <img src="assets/excel.png" title="{{ 'PDF_GENERATOR.EXCEL_EXPORT' | translate }}" />  
               </button>
+            </div>
+            <!-- <div *ngIf="generatingExcel">
+              <app-loading ></app-loading>
+            </div> -->
+
+
             </div>
         </div>
 

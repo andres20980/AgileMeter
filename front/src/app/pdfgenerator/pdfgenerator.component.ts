@@ -106,7 +106,10 @@ export class PdfgeneratorComponent implements OnInit {
   //CircleProgress
   public selectedSection: any = null;
 
-  @ViewChild(SectionResultsComponent) sectionResult: SectionResultsComponent;
+  //Excel
+  public generatingExcel : boolean = false;
+
+  //@ViewChild(SectionResultsComponent) sectionResult: SectionResultsComponent;
 
   scroll(el: HTMLElement) {
    
@@ -386,6 +389,7 @@ export class PdfgeneratorComponent implements OnInit {
   // }
 
   public ExportToExcel(){
+    this.generatingExcel = true;
     let workbook = new Workbook();
 
     var correct = workbook.addImage({
@@ -510,6 +514,20 @@ export class PdfgeneratorComponent implements OnInit {
         let worksheetSec = workbook.addWorksheet(section.nombre,{ views: [{showGridLines: false }], properties: {tabColor:{argb:'03bfda'}} });
         worksheetSec.getColumn(2).width = 4;
         worksheetSec.getColumn(19).width = 4;
+
+        //// SECTION TITLE ////
+        worksheetSec.getRow(1).height = 38;
+        worksheetSec.mergeCells(1, 2, 1, 17); 
+        var cellTitleSec = worksheetSec.getCell(1, 2);
+        cellTitleSec.font = {
+          name: 'Arial',
+          color: { argb: '03a8c0' },
+          family: 4,
+          size: 20,
+          bold: true
+        };
+        cellTitleSec.alignment = { vertical: 'middle', horizontal: 'left', wrapText: true };
+        cellTitleSec.value = section.nombre;
 
         /////// NOTAS SECCION /////
         worksheetSec.mergeCells(2, 2, 2, 17); 
@@ -789,8 +807,10 @@ export class PdfgeneratorComponent implements OnInit {
             cellNotasObC.value = this.Evaluacion.notasObjetivos;
 
             workbook.xlsx.writeBuffer().then((data) => {
+              this.generatingExcel = false;
               let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
               fs.saveAs(blob, 'Resultados_del_equipo_'+  this.Project.nombre+'.xlsx');
+
             });
           });
         }
@@ -798,45 +818,6 @@ export class PdfgeneratorComponent implements OnInit {
         
     });
 
-    
-
-   
-   
-
-    // let titleRow = worksheet.addRow(['Evaluaciones finalizadas del equipo ' +  this.Project.nombre]);
-    // titleRow.font = { name: 'Arial', family: 4, size: 16, bold: true }
-    // worksheet.addRow([]);
-
-    // let header = ["Fecha", "Usuario", "Assessment" , "Puntuación"]
-    // //Add Header Row
-    // let headerRow = worksheet.addRow(header);
-    
-    // // Cell Style : Fill and Border
-    // headerRow.eachCell((cell, number) => {
-    //   cell.fill = {
-    //     type: 'pattern',
-    //     pattern: 'solid',
-    //     fgColor: { argb: 'FFEEEEEE' },
-    //     bgColor: { argb: '110000' }
-    //   }
-    //   cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } }
-    // })
-
-
-    // // this.TableFilteredData.forEach(d => {
-    // //   worksheet.addRow([new Date(d.fecha), d.userNombre, d.assessmentName, d.puntuacion+'%']);
-    // //   }
-    // // );
-
-    // worksheet.getColumn(1).width = 12;
-    // worksheet.getColumn(2).width = 12;
-    // worksheet.getColumn(3).width = 12;
-    // worksheet.getColumn(4).width = 12;
-
-    // workbook.xlsx.writeBuffer().then((data) => {
-    //   let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-    //   fs.saveAs(blob, 'Evaluaciones_finalizadas_'+  this.Project.nombre+'.xlsx');
-    // })
   }
 
 
