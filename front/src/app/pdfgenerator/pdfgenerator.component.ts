@@ -21,7 +21,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { ViewChild, Input } from '@angular/core';
 
 import * as jsPDF from 'jspdf';
-import * as html2canvas from 'html2canvas';
+import html2canvas from 'html2canvas';
 import * as imgTransform from 'img-transform';
 
 import { forEach } from '@angular/router/src/utils/collection';
