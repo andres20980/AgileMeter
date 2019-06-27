@@ -466,8 +466,16 @@ export class PdfgeneratorComponent implements OnInit {
     cellAss.alignment = { vertical: 'top', horizontal: 'center', wrapText: true };
     cellAss.value = this.Evaluacion.assessmentName ;
 
+    let index = 0;
+    
+    this.captureAndFill(index, workbook, worksheet, correct, incorrect, nc);
+
+  }
+
+  captureAndFill(index:number, workbook: any, worksheet: any, correct:any, incorrect: any, nc: any){
+    let section = this.ListaSectionConAsignaciones[index];
     //// SECTIONS ////
-      this.ListaSectionConAsignaciones.forEach((section, index) => {
+    if(index < this.ListaSectionConAsignaciones.length){
       var elemento = document.getElementById(section.nombre);
       html2canvas(elemento, {logging:false}).then(canvas => {
 
@@ -710,114 +718,116 @@ export class PdfgeneratorComponent implements OnInit {
 
         });
         
-
-        if(index == this.ListaSectionConAsignaciones.length - 1){
-          var elementoT = document.getElementById("total");
-          html2canvas(elementoT, {logging:false}).then(canvas => {
-      
-            var imageId = workbook.addImage({
-              base64: canvas.toDataURL("image/png"),
-              extension: 'png',
-            });
-      
-            worksheet.addImage(imageId, {
-              tl: { col: (this.ListaSectionConAsignaciones.length * 3 + 1), row: 4 },
-              br: { col: (this.ListaSectionConAsignaciones.length * 3 + 4), row: 14 }
-            });
-
-            worksheet.mergeCells(15, this.ListaSectionConAsignaciones.length * 3 + 2, 15, this.ListaSectionConAsignaciones.length * 3 + 4); 
-      
-            var cell = worksheet.getCell(15, this.ListaSectionConAsignaciones.length * 3 + 2);
-
-            cell.fill = {
-                  type: 'pattern',
-                  pattern: 'solid',
-                  fgColor: { argb: '03a8c0' },
-                  bgColor: { argb: '03a8c0' }
-            };
-            cell.font = {
-              name: 'Arial',
-              color: { argb: 'ffffff' },
-              family: 2,
-              size: 12,
-              bold: true
-            };
-            cell.alignment = { vertical: 'top', horizontal: 'center', wrapText: true };
-            cell.border = {
-              top: {style:'thin', color: {argb:'dfdfdf'}},
-              left: {style:'thin', color: {argb:'dfdfdf'}},
-              bottom: {style:'thin', color: {argb:'dfdfdf'}},
-              right: {style:'thin', color: {argb:'dfdfdf'}}
-            };
-            
-            cell.value = "VALORACIÓN GLOBAL";
-
-
-            /////// NOTAS EVALUACIÓN /////
-            worksheet.mergeCells(18, 2, 18, 11); 
-      
-            var cellNotasEv = worksheet.getCell(18, 2);
-            cellNotasEv.fill = {
-              type: 'pattern',
-              pattern: 'solid',
-              fgColor: { argb: '5c981b' },
-              bgColor: { argb: '5c981b' }
-            };
-            cellNotasEv.font = cell.font;
-            cellNotasEv.alignment = { vertical: 'top', horizontal: 'left', wrapText: true, indent: 2 };
-            cellNotasEv.border = {
-              top: {style:'medium', color: {argb:'5c981b'}},
-              left: {style:'medium', color: {argb:'5c981b'}},
-              bottom: {style:'medium', color: {argb:'5c981b'}},
-              right: {style:'medium', color: {argb:'5c981b'}}
-            };
-            cellNotasEv.value = "Notas Evaluación";
-
-            worksheet.mergeCells(19, 2, 26, 11); 
-
-            var cellNotasEvC = worksheet.getCell(19, 2);
-            cellNotasEvC.font = {
-              name: 'Arial',
-              color: { argb: '555555' },
-              family: 2,
-              size: 11,
-              bold: false
-            };
-            cellNotasEvC.alignment = cellNotasEv.alignment;
-            cellNotasEvC.border = cellNotasEv.border;
-            cellNotasEvC.value = this.Evaluacion.notasEvaluacion;
-
-
-            /////// NOTAS OBJETIVOS /////
-            worksheet.mergeCells(18, 13, 18, 22); 
-      
-            var cellNotasOb = worksheet.getCell(18, 13);
-            cellNotasOb.fill = cellNotasEv.fill;
-            cellNotasOb.font = cell.font;
-            cellNotasOb.alignment = cellNotasEv.alignment;
-            cellNotasOb.border = cellNotasEv.border;
-            cellNotasOb.value = "Notas Objetivos";
-
-            worksheet.mergeCells(19, 13, 26, 22); 
-
-            var cellNotasObC = worksheet.getCell(19, 13);
-            cellNotasObC.font = cellNotasEvC.font;
-            cellNotasObC.alignment = cellNotasEv.alignment;
-            cellNotasObC.border = cellNotasEv.border;
-            cellNotasObC.value = this.Evaluacion.notasObjetivos;
-
-            workbook.xlsx.writeBuffer().then((data) => {
-              this.generatingExcel = false;
-              let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-              fs.saveAs(blob, 'Resultados_del_equipo_'+  this.Project.nombre+'.xlsx');
-
-            });
-          });
+        if(index <= this.ListaSectionConAsignaciones.length){
+          index++;
+          this.captureAndFill(index,  workbook, worksheet, correct, incorrect, nc);       
         }
       });
-        
-    });
+    }
+    else if(index == this.ListaSectionConAsignaciones.length){
+      var elementoT = document.getElementById("total");
+      html2canvas(elementoT, {logging:false}).then(canvas => {
+  
+        var imageId = workbook.addImage({
+          base64: canvas.toDataURL("image/png"),
+          extension: 'png',
+        });
+  
+        worksheet.addImage(imageId, {
+          tl: { col: (this.ListaSectionConAsignaciones.length * 3 + 1), row: 4 },
+          br: { col: (this.ListaSectionConAsignaciones.length * 3 + 4), row: 14 }
+        });
 
+        worksheet.mergeCells(15, this.ListaSectionConAsignaciones.length * 3 + 2, 15, this.ListaSectionConAsignaciones.length * 3 + 4); 
+  
+        var cell = worksheet.getCell(15, this.ListaSectionConAsignaciones.length * 3 + 2);
+
+        cell.fill = {
+              type: 'pattern',
+              pattern: 'solid',
+              fgColor: { argb: '03a8c0' },
+              bgColor: { argb: '03a8c0' }
+        };
+        cell.font = {
+          name: 'Arial',
+          color: { argb: 'ffffff' },
+          family: 2,
+          size: 12,
+          bold: true
+        };
+        cell.alignment = { vertical: 'top', horizontal: 'center', wrapText: true };
+        cell.border = {
+          top: {style:'thin', color: {argb:'dfdfdf'}},
+          left: {style:'thin', color: {argb:'dfdfdf'}},
+          bottom: {style:'thin', color: {argb:'dfdfdf'}},
+          right: {style:'thin', color: {argb:'dfdfdf'}}
+        };
+        
+        cell.value = "VALORACIÓN GLOBAL";
+
+
+        /////// NOTAS EVALUACIÓN /////
+        worksheet.mergeCells(18, 2, 18, 11); 
+  
+        var cellNotasEv = worksheet.getCell(18, 2);
+        cellNotasEv.fill = {
+          type: 'pattern',
+          pattern: 'solid',
+          fgColor: { argb: '5c981b' },
+          bgColor: { argb: '5c981b' }
+        };
+        cellNotasEv.font = cell.font;
+        cellNotasEv.alignment = { vertical: 'top', horizontal: 'left', wrapText: true, indent: 2 };
+        cellNotasEv.border = {
+          top: {style:'medium', color: {argb:'5c981b'}},
+          left: {style:'medium', color: {argb:'5c981b'}},
+          bottom: {style:'medium', color: {argb:'5c981b'}},
+          right: {style:'medium', color: {argb:'5c981b'}}
+        };
+        cellNotasEv.value = "Notas Evaluación";
+
+        worksheet.mergeCells(19, 2, 26, 11); 
+
+        var cellNotasEvC = worksheet.getCell(19, 2);
+        cellNotasEvC.font = {
+          name: 'Arial',
+          color: { argb: '555555' },
+          family: 2,
+          size: 11,
+          bold: false
+        };
+        cellNotasEvC.alignment = cellNotasEv.alignment;
+        cellNotasEvC.border = cellNotasEv.border;
+        cellNotasEvC.value = this.Evaluacion.notasEvaluacion;
+
+
+        /////// NOTAS OBJETIVOS /////
+        worksheet.mergeCells(18, 13, 18, 22); 
+  
+        var cellNotasOb = worksheet.getCell(18, 13);
+        cellNotasOb.fill = cellNotasEv.fill;
+        cellNotasOb.font = cell.font;
+        cellNotasOb.alignment = cellNotasEv.alignment;
+        cellNotasOb.border = cellNotasEv.border;
+        cellNotasOb.value = "Notas Objetivos";
+
+        worksheet.mergeCells(19, 13, 26, 22); 
+
+        var cellNotasObC = worksheet.getCell(19, 13);
+        cellNotasObC.font = cellNotasEvC.font;
+        cellNotasObC.alignment = cellNotasEv.alignment;
+        cellNotasObC.border = cellNotasEv.border;
+        cellNotasObC.value = this.Evaluacion.notasObjetivos;
+
+        workbook.xlsx.writeBuffer().then((data) => {
+          this.generatingExcel = false;
+          let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+          fs.saveAs(blob, 'Resultados_del_equipo_'+  this.Project.nombre+'.xlsx');
+
+        });
+      });
+    }
+    //});
   }
 
 

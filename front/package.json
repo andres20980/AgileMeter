@@ -30,7 +30,7 @@
     "exceljs": "1.10.0",
     "file-saver": "2.0.1",
     "hammerjs": "^2.0.8",
-    "html2canvas": "1.0.0-rc.0",
+    "html2canvas": "1.0.0-alpha.12",
     "img-transform": "1.0.3",
     "jquery": "3.4.1",
     "jspdf": "1.5.3",
