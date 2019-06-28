@@ -22,11 +22,11 @@ namespace everisapiTest
         Mock<ILogger<UsersController>> mockLogger;
         Mock<IUsersInfoRepository> mockRepository;
 
-        public UsersControllerTest() 
+        public UsersControllerTest()
         {
             mockLogger = new Mock<ILogger<UsersController>>();
             _logger = mockLogger.Object;
-            
+
             mockRepository = new Mock<IUsersInfoRepository>();
             _userInfoRepository = mockRepository.Object;
 
@@ -34,8 +34,8 @@ namespace everisapiTest
             {
                 cfg.CreateMap<everisapi.API.Entities.UserEntity, everisapi.API.Models.UsersSinProyectosDto>();
                 cfg.CreateMap<everisapi.API.Entities.UserEntity, everisapi.API.Models.UsersDto>();
-                cfg.CreateMap<everisapi.API.Entities.RoleEntity, everisapi.API.Models.RoleDto>();
                 cfg.CreateMap<everisapi.API.Entities.UserEntity, everisapi.API.Models.UsersWithRolesDto>();
+                cfg.CreateMap<everisapi.API.Entities.RoleEntity, everisapi.API.Models.RoleDto>();
             });
 
         }
@@ -45,7 +45,7 @@ namespace everisapiTest
             Mapper.Reset();
         }
 
-        
+
         //Method: GetUsers
 
         [Fact]
@@ -73,7 +73,7 @@ namespace everisapiTest
             Assert.IsType<OkObjectResult>(okResult);
         }
 
-        
+
         [Fact]
         public void GetUsers_WhenThrowException_ReturnStatusCode()
         {
@@ -149,7 +149,7 @@ namespace everisapiTest
             Assert.IsType<NotFoundResult>(okResult);
         }
 
-        
+
         [Fact]
         public void GetUser_WhenThrowException_ReturnStatusCode()
         {
@@ -197,7 +197,7 @@ namespace everisapiTest
             Assert.IsType<OkObjectResult>(okResult);
         }
 
-        
+
         [Fact]
         public void GetRoles_WhenThrowException_ReturnStatusCode()
         {
@@ -237,6 +237,24 @@ namespace everisapiTest
 
             //Assert
             Assert.IsType<NotFoundResult>(okResult);
+        }
+
+        //Method: AddUsers
+
+        [Fact]
+        public void AddUsers_GivenInvalidModel_ReturnsBadRequest()
+        {
+            //Arrange
+            _controller = new UsersController(_logger, _userInfoRepository);
+
+
+            //_controller.ModelState.AddModelError("error", "some error");
+
+            //Act
+            var okResult = _controller.AddUsers(UsuarioAdd: null);
+
+            //Assert
+            Assert.IsType<BadRequestResult>(okResult);
         }
 
     } //end of class
