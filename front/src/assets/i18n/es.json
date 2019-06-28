@@ -248,7 +248,9 @@
 		"ICONS_CORRECT": "Correcta",
 		"ICONS_INCORRECT": "Incorrecta",
 		"ICONS_NOT_ANSWERED": "No contestada",
-		"QUESTION_NOTES": "Notas"
+		"QUESTION_NOTES": "Notas",
+		"NO_NOTES": "No hay notas añadidas"
+
 	},
 	"PREGUNTAS_TABLE": {
 		"FILTER": "Filtro",

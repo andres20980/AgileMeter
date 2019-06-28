@@ -248,7 +248,8 @@
 		"ICONS_CORRECT": "Correct",
 		"ICONS_INCORRECT": "Incorrect",
 		"ICONS_NOT_ANSWERED": "Not answered",
-		"QUESTION_NOTES": "Notes"
+		"QUESTION_NOTES": "Notes",
+		"NO_NOTES": "No notes added"
 	},
 	"PREGUNTAS_TABLE": {
 		"FILTER": "Filter",
