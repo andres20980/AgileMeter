@@ -163,7 +163,8 @@ export class PreviousevaluationComponent implements OnInit {
         //this.Restablecer();
       });
 
-      this._appComponent.pushBreadcrumb("Evaluaciones finalizadas", "/finishedevaluations");
+      //this._appComponent.pushBreadcrumb("Evaluaciones finalizadas", "/finishedevaluations");
+      this._appComponent.pushBreadcrumb("BREADCRUMB.FINISHED_EVALUATIONS", "/finishedevaluations");
       this._appComponent.pushBreadcrumb(this._appComponent._storageDataService.UserProjectSelected.nombre, null);
 
     if (this.Project.fecha != null) {
@@ -294,7 +295,8 @@ export class PreviousevaluationComponent implements OnInit {
     this._appComponent.pushBreadcrumb(evaluacion.assessmentName, null);
     var pipe = new DatePipe('en-US');
     this._appComponent.pushBreadcrumb(pipe.transform(evaluacion.fecha, 'dd/MM/yyyy'), null);
-    this._appComponent.pushBreadcrumb("Resultados", "/evaluationresults");  
+    //this._appComponent.pushBreadcrumb("Resultados", "/evaluationresults");
+    this._appComponent.pushBreadcrumb("BREADCRUMB.RESULTS", "/evaluationresults");
     this._router.navigate(['/evaluationresults']);
   }
 

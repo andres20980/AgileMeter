@@ -1,11 +1,12 @@
-<div >
+<!-- Mensajes de error y al añadir notas
+  <div >
   <div *ngIf="(ErrorMessage != null || ErrorMessage != undefined )" class="alert alert-danger" id="danger">
     <strong>{{ErrorMessage}}</strong>
   </div>
   <div *ngIf="anadeNota != null" class=" alert alert-success">
     {{anadeNota}}
   </div>
-</div>
+</div> -->
 
 <div class="container">
     <app-breadcrumb></app-breadcrumb>
@@ -13,7 +14,7 @@
   <div class="ng-card-box p-2 pt-4 br-2 mat-elevation-z5">
       <div class="row">
           <div class="col ml-5 mb-3 mt-4">
-            <h3>Evaluaciones finalizadas</h3>
+            <h3>{{ 'PREVIOUS_EVALUATION.FINISHED_EVALUATIONS' | translate }}</h3>
           </div>
         </div>
     
@@ -147,10 +148,10 @@
     <div class="botonesTablaOGrafica">
         
         <button class="transparente botonTabla" (click)="MostrarGrafica = false; MostrarTabla = true">
-            <img [class.button-disabled]="!MostrarTabla" src="assets/table.png" title="Ver tabla" />
+            <img [class.button-disabled]="!MostrarTabla" src="assets/table.png" title="{{ 'PREVIOUS_EVALUATION.SHOW_TABLE' | translate }}" />
           </button>
         <button class="transparente botonGrafica" (click)="MostrarGrafica = true; MostrarTabla = false">
-            <img [class.button-disabled]="!MostrarGrafica" src="assets/chart.png" title="Ver gráfica" />
+            <img [class.button-disabled]="!MostrarGrafica" src="assets/chart.png" title="{{ 'PREVIOUS_EVALUATION.SHOW_GRAPH' | translate }}" />
           </button>         
     </div>
 
@@ -160,7 +161,7 @@
 
     <div id="sortedtable" *ngIf="MostrarTabla && ListaDeEvaluacionesPaginada">
       <sorted-table *ngIf="ListaDeEvaluacionesPaginada && ListaDeEvaluacionesPaginada.length > 0" [dataInput]="ListaDeEvaluacionesPaginada">
-        loading
+        {{ 'PREVIOUS_EVALUATION.LOADING' | translate }}
       </sorted-table>
       
     </div>
@@ -168,7 +169,7 @@
     <!--Grafica-->
     <div class="container-grafica" [hidden]="!MostrarGrafica">
         <mat-form-field class = "mt-3 ml-5">
-            <mat-select [(value)]="selectedAssessment" placeholder="Assessment" (selectionChange)="changeChartAssessment()">
+            <mat-select [(value)]="selectedAssessment" placeholder="{{ 'PREVIOUS_EVALUATION.ASSESSMENT' | translate }}" (selectionChange)="changeChartAssessment()">
                 <mat-option *ngFor="let a of ListaAssessments" [value]="a">{{a.name}} </mat-option>
               </mat-select>
             </mat-form-field>
@@ -217,7 +218,7 @@
                   </g>
                  </svg>
             </div>
-            <div class ="legend-global-label">GLOBAL</div>
+            <div class ="legend-global-label">{{ 'PREVIOUS_EVALUATION.GLOBAL' | translate }}</div>
         </div>
       </div>
       </div>
@@ -249,17 +250,17 @@
 <ng-template #notasEv let-cl="close" let-di="dismiss">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title">Notas Evaluación</h5> <button type="button" class="close" (click)="cl('Cerrar')">
+      <h5 class="modal-title">{{ 'PREVIOUS_EVALUATION.MODAL_EVALUATION_TITLE' | translate }}</h5> <button type="button" class="close" (click)="cl('Cerrar')">
         <span aria-hidden="true">×</span>
       </button>
     </div>
     <div class="modal-body">
-      <textarea class="form-control" maxlength="4000" placeholder="Inserte aquí el texto" rows="10" [(ngModel)]="textoModal"></textarea>
+      <textarea class="form-control" maxlength="4000" placeholder="{{ 'PREVIOUS_EVALUATION.MODAL_EVALUATION_PLACEHOLDER' | translate }}" rows="10" [(ngModel)]="textoModal"></textarea>
     </div>
     <div class="modal-footer">
       <p id="numletras" class="mr-2 mt-2">{{textoModal.length}}/4000</p>
-      <button type="button" class="btn btn-success cambiar" (click)="di('Guardar')">Guardar</button>
-      <button type="button" class="btn btn-secondary" (click)="cl('Cerrar')">Cancelar</button>
+      <button type="button" class="btn btn-success cambiar" (click)="di('Guardar')">{{ 'PREVIOUS_EVALUATION.MODAL_BTN_SAVE' | translate }}</button>
+      <button type="button" class="btn btn-secondary" (click)="cl('Cerrar')">{{ 'PREVIOUS_EVALUATION.MODAL_BTN_CANCEL' | translate }}</button>
     </div>
   </div>
 </ng-template>
@@ -267,17 +268,17 @@
 <ng-template #notasOb let-cl="close" let-di="dismiss">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title">Notas Objetivos</h5> <button type="button" class="close" (click)="cl('Cerrar')">
+      <h5 class="modal-title">{{ 'PREVIOUS_EVALUATION.MODAL_OBJECTIVES_TITLE' | translate }}</h5> <button type="button" class="close" (click)="cl('Cerrar')">
         <span aria-hidden="true">×</span>
       </button>
     </div>
     <div class="modal-body">
-      <textarea class="form-control" maxlength="4000" placeholder="Inserte aquí el texto" rows="10" [(ngModel)]="textoModal"></textarea>
+      <textarea class="form-control" maxlength="4000" placeholder="{{ 'PREVIOUS_EVALUATION.MODAL_OBJECTIVES_PLACEHOLDER' | translate }}" rows="10" [(ngModel)]="textoModal"></textarea>
     </div>
     <div class="modal-footer">
       <p id="numletras" class="mr-2 mt-2">{{textoModal.length}}/4000</p>
-      <button type="button" class="btn btn-success cambiar" (click)="di('Guardar')">Guardar</button>
-      <button type="button" class="btn btn-secondary" (click)="cl('Cerrar')">Cancelar</button>
+      <button type="button" class="btn btn-success cambiar" (click)="di('Guardar')">{{ 'PREVIOUS_EVALUATION.MODAL_BTN_SAVE' | translate }}</button>
+      <button type="button" class="btn btn-secondary" (click)="cl('Cerrar')">{{ 'PREVIOUS_EVALUATION.MODAL_BTN_CANCEL' | translate }}</button>
     </div>
   </div>
 </ng-template>

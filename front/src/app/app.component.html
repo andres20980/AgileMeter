@@ -34,7 +34,7 @@
           </div>
           <!-- <div class="text-center col-6 title-center us-none title-agile">AgileMeter</div> -->
           <div class="col-6 col-centered"> 
-            <div class="logo-container"> 
+            <div class="logo-container" id="logo"> 
               <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <img  src="assets/logo.png" style="width: 17rem;"/>
               </a>
@@ -71,7 +71,7 @@
 </div>
 
 <!--Ventana mediana-->
-<div class="no-print text-center" id='cssmenu' *ngIf="_router.url != '/login' && _router.url != '/' && ScreenWidth <= 776 && ScreenWidth > 537">
+<!-- <div class="no-print text-center" id='cssmenu' *ngIf="_router.url != '/login' && _router.url != '/' && ScreenWidth <= 776 && ScreenWidth > 537">
 
   <ul class="text-center">
     <li class="active text-center top2" id="inicio"><a routerLink="/home">Inicio</a></li>
@@ -87,10 +87,10 @@
     </li>
     <li class="text-center active top2" id="cerrarsesion"><a routerLink="/login">Cerrar sesi&oacute;n</a></li>
   </ul>
-</div>
+</div> -->
 
 <!--Ventana pequeña-->
-<div class="no-print text-center" id='cssmenu' *ngIf="_router.url != '/login' && _router.url != '/' && ScreenWidth <= 537">
+<!-- <div class="no-print text-center" id='cssmenu' *ngIf="_router.url != '/login' && _router.url != '/' && ScreenWidth <= 537">
 
   <p class="text-center titulo3 noSelect">AgileMeter</p>
   <p>
@@ -104,7 +104,7 @@
           exit_to_app
         </i></a></li>
   </ul>
-</div>
+</div> -->
 
 
 <router-outlet></router-outlet>
