@@ -4,9 +4,11 @@ using everisapi.API.Controllers;
 using everisapi.API.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Moq;
 using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace everisapiTest
@@ -31,7 +33,9 @@ namespace everisapiTest
             Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<everisapi.API.Entities.UserEntity, everisapi.API.Models.UsersSinProyectosDto>();
+                cfg.CreateMap<everisapi.API.Entities.UserEntity, everisapi.API.Models.UsersDto>();
                 cfg.CreateMap<everisapi.API.Entities.RoleEntity, everisapi.API.Models.RoleDto>();
+                cfg.CreateMap<everisapi.API.Entities.UserEntity, everisapi.API.Models.UsersWithRolesDto>();
             });
 
         }
@@ -41,6 +45,53 @@ namespace everisapiTest
             Mapper.Reset();
         }
 
+        
+        //Method: GetUsers
+
+        [Fact]
+        public void GetUsers_WhenCalled_ReturnOkResult()
+        {
+            //Arrange            
+            _controller = new UsersController(_logger, _userInfoRepository);
+
+            var usersEntities = new List<everisapi.API.Entities.UserEntity>()
+            {
+                new everisapi.API.Entities.UserEntity {
+                    Nombre = "Jose Antonio Beltran"
+                },
+                new everisapi.API.Entities.UserEntity {
+                    Nombre = "Francisco Javier Moreno"
+                }
+            };
+
+            mockRepository.Setup(r => r.GetUsers()).Returns(usersEntities);
+
+            //Act
+            var okResult = _controller.GetUsers();
+
+            //Assert
+            Assert.IsType<OkObjectResult>(okResult);
+        }
+
+        
+        [Fact]
+        public void GetUsers_WhenThrowException_ReturnStatusCode()
+        {
+            //Arrange            
+            _controller = new UsersController(_logger, _userInfoRepository);
+
+
+            mockRepository.Setup(r => r.GetUsers()).Throws(new Exception());
+
+            //Act
+            var okResult = _controller.GetUsers();
+
+            //Assert
+            Assert.IsType<ObjectResult>(okResult);
+        }
+
+        //Method: GetUser
+
         [Fact]
         public void GetUser_WhenCalledWithoutIncluirProyectos_ReturnOkResult()
         {
@@ -49,7 +100,7 @@ namespace everisapiTest
 
             var entity = new everisapi.API.Entities.UserEntity
             {
-                Nombre = "Jose Antonio Beltrán"
+                Nombre = "Jose Antonio Beltran"
             };
 
             mockRepository.Setup(r => r.GetUser("jbeltrma", false)).Returns(entity);
@@ -62,6 +113,62 @@ namespace everisapiTest
         }
 
         [Fact]
+        public void GetUser_WhenCalledWithIncluirProyectos_ReturnOkResult()
+        {
+            //Arrange            
+            _controller = new UsersController(_logger, _userInfoRepository);
+
+            var entity = new everisapi.API.Entities.UserEntity
+            {
+                Nombre = "Jose Antonio Beltran"
+            };
+
+            mockRepository.Setup(r => r.GetUser("jbeltrma", true)).Returns(entity);
+
+            //Act
+            var okResult = _controller.GetUser("jbeltrma", true);
+
+            //Assert
+            Assert.IsType<OkObjectResult>(okResult);
+        }
+
+        [Fact]
+        public void GetUser_WhenGetUserNull_ReturnNotFoundResult()
+        {
+            //Arrange            
+            _controller = new UsersController(_logger, _userInfoRepository);
+
+            everisapi.API.Entities.UserEntity entity = null;
+
+            mockRepository.Setup(r => r.GetUser("jbeltrma", false)).Returns(entity);
+
+            //Act
+            var okResult = _controller.GetUser("jbeltrma", false);
+
+            //Assert
+            Assert.IsType<NotFoundResult>(okResult);
+        }
+
+        
+        [Fact]
+        public void GetUser_WhenThrowException_ReturnStatusCode()
+        {
+            //Arrange            
+            _controller = new UsersController(_logger, _userInfoRepository);
+
+
+            mockRepository.Setup(r => r.GetUser("jbeltrma", false)).Throws(new Exception());
+
+            //Act
+            var okResult = _controller.GetUser("jbeltrma", false);
+
+            //Assert
+            Assert.IsType<ObjectResult>(okResult);
+        }
+
+        //Method: GetRoles
+
+        [Fact]
         public void GetRoles_WhenCalledWithNameBeltran_BeltranHasAdminPermission()
         {
             //Arrange
@@ -69,7 +176,7 @@ namespace everisapiTest
 
             var entity = new everisapi.API.Entities.UserEntity
             {
-                Nombre = "Jose Antonio Beltrán"
+                Nombre = "Jose Antonio Beltran"
             };
 
             mockRepository.Setup(r => r.GetUser("jbeltrma", false)).Returns(entity);
@@ -88,6 +195,48 @@ namespace everisapiTest
 
             //Assert
             Assert.IsType<OkObjectResult>(okResult);
+        }
+
+        
+        [Fact]
+        public void GetRoles_WhenThrowException_ReturnStatusCode()
+        {
+            //Arrange
+            _controller = new UsersController(_logger, _userInfoRepository);
+
+            var entity = new everisapi.API.Entities.UserEntity
+            {
+                Nombre = "Jose Antonio Beltran"
+            };
+
+            mockRepository.Setup(r => r.GetUser("jbeltrma", false)).Returns(entity);
+
+
+            mockRepository.Setup(x => x.GetRolesUsuario(entity)).Throws(new Exception());
+
+
+            //Act
+            var okResult = _controller.GetRoles("jbeltrma");
+
+            //Assert
+            Assert.IsType<ObjectResult>(okResult);
+        }
+
+        [Fact]
+        public void GetRoles_WhenGetUserNull_ReturnNotFoundResult()
+        {
+            //Arrange            
+            _controller = new UsersController(_logger, _userInfoRepository);
+
+            everisapi.API.Entities.UserEntity entity = null;
+
+            mockRepository.Setup(r => r.GetUser("jbeltrma", false)).Returns(entity);
+
+            //Act
+            var okResult = _controller.GetRoles("jbeltrma");
+
+            //Assert
+            Assert.IsType<NotFoundResult>(okResult);
         }
 
     } //end of class
