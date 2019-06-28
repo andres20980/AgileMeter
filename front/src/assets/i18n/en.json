@@ -124,7 +124,7 @@
 		"NOTIFICATION_ERROR_TEAM_MODIFY": "Sorry, we couldn't modify the team"
 	},
 	"PENDING_EVALUATION": {
-		"PENDING_EVALUATION": "Pending evaluation",
+		"PENDING_EVALUATION": "Pending assessments",
 		"LOADING": "loading",
 		"MODAL1_TITLE": "Evaluation Notes",
 		"MODAL1_BTN_SAVE": "Save",
