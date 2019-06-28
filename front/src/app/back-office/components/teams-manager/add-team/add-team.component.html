@@ -68,6 +68,16 @@
         </mat-form-field>
       </div>
 
+      <!--INPUT NUMBER PARA EL CODIGO-->
+      <div class="col-4">
+        <mat-form-field class="col-12">
+          <input matInput type="text" formControlName="Codigo" id="Codigo"
+            placeholder="{{ 'ADD_TEAM.FORM_CODIGO' | translate }}" value="{{this.equipo?.codigo}}">
+          <mat-error *ngIf="hasError('Codigo','maxlength')">{{ 'ADD_TEAM.FORM_CODIGO_MAX_LENGTH' | translate }}
+          </mat-error>
+        </mat-form-field>
+      </div>
+
       <!--INPUT TEXT PARA LOS PROYECTOS-->
       <div class="col-4">
         <mat-form-field class="col-12">
@@ -80,7 +90,7 @@
 
 
       <!--INPUT TEXT PARA LOS EQUIPOS-->
-      <div class="col-8">
+      <div class="col-6">
         <mat-form-field class="col-12">
           <input matInput type="text" formControlName="Nombre" id="Nombre"
             placeholder="{{ 'ADD_TEAM.FORM_TEAM' | translate }}" value="{{this.equipo?.nombre}}">
@@ -89,23 +99,13 @@
       </div>
 
       <!--INPUT NUMBER PARA EL TAMAÑO-->
-      <div class="col-4">
+      <div class="col-2">
         <mat-form-field class="col-12">
           <input matInput type="text" formControlName="ProjectSize" id="ProjectSize"
             placeholder="{{ 'ADD_TEAM.FORM_SIZE' | translate }}" value="{{this.equipo?.projectSize}}">
           <mat-error *ngIf="hasError('ProjectSize','required')"> {{ 'ADD_TEAM.FORM_SIZE_REQUIRED' | translate }}
           </mat-error>
           <mat-error *ngIf="hasError('ProjectSize','pattern')">{{ 'ADD_TEAM.FORM_SIZE_LENGHT' | translate }}
-          </mat-error>
-        </mat-form-field>
-      </div>
-
-      <!--INPUT NUMBER PARA EL CODIGO-->
-      <div class="col-12">
-        <mat-form-field class="col-4">
-          <input matInput type="text" formControlName="Codigo" id="Codigo"
-            placeholder="{{ 'ADD_TEAM.FORM_CODIGO' | translate }}" value="{{this.equipo?.codigo}}">
-          <mat-error *ngIf="hasError('Codigo','maxlength')">{{ 'ADD_TEAM.FORM_CODIGO_MAX_LENGTH' | translate }}
           </mat-error>
         </mat-form-field>
       </div>
