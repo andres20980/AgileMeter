@@ -411,5 +411,119 @@ namespace everisapiTest
             //Assert
             Assert.IsType<BadRequestResult>(okResult);
         }
+
+        //Method: UpdateUsers
+
+        [Fact]
+        public void UpdateUsers_GivenNullUser_ReturnsBadRequest()
+        {
+            //Arrange
+            _controller = new UsersController(_logger, _userInfoRepository);
+
+            //Act
+            var okResult = _controller.UpdateUsers(UsuarioUpdate: null);
+
+            //Assert
+            Assert.IsType<BadRequestResult>(okResult);
+        }
+
+        [Fact]
+        public void UpdateUsers_GivenInvalidModel_ReturnsBadRequest()
+        {
+            //Arrange
+            _controller = new UsersController(_logger, _userInfoRepository);
+            _controller.ModelState.AddModelError("error", "some error");
+
+            var rol = new everisapi.API.Models.RoleDto {Id = 1, Role = "Usuario"};
+
+            var proyectosDeUsuario = new List<everisapi.API.Models.ProyectoDto> {
+                new everisapi.API.Models.ProyectoDto{Id = 1, Nombre = "Mi Proyecto"}};
+
+            //Act
+            var okResult = _controller.UpdateUsers(new everisapi.API.Models.UsersWithRolesDto 
+            {Nombre = "Pedro"
+            , Password="clave"
+            , Activo = true
+            , Role = rol
+            , ProyectosDeUsuario = proyectosDeUsuario});
+
+            //Assert
+            Assert.IsType<BadRequestObjectResult>(okResult);
+        }
+
+        [Fact]
+        public void UpdateUsers_GivenUser_ReturnsBadRequest()
+        {
+            //Arrange
+            _controller = new UsersController(_logger, _userInfoRepository);
+
+            var entidad = new everisapi.API.Entities.UserEntity
+            {
+                Nombre = "fmorenov",
+                Activo = true,
+                RoleId = 1,
+                NombreCompleto = "Francisco Javier Moreno Vicente"
+            };
+
+            mockRepository.Setup(r => r.GetUser("fmorenov",false)).Returns(entidad);
+
+            var rol = new everisapi.API.Models.RoleDto {Id = 1, Role = "Usuario"};
+            var proyectosDeUsuario = new List<everisapi.API.Models.ProyectoDto> 
+                    { new everisapi.API.Models.ProyectoDto 
+                        {Id = 1, Nombre = "Mi Proyecto"}};
+            var usuario = new everisapi.API.Models.UsersWithRolesDto 
+                    {
+                    Nombre = "fmorenov"
+                    , Password="clave"
+                    , Activo = true
+                    , Role = rol
+                    , ProyectosDeUsuario = proyectosDeUsuario};
+
+            //Act
+            var okResult = _controller.UpdateUsers(usuario);
+
+            //Assert
+            Assert.IsType<BadRequestResult>(okResult);
+        }   
+
+        [Fact]
+        public void UpdateUsers_GivenUser_ReturnsOk()
+        {
+            //Arrange
+            _controller = new UsersController(_logger, _userInfoRepository);
+
+            var entidad = new everisapi.API.Entities.UserEntity
+            {
+                Nombre = "fmorenov",
+                Activo = true,
+                RoleId = 1,
+                NombreCompleto = "Francisco Javier Moreno Vicente"
+            };
+
+            mockRepository.Setup(r => r.GetUser("fmorenov",false)).Returns(entidad);
+
+            mockRepository.Setup(r => r.AlterUserRole(It.Is<everisapi.API.Entities.UserEntity>(u => true))).Returns(true);
+
+            mockRepository.Setup(r => r.GetUser("fmorenov",false)).Returns(entidad);
+
+            var rol = new everisapi.API.Models.RoleDto {Id = 1, Role = "Usuario"};
+            var proyectosDeUsuario = new List<everisapi.API.Models.ProyectoDto> 
+                    { new everisapi.API.Models.ProyectoDto 
+                        {Id = 1, Nombre = "Mi Proyecto"}};
+            var usuario = new everisapi.API.Models.UsersWithRolesDto 
+                    {
+                    Nombre = "fmorenov"
+                    , Password="clave"
+                    , Activo = true
+                    , Role = rol
+                    , ProyectosDeUsuario = proyectosDeUsuario};
+
+            //Act
+            var okResult = _controller.UpdateUsers(usuario);
+
+            //Assert
+            Assert.IsType<OkObjectResult>(okResult);
+        }                
+
     } //end of class
 } //end of namespace
