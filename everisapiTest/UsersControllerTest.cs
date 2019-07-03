@@ -696,6 +696,50 @@ namespace everisapiTest
 
             //Assert
             Assert.IsType<BadRequestResult>(okResult);
+        }  
+
+//Method: AddUserProject
+
+        [Fact]
+        public void removeUserProject_WhenCalled_ReturnOkResult()
+        {
+            //Arrange            
+            _controller = new UsersController(_logger, _userInfoRepository);
+
+
+            mockRepository.Setup(r => r.DeleteUserProject("fmoreno",1)).Returns(true);
+
+            var param = new everisapi.API.Models.UserProyectoDto {
+                UserNombre = "fmoreno",
+                ProyectoId = 1
+            };
+
+            //Act
+            var okResult = _controller.removeUserProject(UserProyectoRemove: param);
+
+            //Assert
+            Assert.IsType<OkObjectResult>(okResult);
+        }    
+
+        [Fact]
+        public void removeUserProject_WhenCalled_ReturnBadRequestResult()
+        {
+            //Arrange            
+            _controller = new UsersController(_logger, _userInfoRepository);
+
+
+            mockRepository.Setup(r => r.DeleteUserProject("fmoreno",1)).Returns(false);
+
+            var param = new everisapi.API.Models.UserProyectoDto {
+                UserNombre = "fmoreno",
+                ProyectoId = 1
+            };
+
+            //Act
+            var okResult = _controller.removeUserProject(UserProyectoRemove: param);
+
+            //Assert
+            Assert.IsType<BadRequestResult>(okResult);
         }           
 
     } //end of class
