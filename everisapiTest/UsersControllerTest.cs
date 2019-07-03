@@ -523,7 +523,102 @@ namespace everisapiTest
 
             //Assert
             Assert.IsType<OkObjectResult>(okResult);
-        }                
+        }
+
+        //Method: UpdateUsers
+
+        [Fact]
+        public void DeleteUsers_GivenNullUser_ReturnsBadRequest()
+        {
+            //Arrange
+            _controller = new UsersController(_logger, _userInfoRepository);
+
+            //Act
+            var okResult = _controller.DeleteUsers(usuarioDelete: null);
+
+            //Assert
+            Assert.IsType<BadRequestResult>(okResult);
+        }
+
+        [Fact]
+        public void DeleteUsers_GivenInvalidModel_ReturnsBadRequest()
+        {
+            //Arrange
+            _controller = new UsersController(_logger, _userInfoRepository);
+            _controller.ModelState.AddModelError("error", "some error");
+
+            var rol = new everisapi.API.Models.RoleDto {Id = 1, Role = "Usuario"};
+
+            //Act
+            var okResult = _controller.DeleteUsers(new everisapi.API.Models.UsersSinProyectosDto 
+            {Nombre = "Pedro"
+            , Password="clave"});
+
+            //Assert
+            Assert.IsType<BadRequestObjectResult>(okResult);
+        }
+
+        [Fact]
+        public void DeleteUsers_GivenUser_ReturnsBadRequest()
+        {
+            //Arrange
+            _controller = new UsersController(_logger, _userInfoRepository);
+
+            var entidad = new everisapi.API.Entities.UserEntity
+            {
+                Nombre = "fmorenov",
+                Password="clave",
+                Activo = true,
+                RoleId = 1,
+                NombreCompleto = "Francisco Javier Moreno Vicente"
+            };
+
+            mockRepository.Setup(r => r.GetUser(entidad.Nombre, false)).Returns(entidad);
+            mockRepository.Setup(r => r.DeleteUser(entidad)).Returns(false);
+
+            var usuario = new everisapi.API.Models.UsersSinProyectosDto 
+                    {
+                    Nombre = "fmorenov"
+                    , Password="clave"
+                    , NombreCompleto = "Francisco Javier Moreno Vicente"};
+
+            //Act
+            var okResult = _controller.DeleteUsers(usuario);
+
+            //Assert
+            Assert.IsType<BadRequestResult>(okResult);
+        }   
+
+        [Fact]
+        public void DeleteUsers_GivenUser_ReturnsOk()
+        {
+            //Arrange
+            _controller = new UsersController(_logger, _userInfoRepository);
+
+            var entidad = new everisapi.API.Entities.UserEntity
+            {
+                Nombre = "fmorenov",
+                Password="clave",
+                Activo = true,
+                RoleId = 1,
+                NombreCompleto = "Francisco Javier Moreno Vicente"
+            };
+
+            mockRepository.Setup(r => r.GetUser(entidad.Nombre, false)).Returns(entidad);
+            mockRepository.Setup(r => r.DeleteUser(entidad)).Returns(true);
+
+            var usuario = new everisapi.API.Models.UsersSinProyectosDto 
+                    {
+                    Nombre = "fmorenov"
+                    , Password="clave"
+                    , NombreCompleto = "Francisco Javier Moreno Vicente"};
+
+            //Act
+            var okResult = _controller.DeleteUsers(usuario);
+
+            //Assert
+            Assert.IsType<OkObjectResult>(okResult);
+        }              
 
     } //end of class
 } //end of namespace
