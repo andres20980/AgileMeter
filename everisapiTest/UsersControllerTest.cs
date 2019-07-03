@@ -618,7 +618,129 @@ namespace everisapiTest
 
             //Assert
             Assert.IsType<OkObjectResult>(okResult);
-        }              
+        }
+
+        //Method: GetAllRoles
+
+        [Fact]
+        public void GetAllRoles_WhenCalled_ReturnOkResult()
+        {
+            //Arrange            
+            _controller = new UsersController(_logger, _userInfoRepository);
+
+
+            mockRepository.Setup(r => r.GetAllRoles()).Returns(new List<everisapi.API.Entities.RoleEntity>());
+
+            //Act
+            var okResult = _controller.GetAllRoles();
+
+            //Assert
+            Assert.IsType<OkObjectResult>(okResult);
+        }      
+
+        [Fact]
+        public void GetAllRoles_WhenThrowException_ReturnStatusCode()
+        {
+            //Arrange            
+            _controller = new UsersController(_logger, _userInfoRepository);
+
+
+            mockRepository.Setup(r => r.GetAllRoles()).Throws(new Exception());
+
+            //Act
+            var okResult = _controller.GetAllRoles();
+
+            //Assert
+            Assert.IsType<ObjectResult>(okResult);
+        }
+
+        //Method: AddUserProject
+
+        [Fact]
+        public void AddUserProject_WhenCalled_ReturnOkResult()
+        {
+            //Arrange            
+            _controller = new UsersController(_logger, _userInfoRepository);
+
+
+            mockRepository.Setup(r => r.AddUserToProject("fmoreno",1)).Returns(true);
+
+            var param = new everisapi.API.Models.UserProyectoDto {
+                UserNombre = "fmoreno",
+                ProyectoId = 1
+            };
+
+            //Act
+            var okResult = _controller.AddUserProject(UserProyectoAdd: param);
+
+            //Assert
+            Assert.IsType<OkObjectResult>(okResult);
+        }    
+
+        [Fact]
+        public void AddUserProject_WhenCalled_ReturnBadRequestResult()
+        {
+            //Arrange            
+            _controller = new UsersController(_logger, _userInfoRepository);
+
+
+            mockRepository.Setup(r => r.AddUserToProject("fmoreno",1)).Returns(false);
+
+            var param = new everisapi.API.Models.UserProyectoDto {
+                UserNombre = "fmoreno",
+                ProyectoId = 1
+            };
+
+            //Act
+            var okResult = _controller.AddUserProject(UserProyectoAdd: param);
+
+            //Assert
+            Assert.IsType<BadRequestResult>(okResult);
+        }  
+
+//Method: AddUserProject
+
+        [Fact]
+        public void removeUserProject_WhenCalled_ReturnOkResult()
+        {
+            //Arrange            
+            _controller = new UsersController(_logger, _userInfoRepository);
+
+
+            mockRepository.Setup(r => r.DeleteUserProject("fmoreno",1)).Returns(true);
+
+            var param = new everisapi.API.Models.UserProyectoDto {
+                UserNombre = "fmoreno",
+                ProyectoId = 1
+            };
+
+            //Act
+            var okResult = _controller.removeUserProject(UserProyectoRemove: param);
+
+            //Assert
+            Assert.IsType<OkObjectResult>(okResult);
+        }    
+
+        [Fact]
+        public void removeUserProject_WhenCalled_ReturnBadRequestResult()
+        {
+            //Arrange            
+            _controller = new UsersController(_logger, _userInfoRepository);
+
+
+            mockRepository.Setup(r => r.DeleteUserProject("fmoreno",1)).Returns(false);
+
+            var param = new everisapi.API.Models.UserProyectoDto {
+                UserNombre = "fmoreno",
+                ProyectoId = 1
+            };
+
+            //Act
+            var okResult = _controller.removeUserProject(UserProyectoRemove: param);
+
+            //Assert
+            Assert.IsType<BadRequestResult>(okResult);
+        }           
 
     } //end of class
 } //end of namespace
