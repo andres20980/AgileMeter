@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    service: agilemeterfront
+  name: agilemeterfront
+spec:
+  ports:
+  - name: "4200"
+    port: 4200
+    targetPort: 4200
+  selector:
+    service: agilemeterfront
+status:
+  loadBalancer: {}
