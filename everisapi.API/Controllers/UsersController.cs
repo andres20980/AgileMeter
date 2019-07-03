@@ -252,8 +252,10 @@ namespace everisapi.API.Controllers
                 usuarioDelete.Password = hash;
             }
 
+            UserEntity userEntity = _userInfoRepository.GetUser(usuarioDelete.Nombre, false);
+
             //Comprueba que se guardo bien y lo envia
-            if (_userInfoRepository.DeleteUser(Mapper.Map<UserEntity>(usuarioDelete)))
+            if (_userInfoRepository.DeleteUser(userEntity))
             {
                 return Ok("Eliminación completada");
             }
