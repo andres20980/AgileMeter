@@ -5,7 +5,6 @@ import { RespuestaConNotas } from 'app/Models/RespuestaConNotas';
 import { RespuestaConNotasTabla } from 'app/pdfgenerator/pdfgenerator.component';
 import { RespuestasService } from 'app/services/RespuestasService';
 import { Respuesta } from 'app/Models/Respuesta';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-section-results',
@@ -16,7 +15,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class SectionResultsComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
-  @Input() SectionConAsignacionesDto: any; //IEnumerable<SectionConAsignacionesDto>
+  @Input() lSectionConAsignacionesDto: any; //IEnumerable<SectionConAsignacionesDto>
   userRole: string = this._appComponent._storageDataService.Role;
   dataSource: MatTableDataSource<any>;
   expandedElement: RespuestaConNotas;
@@ -26,8 +25,7 @@ export class SectionResultsComponent implements OnInit {
   
   constructor(
     private _appComponent: AppComponent,
-    private _respuestasService: RespuestasService,
-    private _translateService: TranslateService,
+    private _respuestasService: RespuestasService
     ){
     }
     saveNotas(model: RespuestaConNotas): void{
@@ -103,9 +101,9 @@ export class SectionResultsComponent implements OnInit {
 
   //Metodo encargado de gestionar las notas de las secciones y modulos
   DisplayNotes(noteText: string): string{
-    noteText = noteText || null;   
-    var returnedText = "";
-    this._translateService.get('SECTION_RESULTS.NO_NOTES').subscribe(value => { returnedText = value; });
+    noteText = noteText || null;
+    
+    var returnedText = "No hay notas añadidas";
     if (noteText != null){
       returnedText = noteText;
     }
