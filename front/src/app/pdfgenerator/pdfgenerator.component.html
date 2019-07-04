@@ -11,7 +11,7 @@
     <div class="ng-card-box p-2 p-2 pt-5 pb-5 br-2 mat-elevation-z5">
         <div class="row">
             <div class="col ml-5">
-              <h3>Resultados de la evaluación</h3>
+              <h3>{{ 'PDF_GENERATOR.ASSESSMENT_RESULTS' | translate }}</h3>
             </div>
         </div>
 
@@ -201,8 +201,8 @@
       [renderOnClick]="false"
       [animationDuration]="300"
         ></circle-progress>
-        <div class="text-center"><b>VALORACIÓN</b></div>
-        <div class="text-center"><b>GLOBAL</b></div>
+        <div class="text-center"><b>{{ 'PDF_GENERATOR.GLOBAL'| translate }}</b></div>
+        <!-- <div class="text-center"><b>GLOBAL</b></div> -->
   </div> 
 
 </div>
@@ -211,21 +211,21 @@
   <mat-expansion-panel class="notas-panel">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Notas
-        <img class="comment" *ngIf="(Evaluacion.notasEvaluacion != null && Evaluacion.notasEvaluacion != '') || (Evaluacion.notasObjetivos != null && Evaluacion.notasObjetivos != '')" src="assets/comment_filled.png" title="Hay notas" />
-        <img class="comment" *ngIf="(Evaluacion.notasEvaluacion == null || Evaluacion.notasEvaluacion == '') && (Evaluacion.notasObjetivos == null || Evaluacion.notasObjetivos == '')" src="assets/comment_empty.png" title="No hay notas" />
+        {{ 'PDF_GENERATOR.NOTES'| translate }}
+        <img class="comment" *ngIf="(Evaluacion.notasEvaluacion != null && Evaluacion.notasEvaluacion != '') || (Evaluacion.notasObjetivos != null && Evaluacion.notasObjetivos != '')" src="assets/comment_filled.png" title="{{ 'PDF_GENERATOR.ICONS_NOTES_FILLED'| translate }}" />
+        <img class="comment" *ngIf="(Evaluacion.notasEvaluacion == null || Evaluacion.notasEvaluacion == '') && (Evaluacion.notasObjetivos == null || Evaluacion.notasObjetivos == '')" src="assets/comment_empty.png" title="{{ 'PDF_GENERATOR.ICONS_NOTES_EMPTY'| translate }}" />
       </mat-panel-title>
     </mat-expansion-panel-header>
   <div class="notas-row">
       <div class="notas-container">
       <mat-form-field class="comments-form-field" appearance="outline">
-          <mat-label>Notas Evaluación</mat-label>
+          <mat-label>{{ 'PDF_GENERATOR.EVALUATION_NOTES'| translate }}</mat-label>
           <textarea matInput 
           cdkTextareaAutosize
         #autosize="cdkTextareaAutosize"
         cdkAutosizeMinRows="6"
         cdkAutosizeMaxRows="6"
-        placeholder="Notas Evaluación" [(ngModel)]="Evaluacion.notasEvaluacion"
+        placeholder="{{ 'PDF_GENERATOR.PLACEHOLDER_EVALUATION_NOTES'| translate }}" [(ngModel)]="Evaluacion.notasEvaluacion"
         [debounce]="1000" 
         (ngModelChange)="saveNotas(Evaluacion)"
         [readonly] = "UserRole != 'Evaluador' && UserRole != 'Administrador'"> 
@@ -234,13 +234,13 @@
       </div>
       <div class="notas-container">
           <mat-form-field class="comments-form-field" appearance="outline">
-              <mat-label>Notas Objetivos</mat-label>
+              <mat-label>{{ 'PDF_GENERATOR.OBJETIVES_NOTES'| translate }}</mat-label>
               <textarea matInput 
               cdkTextareaAutosize
             #autosize="cdkTextareaAutosize"
             cdkAutosizeMinRows="6"
             cdkAutosizeMaxRows="6"
-            placeholder="Notas Objetivos" [(ngModel)]="Evaluacion.notasObjetivos"
+            placeholder="{{ 'PDF_GENERATOR.PLACEHOLDER_OBJETIVES_NOTES'| translate }}" [(ngModel)]="Evaluacion.notasObjetivos"
             [debounce]="1000" 
             (ngModelChange)="saveNotas(Evaluacion)"
             [readonly] = "UserRole != 'Evaluador' && UserRole != 'Administrador'"> 
@@ -252,11 +252,11 @@
   
   <div class="table-row" *ngIf="true">
     <app-section-results *ngIf="MostrarPreguntas && ListaDeRespuestas && ListaDeRespuestas.length > 0" [lSectionConAsignacionesDto]="ListaSectionConAsignaciones" >
-      loading
+      {{ 'PDF_GENERATOR.LOADING'| translate }}
     </app-section-results>
 
     <comentarios-table *ngIf="MostrarComentarios && ListaDeAsignaciones" [dataInput]="ListaDeAsignaciones">
-      loading
+      {{ 'PDF_GENERATOR.LOADING'| translate }}
     </comentarios-table>
   </div>
 
@@ -282,17 +282,17 @@
 <ng-template #notasAdmin let-cl="close" let-di="dismiss">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title">Notas Respuestas Administrador</h5> <button type="button" class="close" (click)="cl('Cerrar')">
+      <h5 class="modal-title">{{ 'PDF_GENERATOR.MODAL_TITLE'| translate }}</h5> <button type="button" class="close" (click)="cl('Cerrar')">
         <span aria-hidden="true">×</span>
       </button>
     </div>
     <div class="modal-body">
-      <textarea class="form-control" maxlength="4000" placeholder="Inserte aquí el texto" rows="10" [(ngModel)]="textoModal"></textarea>
+      <textarea class="form-control" maxlength="4000" placeholder="{{ 'PDF_GENERATOR.MODAL_PLACEHOLDER'| translate }}" rows="10" [(ngModel)]="textoModal"></textarea>
     </div>
     <div class="modal-footer">
       <p id="numletras" class="mr-2 mt-2">{{textoModal.length}}/4000</p>
-      <button type="button" class="btn btn-success cambiar" (click)="di('Guardar')">Guardar</button>
-      <button type="button" class="btn btn-secondary" (click)="cl('Cerrar')">Cancelar</button>
+      <button type="button" class="btn btn-success cambiar" (click)="di('Guardar')">{{ 'PDF_GENERATOR.MODAL_BTN_SAVE'| translate }}</button>
+      <button type="button" class="btn btn-secondary" (click)="cl('Cerrar')">{{ 'PDF_GENERATOR.MODAL_BTN_CANCEL'| translate }}</button>
     </div>
   </div>
 </ng-template>
