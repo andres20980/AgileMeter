@@ -5,6 +5,7 @@ import { RespuestaConNotas } from 'app/Models/RespuestaConNotas';
 import { RespuestaConNotasTabla } from 'app/pdfgenerator/pdfgenerator.component';
 import { RespuestasService } from 'app/services/RespuestasService';
 import { Respuesta } from 'app/Models/Respuesta';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-section-results',
@@ -25,7 +26,8 @@ export class SectionResultsComponent implements OnInit {
   
   constructor(
     private _appComponent: AppComponent,
-    private _respuestasService: RespuestasService
+    private _respuestasService: RespuestasService,
+    private _translateService: TranslateService,
     ){
     }
     saveNotas(model: RespuestaConNotas): void{
@@ -101,9 +103,9 @@ export class SectionResultsComponent implements OnInit {
 
   //Metodo encargado de gestionar las notas de las secciones y modulos
   DisplayNotes(noteText: string): string{
-    noteText = noteText || null;
-    
-    var returnedText = "No hay notas añadidas";
+    noteText = noteText || null;   
+    var returnedText = "";
+    this._translateService.get('SECTION_RESULTS.NO_NOTES').subscribe(value => { returnedText = value; });
     if (noteText != null){
       returnedText = noteText;
     }
