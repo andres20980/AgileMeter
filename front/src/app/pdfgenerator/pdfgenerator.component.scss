@@ -657,17 +657,17 @@ hr.textopdf {
   border-radius: 3px; 
   position: relative;
   //cursor: pointer;
-  @extend .transition-animation;
-  &:hover {
-    @extend .transition-animation;
-    box-shadow: 0 0 7px 1px mat-color($mat-everis, 300);
-  }
+  //@extend .transition-animation;
+  //&:hover {
+   // @extend .transition-animation;
+    //box-shadow: 0 0 7px 1px mat-color($mat-everis, 300);
+  //}
 }
 
 .circle-progress-title{
-  background-color: mat-color($mat-everis, 300);
-  color: white;
-  border-radius: 0 0 3px 3px; 
+  // background-color: mat-color($mat-everis, 300);
+  // color: white;
+   border-radius: 0 0 3px 3px; 
 }
 
 .notas-container {
@@ -735,7 +735,7 @@ hr.textopdf {
 }
 
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-thick {
-  color: mat-color($mat-everis, 50);
+  color: mat-color($mat-everis, 50) !important;
 }
 
 .button-disabled {
@@ -790,24 +790,5 @@ hr.textopdf {
   font-size: 15px !important;
   font-weight: bold;
   color: mat-color($mat-everis, 300);
-  font-family: monospace;
-}
-.right-comment{
-  padding-left: 1rem;
-  margin-bottom: -12px;    
-}
-
-.right-comment img{
-  width: 28px;
-  height: 28px;
-}
-
-.right-comment p{
-  width: 28px;
-  text-align: center;
-  margin-top: -27px;   
-  font-size: 15px !important;
-  font-weight: bold;
-  color:  mat-color($mat-everis, 300);
   font-family: monospace;
 }

@@ -11,7 +11,11 @@
   <div class="ng-card-box p-2 p-2 pt-5 pb-5 br-2 mat-elevation-z5">
     <div class="row">
       <div class="col ml-5">
-        <h3>{{ 'PDF_GENERATOR.ASSESSMENT_RESULTS' | translate }}</h3>
+        <h3>{{ 'PDF_GENERATOR.ASSESSMENT_RESULTS' | translate }}
+          <button class="transparente" (click)="ExportToExcel();">
+            <img src="assets/excel.png" title="{{ 'PDF_GENERATOR.EXCEL_EXPORT' | translate }}" />
+          </button>
+        </h3>
       </div>
     </div>
 
@@ -21,7 +25,8 @@
 
     <div class="circle-progress-container" *ngIf="ListaSectionConAsignaciones && ListaSectionConAsignaciones.length>0">
       <div *ngFor="let datos of ListaSectionConAsignaciones; let i = index" [attr.data-index]="i"
-        [ngClass]="formatLevel(ListaSectionConAsignaciones[i])" class="circle-progress mat-elevation-z3 m-2">
+        [attr.id]="datos.nombre" [ngClass]="formatLevel(ListaSectionConAsignaciones[i])"
+        class="circle-progress">
         <div *ngIf="datos.numNotas > 0" class="top-comment" data-html2canvas-ignore="true">
           <img class="" src="assets/comment_empty.png" title="{{ 'PDF_GENERATOR.NOTES' | translate }}" />
           <p>{{datos.numNotas}}</p>
@@ -32,15 +37,15 @@
           [innerStrokeColor]="getLevelColorInner(ListaSectionConAsignaciones[i])"
           [outerStrokeColor]="getLevelColorOuter(ListaSectionConAsignaciones[i])" [outerStrokeLinecap]="'square'"
           [animation]="true" [renderOnClick]="false" [animationDuration]="300"></circle-progress>
-        <div class="text-center circle-progress-title"><b>{{datos.nombre}}</b></div>
+        <div class="text-center circle-progress-title" data-html2canvas-ignore="true"><b>{{datos.nombre}}</b></div>
       </div>
-      <div [ngClass]="formatTotalLevel(ListaSectionConAsignaciones)" class="mat-elevation-z3 m-2">
+      <div [ngClass]="formatTotalLevel(ListaSectionConAsignaciones)"  [attr.id]="'total'">
         <circle-progress [percent]="getTotalPercent(ListaSectionConAsignaciones)" [toFixed]="1" [showSubtitle]="false"
           [subtitle]="[formatTotalSubtitle(ListaSectionConAsignaciones)]" [subtitleFontSize]="14" [titleFontSize]="26"
           [unitsFontSize]="14" [radius]="74" [space]="-10" [outerStrokeWidth]="10" [innerStrokeWidth]="10"
           [innerStrokeColor]="'#b8457a30'" [outerStrokeColor]="'#b8457a'" [outerStrokeLinecap]="'square'"
           [animation]="true" [renderOnClick]="false" [animationDuration]="300"></circle-progress>
-        <div class="text-center circle-progress-title"><b>{{ 'PDF_GENERATOR.GLOBAL'| translate }}</b></div>
+        <div class="text-center circle-progress-title" data-html2canvas-ignore="true"><b>{{ 'PDF_GENERATOR.GLOBAL'| translate }}</b></div>
         <!-- <div class="text-center"><b>GLOBAL</b></div> -->
       </div>
 
@@ -50,41 +55,14 @@
   <mat-expansion-panel class="notas-panel">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <div class="col-11">
-          {{ 'PDF_GENERATOR.NOTES'| translate }}
-        </div>
-        <!-- <img class="comment"
+        {{ 'PDF_GENERATOR.NOTES'| translate }}
+        <img class="comment"
           *ngIf="(Evaluacion.notasEvaluacion != null && Evaluacion.notasEvaluacion != '') || (Evaluacion.notasObjetivos != null && Evaluacion.notasObjetivos != '')"
           src="assets/comment_filled.png" title="{{ 'PDF_GENERATOR.ICONS_NOTES_FILLED'| translate }}" />
         <img class="comment"
           *ngIf="(Evaluacion.notasEvaluacion == null || Evaluacion.notasEvaluacion == '') && (Evaluacion.notasObjetivos == null || Evaluacion.notasObjetivos == '')"
-          src="assets/comment_empty.png" title="{{ 'PDF_GENERATOR.ICONS_NOTES_EMPTY'| translate }}" />  -->
-        <div class="col-1">
-          <div
-            *ngIf="(Evaluacion.notasEvaluacion != null && Evaluacion.notasEvaluacion != '') || (Evaluacion.notasObjetivos != null && Evaluacion.notasObjetivos != '')"
-            class="right-comment">
-            <img class="" src="assets/comment_empty.png" title="Notas" />
-            <p *ngIf="(Evaluacion.notasEvaluacion != null && Evaluacion.notasEvaluacion != '') && (Evaluacion.notasObjetivos != null && Evaluacion.notasObjetivos != '') ;else contentElse">2</p>
-            <ng-template #contentElse>
-              <p *ngIf="(Evaluacion.notasEvaluacion != null && Evaluacion.notasEvaluacion != '') || (Evaluacion.notasObjetivos != null && Evaluacion.notasObjetivos != '')">1</p>
-            </ng-template>
-          </div>
-        </div>
+          src="assets/comment_empty.png" title="{{ 'PDF_GENERATOR.ICONS_NOTES_EMPTY'| translate }}" />
 
-        <!-- <div *ngIf="(Evaluacion.notasEvaluacion != null && Evaluacion.notasEvaluacion != '') && (Evaluacion.notasObjetivos != null && Evaluacion.notasObjetivos != '')" class="top-comment" data-html2canvas-ignore="true">
-            <img class="" src="assets/comment_empty.png" title="{{ 'PDF_GENERATOR.NOTES' | translate }}" />
-            <p>2</p>
-          </div>
-
-          <div *ngIf="(Evaluacion.notasEvaluacion == null || Evaluacion.notasEvaluacion == '') && (Evaluacion.notasObjetivos != null && Evaluacion.notasObjetivos != '')" class="top-comment" data-html2canvas-ignore="true">
-            <img class="" src="assets/comment_empty.png" title="{{ 'PDF_GENERATOR.NOTES' | translate }}" />
-            <p>1</p>
-          </div>
-
-          <div *ngIf="(Evaluacion.notasEvaluacion != null && Evaluacion.notasEvaluacion != '') && (Evaluacion.notasObjetivos == null || Evaluacion.notasObjetivos == '')" class="top-comment" data-html2canvas-ignore="true">
-            <img class="" src="assets/comment_empty.png" title="{{ 'PDF_GENERATOR.NOTES' | translate }}" />
-            <p>1</p>
-          </div> -->
       </mat-panel-title>
     </mat-expansion-panel-header>
     <div class="notas-row">
