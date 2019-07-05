@@ -656,7 +656,7 @@ hr.textopdf {
   max-width: 11rem;
   border-radius: 3px; 
   position: relative;
-  cursor: pointer;
+  //cursor: pointer;
   @extend .transition-animation;
   &:hover {
     @extend .transition-animation;
