@@ -1,0 +1,244 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<flow-build plugin="workflow-job@2.33">
+  <actions>
+    <hudson.model.CauseAction>
+      <causeBag class="linked-hash-map">
+        <entry>
+          <hudson.model.Cause_-UserIdCause>
+            <userId>admin</userId>
+          </hudson.model.Cause_-UserIdCause>
+          <int>1</int>
+        </entry>
+      </causeBag>
+    </hudson.model.CauseAction>
+    <org.jenkinsci.plugins.workflow.libs.LibrariesAction plugin="workflow-cps-global-lib@2.13">
+      <libraries/>
+    </org.jenkinsci.plugins.workflow.libs.LibrariesAction>
+    <org.jenkinsci.plugins.pipeline.modeldefinition.actions.ExecutionModelAction plugin="pipeline-model-definition@1.3.9">
+      <stagesUUID>cc88e92b-0064-4adc-8b56-be79fea7061e</stagesUUID>
+      <stagesList>
+        <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStages plugin="pipeline-model-api@1.3.9">
+          <stages>
+            <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+              <name>Clean workspace</name>
+              <branches>
+                <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                  <name>default</name>
+                  <steps>
+                    <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                      <name>println</name>
+                      <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTSingleArgument">
+                        <value class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue$ConstantValue">
+                          <value class="string">Se limpia el workspace</value>
+                        </value>
+                      </args>
+                    </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                    <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                      <name>cleanWs</name>
+                      <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                        <arguments class="linked-hash-map"/>
+                      </args>
+                    </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStep>
+                  </steps>
+                </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+              </branches>
+            </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+            <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+              <name>Donwload Source</name>
+              <branches>
+                <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                  <name>default</name>
+                  <steps>
+                    <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTScriptBlock>
+                      <name>script</name>
+                      <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                        <arguments class="linked-hash-map">
+                          <entry>
+                            <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                              <key>scriptBlock</key>
+                            </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                            <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                              <value class="string">sh &apos;/usr/bin/git clone ssh://git@steps.everis.com:766/INNOVASEV/ScrumMeter.git -b Development&apos;
+        	        sh &apos;chown -R jenkins:jenkins $WORKSPACE/ScrumMeter/&apos;</value>
+                            </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                          </entry>
+                        </arguments>
+                      </args>
+                    </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTScriptBlock>
+                  </steps>
+                </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+              </branches>
+            </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+            <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+              <name>Install package and build</name>
+              <branches>
+                <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                  <name>default</name>
+                  <steps>
+                    <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTScriptBlock>
+                      <name>script</name>
+                      <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                        <arguments class="linked-hash-map">
+                          <entry>
+                            <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                              <key>scriptBlock</key>
+                            </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                            <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                              <value class="string">sh &apos;dotnet build $WORKSPACE/ScrumMeter/everisapi.API/&apos;</value>
+                            </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                          </entry>
+                        </arguments>
+                      </args>
+                    </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTScriptBlock>
+                  </steps>
+                </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+              </branches>
+            </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+            <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+              <name>Build test</name>
+              <branches>
+                <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                  <name>default</name>
+                  <steps>
+                    <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTScriptBlock>
+                      <name>script</name>
+                      <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                        <arguments class="linked-hash-map">
+                          <entry>
+                            <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                              <key>scriptBlock</key>
+                            </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                            <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                              <value class="string">sh &apos;dotnet add $WORKSPACE/ScrumMeter/everisapiTest/everisapiTest.csproj package  dotnet-reportgenerator-cli --version 4.2.2&apos;
+    	            sh &apos;dotnet build $WORKSPACE/ScrumMeter/everisapiTest/&apos;</value>
+                            </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                          </entry>
+                        </arguments>
+                      </args>
+                    </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTScriptBlock>
+                  </steps>
+                </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+              </branches>
+            </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+            <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+              <name>Execute test</name>
+              <branches>
+                <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+                  <name>default</name>
+                  <steps>
+                    <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTScriptBlock>
+                      <name>script</name>
+                      <args class="org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTNamedArgumentList">
+                        <arguments class="linked-hash-map">
+                          <entry>
+                            <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                              <key>scriptBlock</key>
+                            </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTKey>
+                            <org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                              <value class="string">sh &apos;dotnet test $WORKSPACE/ScrumMeter/everisapiTest/everisapiTest.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=&quot;$WORKSPACE/ScrumMeter/everisapiTest/TestResult/&quot; /p:Exclude=&quot;[xunit*]*&quot;&apos;
+    	            sh &apos;cd $WORKSPACE/ScrumMeter/everisapiTest/ &amp;&amp; dotnet reportgenerator everisapiTest.csproj &quot;-reports:./TestResult/coverage.opencover.xml&quot; -targetdir:&quot;./TestResults/Reports&quot; -reporttypes:HTML;HTMLSummary&apos;</value>
+                            </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTValue_-ConstantValue>
+                          </entry>
+                        </arguments>
+                      </args>
+                    </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTScriptBlock>
+                  </steps>
+                </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTBranch>
+              </branches>
+            </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStage>
+          </stages>
+          <uuid>cc88e92b-0064-4adc-8b56-be79fea7061e</uuid>
+        </org.jenkinsci.plugins.pipeline.modeldefinition.ast.ModelASTStages>
+      </stagesList>
+    </org.jenkinsci.plugins.pipeline.modeldefinition.actions.ExecutionModelAction>
+  </actions>
+  <queueId>13</queueId>
+  <timestamp>1561726727070</timestamp>
+  <startTime>1561726727171</startTime>
+  <result>FAILURE</result>
+  <duration>97304</duration>
+  <charset>UTF-8</charset>
+  <keepLog>false</keepLog>
+  <execution class="org.jenkinsci.plugins.workflow.cps.CpsFlowExecution">
+    <result>FAILURE</result>
+    <script>pipeline {
+    agent{
+        label{
+            label &apos;&apos;
+        }
+    }
+	stages {
+	    stage(&apos;Clean workspace&apos;){
+	        steps{
+	            println &apos;Se limpia el workspace&apos;
+                cleanWs()
+	        }
+	    }
+	    stage(&apos;Donwload Source&apos;) {
+        	steps {
+        	    script{
+        	        sh &apos;/usr/bin/git clone ssh://git@steps.everis.com:766/INNOVASEV/ScrumMeter.git -b Development&apos;
+        	        sh &apos;chown -R jenkins:jenkins $WORKSPACE/ScrumMeter/&apos;
+        	    }
+        	}
+    	}
+    	stage(&apos;Install package and build&apos;){
+    	    steps{
+    	        script{
+    	            sh &apos;dotnet build $WORKSPACE/ScrumMeter/everisapi.API/&apos;
+    	        }
+    	    }
+    	}
+    	stage(&apos;Build test&apos;){
+    	    steps{
+    	        script{
+    	            
+    	            sh &apos;dotnet add $WORKSPACE/ScrumMeter/everisapiTest/everisapiTest.csproj package  dotnet-reportgenerator-cli --version 4.2.2&apos;
+    	            sh &apos;dotnet build $WORKSPACE/ScrumMeter/everisapiTest/&apos;
+    	        }
+    	    }
+    	}
+    	stage(&apos;Execute test&apos;){
+    	    steps{
+    	        script{
+    	            
+    	            sh &apos;dotnet test $WORKSPACE/ScrumMeter/everisapiTest/everisapiTest.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=&quot;$WORKSPACE/ScrumMeter/everisapiTest/TestResult/&quot; /p:Exclude=&quot;[xunit*]*&quot;&apos;
+    	            sh &apos;cd $WORKSPACE/ScrumMeter/everisapiTest/ &amp;&amp; dotnet reportgenerator everisapiTest.csproj &quot;-reports:./TestResult/coverage.opencover.xml&quot; -targetdir:&quot;./TestResults/Reports&quot; -reporttypes:HTML;HTMLSummary&apos;
+    	        }
+    	    }
+    	}
+	}
+}</script>
+    <loadedScripts class="map"/>
+    <durabilityHint>MAX_SURVIVABILITY</durabilityHint>
+    <timings class="map">
+      <entry>
+        <string>flowNode</string>
+        <long>5807734800</long>
+      </entry>
+      <entry>
+        <string>classLoad</string>
+        <long>1234169800</long>
+      </entry>
+      <entry>
+        <string>run</string>
+        <long>29532321600</long>
+      </entry>
+      <entry>
+        <string>parse</string>
+        <long>370539500</long>
+      </entry>
+      <entry>
+        <string>saveProgram</string>
+        <long>15611306200</long>
+      </entry>
+    </timings>
+    <sandbox>true</sandbox>
+    <iota>52</iota>
+    <head>1:52</head>
+    <done>true</done>
+    <resumeBlocked>false</resumeBlocked>
+  </execution>
+  <completed>true</completed>
+  <checkouts class="hudson.util.PersistedList"/>
+</flow-build>

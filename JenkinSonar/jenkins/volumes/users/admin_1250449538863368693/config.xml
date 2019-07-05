@@ -1,0 +1,70 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<user>
+  <fullName>admin</fullName>
+  <properties>
+    <jenkins.security.ApiTokenProperty>
+      <apiToken>{AQAAABAAAABQrhSEBjPUtR53NKYr/aaAiE3iXs7ViCLxJdlvHtDunOMwbmlJXBJSfj6XkNRyrMvKr7isLx8Pg9REFQ8Hhi1LOJJX7MEL/TtnoTeowj/QrOiuUtB/dMUoKUkWb64dzsUo}</apiToken>
+      <tokenStore>
+        <tokenList>
+          <jenkins.security.apitoken.ApiTokenStore_-HashedToken>
+            <uuid>de02b7df-e6c5-4a9b-81d5-4d3b8bcae535</uuid>
+            <name>Legacy Token</name>
+            <value>
+              <version>10</version>
+              <hash>01b8cfbf5b8c8fd0c99cd3fff3fa3378e3bbb7e1906ddb2aea807ae0c0151e8f</hash>
+            </value>
+          </jenkins.security.apitoken.ApiTokenStore_-HashedToken>
+        </tokenList>
+      </tokenStore>
+    </jenkins.security.ApiTokenProperty>
+    <hudson.model.MyViewsProperty>
+      <views>
+        <hudson.model.AllView>
+          <owner class="hudson.model.MyViewsProperty" reference="../../.."/>
+          <name>All</name>
+          <filterExecutors>false</filterExecutors>
+          <filterQueue>false</filterQueue>
+          <properties class="hudson.model.View$PropertyList"/>
+        </hudson.model.AllView>
+      </views>
+    </hudson.model.MyViewsProperty>
+    <hudson.model.PaneStatusProperties>
+      <collapsed/>
+    </hudson.model.PaneStatusProperties>
+    <hudson.search.UserSearchProperty>
+      <insensitiveSearch>false</insensitiveSearch>
+    </hudson.search.UserSearchProperty>
+    <hudson.security.HudsonPrivateSecurityRealm_-Details>
+      <passwordHash>#jbcrypt:$2a$10$KZr7NUlLVTbMykYeuYLdPOgT/jFSfiLZHI3tqU.BkkzW3chSYi9Ha</passwordHash>
+    </hudson.security.HudsonPrivateSecurityRealm_-Details>
+    <jenkins.security.LastGrantedAuthoritiesProperty>
+      <roles>
+        <string>authenticated</string>
+      </roles>
+      <timestamp>1486734797021</timestamp>
+    </jenkins.security.LastGrantedAuthoritiesProperty>
+    <com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty plugin="credentials@2.2.0">
+      <domainCredentialsMap class="hudson.util.CopyOnWriteMap$Hash">
+        <entry>
+          <com.cloudbees.plugins.credentials.domains.Domain>
+            <specifications/>
+          </com.cloudbees.plugins.credentials.domains.Domain>
+          <java.util.concurrent.CopyOnWriteArrayList>
+            <com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey plugin="ssh-credentials@1.17">
+              <id>527fb671-6e60-431a-a5ca-00f698f8911d</id>
+              <description></description>
+              <username></username>
+              <privateKeySource class="com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey$DirectEntryPrivateKeySource">
+                <privateKey>{AQAAABAAAAGQpJcfp7VNtVoNEVhxGsXL7FWliXMUfPuv845aVwrWEO3R1jGJqsbvLDdVwr8octwE6JmoJOJjXmDie2Pix2Cgh3NivzSRqo7r/SFiGbza+cqmguDHOCFvxBEL0Fnf0+8gSwrPpIfuT33JyXY/5wlzQDp655m9jfRMYMrFieN/COfBdCVACWBdYbt2yNFlvKTaOiOMS8vfzcMaJ5tQKq8hiNJJlEIQYusdULSpHSNHK14cbry3Jl8RwUVFCqW964SNGUPvarkyPGbD10TM/3WB5aC0PtHKsbColaWIvc6rJxZh1KLca4TGsWTwG2LCyF32nCVr1bUxyBYI8zGn2wDUdLMxIC8s3Kkz53SqDKc8wmhuiSGgKe/BkayL4KVdSsJDp3A9g1+CcCWpGFQlhV4uEDVadv43HevWiFF7Rgqliu1gpPjcJ9TVZiTuNz5iR32GgPyFRq/NwyRxjB2zdZy/dPOxqrkG/B0P9Slq1n5U7YOb1ST+oSx/rIVwGnXHEHt1r1nrHV2H0rKQ/gYOQPkjUUMFpt9vAgi+HmeYS/BOswQ=}</privateKey>
+              </privateKeySource>
+            </com.cloudbees.jenkins.plugins.sshcredentials.impl.BasicSSHUserPrivateKey>
+          </java.util.concurrent.CopyOnWriteArrayList>
+        </entry>
+      </domainCredentialsMap>
+    </com.cloudbees.plugins.credentials.UserCredentialsProvider_-UserCredentialsProperty>
+    <hudson.tasks.Mailer_-UserProperty plugin="mailer@1.23"/>
+    <org.jenkinsci.plugins.displayurlapi.user.PreferredProviderUserProperty plugin="display-url-api@2.3.1">
+      <providerId>default</providerId>
+    </org.jenkinsci.plugins.displayurlapi.user.PreferredProviderUserProperty>
+  </properties>
+</user>
