@@ -26,6 +26,7 @@ import { Workbook } from 'exceljs';
 import * as fs from 'file-saver';
 import { MatTable, MatTableDataSource } from '@angular/material';
 import { SortedTableComponent } from 'app/sorted-table/sorted-table.component';
+import { TranslateService } from '@ngx-translate/core';
 
 // import { setTimeout } from 'timers';
 
@@ -107,7 +108,8 @@ export class PreviousevaluationComponent implements OnInit {
     private _proyectoService: ProyectoService,
     private _sectionService: SectionService,
     private modalService: NgbModal,
-    private http: Http
+    private http: Http,
+    private _translateService: TranslateService
   ) { }
 
   ngOnInit() {
@@ -411,14 +413,22 @@ export class PreviousevaluationComponent implements OnInit {
   }
 
   public ExportToExcel(){
+    var woorksheet = "",title="",date="",user="",assessment="",score="";
+    this._translateService.get('PREVIOUS_EVALUATION.EXCEL_WORKSHEET').subscribe(value => { woorksheet = value; });
+    this._translateService.get('PREVIOUS_EVALUATION.EXCEL_TITLE').subscribe(value => { title = value; });
+    this._translateService.get('PREVIOUS_EVALUATION.EXCEL_DATE').subscribe(value => { date = value; });
+    this._translateService.get('PREVIOUS_EVALUATION.EXCEL_USER').subscribe(value => { user = value; });
+    this._translateService.get('PREVIOUS_EVALUATION.EXCEL_ASSESSMENT').subscribe(value => { assessment = value; });
+    this._translateService.get('PREVIOUS_EVALUATION.EXCEL_SCORE').subscribe(value => { score = value; });
     let workbook = new Workbook();
-    let worksheet = workbook.addWorksheet('Evaluaciones finalizadas');
+    
+    let worksheet = workbook.addWorksheet(woorksheet);
 
-    let titleRow = worksheet.addRow(['Evaluaciones finalizadas del equipo ' +  this.Project.nombre]);
+    let titleRow = worksheet.addRow([title +" "+ this.Project.nombre]);
     titleRow.font = { name: 'Arial', family: 4, size: 16, bold: true }
     worksheet.addRow([]);
 
-    let header = ["Fecha", "Usuario", "Assessment" , "Puntuación"]
+    let header = [date,user , assessment , score ]
     //Add Header Row
     let headerRow = worksheet.addRow(header);
     
