@@ -114,7 +114,7 @@
 		"FORM_SIZE": "Tamaño",
 		"FORM_SIZE_REQUIRED": "El campo tamaño no puede estar vacio.",
 		"FORM_SIZE_LENGHT": "El campo tamaño solo puede contener entre 1 y 6 números",
-		"FORM_CODIGO": "Código",
+		"FORM_CODIGO": "Código de Proyecto",
 		"FORM_CODIGO_MAX_LENGTH": "El campo código no puede tener más de 100 caracteres.",
 		"BTN_SAVE": "Guardar",
 		"BTN_BACK": "Volver",

@@ -114,7 +114,7 @@
 		"FORM_SIZE": "Size",
 		"FORM_SIZE_REQUIRED": "Size field can't be empty",
 		"FORM_SIZE_LENGHT": "Size field can only contain between 1 and 6 digits",
-		"FORM_CODIGO": "Code",
+		"FORM_CODIGO": "Project´s Code",
 		"FORM_CODIGO_MAX_LENGTH": "Code field can't be more than 100 characters long",
 		"BTN_SAVE": "Save",
 		"BTN_BACK": "Back",
