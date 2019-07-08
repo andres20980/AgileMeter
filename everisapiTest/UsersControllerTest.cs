@@ -13,7 +13,7 @@ using Xunit;
 
 namespace everisapiTest
 {
-    public class UsersControllerTest : IDisposable
+    public class UsersControllerTest
     {
         UsersController _controller;
         private readonly ILogger<UsersController> _logger;
@@ -30,24 +30,10 @@ namespace everisapiTest
             mockRepository = new Mock<IUsersInfoRepository>();
             _userInfoRepository = mockRepository.Object;
 
-            Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<everisapi.API.Entities.UserEntity, everisapi.API.Models.UsersSinProyectosDto>();
-                cfg.CreateMap<everisapi.API.Entities.UserEntity, everisapi.API.Models.UsersDto>();
-                cfg.CreateMap<everisapi.API.Entities.UserEntity, everisapi.API.Models.UsersWithRolesDto>();
-                cfg.CreateMap<everisapi.API.Entities.RoleEntity, everisapi.API.Models.RoleDto>();
-            });
-
+            var autoMapperInstance = AutoMapperConfig.Instance;
         }
-
-        public void Dispose()
-        {
-            Mapper.Reset();
-        }
-
 
         //Method: GetUsers
-
         [Fact]
         public void GetUsers_WhenCalled_ReturnOkResult()
         {
@@ -261,18 +247,20 @@ namespace everisapiTest
             _controller = new UsersController(_logger, _userInfoRepository);
             _controller.ModelState.AddModelError("error", "some error");
 
-            var rol = new everisapi.API.Models.RoleDto {Id = 1, Role = "Usuario"};
+            var rol = new everisapi.API.Models.RoleDto { Id = 1, Role = "Usuario" };
 
             var proyectosDeUsuario = new List<everisapi.API.Models.ProyectoDto> {
                 new everisapi.API.Models.ProyectoDto{Id = 1, Nombre = "Mi Proyecto"}};
 
             //Act
-            var okResult = _controller.AddUsers(new everisapi.API.Models.UsersWithRolesDto 
-            {Nombre = "Pedro"
-            , Password="clave"
-            , Activo = true
-            , Role = rol
-            , ProyectosDeUsuario = proyectosDeUsuario});
+            var okResult = _controller.AddUsers(new everisapi.API.Models.UsersWithRolesDto
+            {
+                Nombre = "Pedro",
+                Password = "clave",
+                Activo = true,
+                Role = rol,
+                ProyectosDeUsuario = proyectosDeUsuario
+            });
 
             //Assert
             Assert.IsType<BadRequestObjectResult>(okResult);
@@ -287,16 +275,18 @@ namespace everisapiTest
             mockRepository.Setup(r => r.UserExiste("fmorenov")).Returns(true);
             mockRepository.Setup(r => r.UserActivo("fmorenov")).Returns(true);
 
-            var rol = new everisapi.API.Models.RoleDto {Id = 1, Role = "Usuario"};
-            var proyectosDeUsuario = new List<everisapi.API.Models.ProyectoDto> 
-                    { new everisapi.API.Models.ProyectoDto 
+            var rol = new everisapi.API.Models.RoleDto { Id = 1, Role = "Usuario" };
+            var proyectosDeUsuario = new List<everisapi.API.Models.ProyectoDto>
+                    { new everisapi.API.Models.ProyectoDto
                         {Id = 1, Nombre = "Mi Proyecto"}};
-            var usuario = new everisapi.API.Models.UsersWithRolesDto 
-                    {Nombre = "fmorenov"
-                    , Password="clave"
-                    , Activo = true
-                    , Role = rol
-                    , ProyectosDeUsuario = proyectosDeUsuario};
+            var usuario = new everisapi.API.Models.UsersWithRolesDto
+            {
+                Nombre = "fmorenov",
+                Password = "clave",
+                Activo = true,
+                Role = rol,
+                ProyectosDeUsuario = proyectosDeUsuario
+            };
 
             //Act
             var okResult = _controller.AddUsers(usuario);
@@ -315,16 +305,18 @@ namespace everisapiTest
             mockRepository.Setup(r => r.UserActivo("fmorenov")).Returns(false);
             mockRepository.Setup(r => r.AlterUserRole(It.Is<everisapi.API.Entities.UserEntity>(u => true))).Returns(false);
 
-            var rol = new everisapi.API.Models.RoleDto {Id = 1, Role = "Usuario"};
-            var proyectosDeUsuario = new List<everisapi.API.Models.ProyectoDto> 
-                    { new everisapi.API.Models.ProyectoDto 
+            var rol = new everisapi.API.Models.RoleDto { Id = 1, Role = "Usuario" };
+            var proyectosDeUsuario = new List<everisapi.API.Models.ProyectoDto>
+                    { new everisapi.API.Models.ProyectoDto
                         {Id = 1, Nombre = "Mi Proyecto"}};
-            var usuario = new everisapi.API.Models.UsersWithRolesDto 
-                    {Nombre = "fmorenov"
-                    , Password="clave"
-                    , Activo = true
-                    , Role = rol
-                    , ProyectosDeUsuario = proyectosDeUsuario};
+            var usuario = new everisapi.API.Models.UsersWithRolesDto
+            {
+                Nombre = "fmorenov",
+                Password = "clave",
+                Activo = true,
+                Role = rol,
+                ProyectosDeUsuario = proyectosDeUsuario
+            };
 
             //Act
             var okResult = _controller.AddUsers(usuario);
@@ -333,7 +325,7 @@ namespace everisapiTest
             Assert.IsType<BadRequestResult>(okResult);
         }
 
-                [Fact]
+        [Fact]
         public void AddUsers_GivenExitUserNoActivo_ReturnsOk()
         {
             //Arrange
@@ -343,24 +335,26 @@ namespace everisapiTest
             mockRepository.Setup(r => r.UserActivo("fmorenov")).Returns(false);
             mockRepository.Setup(r => r.AlterUserRole(It.Is<everisapi.API.Entities.UserEntity>(u => true))).Returns(true);
 
-            var rol = new everisapi.API.Models.RoleDto {Id = 1, Role = "Usuario"};
-            var proyectosDeUsuario = new List<everisapi.API.Models.ProyectoDto> 
-                    { new everisapi.API.Models.ProyectoDto 
+            var rol = new everisapi.API.Models.RoleDto { Id = 1, Role = "Usuario" };
+            var proyectosDeUsuario = new List<everisapi.API.Models.ProyectoDto>
+                    { new everisapi.API.Models.ProyectoDto
                         {Id = 1, Nombre = "Mi Proyecto"}};
-            var usuario = new everisapi.API.Models.UsersWithRolesDto 
-                    {Nombre = "fmorenov"
-                    , Password="clave"
-                    , Activo = true
-                    , Role = rol
-                    , ProyectosDeUsuario = proyectosDeUsuario};
+            var usuario = new everisapi.API.Models.UsersWithRolesDto
+            {
+                Nombre = "fmorenov",
+                Password = "clave",
+                Activo = true,
+                Role = rol,
+                ProyectosDeUsuario = proyectosDeUsuario
+            };
 
             //Act
             var okResult = _controller.AddUsers(usuario);
 
             //Assert
             Assert.IsType<OkObjectResult>(okResult);
-        }                 
-                 
+        }
+
 
         [Fact]
         public void AddUsers_GivenUserNuevo_ReturnsOk()
@@ -369,16 +363,18 @@ namespace everisapiTest
             _controller = new UsersController(_logger, _userInfoRepository);
             mockRepository.Setup(r => r.AddUser(It.Is<everisapi.API.Entities.UserEntity>(u => true))).Returns(true);
 
-            var rol = new everisapi.API.Models.RoleDto {Id = 1, Role = "Usuario"};
-            var proyectosDeUsuario = new List<everisapi.API.Models.ProyectoDto> 
-                    { new everisapi.API.Models.ProyectoDto 
+            var rol = new everisapi.API.Models.RoleDto { Id = 1, Role = "Usuario" };
+            var proyectosDeUsuario = new List<everisapi.API.Models.ProyectoDto>
+                    { new everisapi.API.Models.ProyectoDto
                         {Id = 1, Nombre = "Mi Proyecto"}};
-            var usuario = new everisapi.API.Models.UsersWithRolesDto 
-                    {Nombre = "Pedro"
-                    , Password="clave"
-                    , Activo = true
-                    , Role = rol
-                    , ProyectosDeUsuario = proyectosDeUsuario};
+            var usuario = new everisapi.API.Models.UsersWithRolesDto
+            {
+                Nombre = "Pedro",
+                Password = "clave",
+                Activo = true,
+                Role = rol,
+                ProyectosDeUsuario = proyectosDeUsuario
+            };
 
             //Act
             var okResult = _controller.AddUsers(usuario);
@@ -395,15 +391,17 @@ namespace everisapiTest
 
             mockRepository.Setup(r => r.AddUser(It.Is<everisapi.API.Entities.UserEntity>(u => true))).Returns(false);
 
-            var rol = new everisapi.API.Models.RoleDto {Id = 1, Role = "Usuario"};
+            var rol = new everisapi.API.Models.RoleDto { Id = 1, Role = "Usuario" };
             var proyectosDeUsuario = new List<everisapi.API.Models.ProyectoDto> {
-                new everisapi.API.Models.ProyectoDto{Id = 1, Nombre = "Mi Proyecto"}};         
-            var usuario = new everisapi.API.Models.UsersWithRolesDto 
-                    {Nombre = "Pedro"
-                    , Password="clave"
-                    , Activo = true
-                    , Role = rol
-                    , ProyectosDeUsuario = proyectosDeUsuario};
+                new everisapi.API.Models.ProyectoDto{Id = 1, Nombre = "Mi Proyecto"}};
+            var usuario = new everisapi.API.Models.UsersWithRolesDto
+            {
+                Nombre = "Pedro",
+                Password = "clave",
+                Activo = true,
+                Role = rol,
+                ProyectosDeUsuario = proyectosDeUsuario
+            };
 
             //Act
             var okResult = _controller.AddUsers(usuario);
@@ -434,18 +432,20 @@ namespace everisapiTest
             _controller = new UsersController(_logger, _userInfoRepository);
             _controller.ModelState.AddModelError("error", "some error");
 
-            var rol = new everisapi.API.Models.RoleDto {Id = 1, Role = "Usuario"};
+            var rol = new everisapi.API.Models.RoleDto { Id = 1, Role = "Usuario" };
 
             var proyectosDeUsuario = new List<everisapi.API.Models.ProyectoDto> {
                 new everisapi.API.Models.ProyectoDto{Id = 1, Nombre = "Mi Proyecto"}};
 
             //Act
-            var okResult = _controller.UpdateUsers(new everisapi.API.Models.UsersWithRolesDto 
-            {Nombre = "Pedro"
-            , Password="clave"
-            , Activo = true
-            , Role = rol
-            , ProyectosDeUsuario = proyectosDeUsuario});
+            var okResult = _controller.UpdateUsers(new everisapi.API.Models.UsersWithRolesDto
+            {
+                Nombre = "Pedro",
+                Password = "clave",
+                Activo = true,
+                Role = rol,
+                ProyectosDeUsuario = proyectosDeUsuario
+            });
 
             //Assert
             Assert.IsType<BadRequestObjectResult>(okResult);
@@ -465,26 +465,27 @@ namespace everisapiTest
                 NombreCompleto = "Francisco Javier Moreno Vicente"
             };
 
-            mockRepository.Setup(r => r.GetUser("fmorenov",false)).Returns(entidad);
+            mockRepository.Setup(r => r.GetUser("fmorenov", false)).Returns(entidad);
 
-            var rol = new everisapi.API.Models.RoleDto {Id = 1, Role = "Usuario"};
-            var proyectosDeUsuario = new List<everisapi.API.Models.ProyectoDto> 
-                    { new everisapi.API.Models.ProyectoDto 
+            var rol = new everisapi.API.Models.RoleDto { Id = 1, Role = "Usuario" };
+            var proyectosDeUsuario = new List<everisapi.API.Models.ProyectoDto>
+                    { new everisapi.API.Models.ProyectoDto
                         {Id = 1, Nombre = "Mi Proyecto"}};
-            var usuario = new everisapi.API.Models.UsersWithRolesDto 
-                    {
-                    Nombre = "fmorenov"
-                    , Password="clave"
-                    , Activo = true
-                    , Role = rol
-                    , ProyectosDeUsuario = proyectosDeUsuario};
+            var usuario = new everisapi.API.Models.UsersWithRolesDto
+            {
+                Nombre = "fmorenov",
+                Password = "clave",
+                Activo = true,
+                Role = rol,
+                ProyectosDeUsuario = proyectosDeUsuario
+            };
 
             //Act
             var okResult = _controller.UpdateUsers(usuario);
 
             //Assert
             Assert.IsType<BadRequestResult>(okResult);
-        }   
+        }
 
         [Fact]
         public void UpdateUsers_GivenUser_ReturnsOk()
@@ -500,23 +501,24 @@ namespace everisapiTest
                 NombreCompleto = "Francisco Javier Moreno Vicente"
             };
 
-            mockRepository.Setup(r => r.GetUser("fmorenov",false)).Returns(entidad);
+            mockRepository.Setup(r => r.GetUser("fmorenov", false)).Returns(entidad);
 
             mockRepository.Setup(r => r.AlterUserRole(It.Is<everisapi.API.Entities.UserEntity>(u => true))).Returns(true);
 
-            mockRepository.Setup(r => r.GetUser("fmorenov",false)).Returns(entidad);
+            mockRepository.Setup(r => r.GetUser("fmorenov", false)).Returns(entidad);
 
-            var rol = new everisapi.API.Models.RoleDto {Id = 1, Role = "Usuario"};
-            var proyectosDeUsuario = new List<everisapi.API.Models.ProyectoDto> 
-                    { new everisapi.API.Models.ProyectoDto 
+            var rol = new everisapi.API.Models.RoleDto { Id = 1, Role = "Usuario" };
+            var proyectosDeUsuario = new List<everisapi.API.Models.ProyectoDto>
+                    { new everisapi.API.Models.ProyectoDto
                         {Id = 1, Nombre = "Mi Proyecto"}};
-            var usuario = new everisapi.API.Models.UsersWithRolesDto 
-                    {
-                    Nombre = "fmorenov"
-                    , Password="clave"
-                    , Activo = true
-                    , Role = rol
-                    , ProyectosDeUsuario = proyectosDeUsuario};
+            var usuario = new everisapi.API.Models.UsersWithRolesDto
+            {
+                Nombre = "fmorenov",
+                Password = "clave",
+                Activo = true,
+                Role = rol,
+                ProyectosDeUsuario = proyectosDeUsuario
+            };
 
             //Act
             var okResult = _controller.UpdateUsers(usuario);
@@ -547,12 +549,14 @@ namespace everisapiTest
             _controller = new UsersController(_logger, _userInfoRepository);
             _controller.ModelState.AddModelError("error", "some error");
 
-            var rol = new everisapi.API.Models.RoleDto {Id = 1, Role = "Usuario"};
+            var rol = new everisapi.API.Models.RoleDto { Id = 1, Role = "Usuario" };
 
             //Act
-            var okResult = _controller.DeleteUsers(new everisapi.API.Models.UsersSinProyectosDto 
-            {Nombre = "Pedro"
-            , Password="clave"});
+            var okResult = _controller.DeleteUsers(new everisapi.API.Models.UsersSinProyectosDto
+            {
+                Nombre = "Pedro",
+                Password = "clave"
+            });
 
             //Assert
             Assert.IsType<BadRequestObjectResult>(okResult);
@@ -567,7 +571,7 @@ namespace everisapiTest
             var entidad = new everisapi.API.Entities.UserEntity
             {
                 Nombre = "fmorenov",
-                Password="clave",
+                Password = "clave",
                 Activo = true,
                 RoleId = 1,
                 NombreCompleto = "Francisco Javier Moreno Vicente"
@@ -576,18 +580,19 @@ namespace everisapiTest
             mockRepository.Setup(r => r.GetUser(entidad.Nombre, false)).Returns(entidad);
             mockRepository.Setup(r => r.DeleteUser(entidad)).Returns(false);
 
-            var usuario = new everisapi.API.Models.UsersSinProyectosDto 
-                    {
-                    Nombre = "fmorenov"
-                    , Password="clave"
-                    , NombreCompleto = "Francisco Javier Moreno Vicente"};
+            var usuario = new everisapi.API.Models.UsersSinProyectosDto
+            {
+                Nombre = "fmorenov",
+                Password = "clave",
+                NombreCompleto = "Francisco Javier Moreno Vicente"
+            };
 
             //Act
             var okResult = _controller.DeleteUsers(usuario);
 
             //Assert
             Assert.IsType<BadRequestResult>(okResult);
-        }   
+        }
 
         [Fact]
         public void DeleteUsers_GivenUser_ReturnsOk()
@@ -598,7 +603,7 @@ namespace everisapiTest
             var entidad = new everisapi.API.Entities.UserEntity
             {
                 Nombre = "fmorenov",
-                Password="clave",
+                Password = "clave",
                 Activo = true,
                 RoleId = 1,
                 NombreCompleto = "Francisco Javier Moreno Vicente"
@@ -607,11 +612,12 @@ namespace everisapiTest
             mockRepository.Setup(r => r.GetUser(entidad.Nombre, false)).Returns(entidad);
             mockRepository.Setup(r => r.DeleteUser(entidad)).Returns(true);
 
-            var usuario = new everisapi.API.Models.UsersSinProyectosDto 
-                    {
-                    Nombre = "fmorenov"
-                    , Password="clave"
-                    , NombreCompleto = "Francisco Javier Moreno Vicente"};
+            var usuario = new everisapi.API.Models.UsersSinProyectosDto
+            {
+                Nombre = "fmorenov",
+                Password = "clave",
+                NombreCompleto = "Francisco Javier Moreno Vicente"
+            };
 
             //Act
             var okResult = _controller.DeleteUsers(usuario);
@@ -636,7 +642,7 @@ namespace everisapiTest
 
             //Assert
             Assert.IsType<OkObjectResult>(okResult);
-        }      
+        }
 
         [Fact]
         public void GetAllRoles_WhenThrowException_ReturnStatusCode()
@@ -663,9 +669,10 @@ namespace everisapiTest
             _controller = new UsersController(_logger, _userInfoRepository);
 
 
-            mockRepository.Setup(r => r.AddUserToProject("fmoreno",1)).Returns(true);
+            mockRepository.Setup(r => r.AddUserToProject("fmoreno", 1)).Returns(true);
 
-            var param = new everisapi.API.Models.UserProyectoDto {
+            var param = new everisapi.API.Models.UserProyectoDto
+            {
                 UserNombre = "fmoreno",
                 ProyectoId = 1
             };
@@ -675,7 +682,7 @@ namespace everisapiTest
 
             //Assert
             Assert.IsType<OkObjectResult>(okResult);
-        }    
+        }
 
         [Fact]
         public void AddUserProject_WhenCalled_ReturnBadRequestResult()
@@ -684,9 +691,10 @@ namespace everisapiTest
             _controller = new UsersController(_logger, _userInfoRepository);
 
 
-            mockRepository.Setup(r => r.AddUserToProject("fmoreno",1)).Returns(false);
+            mockRepository.Setup(r => r.AddUserToProject("fmoreno", 1)).Returns(false);
 
-            var param = new everisapi.API.Models.UserProyectoDto {
+            var param = new everisapi.API.Models.UserProyectoDto
+            {
                 UserNombre = "fmoreno",
                 ProyectoId = 1
             };
@@ -696,9 +704,9 @@ namespace everisapiTest
 
             //Assert
             Assert.IsType<BadRequestResult>(okResult);
-        }  
+        }
 
-//Method: AddUserProject
+        //Method: AddUserProject
 
         [Fact]
         public void removeUserProject_WhenCalled_ReturnOkResult()
@@ -707,9 +715,10 @@ namespace everisapiTest
             _controller = new UsersController(_logger, _userInfoRepository);
 
 
-            mockRepository.Setup(r => r.DeleteUserProject("fmoreno",1)).Returns(true);
+            mockRepository.Setup(r => r.DeleteUserProject("fmoreno", 1)).Returns(true);
 
-            var param = new everisapi.API.Models.UserProyectoDto {
+            var param = new everisapi.API.Models.UserProyectoDto
+            {
                 UserNombre = "fmoreno",
                 ProyectoId = 1
             };
@@ -719,7 +728,7 @@ namespace everisapiTest
 
             //Assert
             Assert.IsType<OkObjectResult>(okResult);
-        }    
+        }
 
         [Fact]
         public void removeUserProject_WhenCalled_ReturnBadRequestResult()
@@ -728,9 +737,10 @@ namespace everisapiTest
             _controller = new UsersController(_logger, _userInfoRepository);
 
 
-            mockRepository.Setup(r => r.DeleteUserProject("fmoreno",1)).Returns(false);
+            mockRepository.Setup(r => r.DeleteUserProject("fmoreno", 1)).Returns(false);
 
-            var param = new everisapi.API.Models.UserProyectoDto {
+            var param = new everisapi.API.Models.UserProyectoDto
+            {
                 UserNombre = "fmoreno",
                 ProyectoId = 1
             };
@@ -740,7 +750,7 @@ namespace everisapiTest
 
             //Assert
             Assert.IsType<BadRequestResult>(okResult);
-        }           
+        }
 
     } //end of class
 } //end of namespace
