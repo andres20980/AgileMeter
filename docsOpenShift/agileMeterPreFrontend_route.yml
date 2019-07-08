@@ -1,0 +1,30 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  creationTimestamp: '2019-05-21T15:54:17Z'
+  labels:
+    app: agile-meter-pre
+  name: agile-meter-pre-front
+  namespace: agile-meter-pre
+  resourceVersion: '37204315'
+  selfLink: >-
+    /apis/route.openshift.io/v1/namespaces/agile-meter-pre/routes/agile-meter-pre-front
+  uid: b09da07b-7be0-11e9-815b-000d3a44daf8
+spec:
+  host: agilemeter-pre-front.23.97.158.29.nip.io
+  port:
+    targetPort: 4200-tcp
+  to:
+    kind: Service
+    name: agilemeterfront
+    weight: 100
+  wildcardPolicy: None
+status:
+  ingress:
+    - conditions:
+        - lastTransitionTime: '2019-05-21T15:54:17Z'
+          status: 'True'
+          type: Admitted
+      host: agilemeter-pre-front.23.97.158.29.nip.io
+      routerName: router
+      wildcardPolicy: None
