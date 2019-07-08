@@ -13,7 +13,6 @@ using Xunit;
 
 namespace everisapiTest
 {
-
     public class UnidadControllerTest : IDisposable
     {
         UnidadController _controller;
@@ -31,15 +30,10 @@ namespace everisapiTest
             mockRepository = new Mock<IUnidadInfoRepository>();
             _unidadInfoRepository = mockRepository.Object;
 
-            Mapper.Reset();
-
             Mapper.Initialize(cfg =>
             {
                 cfg.CreateMap<everisapi.API.Entities.UnidadEntity, everisapi.API.Models.Unidad>();
             });
-            
-            Mapper.AssertConfigurationIsValid();
-
         }
 
         public void Dispose()
@@ -47,7 +41,7 @@ namespace everisapiTest
             Mapper.Reset();
         } 
 
-                //Method: GetUnidades
+        //Method: GetUnidades
 
         [Fact]
         public void GetUnidades_WhenCalled_ReturnOkResult()
@@ -60,7 +54,7 @@ namespace everisapiTest
                new everisapi.API.Entities.UnidadEntity
                {
                    UnidadId = 1,
-                   UnidadNombre = "Sevilla", 
+                   UnidadNombre = "Sevilla",  
                    OficinaId =1
                 }
             };
