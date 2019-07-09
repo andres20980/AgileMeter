@@ -1,0 +1,65 @@
+version: '3.4'
+ 
+services:
+
+# MySql
+  agiledatabase:
+    image: amapidatabase.azurecr.io/samples/agiledatabase
+##    build: 
+##      context: ./AutoDumperAgile
+##      dockerfile: Dockerfile
+#    networks:
+#      - AgilemeterNetwork
+    ports:
+      - "3306:3306"
+    container_name: agiledatabase
+    hostname: agiledatabase
+    environment:
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_USER: root
+      MYSQL_PASSWORD:
+      MYSQL_DATABASE: agilemeter
+    volumes:
+      - mysql:/var/lib/mysql
+    restart: always
+
+# Front
+  agilemeterfront:
+    image: amapifront.azurecr.io/samples/agilemeterfront
+##    build: 
+##      context: ./front
+##      dockerfile: Dockerfile
+##      args:
+##        - 'BACKEND_HOST=$BACKEND_HOST'
+##        - 'BACKEND_PORT=$BACKEND_PORT'
+#    networks:
+#      - AgilemeterNetwork
+    container_name: agilemeterfront
+    hostname: agilemeterfront
+    ports:
+      - "4200:4200"
+ 
+# API
+  agilemeter:
+    image: amapiback.azurecr.io/samples/agilemeter
+##    build: 
+##      context: ./everisapi.API
+##      dockerfile: Dockerfile
+#    networks:
+#      - AgilemeterNetwork
+    depends_on:
+      - agiledatabase
+    links:
+      - agiledatabase:database
+    container_name: agilemeter
+    hostname: agilemeter
+    ports:
+      - "60406:60406"
+
+volumes:
+  mysql:
+
+
+#networks:
+#  AgilemeterNetwork:
+#    driver: bridge

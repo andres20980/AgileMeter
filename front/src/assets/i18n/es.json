@@ -39,7 +39,7 @@
 		"TABLE_PAGINATOR": "Elementos por página",
 		"MODAL_HEADER": "Importante",
 		"MODAL_BODY": "Se va a proceder a borrar el usuario",
-		"MODAL_REMOVE_YOU": "como el usuario a eliminar es el mismo con el que accedió se le redireccionará al login",
+		"MODAL_REMOVE_YOU": "Como el usuario a eliminar es el mismo con el que accedió se le redireccionará al login.",
 		"MODAL_QUESTION": "¿Estás seguro de realizar esta acción?",
 		"MODAL_BTN_ACCEPT": "Aceptar",
 		"MODAL_BTN_CANCEL": "Cancelar",
@@ -68,6 +68,7 @@
 		"FORM_PASSWORD_REQUIRED": "El campo Contraseña no puede estar vacio.",
 		"FORM_NAME": "Nombre",
 		"FORM_FULL_NAME_REQUIRED": "El campo nombre no puede estar vacio.",
+		"FORM_ROL" :"Rol",
 		"BTN_GUARDAR": "Guardar",
 		"BTN_BACK": "Volver",
 		"MODAL_HEADER": "Importante",
@@ -102,7 +103,7 @@
 	},
 	"ADD_TEAM": {
 		"ADD_TEAM": "Alta de Equipo",
-		"MODIFY_TEAM": "Modificar Equipo",
+		"MODIFY_TEAM": "Editar Equipo",
 		"FORM_OFFICE": "Oficina",
 		"FORM_OFFICE_REQUIRED": "El campo oficina no puede estar vacio.",
 		"FORM_UNIT": "Unidad",
@@ -114,7 +115,7 @@
 		"FORM_SIZE": "Tamaño",
 		"FORM_SIZE_REQUIRED": "El campo tamaño no puede estar vacio.",
 		"FORM_SIZE_LENGHT": "El campo tamaño solo puede contener entre 1 y 6 números",
-		"FORM_CODIGO": "Código",
+		"FORM_CODIGO": "Código de Proyecto",
 		"FORM_CODIGO_MAX_LENGTH": "El campo código no puede tener más de 100 caracteres.",
 		"BTN_SAVE": "Guardar",
 		"BTN_BACK": "Volver",
@@ -183,7 +184,14 @@
 		"MODAL_OBJECTIVES_TITLE": "Notas Objetivos",
 		"MODAL_OBJECTIVES_PLACEHOLDER": "Inserte aquí el texto",
 		"MODAL_BTN_SAVE": "Guardar",
-		"MODAL_BTN_CANCEL": "Cancelar"
+		"MODAL_BTN_CANCEL": "Cancelar",
+		"EXCEL_WORKSHEET": "Evaluaciones finalizadas",
+		"EXCEL_TITLE": "Evaluaciones finalizadas del equipo",
+		"EXCEL_DATE": "Fecha",
+		"EXCEL_USER": "Usuario",
+		"EXCEL_ASSESSMENT": "Evaluación",
+		"EXCEL_SCORE": "Puntuación"
+
 	},
 	"SORTED_TABLE": {
 		"FILTER": " Filtro",
@@ -248,7 +256,9 @@
 		"ICONS_CORRECT": "Correcta",
 		"ICONS_INCORRECT": "Incorrecta",
 		"ICONS_NOT_ANSWERED": "No contestada",
-		"QUESTION_NOTES": "Notas"
+		"QUESTION_NOTES": "Notas",
+		"NO_NOTES": "No hay notas añadidas"
+
 	},
 	"PREGUNTAS_TABLE": {
 		"FILTER": "Filtro",

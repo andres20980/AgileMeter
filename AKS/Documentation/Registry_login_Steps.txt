@@ -1,0 +1,58 @@
+
+
+amapifront.azurecr.io
+amapifront
+zZpndR1T1ZRoe=UwOg5aIiGSug9TS/CB
+
+
+amapiback.azurecr.io
+amapiback
+4Xyy2uQT5vNP2B2lWWmtHDeKdnnhWZc=
+
+
+amapidatabase.azurecr.io
+amapidatabase
+20WxT4a3CPeE99EqfZ6N6qOYBQPsg=dr
+
+
+##Azure Registry - alberto.muriel.devops@hotmail.com
+
+docker login amapifront.azurecr.io -u amapifront -p zZpndR1T1ZRoe=UwOg5aIiGSug9TS/CB
+docker tag amurielbeveris/agilemeterfront amapifront.azurecr.io/samples/agilemeterfront
+docker push amapifront.azurecr.io/samples/agilemeterfront
+
+
+docker login amapiback.azurecr.io -u amapiback -p 4Xyy2uQT5vNP2B2lWWmtHDeKdnnhWZc=
+docker tag amurielbeveris/agilemeter amapiback.azurecr.io/samples/agilemeter
+docker push amapiback.azurecr.io/samples/agilemeter
+
+
+docker login amapidatabase.azurecr.io -u amapidatabase -p 20WxT4a3CPeE99EqfZ6N6qOYBQPsg=dr
+docker tag amurielbeveris/agiledatabase amapidatabase.azurecr.io/samples/agiledatabase
+docker push amapidatabase.azurecr.io/samples/agiledatabase
+
+
+
+##Azure login alberto.muriel.devops@hotmail.com
+az login -u alberto.muriel.devops@hotmail.com -p Passw0rd10!
+
+
+##Only login on first run
+az acr login --name amapifront -u amapifront -p zZpndR1T1ZRoe=UwOg5aIiGSug9TS/CB
+az acr repository list --name amapifront --output table
+az acr login --name amapiback -u amapiback -p 4Xyy2uQT5vNP2B2lWWmtHDeKdnnhWZc=
+az acr repository list --name amapiback --output table
+az acr login --name amapidatabase -u amapidatabase -p 20WxT4a3CPeE99EqfZ6N6qOYBQPsg=dr
+az acr repository list --name amapidatabase --output table
+
+
+az acr repository list --name amapifront --output table
+az acr repository list --name amapiback --output table
+az acr repository list --name amapidatabase --output table
+
+
+az login -u alberto.muriel.devops@hotmail.com -p Passw0rd10!
+
+
+
+az container create --resource-group AgileMeter --name  --image <acrLoginServer>/aci-tutorial-app:v1 --cpu 1 --memory 1 --registry-login-server <acrLoginServer> --registry-username <service-principal-ID> --registry-password <service-principal-password> --dns-name-label <aciDnsLabel> --ports 80

@@ -1,0 +1,10 @@
+version: '2.1'
+
+services:
+  agilemeter jenkins:
+    image: agilemeter jenkins
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8081:8081

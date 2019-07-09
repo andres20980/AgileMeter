@@ -1,9 +1,9 @@
-import { Component, HostListener} from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { StorageDataService } from './services/StorageDataService';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { ProyectoService } from './services/ProyectoService';
-import {TranslateService} from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +17,7 @@ export class AppComponent {
   public NombreDeProyecto: string = null;
   public RolDeUsuario: boolean = false;
   public ScreenWidth;
-  public AssessmentName:string = null;
+  public AssessmentName: string = null;
 
   //Para la barra de arriba
   @HostListener('window:resize', ['$event'])
@@ -39,7 +39,7 @@ export class AppComponent {
     translate.use(browserLang.match(/es|en/) ? browserLang : 'es');
   }
 
-  public ChangeLang(lang : string){
+  public ChangeLang(lang: string) {
     this.translate.use(lang);
     this.refreshBreadCrumb();
   }
@@ -68,11 +68,11 @@ export class AppComponent {
   }
 
   //Para añadir texto a la barra de arriba
-  public anadirUserProyecto(nomUsu: string, userlongname: string, nomProy: string, assessmentName?:string) {
+  public anadirUserProyecto(nomUsu: string, userlongname: string, nomProy: string, assessmentName?: string) {
     if (nomUsu != null) {
       this.NombreDeUsuario = nomUsu;
     }
-    if(userlongname != null){
+    if (userlongname != null) {
       this.UserLongName = userlongname;
     }
     this.NombreDeProyecto = nomProy;
@@ -81,36 +81,37 @@ export class AppComponent {
   }
 
 
-  public pushBreadcrumb(_var : string, _path:string){
+  public pushBreadcrumb(_var: string, _path: string) {
     var bc = this._storageDataService.breadcrumbList.find(x => x.var == _var && x.path == _path)
 
-    if(bc != null){
+    if (bc != null) {
       let index: number = this._storageDataService.breadcrumbList.indexOf(bc);
       this.popBreadcrumb(index);
     }
     let _name = "";
-    this.translate.get(_var).subscribe((res: string) => {
-      _name= res;
-      this._storageDataService.breadcrumbList.push({name: _name, var: _var, path: _path});
-    });
-    
+    if (_var.length > 0) {//sin esta condicion da un error al recargar la pagina pues intenta traducir una variable no existente
+      this.translate.get(_var).subscribe((res: string) => {
+        _name = res;
+        this._storageDataService.breadcrumbList.push({ name: _name, var: _var, path: _path });
+      });
+    }
   }
 
-  public popBreadcrumb(index: number){
+  public popBreadcrumb(index: number) {
     let length: number = this._storageDataService.breadcrumbList.length;
-    for(var i = index; i <  length ; i++){
+    for (var i = index; i < length; i++) {
       this._storageDataService.breadcrumbList.pop();
-    }   
+    }
   }
 
-  public getBreadcrumb(index: number) : any{
+  public getBreadcrumb(index: number): any {
     return this._storageDataService.breadcrumbList[index];
   }
 
-  public refreshBreadCrumb(){
+  public refreshBreadCrumb() {
     this._storageDataService.breadcrumbList.forEach((br, index) => {
       this.translate.get(br.var).subscribe((res: string) => {
-        br.name= res;
+        br.name = res;
       });
     });
   }

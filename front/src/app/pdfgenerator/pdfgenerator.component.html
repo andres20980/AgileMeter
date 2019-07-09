@@ -6,199 +6,137 @@
     {{anadeNota}}
   </div>
 </div> -->
-<mat-sidenav-container>
+<div class="container">
+  <app-breadcrumb></app-breadcrumb>
+  <div class="ng-card-box p-2 p-2 pt-5 pb-5 br-2 mat-elevation-z5">
+    <div class="row">
+      <div class="col ml-5">
+        <h3>{{ 'PDF_GENERATOR.ASSESSMENT_RESULTS' | translate }}
+          <button class="transparente" (click)="ExportToExcel();">
+            <img src="assets/excel.png" title="{{ 'PDF_GENERATOR.EXCEL_EXPORT' | translate }}" />
+          </button>
+        </h3>
+      </div>
+    </div>
 
-    <mat-sidenav class="notas-panel"  #sidenav [mode]="'over'" [position]="'end'" fixedInViewport="true">
-        <!-- <p><button mat-button (click)="sidenav.toggle()">Toggle</button></p> -->
-        <div class="notas-row">
-            <div class="notas-container">
-            <mat-form-field class="comments-form-field" appearance="outline">
-                <mat-label>{{ 'PDF_GENERATOR.EVALUATION_NOTES' | translate }}</mat-label>
-                <textarea matInput 
-                cdkTextareaAutosize
-              #autosize="cdkTextareaAutosize"
-              cdkAutosizeMinRows="6"
-              cdkAutosizeMaxRows="6"
-              placeholder="{{ 'PDF_GENERATOR.PLACEHOLDER_EVALUATION_NOTES' | translate }}" [(ngModel)]="Evaluacion.notasEvaluacion"
-              [debounce]="1000" 
-              (ngModelChange)="saveNotas(Evaluacion)"
-              [readonly] = "UserRole != 'Evaluador' && UserRole != 'Administrador'"> 
-              </textarea>
-              </mat-form-field>
-            </div>
-            <div class="notas-container">
-                <mat-form-field class="comments-form-field" appearance="outline">
-                    <mat-label>{{ 'PDF_GENERATOR.OBJETIVES_NOTES' | translate }}</mat-label>
-                    <textarea matInput 
-                    cdkTextareaAutosize
-                  #autosize="cdkTextareaAutosize"
-                  cdkAutosizeMinRows="6"
-                  cdkAutosizeMaxRows="6"
-                  placeholder="Notas Objetivos{{ 'PDF_GENERATOR.PLACEHOLDER_OBJETIVES_NOTES' | translate }}" [(ngModel)]="Evaluacion.notasObjetivos"
-                  [debounce]="1000" 
-                  (ngModelChange)="saveNotas(Evaluacion)"
-                  [readonly] = "UserRole != 'Evaluador' && UserRole != 'Administrador'"> 
-                  </textarea>
-                  </mat-form-field>
-                </div>
-        </div>
-      </mat-sidenav>
+    <div *ngIf="!ListaSectionConAsignaciones" class="loading mt-4">
+      <app-loading></app-loading>
+    </div>
 
-
-<mat-sidenav-content>
-
-<div class="comments-button mat-elevation-z5" (click)="sidenav.toggle()"> 
-  <div class="icon-notas">
-    <img *ngIf="(Evaluacion.notasEvaluacion != null && Evaluacion.notasEvaluacion != '') || (Evaluacion.notasObjetivos != null && Evaluacion.notasObjetivos != '')" src="assets/comment_filled_white.png" title="{{ 'PDF_GENERATOR.ICONS_NOTES_FILLED' | translate }}"/>
-    <img *ngIf="(Evaluacion.notasEvaluacion == null || Evaluacion.notasEvaluacion == '') && (Evaluacion.notasObjetivos == null || Evaluacion.notasObjetivos == '')" src="assets/comment_empty_white.png" title="{{ 'PDF_GENERATOR.ICONS_NOTES_EMPTY' | translate }}"/>
-  </div>
-  </div>
-
-<div  class="container" >
-    <app-breadcrumb></app-breadcrumb>
-    <div class="ng-card-box p-2 p-2 pt-5 pb-5 br-2 mat-elevation-z5">
-        <div class="row">
-            <div class="col ml-5" style="display: inline-flex">
-              <h3>{{ 'PDF_GENERATOR.ASSESSMENT_RESULTS' | translate }}</h3>
-              <div>
-              <button class="transparente" (click)="ExportToExcel();">
-                <img src="assets/excel.png" title="{{ 'PDF_GENERATOR.EXCEL_EXPORT' | translate }}" />  
-              </button>
-            </div>
-            <!-- <div *ngIf="generatingExcel">
-              <app-loading ></app-loading>
-            </div> -->
-
-
-            </div>
-        </div>
-
-        <div *ngIf="!ListaSectionConAsignaciones" class="loading mt-4">
-            <app-loading ></app-loading>
-        </div>
-
-  <div class="circle-progress-container" *ngIf="ListaSectionConAsignaciones && ListaSectionConAsignaciones.length>0">
-      <div *ngFor="let datos of ListaSectionConAsignaciones; let i = index" [attr.data-index]="i" [attr.id]="datos.nombre" (click)="selectedSection = datos; scroll(target);" [ngClass]="formatLevel(ListaSectionConAsignaciones[i])" class="circle-progress mat-elevation-z3 m-2">
+    <div class="circle-progress-container" *ngIf="ListaSectionConAsignaciones && ListaSectionConAsignaciones.length>0">
+      <div *ngFor="let datos of ListaSectionConAsignaciones; let i = index" [attr.data-index]="i"
+        [attr.id]="datos.nombre" [ngClass]="formatLevel(ListaSectionConAsignaciones[i])"
+        class="circle-progress">
         <div *ngIf="datos.numNotas > 0" class="top-comment" data-html2canvas-ignore="true">
-          <img class="" src="assets/comment_empty.png" title="{{ 'PDF_GENERATOR.NOTES' | translate }}"/>
+          <img class="" src="assets/comment_empty.png" title="{{ 'PDF_GENERATOR.NOTES' | translate }}" />
           <p>{{datos.numNotas}}</p>
         </div>
-        <circle-progress style="font-family: 'Raleway', sans-serif;"
-  [percent]= "ListaSectionConAsignaciones[i].puntuacion"
-  [toFixed] = "1"
-  [subtitle] = "[formatSubtitle(ListaSectionConAsignaciones[i])]"
-  [subtitleFontSize]= "14"
-  [titleFontSize]= "26"
-  [unitsFontSize]= "14"
-  [radius]="74"
-  [space] = "-10"
-  [outerStrokeWidth]="10"
-  [innerStrokeWidth]="10"
+        <circle-progress [percent]="ListaSectionConAsignaciones[i].puntuacion" [toFixed]="1"
+          [subtitle]="[formatSubtitle(ListaSectionConAsignaciones[i])]" [subtitleFontSize]="14" [titleFontSize]="26"
+          [unitsFontSize]="14" [radius]="74" [space]="-10" [outerStrokeWidth]="10" [innerStrokeWidth]="10"
+          [innerStrokeColor]="getLevelColorInner(ListaSectionConAsignaciones[i])"
+          [outerStrokeColor]="getLevelColorOuter(ListaSectionConAsignaciones[i])" [outerStrokeLinecap]="'square'"
+          [animation]="true" [renderOnClick]="false" [animationDuration]="300"></circle-progress>
+        <div class="text-center circle-progress-title" data-html2canvas-ignore="true"><b>{{datos.nombre}}</b></div>
+      </div>
+      <div [ngClass]="formatTotalLevel(ListaSectionConAsignaciones)"  [attr.id]="'total'">
+        <circle-progress [percent]="getTotalPercent(ListaSectionConAsignaciones)" [toFixed]="1" [showSubtitle]="false"
+          [subtitle]="[formatTotalSubtitle(ListaSectionConAsignaciones)]" [subtitleFontSize]="14" [titleFontSize]="26"
+          [unitsFontSize]="14" [radius]="74" [space]="-10" [outerStrokeWidth]="10" [innerStrokeWidth]="10"
+          [innerStrokeColor]="'#b8457a30'" [outerStrokeColor]="'#b8457a'" [outerStrokeLinecap]="'square'"
+          [animation]="true" [renderOnClick]="false" [animationDuration]="300"></circle-progress>
+        <div class="text-center circle-progress-title" data-html2canvas-ignore="true"><b>{{ 'PDF_GENERATOR.GLOBAL'| translate }}</b></div>
+        <!-- <div class="text-center"><b>GLOBAL</b></div> -->
+      </div>
 
-  [innerStrokeColor]="getLevelColorInner(ListaSectionConAsignaciones[i])"
-  [outerStrokeColor]="getLevelColorOuter(ListaSectionConAsignaciones[i])"
-  [outerStrokeLinecap]="'round'"
-  [animation]="true"
-  [renderOnClick]="false"
-  [animationDuration]="300"
-    ></circle-progress>
-    <div class="text-center circle-progress-title" data-html2canvas-ignore="true"><b>{{datos.nombre}}</b></div>
-    
-  </div>
-   <div  [ngClass]="formatTotalLevel(ListaSectionConAsignaciones)" [attr.id]="'total'" (click)="selectedSection = null" class="circle-progress mat-elevation-z3 m-2">
-        <circle-progress
-      [percent]= "getTotalPercent(ListaSectionConAsignaciones)"
-      [toFixed] = "1"
-      [showSubtitle] = "false"
-      [subtitle] = "[formatTotalSubtitle(ListaSectionConAsignaciones)]"
-      [subtitleFontSize]= "14"
-      [titleFontSize]= "26"
-      [unitsFontSize]= "14"
-      [radius]="74"
-      [space] = "-10"
-      [outerStrokeWidth]="10"
-      [innerStrokeWidth]="10"
-      [innerStrokeColor]="'#b8457a30'"
-      [outerStrokeColor]="'#b8457a'"
-      [outerStrokeLinecap]="'round'"
-      [animation]="true"
-      [renderOnClick]="false"
-      [animationDuration]="300"
-        ></circle-progress>
-        <div class="text-center circle-progress-title" data-html2canvas-ignore="true"><b>{{ 'PDF_GENERATOR.GLOBAL' | translate }}</b></div>
-        <!-- <div class="text-center"><b>GLOBAL</b></div> -->      
-  </div> 
-</div>
-<app-section-results *ngIf="selectedSection != null" [SectionConAsignacionesDto]="selectedSection" >
-  {{ 'PDF_GENERATOR.LOADING' | translate }}
-</app-section-results>
-<div #target></div>
-  </div>
+    </div>
 
-  <!-- <mat-expansion-panel class="notas-panel">
+  </div>
+  <mat-expansion-panel class="notas-panel">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        {{ 'PDF_GENERATOR.NOTES' | translate }}
-        <img class="comment" *ngIf="(Evaluacion.notasEvaluacion != null && Evaluacion.notasEvaluacion != '') || (Evaluacion.notasObjetivos != null && Evaluacion.notasObjetivos != '')" src="assets/comment_filled.png" title="{{ 'PDF_GENERATOR.ICONS_NOTES_FILLED' | translate }}" />
-        <img class="comment" *ngIf="(Evaluacion.notasEvaluacion == null || Evaluacion.notasEvaluacion == '') && (Evaluacion.notasObjetivos == null || Evaluacion.notasObjetivos == '')" src="assets/comment_empty.png" title="{{ 'PDF_GENERATOR.ICONS_NOTES_EMPTY' | translate }}" />
+        {{ 'PDF_GENERATOR.NOTES'| translate }}
+        <img class="comment"
+          *ngIf="(Evaluacion.notasEvaluacion != null && Evaluacion.notasEvaluacion != '') || (Evaluacion.notasObjetivos != null && Evaluacion.notasObjetivos != '')"
+          src="assets/comment_filled.png" title="{{ 'PDF_GENERATOR.ICONS_NOTES_FILLED'| translate }}" />
+        <img class="comment"
+          *ngIf="(Evaluacion.notasEvaluacion == null || Evaluacion.notasEvaluacion == '') && (Evaluacion.notasObjetivos == null || Evaluacion.notasObjetivos == '')"
+          src="assets/comment_empty.png" title="{{ 'PDF_GENERATOR.ICONS_NOTES_EMPTY'| translate }}" />
+
       </mat-panel-title>
     </mat-expansion-panel-header>
-  <div class="notas-row">
+    <div class="notas-row">
       <div class="notas-container">
-      <mat-form-field class="comments-form-field" appearance="outline">
-          <mat-label>{{ 'PDF_GENERATOR.EVALUATION_NOTES' | translate }}</mat-label>
-          <textarea matInput 
-          cdkTextareaAutosize
-        #autosize="cdkTextareaAutosize"
-        cdkAutosizeMinRows="6"
-        cdkAutosizeMaxRows="6"
-        placeholder="{{ 'PDF_GENERATOR.PLACEHOLDER_EVALUATION_NOTES' | translate }}" [(ngModel)]="Evaluacion.notasEvaluacion"
-        [debounce]="1000" 
-        (ngModelChange)="saveNotas(Evaluacion)"
-        [readonly] = "UserRole != 'Evaluador' && UserRole != 'Administrador'"> 
+        <mat-form-field class="comments-form-field" appearance="outline">
+          <mat-label>{{ 'PDF_GENERATOR.EVALUATION_NOTES'| translate }}</mat-label>
+          <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="6"
+            cdkAutosizeMaxRows="6" placeholder="{{ 'PDF_GENERATOR.PLACEHOLDER_EVALUATION_NOTES'| translate }}"
+            [(ngModel)]="Evaluacion.notasEvaluacion" [debounce]="1000" (ngModelChange)="saveNotas(Evaluacion)"
+            [readonly]="UserRole != 'Evaluador' && UserRole != 'Administrador'">
         </textarea>
         </mat-form-field>
       </div>
       <div class="notas-container">
-          <mat-form-field class="comments-form-field" appearance="outline">
-              <mat-label>{{ 'PDF_GENERATOR.OBJETIVES_NOTES' | translate }}</mat-label>
-              <textarea matInput 
-              cdkTextareaAutosize
-            #autosize="cdkTextareaAutosize"
-            cdkAutosizeMinRows="6"
-            cdkAutosizeMaxRows="6"
-            placeholder="{{ 'PDF_GENERATOR.PLACEHOLDER_OBJETIVES_NOTES' | translate }}" [(ngModel)]="Evaluacion.notasObjetivos"
-            [debounce]="1000" 
-            (ngModelChange)="saveNotas(Evaluacion)"
-            [readonly] = "UserRole != 'Evaluador' && UserRole != 'Administrador'"> 
+        <mat-form-field class="comments-form-field" appearance="outline">
+          <mat-label>{{ 'PDF_GENERATOR.OBJETIVES_NOTES'| translate }}</mat-label>
+          <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="6"
+            cdkAutosizeMaxRows="6" placeholder="{{ 'PDF_GENERATOR.PLACEHOLDER_OBJETIVES_NOTES'| translate }}"
+            [(ngModel)]="Evaluacion.notasObjetivos" [debounce]="1000" (ngModelChange)="saveNotas(Evaluacion)"
+            [readonly]="UserRole != 'Evaluador' && UserRole != 'Administrador'">
             </textarea>
-            </mat-form-field>
-          </div>
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-expansion-panel>
+
+  <div class="table-row" *ngIf="true">
+    <app-section-results *ngIf="MostrarPreguntas && ListaDeRespuestas && ListaDeRespuestas.length > 0"
+      [lSectionConAsignacionesDto]="ListaSectionConAsignaciones">
+      {{ 'PDF_GENERATOR.LOADING'| translate }}
+    </app-section-results>
+
+    <comentarios-table *ngIf="MostrarComentarios && ListaDeAsignaciones" [dataInput]="ListaDeAsignaciones">
+      {{ 'PDF_GENERATOR.LOADING'| translate }}
+    </comentarios-table>
   </div>
-  </mat-expansion-panel> -->
-  
-  <br>
 
+  <div class="row">
+
+    <div class="col-xs-0 col-sm-0 col-md-3 col-lg-3 mt-3 text-center"></div>
+
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-5 mt-3 text-center">
+
+
+
+    </div>
+
+    <div class="col-xs-0 col-sm-0 col-md-4 col-lg-3 mt-3 text-center"></div>
+
+
+
+  </div>
 </div>
-</mat-sidenav-content>
-</mat-sidenav-container>
 
-<!-- <div id="my_mm" style="height:1mm;display:none"></div>
+<div id="my_mm" style="height:1mm;display:none"></div>
 
 <ng-template #notasAdmin let-cl="close" let-di="dismiss">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title">{{ 'PDF_GENERATOR.MODAL_TITLE' | translate }}</h5> <button type="button" class="close" (click)="cl('Cerrar')">
+      <h5 class="modal-title">{{ 'PDF_GENERATOR.MODAL_TITLE'| translate }}</h5> <button type="button" class="close"
+        (click)="cl('Cerrar')">
         <span aria-hidden="true">×</span>
       </button>
     </div>
     <div class="modal-body">
-      <textarea class="form-control" maxlength="4000" placeholder="{{ 'PDF_GENERATOR.MODAL_PLACEHOLDER' | translate }}" rows="10" [(ngModel)]="textoModal"></textarea>
+      <textarea class="form-control" maxlength="4000" placeholder="{{ 'PDF_GENERATOR.MODAL_PLACEHOLDER'| translate }}"
+        rows="10" [(ngModel)]="textoModal"></textarea>
     </div>
     <div class="modal-footer">
       <p id="numletras" class="mr-2 mt-2">{{textoModal.length}}/4000</p>
-      <button type="button" class="btn btn-success cambiar" (click)="di('Guardar')">{{ 'PDF_GENERATOR.MODAL_BTN_SAVE' | translate }}</button>
-      <button type="button" class="btn btn-secondary" (click)="cl('Cerrar')">{{ 'PDF_GENERATOR.MODAL_BTN_CANCEL' | translate }}</button>
+      <button type="button" class="btn btn-success cambiar"
+        (click)="di('Guardar')">{{ 'PDF_GENERATOR.MODAL_BTN_SAVE'| translate }}</button>
+      <button type="button" class="btn btn-secondary"
+        (click)="cl('Cerrar')">{{ 'PDF_GENERATOR.MODAL_BTN_CANCEL'| translate }}</button>
     </div>
   </div>
-</ng-template> -->
+</ng-template>

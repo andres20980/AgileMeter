@@ -18,7 +18,6 @@ namespace everisapiTest
         UnidadController _controller;
         private readonly ILogger<UnidadController> _logger;
         private readonly IUnidadInfoRepository _unidadInfoRepository;
-
         Mock<ILogger<UnidadController>> mockLogger;
         Mock<IUnidadInfoRepository> mockRepository;
 
@@ -48,7 +47,6 @@ namespace everisapiTest
         {
             //Arrange            
             _controller = new UnidadController(_logger, _unidadInfoRepository);
-
             var unidadEntities = new List<everisapi.API.Entities.UnidadEntity>
             {
                new everisapi.API.Entities.UnidadEntity

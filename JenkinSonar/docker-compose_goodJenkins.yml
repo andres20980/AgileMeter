@@ -1,0 +1,51 @@
+version: '3'
+
+services:
+  agilemeter_jenkins:
+    container_name: agilemeter_jenkins 
+    build: ./jenkins
+    hostname: jenkins
+    environment:  
+      JAVA_OPTS: "-Djava.awt.headless=true"  
+      JAVA_OPTS: "-Djenkins.install.runSetupWizard=false" # Start jenkins unlocked 
+    ports:
+      - 8081:8080
+      - 50001:50001
+    expose:
+      - 8080
+      - 50000
+    volumes:
+      - ./jenkins/volumes/users:/var/jenkins_home/users
+      - ./jenkins/volumes/jobs:/var/jenkins_home/jobs
+    networks: 
+      - sonarnet
+  sonarqube:
+    container_name: agilemeter_sonarqube
+    hostname: sonarqube
+    build: ./sonarqube
+    ports:
+      - 9001:9000
+    networks: 
+      - sonarnet
+    expose:
+      - 9000
+    environment:
+      - SONARQUBE_JDBC_URL=jdbc:postgresql://db:5432/sonar
+    volumes:
+      - ./sonarqube/conf/:/opt/sonarqube/conf
+      - ./sonarqube/data/:/opt/sonarqube/data
+      - ./sonarqube/logs/:/opt/sonarqube/logs
+      - ./sonarqube/extensions/:/opt/sonarqube/extensions
+  db:
+    image: postgres
+    networks:
+      - sonarnet
+    environment:
+      - POSTGRES_USER=sonar
+      - POSTGRES_PASSWORD=sonar
+    volumes:
+      - ./sonarqube/postgresql:/var/lib/postgresql
+      - ./sonarqube/postgresql_data:/var/lib/postgresql/data
+networks:
+  sonarnet:
+    driver: bridge

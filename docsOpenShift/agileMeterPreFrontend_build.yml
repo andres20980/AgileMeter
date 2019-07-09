@@ -1,0 +1,50 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+    template.alpha.openshift.io/wait-for-ready: 'true'
+  creationTimestamp: '2019-05-21T13:46:49Z'
+  name: agile-meter-pre-frontend
+  namespace: agile-meter-pre
+  resourceVersion: '38294572'
+  selfLink: >-
+    /apis/build.openshift.io/v1/namespaces/agile-meter-pre/buildconfigs/agile-meter-pre-frontend
+  uid: e1f599f0-7bce-11e9-815b-000d3a44daf8
+spec:
+  completionDeadlineSeconds: 1800
+  failedBuildsHistoryLimit: 3
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'agile-meter-pre-frontend:latest'
+  postCommit: {}
+  resources:
+    limits:
+      cpu: '1'
+      memory: 3Gi
+    requests:
+      cpu: 500m
+      memory: 1Gi
+  runPolicy: Serial
+  source:
+    contextDir: front
+    git:
+      ref: master
+      uri: >-
+        https://deployer:Deployer06%2F11%2F2018%21@steps.everis.com/git/INNOVASEV/ScrumMeter.git
+    type: Git
+  strategy:
+    dockerStrategy:
+      env:
+        - name: BACKEND_HOST
+          value: agilemeter-pre-back.23.97.158.29.nip.io
+        - name: BACKEND_PORT
+          value: '80'
+    type: Docker
+  successfulBuildsHistoryLimit: 1
+  triggers:
+    - type: ConfigChange
+status:
+  lastVersion: 38
