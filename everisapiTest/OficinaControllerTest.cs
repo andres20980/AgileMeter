@@ -13,7 +13,7 @@ using Xunit;
 
 namespace everisapiTest
 {
-    public class OficinaControllerTest : IDisposable
+    public class OficinaControllerTest
     {
         OficinaController _controller;
         private readonly ILogger<OficinaController> _logger;
@@ -30,16 +30,9 @@ namespace everisapiTest
             mockRepository = new Mock<IOficinaInfoRepository>();
             _oficinaInfoRepository = mockRepository.Object;
 
-            Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<everisapi.API.Entities.OficinaEntity, everisapi.API.Models.Oficina>();
-            });
-        }
+            var autoMapperInstance = AutoMapperConfig.Instance;
 
-        public void Dispose()
-        {
-            Mapper.Reset();
-        } 
+        }
 
         //Method: GetOficinas
 

@@ -13,7 +13,7 @@ using Xunit;
 
 namespace everisapiTest
 {
-    public class TokenControllerTest : IDisposable
+    public class TokenControllerTest
     {
         TokenController _controller;
         private readonly IConfiguration _configuration;
@@ -30,16 +30,8 @@ namespace everisapiTest
             mockRepository = new Mock<IUsersInfoRepository>();
             _usersInfoRepository = mockRepository.Object;
 
-            Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<everisapi.API.Entities.UserEntity, everisapi.API.Models.UsersSinProyectosDto>();
-            });
+            var autoMapperInstance = AutoMapperConfig.Instance;
         }
-
-        public void Dispose()
-        {
-            Mapper.Reset();
-        } 
 
         //Method: GetTokens
 

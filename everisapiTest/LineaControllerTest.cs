@@ -13,7 +13,7 @@ using Xunit;
 
 namespace everisapiTest
 {
-    public class LineaControllerTest : IDisposable
+    public class LineaControllerTest
     {
         LineaController _controller;
         private readonly ILogger<LineaController> _logger;
@@ -30,16 +30,9 @@ namespace everisapiTest
             mockRepository = new Mock<ILineaInfoRepository>();
             _lineaInfoRepository = mockRepository.Object;
 
-            Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<everisapi.API.Entities.LineaEntity, everisapi.API.Models.Linea>();
-            });
-        }
+            var autoMapperInstance = AutoMapperConfig.Instance;
 
-        public void Dispose()
-        {
-            Mapper.Reset();
-        } 
+        }
 
         //Method: GetLineas
 

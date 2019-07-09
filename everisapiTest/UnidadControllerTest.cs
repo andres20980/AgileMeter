@@ -13,7 +13,7 @@ using Xunit;
 
 namespace everisapiTest
 {
-    public class UnidadControllerTest : IDisposable
+    public class UnidadControllerTest
     {
         UnidadController _controller;
         private readonly ILogger<UnidadController> _logger;
@@ -29,16 +29,9 @@ namespace everisapiTest
             mockRepository = new Mock<IUnidadInfoRepository>();
             _unidadInfoRepository = mockRepository.Object;
 
-            Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<everisapi.API.Entities.UnidadEntity, everisapi.API.Models.Unidad>();
-            });
-        }
+            var autoMapperInstance = AutoMapperConfig.Instance;
 
-        public void Dispose()
-        {
-            Mapper.Reset();
-        } 
+        }
 
         //Method: GetUnidades
 
