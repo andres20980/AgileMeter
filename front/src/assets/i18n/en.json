@@ -173,7 +173,7 @@
 		"MODAL_BTN_CANCEL": "Cancel"
 	},
 	"PREVIOUS_EVALUATION": {
-		"FINISHED_EVALUATIONS": "Finished assessments",
+		"FINISHED_EVALUATIONS": "Completed assessments",
 		"SHOW_TABLE": "Show table",
 		"SHOW_GRAPH": "Show chart",
 		"LOADING": "Loading",
@@ -185,8 +185,8 @@
 		"MODAL_OBJECTIVES_PLACEHOLDER": "Insert text here",
 		"MODAL_BTN_SAVE": "Save",
 		"MODAL_BTN_CANCEL": "Cancel",
-		"EXCEL_WORKSHEET": "Finished assessments",
-		"EXCEL_TITLE": "Team´s Finished assessments",
+		"EXCEL_WORKSHEET": "Completed assessments",
+		"EXCEL_TITLE": "Team´s Completed assessments",
 		"EXCEL_DATE": "Date",
 		"EXCEL_USER": "User",
 		"EXCEL_ASSESSMENT": "Assessment",
