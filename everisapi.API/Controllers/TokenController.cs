@@ -4,16 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using Novell.Directory.Ldap;
-using System.Net.Http;
-using System.Net;
-using System.Net.Http.Headers;
 
 namespace everisapi.API.Controllers
 {
