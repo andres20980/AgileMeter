@@ -11,7 +11,9 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Novell.Directory.Ldap;
-
+using System.Net.Http;
+using System.Net;
+using System.Net.Http.Headers;
 
 namespace everisapi.API.Controllers
 {
@@ -29,6 +31,12 @@ namespace everisapi.API.Controllers
         {
             Configuration = config;
             _usersInfoRespository = usersInfoRespository;
+        }
+
+        [HttpGet("health")]
+        public string Test()
+        {
+          return "API working successfully";
         }
 
         [HttpPost()]
