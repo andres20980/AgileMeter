@@ -5,7 +5,7 @@
 	"BREADCRUMB": {
 		"HOME": "Home",
 		"NEW_ASSESSMENT": "New assessment",
-		"FINISHED_EVALUATIONS": "Finished assessments",
+		"FINISHED_EVALUATIONS": "Completed Assessments",
 		"RESULTS": "Results",
 		"SECTIONS": "Sections",
 		"QUESTIONS": "Questions",
@@ -13,8 +13,8 @@
 	},
 	"HOME": {
 		"SELECT_TEAM": "Select a team",
-		"SELECT_ASSESSMENT": "Select an assessment",
-		"FINISHED_ASSESSMENTS": "FINISHED ASSESSMENTS",
+		"SELECT_ASSESSMENT": "Select an assessment type",
+		"FINISHED_ASSESSMENTS": "COMPLETED ASSESSMENT",
 		"PENDING_ASSESSMENTS": "PENDING ASSESSMENTS",
 		"PENDING_ASSESSMENTS_MODAL": "PENDING",
 		"NEW_ASSESSMENT": "NEW ASSESSMENT",
@@ -38,16 +38,16 @@
 		"TABLE_COL_ACTIONS": "Actions",
 		"TABLE_PAGINATOR": "Items per page",
 		"MODAL_HEADER": "Important",
-		"MODAL_BODY": "The user will be removed.",
-		"MODAL_REMOVE_YOU": "As the user to be removed is the same as logged in, you will be redirected to the login",
-		"MODAL_QUESTION": "Are you sure to perform this action?",
+		"MODAL_BODY": "The user",
+		"MODAL_REMOVE_YOU": "As the user to be removed is the same as logged in, you will be redirected to the login.",
+		"MODAL_QUESTION": "will be removed. Are you sure to perform this action?",
 		"MODAL_BTN_ACCEPT": "Accept",
 		"MODAL_BTN_CANCEL": "Cancel",
 		"NOTIFICATION_DELETE_USER": "User deleted successfully",
 		"NOTIFICATION_DELETE_USER_ERROR": "Sorry, we couldn't remove user",
 		"ICON_TEAM_ASSIGN": "Assign teams",
 		"ICON_EDIT_USER": "Edit user",
-		"ICON_REMOVED_USER": "Removed user"
+		"ICON_REMOVED_USER": "Delete user"
 	},
 	"TEAM_MANAGEMENT": {
 		"TEAM_ASSIGN": "Teams assignment",
@@ -68,6 +68,7 @@
 		"FORM_PASSWORD_REQUIRED": "Password field can't be empty",
 		"FORM_NAME": "Name",
 		"FORM_FULL_NAME_REQUIRED": "Name field can't be empty",
+		"FORM_ROL" :"Role",
 		"BTN_GUARDAR": "Save",
 		"BTN_BACK": "Back",
 		"MODAL_HEADER": "Important",
@@ -89,8 +90,8 @@
 		"TABLE_COL_TEAM": "Team",
 		"TABLE_COL_SIZE": "Size",
 		"TABLE_COL_ACTIONS": "Actions",
-		"ICON_MODIFY_TEAM": "Modify team",
-		"ICON_REMOVE_TEAM": "Remove Team",
+		"ICON_MODIFY_TEAM": "Edit team",
+		"ICON_REMOVE_TEAM": "Delete Team",
 		"MODAL_HEADER": "Important",
 		"MODAL_BODY1": "The team ",
 		"MODAL_BODY2": "will be removed and its",
@@ -102,7 +103,7 @@
 	},
 	"ADD_TEAM": {
 		"ADD_TEAM": "Add team",
-		"MODIFY_TEAM": "Modify Team",
+		"MODIFY_TEAM": "Edit Team",
 		"FORM_OFFICE": "Office",
 		"FORM_OFFICE_REQUIRED": "Office field can't be empty",
 		"FORM_UNIT": "Unit",
@@ -159,13 +160,13 @@
 		"MODAL_NOTES_PREGUNTA_PLACEHOLDER": "Insert text here",
 		"MODAL_NOTES_ASSESSMENT_TITLE": "Module notes",
 		"MODAL_NOTES_ASSESSMENT_PLACEHOLDER": "Insert text here",
-		"MODAL_NOTES_SECTION_TITLE": "Section notes",
+		"MODAL_NOTES_SECTION_TITLE": "Section’s notes",
 		"MODAL_NOTES_SECTION_PLACEHOLDER": "Insert text here",
 		"MODALS_BTN_SAVE": "Save",
 		"MODALS_BTN_CANCEL": "Cancel"
 	},
 	"BTN_FINALIZE_EVALUATION": {
-		"FINALIZE_EVALUATION": "Finalize assessment",
+		"FINALIZE_EVALUATION": "Complete assessment",
 		"MODAL_TITLE": "Important",
 		"MODAL_BODY": "When you finalize this assessment you won't be able to modify or remove it. Are you sure to perform this action?",
 		"MODAL_BTN_FINALIZE": "Finalize",
@@ -183,7 +184,13 @@
 		"MODAL_OBJECTIVES_TITLE": "Objectives notes",
 		"MODAL_OBJECTIVES_PLACEHOLDER": "Insert text here",
 		"MODAL_BTN_SAVE": "Save",
-		"MODAL_BTN_CANCEL": "Cancel"
+		"MODAL_BTN_CANCEL": "Cancel",
+		"EXCEL_WORKSHEET": "Finished assessments",
+		"EXCEL_TITLE": "Team´s Finished assessments",
+		"EXCEL_DATE": "Date",
+		"EXCEL_USER": "User",
+		"EXCEL_ASSESSMENT": "Assessment",
+		"EXCEL_SCORE": "Score"
 	},
 	"SORTED_TABLE": {
 		"FILTER": " Filter",
@@ -217,7 +224,7 @@
 		"OF": "out of",
 		"ICONS_NOTES_FILLED": "Notes available",
 		"ICONS_NOTES_EMPTY": "No notes added",
-		"MODAL_TITLE": "Section notes",
+		"MODAL_TITLE": "Section’s notes",
 		"MODAL_PLACEHOLDER": "Insert text here",
 		"MODAL_BTN_SAVE": "Save",
 		"MODAL_BTN_CANCEL": "Cancel"
