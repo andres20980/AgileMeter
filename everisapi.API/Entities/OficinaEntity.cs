@@ -16,13 +16,5 @@ namespace everisapi.API.Entities
         [Required]
         [MaxLength(50)]
         public string OficinaNombre { get; set; }
-
-        [Required]
-        [MaxLength(50)]
-        public string OficinaNombreEs { get; set; }
-
-        [Required]
-        [MaxLength(50)]
-        public string OficinaNombreEn { get; set; }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace everisapi.API.Entities
 {
-    public class SectionsIdiomasEntity
+    public class TraduccionesSectionsEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -15,11 +15,10 @@ namespace everisapi.API.Entities
 
         [Required]
         [MaxLength(120)]
-        public string Sections { get; set; }
+        public string Traduccion { get; set; }
 
-        public string CodigoIdioma { get; set; }
-        [MaxLength(7)]
-        [ForeignKey("Codigo")]
+        public int IdiomaId { get; set; }
+        [ForeignKey("ID")]
         public IdiomasEntity IdiomasEntity { get; set; }
 
         [Required]

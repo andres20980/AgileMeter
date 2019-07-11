@@ -7,13 +7,24 @@ using System.Threading.Tasks;
 
 namespace everisapi.API.Entities
 {
-    public class RoleEntity
+    public class TraduccionesRolesEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [Required]
-        public string Role { get; set; }
+        [MaxLength(50)]
+        public string Traduccion { get; set; }
+
+        public int IdiomaId { get; set; }
+        [ForeignKey("ID")]
+        public IdiomasEntity IdiomasEntity { get; set; }
+
+        public int RoleId { get; set; }
+        [ForeignKey("Id")]
+        public RoleEntity RoleEntity { get; set; }
+
+
     }
 }

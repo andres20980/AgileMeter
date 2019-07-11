@@ -44,7 +44,8 @@ namespace everisapi.API.Migrations
                     ID = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Codigo = table.Column<string>(maxLength: 7, nullable: false),
-                    Nombre = table.Column<string>(maxLength: 50, nullable: false)
+                    NombreEN = table.Column<string>(maxLength: 50, nullable: false),
+                    NombreES = table.Column<string>(maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -60,7 +61,7 @@ namespace everisapi.API.Migrations
                     Asignacion = table.Column<string>(maxLength: 50, nullable: false),
                     AsignacionesId = table.Column<int>(nullable: false),
                     Codigo = table.Column<int>(nullable: true),
-                    CodigoIdioma = table.Column<string>(nullable: true)
+                    CodigoIdioma = table.Column<string>(maxLength: 7, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -86,7 +87,7 @@ namespace everisapi.API.Migrations
                     ID = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Codigo = table.Column<int>(nullable: true),
-                    CodigoIdioma = table.Column<string>(nullable: true),
+                    CodigoIdioma = table.Column<string>(maxLength: 7, nullable: true),
                     Pregunta = table.Column<string>(maxLength: 500, nullable: false),
                     PreguntaId = table.Column<int>(nullable: false)
                 },
@@ -114,7 +115,7 @@ namespace everisapi.API.Migrations
                     ID = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Codigo = table.Column<int>(nullable: true),
-                    CodigoIdioma = table.Column<string>(nullable: true),
+                    CodigoIdioma = table.Column<string>(maxLength: 7, nullable: true),
                     Sections = table.Column<string>(maxLength: 120, nullable: false),
                     SectionsId = table.Column<int>(nullable: false)
                 },

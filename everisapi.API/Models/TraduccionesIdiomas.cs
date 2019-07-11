@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 
 namespace everisapi.API.Models
 {
-    public class Idiomas
+    public class TraduccionesIdiomas
     {
         public int ID { get; set; }
-        public string Idioma { get; set; }
+        public string Traduccion { get; set; }
+        public string IdiomaId { get; set; }        
     }
 }

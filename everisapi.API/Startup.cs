@@ -134,9 +134,13 @@ namespace everisapi.API
                 cfg.CreateMap<Entities.LineaEntity, Models.Linea>();
                 cfg.CreateMap<Entities.ProyectoEntity, Models.Equipos>();
                 cfg.CreateMap<Entities.IdiomasEntity, Models.Idiomas>();
-                cfg.CreateMap<Entities.PreguntasIdiomasEntity, Models.PreguntasIdiomas>();
-                cfg.CreateMap<Entities.AsignacionesIdiomasEntity, Models.AsignacionesIdiomas>();
-                cfg.CreateMap<Entities.SectionsIdiomasEntity, Models.SectionsIdiomas>();
+                cfg.CreateMap<Entities.TraduccionesPreguntasEntity, Models.TraduccionesPreguntas>();
+                cfg.CreateMap<Entities.TraduccionesAsignacionesEntity, Models.TraduccionesAsignaciones>();
+                cfg.CreateMap<Entities.TraduccionesSectionsEntity, Models.TraduccionesAsignaciones>();
+                cfg.CreateMap<Entities.TraduccionesRolesEntity, Models.TraduccionesRoles>();
+                cfg.CreateMap<Entities.TraduccionesIdiomasEntity, Models.TraduccionesIdiomas>();
+                cfg.CreateMap<Entities.TraduccionesOficinasEntity, Models.TraduccionesOficinas>();
+                
 
             });
 

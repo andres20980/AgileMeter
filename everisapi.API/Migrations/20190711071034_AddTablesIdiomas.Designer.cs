@@ -11,7 +11,7 @@ using System;
 namespace everisapi.API.Migrations
 {
     [DbContext(typeof(AsignacionInfoContext))]
-    [Migration("20190711062730_AddTablesIdiomas")]
+    [Migration("20190711071034_AddTablesIdiomas")]
     partial class AddTablesIdiomas
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -57,7 +57,8 @@ namespace everisapi.API.Migrations
 
                     b.Property<int?>("Codigo");
 
-                    b.Property<string>("CodigoIdioma");
+                    b.Property<string>("CodigoIdioma")
+                        .HasMaxLength(7);
 
                     b.HasKey("ID");
 
@@ -126,10 +127,13 @@ namespace everisapi.API.Migrations
 
                     b.Property<string>("Codigo")
                         .IsRequired()
-                        .ValueGeneratedOnAdd()
                         .HasMaxLength(7);
 
-                    b.Property<string>("Nombre")
+                    b.Property<string>("NombreEN")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<string>("NombreES")
                         .IsRequired()
                         .HasMaxLength(50);
 
@@ -263,7 +267,8 @@ namespace everisapi.API.Migrations
 
                     b.Property<int?>("Codigo");
 
-                    b.Property<string>("CodigoIdioma");
+                    b.Property<string>("CodigoIdioma")
+                        .HasMaxLength(7);
 
                     b.Property<string>("Pregunta")
                         .IsRequired()
@@ -419,7 +424,8 @@ namespace everisapi.API.Migrations
 
                     b.Property<int?>("Codigo");
 
-                    b.Property<string>("CodigoIdioma");
+                    b.Property<string>("CodigoIdioma")
+                        .HasMaxLength(7);
 
                     b.Property<string>("Sections")
                         .IsRequired()
