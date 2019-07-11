@@ -130,7 +130,7 @@ namespace everisapi.API.Migrations
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasMaxLength(500);
+                        .HasMaxLength(50);
 
                     b.HasKey("ID");
 

@@ -16,8 +16,9 @@ namespace everisapi.API.Entities
         [Required]
         [MaxLength(120)]
         public string Sections { get; set; }
-        
+
         public string CodigoIdioma { get; set; }
+        [MaxLength(7)]
         [ForeignKey("Codigo")]
         public IdiomasEntity IdiomasEntity { get; set; }
 

@@ -11,7 +11,7 @@ using System;
 namespace everisapi.API.Migrations
 {
     [DbContext(typeof(AsignacionInfoContext))]
-    [Migration("20190711061141_AddTablesIdiomas")]
+    [Migration("20190711062730_AddTablesIdiomas")]
     partial class AddTablesIdiomas
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -131,7 +131,7 @@ namespace everisapi.API.Migrations
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasMaxLength(500);
+                        .HasMaxLength(50);
 
                     b.HasKey("ID");
 

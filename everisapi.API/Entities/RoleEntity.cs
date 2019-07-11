@@ -22,6 +22,6 @@ namespace everisapi.API.Entities
 
         [Required]
         [MaxLength(50)]
-        public string RoleEN { get; set; } 
+        public string RoleEN { get; set; }
     }
 }

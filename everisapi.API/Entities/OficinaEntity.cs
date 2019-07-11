@@ -24,5 +24,5 @@ namespace everisapi.API.Entities
         [Required]
         [MaxLength(50)]
         public string OficinaNombreEn { get; set; }
-    }    
+    }
 }

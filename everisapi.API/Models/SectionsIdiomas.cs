@@ -9,7 +9,7 @@ namespace everisapi.API.Models
     {
         public int ID { get; set; }
         public string Sections { get; set; }
-        public string CodigoIdioma{get;set;}
-        public int SectionsId{get;set;}
+        public string CodigoIdioma { get; set; }
+        public int SectionsId { get; set; }
     }
 }

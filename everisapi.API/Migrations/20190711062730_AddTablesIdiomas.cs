@@ -44,7 +44,7 @@ namespace everisapi.API.Migrations
                     ID = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Codigo = table.Column<string>(maxLength: 7, nullable: false),
-                    Nombre = table.Column<string>(maxLength: 500, nullable: false)
+                    Nombre = table.Column<string>(maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {

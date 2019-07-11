@@ -15,16 +15,17 @@ namespace everisapi.API.Entities
 
         [Required]
         [MaxLength(50)]
-        public string Asignacion { get; set; }             
-        
+        public string Asignacion { get; set; }
+
         public string CodigoIdioma { get; set; }
+        [MaxLength(7)]
         [ForeignKey("Codigo")]
         public IdiomasEntity IdiomasEntity { get; set; }
 
-        [Required]        
+        [Required]
         public int AsignacionesId { get; set; }
         [ForeignKey("ID")]
-        public AsignacionEntity AsignacionEntity {get;set;}
+        public AsignacionEntity AsignacionEntity { get; set; }
 
-    }    
+    }
 }

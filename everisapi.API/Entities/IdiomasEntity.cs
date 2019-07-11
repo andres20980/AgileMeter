@@ -14,12 +14,12 @@ namespace everisapi.API.Entities
         public int ID { get; set; }
 
         [Required]
-        [MaxLength(500)]
+        [MaxLength(50)]
         public string Nombre { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Required]
         [MaxLength(7)]
-        public string Codigo {get;set;}
+        public string Codigo { get; set; }
     }
 }
