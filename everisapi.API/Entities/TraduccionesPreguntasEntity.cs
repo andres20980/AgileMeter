@@ -18,12 +18,12 @@ namespace everisapi.API.Entities
         public string Traduccion { get; set; }
 
         public int IdiomaId { get; set; }
-        [ForeignKey("ID")]
+        [ForeignKey("IdiomaId")]
         public IdiomasEntity IdiomasEntity { get; set; }
 
         [Required]
         public int PreguntaId { get; set; }
-        [ForeignKey("ID")]
+        [ForeignKey("PreguntaId")]
         public PreguntaEntity PreguntaEntity { get; set; }
 
     }

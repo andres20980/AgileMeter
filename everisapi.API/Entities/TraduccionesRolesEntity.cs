@@ -11,18 +11,18 @@ namespace everisapi.API.Entities
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+        public int ID { get; set; }
 
         [Required]
         [MaxLength(50)]
         public string Traduccion { get; set; }
 
         public int IdiomaId { get; set; }
-        [ForeignKey("ID")]
+        [ForeignKey("IdiomaId")]
         public IdiomasEntity IdiomasEntity { get; set; }
 
         public int RoleId { get; set; }
-        [ForeignKey("Id")]
+        [ForeignKey("RoleId")]
         public RoleEntity RoleEntity { get; set; }
 
 
