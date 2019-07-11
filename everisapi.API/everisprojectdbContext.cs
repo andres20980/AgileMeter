@@ -11,7 +11,7 @@ namespace everisapi.API
             if (!optionsBuilder.IsConfigured)
             {
                //optionsBuilder.UseMySql("server=localhost; port=3306; database=everisprojectdb; user=root; password=");
-               optionsBuilder.UseMySql("server=localhost; port=3306; database=everisprojectdb; user=root; password=");
+               optionsBuilder.UseMySql("server=agiledatabase; port=3306; database=everisprojectdb; user=root; password=");
            }
          }
 

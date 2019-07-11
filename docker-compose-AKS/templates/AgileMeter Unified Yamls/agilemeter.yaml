@@ -1,0 +1,59 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    service: agilemeter
+  name: agilemeter
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: agilemeter
+    spec:
+      containers:
+      - image: amapiback.azurecr.io/agilemeter_dev:latest
+        name: agilemeter
+      imagePullSecrets:
+      - name: amapiback-regsecret
+        ports:
+        - containerPort: 60406
+        resources: {}
+      hostname: agilemeter
+      restartPolicy: Always
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: agilemeter
+  labels:
+    service: agilemeter
+spec:
+  ports:
+  - name: "60406"
+    protocol: "TCP"
+    port: 60406
+    targetPort: 60406
+  selector:
+    service: agilemeter
+status:
+  loadBalancer: {}
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: agilemeteringress
+  annotations:
+    kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+  rules:
+  - host: agilemeter.1f42c33a08324650ac17.westeurope.aksapp.io
+    http:
+      paths:
+      - backend:
+          serviceName: agilemeter
+          servicePort: 60406
+        path: /

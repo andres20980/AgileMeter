@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    service: agilemeter
+  name: agilemeter
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: agilemeter
+    spec:
+      containers:
+      - image: amapiback.azurecr.io/agilemeter_dev:latest
+        name: agilemeter
+      imagePullSecrets:
+      - name: amapiback-regsecret
+        ports:
+        - containerPort: 60406
+        resources: {}
+      hostname: agilemeter
+      restartPolicy: Always
+status: {}
