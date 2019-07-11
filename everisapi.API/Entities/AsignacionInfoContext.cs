@@ -47,6 +47,10 @@ namespace everisapi.API.Entities
         public DbSet<OficinaEntity> Oficina {get;set;}
         public DbSet<UnidadEntity> Unidad {get;set;}
         public DbSet<LineaEntity> Linea {get;set;}
+        public DbSet<IdiomasEntity> Idiomas {get;set;}
+        public DbSet<PreguntasIdiomasEntity> PreguntasIdiomas {get;set;}
+        public DbSet<AsignacionesIdiomasEntity> AsignacionesIdiomas {get;set;}
+        public DbSet<SectionsIdiomasEntity> SectionsIdioma {get;set;}
 
 
   }

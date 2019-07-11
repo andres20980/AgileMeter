@@ -7,22 +7,19 @@ using System.Threading.Tasks;
 
 namespace everisapi.API.Entities
 {
-    public class OficinaEntity
+    public class IdiomasEntity
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int OficinaId { get; set; }
+        public int ID { get; set; }
 
         [Required]
-        [MaxLength(50)]
-        public string OficinaNombre { get; set; }
+        [MaxLength(500)]
+        public string Nombre { get; set; }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Required]
-        [MaxLength(50)]
-        public string OficinaNombreEs { get; set; }
-
-        [Required]
-        [MaxLength(50)]
-        public string OficinaNombreEn { get; set; }
-    }    
+        [MaxLength(7)]
+        public string Codigo {get;set;}
+    }
 }
