@@ -17,9 +17,11 @@ namespace everisapi.API.Entities
         public string Role { get; set; }
 
         [Required]
+        [MaxLength(50)]
         public string RoleES { get; set; }
 
         [Required]
+        [MaxLength(50)]
         public string RoleEN { get; set; } 
     }
 }
