@@ -57,7 +57,7 @@ namespace everisapi.API.Services
         }
 
         //Realiza un update de la respuesta por el id de la respuesta y el estado que se desea cambiar
-        public bool UpdateRespuesta(RespuestaDto Respuesta)
+        public bool UpdateRespuesta(RespuestaConUserDto Respuesta)
         {
             RespuestaEntity respuestaAnterior = _context.Respuestas.Where(r => r.Id == Respuesta.Id).FirstOrDefault();
             EvaluacionEntity currentEvaluation = _context.Evaluaciones.First(x => x.Id == respuestaAnterior.EvaluacionId);

@@ -137,7 +137,7 @@ namespace everisapi.API.Controllers
 
     //Cambiamos el estado de la pregunta que queremos cambiar
     [HttpPut("update")]
-    public IActionResult AlterRespuesta([FromBody] RespuestaDto RespuestaUpdate)
+    public IActionResult AlterRespuesta([FromBody] RespuestaConUserDto RespuestaUpdate)
     {
       try
       {
