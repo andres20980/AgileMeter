@@ -82,7 +82,7 @@ namespace everisapi.API.Services
     {
       List<AsignacionInfoDto> AsignacionesInfo = new List<AsignacionInfoDto>();
       List<RespuestaDto> ListaRespuestas = Mapper.Map<List<RespuestaDto>>(_context.Respuestas.Where(r => r.EvaluacionId == idEval).ToList());
-
+      int codigoIdioma = 1;
 
 
       var asignaciones = (from res in _context.Respuestas
@@ -99,7 +99,7 @@ namespace everisapi.API.Services
         {
           Id = asignacion.Id,
           Nombre = asignacion.Nombre,
-          Preguntas = ChangePregunta(asignacion.PreguntasDeAsignacion, ListaRespuestas)
+          Preguntas = ChangePregunta(asignacion.PreguntasDeAsignacion, ListaRespuestas,codigoIdioma)
         };
 
         var nota = _context.NotasAsignaciones.Where(r => r.EvaluacionId == idEval && r.AsignacionId == asignacion.Id).FirstOrDefault();
@@ -120,7 +120,7 @@ namespace everisapi.API.Services
     {
       List<AsignacionInfoDto> AsignacionesInfo = new List<AsignacionInfoDto>();
       List<RespuestaDto> ListaRespuestas = Mapper.Map<List<RespuestaDto>>(_context.Respuestas.Where(r => r.EvaluacionId == idEval).ToList());
-
+      int codigoIdioma = 1;
       var asignaciones = (from res in _context.Respuestas
                           where res.EvaluacionId == idEval
                           select new { res.Id, res.PreguntaId, res.Estado, res.EvaluacionId } into respuestas
@@ -137,7 +137,7 @@ namespace everisapi.API.Services
         {
           Id = asignacion.Id,
           Nombre = asignacion.Nombre,
-          Preguntas = ChangePregunta(asignacion.PreguntasDeAsignacion, ListaRespuestas),
+          Preguntas = ChangePregunta(asignacion.PreguntasDeAsignacion, ListaRespuestas,codigoIdioma),
         };
 
         var nota = _context.NotasAsignaciones.Where(r => r.EvaluacionId == idEval && r.AsignacionId == asignacion.Id).FirstOrDefault();
@@ -154,7 +154,7 @@ namespace everisapi.API.Services
     }
 
     //Devuelve todas las asignaciones con datos extendidos filtrado por evaluacion
-    public AsignacionInfoDto GetAsignFromEvalAndAsig(int idEval, int idAsig)
+    public AsignacionInfoDto GetAsignFromEvalAndAsig(int idEval, int idAsig, int codigoIdioma)
     {
 
       AsignacionInfoDto AsignacionesInfo = new AsignacionInfoDto();
@@ -173,7 +173,7 @@ namespace everisapi.API.Services
 
       AsignacionesInfo.Id = asignacionBD.Id;
       AsignacionesInfo.Nombre = asignacionBD.Nombre;
-      AsignacionesInfo.Preguntas = ChangePregunta(asignacionBD.PreguntasDeAsignacion, ListaRespuestas);
+      AsignacionesInfo.Preguntas = ChangePregunta(asignacionBD.PreguntasDeAsignacion, ListaRespuestas, codigoIdioma);
 
       var nota = _context.NotasAsignaciones.Where(r => r.EvaluacionId == idEval && r.AsignacionId == idAsig).FirstOrDefault();
 
@@ -192,14 +192,14 @@ namespace everisapi.API.Services
     }*/
 
     // Metodo que devolvia una lista
-    public List<PreguntaWithOneRespuestasDto> ChangePregunta(IEnumerable<PreguntaEntity> Preguntas, IEnumerable<RespuestaDto> Respuestas)
+    public List<PreguntaWithOneRespuestasDto> ChangePregunta(IEnumerable<PreguntaEntity> Preguntas, IEnumerable<RespuestaDto> Respuestas, int codigoIdioma)
     {
       List<PreguntaWithOneRespuestasDto> PreguntasConRespuestas = new List<PreguntaWithOneRespuestasDto>();
       foreach (var pregunta in Preguntas)
       {
         var RespuestaParaPregunta = Respuestas.Where(r => r.PreguntaId == pregunta.Id).FirstOrDefault();
-
-        var PreguntaAdd = new PreguntaWithOneRespuestasDto { Id = pregunta.Id, Pregunta = pregunta.Pregunta, Correcta = pregunta.Correcta,
+        TraduccionesPreguntasEntity traduccion = _context.TraduccionesPreguntas.Where(t => t.PreguntaId == pregunta.Id && t.IdiomaId == codigoIdioma).FirstOrDefault();
+          var PreguntaAdd = new PreguntaWithOneRespuestasDto { Id = pregunta.Id, Pregunta = traduccion.Traduccion, Correcta = pregunta.Correcta,
           Respuesta = RespuestaParaPregunta,EsHabilitante = pregunta.EsHabilitante, PreguntaHabilitanteId = pregunta.PreguntaHabilitanteId  };
 
         PreguntasConRespuestas.Add(PreguntaAdd);

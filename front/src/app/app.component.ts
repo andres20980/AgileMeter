@@ -29,7 +29,8 @@ export class AppComponent {
   constructor(
     public _storageDataService: StorageDataService,
     public _router: Router,
-    public translate: TranslateService) {
+    public translate: TranslateService
+    ) {
     this.ScreenWidth = window.innerWidth;
 
     translate.addLangs(['es', 'en']);
@@ -42,8 +43,26 @@ export class AppComponent {
   public ChangeLang(lang: string) {
     this.translate.use(lang);
     this.refreshBreadCrumb();
+    this.obtenerCodigoIdioma(lang);
+    this._router.navigate(["/home"]);
   }
 
+  public obtenerCodigoIdioma(lang) {
+    switch (lang) {
+      case 'es': {
+        this._storageDataService.codigoIdioma = 1;
+        break;
+      }
+      case 'en': {
+        this._storageDataService.codigoIdioma = 2;
+        break;
+      }
+      default: {
+        this._storageDataService.codigoIdioma = 1;
+        break;
+      }        
+    }
+  }
 
   public ComprobarUserYToken() {
     //Recogemos los datos

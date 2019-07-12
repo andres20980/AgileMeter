@@ -16,7 +16,7 @@ namespace everisapi.API.Services
     IEnumerable<AsignacionInfoDto> GetAsignFromEval(int idEval);
 
     //Devuelve una asignación con datos extendidos filtrado por evaluación y asignación
-    AsignacionInfoDto GetAsignFromEvalAndAsig(int idEval, int idAsig);
+    AsignacionInfoDto GetAsignFromEvalAndAsig(int idEval, int idAsig, int codigoIdioma);
 
     //Devuelve una asignación con datos extendidos filtrado por evaluación y su sección
     IEnumerable<AsignacionInfoDto> GetAsignFromEvalAndSection(int idEval, int idSection);

@@ -86,12 +86,12 @@ namespace everisapi.API.Controllers
     }
 
     //Recoge una asignación con todas sus preguntas y su respuesta filtrada por id de evaluación y otra de asignación
-    [HttpGet("evaluacion/{idEval}/asignacion/{idAsig}")]
-    public IActionResult GetAsignacionFromEval(int idEval, int idAsig)
+    [HttpGet("evaluacion/{idEval}/asignacion/{idAsig}/{codigoIdioma}")]
+    public IActionResult GetAsignacionFromEval(int idEval, int idAsig, int codigoIdioma)
     {
       try
       {
-        var AsignacionesWithInfo = _asignacionInfoRepository.GetAsignFromEvalAndAsig(idEval, idAsig);
+        var AsignacionesWithInfo = _asignacionInfoRepository.GetAsignFromEvalAndAsig(idEval, idAsig,codigoIdioma);
 
         return Ok(AsignacionesWithInfo);
       }
