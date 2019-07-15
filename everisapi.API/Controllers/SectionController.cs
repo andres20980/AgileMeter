@@ -191,15 +191,15 @@ namespace everisapi.API.Controllers
     }
 
 
-    [HttpGet("evaluacion/{id}/assessment/{assessmentId}")]
-    public IActionResult GetDatosEvaluacionFromEvalNew(int id,int assessmentId)
+    [HttpGet("evaluacion/{id}/assessment/{assessmentId}/{codigoIdioma}")]
+    public IActionResult GetDatosEvaluacionFromEvalNew(int id,int assessmentId, int codigoIdioma)
     {
 
       try
       {
         //Comprueba si existe la section y si existe manda un json con la información
         //si no existe mandara un error 404 el error 500 aparecera si el servidor falla
-        var SectionInfo = _sectionInfoRepository.GetSectionsInfoFromEvalNew(id,assessmentId);
+        var SectionInfo = _sectionInfoRepository.GetSectionsInfoFromEvalNew(id,assessmentId,codigoIdioma);
         if (SectionInfo == null)
         {
           _logger.LogInformation($"La section con id de evaluación" + id + " no pudo ser encontrado.");

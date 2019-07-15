@@ -240,7 +240,7 @@ namespace everisapi.API.Services
       return ListadoSectionInformacion;
     }
 
-    public IEnumerable<SectionInfoDto> GetSectionsInfoFromEvalNew(int idEvaluacion,int assessmentId)
+    public IEnumerable<SectionInfoDto> GetSectionsInfoFromEvalNew(int idEvaluacion,int assessmentId, int codigoIdioma)
     {
       //Recoge las respuestas de la evaluación
       List<SectionInfoDto> ListadoSectionInformacion = new List<SectionInfoDto>();
@@ -257,10 +257,12 @@ namespace everisapi.API.Services
       //Rellena los datos y los añade a la lista para cada sección
       foreach (var section in SectionsUtilizadas)
       {
+        var TraduccionSection = _context.TraduccionesSections.Where(t => t.SectionsId == section.Id && t.IdiomaId == codigoIdioma).FirstOrDefault();
         SectionInfoDto SectionAdd = new SectionInfoDto
         {
           Id = section.Id,
-          Nombre = section.Nombre,
+          //Nombre = section.Nombre,
+          Nombre = TraduccionSection.Traduccion,
           Preguntas = Respuestas.Where(r => r.PreguntaEntity.AsignacionEntity.SectionEntity.Id == section.Id).Count(),
         };
 
