@@ -154,7 +154,7 @@ namespace everisapi.API.Services
     }
 
     //Devuelve todas las asignaciones con datos extendidos filtrado por evaluacion
-    public AsignacionInfoDto GetAsignFromEvalAndAsig(int idEval, int idAsig, int codigoIdioma)
+    public AsignacionInfoDto GetAsignFromEvalAndAsig(int idEval, int idAsig, int codigoIdioma) 
     {
 
       AsignacionInfoDto AsignacionesInfo = new AsignacionInfoDto();

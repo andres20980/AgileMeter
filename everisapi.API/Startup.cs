@@ -66,10 +66,6 @@ namespace everisapi.API
             services.AddScoped<IUnidadInfoRepository, UnidadInfoRepository>();
             services.AddScoped<ILineaInfoRepository, LineaInfoRepository>();
             services.AddScoped<IIdiomasInfoRepository, IdiomasInfoRepository>();
-            services.AddScoped<IPreguntasIdiomasInfoRepository, PreguntasIdiomasInfoRepository>();
-            services.AddScoped<IAsignacionesIdiomasInfoRepository, AsignacionesIdiomasInfoRepository>();
-            services.AddScoped<ISectionsIdiomasInfoRepository, SectionsIdiomasInfoRepository>();
-
 
             //Incluimos swagger
             services.AddSwaggerGen(c =>
@@ -134,14 +130,6 @@ namespace everisapi.API
                 cfg.CreateMap<Entities.LineaEntity, Models.Linea>();
                 cfg.CreateMap<Entities.ProyectoEntity, Models.Equipos>();
                 cfg.CreateMap<Entities.IdiomasEntity, Models.Idiomas>();
-                cfg.CreateMap<Entities.TraduccionesPreguntasEntity, Models.TraduccionesPreguntas>();
-                cfg.CreateMap<Entities.TraduccionesAsignacionesEntity, Models.TraduccionesAsignaciones>();
-                cfg.CreateMap<Entities.TraduccionesSectionsEntity, Models.TraduccionesAsignaciones>();
-                cfg.CreateMap<Entities.TraduccionesRolesEntity, Models.TraduccionesRoles>();
-                cfg.CreateMap<Entities.TraduccionesIdiomasEntity, Models.TraduccionesIdiomas>();
-                cfg.CreateMap<Entities.TraduccionesOficinasEntity, Models.TraduccionesOficinas>();
-                
-
             });
 
             //Incluimos todos los cors
