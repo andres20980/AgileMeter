@@ -259,7 +259,470 @@ namespace everisapiTest
             //Assert
             Assert.IsType<ObjectResult>(okResult);
         }
-        
+
+        //Method:  AlterRespuesta
+        [Fact]
+        public void AlterRespuesta_WhenCalled_ReturnOkResult()
+        {
+            //Arrange            
+            _controller = new RespuestaController(_logger, _respuestasInfoRepository);
+
+            var respuestasEntity = new everisapi.API.Models.RespuestaConUserDto {
+                Id = 1,
+                PreguntaId = 1,
+                Estado = 1,
+                EvaluacionId = 1,
+                UserName = "fmoreno"
+            };
+
+            mockRepository.Setup(r => r.ExiteRespuesta(1)).Returns(true);
+            mockRepository.Setup(r => r.UpdateRespuesta(respuestasEntity)).Returns(true);
+            mockRepository.Setup(r => r.SaveChanges()).Returns(true);
+
+            //Act
+            var okResult = _controller.AlterRespuesta(RespuestaUpdate: respuestasEntity);
+
+            //Assert
+            Assert.IsType<OkObjectResult>(okResult);
+        }
+
+        [Fact]
+        public void AlterRespuestas_WhenThrowException_ReturnStatusCode()
+        {
+            //Arrange            
+            _controller = new RespuestaController(_logger, _respuestasInfoRepository);
+
+            var respuestasEntity = new everisapi.API.Models.RespuestaConUserDto {
+                Id = 1,
+                PreguntaId = 1,
+                Estado = 1,
+                EvaluacionId = 1,
+                UserName = "fmoreno"
+            };
+
+            mockRepository.Setup(r => r.ExiteRespuesta(1)).Throws(new Exception());
+
+            //Act
+            var okResult = _controller.AlterRespuesta(RespuestaUpdate: respuestasEntity);
+
+            //Assert
+            Assert.IsType<ObjectResult>(okResult);
+        }
+
+       [Fact]
+        public void AlterRespuestas_WhenNotExitRespuesta_ReturnNotFound()
+        {
+            //Arrange            
+            _controller = new RespuestaController(_logger, _respuestasInfoRepository);
+
+            var respuestasEntity = new everisapi.API.Models.RespuestaConUserDto {
+                Id = 1,
+                PreguntaId = 1,
+                Estado = 1,
+                EvaluacionId = 1,
+                UserName = "fmoreno"
+            };
+
+            mockRepository.Setup(r => r.ExiteRespuesta(1)).Returns(false);
+
+            //Act
+            var okResult = _controller.AlterRespuesta(RespuestaUpdate: respuestasEntity);
+
+            //Assert
+            Assert.IsType<NotFoundResult>(okResult);
+        }
+
+        [Fact]
+        public void AlterRespuestas_WhenRespuestaIsNull_ReturnNotFound()
+        {
+            //Arrange            
+            _controller = new RespuestaController(_logger, _respuestasInfoRepository);
+
+            //Act
+            var okResult = _controller.AlterRespuesta(RespuestaUpdate: null);
+
+            //Assert
+            Assert.IsType<NotFoundResult>(okResult);
+        }
+
+        [Fact]
+        public void AlterRespuestas_GivenInvalidModel_ReturnsBadRequest()
+        {
+            //Arrange
+            _controller = new RespuestaController(_logger, _respuestasInfoRepository);
+
+            _controller.ModelState.AddModelError("error", "some error");
+
+            var respuestasEntity = new everisapi.API.Models.RespuestaConUserDto {
+                Id = 1,
+                PreguntaId = 1,
+                Estado = 1,
+                EvaluacionId = 1,
+                UserName = "fmoreno"
+            };
+
+            //Act
+            mockRepository.Setup(r => r.ExiteRespuesta(1)).Returns(true);
+            mockRepository.Setup(r => r.UpdateRespuesta(respuestasEntity)).Returns(true);
+
+            var okResult = _controller.AlterRespuesta(RespuestaUpdate: respuestasEntity);
+
+            //Assert
+            Assert.IsType<BadRequestObjectResult>(okResult);
+        }
+
+        [Fact]
+        public void AlterRespuesta_WhenErrorSaveChanges_ReturnStatusCode()
+        {
+            //Arrange            
+            _controller = new RespuestaController(_logger, _respuestasInfoRepository);
+
+            var respuestasEntity = new everisapi.API.Models.RespuestaConUserDto {
+                Id = 1,
+                PreguntaId = 1,
+                Estado = 1,
+                EvaluacionId = 1,
+                UserName = "fmoreno"
+            };
+
+            mockRepository.Setup(r => r.ExiteRespuesta(1)).Returns(true);
+            mockRepository.Setup(r => r.UpdateRespuesta(respuestasEntity)).Returns(true);
+            mockRepository.Setup(r => r.SaveChanges()).Returns(false);
+
+            //Act
+            var okResult = _controller.AlterRespuesta(RespuestaUpdate: respuestasEntity);
+
+            //Assert
+            Assert.IsType<ObjectResult>(okResult);
+        }
+
+        //Method:  GetRespuestasConNotas
+        [Fact]
+        public void GetRespuestasConNotas_WhenCalled_ReturnOkResult()
+        {
+            //Arrange            
+            _controller = new RespuestaController(_logger, _respuestasInfoRepository);
+
+            mockRepository.Setup(r => r.GetRespuestasConNotas(1,0)).Returns(new List<everisapi.API.Models.RespuestaConNotasDto>());
+
+            //Act
+            var okResult = _controller.GetRespuestasConNotas(idevaluacion: 1);
+
+            //Assert
+            Assert.IsType<OkObjectResult>(okResult);
+        }
+
+        [Fact]
+        public void GetRespuestasConNotas_WhenThrowException_ReturnStatusCode()
+        {
+            //Arrange            
+            _controller = new RespuestaController(_logger, _respuestasInfoRepository);
+
+            mockRepository.Setup(r => r.GetRespuestasConNotas(1,0)).Throws(new Exception());
+
+            //Act
+            var okResult = _controller.GetRespuestasConNotas(idevaluacion: 1);
+
+            //Assert
+            Assert.IsType<ObjectResult>(okResult);
+        }
+
+        //Method:  GetRespuestasConNotasConAssessments
+        [Fact]
+        public void GetRespuestasConNotasConAssessments_WhenCalled_ReturnOkResult()
+        {
+            //Arrange            
+            _controller = new RespuestaController(_logger, _respuestasInfoRepository);
+
+            mockRepository.Setup(r => r.GetRespuestasConNotas(1,1)).Returns(new List<everisapi.API.Models.RespuestaConNotasDto>());
+
+            //Act
+            var okResult = _controller.GetRespuestasConNotasConAssessments(idevaluacion: 1, assessmentid: 1);
+
+            //Assert
+            Assert.IsType<OkObjectResult>(okResult);
+        }
+
+        [Fact]
+        public void GetRespuestasConNotasConAssessments_WhenThrowException_ReturnStatusCode()
+        {
+            //Arrange            
+            _controller = new RespuestaController(_logger, _respuestasInfoRepository);
+
+            mockRepository.Setup(r => r.GetRespuestasConNotas(1,1)).Throws(new Exception());
+
+            //Act
+            var okResult = _controller.GetRespuestasConNotasConAssessments(idevaluacion: 1, assessmentid: 1);
+
+            //Assert
+            Assert.IsType<ObjectResult>(okResult);
+        }
+
+//Method:  GetPreguntasNivelOrganizadas
+        [Fact]
+        public void GetPreguntasNivelOrganizadas_WhenCalled_ReturnOkResult()
+        {
+            //Arrange            
+            _controller = new RespuestaController(_logger, _respuestasInfoRepository);
+
+            mockRepository.Setup(r => r.GetPreguntasNivelOrganizadas(1,1)).Returns(new List<everisapi.API.Models.SectionConAsignacionesDto>());
+
+            //Act
+            var okResult = _controller.GetPreguntasNivelOrganizadas(idevaluacion: 1, assessmentid: 1);
+
+            //Assert
+            Assert.IsType<OkObjectResult>(okResult);
+        }
+
+        [Fact]
+        public void GetPreguntasNivelOrganizadas_WhenThrowException_ReturnStatusCode()
+        {
+            //Arrange            
+            _controller = new RespuestaController(_logger, _respuestasInfoRepository);
+
+            mockRepository.Setup(r => r.GetPreguntasNivelOrganizadas(1,1)).Throws(new Exception());
+
+            //Act
+            var okResult = _controller.GetPreguntasNivelOrganizadas(idevaluacion: 1, assessmentid: 1);
+
+            //Assert
+            Assert.IsType<ObjectResult>(okResult);
+        }
+
+        //Method:  AddRespuesta
+        [Fact]
+        public void AddRespuesta_WhenCalled_ReturnOkResult()
+        {
+            //Arrange            
+            _controller = new RespuestaController(_logger, _respuestasInfoRepository);
+
+            var respuestasDto = new everisapi.API.Models.RespuestaDto {
+                Id = 1,
+                PreguntaId = 1,
+                Estado = 1,
+                EvaluacionId = 1
+            };
+
+            mockRepository.Setup(r => r.AddRespuesta(It.IsAny<everisapi.API.Models.RespuestaDto>())).Returns(true);
+
+            //Act
+            var okResult = _controller.AddRespuesta(RespuestaAdd: respuestasDto);
+
+            //Assert
+            Assert.IsType<OkObjectResult>(okResult);
+        }
+
+        [Fact]
+        public void AddRespuesta_WhenCalled_ReturnBadRequest()
+        {
+            //Arrange            
+            _controller = new RespuestaController(_logger, _respuestasInfoRepository);
+
+            var respuestasDto = new everisapi.API.Models.RespuestaDto {
+                Id = 1,
+                PreguntaId = 1,
+                Estado = 1,
+                EvaluacionId = 1
+            };
+
+            mockRepository.Setup(r => r.AddRespuesta(It.IsAny<everisapi.API.Models.RespuestaDto>())).Returns(false);
+
+            //Act
+            var okResult = _controller.AddRespuesta(RespuestaAdd: respuestasDto);
+
+            //Assert
+            Assert.IsType<BadRequestResult>(okResult);
+        }
+
+        [Fact]
+        public void AddRespuesta_WhenThrowException_ReturnStatusCode()
+        {
+            //Arrange            
+            _controller = new RespuestaController(_logger, _respuestasInfoRepository);
+
+            var respuestasDto = new everisapi.API.Models.RespuestaDto {
+                Id = 1,
+                PreguntaId = 1,
+                Estado = 1,
+                EvaluacionId = 1
+            };
+
+            mockRepository.Setup(r => r.ExiteRespuesta(1)).Returns(false);
+            mockRepository.Setup(r => r.AddRespuesta(It.IsAny<everisapi.API.Models.RespuestaDto>())).Throws(new Exception());
+
+            //Act
+            var okResult = _controller.AddRespuesta(RespuestaAdd: respuestasDto);
+
+            //Assert
+            Assert.IsType<ObjectResult>(okResult);
+        }
+
+       [Fact]
+        public void AddRespuesta_WhenExitRespuesta_ReturnNotFound()
+        {
+            //Arrange            
+            _controller = new RespuestaController(_logger, _respuestasInfoRepository);
+
+            var respuestasDto = new everisapi.API.Models.RespuestaDto {
+                Id = 1,
+                PreguntaId = 1,
+                Estado = 1,
+                EvaluacionId = 1
+            };
+
+            mockRepository.Setup(r => r.ExiteRespuesta(1)).Returns(true);
+
+            //Act
+            var okResult = _controller.AddRespuesta(RespuestaAdd: respuestasDto);
+
+            //Assert
+            Assert.IsType<BadRequestResult>(okResult);
+        }
+
+        [Fact]
+        public void AddRespuesta_WhenRespuestaIsNull_ReturnNotFound()
+        {
+            //Arrange            
+            _controller = new RespuestaController(_logger, _respuestasInfoRepository);
+
+            //Act
+            var okResult = _controller.AddRespuesta(RespuestaAdd: null);
+
+            //Assert
+            Assert.IsType<BadRequestResult>(okResult);
+        }
+
+        [Fact]
+        public void AddRespuesta_GivenInvalidModel_ReturnsBadRequest()
+        {
+            //Arrange
+            _controller = new RespuestaController(_logger, _respuestasInfoRepository);
+
+            _controller.ModelState.AddModelError("error", "some error");
+
+            var respuestasDto = new everisapi.API.Models.RespuestaDto {
+                Id = 1,
+                PreguntaId = 1,
+                Estado = 1,
+                EvaluacionId = 1
+            };
+
+            //Act
+            mockRepository.Setup(r => r.ExiteRespuesta(1)).Returns(false);
+            mockRepository.Setup(r => r.AddRespuesta(It.IsAny<everisapi.API.Models.RespuestaDto>())).Returns(true);
+
+            var okResult = _controller.AddRespuesta(RespuestaAdd: respuestasDto);
+
+            //Assert
+            Assert.IsType<BadRequestObjectResult>(okResult);
+        }
+
+        //Method:  DeleteRespuesta
+        [Fact]
+        public void DeleteRespuesta_WhenCalled_ReturnOkResult()
+        {
+            //Arrange            
+            _controller = new RespuestaController(_logger, _respuestasInfoRepository);
+
+            var respuestasDto = new everisapi.API.Models.RespuestaDto {
+                Id = 1,
+                PreguntaId = 1,
+                Estado = 1,
+                EvaluacionId = 1
+            };
+
+            mockRepository.Setup(r => r.ExiteRespuesta(1)).Returns(true);
+            mockRepository.Setup(r => r.DeleteRespuesta(It.IsAny<everisapi.API.Models.RespuestaDto>())).Returns(true);
+
+            //Act
+            var okResult = _controller.DeleteRespuesta(RespuestaDelete: respuestasDto);
+
+            //Assert
+            Assert.IsType<OkObjectResult>(okResult);
+        }
+
+        [Fact]
+        public void DeleteRespuesta_WhenThrowException_ReturnStatusCode()
+        {
+            //Arrange            
+            _controller = new RespuestaController(_logger, _respuestasInfoRepository);
+
+            var respuestasDto = new everisapi.API.Models.RespuestaDto {
+                Id = 1,
+                PreguntaId = 1,
+                Estado = 1,
+                EvaluacionId = 1
+            };
+
+            mockRepository.Setup(r => r.ExiteRespuesta(1)).Returns(true);
+            mockRepository.Setup(r => r.DeleteRespuesta(It.IsAny<everisapi.API.Models.RespuestaDto>())).Throws(new Exception());
+
+            //Act
+            var okResult = _controller.DeleteRespuesta(RespuestaDelete: respuestasDto);
+
+            //Assert
+            Assert.IsType<ObjectResult>(okResult);
+        }
+
+       [Fact]
+        public void DeleteRespuesta_WhenExitRespuesta_ReturnBadRequestResult()
+        {
+            //Arrange            
+            _controller = new RespuestaController(_logger, _respuestasInfoRepository);
+
+            var respuestasDto = new everisapi.API.Models.RespuestaDto {
+                Id = 1,
+                PreguntaId = 1,
+                Estado = 1,
+                EvaluacionId = 1
+            };
+
+            mockRepository.Setup(r => r.ExiteRespuesta(1)).Returns(true);
+
+            //Act
+            var okResult = _controller.DeleteRespuesta(RespuestaDelete: respuestasDto);
+
+            //Assert
+            Assert.IsType<BadRequestResult>(okResult);
+        }
+
+        [Fact]
+        public void DeleteRespuesta_WhenRespuestaIsNull_ReturnNotFound()
+        {
+            //Arrange            
+            _controller = new RespuestaController(_logger, _respuestasInfoRepository);
+
+            //Act
+            var okResult = _controller.DeleteRespuesta(RespuestaDelete: null);
+
+            //Assert
+            Assert.IsType<NotFoundResult>(okResult);
+        }
+
+        [Fact]
+        public void DeleteRespuesta_GivenInvalidModel_ReturnsBadRequest()
+        {
+            //Arrange
+            _controller = new RespuestaController(_logger, _respuestasInfoRepository);
+
+            _controller.ModelState.AddModelError("error", "some error");
+
+            var respuestasDto = new everisapi.API.Models.RespuestaDto {
+                Id = 1,
+                PreguntaId = 1,
+                Estado = 1,
+                EvaluacionId = 1
+            };
+
+            //Act
+            mockRepository.Setup(r => r.ExiteRespuesta(1)).Returns(true);
+            // mockRepository.Setup(r => r.DeleteRespuesta(It.IsAny<everisapi.API.Models.RespuestaDto>())).Returns(true);
+
+            var okResult = _controller.DeleteRespuesta(RespuestaDelete: respuestasDto);
+
+            //Assert
+            Assert.IsType<BadRequestObjectResult>(okResult);
+        }
 
     }
 }

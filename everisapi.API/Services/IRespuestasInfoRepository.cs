@@ -31,10 +31,10 @@ namespace everisapi.API.Services
     bool SaveChanges();
 
     //Aqui introducimos una nueva respuesta
-    bool AddRespuesta(RespuestaEntity respuesta);
+    bool AddRespuesta(RespuestaDto respuesta);
 
     //Elimina una respuesta
-    bool DeleteRespuesta(RespuestaEntity respuesta);
+    bool DeleteRespuesta(RespuestaDto respuesta);
 
     //Muestra si existe la respuesta
     bool ExiteRespuesta(int idRespuesta);
