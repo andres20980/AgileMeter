@@ -134,11 +134,11 @@ export class SectionService {
       'Authorization': Token
     });
     if (assessmentId) {
-      return this._http.get(`${this.url}respuestas/evaluacion/${id}/assessment/${assessmentId}`, { headers: headers }).pipe(
+      return this._http.get(this.url + 'respuestas/evaluacion/' + id +'/assessment/' + assessmentId , { headers: headers }).pipe(
         map((response: Response) => response.json()),
         catchError(this.errorHandler));
     } else {
-      return this._http.get(this.url + 'respuestas/evaluacion/' + id, { headers: headers }).pipe(
+      return this._http.get(this.url + 'respuestas/evaluacion/' + id , { headers: headers }).pipe(
         map((response: Response) => response.json()),
         catchError(this.errorHandler));
     }
@@ -147,12 +147,13 @@ export class SectionService {
 
     //Obtiene todas las respuestas con notas para esta evaluacion
     GetPreguntasNivelOrganizadas(id, assessmentId) {
+      var codigoIdioma = this._appComponent._storageDataService.codigoIdioma;
       let Token = this._appComponent.ComprobarUserYToken();
       let headers = new Headers({
         'Authorization': Token
       });
 
-      return this._http.get(`${this.url}respuestas/evaluacion/preguntas/${id}/assessment/${assessmentId}`, { headers: headers }).pipe(
+      return this._http.get(`${this.url}respuestas/evaluacion/preguntas/${id}/assessment/${assessmentId}/${codigoIdioma}`, { headers: headers }).pipe(
         map((response: Response) => response.json()),
         catchError(this.errorHandler));
 

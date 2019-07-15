@@ -149,7 +149,7 @@ namespace everisapi.API.Services
             return lista;
         }
 
-         public IEnumerable<SectionConAsignacionesDto> GetPreguntasNivelOrganizadas(int idEvaluacion, int assessmentId)
+         public IEnumerable<SectionConAsignacionesDto> GetPreguntasNivelOrganizadas(int idEvaluacion, int assessmentId, int codigoIdioma)
         {
 
             List<SectionConAsignacionesDto> sectionsConAsignaciones = new List<SectionConAsignacionesDto>();
@@ -205,16 +205,18 @@ namespace everisapi.API.Services
                     preguntas = _context.Respuestas.
                     Include(r => r.PreguntaEntity).Where(p => p.EvaluacionId == idEvaluacion && p.PreguntaEntity.AsignacionId == a.asignacion.Id).ToList();
                     preguntas = preguntas.OrderBy(x => x.PreguntaEntity.Id).ToList();
-
+                    
                      foreach (RespuestaEntity p in preguntas)
                      {
+                         var traduccion = _context.TraduccionesPreguntas.Where(t => t.PreguntaId == p.PreguntaId && t.IdiomaId == codigoIdioma).FirstOrDefault();
                          PreguntaRespuestaNivelDto preguntaRespuestaNivel = new PreguntaRespuestaNivelDto();
                          preguntaRespuestaNivel.Id = p.PreguntaEntity.Id;
                          preguntaRespuestaNivel.Nivel = p.PreguntaEntity.Nivel;
                          preguntaRespuestaNivel.Notas = p.Notas;
                          preguntaRespuestaNivel.NotasAdmin = p.NotasAdmin;
                          preguntaRespuestaNivel.Peso = p.PreguntaEntity.Peso;
-                         preguntaRespuestaNivel.Pregunta = p.PreguntaEntity.Pregunta;
+                         //preguntaRespuestaNivel.Pregunta = p.PreguntaEntity.Pregunta;
+                         preguntaRespuestaNivel.Pregunta = traduccion.Traduccion;
                          preguntaRespuestaNivel.Estado = p.Estado;
                          preguntaRespuestaNivel.Correcta = p.PreguntaEntity.Correcta;
 

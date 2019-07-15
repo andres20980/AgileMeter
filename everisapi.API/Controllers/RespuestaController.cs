@@ -211,12 +211,12 @@ namespace everisapi.API.Controllers
       }
     }
 
-     [HttpGet("evaluacion/preguntas/{idevaluacion}/assessment/{assessmentid}")]
-    public IActionResult GetPreguntasNivelOrganizadas(int idevaluacion,int assessmentid)
+     [HttpGet("evaluacion/preguntas/{idevaluacion}/assessment/{assessmentid}/{codigoIdioma}")]
+    public IActionResult GetPreguntasNivelOrganizadas(int idevaluacion,int assessmentid, int codigoIdioma)
     {
       try
       {
-        var respuestas = _respuestasInfoRepository.GetPreguntasNivelOrganizadas(idevaluacion,assessmentid);
+        var respuestas = _respuestasInfoRepository.GetPreguntasNivelOrganizadas(idevaluacion,assessmentid,codigoIdioma);
 
         _logger.LogInformation("Mandamos correctamente todas las preguntas organizadas.");
 
