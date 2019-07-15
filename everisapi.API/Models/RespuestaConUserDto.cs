@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace everisapi.API.Models
 {
-    public class RespuestaDto
+    public class RespuestaConUserDto
     {
     public int Id { get; set; }
 
@@ -18,6 +18,8 @@ namespace everisapi.API.Models
     public string Notas { get; set; }
 
     public string NotasAdmin { get; set; }
+
+    public string UserName { get; set; }
 
   }
 }

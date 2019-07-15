@@ -15,6 +15,7 @@ namespace everisapiTest
                 CreateMap<everisapi.API.Entities.RoleEntity, everisapi.API.Models.RoleDto>();
                 CreateMap<everisapi.API.Entities.LineaEntity, everisapi.API.Models.Linea>();
                 CreateMap<everisapi.API.Entities.OficinaEntity, everisapi.API.Models.Oficina>();
+                CreateMap<everisapi.API.Entities.RespuestaEntity, everisapi.API.Models.RespuestaDto>();
             });
         }
     }

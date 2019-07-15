@@ -25,16 +25,16 @@ namespace everisapi.API.Services
     IEnumerable<RespuestaEntity> GetRespuestasFromAsigEval(int IdProyecto, int IdPregunta);
 
     //Update de una respuesta
-    bool UpdateRespuesta(RespuestaDto respuesta);
+    bool UpdateRespuesta(RespuestaConUserDto respuesta);
 
     //Guardar cambio de las entidades
     bool SaveChanges();
 
     //Aqui introducimos una nueva respuesta
-    bool AddRespuesta(RespuestaEntity respuesta);
+    bool AddRespuesta(RespuestaDto respuesta);
 
     //Elimina una respuesta
-    bool DeleteRespuesta(RespuestaEntity respuesta);
+    bool DeleteRespuesta(RespuestaDto respuesta);
 
     //Muestra si existe la respuesta
     bool ExiteRespuesta(int idRespuesta);

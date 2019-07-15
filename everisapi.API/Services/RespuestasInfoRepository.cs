@@ -57,7 +57,7 @@ namespace everisapi.API.Services
         }
 
         //Realiza un update de la respuesta por el id de la respuesta y el estado que se desea cambiar
-        public bool UpdateRespuesta(RespuestaDto Respuesta)
+        public bool UpdateRespuesta(RespuestaConUserDto Respuesta)
         {
             RespuestaEntity respuestaAnterior = _context.Respuestas.Where(r => r.Id == Respuesta.Id).FirstOrDefault();
             EvaluacionEntity currentEvaluation = _context.Evaluaciones.First(x => x.Id == respuestaAnterior.EvaluacionId);
@@ -287,16 +287,21 @@ namespace everisapi.API.Services
         }
 
         //Aqui introducimos una nueva respuesta
-        public bool AddRespuesta(RespuestaEntity respuesta)
+        public bool AddRespuesta(RespuestaDto respuesta)
         {
-            _context.Respuestas.Add(respuesta);
+            _context.Respuestas.Add(new RespuestaEntity {
+                Estado = respuesta.Estado, 
+                Notas = respuesta.Notas,
+                PreguntaId = respuesta.PreguntaId,
+                EvaluacionId = respuesta.EvaluacionId
+                });
             return SaveChanges();
         }
 
         //Elimina una respuesta
-        public bool DeleteRespuesta(RespuestaEntity respuesta)
+        public bool DeleteRespuesta(RespuestaDto respuesta)
         {
-            _context.Respuestas.Remove(_context.Respuestas.Where(r => r == respuesta).FirstOrDefault());
+            _context.Respuestas.Remove(_context.Respuestas.Where(r => r.Id == respuesta.Id).FirstOrDefault());
             return SaveChanges();
         }
 
