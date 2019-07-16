@@ -93,13 +93,14 @@ export class EvaluacionService {
 
   //Nos permite recoger información de las evaluaciones filtrada para la gráfica
   GetEvaluationsWithSectionsInfo(idProject: number, EvaluacionFiltrar: EvaluacionFilterInfo) {
+    var codigoIdioma = this._appComponent._storageDataService.codigoIdioma;
     let Token = this._appComponent.ComprobarUserYToken();
     let params = JSON.stringify(EvaluacionFiltrar);
     let headers = new Headers({
       'Content-Type': 'application/json',
       'Authorization': Token
     });
-    return this._http.post(this.url + 'evaluaciones/proyecto/' + idProject + '/sectionsinfo/', params, { headers: headers }).pipe(
+    return this._http.post(this.url + 'evaluaciones/proyecto/' + idProject + '/sectionsinfo/' + codigoIdioma, params, { headers: headers }).pipe(
       map(res => res.json()),
       // tap(r => console.log("OBSERVAAAAAAAAAAAAABLE",r)),
       catchError(this.errorHandler));
@@ -203,13 +204,13 @@ export class EvaluacionService {
     let headers = new Headers({
       'Authorization': Token
     });
-    return this._http.get(this.url + 'evaluaciones/proyecto/' + idEvaluacion + '/assessment/' + idAssessment +'/totalprogress', { headers: headers }).pipe(
+    return this._http.get(this.url + 'evaluaciones/proyecto/' + idEvaluacion + '/assessment/' + idAssessment + '/totalprogress', { headers: headers }).pipe(
       map((response: Response) => response.json()),
       catchError(this.errorHandler));
   }
 
   //Metodo encargado de borrar una evaluacion
-  EvaluationDelete(evaluationId: number){
+  EvaluationDelete(evaluationId: number) {
     let Token = this._appComponent.ComprobarUserYToken();
     let params = JSON.stringify(evaluationId);
     let headers = new Headers({
@@ -219,7 +220,7 @@ export class EvaluacionService {
     return this._http.post(this.url + 'evaluaciones/evaluacion/delete/', params, { headers: headers }).pipe(
       map(res => res),
       catchError(this.errorHandler));
-      
+
 
   }
 }
