@@ -152,12 +152,12 @@
                     </i>
 
                     <i *ngIf="nextSection != null" class="material-icons pointer b-f-buttons position-absolute next-sec-btn"
-                      (click)="redirectToNextSection()" title="Siguiente sección: {{nextSection.nombre}}" >
+                      (click)="redirectToNextSection()" title="{{ 'NEW_EVALUATION.BTN_NEXT_SECTION' | translate }}: {{nextSection.nombre}}" >
                       <img class="dots-icon" src="assets/round_navigate_next_double.png">
                     </i>
 
                     <i *ngIf="prevSection != null" class="material-icons pointer b-f-buttons position-absolute back-sec-btn" 
-                      (click)="redirectToPrevSection()" title="Sección anterior: {{prevSection.nombre}}">
+                      (click)="redirectToPrevSection()" title="{{ 'NEW_EVALUATION.BTN_PREVIOUS_SECTION' | translate }}: {{prevSection.nombre}}">
                       <img class="dots-icon" src="assets/round_navigate_before_double.png">
                     </i>
 

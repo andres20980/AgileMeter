@@ -163,7 +163,11 @@
 		"MODAL_NOTES_SECTION_TITLE": "Notas de la Sección",
 		"MODAL_NOTES_SECTION_PLACEHOLDER": "Inserte aquí el texto",
 		"MODALS_BTN_SAVE": "Guardar",
-		"MODALS_BTN_CANCEL": "Cancelar"
+		"MODALS_BTN_CANCEL": "Cancelar",
+		"BTN_PREVIOUS_MODULE": "Módulo anterior",
+		"BTN_NEXT_MODULE": "Siguiente módulo",
+		"BTN_NEXT_SECTION": "Siguiente sección",
+		"BTN_PREVIOUS_SECTION": "Sección anterior"
 	},
 	"BTN_FINALIZE_EVALUATION": {
 		"FINALIZE_EVALUATION": "Finalizar Evaluación",
