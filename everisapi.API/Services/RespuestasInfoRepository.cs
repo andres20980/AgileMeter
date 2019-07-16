@@ -167,7 +167,8 @@ namespace everisapi.API.Services
                 SectionConAsignacionesDto sectionConAsignacion = new SectionConAsignacionesDto();
                 sectionConAsignacion.EvaluacionId = idEvaluacion;
                 sectionConAsignacion.SectionId = s.section.Id;
-                sectionConAsignacion.Nombre = s.section.Nombre;
+                // sectionConAsignacion.Nombre = s.section.Nombre;
+                sectionConAsignacion.Nombre = _context.TraduccionesSections.Where(sec => sec.IdiomaId == codigoIdioma && s.section.Id == sec.SectionsId).Select(sec => sec.Traduccion).FirstOrDefault();
                 sectionConAsignacion.Notas = s.notas;
                 sectionConAsignacion.Peso = s.section.Peso;
                 sectionConAsignacion.PesoNivel1 = s.section.PesoNivel1;
@@ -190,12 +191,13 @@ namespace everisapi.API.Services
                     orderby a.Id
                     select new {asignacion = a, notas = y1.Notas};
 
-
+                List<TraduccionesPreguntasEntity> traducciones = _context.TraduccionesPreguntas.Where(y => y.IdiomaId == codigoIdioma).ToList();
                 foreach (var a in asignaciones)
                 {
                     AsignacionConPreguntaNivelDto asignacionConPreguntaNivel = new AsignacionConPreguntaNivelDto();
                     asignacionConPreguntaNivel.Id = a.asignacion.Id;
-                    asignacionConPreguntaNivel.Nombre = a.asignacion.Nombre;
+                    // asignacionConPreguntaNivel.Nombre = a.asignacion.Nombre;
+                    asignacionConPreguntaNivel.Nombre = _context.TraduccionesAsignaciones.Where(asig => asig.IdiomaId == codigoIdioma && asig.AsignacionesId == a.asignacion.Id).Select(asig => asig.Traduccion).FirstOrDefault();
                     asignacionConPreguntaNivel.Peso = a.asignacion.Peso;
                     asignacionConPreguntaNivel.Notas = a.notas;
                     asignacionConPreguntaNivel.NumNotas = (a.notas == null || a.notas.Trim() == "") ? 0: 1;
@@ -208,7 +210,7 @@ namespace everisapi.API.Services
                     
                      foreach (RespuestaEntity p in preguntas)
                      {
-                         var traduccion = _context.TraduccionesPreguntas.Where(t => t.PreguntaId == p.PreguntaId && t.IdiomaId == codigoIdioma).FirstOrDefault();
+                         //var traduccion = _context.TraduccionesPreguntas.Where(t => t.PreguntaId == p.PreguntaId && t.IdiomaId == codigoIdioma).FirstOrDefault();
                          PreguntaRespuestaNivelDto preguntaRespuestaNivel = new PreguntaRespuestaNivelDto();
                          preguntaRespuestaNivel.Id = p.PreguntaEntity.Id;
                          preguntaRespuestaNivel.Nivel = p.PreguntaEntity.Nivel;
@@ -216,7 +218,7 @@ namespace everisapi.API.Services
                          preguntaRespuestaNivel.NotasAdmin = p.NotasAdmin;
                          preguntaRespuestaNivel.Peso = p.PreguntaEntity.Peso;
                          //preguntaRespuestaNivel.Pregunta = p.PreguntaEntity.Pregunta;
-                         preguntaRespuestaNivel.Pregunta = traduccion.Traduccion;
+                         preguntaRespuestaNivel.Pregunta = traducciones.Where(tra => tra.PreguntaId == p.PreguntaId && tra.IdiomaId == codigoIdioma).Select(tra => tra.Traduccion).FirstOrDefault();
                          preguntaRespuestaNivel.Estado = p.Estado;
                          preguntaRespuestaNivel.Correcta = p.PreguntaEntity.Correcta;
 
