@@ -17,3 +17,4 @@ pipeline-stage-tags-metadata
 pipeline-stage-view
 ws-cleanup
 credentials
+sonar

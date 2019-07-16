@@ -1,0 +1,25 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<Tag plugin="workflow-support@3.3">
+  <node class="cps.n.StepAtomNode" plugin="workflow-cps@2.72">
+    <parentIds>
+      <string>54</string>
+    </parentIds>
+    <id>55</id>
+    <descriptorId>org.jenkinsci.plugins.workflow.steps.durable_task.ShellStep</descriptorId>
+  </node>
+  <actions>
+    <cps.a.ArgumentsActionImpl plugin="workflow-cps@2.72">
+      <arguments>
+        <entry>
+          <string>script</string>
+          <string>cd $WORKSPACE/ScrumMeter/ &amp;&amp; dotnet sonarscanner begin /k:&quot;AgileMeter&quot; /d:sonar.host.url=&quot;http://sonarqube:9000&quot; /d:sonar.login=&quot;c489797caa4b70e364a84bce15be1057c7e2b9aa&quot; /d:sonar.language=&quot;cs&quot;</string>
+        </entry>
+      </arguments>
+      <isUnmodifiedBySanitization>true</isUnmodifiedBySanitization>
+    </cps.a.ArgumentsActionImpl>
+    <wf.a.TimingAction plugin="workflow-api@2.35">
+      <startTime>1563288182760</startTime>
+    </wf.a.TimingAction>
+    <s.a.LogStorageAction/>
+  </actions>
+</Tag>
