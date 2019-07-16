@@ -1,0 +1,59 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    service: agilemeterfront
+  name: agilemeterfront
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: agilemeterfront
+    spec:
+      containers:
+      - image: amapifront.azurecr.io/agilemeterfront_dev:latest
+        name: agilemeterfront
+      imagePullSecrets:
+      - name: amapifront-regsecret
+        ports:
+        - containerPort: 4200
+        resources: {}
+      hostname: agilemeterfront
+      restartPolicy: Always
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: agilemeterfront
+  labels:
+    service: agilemeterfront
+spec:
+  ports:
+  - name: "4200"
+    protocol: "TCP"
+    port: 4200
+    targetPort: 4200
+  selector:
+    service: agilemeterfront
+status:
+  loadBalancer: {}
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: agilemeterfrontingress
+  annotations:
+    kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+  rules:
+  - host: agilemeterfront.7d07ee6a441f4fc2ac9d.westeurope.aksapp.io
+    http:
+      paths:
+      - backend:
+          serviceName: agilemeterfront
+          servicePort: 4200
+        path: /

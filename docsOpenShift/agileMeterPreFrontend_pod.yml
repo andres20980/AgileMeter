@@ -1,0 +1,123 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    openshift.io/deployment-config.latest-version: '26'
+    openshift.io/deployment-config.name: agile-meter-pre-frontend
+    openshift.io/deployment.name: agile-meter-pre-frontend-26
+    openshift.io/generated-by: OpenShiftNewApp
+    openshift.io/scc: restricted
+  creationTimestamp: '2019-06-07T07:54:13Z'
+  generateName: agile-meter-pre-frontend-26-
+  labels:
+    deployment: agile-meter-pre-frontend-26
+    deploymentconfig: agile-meter-pre-frontend
+    name: agile-meter-pre-frontend
+  name: agile-meter-pre-frontend-26-bl6lc
+  namespace: agile-meter-pre
+  ownerReferences:
+    - apiVersion: v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicationController
+      name: agile-meter-pre-frontend-26
+      uid: 4c86971f-88f9-11e9-9908-000d3a44d957
+  resourceVersion: '48979873'
+  selfLink: /api/v1/namespaces/agile-meter-pre/pods/agile-meter-pre-frontend-26-bl6lc
+  uid: 70b93b3b-88f9-11e9-815b-000d3a44daf8
+spec:
+  containers:
+    - env:
+        - name: BACKEND_HOST
+          value: agilemeter-pre-back.23.97.158.29.nip.io
+        - name: BACKEND_PORT
+          value: '80'
+        - name: BACKEND_PROTOCOL
+          value: http
+        - name: BACKEND_URL
+          value: 'https://agilemeter-pre-back.23.97.158.29.nip.io'
+      image: >-
+        docker-registry.default.svc:5000/agile-meter-pre/agile-meter-pre-frontend@sha256:a6d4b671b0869ce4131e3349841a0ddcf6fd65ece4fcc21a734b971ff950e00c
+      imagePullPolicy: IfNotPresent
+      name: agile-meter-pre-frontend
+      ports:
+        - containerPort: 4200
+          protocol: TCP
+      resources:
+        limits:
+          cpu: '1'
+          memory: 1Gi
+        requests:
+          cpu: 300m
+          memory: 512Mi
+      securityContext:
+        capabilities:
+          drop:
+            - KILL
+            - MKNOD
+            - SETGID
+            - SETUID
+        runAsUser: 1000220000
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: default-token-gdw7v
+          readOnly: true
+  dnsPolicy: ClusterFirst
+  imagePullSecrets:
+    - name: default-dockercfg-hrk26
+  nodeName: cadcluster-node-6
+  nodeSelector:
+    region: app
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext:
+    fsGroup: 1000220000
+    seLinuxOptions:
+      level: 's0:c15,c5'
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+    - effect: NoSchedule
+      key: node.kubernetes.io/memory-pressure
+      operator: Exists
+  volumes:
+    - name: default-token-gdw7v
+      secret:
+        defaultMode: 420
+        secretName: default-token-gdw7v
+status:
+  conditions:
+    - lastProbeTime: null
+      lastTransitionTime: '2019-06-07T07:54:13Z'
+      status: 'True'
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: '2019-06-07T07:56:07Z'
+      status: 'True'
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: '2019-06-07T07:54:13Z'
+      status: 'True'
+      type: PodScheduled
+  containerStatuses:
+    - containerID: >-
+        docker://d5119b9bd9dc1b528c1668aa4578660db2b438ca1e84475a859a362ff0f5aa58
+      image: >-
+        docker-registry.default.svc:5000/agile-meter-pre/agile-meter-pre-frontend@sha256:a6d4b671b0869ce4131e3349841a0ddcf6fd65ece4fcc21a734b971ff950e00c
+      imageID: >-
+        docker-pullable://docker-registry.default.svc:5000/agile-meter-pre/agile-meter-pre-frontend@sha256:a6d4b671b0869ce4131e3349841a0ddcf6fd65ece4fcc21a734b971ff950e00c
+      lastState: {}
+      name: agile-meter-pre-frontend
+      ready: true
+      restartCount: 0
+      state:
+        running:
+          startedAt: '2019-06-07T07:55:55Z'
+  hostIP: 10.2.0.10
+  phase: Running
+  podIP: 10.128.6.172
+  qosClass: Burstable
+  startTime: '2019-06-07T07:54:13Z'

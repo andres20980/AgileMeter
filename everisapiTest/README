@@ -10,4 +10,5 @@ Para la primera vez:
 
 Para generar el informe:
 1 - dotnet test everisapiTest.csproj /p:Language=cs --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="./TestResult/" /p:Exclude="[xunit*]*"
-2 - reportgenerator "-reports:./TestResult/coverage.opencover.xml" -targetdir:"./TestResults/Reports" -reporttypes:HTML;HTMLSummary
+2 - (Solo una clase) - dotnet test --filter DisplayName~LineaControllerTest everisapiTest.csproj /p:Language=cs --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput="./TestResult/" /p:Exclude="[xunit*]*"
+2 - reportgenerator "-reports:./TestResult/coverage.opencover.xml" -targetdir:"./TestResults/Reports" -reporttypes:HTML

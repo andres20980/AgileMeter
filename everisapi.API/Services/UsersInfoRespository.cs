@@ -280,9 +280,9 @@ namespace everisapi.API.Services
             AlterProject.Codigo = proyecto.Codigo;
             AlterProject.Fecha = System.DateTime.Now;
             AlterProject.UserNombre = proyecto.UserNombre;
-            AlterProject.Oficina = proyecto.Oficina;
+            AlterProject.Oficina = proyecto.Oficina.Trim();
             AlterProject.Unidad = proyecto.Unidad;
-            AlterProject.Proyecto = proyecto.Proyecto;
+            AlterProject.Proyecto = proyecto.Proyecto.Trim();
             AlterProject.OficinaEntity = _context.Oficina.Where(o => o.OficinaId == 1).FirstOrDefault();
             AlterProject.UnidadEntity = _context.Unidad.Where(u => u.UnidadId == 1).FirstOrDefault();
             AlterProject.LineaEntity = _context.Linea.Where(l => l.LineaId == 1).FirstOrDefault();
@@ -352,9 +352,9 @@ namespace everisapi.API.Services
             proyecto.UserNombre = equipo.UserNombre;
             proyecto.ProjectSize = equipo.ProjectSize;
             proyecto.TestProject = false;
-            proyecto.Oficina = equipo.Oficina;
+            proyecto.Oficina = equipo.Oficina.Trim();
             proyecto.Unidad = equipo.Unidad;
-            proyecto.Proyecto = equipo.Proyecto;
+            proyecto.Proyecto = equipo.Proyecto.Trim();
             proyecto.Codigo = equipo.Codigo;
 
             proyecto.OficinaEntity = _context.Oficina.Where(o => o.OficinaId == 1).FirstOrDefault();
