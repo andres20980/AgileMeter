@@ -172,7 +172,9 @@ namespace everisapi.API.Services
 
 
       AsignacionesInfo.Id = asignacionBD.Id;
-      AsignacionesInfo.Nombre = asignacionBD.Nombre;
+      //AsignacionesInfo.Nombre = asignacionBD.Nombre;
+      var a = _context.TraduccionesAsignaciones.Where(t => t.IdiomaId == codigoIdioma && t.AsignacionesId == asignacionBD.Id).FirstOrDefault();
+      AsignacionesInfo.Nombre = a.Traduccion;
       AsignacionesInfo.Preguntas = ChangePregunta(asignacionBD.PreguntasDeAsignacion, ListaRespuestas, codigoIdioma);
 
       var nota = _context.NotasAsignaciones.Where(r => r.EvaluacionId == idEval && r.AsignacionId == idAsig).FirstOrDefault();
