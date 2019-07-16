@@ -29,17 +29,14 @@ namespace everisapi.API.Controllers
 
     /*METODOS GET DE PREGUNTAS*/
     [HttpGet("{nombreUsuario}/fullproyectos")]
-    public IActionResult GetFullProyectos(string nombreUsuario)
+    public IActionResult GetFullProyectos()
     {
       try
       {
 
-        //Recogemos una lista de proyecto del usuario
-        var TodosLosProyectos = _usersInfoRepository.GetFullProyectos(nombreUsuario);
+        //Recogemos la lista de todos los proyectos que no son del tipo test
+        var FullResult = _usersInfoRepository.GetFullProyectos();
 
-        //Transformamos la lista anterior en una nueva con los datos que necesitamos
-        //Ya que otros son relevantes
-        var FullResult = Mapper.Map<IEnumerable<ProyectoDto>>(TodosLosProyectos);
         return Ok(FullResult);
       }
       catch (Exception ex)
@@ -107,11 +104,13 @@ namespace everisapi.API.Controllers
         }
 
         //Recogemos una lista de proyecto del usuario
-        var ProyectosDeUsuario = _usersInfoRepository.GetProyectosDeUsuario(nombreUsuario);
+        var ProyectosDeUsuarioResult = _usersInfoRepository.GetProyectosDeUsuario(nombreUsuario);
 
         //Transformamos la lista anterior en una nueva con los datos que necesitamos
         //Ya que otros son relevantes
-        var ProyectosDeUsuarioResult = Mapper.Map<IEnumerable<ProyectoDto>>(ProyectosDeUsuario);
+        
+        //var ProyectosDeUsuarioResult = Mapper.Map<IEnumerable<ProyectoDto>>(ProyectosDeUsuario);
+
         return Ok(ProyectosDeUsuarioResult);
       }
       catch (Exception ex)
@@ -143,10 +142,9 @@ namespace everisapi.API.Controllers
           return NotFound();
         }
 
-        //Creamos un proyecto nuevo con los  datos estrictamente necesarios
-        var ProyectoEncontrado = Mapper.Map<ProyectoDto>(proyectoDeUsuario);
+        //ProyectoEncontrado = Mapper.Map<ProyectoDto>(proyectoDeUsuario);
 
-        return Ok(ProyectoEncontrado);
+        return Ok(proyectoDeUsuario);
       }
       catch (Exception ex)
       {
@@ -186,26 +184,32 @@ namespace everisapi.API.Controllers
     [HttpPost("proyectos/add")]
     public IActionResult AddProyecto([FromBody] ProyectoCreateUpdateDto ProyectoAdd)
     {
+      try{
 
-      //Si los datos son validos los guardara
-      if (ProyectoAdd == null || _usersInfoRepository.ProyectoExiste(ProyectoAdd.Id) || !_usersInfoRepository.UserExiste(ProyectoAdd.UserNombre))
-      {
-        return BadRequest();
-      }
+          //Si los datos son validos los guardara
+          if (ProyectoAdd == null || _usersInfoRepository.ProyectoExiste(ProyectoAdd.Id) || !_usersInfoRepository.UserExiste(ProyectoAdd.UserNombre))
+          {
+            return BadRequest();
+          }
 
-      if (!ModelState.IsValid)
-      {
-        return BadRequest(ModelState);
-      }
+          if (!ModelState.IsValid)
+          {
+            return BadRequest(ModelState);
+          }
 
-      //Comprueba que se guardo bien y lo envia
-      if (_usersInfoRepository.AddProj(Mapper.Map<ProyectoEntity>(ProyectoAdd)))
-      {
-        return Ok("El proyecto fue creado.");
-      }
-      else
-      {
-        return BadRequest();
+          //Comprueba que se guardo bien y lo envia
+          if (_usersInfoRepository.AddProj(Mapper.Map<ProyectoEntity>(ProyectoAdd)))
+          {
+            return Ok("El proyecto fue creado.");
+          }
+          else
+          {
+            return BadRequest();
+          }
+      }catch (Exception ex)
+      {        
+        _logger.LogCritical($"Se recogio un error al insertar el proyecto: " + ex);
+        return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
       }
     }
 
