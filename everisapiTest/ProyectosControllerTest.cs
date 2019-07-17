@@ -496,5 +496,252 @@ namespace everisapiTest
             Assert.IsType<BadRequestObjectResult>(okResult);
         }
 
+        //Method: UpdateProyecto([FromBody] ProyectoCreateUpdateDto ProyectoUpdate)
+        [Fact]
+        public void UpdateProyecto_WhenCalled_ReturnOkResult()
+        {
+            //Arrange            
+            _controller = new ProyectosController(_logger, _userInfoRepository);
+
+            var proyecto = new everisapi.API.Models.ProyectoCreateUpdateDto {
+                Id = 1,
+                Nombre = "Proyecto prueba 1",
+                UserNombre = "fmoreno"
+            };
+
+            mockRepository.Setup(r => r.ProyectoExiste(It.IsAny<int>())).Returns(true);
+            mockRepository.Setup(r => r.UserExiste(It.IsAny<string>())).Returns(true);
+            mockRepository.Setup(r => r.AlterProj(It.IsAny<everisapi.API.Entities.ProyectoEntity>())).Returns(true);
+
+            //Act
+            var okResult = _controller.UpdateProyecto(proyecto);
+
+            //Assert
+            Assert.IsType<OkObjectResult>(okResult);
+        }
+
+        [Fact]
+        public void UpdateProyecto_WhenCalled_ReturnBadRequest()
+        {
+            //Arrange            
+            _controller = new ProyectosController(_logger, _userInfoRepository);
+
+            var proyecto = new everisapi.API.Models.ProyectoCreateUpdateDto {
+                Id = 1,
+                Nombre = "Proyecto prueba 1",
+                UserNombre = "fmoreno"
+            };
+
+            mockRepository.Setup(r => r.ProyectoExiste(It.IsAny<int>())).Returns(true);
+            mockRepository.Setup(r => r.UserExiste(It.IsAny<string>())).Returns(true);
+            mockRepository.Setup(r => r.AlterProj(It.IsAny<everisapi.API.Entities.ProyectoEntity>())).Returns(false);
+
+            //Act
+            var okResult = _controller.UpdateProyecto(proyecto);
+
+            //Assert
+            Assert.IsType<BadRequestResult>(okResult);
+        }
+
+        [Fact]
+        public void UpdateProyecto_WhenNotExitProject_ReturnsBadRequest()
+        {
+            //Arrange            
+            _controller = new ProyectosController(_logger, _userInfoRepository);
+
+            var proyecto = new everisapi.API.Models.ProyectoCreateUpdateDto {
+                Id = 1,
+                Nombre = "Proyecto prueba 1",
+                UserNombre = "fmoreno"
+            };
+
+            mockRepository.Setup(r => r.ProyectoExiste(It.IsAny<int>())).Returns(false);
+            mockRepository.Setup(r => r.UserExiste(It.IsAny<string>())).Returns(true);
+            mockRepository.Setup(r => r.AlterProj(It.IsAny<everisapi.API.Entities.ProyectoEntity>())).Returns(true);
+
+            //Act
+            var okResult =  _controller.UpdateProyecto(proyecto);
+
+            //Assert
+            Assert.IsType<BadRequestResult>(okResult);
+        }
+
+        [Fact]
+        public void UpdateProyecto_WhenNotExitUser_ReturnsBadRequest()
+        {
+            //Arrange            
+            _controller = new ProyectosController(_logger, _userInfoRepository);
+
+            var proyecto = new everisapi.API.Models.ProyectoCreateUpdateDto {
+                Id = 1,
+                Nombre = "Proyecto prueba 1",
+                UserNombre = "fmoreno"
+            };
+
+            mockRepository.Setup(r => r.ProyectoExiste(It.IsAny<int>())).Returns(true);
+            mockRepository.Setup(r => r.UserExiste(It.IsAny<string>())).Returns(false);
+            mockRepository.Setup(r => r.AlterProj(It.IsAny<everisapi.API.Entities.ProyectoEntity>())).Returns(true);
+
+            //Act
+            var okResult = _controller.UpdateProyecto(proyecto);
+
+            //Assert
+            Assert.IsType<BadRequestResult>(okResult);
+        }
+
+        [Fact]
+        public void UpdateProyecto_GivenInvalidModel_ReturnsBadRequest()
+        {
+            //Arrange
+            _controller = new ProyectosController(_logger, _userInfoRepository);
+            _controller.ModelState.AddModelError("error", "some error");
+
+            var proyecto = new everisapi.API.Models.ProyectoCreateUpdateDto {
+                Id = 1,
+                Nombre = "Proyecto prueba 1",
+                UserNombre = "fmoreno"
+            };
+
+            mockRepository.Setup(r => r.ProyectoExiste(It.IsAny<int>())).Returns(true);
+            mockRepository.Setup(r => r.UserExiste(It.IsAny<string>())).Returns(true);
+            mockRepository.Setup(r => r.AlterProj(It.IsAny<everisapi.API.Entities.ProyectoEntity>())).Returns(true);
+
+            //Act
+            var okResult = _controller.UpdateProyecto(proyecto);
+
+            //Assert
+            Assert.IsType<BadRequestObjectResult>(okResult);
+        }
+
+        //Method: DeleteProyecto([FromBody] ProyectoDto ProyectoDelete)
+        [Fact]
+        public void DeleteProyecto_WhenCalled_ReturnOkResult()
+        {
+            //Arrange            
+            _controller = new ProyectosController(_logger, _userInfoRepository);
+
+            var proyecto = new everisapi.API.Models.ProyectoDto {
+                Id = 1,
+                Nombre = "Proyecto prueba 1",
+                UserNombre = "fmoreno"
+            };
+
+            mockRepository.Setup(r => r.ProyectoExiste(It.IsAny<int>())).Returns(true);
+            mockRepository.Setup(r => r.DeleteProj(It.IsAny<everisapi.API.Entities.ProyectoEntity>())).Returns(true);
+
+            //Act
+            var okResult = _controller.DeleteProyecto(proyecto);
+
+            //Assert
+            Assert.IsType<OkObjectResult>(okResult);
+        }
+
+        [Fact]
+        public void DeleteProyecto_WhenCalled_ReturnBadRequest()
+        {
+            //Arrange            
+            _controller = new ProyectosController(_logger, _userInfoRepository);
+
+            var proyecto = new everisapi.API.Models.ProyectoDto {
+                Id = 1,
+                Nombre = "Proyecto prueba 1",
+                UserNombre = "fmoreno"
+            };
+
+            mockRepository.Setup(r => r.ProyectoExiste(It.IsAny<int>())).Returns(true);
+            mockRepository.Setup(r => r.DeleteProj(It.IsAny<everisapi.API.Entities.ProyectoEntity>())).Returns(false);
+
+            //Act
+            var okResult = _controller.DeleteProyecto(proyecto);
+
+            //Assert
+            Assert.IsType<BadRequestResult>(okResult);
+        }
+
+        [Fact]
+        public void DeleteProyecto_WhenNotExitProject_ReturnsBadRequest()
+        {
+            //Arrange            
+            _controller = new ProyectosController(_logger, _userInfoRepository);
+
+            var proyecto = new everisapi.API.Models.ProyectoDto {
+                Id = 1,
+                Nombre = "Proyecto prueba 1",
+                UserNombre = "fmoreno"
+            };
+
+            mockRepository.Setup(r => r.ProyectoExiste(It.IsAny<int>())).Returns(false);
+            mockRepository.Setup(r => r.DeleteProj(It.IsAny<everisapi.API.Entities.ProyectoEntity>())).Returns(true);
+
+            //Act
+            var okResult =  _controller.DeleteProyecto(proyecto);
+
+            //Assert
+            Assert.IsType<BadRequestResult>(okResult);
+        }
+
+        [Fact]
+        public void DeleteProyecto_GivenInvalidModel_ReturnsBadRequest()
+        {
+            //Arrange
+            _controller = new ProyectosController(_logger, _userInfoRepository);
+            _controller.ModelState.AddModelError("error", "some error");
+
+            var proyecto = new everisapi.API.Models.ProyectoDto {
+                Id = 1,
+                Nombre = "Proyecto prueba 1",
+                UserNombre = "fmoreno"
+            };
+
+            mockRepository.Setup(r => r.ProyectoExiste(It.IsAny<int>())).Returns(true);
+            mockRepository.Setup(r => r.DeleteProj(It.IsAny<everisapi.API.Entities.ProyectoEntity>())).Returns(true);
+
+            //Act
+            var okResult = _controller.DeleteProyecto(proyecto);
+
+            //Assert
+            Assert.IsType<BadRequestObjectResult>(okResult);
+        }          
+
+        //Method: AddTeam([FromBody] Equipos equipo)
+        [Fact]
+        public void AddTeam_WhenCalled_ReturnOkResult()
+        {
+            //Arrange            
+            _controller = new ProyectosController(_logger, _userInfoRepository);
+
+            var proyecto = new everisapi.API.Models.Equipos {
+                Id = 1,
+                Nombre = "Proyecto prueba 1",
+            };
+
+            mockRepository.Setup(r => r.AddTeam(proyecto)).Returns(true);
+
+            //Act
+            var okResult = _controller.AddTeam(proyecto);
+
+            //Assert
+            Assert.IsType<OkObjectResult>(okResult);
+        }
+
+        [Fact]
+        public void AddTeam_WhenCalled_ReturnStatusCode()
+        {
+            //Arrange            
+            _controller = new ProyectosController(_logger, _userInfoRepository);
+
+            var proyecto = new everisapi.API.Models.Equipos {
+                Id = 1,
+                Nombre = "Proyecto prueba 1",
+            };
+
+            mockRepository.Setup(r => r.AddTeam(proyecto)).Throws(new Exception());
+
+            //Act
+            var okResult = _controller.AddTeam(proyecto);
+
+            //Assert
+            Assert.IsType<ObjectResult>(okResult);
+        }
     }
 }

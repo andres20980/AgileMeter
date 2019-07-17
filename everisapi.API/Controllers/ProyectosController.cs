@@ -246,7 +246,7 @@ namespace everisapi.API.Controllers
       UserEntity u= _usersInfoRepository.GetUser(ProyectoDelete.UserNombre,false);
       ProyectoDelete.UserEntity= Mapper.Map<UsersDto>(u);
       //Si los datos son validos los guardara
-      if (ProyectoDelete == null || !_usersInfoRepository.ProyectoExiste(ProyectoDelete.Id))
+      if (!_usersInfoRepository.ProyectoExiste(ProyectoDelete.Id))
       {
         return BadRequest();
       }
