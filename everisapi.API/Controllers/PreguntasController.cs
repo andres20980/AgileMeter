@@ -124,7 +124,16 @@ namespace everisapi.API.Controllers
         }
 
         //Hacemos un mapeo de la pregunta que recogimos
-        var IngresarPregunta = Mapper.Map<Entities.PreguntaEntity>(PreguntaRecogida);
+        //var IngresarPregunta = Mapper.Map<Entities.PreguntaEntity>(PreguntaRecogida);
+        var IngresarPregunta = new Entities.PreguntaEntity 
+        {
+          Pregunta = PreguntaRecogida.Pregunta,
+          Correcta = PreguntaRecogida.Respuesta?"Si":"No",
+          AsignacionId = asignacionId,
+          Peso = 0, //Valor por defecto
+          EsHabilitante = true, //Valor por defecto
+          Nivel = 1 //Valor por defecto
+        };
 
         //La incluimos en la asignación
         _asignacionInfoRepository.IncluirPreguntaParaAsignacion(asignacionId, IngresarPregunta);
@@ -180,7 +189,9 @@ namespace everisapi.API.Controllers
           return NotFound();
         }
 
-        Mapper.Map(PreguntaCambiar, PreguntaEncontrada);
+        //Mapper.Map(PreguntaCambiar, PreguntaEncontrada);
+        //Problemas en el test unit
+        PreguntaEncontrada.Pregunta = PreguntaCambiar.Pregunta;
 
         if (!_asignacionInfoRepository.SaveChanges())
         {
