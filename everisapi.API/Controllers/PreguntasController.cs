@@ -124,16 +124,7 @@ namespace everisapi.API.Controllers
         }
 
         //Hacemos un mapeo de la pregunta que recogimos
-        //var IngresarPregunta = Mapper.Map<Entities.PreguntaEntity>(PreguntaRecogida);
-        var IngresarPregunta = new Entities.PreguntaEntity 
-        {
-          Pregunta = PreguntaRecogida.Pregunta,
-          Correcta = PreguntaRecogida.Respuesta?"Si":"No",
-          AsignacionId = asignacionId,
-          Peso = 0, //Valor por defecto
-          EsHabilitante = true, //Valor por defecto
-          Nivel = 1 //Valor por defecto
-        };
+        var IngresarPregunta = Mapper.Map<Entities.PreguntaEntity>(PreguntaRecogida);
 
         //La incluimos en la asignación
         _asignacionInfoRepository.IncluirPreguntaParaAsignacion(asignacionId, IngresarPregunta);
@@ -189,10 +180,7 @@ namespace everisapi.API.Controllers
           return NotFound();
         }
 
-        //Mapper.Map(PreguntaCambiar, PreguntaEncontrada);
-        //Problemas en el test unit
-        PreguntaEncontrada.Pregunta = PreguntaCambiar.Pregunta;
-
+        Mapper.Map(PreguntaCambiar, PreguntaEncontrada);
         if (!_asignacionInfoRepository.SaveChanges())
         {
           _logger.LogCritical("Ocurrio un error al guardar los cambios cuando intentamos actualizar una pregunta de asignación: " + asignacionId + ", id de pregunta: " + id);

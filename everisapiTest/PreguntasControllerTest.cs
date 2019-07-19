@@ -17,13 +17,11 @@ namespace everisapiTest
     {
         PreguntasController _controller;
         private readonly ILogger<PreguntasController> _logger;
-        private readonly IMapper _mapper;
 
         private readonly IAsignacionInfoRepository _asignacionInfoRepository;
 
         Mock<ILogger<PreguntasController>> mockLogger;
         Mock<IAsignacionInfoRepository> mockRepository;
-        Mock<IMapper> mockmapper;
 
         public PreguntasControllerTest()
         {
@@ -32,9 +30,6 @@ namespace everisapiTest
 
             mockRepository = new Mock<IAsignacionInfoRepository>();
             _asignacionInfoRepository = mockRepository.Object;
-
-            mockmapper = new Mock<IMapper>();
-            _mapper = mockmapper.Object;
 
             var autoMapperInstance = AutoMapperConfig.Instance;
         }
@@ -348,7 +343,8 @@ namespace everisapiTest
                 Pregunta = "Pregunta 1"
             };
 
-            var preguntaEncontrada = new everisapi.API.Entities.PreguntaEntity {
+            var preguntaEncontrada = new everisapi.API.Entities.PreguntaEntity 
+            {
                 Id = 1, 
                 AsignacionEntity = null,
                 AsignacionId = 1,
@@ -356,16 +352,13 @@ namespace everisapiTest
                 EsHabilitante = true,
                 Nivel = 1,
                 Peso = 0,
-                Pregunta = "Pregunta Modificada 2",
+                Pregunta = "Pregunta 1",
                 PreguntaHabilitante = null,
                 PreguntaHabilitanteId = null
             };
 
             mockRepository.Setup(r => r.AsignacionExiste(It.IsAny<int>())).Returns(true);
             mockRepository.Setup(r => r.GetPreguntaDeAsignacion(It.IsAny<int>(), It.IsAny<int>())).Returns(preguntaEncontrada);
-            mockmapper.Setup(r => 
-                r.Map(It.IsAny<everisapi.API.Models.PreguntaUpdateDto>(),It.IsAny<everisapi.API.Entities.PreguntaEntity>()))
-                .Returns(preguntaEncontrada);
             mockRepository.Setup(r => r.SaveChanges()).Returns(true);
 
             //Act
