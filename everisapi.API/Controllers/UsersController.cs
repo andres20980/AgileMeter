@@ -266,16 +266,16 @@ namespace everisapi.API.Controllers
         }
 
         //Introduciendo el nombre del usuario recogemos todos sus roles
-        [HttpGet("allroles")]
-        public IActionResult GetAllRoles()
+        [HttpGet("allroles/{codigoIdioma}")]
+        public IActionResult GetAllRoles(int codigoIdioma)
         {
 
             try
             {
-                var RolesEntities = _userInfoRepository.GetAllRoles();
+                // var RolesEntities = _userInfoRepository.GetAllRoles();
 
-                var results = Mapper.Map<IEnumerable<RoleDto>>(RolesEntities);
-
+                // var results = Mapper.Map<IEnumerable<RoleDto>>(RolesEntities);
+                var results = _userInfoRepository.GetAllRoles(codigoIdioma);
                 _logger.LogInformation("Mandamos correctamente todos los roles");
 
                 return Ok(results);
