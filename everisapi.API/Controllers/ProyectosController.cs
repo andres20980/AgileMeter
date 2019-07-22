@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace everisapi.API.Controllers
 {
   [Authorize]
-  [Route("api/users")]
+  [Route("api/proyectos")]
   public class ProyectosController : Controller
   {
     //Inyectamos un logger

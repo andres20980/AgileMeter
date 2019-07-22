@@ -13,7 +13,7 @@ namespace everisapi.API.Controllers
 {
 
   [Authorize]
-  [Route("api/asignaciones")]
+  [Route("api/preguntas")]
   public class PreguntasController : Controller
   {
     //Inyectamos un logger
