@@ -78,7 +78,7 @@ namespace everisapi.API.Services
     bool AddUserToProject(string UserNombre, int proyectoId);
 
     //Devuelve todos los roles disponibles
-    IEnumerable<RoleDto> GetAllRoles(int codigoIdioma);
+    IEnumerable<RoleEntity> GetAllRoles(int codigoIdioma);
 
     //Desasigna un proyecto d eun usuario
     bool DeleteUserProject(string UserNombre, int ProyectoId);

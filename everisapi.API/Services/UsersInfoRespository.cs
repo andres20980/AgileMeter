@@ -145,9 +145,9 @@ namespace everisapi.API.Services
         }
 
         //Devuelve todos los roles
-        public IEnumerable<RoleDto> GetAllRoles(int codigoIdioma)
+        public IEnumerable<RoleEntity> GetAllRoles(int codigoIdioma)
         {//Mapper.Map<IEnumerable<RoleDto>>
-          return Mapper.Map<IEnumerable<RoleDto>>(_context.Roles.Include(x => x.TraduccionesRoles).ToList());
+          return _context.Roles.Include(x => x.TraduccionesRoles).ToList();
 
 //           return _context.Roles.Include(t => t.TraduccionesRoles).Where(t => t.TraduccionesRoles.ElementAt(0).IdiomaId == codigoIdioma).OrderBy(t => t.Role).ToList();
             //return _context.Roles.Include(t => t.TraduccionesRoles).OrderBy(t => t.Role).ToList();
