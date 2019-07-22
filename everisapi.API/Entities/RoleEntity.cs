@@ -15,5 +15,8 @@ namespace everisapi.API.Entities
 
         [Required]
         public string Role { get; set; }
+
+        public ICollection<TraduccionesRolesEntity> TraduccionesRoles { get; set; }
+        = new List<TraduccionesRolesEntity>();
     }
 }

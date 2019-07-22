@@ -146,20 +146,24 @@ namespace everisapi.API.Services
 
         //Devuelve todos los roles
         public IEnumerable<RoleDto> GetAllRoles(int codigoIdioma)
-        {
-            //return _context.Roles.OrderBy(r => r.Role).ToList();
-            List<int> roles = _context.Roles.Select(x => x.Id).ToList();
-            List<TraduccionesRolesEntity> traduciones = _context.TraduccionesRoles.Where(t => roles.Contains(t.RoleId) && t.IdiomaId == codigoIdioma ).ToList();
-            List<RoleDto> TraducionesRoles = new List<RoleDto>();
-            foreach(var t in traduciones){
-               TraducionesRoles.Add(new RoleDto
-                {
-                    Id = t.RoleId,
-                    Role = t.Traduccion                    
-                });
-            }            
+        {//Mapper.Map<IEnumerable<RoleDto>>
+          return Mapper.Map<IEnumerable<RoleDto>>(_context.Roles.Include(x => x.TraduccionesRoles).ToList());
+
+//           return _context.Roles.Include(t => t.TraduccionesRoles).Where(t => t.TraduccionesRoles.ElementAt(0).IdiomaId == codigoIdioma).OrderBy(t => t.Role).ToList();
+            //return _context.Roles.Include(t => t.TraduccionesRoles).OrderBy(t => t.Role).ToList();
             
-            return TraducionesRoles;
+            // List<int> roles = _context.Roles.Select(x => x.Id).ToList();
+            // List<TraduccionesRolesEntity> traduciones = _context.TraduccionesRoles.Where(t => roles.Contains(t.RoleId) && t.IdiomaId == codigoIdioma ).ToList();
+            // List<RoleDto> TraducionesRoles = new List<RoleDto>();
+            // foreach(var t in traduciones){
+            //    TraducionesRoles.Add(new RoleDto
+            //     {
+            //         Id = t.RoleId,
+            //         Role = t.Traduccion                    
+            //     });
+            // }            
+            
+            // return TraducionesRoles;
         }
 
         //Devuelve una lista con todos los datos del proyecto por su id
