@@ -91,7 +91,7 @@
 						"{{server}}api"
 					],
 					"path": [
-						"asignaciones",
+						"preguntas",
 						"{{asignacionId}}",
 						"preguntas"
 					]
@@ -116,7 +116,7 @@
 						"{{server}}api"
 					],
 					"path": [
-						"asignaciones",
+						"preguntas",
 						"{{asignacionId}}",
 						"pregunta",
 						"{{preguntaId}}"
@@ -151,7 +151,7 @@
 						"{{server}}api"
 					],
 					"path": [
-						"asignaciones",
+						"preguntas",
 						"{{asignacionId}}",
 						"pregunta"
 					]
@@ -185,7 +185,7 @@
 						"{{server}}api"
 					],
 					"path": [
-						"asignaciones",
+						"preguntas",
 						"{{asignacionId}}",
 						"pregunta",
 						"{{preguntaId}}"
@@ -218,7 +218,7 @@
 						"{{server}}api"
 					],
 					"path": [
-						"users",
+						"proyectos",
 						"{{userName}}",
 						"fullproyectos"
 					]
@@ -271,7 +271,7 @@
 						"{{server}}api"
 					],
 					"path": [
-						"asignaciones",
+						"preguntas",
 						"{{asignacionId}}",
 						"pregunta",
 						"{{preguntaId}}"
