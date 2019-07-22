@@ -86,7 +86,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{server}}api/asignaciones/{{asignacionId}}/preguntas",
+					"raw": "{{server}}api/preguntas/{{asignacionId}}/preguntas",
 					"host": [
 						"{{server}}api"
 					],
@@ -111,7 +111,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{server}}api/asignaciones/{{asignacionId}}/pregunta/{{preguntaId}}",
+					"raw": "{{server}}api/preguntas/{{asignacionId}}/pregunta/{{preguntaId}}",
 					"host": [
 						"{{server}}api"
 					],
@@ -146,7 +146,7 @@
 					"raw": "{\r\n\tPregunta: \"PreguntaTestInserccion\",\r\n\tRespuesta: true\r\n}"
 				},
 				"url": {
-					"raw": "{{server}}api/asignaciones/{{asignacionId}}/pregunta",
+					"raw": "{{server}}api/preguntas/{{asignacionId}}/pregunta",
 					"host": [
 						"{{server}}api"
 					],
@@ -180,7 +180,7 @@
 					"raw": "{\r\n\tPregunta: \"PreguntaTestInserccion235_2\"\r\n}"
 				},
 				"url": {
-					"raw": "{{server}}api/asignaciones/{{asignacionId}}/pregunta/{{preguntaId}}",
+					"raw": "{{server}}api/preguntas/{{asignacionId}}/pregunta/{{preguntaId}}",
 					"host": [
 						"{{server}}api"
 					],
@@ -213,7 +213,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{server}}api/users/{{userName}}/fullproyectos",
+					"raw": "{{server}}api/proyectos/{{userName}}/fullproyectos",
 					"host": [
 						"{{server}}api"
 					],
@@ -266,7 +266,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{server}}api/asignaciones/{{asignacionId}}/pregunta/{{preguntaId}}",
+					"raw": "{{server}}api/preguntas/{{asignacionId}}/pregunta/{{preguntaId}}",
 					"host": [
 						"{{server}}api"
 					],
