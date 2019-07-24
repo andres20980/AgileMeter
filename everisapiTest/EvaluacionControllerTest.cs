@@ -867,6 +867,226 @@ namespace everisapiTest
             Assert.IsType<ObjectResult>(okResult);
         }
 
+        //Method: UpdateEvaluacion([FromBody] EvaluacionCreateUpdateDto EvaluacionRecogida)
+
+        [Fact]
+        public void UpdateEvaluacion_WhenCalled_ReturnsOkResult()
+        {
+            //Arrange            
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+
+            var evaluacion = new  everisapi.API.Models.EvaluacionCreateUpdateDto
+                                {
+                                    Id = 1, Fecha = new DateTime()
+                                };
+
+            mockRepository.Setup(r => r.ModificarEvaluacion(It.IsAny<everisapi.API.Entities.EvaluacionEntity>()));
+            mockRepository.Setup(r => r.SaveChanges()).Returns(true);
+
+            //Act
+            var okResult = _controller.UpdateEvaluacion(evaluacion);
+
+            //Assert
+            Assert.IsType<OkObjectResult>(okResult);
+        }
+
+        [Fact]
+        public void UpdateEvaluacion_WhenCalled_ReturnsStatusCodeResult()
+        {
+            //Arrange            
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+
+            var evaluacion = new  everisapi.API.Models.EvaluacionCreateUpdateDto
+                                {
+                                    Id = 1, Fecha = new DateTime()
+                                };
+
+            mockRepository.Setup(r => r.ModificarEvaluacion(It.IsAny<everisapi.API.Entities.EvaluacionEntity>()));
+            mockRepository.Setup(r => r.SaveChanges()).Returns(false);
+
+            //Act
+            var okResult = _controller.UpdateEvaluacion(evaluacion);
+
+            //Assert
+            Assert.IsType<ObjectResult>(okResult);
+        }
+
+        [Fact]
+        public void UpdateEvaluacion_WhenCalledWithNull_ReturnsBadRequestResult()
+        {
+            //Arrange            
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+
+            everisapi.API.Models.EvaluacionCreateUpdateDto evaluacion = null;
+
+            mockRepository.Setup(r => r.ModificarEvaluacion(It.IsAny<everisapi.API.Entities.EvaluacionEntity>()));
+            mockRepository.Setup(r => r.SaveChanges()).Returns(true);
+
+            //Act
+            var okResult = _controller.UpdateEvaluacion(evaluacion);
+
+            //Assert
+            Assert.IsType<BadRequestResult>(okResult);
+        }
+
+        [Fact]
+        public void UpdateEvaluacion_WhenCalledInvalidModel_ReturnsBadRequestResult()
+        {
+            //Arrange            
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller.ModelState.AddModelError("error", "some error");
+
+            var evaluacion = new  everisapi.API.Models.EvaluacionCreateUpdateDto
+                                {
+                                    Id = 1, Fecha = new DateTime()
+                                };
+
+            mockRepository.Setup(r => r.ModificarEvaluacion(It.IsAny<everisapi.API.Entities.EvaluacionEntity>()));
+            mockRepository.Setup(r => r.SaveChanges()).Returns(true);
+
+            //Act
+            var okResult = _controller.UpdateEvaluacion(evaluacion);
+
+            //Assert
+            Assert.IsType<BadRequestObjectResult>(okResult);
+        }
+
+        [Fact]
+        public void UpdateEvaluacion_WhenCalledThrowException_ReturnsStatusCodeResult()
+        {
+            //Arrange            
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+
+            var evaluacion = new  everisapi.API.Models.EvaluacionCreateUpdateDto
+                                {
+                                    Id = 1, Fecha = new DateTime()
+                                };
+
+            mockRepository.Setup(r => r.ModificarEvaluacion(It.IsAny<everisapi.API.Entities.EvaluacionEntity>()));
+            mockRepository.Setup(r => r.SaveChanges()).Throws(new Exception());
+
+            //Act
+            var okResult = _controller.UpdateEvaluacion(evaluacion);
+
+            //Assert
+            Assert.IsType<ObjectResult>(okResult);
+        }
+
+        //Method: EvaluationDelete([FromBody] int evaluationId)
+
+        [Fact]
+        public void EvaluationDelete_WhenCalled_ReturnsOkResult()
+        {
+            //Arrange            
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+
+            var evaluacion = new  everisapi.API.Models.EvaluacionInfoDto
+                                {
+                                    Id = 1, Fecha = new DateTime()
+                                };
+
+            mockRepository.Setup(r => r.GetEvaluationInfoFromIdEvaluation(It.IsAny<int>())).Returns(evaluacion);
+            mockRepository.Setup(r => r.EvaluationDelete(It.IsAny<int>())).Returns(true);
+
+            //Act
+            var okResult = _controller.EvaluationDelete(1);
+
+            //Assert
+            Assert.IsType<OkObjectResult>(okResult);
+        }
+
+        [Fact]
+        public void EvaluationDelete_WhenCalled_ReturnsBadRequestResult()
+        {
+            //Arrange            
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+
+            var evaluacion = new  everisapi.API.Models.EvaluacionInfoDto
+                                {
+                                    Id = 1, Fecha = new DateTime()
+                                };
+
+            mockRepository.Setup(r => r.GetEvaluationInfoFromIdEvaluation(It.IsAny<int>())).Returns(evaluacion);
+            mockRepository.Setup(r => r.EvaluationDelete(It.IsAny<int>())).Returns(false);
+
+            //Act
+            var okResult = _controller.EvaluationDelete(1);
+
+            //Assert
+            Assert.IsType<BadRequestResult>(okResult);
+        }
+
+        [Fact]
+        public void EvaluationDelete_WhenCalledWithNull_ReturnsBadRequestResult()
+        {
+            //Arrange            
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+
+            everisapi.API.Models.EvaluacionInfoDto evaluacion = null;
+
+            mockRepository.Setup(r => r.GetEvaluationInfoFromIdEvaluation(It.IsAny<int>())).Returns(evaluacion);
+            mockRepository.Setup(r => r.EvaluationDelete(It.IsAny<int>())).Returns(true);
+
+            //Act
+            var okResult = _controller.EvaluationDelete(1);
+
+            //Assert
+            Assert.IsType<BadRequestResult>(okResult);
+        }
+
+        [Fact]
+        public void EvaluationDelete_WhenCalledInvalidModel_ReturnsBadRequestResult()
+        {
+            //Arrange            
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller.ModelState.AddModelError("error", "some error");
+
+            var evaluacion = new  everisapi.API.Models.EvaluacionInfoDto
+                                {
+                                    Id = 1, Fecha = new DateTime()
+                                };
+
+            mockRepository.Setup(r => r.GetEvaluationInfoFromIdEvaluation(It.IsAny<int>())).Returns(evaluacion);
+            mockRepository.Setup(r => r.EvaluationDelete(It.IsAny<int>())).Returns(false);
+
+            //Act
+            var okResult = _controller.EvaluationDelete(1);
+
+            //Assert
+            Assert.IsType<BadRequestObjectResult>(okResult);
+        }
+
+        //Method: CalculateEvaluationProgress(int idEvaluacion,  int idAssessment)
+
+        [Fact]
+        public void CalculateEvaluationProgress_WhenCalled_ReturnsOkResult()
+        {
+            //Arrange            
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+
+            mockRepository.Setup(r => r.CalculateEvaluationProgress(It.IsAny<int>(), It.IsAny<int>())).Returns(It.IsAny<float>());
+
+            //Act
+            var okResult = _controller.CalculateEvaluationProgress(1,1);
+
+            //Assert
+            Assert.IsType<OkObjectResult>(okResult);
+        }
+
+        [Fact]
+        public void CalculateEvaluationProgress_WhenCalledThrowException_ReturnsStatusCodeResult()
+        {
+            //Arrange            
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+
+            mockRepository.Setup(r => r.CalculateEvaluationProgress(It.IsAny<int>(), It.IsAny<int>())).Throws(new Exception());
+
+            //Act
+            var okResult = _controller.CalculateEvaluationProgress(1,1);
+
+            //Assert
+            Assert.IsType<ObjectResult>(okResult);
+        }
         
     }
 }

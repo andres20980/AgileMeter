@@ -479,11 +479,12 @@ namespace everisapi.API.Controllers
         //Recoge si existe la evaluación si es asi la devuelve si no es así muestra un error
         float? progress = _evaluacionInfoRepository.CalculateEvaluationProgress(idEvaluacion, idAssessment);
         
-        if (progress == null)
-        {
-          _logger.LogInformation("La evaluación información con id " + idEvaluacion + " no pudo ser encontrado.");
-          return NotFound();
-        }
+        //Se comenta este código ya que es imposible que entre por aquí, el método devuelve un float  y no un float?
+        // if (progress == null)
+        // {
+        //   _logger.LogInformation("La evaluación información con id " + idEvaluacion + " no pudo ser encontrado.");
+        //   return NotFound();
+        // }
 
         return Ok(progress);
       }
