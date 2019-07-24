@@ -32,18 +32,18 @@ namespace everisapi.API.Controllers
 
         //Introduciendo la petición de la route devuelve todos los usuarios
         [Authorize]
-        [HttpGet("allusers")]
-        public IActionResult GetUsers()
+        [HttpGet("allusers/{codigoIdioma}")]
+        public IActionResult GetUsers(int codigoIdioma)
         {
             try
             {
-                var UsersEntities = _userInfoRepository.GetUsers();
+                var Users = _userInfoRepository.GetUsers(codigoIdioma);
 
-                var results = Mapper.Map<IEnumerable<UsersWithRolesDto>>(UsersEntities);
+                //var results = Mapper.Map<IEnumerable<UsersWithRolesDto>>(UsersEntities);
 
                 _logger.LogInformation("Mandamos correctamente todos los usuarios");
 
-                return Ok(results);
+                return Ok(Users);
             }
             catch (Exception ex)
             {

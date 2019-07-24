@@ -30,11 +30,12 @@ export class UserService {
 
   //Este metodo recoge todos los usuarios de la base de datos
   getUsers() {
+    var codigoIdioma = this._appComponent._storageDataService.codigoIdioma;
     let Token = this._appComponent.ComprobarUserYToken();
     let headers = new Headers({
       'Authorization': Token
     });
-    return this._http.get(this.url + 'users/AllUsers', { headers: headers }).pipe(
+    return this._http.get(this.url + 'users/AllUsers/'+codigoIdioma, { headers: headers }).pipe(
       map((response: Response) => response.json()),
       catchError(this.errorHandler));
   }

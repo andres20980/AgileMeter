@@ -10,7 +10,7 @@ namespace everisapi.API.Services
   public interface IUsersInfoRepository
   {
     //Devuelve todos los usuarios
-    IEnumerable<UserEntity> GetUsers();
+    IEnumerable<UsersWithRolesDto> GetUsers(int codigoIdioma);
 
     //Devuelve un usuario
     UserEntity GetUser(string userNombre, Boolean IncluirProyectos);
