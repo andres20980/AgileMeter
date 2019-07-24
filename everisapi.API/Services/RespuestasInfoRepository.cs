@@ -138,7 +138,8 @@ namespace everisapi.API.Services
                     NotasAdmin = resp.NotasAdmin,
                     Asignacion = "",
                     Section = resp.PreguntaEntity.AsignacionEntity.SectionEntity.Nombre,
-                    Pregunta = resp.PreguntaEntity.Pregunta,
+                    //Pregunta = resp.PreguntaEntity.Pregunta,
+                    Pregunta = "",
                     Peso = resp.PreguntaEntity.Peso,
                     Nivel = resp.PreguntaEntity.Nivel
                 });

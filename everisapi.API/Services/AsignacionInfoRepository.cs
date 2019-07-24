@@ -102,7 +102,8 @@ namespace everisapi.API.Services
                                 where res.EvaluacionId == idEval
                                 select new { res.Id, res.PreguntaId, res.Estado, res.EvaluacionId } into respuestas
                                 join p in _context.Preguntas on respuestas.PreguntaId equals p.Id
-                                select new { p.Id, p.AsignacionId, p.Pregunta, } into preguntas
+                                // select new { p.Id, p.AsignacionId, p.Pregunta, } into preguntas
+                                select new { p.Id, p.AsignacionId, } into preguntas
                                 join asig in _context.Asignaciones on preguntas.AsignacionId equals asig.Id
                                 //select new { asig.Id, asig.Nombre, asig.PreguntasDeAsignacion } into asignacionesEntity
                                 select new { asig.Id, asig.PreguntasDeAsignacion } into asignacionesEntity
@@ -140,7 +141,8 @@ namespace everisapi.API.Services
                                 where res.EvaluacionId == idEval
                                 select new { res.Id, res.PreguntaId, res.Estado, res.EvaluacionId } into respuestas
                                 join p in _context.Preguntas on respuestas.PreguntaId equals p.Id
-                                select new { p.Id, p.AsignacionId, p.Pregunta, } into preguntas
+                                // select new { p.Id, p.AsignacionId, p.Pregunta, } into preguntas
+                                select new { p.Id, p.AsignacionId,} into preguntas                                
                                 join asig in _context.Asignaciones on preguntas.AsignacionId equals asig.Id
                                 where asig.SectionId == idSection
                                 //select new { asig.Id, asig.Nombre, asig.PreguntasDeAsignacion } into asignacionesEntity
@@ -181,7 +183,8 @@ namespace everisapi.API.Services
                                 where res.EvaluacionId == idEval
                                 select new { res.Id, res.PreguntaId, res.Estado, res.EvaluacionId } into respuestas
                                 join p in _context.Preguntas on respuestas.PreguntaId equals p.Id
-                                select new { p.Id, p.AsignacionId, p.Pregunta, p.Correcta } into preguntas
+                                // select new { p.Id, p.AsignacionId, p.Pregunta, p.Correcta } into preguntas
+                                select new { p.Id, p.AsignacionId, p.Correcta } into preguntas
                                 join asig in _context.Asignaciones on preguntas.AsignacionId equals asig.Id
                                 where asig.Id == idAsig
                                 //select new { asig.Id, asig.Nombre, asig.PreguntasDeAsignacion } into asignacionesEntity
