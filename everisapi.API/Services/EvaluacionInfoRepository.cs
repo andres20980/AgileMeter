@@ -505,7 +505,8 @@ namespace everisapi.API.Services
                     {
                         AsignacionConPreguntaNivelDto asignacionConPreguntaNivel = new AsignacionConPreguntaNivelDto();
                         asignacionConPreguntaNivel.Id = a.Id;
-                        asignacionConPreguntaNivel.Nombre = a.Nombre;
+                        //asignacionConPreguntaNivel.Nombre = a.Nombre;
+                        asignacionConPreguntaNivel.Nombre = "";
                         asignacionConPreguntaNivel.Peso = a.Peso;
 
                         List<PreguntaRespuestaNivelDto> preguntasRespuestaNivel = new List<PreguntaRespuestaNivelDto>();
@@ -832,7 +833,8 @@ namespace everisapi.API.Services
                 {
                     AsignacionConPreguntaNivelDto asignacionConPreguntaNivel = new AsignacionConPreguntaNivelDto();
                     asignacionConPreguntaNivel.Id = a.Id;
-                    asignacionConPreguntaNivel.Nombre = a.Nombre;
+                    //asignacionConPreguntaNivel.Nombre = a.Nombre;
+                    asignacionConPreguntaNivel.Nombre = "";
                     asignacionConPreguntaNivel.Peso = a.Peso;
 
                     List<PreguntaRespuestaNivelDto> preguntasRespuestaNivel = new List<PreguntaRespuestaNivelDto>();

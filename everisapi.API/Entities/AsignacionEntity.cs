@@ -13,9 +13,9 @@ namespace everisapi.API.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Required]
-        [MaxLength(50)]
-        public string Nombre { get; set; }
+        // [Required]
+        // [MaxLength(50)]
+        // public string Nombre { get; set; }
 
         [Required]
         public ICollection<PreguntaEntity> PreguntasDeAsignacion { get; set; }
@@ -30,5 +30,5 @@ namespace everisapi.API.Entities
         //Mediante esta Foreign Key estamos relacionando SectionEntity con su Id
         [ForeignKey("SectionId")]
         public SectionEntity SectionEntity { get; set; }
-  }
+    }
 }
