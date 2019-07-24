@@ -11,9 +11,10 @@ using System;
 namespace everisapi.API.Migrations
 {
     [DbContext(typeof(AsignacionInfoContext))]
-    partial class AsignacionInfoContextModelSnapshot : ModelSnapshot
+    [Migration("20190724101658_RemoveColsForTranslate")]
+    partial class RemoveColsForTranslate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
