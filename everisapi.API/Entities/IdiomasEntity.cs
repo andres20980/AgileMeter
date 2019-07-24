@@ -11,9 +11,6 @@ namespace everisapi.API.Entities
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
-
-        [MaxLength(50)]
-        public string Idioma { get; set; }
+        public int ID { get; set; }       
     }
 }
