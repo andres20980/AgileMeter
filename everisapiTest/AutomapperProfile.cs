@@ -21,6 +21,7 @@ namespace everisapiTest
                 cfg.CreateMap<everisapi.API.Models.EvaluacionCreateUpdateDto, everisapi.API.Entities.EvaluacionEntity>();
                 cfg.CreateMap<everisapi.API.Models.PreguntaCreateDto, everisapi.API.Entities.PreguntaEntity>();
                 cfg.CreateMap<everisapi.API.Models.PreguntaUpdateDto, everisapi.API.Entities.PreguntaEntity>();
+                cfg.CreateMap<everisapi.API.Models.AsignacionCreateUpdateDto, everisapi.API.Entities.AsignacionEntity>();
             });
         }
     }
