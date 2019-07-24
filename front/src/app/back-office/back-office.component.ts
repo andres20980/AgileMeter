@@ -49,7 +49,7 @@ export class BackOfficeComponent implements OnInit {
       this._router.navigate(['/login']);
     }
     //console.log(this._appComponent._storageDataService.Role);
-    if (this._appComponent._storageDataService.Role != "Administrador") {
+    if (this._appComponent._storageDataService.Role != 2) {
       this._router.navigate(['/home']);
     }
   }

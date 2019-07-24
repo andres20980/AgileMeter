@@ -37,7 +37,7 @@ export class SortedTableComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @Input() dataInput: any;//Array<EvaluacionInfo>;
   dataSource: MatTableDataSource<Evaluacion>;
-  userRole: string;
+  userRole: number;
   expandedElement: Evaluacion;
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['fecha', 'userNombre', 'assessmentName', 'puntuacion', 'notas', 'informe'];
@@ -86,7 +86,7 @@ export class SortedTableComponent implements OnInit {
   }
 
   saveNotas(model: Evaluacion): void{
-    if(this.userRole == "Administrador" || this.userRole == "Evaluador"){
+    if(this.userRole == 2 || this.userRole == 3){ //2 es admin , 3 es evaluador
       this.prevEval._evaluacionService.updateEvaluacion(model).subscribe(
         res => {
           // console.log("success");

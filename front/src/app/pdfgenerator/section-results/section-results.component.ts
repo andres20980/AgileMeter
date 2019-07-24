@@ -17,7 +17,7 @@ export class SectionResultsComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
   @Input() lSectionConAsignacionesDto: any; //IEnumerable<SectionConAsignacionesDto>
-  userRole: string = this._appComponent._storageDataService.Role;
+  userRole: number = this._appComponent._storageDataService.Role;
   dataSource: MatTableDataSource<any>;
   expandedElement: RespuestaConNotas;
 
@@ -32,7 +32,7 @@ export class SectionResultsComponent implements OnInit {
     }
     saveNotas(model: RespuestaConNotas): void{
       let answer: Respuesta  = new Respuesta(model.id, model.estado, 0, 0, model.notas, model.notasAdmin,"");
-      if(this.userRole == "Administrador" || this.userRole == "Evaluador"){
+      if(this.userRole == 2 || this.userRole == 3){//2 es admin, 3 es evaluador
         this._respuestasService.AlterRespuesta(answer).subscribe();
       }
     }

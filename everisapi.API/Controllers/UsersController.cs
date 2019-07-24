@@ -275,7 +275,7 @@ namespace everisapi.API.Controllers
                 // var RolesEntities = _userInfoRepository.GetAllRoles();
 
                 // var results = Mapper.Map<IEnumerable<RoleDto>>(RolesEntities);
-                var results = _userInfoRepository.GetAllRoles(codigoIdioma);
+                var results = _userInfoRepository.GetAllRoles(codigoIdioma);                
                 _logger.LogInformation("Mandamos correctamente todos los roles");
 
                 return Ok(results);

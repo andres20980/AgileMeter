@@ -405,9 +405,9 @@ export class HomeComponent implements OnInit {
       res => {
         var permisosDeUsuario = res;
         //console.log("permisos de usuario en getUserRole", permisosDeUsuario);
-        this._appComponent._storageDataService.Role = permisosDeUsuario.role;
+        this._appComponent._storageDataService.Role = permisosDeUsuario.id;
         //Si no hay errores y son recogidos busca si tienes permisos de usuario
-          if (permisosDeUsuario.role == "Administrador") {
+          if (permisosDeUsuario.id == 2) {// 2 es admin
             //this._appComponent.RolDeUsuario = true;
             // console.log("this._appComponent.RolDeUsuario", this._appComponent.RolDeUsuario);
             // console.log("this._appComponent._storageDataService.RoleAdmin", this._appComponent._storageDataService.RoleAdmin);

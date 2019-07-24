@@ -35,7 +35,7 @@ export class PendingEvaluationTableComponent implements OnInit {
   @Input() ListaDeEvaluacionesPaginada: any;//Array<EvaluacionInfo>;
   public ErrorMessage: string = null;
   dataSource: MatTableDataSource<EvaluacionInfoWithProgress>;
-  userRole: string;
+  userRole: number;
   evaluationProgress : number;
   selectedEvaluacionInfoWithProgress;
   public ListaDeDatos: Array<SectionInfo> = [];

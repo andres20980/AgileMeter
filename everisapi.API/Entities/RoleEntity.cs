@@ -13,10 +13,7 @@ namespace everisapi.API.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Required]
-        public string Role { get; set; }
-
-        public ICollection<TraduccionesRolesEntity> TraduccionesRoles { get; set; }
-        = new List<TraduccionesRolesEntity>();
+        // [Required]
+        // public string Role { get; set; }
     }
 }

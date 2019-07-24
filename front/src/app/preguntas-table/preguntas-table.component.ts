@@ -41,7 +41,7 @@ export class PreguntasTableComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @Input() dataInput: any;//Array<EvaluacionInfo>;
   dataSource: MatTableDataSource<RespuestaConNotas>;
-  userRole: string;
+  userRole: number;
   expandedElement: RespuestaConNotas;
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['section', 'asignacion', 'pregunta', 'estado', 'notas'];
@@ -191,7 +191,7 @@ export class PreguntasTableComponent implements OnInit {
 
     saveNotas(model: RespuestaConNotas): void{
       let resp: Respuesta  = new Respuesta(model.id, model.estado, 0, 0, model.notas, model.notasAdmin,"");
-      if(this.userRole == "Administrador" || this.userRole == "Evaluador"){
+      if(this.userRole == 2 || this.userRole == 3){// 2 es admin, 3 es evaluador
         this._respuestasService.AlterRespuesta(resp).subscribe(
           res => {
           },

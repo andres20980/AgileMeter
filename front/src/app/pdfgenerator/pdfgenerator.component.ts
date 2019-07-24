@@ -76,7 +76,7 @@ export class PdfgeneratorComponent implements OnInit {
   public Mostrar = false;
   public ErrorMessage = null;
   public AdminOn: boolean = false;
-  public UserRole: string = "";
+  public UserRole: number = 0;
 
   //Datos de la barras
   public barChartType: string = 'bar';
@@ -607,7 +607,7 @@ export class PdfgeneratorComponent implements OnInit {
   }
 
   saveNotas(model: Evaluacion): void {
-    if (this.UserRole == "Administrador" || this.UserRole == "Evaluador") {
+    if (this.UserRole == 2 || this.UserRole == 3) {// 2 es admin , 3 es evaluador
       this.prevEval._evaluacionService.updateEvaluacion(model).subscribe(
         res => {
           // console.log("success");

@@ -9,8 +9,6 @@ namespace everisapi.API.Models
     {
         public int Id { get; set; }
 
-        public string Role { get; set; }
-
-        public ICollection<TraduccionesRoles> Traducciones {get;set;} = new List<TraduccionesRoles>();
+        public string Role { get; set; }        
     }
 }
