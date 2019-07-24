@@ -350,7 +350,8 @@ namespace everisapi.API.Services
                 {
                     // Asignacion = asig.AsignacionEntity.Nombre,
                     Asignacion = "",
-                    Section = asig.AsignacionEntity.SectionEntity.Nombre,
+                    // Section = asig.AsignacionEntity.SectionEntity.Nombre,
+                    Section = "",
                     Notas = asig.Notas
                 };
 

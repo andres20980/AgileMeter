@@ -48,7 +48,8 @@ namespace everisapi.API.Services
       SectionInfoDto sectionInfo = new SectionInfoDto
         {
           Id = section.Id,
-          Nombre = section.Nombre,
+          // Nombre = section.Nombre,
+          Nombre = "",
           Preguntas = Respuestas.Where(r => r.PreguntaEntity.AsignacionEntity.SectionEntity.Id == section.Id).Count(),
         };
       var notasSec = _context.NotasSections.Where(r => r.SectionId == section.Id && r.EvaluacionId == evaluationId).FirstOrDefault();
@@ -152,7 +153,8 @@ namespace everisapi.API.Services
         SectionInfoDto SectionAdd = new SectionInfoDto
         {
           Id = section.Id,
-          Nombre = section.Nombre,
+          // Nombre = section.Nombre,
+          Nombre = "",
           Preguntas = Respuestas.Where(r => r.PreguntaEntity.AsignacionEntity.SectionEntity.Id == section.Id).Count(),
         };
 
@@ -414,7 +416,8 @@ namespace everisapi.API.Services
     {
       var SectionAlter = _context.Sections.Where(s => s.Id == section.Id).FirstOrDefault();
 
-      SectionAlter.Nombre = section.Nombre;
+      //SectionAlter.Nombre = section.Nombre;
+      //Cuando se vayan a poder modificar las secciones hacer esta parte
 
       return SaveChanges();
     }

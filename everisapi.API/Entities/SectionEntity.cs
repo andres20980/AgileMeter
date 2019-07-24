@@ -14,9 +14,9 @@ namespace everisapi.API.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Required]
-        [MaxLength(120)]
-        public string Nombre { get; set; }
+        // [Required]
+        // [MaxLength(120)]
+        // public string Nombre { get; set; }
 
         [Required]
         public ICollection<AsignacionEntity> Asignaciones { get; set; }

@@ -492,7 +492,8 @@ namespace everisapi.API.Services
                     SectionConAsignacionesDto sectionConAsignacion = new SectionConAsignacionesDto();
                     sectionConAsignacion.EvaluacionId = evaluacion.Id;
                     sectionConAsignacion.SectionId = s.Id;
-                    sectionConAsignacion.Nombre = s.Nombre;
+                    // sectionConAsignacion.Nombre = s.Nombre;
+                    sectionConAsignacion.Nombre = "";
                     sectionConAsignacion.Peso = s.Peso;
                     sectionConAsignacion.PesoNivel1 = s.PesoNivel1;
                     sectionConAsignacion.PesoNivel2 = s.PesoNivel2;
@@ -820,7 +821,8 @@ namespace everisapi.API.Services
                 SectionConAsignacionesDto sectionConAsignacion = new SectionConAsignacionesDto();
                 sectionConAsignacion.EvaluacionId = idEvaluacion;
                 sectionConAsignacion.SectionId = s.Id;
-                sectionConAsignacion.Nombre = s.Nombre;
+                // sectionConAsignacion.Nombre = s.Nombre;
+                sectionConAsignacion.Nombre = "";
                 sectionConAsignacion.Peso = s.Peso;
                 sectionConAsignacion.PesoNivel1 = s.PesoNivel1;
                 sectionConAsignacion.PesoNivel2 = s.PesoNivel2;
@@ -1011,7 +1013,8 @@ namespace everisapi.API.Services
                 SectionInfoDto SectionAdd = new SectionInfoDto
                 {
                     Id = section.Id,
-                    Nombre = section.Nombre,
+                    // Nombre = section.Nombre,
+                    Nombre = "",
                     Preguntas = Respuestas.Where(r => r.PreguntaEntity.AsignacionEntity.SectionEntity.Id == section.Id).Count(),
                 };
 
