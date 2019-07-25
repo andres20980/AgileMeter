@@ -32,7 +32,7 @@ namespace everisapi.API.Services
     int GetRespuestasCorrectasFromSection(int idSection, int idEvaluacion);
 
     //Devuelve todas las asignaciones de un sector
-    IEnumerable<AsignacionEntity> GetAsignacionesFromSection(SectionEntity section);
+    IEnumerable<AsignacionSinPreguntasDto> GetAsignacionesFromSection(SectionEntity section, int codigoIdioma);
 
     //Metodo encargado de obtener las repsuestas dadas en la seccion y calcular el progreso actual de esta
     SectionInfoDto CalculateSectionInfoProgress(SectionInfoDto sectionInfo, int evaluationId);

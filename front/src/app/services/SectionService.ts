@@ -50,11 +50,12 @@ export class SectionService {
 
   //Este metodo recoge un usuario si existe mediante un nombre de usuario
   getAsignacionesSection(id) {
+    var codigoIdioma = this._appComponent._storageDataService.codigoIdioma;
     let Token = this._appComponent.ComprobarUserYToken();
     let headers = new Headers({
       'Authorization': Token
     });
-    return this._http.get(this.url + 'sections/' + id + '/asignaciones', { headers: headers }).pipe(
+    return this._http.get(this.url + 'sections/' + id + '/asignaciones/'+codigoIdioma, { headers: headers }).pipe(
       map((response: Response) => response.json()),
       catchError(this.errorHandler));
   }
