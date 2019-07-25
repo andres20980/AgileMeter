@@ -467,35 +467,7 @@ namespace everisapi.API.Controllers
             {
                 return BadRequest();
             }
-        }    
-
-    /*DELETE EVALUACIONES*/
-    //Metodo encargado de eliminar una evaluacion con Id determinado
-    [HttpPost("evaluacion/delete/")]
-     public IActionResult EvaluationDelete([FromBody] int evaluationId)
-    {
-      //Se obtiene la evaluacion a borrar desde BBDD en base a su Id
-      if (_evaluacionInfoRepository.GetEvaluationInfoFromIdEvaluation(evaluationId) == null)
-      {
-        return BadRequest();
-      }
-
-      if (!ModelState.IsValid)
-      {
-        return BadRequest(ModelState);
-      }
-      
-      //Se elimina la evaluacion
-      if (_evaluacionInfoRepository.EvaluationDelete(evaluationId))
-      {
-        return Ok("La evaluación fue eliminada correctamente.");
-      }
-      else
-      {
-        return BadRequest();
-      }
-    }
-
+        }
 
     //Introduciendo la id de la evaluación devuelve una evaluación especifica
     [HttpGet("proyecto/{idEvaluacion}/assessment/{idAssessment}/totalprogress")]
@@ -520,5 +492,6 @@ namespace everisapi.API.Controllers
         _logger.LogCritical("Se recogio un error al recibir la evaluación con toda su información con id " + idEvaluacion + ": " + ex);
         return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
       }
+    }
     }
 }
