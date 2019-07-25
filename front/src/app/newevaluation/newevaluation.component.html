@@ -264,7 +264,7 @@
                       </i>
 
                       <i *ngIf="nextSection != null" class="material-icons pointer b-f-buttons position-absolute next-sec-btn"
-                        (click)="redirectToNextSection()" title="Siguiente sección: {{nextSection.nombre}}" >
+                        (click)="redirectToNextSection()" title="{{ 'NEW_EVALUATION.BTN_NEXT_SECTION' | translate }}: {{nextSection.nombre}}" >
                         <img class="dots-icon" src="assets/round_navigate_next_double.png">
                       </i>
 
