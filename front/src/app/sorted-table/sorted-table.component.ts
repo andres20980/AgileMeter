@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { EvaluacionInfo } from 'app/Models/EvaluacionInfo';
-import {animate, state, style, transition, trigger} from '@angular/animations';
-import {PreviousevaluationComponent} from 'app/previousevaluation/previousevaluation.component'
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { PreviousevaluationComponent } from 'app/previousevaluation/previousevaluation.component'
 import { AppComponent } from 'app/app.component';
 import { Evaluacion } from 'app/Models/Evaluacion';
+import { EnumRol } from 'app/Models/EnumRol';
 
 // export interface Evaluacion {
 //   id: number,
@@ -24,10 +25,10 @@ import { Evaluacion } from 'app/Models/Evaluacion';
   styleUrls: ['./sorted-table.component.scss'],
   animations: [
     trigger('detailExpand', [
-    state('collapsed, void', style({ height: '0px', minHeight: '0', display: 'none' })),
-    state('expanded', style({ height: '*' })),
-    transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    transition('expanded <=> void', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)'))
+      state('collapsed, void', style({ height: '0px', minHeight: '0', display: 'none' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+      transition('expanded <=> void', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)'))
     ]),
   ],
 })
@@ -41,52 +42,53 @@ export class SortedTableComponent implements OnInit {
   expandedElement: Evaluacion;
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['fecha', 'userNombre', 'assessmentName', 'puntuacion', 'notas', 'informe'];
+  public rol: EnumRol = new EnumRol();
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource(this.dataInput);
-    this.dataSource.sort= this.sort;
+    this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.userRole = this._appComponent._storageDataService.Role;
     this.prevEval.TableFilteredData = this.dataSource.filteredData;
-    
-    this.dataSource.filterPredicate = function(data, filter: string): boolean {
+
+    this.dataSource.filterPredicate = function (data, filter: string): boolean {
       let date = new Date(data.fecha);
       //console.log ((date.getDate()<10?"0":"")+date.getDate()+"/"+(date.getMonth()<10?"0":"")+(date.getMonth()+1)+"/"+date.getFullYear());
-      return data.nombre.toLowerCase().includes(filter) 
-      ||  data.assessmentName.toLowerCase().includes(filter)
-      ||  data.userNombre.toLowerCase().includes(filter)
-      ||  data.puntuacion.toString().concat("%").includes(filter)
-      ||  (data.notasEvaluacion != null && data.notasEvaluacion.toLowerCase().includes(filter))
-      ||  (data.notasObjetivos != null && data.notasObjetivos.toLowerCase().includes(filter))
-      ||  ((date.getDate()<10?"0":"")+date.getDate()+"/"+(date.getMonth()<10?"0":"")+(date.getMonth()+1)+"/"+date.getFullYear()).includes(filter)
-      ;
-   };
+      return data.nombre.toLowerCase().includes(filter)
+        || data.assessmentName.toLowerCase().includes(filter)
+        || data.userNombre.toLowerCase().includes(filter)
+        || data.puntuacion.toString().concat("%").includes(filter)
+        || (data.notasEvaluacion != null && data.notasEvaluacion.toLowerCase().includes(filter))
+        || (data.notasObjetivos != null && data.notasObjetivos.toLowerCase().includes(filter))
+        || ((date.getDate() < 10 ? "0" : "") + date.getDate() + "/" + (date.getMonth() < 10 ? "0" : "") + (date.getMonth() + 1) + "/" + date.getFullYear()).includes(filter)
+        ;
+    };
   }
 
-  applyFilter(filterValue: string){
+  applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
     this.prevEval.TableFilteredData = this.dataSource.filteredData;
   }
 
 
-  public parseDate(value: string): string{
+  public parseDate(value: string): string {
     let date = new Date(value);
-    console.log(date.getDay()+"/"+date.getMonth()+"/"+date.getFullYear());
-    return date.getDay()+"/"+date.getMonth()+1+"/"+date.getFullYear();
+    console.log(date.getDay() + "/" + date.getMonth() + "/" + date.getFullYear());
+    return date.getDay() + "/" + date.getMonth() + 1 + "/" + date.getFullYear();
   }
-  
+
   constructor(
     public prevEval: PreviousevaluationComponent,
     private _appComponent: AppComponent
-    ){
-    }
-
-  SaveDataToPDF(evaluacion: EvaluacionInfo): void {
-    this.prevEval.SaveDataToPDF(evaluacion) ;
+  ) {
   }
 
-  saveNotas(model: Evaluacion): void{
-    if(this.userRole == 2 || this.userRole == 3){ //2 es admin , 3 es evaluador
+  SaveDataToPDF(evaluacion: EvaluacionInfo): void {
+    this.prevEval.SaveDataToPDF(evaluacion);
+  }
+
+  saveNotas(model: Evaluacion): void {
+    if (this.userRole == this.rol.Administrador || this.userRole == this.rol.Evaluador) {
       this.prevEval._evaluacionService.updateEvaluacion(model).subscribe(
         res => {
           // console.log("success");

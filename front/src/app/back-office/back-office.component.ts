@@ -4,6 +4,8 @@ import { AppComponent } from '../app.component';
 import { ProyectoService } from '../services/ProyectoService';
 import { EventEmitterService } from 'app/services/event-emitter.service';
 import { UserService } from 'app/services/UserService';
+import { EnumRol } from 'app/Models/EnumRol';
+
 
 @Component({
   selector: 'app-back-office',
@@ -18,7 +20,9 @@ export class BackOfficeComponent implements OnInit {
   public MensajeNotificacion: string = null;
   public MensajeNotificacionError: boolean = false;
   public ActiveSection: string = null;
+  public rol: EnumRol = new EnumRol();
   //public collapsedButtons : boolean = false;
+
 
   constructor(
     private _proyectoService: ProyectoService,
@@ -49,7 +53,7 @@ export class BackOfficeComponent implements OnInit {
       this._router.navigate(['/login']);
     }
     //console.log(this._appComponent._storageDataService.Role);
-    if (this._appComponent._storageDataService.Role != 2) {
+    if (this._appComponent._storageDataService.Role != this.rol.Administrador) {
       this._router.navigate(['/home']);
     }
   }

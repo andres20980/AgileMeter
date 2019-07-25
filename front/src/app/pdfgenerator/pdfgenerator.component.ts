@@ -32,6 +32,7 @@ import { Evaluacion } from 'app/Models/Evaluacion';
 import { Workbook } from 'exceljs';
 import * as fs from 'file-saver';
 import { TranslateService } from '@ngx-translate/core';
+import { EnumRol } from 'app/Models/EnumRol';
 
 export interface RespuestaConNotasTabla {
 
@@ -232,6 +233,7 @@ export class PdfgeneratorComponent implements OnInit {
   public primeraVez: boolean = true;
   public doc = null;
   public iteracionResultados: number = 0;
+  public rol: EnumRol = new EnumRol();
 
   constructor(
     private _proyectoService: ProyectoService,
@@ -615,7 +617,7 @@ export class PdfgeneratorComponent implements OnInit {
   }
 
   saveNotas(model: Evaluacion): void {
-    if (this.UserRole == 2 || this.UserRole == 3) {// 2 es admin , 3 es evaluador
+    if (this.UserRole == this.rol.Administrador || this.UserRole == this.rol.Evaluador) {
       this.prevEval._evaluacionService.updateEvaluacion(model).subscribe(
         res => {
           // console.log("success");
