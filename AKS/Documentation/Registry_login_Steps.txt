@@ -1,33 +1,36 @@
 
 
-amapifront.azurecr.io
-amapifront
-zZpndR1T1ZRoe=UwOg5aIiGSug9TS/CB
-
+everisapifront.azurecr.io
+username: amapifront
+password: Och0fEz/0mFFmhCRQWAgPihvqWm3PfS3
+password2: eGpSYoL4wyyAVFlWzTQScptT=WL7Kh2x
 
 amapiback.azurecr.io
-amapiback
-4Xyy2uQT5vNP2B2lWWmtHDeKdnnhWZc=
+user: amapiback
+password: mrzg3koI9/h4jdvrU4EBkvZLu0mANK5l
+password2: Vrt8Woy4MbR9G9PQS9Y8zV/YOkKxgpfE
+
+everisapidatabase.azurecr.io
+user: amapidatabase
+password: twN=NvwcKMXccHC1gYPBQphAR0l62RtY
+password2: qSqJtblwK/fO8aT46lxDQhVLt1qG9cYv
 
 
-amapidatabase.azurecr.io
-amapidatabase
-20WxT4a3CPeE99EqfZ6N6qOYBQPsg=dr
 
 
 ##Azure Registry - alberto.muriel.devops@hotmail.com
 
-docker login amapifront.azurecr.io -u amapifront -p zZpndR1T1ZRoe=UwOg5aIiGSug9TS/CB
+docker login amapifront.azurecr.io -u amapifront -p Och0fEz/0mFFmhCRQWAgPihvqWm3PfS3
 docker tag amurielbeveris/agilemeterfront amapifront.azurecr.io/samples/agilemeterfront
 docker push amapifront.azurecr.io/samples/agilemeterfront
 
 
-docker login amapiback.azurecr.io -u amapiback -p 4Xyy2uQT5vNP2B2lWWmtHDeKdnnhWZc=
+docker login amapiback.azurecr.io -u amapiback -p mrzg3koI9/h4jdvrU4EBkvZLu0mANK5l
 docker tag amurielbeveris/agilemeter amapiback.azurecr.io/samples/agilemeter
 docker push amapiback.azurecr.io/samples/agilemeter
 
 
-docker login amapidatabase.azurecr.io -u amapidatabase -p 20WxT4a3CPeE99EqfZ6N6qOYBQPsg=dr
+docker login amapidatabase.azurecr.io -u amapidatabase -p twN=NvwcKMXccHC1gYPBQphAR0l62RtY
 docker tag amurielbeveris/agiledatabase amapidatabase.azurecr.io/samples/agiledatabase
 docker push amapidatabase.azurecr.io/samples/agiledatabase
 
@@ -38,11 +41,11 @@ az login -u alberto.muriel.devops@hotmail.com -p Passw0rd10!
 
 
 ##Only login on first run
-az acr login --name amapifront -u amapifront -p zZpndR1T1ZRoe=UwOg5aIiGSug9TS/CB
+az acr login --name amapifront -u amapifront -p Och0fEz/0mFFmhCRQWAgPihvqWm3PfS3
 az acr repository list --name amapifront --output table
-az acr login --name amapiback -u amapiback -p 4Xyy2uQT5vNP2B2lWWmtHDeKdnnhWZc=
+az acr login --name amapiback -u amapiback -p mrzg3koI9/h4jdvrU4EBkvZLu0mANK5l
 az acr repository list --name amapiback --output table
-az acr login --name amapidatabase -u amapidatabase -p 20WxT4a3CPeE99EqfZ6N6qOYBQPsg=dr
+az acr login --name amapidatabase -u amapidatabase -p twN=NvwcKMXccHC1gYPBQphAR0l62RtY
 az acr repository list --name amapidatabase --output table
 
 
@@ -50,7 +53,8 @@ az acr repository list --name amapifront --output table
 az acr repository list --name amapiback --output table
 az acr repository list --name amapidatabase --output table
 
-
+set http_proxy=
+set https_proxy=
 az login -u alberto.muriel.devops@hotmail.com -p Passw0rd10!
 
 

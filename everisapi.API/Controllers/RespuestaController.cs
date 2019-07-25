@@ -137,7 +137,7 @@ namespace everisapi.API.Controllers
 
     //Cambiamos el estado de la pregunta que queremos cambiar
     [HttpPut("update")]
-    public IActionResult AlterRespuesta([FromBody] RespuestaDto RespuestaUpdate)
+    public IActionResult AlterRespuesta([FromBody] RespuestaConUserDto RespuestaUpdate)
     {
       try
       {
@@ -235,25 +235,34 @@ namespace everisapi.API.Controllers
     public IActionResult AddRespuesta([FromBody] RespuestaDto RespuestaAdd)
     {
 
-      //Si los datos son validos los guardara
-      if (RespuestaAdd == null || _respuestasInfoRepository.ExiteRespuesta(RespuestaAdd.Id))
-      {
-        return BadRequest();
-      }
+      try{
 
-      if (!ModelState.IsValid)
-      {
-        return BadRequest(ModelState);
-      }
+        //Si los datos son validos los guardara
+        if (RespuestaAdd == null || _respuestasInfoRepository.ExiteRespuesta(RespuestaAdd.Id))
+        {
+          return BadRequest();
+        }
 
-      //Comprueba que se guardo bien y lo envia
-      if (_respuestasInfoRepository.AddRespuesta(Mapper.Map<RespuestaEntity>(RespuestaAdd)))
-      {
-        return Ok("La respuesta fue creada.");
+        if (!ModelState.IsValid)
+        {
+          return BadRequest(ModelState);
+        }
+
+        //Comprueba que se guardo bien y lo envia
+        if (_respuestasInfoRepository.AddRespuesta(RespuestaAdd))
+        {
+          return Ok("La respuesta fue creada.");
+        }
+        else
+        {
+          return BadRequest();
+        }
+
       }
-      else
+      catch (Exception ex)
       {
-        return BadRequest();
+        _logger.LogCritical("Se recogio un error al añadir la respuesta : " + ex);
+        return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
       }
     }
 
@@ -261,25 +270,32 @@ namespace everisapi.API.Controllers
     [HttpDelete("delete")]
     public IActionResult DeleteRespuesta([FromBody] RespuestaDto RespuestaDelete)
     {
-      //Si los datos son validos los guardara
-      if (RespuestaDelete == null || !_respuestasInfoRepository.ExiteRespuesta(RespuestaDelete.Id))
-      {
-        return NotFound();
-      }
+      try{
+        //Si los datos son validos los guardara
+        if (RespuestaDelete == null || !_respuestasInfoRepository.ExiteRespuesta(RespuestaDelete.Id))
+        {
+          return NotFound();
+        }
 
-      if (!ModelState.IsValid)
-      {
-        return BadRequest(ModelState);
-      }
+        if (!ModelState.IsValid)
+        {
+          return BadRequest(ModelState);
+        }
 
-      //Comprueba que se guardo bien y lo envia
-      if (_respuestasInfoRepository.DeleteRespuesta(Mapper.Map<RespuestaEntity>(RespuestaDelete)))
-      {
-        return Ok("La respuesta fue eliminada correctamente.");
+        //Comprueba que se guardo bien y lo envia
+        if (_respuestasInfoRepository.DeleteRespuesta(RespuestaDelete))
+        {
+          return Ok("La respuesta fue eliminada correctamente.");
+        }
+        else
+        {
+          return BadRequest();
+        }
       }
-      else
+      catch (Exception ex)
       {
-        return BadRequest();
+        _logger.LogCritical("Se recogio un error al elimianr una respuesta : " + ex);
+        return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
       }
     }
 

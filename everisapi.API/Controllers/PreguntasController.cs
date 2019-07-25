@@ -13,7 +13,7 @@ namespace everisapi.API.Controllers
 {
 
   [Authorize]
-  [Route("api/asignaciones")]
+  [Route("api/preguntas")]
   public class PreguntasController : Controller
   {
     //Inyectamos un logger
@@ -181,7 +181,6 @@ namespace everisapi.API.Controllers
         }
 
         Mapper.Map(PreguntaCambiar, PreguntaEncontrada);
-
         if (!_asignacionInfoRepository.SaveChanges())
         {
           _logger.LogCritical("Ocurrio un error al guardar los cambios cuando intentamos actualizar una pregunta de asignación: " + asignacionId + ", id de pregunta: " + id);

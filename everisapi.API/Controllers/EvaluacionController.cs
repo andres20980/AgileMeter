@@ -467,31 +467,58 @@ namespace everisapi.API.Controllers
             {
                 return BadRequest();
             }
-        }
+        }    
+
+    /*DELETE EVALUACIONES*/
+    //Metodo encargado de eliminar una evaluacion con Id determinado
+    [HttpPost("evaluacion/delete/")]
+     public IActionResult EvaluationDelete([FromBody] int evaluationId)
+    {
+      //Se obtiene la evaluacion a borrar desde BBDD en base a su Id
+      if (_evaluacionInfoRepository.GetEvaluationInfoFromIdEvaluation(evaluationId) == null)
+      {
+        return BadRequest();
+      }
+
+      if (!ModelState.IsValid)
+      {
+        return BadRequest(ModelState);
+      }
+      
+      //Se elimina la evaluacion
+      if (_evaluacionInfoRepository.EvaluationDelete(evaluationId))
+      {
+        return Ok("La evaluación fue eliminada correctamente.");
+      }
+      else
+      {
+        return BadRequest();
+      }
+    }
 
 
-        //Introduciendo la id de la evaluación devuelve una evaluación especifica
-        [HttpGet("proyecto/{idEvaluacion}/assessment/{idAssessment}/totalprogress")]
-        public IActionResult CalculateEvaluationProgress(int idEvaluacion, int idAssessment)
-        {
-            try
-            {
-                //Recoge si existe la evaluación si es asi la devuelve si no es así muestra un error
-                float? progress = _evaluacionInfoRepository.CalculateEvaluationProgress(idEvaluacion, idAssessment);
+    //Introduciendo la id de la evaluación devuelve una evaluación especifica
+    [HttpGet("proyecto/{idEvaluacion}/assessment/{idAssessment}/totalprogress")]
+    public IActionResult CalculateEvaluationProgress(int idEvaluacion,  int idAssessment)
+    {
+      try
+      {
+        //Recoge si existe la evaluación si es asi la devuelve si no es así muestra un error
+        float? progress = _evaluacionInfoRepository.CalculateEvaluationProgress(idEvaluacion, idAssessment);
+        
+        //Se comenta este código ya que es imposible que entre por aquí, el método devuelve un float  y no un float?
+        // if (progress == null)
+        // {
+        //   _logger.LogInformation("La evaluación información con id " + idEvaluacion + " no pudo ser encontrado.");
+        //   return NotFound();
+        // }
 
-                if (progress == null)
-                {
-                    _logger.LogInformation("La evaluación información con id " + idEvaluacion + " no pudo ser encontrado.");
-                    return NotFound();
-                }
-
-                return Ok(progress);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogCritical("Se recogio un error al recibir la evaluación con toda su información con id " + idEvaluacion + ": " + ex);
-                return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
-            }
-        }
+        return Ok(progress);
+      }
+      catch (Exception ex)
+      {
+        _logger.LogCritical("Se recogio un error al recibir la evaluación con toda su información con id " + idEvaluacion + ": " + ex);
+        return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
+      }
     }
 }

@@ -19,7 +19,7 @@ namespace everisapi.API.Services
     IEnumerable<ProyectoDto> GetProyectosDeUsuario(string userNombre);
 
     //Devuelve un proyecto de un usuario
-    ProyectoEntity GetOneProyecto(string userNombre, int proyectoId);
+    ProyectoDto GetOneProyecto(string userNombre, int proyectoId);
 
     //Devuelve si un usuario existe o no
     bool UserExiste(string userNombre);
@@ -34,7 +34,7 @@ namespace everisapi.API.Services
     RoleEntity GetRolesUsuario(UserEntity usuario);
 
     //Devuelve todos los proyectos de todos los usuarios
-    IEnumerable<ProyectoEntity> GetFullProyectos(string userNombre);
+    IEnumerable<ProyectoDto> GetFullProyectos();
 
     //Devuelve un listado con todos los proyectos dados de alta en el sistema que no sean de pruebas de usuarios
     IEnumerable<ProyectoEntity> GetAllNotTestProjects();

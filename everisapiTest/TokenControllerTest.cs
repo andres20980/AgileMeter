@@ -49,6 +49,24 @@ namespace everisapiTest
         }
 
         [Fact]
+        public void CreateToken_WhenCalledNombreNull_ReturnBadRequest()
+        {
+            //Arrange            
+            _controller = new TokenController(_configuration, _usersInfoRepository);
+
+            var usuario = new everisapi.API.Models.UsersSinProyectosDto 
+                    {Nombre = null
+                    , Password ="clave"
+                    , NombreCompleto = "Francisco Javier Moreno Vicente" };
+
+            //Act
+            var okResult = _controller.CreateToken(UserAuth: usuario);
+
+            //Assert
+            Assert.IsType<UnauthorizedResult>(okResult);
+        }
+
+        [Fact]
         public void CreateToken_GivenInvalidModel_ReturnsBadRequest()
         {
             //Arrange            
@@ -65,6 +83,76 @@ namespace everisapiTest
 
             //Assert
             Assert.IsType<BadRequestObjectResult>(okResult);
+        }
+
+        [Fact]
+        public void CreateToken_WhenCalled_WithUser_Unauthorized_ReturnsUnauthorizedResult()
+        {
+            //Arrange            
+            _controller = new TokenController(_configuration, _usersInfoRepository);
+
+            var usuario = new everisapi.API.Models.UsersSinProyectosDto 
+            {
+                Nombre = "fmorenov"
+                , Password ="clave"
+                , NombreCompleto = "Francisco Javier Moreno Vicente"
+            };
+
+            
+
+            //Act
+            var okResult = _controller.CreateToken(UserAuth: usuario);
+
+            //Assert
+            Assert.IsType<UnauthorizedResult>(okResult);
+        }
+
+        [Fact]
+        public void CreateToken_WhenCalled_WithUser_Authorized_ReturnsOkObjectResult()
+        {
+            //Arrange            
+            _controller = new TokenController(_configuration, _usersInfoRepository);
+
+            var usuario = new everisapi.API.Models.UsersSinProyectosDto 
+            {
+                Nombre = "fmorenov"
+                , Password ="clave"
+                , NombreCompleto = "Francisco Javier Moreno Vicente"
+            };
+
+            mockRepository.Setup(r => r.UserAuth(usuario)).Returns(true);
+            mockRepository.Setup(r => r.getNombreCompleto(usuario.Nombre)).Returns("Francisco Javier Moreno Vicente");
+            mockConfiguracion.SetupGet(c => c["JWT:key"]).Returns(",.eVeRiSaGiLeMeTeRSuPeRSeCReTKEY6754986.,");
+            
+            //Act
+            var okResult = _controller.CreateToken(UserAuth: usuario);
+
+            //Assert
+            Assert.IsType<OkObjectResult>(okResult);
+        }
+
+        [Fact]
+        public void isNewUser_WhenCalled_WithUser_Authorized_ReturnsOkObjectResult()
+        {
+            //Arrange            
+            _controller = new TokenController(_configuration, _usersInfoRepository);
+
+            var usuario = new everisapi.API.Models.UsersSinProyectosDto 
+            {
+                Nombre = "fmorenov"
+                , Password ="clave"
+                , NombreCompleto = "Francisco Javier Moreno Vicente"
+            };
+
+            mockRepository.Setup(r => r.UserAuth(usuario)).Returns(true);
+            mockRepository.Setup(r => r.getNombreCompleto(usuario.Nombre)).Returns("Francisco Javier Moreno Vicente");
+            mockConfiguracion.SetupGet(c => c["JWT:key"]).Returns(",.eVeRiSaGiLeMeTeRSuPeRSeCReTKEY6754986.,");
+            
+            //Act
+            var okResult = _controller.CreateToken(UserAuth: usuario);
+
+            //Assert
+            Assert.IsType<OkObjectResult>(okResult);
         }
     } 
 }

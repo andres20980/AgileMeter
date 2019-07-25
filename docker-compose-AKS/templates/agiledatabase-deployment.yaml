@@ -1,0 +1,38 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    service: agiledatabase
+  name: agiledatabase
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        service: agiledatabase
+    spec:
+      containers:
+      - env:
+        - name: MYSQL_DATABASE
+          value: agilemeter
+        - name: MYSQL_USER
+          value: root
+        image: amapidatabase.azurecr.io/agiledatabase_dev:latest
+        name: agiledatabase
+      imagePullSecrets:
+      - name: amapidatabase-regsecret
+        ports:
+        - containerPort: 3306
+        resources: {}
+        volumeMounts:
+        - mountPath: /var/lib/mysql
+          name: mysql
+      hostname: agiledatabase
+      restartPolicy: Always
+      volumes:
+      - name: mysql
+        persistentVolumeClaim:
+          claimName: mysql
+status: {}

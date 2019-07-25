@@ -111,7 +111,7 @@ export class SectionService {
     let headers = new Headers({
       'Authorization': Token
     });
-    return this._http.get(this.url + 'asignaciones/' + id + '/preguntas', { headers: headers }).pipe(
+    return this._http.get(this.url + 'preguntas/' + id + '/preguntas', { headers: headers }).pipe(
       map((response: Response) => response.json()),
       catchError(this.errorHandler));
   }
