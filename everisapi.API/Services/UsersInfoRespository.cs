@@ -156,9 +156,10 @@ namespace everisapi.API.Services
         {
             var traducciones = _context.TraduccionesRoles.Where(x => x.IdiomaId == codigoIdioma).ToList();
             List<RoleDto> rolesTraducidos = new List<RoleDto>();
+
             foreach (var rol in traducciones)
             {
-                RoleDto rolDto = null;
+                RoleDto rolDto = new RoleDto();
                 rolDto.Id = rol.RoleId;
                 rolDto.Role = rol.Traduccion;
                 rolesTraducidos.Add(rolDto);
