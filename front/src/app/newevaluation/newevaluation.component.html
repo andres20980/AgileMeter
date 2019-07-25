@@ -10,7 +10,7 @@
   </div> -->
 
   <div class="container" [ngClass]="('' + (Deshabilitar ? 'disabled' : ''))" *ngIf="InfoAsignacion.preguntas !=  null">
-      <app-breadcrumb></app-breadcrumb>
+    <app-breadcrumb></app-breadcrumb>
     <!-- <div class="row m-0" hidden>
       <div class="col-xs-12 col-sm-2 col-md-1 offset-md-2 p-0">
         <div class="main-button rounded-back-btn position-relative" title="Volver a secciones" (click)="NextPreviousButton(0)">
@@ -84,28 +84,34 @@
     <!-- End of Section title  -->
 
     <div class="ng-card-box p-5 br-2 mat-elevation-z5">
-        <div class="row">
-            <div class="col section-title">
-              <h3>{{SectionSelected.nombre}}</h3>
-              <button class="transparente" (click)="AbrirModalSec(notasSec)" title="{{ 'NEW_EVALUATION.BTNS_ADD_NOTES' | translate }}">
-                  <img class="comment" *ngIf="SectionSelected.notas != null" src="assets/comment_filled.png" title="{{ 'NEW_EVALUATION.ICONS_NOTES_FILLED' | translate }}" />
-                  <img class="comment" *ngIf="SectionSelected.notas == null" src="assets/comment_empty.png" title="{{ 'NEW_EVALUATION.ICONS_NOTES_EMPTY' | translate }}" />  
-                </button>
-                <h3 style="padding: 0em 1em 0em 1em;"> > </h3>
-                <h3>{{InfoAsignacion.nombre}}</h3>
-                <button class="transparente" (click)="AbrirModalAsig(notasAsset)" title="{{ 'NEW_EVALUATION.BTNS_ADD_NOTES' | translate }}">
-                    <img class="comment" *ngIf="InfoAsignacion.notas != null" src="assets/comment_filled.png" title="{{ 'NEW_EVALUATION.ICONS_NOTES_FILLED' | translate }}" />
-                    <img class="comment" *ngIf="InfoAsignacion.notas == null" src="assets/comment_empty.png" title="{{ 'NEW_EVALUATION.ICONS_NOTES_EMPTY' | translate }}" />  
-                  </button>
-            </div>
+      <div class="row">
+        <div class="col section-title">
+          <h3>{{SectionSelected.nombre}}</h3>
+          <button class="transparente" (click)="AbrirModalSec(notasSec)"
+            title="{{ 'NEW_EVALUATION.BTNS_ADD_NOTES' | translate }}">
+            <img class="comment" *ngIf="SectionSelected.notas != null" src="assets/comment_filled.png"
+              title="{{ 'NEW_EVALUATION.ICONS_NOTES_FILLED' | translate }}" />
+            <img class="comment" *ngIf="SectionSelected.notas == null" src="assets/comment_empty.png"
+              title="{{ 'NEW_EVALUATION.ICONS_NOTES_EMPTY' | translate }}" />
+          </button>
+          <h3 style="padding: 0em 1em 0em 1em;"> > </h3>
+          <h3>{{InfoAsignacion.nombre}}</h3>
+          <button class="transparente" (click)="AbrirModalAsig(notasAsset)"
+            title="{{ 'NEW_EVALUATION.BTNS_ADD_NOTES' | translate }}">
+            <img class="comment" *ngIf="InfoAsignacion.notas != null" src="assets/comment_filled.png"
+              title="{{ 'NEW_EVALUATION.ICONS_NOTES_FILLED' | translate }}" />
+            <img class="comment" *ngIf="InfoAsignacion.notas == null" src="assets/comment_empty.png"
+              title="{{ 'NEW_EVALUATION.ICONS_NOTES_EMPTY' | translate }}" />
+          </button>
         </div>
-    <!-- <div class="row m-0 mt-4" id="content-questions">
+      </div>
+      <!-- <div class="row m-0 mt-4" id="content-questions">
       <div class="col p-0">
         <div class="row m-0" id="content-questions-body">
           <div class="col-8 offset-md-2 p-0 mat-elevation-z5" id="content-questions-box"> -->
 
 
-            <!-- <div class="row m-0 p-0 mb-3 py-3" id="module-title-row"> 
+      <!-- <div class="row m-0 p-0 mb-3 py-3" id="module-title-row"> 
               <div class="col-xs-12 col-sm-2 col-md-3"></div>
               <div class="col-xs-12 col-sm-8 col-md-6">
                 <div class="container-fluid">
@@ -130,173 +136,184 @@
               </div>
               <div class="col-xs-12 col-sm-2 col-md-3"></div>
             </div> -->
-            <!-- End of module title  -->
+      <!-- End of module title  -->
 
-            <!-- Start of pagination -->
-            <div class="row dots m-4 ">
-              <div class="col">
-                <div class="d-flex justify-content-center">
-                  <div class="position-relative">
-                    <ul class="d-flex justify-content-center">
-                      <li *ngFor="let page of pagesArray; let i = index" [class.current]="i==PageNow-1"><a title="{{ListaAsignaciones[i].nombre}}">x</a></li>
-                     
-                    </ul>
-                    <i class="material-icons pointer b-f-buttons position-absolute back-btn" [ngClass]="{'disabled': PageNow == 1}"
-                      (click)="NextPreviousButton(2)" [attr.title]="PageNow == 1 ? '': 'Módulo anterior: '+ListaAsignaciones[PageNow-1].nombre">
-                     <img class="dots-icon" src="assets/round_navigate_before.png">
-                    </i>
+      <!-- Start of pagination -->
+      <div class="row dots m-4 ">
+        <div class="col">
+          <div class="d-flex justify-content-center">
+            <div class="position-relative">
+              <ul class="d-flex justify-content-center">
+                <li *ngFor="let page of pagesArray; let i = index" [class.current]="i==PageNow-1"><a
+                    title="{{ListaAsignaciones[i].nombre}}">x</a></li>
 
-                    <i class="material-icons pointer b-f-buttons position-absolute next-btn" [ngClass]="{'disabled': PageNow == NumMax}"
-                      (click)="NextPreviousButton(1)" [attr.title]="PageNow == NumMax ? '': 'Siguiente módulo: '+ListaAsignaciones[PageNow].nombre">
-                      <img class="dots-icon" src="assets/round_navigate_next.png">
-                    </i>
+              </ul>
+              <i class="material-icons pointer b-f-buttons position-absolute back-btn"
+                [ngClass]="{'disabled': PageNow == 1}" (click)="NextPreviousButton(2)"
+                title="{{ 'NEW_EVALUATION.BTN_PREVIOUS_MODULE' | translate }}: {{ListaAsignaciones[PageNow-1]?.nombre}}">
+                <img class="dots-icon" src="assets/round_navigate_before.png">
+              </i>
 
-                    <i *ngIf="nextSection != null" class="material-icons pointer b-f-buttons position-absolute next-sec-btn"
-                      (click)="redirectToNextSection()" title="{{ 'NEW_EVALUATION.BTN_NEXT_SECTION' | translate }}: {{nextSection.nombre}}" >
-                      <img class="dots-icon" src="assets/round_navigate_next_double.png">
-                    </i>
+              <i class="material-icons pointer b-f-buttons position-absolute next-btn"
+                [ngClass]="{'disabled': PageNow == NumMax}" (click)="NextPreviousButton(1)"
+                title="{{ 'NEW_EVALUATION.BTN_NEXT_MODULE' | translate }}: {{ListaAsignaciones[PageNow]?.nombre}}">
+                <img class="dots-icon" src="assets/round_navigate_next.png">
+              </i>
 
-                    <i *ngIf="prevSection != null" class="material-icons pointer b-f-buttons position-absolute back-sec-btn" 
-                      (click)="redirectToPrevSection()" title="{{ 'NEW_EVALUATION.BTN_PREVIOUS_SECTION' | translate }}: {{prevSection.nombre}}">
-                      <img class="dots-icon" src="assets/round_navigate_before_double.png">
-                    </i>
+              <i *ngIf="nextSection != null" class="material-icons pointer b-f-buttons position-absolute next-sec-btn"
+                (click)="redirectToNextSection()"
+                title="{{ 'NEW_EVALUATION.BTN_NEXT_SECTION' | translate }}: {{nextSection.nombre}}">
+                <img class="dots-icon" src="assets/round_navigate_next_double.png">
+              </i>
 
-                  </div>
+              <i *ngIf="prevSection != null" class="material-icons pointer b-f-buttons position-absolute back-sec-btn"
+                (click)="redirectToPrevSection()"
+                title="{{ 'NEW_EVALUATION.BTN_PREVIOUS_SECTION' | translate }}: {{prevSection.nombre}}">
+                <img class="dots-icon" src="assets/round_navigate_before_double.png">
+              </i>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End of pagination -->
+
+
+      <div class="container-fluid p-0 pt-0 px-5 pb-0">
+        <!-- Inicio preguntas  -->
+        <div class="questions-box mt-1">
+          <div class="row m-0" [class.mb-3]="i == (InfoAsignacion.preguntas.length-1)" id="preguntas{{i}}"
+            *ngFor="let preguntaDada of InfoAsignacion.preguntas; let i = index">
+            <div class="col-1"></div>
+            <div class="col-xs-12 col-sm-5 col-md-7 pt-1 pb-2">
+              {{i + 1}}. {{preguntaDada.pregunta}}
+            </div>
+            <div class="col-md-2 yes-no-centered" id="yes_no_btn_{{i}}">
+              <div class="row m-0 yes-no-width">
+                <div class="col p-0">
+                  <button class="w-100 h-100 questions-yes-btn mat-elevation-z3 item-not-selected"
+                    [class.first-item]="preguntaDada.esHabilitante"
+                    [class.item-full-disabled]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
+                    [class.item-not-selected]="(preguntaDada.respuesta.estado == 2) || (preguntaDada.respuesta.estado == 0 )"
+                    [class.item-disable-no-color]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
+                    (click)="AnswerQuestion(preguntaDada,i,1)">{{ 'NEW_EVALUATION.YES' | translate }}</button>
+                </div>
+                <div class="col p-0">
+                  <button class="w-100 h-100 questions-no-btn mat-elevation-z3"
+                    [class.first-item]="preguntaDada.esHabilitante"
+                    [class.item-full-disabled]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
+                    [class.item-not-selected]="(preguntaDada.respuesta.estado == 1) || (preguntaDada.respuesta.estado == 0)"
+                    [class.item-disable-no-color]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
+                    (click)="AnswerQuestion(preguntaDada,i,2)">{{ 'NEW_EVALUATION.NO' | translate }}</button>
                 </div>
               </div>
             </div>
-            <!-- End of pagination -->
 
+            <div class="col-xs-12 col-sm-1 col-md-1 pb-1 pl-13 yes-no-centered">
+              <button *ngIf="checkHabilitante(preguntaDada)" class="transparente position-relative"
+                (click)="AbrirModalPreg(notasPreg, i)">
 
-            <div class="container-fluid p-0 pt-0 px-5 pb-0">
-              <!-- Inicio preguntas  -->
-              <div class="questions-box mt-1">
-                <div class="row m-0" [class.mb-3]="i == (InfoAsignacion.preguntas.length-1)" id="preguntas{{i}}" *ngFor="let preguntaDada of InfoAsignacion.preguntas; let i = index">
-                  <div class="col-1"></div>
-                  <div class="col-xs-12 col-sm-5 col-md-7 pt-1 pb-2">
-                    {{i + 1}}. {{preguntaDada.pregunta}}
-                  </div>
-                  <div class="col-md-2 yes-no-centered" id="yes_no_btn_{{i}}">
-                    <div class="row m-0 yes-no-width">
-                      <div class="col p-0">
-                        <button class="w-100 h-100 questions-yes-btn mat-elevation-z3 item-not-selected"
-                          [class.first-item]="preguntaDada.esHabilitante"
-                          [class.item-full-disabled]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
-                          [class.item-not-selected]="(preguntaDada.respuesta.estado == 2) || (preguntaDada.respuesta.estado == 0 )"
-                          [class.item-disable-no-color]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
-                          (click)="AnswerQuestion(preguntaDada,i,1)">{{ 'NEW_EVALUATION.YES' | translate }}</button>
-                      </div>
-                      <div class="col p-0">
-                        <button class="w-100 h-100 questions-no-btn mat-elevation-z3" 
-                          [class.first-item]="preguntaDada.esHabilitante"
-                          [class.item-full-disabled]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
-                          [class.item-not-selected]="(preguntaDada.respuesta.estado == 1) || (preguntaDada.respuesta.estado == 0)"
-                          [class.item-disable-no-color]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
-                          (click)="AnswerQuestion(preguntaDada,i,2)">{{ 'NEW_EVALUATION.NO' | translate }}</button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-xs-12 col-sm-1 col-md-1 pb-1 pl-13 yes-no-centered">
-                    <button *ngIf="checkHabilitante(preguntaDada)"
-                      class="transparente position-relative" (click)="AbrirModalPreg(notasPreg, i)">
-                      
-                      <!-- <span *ngIf="preguntaDada.respuesta.notas != null" class="one-badge">1</span>
+                <!-- <span *ngIf="preguntaDada.respuesta.notas != null" class="one-badge">1</span>
                       <i *ngIf="preguntaDada.respuesta.notas != null" class="material-icons comment-added" title="Añadir notas">
                         fiber_manual_record
                       </i>
 
                       <i class="material-icons add-comment" alt="Añadir comentario">add_circle</i> -->
 
-                      <img class="comment-yes-no" *ngIf="preguntaDada.respuesta.notas != null" src="assets/comment_filled.png" title="{{ 'NEW_EVALUATION.ICONS_NOTES_FILLED' | translate }}" />
-                      <img class="comment-yes-no" *ngIf="preguntaDada.respuesta.notas == null" src="assets/comment_empty.png" title="{{ 'NEW_EVALUATION.ICONS_NOTES_EMPTY' | translate }}" />  
+                <img class="comment-yes-no" *ngIf="preguntaDada.respuesta.notas != null" src="assets/comment_filled.png"
+                  title="{{ 'NEW_EVALUATION.ICONS_NOTES_FILLED' | translate }}" />
+                <img class="comment-yes-no" *ngIf="preguntaDada.respuesta.notas == null" src="assets/comment_empty.png"
+                  title="{{ 'NEW_EVALUATION.ICONS_NOTES_EMPTY' | translate }}" />
 
-                    </button>
+              </button>
 
-                    <!-- <button *ngIf="preguntaDada.respuesta.notas == null &&  checkHabilitante(preguntaDada)"
+              <!-- <button *ngIf="preguntaDada.respuesta.notas == null &&  checkHabilitante(preguntaDada)"
                       class="transparente" (click)="AbrirModalPreg(notasPreg, i)">
                       <i class="material-icons add-comment" alt="Añadir comentario">add_circle</i>
                     </button> -->
 
-                    <button *ngIf="!checkHabilitante(preguntaDada)"
-                      class="transparente position-relative disabled">
-                      
-                      <!-- <span *ngIf="preguntaDada.respuesta.notas != null" class="one-badge">1</span>
+              <button *ngIf="!checkHabilitante(preguntaDada)" class="transparente position-relative disabled">
+
+                <!-- <span *ngIf="preguntaDada.respuesta.notas != null" class="one-badge">1</span>
                       <i *ngIf="preguntaDada.respuesta.notas != null" class="material-icons comment-added" title="Añadir notas">
                         fiber_manual_record
                       </i>
                       <i class="material-icons add-comment" alt="Añadir comentario">add_circle</i> -->
 
-                      <img class="comment-yes-no" *ngIf="preguntaDada.respuesta.notas != null" src="assets/comment_filled.png" title="{{ 'NEW_EVALUATION.ICONS_NOTES_FILLED' | translate }}" />
-                      <img class="comment-yes-no" *ngIf="preguntaDada.respuesta.notas == null" src="assets/comment_empty.png" title="{{ 'NEW_EVALUATION.ICONS_NOTES_EMPTY' | translate }}" />  
+                <img class="comment-yes-no" *ngIf="preguntaDada.respuesta.notas != null" src="assets/comment_filled.png"
+                  title="{{ 'NEW_EVALUATION.ICONS_NOTES_FILLED' | translate }}" />
+                <img class="comment-yes-no" *ngIf="preguntaDada.respuesta.notas == null" src="assets/comment_empty.png"
+                  title="{{ 'NEW_EVALUATION.ICONS_NOTES_EMPTY' | translate }}" />
 
-                    </button>
+              </button>
 
-                    <!-- <button *ngIf="preguntaDada.respuesta.notas == null && !checkHabilitante(preguntaDada)"
+              <!-- <button *ngIf="preguntaDada.respuesta.notas == null && !checkHabilitante(preguntaDada)"
                       class="transparente disabled">
                      <i class="material-icons add-comment" alt="Añadir comentario">add_circle</i>
                     </button> -->
-                  </div>
-
-                  <br />
-                </div>
-                
-              </div>
-              <!-- Fin de preguntas -->
-
-                  <!-- Start of pagination -->
-            <div class="row dots m-0 ">
-                <div class="col">
-                  <div class="d-flex justify-content-center">
-                    <div class="position-relative">
-                      <ul class="d-flex justify-content-center">
-                        <li *ngFor="let page of pagesArray; let i = index" [class.current]="i==PageNow-1" ><a title="{{ListaAsignaciones[i].nombre}}">x</a></li>
-                       
-                      </ul>
-                      <i class="material-icons pointer b-f-buttons position-absolute back-btn" [ngClass]="{'disabled': PageNow == 1}"
-                      (click)="NextPreviousButton(2)" [attr.title]="PageNow == 1 ? '': 'Módulo anterior: '+ListaAsignaciones[PageNow-1].nombre">
-                        <img class="dots-icon" src="assets/round_navigate_before.png">
-                      </i>
-
-                      <i class="material-icons pointer b-f-buttons position-absolute next-btn" [ngClass]="{'disabled': PageNow == NumMax}"
-                      (click)="NextPreviousButton(1)" [attr.title]="PageNow == NumMax ? '': 'Siguiente módulo: '+ListaAsignaciones[PageNow].nombre">
-                        <img class="dots-icon" src="assets/round_navigate_next.png">
-                      </i>
-
-                      <i *ngIf="nextSection != null" class="material-icons pointer b-f-buttons position-absolute next-sec-btn"
-                        (click)="redirectToNextSection()" title="{{ 'NEW_EVALUATION.BTN_NEXT_SECTION' | translate }}: {{nextSection.nombre}}" >
-                        <img class="dots-icon" src="assets/round_navigate_next_double.png">
-                      </i>
-
-                      <i *ngIf="prevSection != null" class="material-icons pointer b-f-buttons position-absolute back-sec-btn" 
-                        (click)="redirectToPrevSection()" title="Sección anterior: {{prevSection.nombre}}">
-                        <img class="dots-icon" src="assets/round_navigate_before_double.png">
-                      </i>
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- End of pagination -->
             </div>
 
-            <div class="row m-0 mt-3 centered">
-                <div class="col-1" >
-                    <!-- <div class="secondary-button rounded-btn next-section-box" title="Volver a secciones" (click)="NextPreviousButton(0)">
+            <br />
+          </div>
+
+        </div>
+        <!-- Fin de preguntas -->
+
+        <!-- Start of pagination -->
+        <div class="row dots m-0 ">
+          <div class="col">
+            <div class="d-flex justify-content-center">
+              <div class="position-relative">
+                <ul class="d-flex justify-content-center">
+                  <li *ngFor="let page of pagesArray; let i = index" [class.current]="i==PageNow-1"><a
+                      title="{{ListaAsignaciones[i].nombre}}">x</a></li>
+
+                </ul>
+                <i class="material-icons pointer b-f-buttons position-absolute back-btn"
+                  [ngClass]="{'disabled': PageNow == 1}" (click)="NextPreviousButton(2)"
+                  title="{{ 'NEW_EVALUATION.BTN_PREVIOUS_MODULE' | translate }}: {{ListaAsignaciones[PageNow-1]?.nombre}}">
+                  <img class="dots-icon" src="assets/round_navigate_before.png">
+                </i>
+
+                <i class="material-icons pointer b-f-buttons position-absolute next-btn"
+                  [ngClass]="{'disabled': PageNow == NumMax}" (click)="NextPreviousButton(1)"
+                  title="{{ 'NEW_EVALUATION.BTN_NEXT_MODULE' | translate }}: {{ListaAsignaciones[PageNow]?.nombre}}">
+                  <img class="dots-icon" src="assets/round_navigate_next.png">
+                </i>
+
+                <i *ngIf="nextSection != null" class="material-icons pointer b-f-buttons position-absolute next-sec-btn"
+                  (click)="redirectToNextSection()"
+                  title="{{ 'NEW_EVALUATION.BTN_NEXT_SECTION' | translate }}: {{nextSection.nombre}}">
+                  <img class="dots-icon" src="assets/round_navigate_next_double.png">
+                </i>
+
+                <i *ngIf="prevSection != null" class="material-icons pointer b-f-buttons position-absolute back-sec-btn"
+                  (click)="redirectToPrevSection()" title="Sección anterior: {{prevSection.nombre}}">
+                  <img class="dots-icon" src="assets/round_navigate_before_double.png">
+                </i>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End of pagination -->
+      </div>
+
+      <div class="row m-0 mt-3 centered">
+        <div class="col-1">
+          <!-- <div class="secondary-button rounded-btn next-section-box" title="Volver a secciones" (click)="NextPreviousButton(0)">
                         <mat-icon class="next-section-icon">
                             keyboard_return       
                           </mat-icon>
                       </div> -->
-                </div>
-                <div class="col-3" >
-                    <app-btn-finalize-evaluation 
-                      [evaluacion]="Evaluation" 
-                      [changedQuestion]="changedQuestion" 
-                      [changedAnswer]="changedAnswer">
-                    </app-btn-finalize-evaluation>
-                  </div>
-                  <div class="col-1" >
-                  <!-- <div *ngIf="PageNow == NumMax">
+        </div>
+        <div class="col-3">
+          <app-btn-finalize-evaluation [evaluacion]="Evaluation" [changedQuestion]="changedQuestion"
+            [changedAnswer]="changedAnswer">
+          </app-btn-finalize-evaluation>
+        </div>
+        <div class="col-1">
+          <!-- <div *ngIf="PageNow == NumMax">
                       <div *ngIf="nextSection != null" class="secondary-button rounded-btn next-section-box" title="Siguiente sección: {{nextSection.nombre}}"
                         (click)="redirectToNextSection()">
                         <mat-icon class="next-section-icon">
@@ -304,27 +321,28 @@
                         </mat-icon>
                       </div>
                   </div> -->
-                </div>
-            </div>
-              
-            </div>
-          <!-- End of questions box -->
-
         </div>
-        <!-- End of content-body -->
-      <!-- </div>
+      </div>
+
+    </div>
+    <!-- End of questions box -->
+
+  </div>
+  <!-- End of content-body -->
+  <!-- </div>
     </div>
   </div> -->
   <ng-template #notasPreg let-cl="close" let-di="dismiss">
     <div class="modal-content">
       <div class="modal-header custom-modal-header">
-        <h5 class="modal-title">{{ 'NEW_EVALUATION.MODAL_NOTES_PREGUNTA_TITLE' | translate }}</h5> 
+        <h5 class="modal-title">{{ 'NEW_EVALUATION.MODAL_NOTES_PREGUNTA_TITLE' | translate }}</h5>
         <!-- <button type="button" class="close" (click)="cl('Cerrar')">
           <span aria-hidden="true">×</span>
         </button> -->
       </div>
       <div class="modal-body">
-        <textarea class="form-control custom-text-area" maxlength="4000" placeholder="{{ 'NEW_EVALUATION.MODAL_NOTES_PREGUNTA_PLACEHOLDER' | translate }}" rows="10"
+        <textarea class="form-control custom-text-area" maxlength="4000"
+          placeholder="{{ 'NEW_EVALUATION.MODAL_NOTES_PREGUNTA_PLACEHOLDER' | translate }}" rows="10"
           [(ngModel)]="textoModal"></textarea>
         <p id="numletras" class="mr-2 mt-2 mb-0">{{textoModal.length}}/4000</p>
 
@@ -332,10 +350,12 @@
       <div class="container-fluid p-3 bt-1">
         <div class="row p-0">
           <div class="col">
-            <button type="button" class="main-button w-100 modal-btns border-curve" (click)="di('Guardar')">{{ 'NEW_EVALUATION.MODALS_BTN_SAVE' | translate }}</button>
+            <button type="button" class="main-button w-100 modal-btns border-curve"
+              (click)="di('Guardar')">{{ 'NEW_EVALUATION.MODALS_BTN_SAVE' | translate }}</button>
           </div>
           <div class="col">
-            <button type="button" class="secondary-button w-100 modal-btns border-curve" (click)="cl('Cerrar')">{{ 'NEW_EVALUATION.MODALS_BTN_CANCEL' | translate }}</button>
+            <button type="button" class="secondary-button w-100 modal-btns border-curve"
+              (click)="cl('Cerrar')">{{ 'NEW_EVALUATION.MODALS_BTN_CANCEL' | translate }}</button>
           </div>
 
         </div>
@@ -346,13 +366,14 @@
   <ng-template #notasAsset let-cl="close" let-di="dismiss">
     <div class="modal-content">
       <div class="modal-header custom-modal-header">
-        <h5 class="modal-title">{{ 'NEW_EVALUATION.MODAL_NOTES_ASSESSMENT_TITLE' | translate }}</h5> 
+        <h5 class="modal-title">{{ 'NEW_EVALUATION.MODAL_NOTES_ASSESSMENT_TITLE' | translate }}</h5>
         <!-- <button type="button" class="close" (click)="cl('Cerrar')">
           <span aria-hidden="true">×</span>
         </button> -->
       </div>
       <div class="modal-body">
-        <textarea class="form-control custom-text-area" maxlength="4000" placeholder="{{ 'NEW_EVALUATION.MODAL_NOTES_ASSESSMENT_PLACEHOLDER' | translate }}" rows="10"
+        <textarea class="form-control custom-text-area" maxlength="4000"
+          placeholder="{{ 'NEW_EVALUATION.MODAL_NOTES_ASSESSMENT_PLACEHOLDER' | translate }}" rows="10"
           [(ngModel)]="textoModal"></textarea>
         <p id="numletras" class="mr-2 mt-2 mb-0">{{textoModal.length}}/4000</p>
 
@@ -360,10 +381,12 @@
       <div class="container-fluid p-3 bt-1">
         <div class="row p-0">
           <div class="col">
-            <button type="button" class="main-button w-100 modal-btns border-curve" (click)="di('Guardar')">{{ 'NEW_EVALUATION.MODALS_BTN_SAVE' | translate }}</button>
+            <button type="button" class="main-button w-100 modal-btns border-curve"
+              (click)="di('Guardar')">{{ 'NEW_EVALUATION.MODALS_BTN_SAVE' | translate }}</button>
           </div>
           <div class="col">
-            <button type="button" class="secondary-button w-100 modal-btns border-curve" (click)="cl('Cerrar')">{{ 'NEW_EVALUATION.MODALS_BTN_CANCEL' | translate }}</button>
+            <button type="button" class="secondary-button w-100 modal-btns border-curve"
+              (click)="cl('Cerrar')">{{ 'NEW_EVALUATION.MODALS_BTN_CANCEL' | translate }}</button>
           </div>
 
         </div>
@@ -374,13 +397,14 @@
   <ng-template #notasSec let-cl="close" let-di="dismiss">
     <div class="modal-content">
       <div class="modal-header custom-modal-header">
-        <h5 class="modal-title">{{ 'NEW_EVALUATION.MODAL_NOTES_SECTION_TITLE' | translate }}</h5> 
+        <h5 class="modal-title">{{ 'NEW_EVALUATION.MODAL_NOTES_SECTION_TITLE' | translate }}</h5>
         <!-- <button type="button" class="close" (click)="cl('Cerrar')">
           <span aria-hidden="true">×</span>
         </button> -->
       </div>
       <div class="modal-body">
-        <textarea class="form-control custom-text-area" maxlength="4000" placeholder="{{ 'NEW_EVALUATION.MODAL_NOTES_SECTION_PLACEHOLDER' | translate }}" rows="10"
+        <textarea class="form-control custom-text-area" maxlength="4000"
+          placeholder="{{ 'NEW_EVALUATION.MODAL_NOTES_SECTION_PLACEHOLDER' | translate }}" rows="10"
           [(ngModel)]="textoModal"></textarea>
         <p id="numletras" class="mr-2 mt-2 mb-0">{{textoModal.length}}/4000</p>
 
@@ -388,10 +412,12 @@
       <div class="container-fluid p-3 bt-1">
         <div class="row p-0">
           <div class="col">
-            <button type="button" class="main-button w-100 modal-btns border-curve" (click)="di('Guardar')">{{ 'NEW_EVALUATION.MODALS_BTN_SAVE' | translate }}</button>
+            <button type="button" class="main-button w-100 modal-btns border-curve"
+              (click)="di('Guardar')">{{ 'NEW_EVALUATION.MODALS_BTN_SAVE' | translate }}</button>
           </div>
           <div class="col">
-            <button type="button" class="secondary-button w-100 modal-btns border-curve" (click)="cl('Cerrar')">{{ 'NEW_EVALUATION.MODALS_BTN_CANCEL' | translate }}</button>
+            <button type="button" class="secondary-button w-100 modal-btns border-curve"
+              (click)="cl('Cerrar')">{{ 'NEW_EVALUATION.MODALS_BTN_CANCEL' | translate }}</button>
           </div>
         </div>
       </div>
