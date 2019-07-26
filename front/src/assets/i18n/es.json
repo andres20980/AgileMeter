@@ -20,7 +20,9 @@
 		"NEW_ASSESSMENT": "NUEVA EVALUACIÓN",
 		"NEW_ASSESSMENT_MODAL": "NUEVA",
 		"MODAL_HEADER": "Importante",
-		"MODAL_BODY": "Este equipo tiene evaluaciones pendientes, ¿Desea crear una nueva o gestionar las pendientes?"
+		"MODAL_BODY": "Este equipo tiene evaluaciones pendientes, ¿Desea crear una nueva o gestionar las pendientes?",
+		"ASSESSMENT_CONSULT": "Consultar Evaluaciones"
+
 	},
 	"BACKOFFICE": {
 		"BTN_USER_MANAGEMENT": "GESTIÓN DE USUARIOS",
