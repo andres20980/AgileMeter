@@ -72,7 +72,7 @@
           <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="6"
             cdkAutosizeMaxRows="6" placeholder="{{ 'PDF_GENERATOR.PLACEHOLDER_EVALUATION_NOTES'| translate }}"
             [(ngModel)]="Evaluacion.notasEvaluacion" [debounce]="1000" (ngModelChange)="saveNotas(Evaluacion)"
-            [readonly]="UserRole != 'Evaluador' && UserRole != 'Administrador'">
+            [readonly]="UserRole != this.rol.Evaluador && UserRole != this.rol.Administrador">
         </textarea>
         </mat-form-field>
       </div>
@@ -82,7 +82,7 @@
           <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="6"
             cdkAutosizeMaxRows="6" placeholder="{{ 'PDF_GENERATOR.PLACEHOLDER_OBJETIVES_NOTES'| translate }}"
             [(ngModel)]="Evaluacion.notasObjetivos" [debounce]="1000" (ngModelChange)="saveNotas(Evaluacion)"
-            [readonly]="UserRole != 'Evaluador' && UserRole != 'Administrador'">
+            [readonly]="UserRole != this.rol.Evaluador && UserRole != this.rol.Administrador">
             </textarea>
         </mat-form-field>
       </div>
