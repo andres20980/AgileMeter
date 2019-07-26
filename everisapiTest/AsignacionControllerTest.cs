@@ -527,6 +527,300 @@ namespace everisapiTest
             //Assert
             Assert.IsType<BadRequestObjectResult>(okResult);
         }
+
+        //Method: AddNotasAsignacion([FromBody] AsignacionUpdateNotasDto AsignacionUpdate)
+        [Fact]
+        public void AddNotasAsignacion_WhenCalled_ReturnOkResult()
+        {
+            //Arrange            
+            _controller = new AsignacionController(_logger, _asignacionInfoRepository);
+
+            var asignacion = new everisapi.API.Models.AsignacionUpdateNotasDto 
+                {
+                    Id = 1,
+                    EvId = 1, 
+                    Notas = "Notas_1"
+                };
+
+            mockRepository.Setup(r => r.AsignacionExiste(It.IsAny<int>())).Returns(true);
+            mockRepository.Setup(r => r.AddNotas(It.IsAny<everisapi.API.Models.AsignacionUpdateNotasDto>())).Returns(true);
+
+            //Act
+            var okResult = _controller.AddNotasAsignacion(asignacion);
+
+            //Assert
+            Assert.IsType<OkObjectResult>(okResult);
+        }
+
+        [Fact]
+        public void AddNotasAsignacion_WhenCalled_ReturnsBadRequestResult()
+        {
+            //Arrange            
+            _controller = new AsignacionController(_logger, _asignacionInfoRepository);
+
+            var asignacion = new everisapi.API.Models.AsignacionUpdateNotasDto 
+                {
+                    Id = 1,
+                    EvId = 1, 
+                    Notas = "Notas_1"
+                };
+
+            mockRepository.Setup(r => r.AsignacionExiste(It.IsAny<int>())).Returns(true);
+            mockRepository.Setup(r => r.AddNotas(It.IsAny<everisapi.API.Models.AsignacionUpdateNotasDto>())).Returns(false);
+
+            //Act
+            var okResult = _controller.AddNotasAsignacion(asignacion);
+
+            //Assert
+            Assert.IsType<BadRequestResult>(okResult);
+        }
+
+        [Fact]
+        public void AddNotasAsignacion_WhenCalledWithExitAsignacion_ReturnsBadRequestResult()
+        {
+            //Arrange            
+            _controller = new AsignacionController(_logger, _asignacionInfoRepository);
+
+            var asignacion = new everisapi.API.Models.AsignacionUpdateNotasDto 
+                {
+                    Id = 1,
+                    EvId = 1, 
+                    Notas = "Notas_1"
+                };
+
+            mockRepository.Setup(r => r.AsignacionExiste(It.IsAny<int>())).Returns(false);
+            mockRepository.Setup(r => r.AddNotas(It.IsAny<everisapi.API.Models.AsignacionUpdateNotasDto>())).Returns(true);
+
+            //Act
+            var okResult = _controller.AddNotasAsignacion(asignacion);
+
+            //Assert
+            Assert.IsType<BadRequestResult>(okResult);
+        }
+
+        [Fact]
+        public void AddNotasAsignacion_WhenCalledNull_ReturnsBadRequestResult()
+        {
+            //Arrange            
+            _controller = new AsignacionController(_logger, _asignacionInfoRepository);
+
+            everisapi.API.Models.AsignacionUpdateNotasDto  asignacion = null;
+
+            mockRepository.Setup(r => r.AsignacionExiste(It.IsAny<int>())).Returns(true);
+            mockRepository.Setup(r => r.AddNotas(It.IsAny<everisapi.API.Models.AsignacionUpdateNotasDto>())).Returns(true);
+
+            //Act
+            var okResult = _controller.AddNotasAsignacion(asignacion);
+
+            //Assert
+            Assert.IsType<BadRequestResult>(okResult);
+        }
+
+        [Fact]
+        public void AddNotasAsignacion_WhenCalledWithWithInValidModel_ReturnsBadRequestObjectResult()
+        {
+            //Arrange            
+            _controller = new AsignacionController(_logger, _asignacionInfoRepository);
+            _controller.ModelState.AddModelError("error", "some error");
+
+            var asignacion = new everisapi.API.Models.AsignacionUpdateNotasDto 
+                {
+                    Id = 1,
+                    EvId = 1, 
+                    Notas = "Notas_1"
+                };
+
+            mockRepository.Setup(r => r.AsignacionExiste(It.IsAny<int>())).Returns(true);
+            mockRepository.Setup(r => r.AddNotas(It.IsAny<everisapi.API.Models.AsignacionUpdateNotasDto>())).Returns(true);
+
+            //Act
+            var okResult = _controller.AddNotasAsignacion(asignacion);
+
+            //Assert
+            Assert.IsType<BadRequestObjectResult>(okResult);
+        }
+
+        [Fact]
+        public void AddNotasAsignacion_WhenCalledThrowException_ReturnsStatusCodeResult()
+        {
+            //Arrange            
+            _controller = new AsignacionController(_logger, _asignacionInfoRepository);
+
+            var asignacion = new everisapi.API.Models.AsignacionUpdateNotasDto 
+                {
+                    Id = 1,
+                    EvId = 1, 
+                    Notas = "Notas_1"
+                };
+
+            mockRepository.Setup(r => r.AsignacionExiste(It.IsAny<int>())).Returns(true);
+            mockRepository.Setup(r => r.AddNotas(It.IsAny<everisapi.API.Models.AsignacionUpdateNotasDto>())).Throws(new Exception());
+
+            //Act
+            var okResult = _controller.AddNotasAsignacion(asignacion);
+
+            //Assert
+            Assert.IsType<ObjectResult>(okResult);
+        }
+
+        //Method: GetNotasAsignaciones(int id)
+        [Fact]
+        public void GetNotasAsignaciones_WhenCalled_ReturnOkResult()
+        {
+            //Arrange            
+            _controller = new AsignacionController(_logger, _asignacionInfoRepository);
+
+            var asignaciones = new List<everisapi.API.Models.AsignacionConNotasDto>{
+                new everisapi.API.Models.AsignacionConNotasDto{
+                    Section = "Section_1",
+                    Asignacion = "Asignacion_1",
+                    Notas = "Nota_1",
+                }
+            };
+
+            mockRepository.Setup(r => r.GetAsignConNotas(It.IsAny<int>())).Returns(asignaciones);
+
+            //Act
+            var okResult = _controller.GetNotasAsignaciones(1);
+
+            //Assert
+            Assert.IsType<OkObjectResult>(okResult);
+        }
+
+        [Fact]
+        public void GetNotasAsignaciones_WhenCalledThrowException_ReturnsStatusCodeResult()
+        {
+            //Arrange            
+            _controller = new AsignacionController(_logger, _asignacionInfoRepository);
+
+            var asignaciones = new List<everisapi.API.Models.AsignacionConNotasDto>{
+                new everisapi.API.Models.AsignacionConNotasDto{
+                    Section = "Section_1",
+                    Asignacion = "Asignacion_1",
+                    Notas = "Nota_1",
+                }
+            };
+
+            mockRepository.Setup(r => r.GetAsignConNotas(It.IsAny<int>())).Throws(new Exception());
+
+            //Act
+            var okResult = _controller.GetNotasAsignaciones(1);
+
+            //Assert
+            Assert.IsType<ObjectResult>(okResult);
+        }
+
+        //Method: DeleteAsignacion([FromBody] AsignacionCreateUpdateDto AsignacionDelete)
+        [Fact]
+        public void DeleteAsignacion_WhenCalled_ReturnOkResult()
+        {
+            //Arrange            
+            _controller = new AsignacionController(_logger, _asignacionInfoRepository);
+
+            var asignacion = new everisapi.API.Models.AsignacionCreateUpdateDto 
+                {
+                    Id = 1,
+                    Nombre = "Asignacion_1", 
+                    SectionId = 1
+                };
+
+            mockRepository.Setup(r => r.AsignacionExiste(It.IsAny<int>())).Returns(true);
+            mockRepository.Setup(r => r.DeleteAsig(It.IsAny<everisapi.API.Entities.AsignacionEntity>())).Returns(true);
+
+            //Act
+            var okResult = _controller.DeleteAsignacion(asignacion);
+
+            //Assert
+            Assert.IsType<OkObjectResult>(okResult);
+        }
+
+        [Fact]
+        public void DeleteAsignacion_WhenCalled_ReturnsBadRequestResult()
+        {
+            //Arrange            
+            _controller = new AsignacionController(_logger, _asignacionInfoRepository);
+
+            var asignacion = new everisapi.API.Models.AsignacionCreateUpdateDto 
+                {
+                    Id = 1,
+                    Nombre = "Asignacion_1", 
+                    SectionId = 1
+                };
+
+            mockRepository.Setup(r => r.AsignacionExiste(It.IsAny<int>())).Returns(true);
+            mockRepository.Setup(r => r.DeleteAsig(It.IsAny<everisapi.API.Entities.AsignacionEntity>())).Returns(false);
+
+            //Act
+            var okResult = _controller.DeleteAsignacion(asignacion);
+
+            //Assert
+            Assert.IsType<BadRequestResult>(okResult);
+        }
+
+        [Fact]
+        public void DeleteAsignacion_WhenCalledWithExitAsignacion_ReturnsBadRequestResult()
+        {
+            //Arrange                     
+            _controller = new AsignacionController(_logger, _asignacionInfoRepository);
+
+            var asignacion = new everisapi.API.Models.AsignacionCreateUpdateDto 
+                {
+                    Id = 1,
+                    Nombre = "Asignacion_1", 
+                    SectionId = 1
+                };
+
+            mockRepository.Setup(r => r.AsignacionExiste(It.IsAny<int>())).Returns(false);
+            mockRepository.Setup(r => r.DeleteAsig(It.IsAny<everisapi.API.Entities.AsignacionEntity>())).Returns(true);
+
+            //Act
+            var okResult = _controller.DeleteAsignacion(asignacion);
+
+            //Assert
+            Assert.IsType<BadRequestResult>(okResult);
+        }
+
+        [Fact]
+        public void DeleteAsignacion_WhenCalledNull_ReturnsBadRequestResult()
+        {
+            //Arrange            
+            _controller = new AsignacionController(_logger, _asignacionInfoRepository);
+
+            everisapi.API.Models.AsignacionCreateUpdateDto  asignacion = null;
+
+            mockRepository.Setup(r => r.AsignacionExiste(It.IsAny<int>())).Returns(true);
+            mockRepository.Setup(r => r.DeleteAsig(It.IsAny<everisapi.API.Entities.AsignacionEntity>())).Returns(true);
+
+            //Act
+            var okResult = _controller.DeleteAsignacion(asignacion);
+
+            //Assert
+            Assert.IsType<BadRequestResult>(okResult);
+        }
+
+        [Fact]
+        public void ADeleteAsignacion_WhenCalledWithWithInValidModel_ReturnsBadRequestObjectResult()
+        {
+            //Arrange            
+            _controller = new AsignacionController(_logger, _asignacionInfoRepository);
+            _controller.ModelState.AddModelError("error", "some error");
+
+            var asignacion = new everisapi.API.Models.AsignacionCreateUpdateDto 
+                {
+                    Id = 1,
+                    Nombre = "Asignacion_1", 
+                    SectionId = 1
+                };
+
+            mockRepository.Setup(r => r.AsignacionExiste(It.IsAny<int>())).Returns(true);
+            mockRepository.Setup(r => r.DeleteAsig(It.IsAny<everisapi.API.Entities.AsignacionEntity>())).Returns(true);
+
+            //Act
+            var okResult = _controller.DeleteAsignacion(asignacion);
+
+            //Assert
+            Assert.IsType<BadRequestObjectResult>(okResult);
+        }
         
     }
 }
