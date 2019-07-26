@@ -11,7 +11,7 @@
 
     <div class="container">
       <app-breadcrumb></app-breadcrumb>
-      <div class="row ng-card-box p-5 br-2 mat-elevation-z5 mx-0">
+      <!-- <div class="row ng-card-box p-5 br-2 mat-elevation-z5 mx-0">
         <div class="col" id="proyectSelectorContainer">
           <div class="row">
             <div class="col">
@@ -47,7 +47,33 @@
             </div>
           </div>
         </div>
+      </div> -->
+
+      <div class="row ng-card-box p-5 br-2 mat-elevation-z5 mx-0">
+        <div class="col" id="proyectSelectorContainer">
+          <div class="row">
+            <div class="col">
+              <h3> Consultar Evaluaciones</h3>
+            </div>
+          </div>
+          <div class="row mt-3">
+
+            <div class="col-4">
+              <div class="main-button border-curve bajarmedia eval-ant mat-elevation-z5 w-85 m-auto"
+                [class.card-disabled]="!evaluacionesFinalizadas" (click)="EvaluacionesAnteriores()">
+                <a>{{ 'HOME.FINISHED_ASSESSMENTS' | translate }}</a>
+              </div>
+            </div>
+            <div class="col-4">
+              <div class="secondary-button border-curve bajarmedia eval-ant mat-elevation-z5 w-85 m-auto"
+                [class.card-disabled]="!evaluacionesPendientes" (click)="EvaluacionesPendientes()">
+                <a>{{ 'HOME.PENDING_ASSESSMENTS' | translate }}</a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
+
       <div class="row ng-card-box p-5 br-2 mt-4 mat-elevation-z5 mx-0"
         [class.card-disabled]="!this.ProyectoSeleccionado">
         <div class="col" id="assessmentSelectorContainer">

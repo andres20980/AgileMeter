@@ -36,6 +36,9 @@ export class HomeComponent implements OnInit {
   public fadeInError = false;
   public rol: EnumRol = new EnumRol();
 
+  public evaluacionesPendientes: boolean = false;
+  public evaluacionesFinalizadas: boolean = false;
+
   constructor(
     private _proyectoService: ProyectoService,
     private _evaluacionService: EvaluacionService,
@@ -124,6 +127,7 @@ export class HomeComponent implements OnInit {
       this._proyectoService.getProyectosDeUsuario().subscribe(
         res => {
           this.ListaDeProyectos = res;
+          this.comprobarEvaluaciones();
         },
         error => {
           //Si el servidor tiene algún tipo de problema mostraremos este error
@@ -165,7 +169,23 @@ export class HomeComponent implements OnInit {
         });
     }
   }
+  public comprobarEvaluaciones() {
+    var evalPendientes = this.ListaDeProyectos.filter(p => p.numPendingEvals > 0);
+    if (evalPendientes.length > 0) {
+      this.evaluacionesPendientes = true;
+    } else {
+      this.evaluacionesPendientes = false;
+    }
 
+    var evalFinalizadas = this.ListaDeProyectos.filter(p => p.numFinishedEvals > 0);
+    if (evalFinalizadas.length > 0) {
+      this.evaluacionesFinalizadas = true;
+    } else {
+      this.evaluacionesFinalizadas = false;
+    }
+  }
+
+/* Eliminado en el nuevo home  
   //Este metodo guarda el proyecto que a sido seleccionado en el front
   public SeleccionDeProyecto() {
     //this.ProyectoSeleccionado = this.ListaDeProyectos[index];
@@ -211,7 +231,7 @@ export class HomeComponent implements OnInit {
     }
 
   }
-
+*/
   public SeleccionDeAssessment() {
     // console.log("assessment",index);
 
@@ -299,28 +319,30 @@ export class HomeComponent implements OnInit {
 
   //Este metodo consulta las evaluaciones anteriores de este proyecto si esta seleccionado y existe
   public EvaluacionesAnteriores() {
-    if (this.SeeAllProjects || this.ProyectoSeleccionado != null && this.ProyectoSeleccionado != undefined) {
-      this._router.navigate(['/finishedevaluations']);
-    } else {
-      this.ErrorMessage = "Seleccione un proyecto para realizar esta acción.";
-      setTimeout(() => {
-        this.fadeInError = false;
-        setTimeout(() => this.ErrorMessage = "", 900);
-      }, 2000);
-    }
+    this._router.navigate(['/finishedevaluations']);
+    // if (this.SeeAllProjects || this.ProyectoSeleccionado != null && this.ProyectoSeleccionado != undefined) {
+    //   this._router.navigate(['/finishedevaluations']);
+    // } else {
+    //   this.ErrorMessage = "Seleccione un proyecto para realizar esta acción.";
+    //   setTimeout(() => {
+    //     this.fadeInError = false;
+    //     setTimeout(() => this.ErrorMessage = "", 900);
+    //   }, 2000);
+    // }
   }
 
   //Este metodo consulta las evaluaciones anteriores de este proyecto si esta seleccionado y existe
   public EvaluacionesPendientes() {
-    if (this.SeeAllProjects || this.ProyectoSeleccionado != null && this.ProyectoSeleccionado != undefined) {
-      this._router.navigate(['/pendingevaluations']);
-    } else {
-      this.ErrorMessage = "Seleccione un proyecto para realizar esta acción.";
-      setTimeout(() => {
-        this.fadeInError = false;
-        setTimeout(() => this.ErrorMessage = "", 900);
-      }, 2000);
-    }
+    this._router.navigate(['/pendingevaluations']);
+    // if (this.SeeAllProjects || this.ProyectoSeleccionado != null && this.ProyectoSeleccionado != undefined) {
+    //   this._router.navigate(['/pendingevaluations']);
+    // } else {
+    //   this.ErrorMessage = "Seleccione un proyecto para realizar esta acción.";
+    //   setTimeout(() => {
+    //     this.fadeInError = false;
+    //     setTimeout(() => this.ErrorMessage = "", 900);
+    //   }, 2000);
+    // }
   }
 
   //Este metodo guarda la evaluacion y cambia su estado como finalizado
