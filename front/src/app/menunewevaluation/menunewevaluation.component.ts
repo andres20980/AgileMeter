@@ -56,9 +56,10 @@ export class MenunewevaluationComponent implements OnInit {
     this.Evaluacion = this._appComponent._storageDataService.Evaluacion;
     if (!this._proyectoService.verificarUsuario()) {
       this._router.navigate(['/login']);
-    } else if (this.ProjectSelected == null || this.ProjectSelected == undefined || this.ProjectSelected.id == -1 || this.Evaluacion == null || this.Evaluacion == undefined) {
+    } /*no valido con el listar evaluaciones
+    else if (this.ProjectSelected == null || this.ProjectSelected == undefined || this.ProjectSelected.id == -1 || this.Evaluacion == null || this.Evaluacion == undefined) {
       this._router.navigate(['/home']);
-    }
+    }*/
     //Recogemos el nombre del usuario con el que nos logueamos
     this.UserSelected = this._proyectoService.UsuarioLogeado;
     this.MostrarInfo = false;

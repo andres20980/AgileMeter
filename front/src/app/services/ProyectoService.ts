@@ -80,6 +80,16 @@ export class ProyectoService {
       catchError(this.errorHandler));
   }
 
+  getProyectosDeUsuarioConEvaluacionesPendientes() {
+    let Token = this._appComponent.ComprobarUserYToken();
+    let headers = new Headers({
+      'Authorization': Token
+    });
+    return this._http.get(this.url + 'proyectos/' + this.UsuarioLogeado + '/proyectosConEvaluacionesPendientes', { headers: headers }).pipe(
+      map((response: Response) => response.json()),
+      catchError(this.errorHandler));
+  }
+
   getProyectosDeUsuarioSeleccionado(user: UserWithRole) {
     let Token = this._appComponent.ComprobarUserYToken();
     let headers = new Headers({

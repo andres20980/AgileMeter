@@ -18,7 +18,7 @@ import { Asignacion } from 'app/Models/Asignacion';
 @Injectable()
 export class StorageDataService {
   public UserProjects: any = [];
-  public UserProjectSelected: Proyecto = { id: -1, fecha: null, nombre: '',codigo: null, numFinishedEvals:0, numPendingEvals: 0 };
+  public UserProjectSelected: Proyecto = { id: -1, fecha: null, nombre: '',codigo: null, numFinishedEvals:0, numPendingEvals: 0,oficina:null };
   public UserData: User;
   public DataUnfinished: boolean = false;
   public SectionSelected: Section = null;

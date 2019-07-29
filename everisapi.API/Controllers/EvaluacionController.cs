@@ -280,6 +280,39 @@ namespace everisapi.API.Controllers
             }
         }
 
+        [HttpPost("alluserprojects/{userNombre}/progress/")]
+        public IActionResult GetAllEvaluationsWithProgress([FromBody] EvaluacionInfoPaginationDto EvaluacionParaFiltrar, string userNombre)
+        {
+            try
+            {
+                if (EvaluacionParaFiltrar == null)
+                {
+                    return BadRequest();
+                }
+
+                //Si no cumple con el modelo de creación devuelve error
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var EvaluacionesFiltradas = new List<EvaluacionInfoWithProgressDto>();
+
+                var Evals = _evaluacionInfoRepository.GetAllEvaluationsWithProgress(EvaluacionParaFiltrar, userNombre);
+                EvaluacionesFiltradas = Evals.ToList();
+
+                //Hacemos un mapeo de la pregunta que recogimos
+                var EvaluacionesResult = Mapper.Map<List<EvaluacionInfoWithProgressDto>>(EvaluacionesFiltradas);
+
+                return Ok(new { EvaluacionesResult });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("Se recogio un error al recibir la petición post de recoger una lista filtrada de evaluaciones " + ex);
+                return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
+            }
+        }
+
         //Este metodo devuelve el número de evaluaciones que contiene un proyecto o todos los proyectos
         [HttpGet("proyecto/{id}/num")]
         public IActionResult GetNumEvaluacionFromProject(int id)

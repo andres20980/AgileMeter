@@ -27,15 +27,16 @@ namespace everisapi.API.Services
         {
             var proyectoDeUsuario = _context.Proyectos.Where(p => p.UserNombre == userNombre && p.Id == proyectoId).FirstOrDefault();
 
-                    //Creamos un proyecto nuevo con los  datos estrictamente necesarios
-            var ProyectoEncontrado = new everisapi.API.Models.ProyectoDto {
-                        Id = proyectoDeUsuario.Id,
-                        Nombre = proyectoDeUsuario.Nombre,
-                        Fecha = proyectoDeUsuario.Fecha,
-                        Proyecto = proyectoDeUsuario.Proyecto,
-                        numFinishedEvals = _context.Evaluaciones.Where(e => e.ProyectoId == proyectoDeUsuario.Id && e.Estado).Count(),
-                        numPendingEvals = _context.Evaluaciones.Where(e => e.ProyectoId == proyectoDeUsuario.Id && !e.Estado).Count(),
-                        TestProject = proyectoDeUsuario.TestProject
+            //Creamos un proyecto nuevo con los  datos estrictamente necesarios
+            var ProyectoEncontrado = new everisapi.API.Models.ProyectoDto
+            {
+                Id = proyectoDeUsuario.Id,
+                Nombre = proyectoDeUsuario.Nombre,
+                Fecha = proyectoDeUsuario.Fecha,
+                Proyecto = proyectoDeUsuario.Proyecto,
+                numFinishedEvals = _context.Evaluaciones.Where(e => e.ProyectoId == proyectoDeUsuario.Id && e.Estado).Count(),
+                numPendingEvals = _context.Evaluaciones.Where(e => e.ProyectoId == proyectoDeUsuario.Id && !e.Estado).Count(),
+                TestProject = proyectoDeUsuario.TestProject
             };
 
             return ProyectoEncontrado;
@@ -62,6 +63,7 @@ namespace everisapi.API.Services
                     p.numFinishedEvals = _context.Evaluaciones.Where(e => e.ProyectoId == pe.Id && e.Estado).Count();
                     p.numPendingEvals = _context.Evaluaciones.Where(e => e.ProyectoId == pe.Id && !e.Estado).Count();
                     p.TestProject = pe.TestProject;
+                    p.Oficina = pe.Oficina;
                     proyectos.Add(p);
                 }
             }
@@ -80,6 +82,7 @@ namespace everisapi.API.Services
                     p.numFinishedEvals = _context.Evaluaciones.Where(e => e.ProyectoId == pe.Id && e.Estado).Count();
                     p.numPendingEvals = _context.Evaluaciones.Where(e => e.ProyectoId == pe.Id && !e.Estado).Count();
                     p.TestProject = pe.TestProject;
+                    p.Oficina = pe.Oficina;
                     proyectos.Add(p);
                 }
                 proyectos = proyectos.OrderBy(pro => pro.Proyecto).ToList();
@@ -87,6 +90,14 @@ namespace everisapi.API.Services
 
             return proyectos;
 
+        }
+
+        //Recoge todos los proyectos de un usuario con evaluaciones pendientes
+        public IEnumerable<ProyectoDto> GetProyectosDeUsuarioConEvaluacionesPendientes(string userNombre)
+        {
+            var proyectos = this.GetProyectosDeUsuario(userNombre);
+            proyectos = proyectos.Where(p => p.numPendingEvals > 0).ToList();
+            return proyectos;
         }
 
         //Recoge todos los proyectos de todos los usuarios que no sean de tipo test

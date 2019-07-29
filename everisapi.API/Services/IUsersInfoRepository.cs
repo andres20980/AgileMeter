@@ -21,6 +21,9 @@ namespace everisapi.API.Services
     //Devuelve un proyecto de un usuario
     ProyectoDto GetOneProyecto(string userNombre, int proyectoId);
 
+    //Devuelve todos los proyectos de un usuario con evaluaciones pendientes
+     IEnumerable<ProyectoDto> GetProyectosDeUsuarioConEvaluacionesPendientes(string userNombre);
+
     //Devuelve si un usuario existe o no
     bool UserExiste(string userNombre);
 

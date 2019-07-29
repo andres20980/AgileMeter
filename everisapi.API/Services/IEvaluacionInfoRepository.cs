@@ -44,7 +44,7 @@ namespace everisapi.API.Services
         List<EvaluacionInfoWithSectionsDto> GetEvaluationsWithSectionsInfo(int IdProject, EvaluacionInfoPaginationDto Evaluacion, int codigoIdioma);
 
         List<EvaluacionInfoWithProgressDto> GetEvaluationsWithProgress(int IdProject, EvaluacionInfoPaginationDto Evaluacion);
-
+        List<EvaluacionInfoWithProgressDto> GetAllEvaluationsWithProgress(EvaluacionInfoPaginationDto Evaluacion, string userNombre);
         //Devuelve un número entero de las evaluaciones por proyecto o todas las evaluaciones
         int GetNumEval(int idProject);
 

@@ -1,6 +1,74 @@
 <mat-form-field class = "ml-5">
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'PENDING_EVALUATION_TABLE.FILTER' | translate }}">
 </mat-form-field>
+<mat-form-field class="ml-2 col-3">
+  <mat-select placeholder="Oficina" [(value)]="OficinaSeleccionada" multiple>
+    <mat-select-trigger>
+      {{OficinaSeleccionada[0] ? OficinaSeleccionada[0] : ''}}
+      <span *ngIf="OficinaSeleccionada?.length > 1 && OficinaSeleccionada[0] !== 'TODAS'">
+        (+{{OficinaSeleccionada.length - 1}} {{OficinaSeleccionada.length > 1 ? 'others' : 'other'}})
+      </span>
+    </mat-select-trigger>
+    <div *ngFor="let oficina of ListaDeOficinas; let i = index">
+      <mat-option [value]="oficina" *ngIf="i==0" (click)="seleccionarTodasOficinas()">
+        {{oficina}}
+      </mat-option>
+      <mat-option [value]="oficina" *ngIf="i!=0" (click)="selectOficinas()">
+        {{oficina}}
+      </mat-option>
+    </div>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field class="ml-2 col-3">
+  <mat-select placeholder="Equipos" [(value)]="EquipoSeleccionado" multiple>
+    <mat-select-trigger>
+      <div *ngIf="EquipoSeleccionado[0]?.id != -1">
+        {{EquipoSeleccionado[0]?.proyecto ? EquipoSeleccionado[0]?.proyecto : ''}} -
+        {{EquipoSeleccionado[0]?.nombre ? EquipoSeleccionado[0]?.nombre : ''}}
+        <span *ngIf="EquipoSeleccionado?.length > 1 && EquipoSeleccionado[0].nombre !== 'TODAS'">
+          (+{{EquipoSeleccionado.length - 1}} {{EquipoSeleccionado.length > 1 ? 'others' : 'other'}})
+        </span>
+      </div>
+      <div *ngIf="EquipoSeleccionado[0]?.id == -1">
+        {{EquipoSeleccionado[0]?.nombre ? EquipoSeleccionado[0]?.nombre : ''}}
+        <span *ngIf="EquipoSeleccionado?.length > 1 && EquipoSeleccionado[0].nombre !== 'TODAS'">
+          (+{{EquipoSeleccionado.length - 1}} {{EquipoSeleccionado.length > 1 ? 'others' : 'other'}})
+        </span>
+      </div>
+    </mat-select-trigger>
+    <div *ngFor="let equipo of ListaDeProyectosFiltrada; let i = index">
+      <mat-option [value]="equipo" *ngIf="i!=0" (click)="selectEquipos()">
+        <div *ngIf="equipo.nombre !== 'TODAS'">{{equipo.proyecto}} - {{equipo.nombre}}</div>
+        <div *ngIf="equipo.nombre === 'TODAS'">{{equipo.nombre}}</div>
+      </mat-option>
+      <mat-option [value]="equipo" *ngIf="i==0" (click)="seleccionarTodosEquipos()">
+        <div *ngIf="equipo.nombre !== 'TODAS'">{{equipo.proyecto}} - {{equipo.nombre}}</div>
+        <div *ngIf="equipo.nombre === 'TODAS'">{{equipo.nombre}}</div>
+      </mat-option>
+    </div>
+  </mat-select>
+</mat-form-field>
+
+<mat-form-field class="ml-2 col-3">
+  <mat-select placeholder="Assessment" [(value)]="AssessmentSeleccionado" multiple>
+    <mat-select-trigger>
+      {{AssessmentSeleccionado[0]?.assessmentName ? AssessmentSeleccionado[0]?.assessmentName : ''}}
+      <span *ngIf="AssessmentSeleccionado?.length > 1 && AssessmentSeleccionado[0]?.assessmentName !== 'TODAS'">
+        (+{{AssessmentSeleccionado.length - 1}} {{AssessmentSeleccionado.length > 1 ? 'others' : 'other'}})
+      </span>
+    </mat-select-trigger>
+    <div *ngFor="let assessment of ListaDeAssessmentFiltrada; let i = index">
+      <mat-option [value]="assessment" *ngIf="i!=0" (click)="selectAssessment()">
+        <div *ngIf="assessment.assessmentName !== 'TODAS'">{{assessment.assessmentName}}</div>
+      </mat-option>
+      <mat-option [value]="assessment" *ngIf="i==0" (click)="seleccionarTodosAssessment()">
+        <div *ngIf="assessment.assessmentName === 'TODAS'">{{assessment.assessmentName}}</div>
+      </mat-option>
+    </div>
+  </mat-select>
+</mat-form-field>
+
 
 <div class="table-container">
   <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort aria-label="Elements">
@@ -15,6 +83,18 @@
     <ng-container matColumnDef="userNombre">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'PENDING_EVALUATION_TABLE.TABLE_COL_USER' | translate }}</th>
       <td mat-cell *matCellDef="let row">{{row.userNombre}}</td>
+    </ng-container>
+
+    <!-- Oficina  -->
+    <ng-container matColumnDef="oficina">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Oficina</th>
+      <td mat-cell *matCellDef="let row">{{row.oficina}}</td>
+    </ng-container>
+
+    <!-- Equipo  -->
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Equipo</th>
+      <td mat-cell *matCellDef="let row">{{row.nombre}}</td>
     </ng-container>
 
     <!-- Nombre  -->
