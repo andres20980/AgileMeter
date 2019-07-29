@@ -300,13 +300,13 @@ export class PendingEvaluationTableComponent implements OnInit {
     if (this.EquipoSeleccionado.length > 0) {
       //si no estan marcadas todas las casillas se desmarca la opcion de todas
       if (this.EquipoSeleccionado[0].nombre == "TODAS") {
-        if (this.EquipoSeleccionado.length < this.ListaDeProyectos.length) {
+        if (this.EquipoSeleccionado.length < this.ListaDeProyectosFiltrada.length) {
           this.EquipoSeleccionado = this.EquipoSeleccionado.slice(1);
         }
       }
       //si estan marcadas todas las casillas menos la opcion de todas --> se marca la opcion de todas
       else {
-        if (this.EquipoSeleccionado.length == (this.ListaDeProyectos.length - 1)) {
+        if (this.EquipoSeleccionado.length == (this.ListaDeProyectosFiltrada.length - 1)) {
           this.EquipoSeleccionado = this.ListaDeProyectos;
         }
       }
@@ -387,12 +387,10 @@ export class PendingEvaluationTableComponent implements OnInit {
     if (this.OficinaSeleccionada.length === 0 || this.OficinaSeleccionada[0] === "TODAS") {
       this.ListaDeProyectosFiltrada = this.ListaDeProyectos;
     } else {
-      this.ListaDeProyectosFiltrada = this.ListaDeProyectos.filter(x => this.OficinaSeleccionada.indexOf(x.oficina) >= 0);
-      if (this.ListaDeProyectosFiltrada.length > 1) {
-        this.ListaDeProyectosFiltrada.unshift({ id: -1, nombre: "TODAS", codigo: "", fecha: new Date(0, 0, 0), numFinishedEvals: 0, numPendingEvals: 0, oficina: "TODAS" });
-      }
+      this.ListaDeProyectosFiltrada = this.ListaDeProyectos.filter(x => x.oficina==="TODAS")
+      .concat(this.ListaDeProyectos.filter(x => this.OficinaSeleccionada.indexOf(x.oficina) >= 0));     
     }
-    this.EquipoSeleccionado = this.ListaDeProyectosFiltrada;
+    this.EquipoSeleccionado = this.ListaDeProyectosFiltrada;    
   }
 
   public oficinasDeLosEquiposSeleccionados() {
@@ -405,8 +403,8 @@ export class PendingEvaluationTableComponent implements OnInit {
           oficinas.push(value.oficina);
         }
       });
-      oficinas = oficinas.sort();      
+      oficinas = oficinas.sort();
       this.OficinaSeleccionada = oficinas;
-    }    
+    }
   }
 }
