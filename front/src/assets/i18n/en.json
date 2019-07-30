@@ -194,7 +194,9 @@
 		"EXCEL_DATE": "Date",
 		"EXCEL_USER": "User",
 		"EXCEL_ASSESSMENT": "Assessment",
-		"EXCEL_SCORE": "Score"
+		"EXCEL_SCORE": "Score",
+		"LEVEL": "Level",
+		"OF_LEVEL": "of level"
 	},
 	"SORTED_TABLE": {
 		"FILTER": " Filter",

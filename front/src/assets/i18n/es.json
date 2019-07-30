@@ -194,7 +194,9 @@
 		"EXCEL_DATE": "Fecha",
 		"EXCEL_USER": "Usuario",
 		"EXCEL_ASSESSMENT": "Evaluación",
-		"EXCEL_SCORE": "Puntuación"
+		"EXCEL_SCORE": "Puntuación",
+		"LEVEL": "Nivel",
+		"OF_LEVEL": "del nivel"
 	},
 	"SORTED_TABLE": {
 		"FILTER": " Filtro",
