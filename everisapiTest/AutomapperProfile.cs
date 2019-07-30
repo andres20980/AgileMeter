@@ -22,6 +22,7 @@ namespace everisapiTest
                 cfg.CreateMap<everisapi.API.Models.PreguntaCreateDto, everisapi.API.Entities.PreguntaEntity>();
                 cfg.CreateMap<everisapi.API.Models.PreguntaUpdateDto, everisapi.API.Entities.PreguntaEntity>();
                 cfg.CreateMap<everisapi.API.Models.AsignacionCreateUpdateDto, everisapi.API.Entities.AsignacionEntity>();
+                cfg.CreateMap<everisapi.API.Models.SectionWithoutAreaDto, everisapi.API.Entities.SectionEntity>();
             });
         }
     }

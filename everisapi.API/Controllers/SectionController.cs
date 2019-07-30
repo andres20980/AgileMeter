@@ -254,7 +254,11 @@ namespace everisapi.API.Controllers
     {
 
       //Si los datos son validos los guardara
-      if (SectionAdd == null || _sectionInfoRepository.GetSection(SectionAdd.Id, false) != null)
+      if (SectionAdd == null) 
+      {
+        return BadRequest();
+      }
+      else if (_sectionInfoRepository.GetSection(SectionAdd.Id, false) != null)
       {
         return BadRequest();
       }
@@ -280,7 +284,11 @@ namespace everisapi.API.Controllers
     public IActionResult UpdateSection([FromBody] SectionWithoutAreaDto SectionUpdate)
     {
       //Si los datos son validos los guardara
-      if (SectionUpdate == null || _sectionInfoRepository.GetSection(SectionUpdate.Id, false) == null)
+      if (SectionUpdate == null)
+      {
+        return BadRequest();
+      }
+      else if (_sectionInfoRepository.GetSection(SectionUpdate.Id, false) == null)
       {
         return BadRequest();
       }
@@ -306,9 +314,13 @@ namespace everisapi.API.Controllers
     public IActionResult AddNotas([FromBody] SectionWithNotasDto SectionUpdate)
     {
       //Si los datos son validos
-      if (SectionUpdate == null || _sectionInfoRepository.GetSection(SectionUpdate.SectionId, false) == null)
+      if (SectionUpdate == null)
       {
         return BadRequest();
+      }
+      else if (_sectionInfoRepository.GetSection(SectionUpdate.SectionId, false) == null)
+      {
+          return BadRequest();
       }
 
       if (!ModelState.IsValid)
@@ -340,7 +352,11 @@ namespace everisapi.API.Controllers
     public IActionResult DeleteSection([FromBody] SectionWithoutAreaDto SectionDelete)
     {
       //Si los datos son validos los guardara
-      if (SectionDelete == null || _sectionInfoRepository.GetSection(SectionDelete.Id, false) == null)
+      if (SectionDelete == null)
+      {
+        return BadRequest();
+      }
+      else if (_sectionInfoRepository.GetSection(SectionDelete.Id, false) == null)
       {
         return BadRequest();
       }
