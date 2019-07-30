@@ -22,5 +22,8 @@ namespace everisapi.API.Models
 
     public string UserNombre { get; set; }
 
+    public string[] Oficinas{get;set;}
+    public int[] Equipos{get;set;}
+
   }
 }

@@ -702,8 +702,9 @@ namespace everisapi.API.Services
             Where(e =>
             (equipos.Count > 0 ? (equipos.Contains(e.ProyectoId)) : 1 == 1) &&
             e.Estado == Boolean.Parse(EvaluacionParaFiltrar.Estado) &&
-            e.ProyectoEntity.TestProject == false //&&
-            //(EvaluacionParaFiltrar.Oficina != "" ? (e.ProyectoEntity.Oficina.Equals(EvaluacionParaFiltrar.Oficina)) : 1 == 1) &&
+            e.ProyectoEntity.TestProject == false &&
+            (EvaluacionParaFiltrar.Oficinas.Length > 0 ? (Array.Exists(EvaluacionParaFiltrar.Oficinas, element => element == e.ProyectoEntity.Oficina)) : 1 == 1) &&
+            (EvaluacionParaFiltrar.Equipos.Length > 0 ? (Array.Exists(EvaluacionParaFiltrar.Equipos, element => element == e.ProyectoId)) : 1 == 1) //&&
             //(EvaluacionParaFiltrar.Nombre != "" ? (e.ProyectoEntity.Nombre == EvaluacionParaFiltrar.Nombre) : 1 == 1)
             ).OrderByDescending(e => e.Fecha).ToList();
 

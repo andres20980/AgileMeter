@@ -134,6 +134,21 @@ export class PendingEvaluationTableComponent implements OnInit {
   }
   //Metodo encargado de refrescar la tabla 
   public refresh() {
+    var o = this.OficinaSeleccionada;
+    //si es TODAS dejamos el array vacio  --> pasamos menos datos y excluimos una comparacion en la consulta --> mas optima
+    if (this.OficinaSeleccionada.length === 0 || this.OficinaSeleccionada[0] == "TODAS") {
+      o = [];//o = this.ListaDeOficinas;
+    }
+    var e = [];
+    if (this.EquipoSeleccionado.length === 0 || this.EquipoSeleccionado[0].nombre == "TODAS") {
+      e = [];
+    } else {
+      this.EquipoSeleccionado.forEach(function (element) {
+        e.push(element.id);
+      });
+    }
+    var a = 0;//[] ;
+    this.parent.EvaluacionFiltrar ={ 'nombre': '', 'estado': 'false', 'fecha': '', 'userNombre': '', 'puntuacion': '', 'assessmentId': a, 'oficinas':o, equipos:e};
     this.parent.GetPaginacion();
 
   }
@@ -281,6 +296,7 @@ export class PendingEvaluationTableComponent implements OnInit {
       }
     }
     //Modificamos el select del equipo y assessment mostrando los de las oficinas seleccionadas
+    this.refresh();
     this.equiposDeLasOficinasSeleccionadas();
   }
   public seleccionarTodasOficinas() {
@@ -292,6 +308,7 @@ export class PendingEvaluationTableComponent implements OnInit {
     }
     //Modificamos el select del equipo y assessment mostrando los de las oficinas seleccionadas
     this.equiposDeLasOficinasSeleccionadas();
+    this.refresh();
   }
 
   // FUNCIONES SELECT DE EQUIPOS
@@ -312,6 +329,7 @@ export class PendingEvaluationTableComponent implements OnInit {
       }
     }
     this.oficinasDeLosEquiposSeleccionados();
+    this.refresh();
   }
   public seleccionarTodosEquipos() {
     //marcamos / desmarcamos todas las opciones    
@@ -321,6 +339,7 @@ export class PendingEvaluationTableComponent implements OnInit {
       this.EquipoSeleccionado = [];
     }
     this.oficinasDeLosEquiposSeleccionados();
+    this.refresh();
   }
 
   // FUNCIONES SELECT DE ASSESSMENT
@@ -387,15 +406,25 @@ export class PendingEvaluationTableComponent implements OnInit {
     if (this.OficinaSeleccionada.length === 0 || this.OficinaSeleccionada[0] === "TODAS") {
       this.ListaDeProyectosFiltrada = this.ListaDeProyectos;
     } else {
-      this.ListaDeProyectosFiltrada = this.ListaDeProyectos.filter(x => x.oficina==="TODAS")
-      .concat(this.ListaDeProyectos.filter(x => this.OficinaSeleccionada.indexOf(x.oficina) >= 0));     
+      this.ListaDeProyectosFiltrada = this.ListaDeProyectos.filter(x => x.oficina === "TODAS")
+        .concat(this.ListaDeProyectos.filter(x => this.OficinaSeleccionada.indexOf(x.oficina) >= 0));
     }
-    this.EquipoSeleccionado = this.ListaDeProyectosFiltrada;    
+    this.EquipoSeleccionado = this.ListaDeProyectosFiltrada;
   }
 
   public oficinasDeLosEquiposSeleccionados() {
     if (this.EquipoSeleccionado.length === 0 || this.EquipoSeleccionado[0].oficina === "TODAS") {
-      this.OficinaSeleccionada = this.ListaDeOficinas;
+      if (this.EquipoSeleccionado.length !== 0 && this.EquipoSeleccionado[0].oficina === "TODAS") {
+        var o = [];
+        this.ListaDeProyectosFiltrada.forEach(function (element) {
+          if (element.oficina != "TODAS") {
+            o.push(element.oficina);
+          }
+        });
+        this.OficinaSeleccionada = o;
+      } else {
+        this.OficinaSeleccionada = [];
+      }
     } else {
       var oficinas = [];
       this.EquipoSeleccionado.forEach(function (value) {
