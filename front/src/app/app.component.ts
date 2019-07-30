@@ -4,6 +4,7 @@ import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { ProyectoService } from './services/ProyectoService';
 import { TranslateService } from '@ngx-translate/core';
+import { EnumIdiomas } from './Models/EnumIdiomas';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ export class AppComponent {
   public RolDeUsuario: boolean = false;
   public ScreenWidth;
   public AssessmentName: string = null;
+  public idioma: EnumIdiomas = new EnumIdiomas();
 
   //Para la barra de arriba
   @HostListener('window:resize', ['$event'])
@@ -29,7 +31,8 @@ export class AppComponent {
   constructor(
     public _storageDataService: StorageDataService,
     public _router: Router,
-    public translate: TranslateService) {
+    public translate: TranslateService
+  ) {
     this.ScreenWidth = window.innerWidth;
 
     translate.addLangs(['es', 'en']);
@@ -37,13 +40,32 @@ export class AppComponent {
 
     const browserLang = translate.getBrowserLang();
     translate.use(browserLang.match(/es|en/) ? browserLang : 'es');
+    this.obtenerCodigoIdioma(browserLang);
   }
 
   public ChangeLang(lang: string) {
     this.translate.use(lang);
     this.refreshBreadCrumb();
+    this.obtenerCodigoIdioma(lang);
+    this._router.navigate(["/home"]);
   }
 
+  public obtenerCodigoIdioma(lang) {
+    switch (lang) {
+      case 'es': {
+        this._storageDataService.codigoIdioma = this.idioma.Español;
+        break;
+      }
+      case 'en': {
+        this._storageDataService.codigoIdioma = this.idioma.Ingles;
+        break;
+      }
+      default: {
+        this._storageDataService.codigoIdioma = this.idioma.Español;
+        break;
+      }
+    }
+  }
 
   public ComprobarUserYToken() {
     //Recogemos los datos

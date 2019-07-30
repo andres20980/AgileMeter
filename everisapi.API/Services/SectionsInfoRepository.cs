@@ -8,443 +8,461 @@ using System.Threading.Tasks;
 
 namespace everisapi.API.Services
 {
-  public class SectionsInfoRepository : ISectionsInfoRepository
-  {
-
-    private AsignacionInfoContext _context;
-
-    //Constructor genera el context
-    public SectionsInfoRepository(AsignacionInfoContext context)
+    public class SectionsInfoRepository : ISectionsInfoRepository
     {
-      _context = context;
-    }
 
-    //Devolvemos el numero de preguntas de la seccion filtrada por proyecto
-    public int GetNumPreguntasFromSection(int idSection, int idEvaluacion)
-    {
-      return _context.Respuestas.Where(r => r.EvaluacionId == idEvaluacion && r.PreguntaEntity.AsignacionEntity.SectionId == idSection).Count();
-    }
+        private AsignacionInfoContext _context;
 
-    //Devolvemos el numero de preguntas respondidas de la seccion filtrada por proyecto
-    public int GetRespuestasCorrectasFromSection(int idSection, int idEvaluacion)
-    {
-      return _context.Respuestas.Where(r => r.EvaluacionId == idEvaluacion && r.Estado == 1 && r.PreguntaEntity.AsignacionEntity.SectionId == idSection).Count();
-    }
-
-    //Devuelve un objeto estado con información extendida de una unica sección
-    public SectionInfoDto GetSectionsInfoFromSectionId(int evaluationId, int sectionId)
-    {
-      //Recoge las respuestas de la evaluación
-      var Respuestas = _context.Respuestas.
-        Include(r => r.PreguntaEntity).
-          ThenInclude(rp => rp.AsignacionEntity).
-            ThenInclude(rpa => rpa.SectionEntity).            
-        Where(r => r.EvaluacionId == evaluationId).ToList();
-
-      //Saca las en que secciones estuvo en ese momento
-      var section = Respuestas.Where(r => r.PreguntaEntity.AsignacionEntity.SectionId == sectionId)
-      .Select(r => r.PreguntaEntity.AsignacionEntity.SectionEntity).FirstOrDefault();
-
-      SectionInfoDto sectionInfo = new SectionInfoDto
+        //Constructor genera el context
+        public SectionsInfoRepository(AsignacionInfoContext context)
         {
-          Id = section.Id,
-          Nombre = section.Nombre,
-          Preguntas = Respuestas.Where(r => r.PreguntaEntity.AsignacionEntity.SectionEntity.Id == section.Id).Count(),
-        };
-      var notasSec = _context.NotasSections.Where(r => r.SectionId == section.Id && r.EvaluacionId == evaluationId).FirstOrDefault();
-
-      if(notasSec == null)
-      {
-        notasSec = new NotasSectionsEntity
-        {
-          EvaluacionEntity = _context.Evaluaciones.Where(s => s.Id == evaluationId).FirstOrDefault(),
-          SectionEntity = _context.Sections.Where(s => s.Id == section.Id).FirstOrDefault()
-        };
-
-        _context.NotasSections.Add(notasSec);
-      }
-
-      sectionInfo.Notas = notasSec.Notas;
-
-      //Para calcular el progreso
-      var listaAsignaciones = _context.Asignaciones.Where(r => r.SectionId == section.Id).ToList();
-
-      int contestadas = 0;
-      foreach(AsignacionEntity asig in listaAsignaciones)
-      {
-        var respuestasAsig = Respuestas.Where(p => p.PreguntaEntity.AsignacionEntity.Id == asig.Id).ToList();
-
-        //Para ver si la primera es de las que habilitan a las demás o no
-        //y si está contestada a NO (para contar las demás como contestadas
-        bool flag = false;
-        if(respuestasAsig[0].PreguntaEntity.Correcta == null && respuestasAsig[0].Estado == 2)
-        {
-          flag = true;
+            _context = context;
         }
 
-
-        foreach(RespuestaEntity resp in respuestasAsig)
+        //Devolvemos el numero de preguntas de la seccion filtrada por proyecto
+        public int GetNumPreguntasFromSection(int idSection, int idEvaluacion)
         {
-          if(flag)
-          {
-            contestadas++;
-          }
-          else if (resp.Estado != 0)
-          {
-            contestadas++;
-          }
+            return _context.Respuestas.Where(r => r.EvaluacionId == idEvaluacion && r.PreguntaEntity.AsignacionEntity.SectionId == idSection).Count();
         }
 
-      }
-      
-      sectionInfo.Contestadas = contestadas;
-      sectionInfo.Progreso = Math.Round( ((double)sectionInfo.Contestadas / sectionInfo.Preguntas) *100, 1);
-
-
-      var listaRespuestas = Respuestas.Where(r => r.PreguntaEntity.AsignacionEntity.SectionEntity.Id == section.Id).ToList();
-      double suma = 0;
-      double puntosCorrectos = 0;
-
-      foreach (var resp in listaRespuestas)
-      {
-        if (resp.PreguntaEntity.Correcta != null)
+        //Devolvemos el numero de preguntas respondidas de la seccion filtrada por proyecto
+        public int GetRespuestasCorrectasFromSection(int idSection, int idEvaluacion)
         {
-          var maxPuntos = Respuestas.Where(r => r.PreguntaEntity.Correcta != null && r.PreguntaEntity.AsignacionId == resp.PreguntaEntity.AsignacionId).Count();
-          var puntos = (double)resp.PreguntaEntity.AsignacionEntity.Peso / maxPuntos;
-
-          puntosCorrectos += puntos;
-
-          if (resp.Estado == 1 && resp.PreguntaEntity.Correcta.Equals("Si"))
-          {
-            suma += puntos;
-          }
-
-          else if (resp.Estado == 2 && resp.PreguntaEntity.Correcta.Equals("No"))
-          {
-            suma += puntos;
-          }
-
-        }
-      }
-
-      sectionInfo.RespuestasCorrectas = Math.Round(100 * suma/puntosCorrectos, 1);
-      return sectionInfo;
-    }
-
-    //Devuelve un objeto estado con información extendida
-    public IEnumerable<SectionInfoDto> GetSectionsInfoFromEval(int idEvaluacion)
-    {
-      //Recoge las respuestas de la evaluación
-      List<SectionInfoDto> ListadoSectionInformacion = new List<SectionInfoDto>();
-      var Respuestas = _context.Respuestas.
-        Include(r => r.PreguntaEntity).
-          ThenInclude(rp => rp.AsignacionEntity).
-            ThenInclude(rpa => rpa.SectionEntity).            
-        Where(r => r.EvaluacionId == idEvaluacion).ToList();
-
-      //Saca las en que secciones estuvo en ese momento
-      var SectionsUtilizadas = Respuestas.Select(r => r.PreguntaEntity.AsignacionEntity.SectionEntity).Distinct().ToList();
-
-
-      //Rellena los datos y los añade a la lista para cada sección
-      foreach (var section in SectionsUtilizadas)
-      {
-        SectionInfoDto SectionAdd = new SectionInfoDto
-        {
-          Id = section.Id,
-          Nombre = section.Nombre,
-          Preguntas = Respuestas.Where(r => r.PreguntaEntity.AsignacionEntity.SectionEntity.Id == section.Id).Count(),
-        };
-
-        var notasSec = _context.NotasSections.Where(r => r.SectionId == section.Id && r.EvaluacionId == idEvaluacion).FirstOrDefault();
-
-        if(notasSec == null)
-        {
-          notasSec = new NotasSectionsEntity
-          {
-            EvaluacionEntity = _context.Evaluaciones.Where(s => s.Id == idEvaluacion).FirstOrDefault(),
-            SectionEntity = _context.Sections.Where(s => s.Id == section.Id).FirstOrDefault()
-          };
-
-          _context.NotasSections.Add(notasSec);
+            return _context.Respuestas.Where(r => r.EvaluacionId == idEvaluacion && r.Estado == 1 && r.PreguntaEntity.AsignacionEntity.SectionId == idSection).Count();
         }
 
-        SectionAdd.Notas = notasSec.Notas;
-
-        //Para calcular el progreso
-        var listaAsignaciones = _context.Asignaciones.Where(r => r.SectionId == section.Id).ToList();
-
-        int contestadas = 0;
-        foreach(AsignacionEntity asig in listaAsignaciones)
+        //Devuelve un objeto estado con información extendida de una unica sección
+        public SectionInfoDto GetSectionsInfoFromSectionId(int evaluationId, int sectionId)
         {
-          var respuestasAsig = Respuestas.Where(p => p.PreguntaEntity.AsignacionEntity.Id == asig.Id).ToList();
+            //Recoge las respuestas de la evaluación
+            var Respuestas = _context.Respuestas.
+              Include(r => r.PreguntaEntity).
+                ThenInclude(rp => rp.AsignacionEntity).
+                  ThenInclude(rpa => rpa.SectionEntity).
+              Where(r => r.EvaluacionId == evaluationId).ToList();
 
-          //Para ver si la primera es de las que habilitan a las demás o no
-          //y si está contestada a NO (para contar las demás como contestadas
-          bool flag = false;
-          if(respuestasAsig[0].PreguntaEntity.Correcta == null && respuestasAsig[0].Estado == 2)
-          {
-            flag = true;
-          }
+            //Saca las en que secciones estuvo en ese momento
+            var section = Respuestas.Where(r => r.PreguntaEntity.AsignacionEntity.SectionId == sectionId)
+            .Select(r => r.PreguntaEntity.AsignacionEntity.SectionEntity).FirstOrDefault();
 
-
-          foreach(RespuestaEntity resp in respuestasAsig)
-          {
-            if(flag)
+            SectionInfoDto sectionInfo = new SectionInfoDto
             {
-              contestadas++;
-            }
-            else if (resp.Estado != 0)
+                Id = section.Id,
+                // Nombre = section.Nombre,
+                Nombre = "",
+                Preguntas = Respuestas.Where(r => r.PreguntaEntity.AsignacionEntity.SectionEntity.Id == section.Id).Count(),
+            };
+            var notasSec = _context.NotasSections.Where(r => r.SectionId == section.Id && r.EvaluacionId == evaluationId).FirstOrDefault();
+
+            if (notasSec == null)
             {
-              contestadas++;
-            }
-          }
+                notasSec = new NotasSectionsEntity
+                {
+                    EvaluacionEntity = _context.Evaluaciones.Where(s => s.Id == evaluationId).FirstOrDefault(),
+                    SectionEntity = _context.Sections.Where(s => s.Id == section.Id).FirstOrDefault()
+                };
 
-        }
-        
-        SectionAdd.Contestadas = contestadas;
-        SectionAdd.Progreso = Math.Round( ((double)SectionAdd.Contestadas / SectionAdd.Preguntas) *100, 1);
-
-
-        var listaRespuestas = Respuestas.Where(r => r.PreguntaEntity.AsignacionEntity.SectionEntity.Id == section.Id).ToList();
-        double suma = 0;
-        double puntosCorrectos = 0;
-
-        foreach (var resp in listaRespuestas)
-        {
-          if (resp.PreguntaEntity.Correcta != null)
-          {
-            var maxPuntos = Respuestas.Where(r => r.PreguntaEntity.Correcta != null && r.PreguntaEntity.AsignacionId == resp.PreguntaEntity.AsignacionId).Count();
-            var puntos = (double)resp.PreguntaEntity.AsignacionEntity.Peso / maxPuntos;
-
-            puntosCorrectos += puntos;
-
-            if (resp.Estado == 1 && resp.PreguntaEntity.Correcta.Equals("Si"))
-            {
-              suma += puntos;
+                _context.NotasSections.Add(notasSec);
             }
 
-            else if (resp.Estado == 2 && resp.PreguntaEntity.Correcta.Equals("No"))
+            sectionInfo.Notas = notasSec.Notas;
+
+            //Para calcular el progreso
+            var listaAsignaciones = _context.Asignaciones.Where(r => r.SectionId == section.Id).ToList();
+
+            int contestadas = 0;
+            foreach (AsignacionEntity asig in listaAsignaciones)
             {
-              suma += puntos;
+                var respuestasAsig = Respuestas.Where(p => p.PreguntaEntity.AsignacionEntity.Id == asig.Id).ToList();
+
+                //Para ver si la primera es de las que habilitan a las demás o no
+                //y si está contestada a NO (para contar las demás como contestadas
+                bool flag = false;
+                if (respuestasAsig[0].PreguntaEntity.Correcta == null && respuestasAsig[0].Estado == 2)
+                {
+                    flag = true;
+                }
+
+
+                foreach (RespuestaEntity resp in respuestasAsig)
+                {
+                    if (flag)
+                    {
+                        contestadas++;
+                    }
+                    else if (resp.Estado != 0)
+                    {
+                        contestadas++;
+                    }
+                }
+
             }
 
-          }
-        }
-
-        SectionAdd.RespuestasCorrectas = Math.Round(100 * suma/puntosCorrectos, 1);
-
-        ListadoSectionInformacion.Add(SectionAdd);
-      }
-
-      return ListadoSectionInformacion;
-    }
-
-    public IEnumerable<SectionInfoDto> GetSectionsInfoFromEvalNew(int idEvaluacion,int assessmentId)
-    {
-      //Recoge las respuestas de la evaluación
-      List<SectionInfoDto> ListadoSectionInformacion = new List<SectionInfoDto>();
-      var Respuestas = _context.Respuestas.
-        Include(r => r.PreguntaEntity).
-          ThenInclude(rp => rp.AsignacionEntity).
-            ThenInclude(rpa => rpa.SectionEntity).            
-        Where(r => r.EvaluacionId == idEvaluacion && r.PreguntaEntity.AsignacionEntity.SectionEntity.AssessmentId == assessmentId).ToList();
-
-      //Saca las en que secciones estuvo en ese momento
-      var SectionsUtilizadas = Respuestas.Select(r => r.PreguntaEntity.AsignacionEntity.SectionEntity).Distinct().ToList();
+            sectionInfo.Contestadas = contestadas;
+            sectionInfo.Progreso = Math.Round(((double)sectionInfo.Contestadas / sectionInfo.Preguntas) * 100, 1);
 
 
-      //Rellena los datos y los añade a la lista para cada sección
-      foreach (var section in SectionsUtilizadas)
-      {
-        SectionInfoDto SectionAdd = new SectionInfoDto
-        {
-          Id = section.Id,
-          Nombre = section.Nombre,
-          Preguntas = Respuestas.Where(r => r.PreguntaEntity.AsignacionEntity.SectionEntity.Id == section.Id).Count(),
-        };
+            var listaRespuestas = Respuestas.Where(r => r.PreguntaEntity.AsignacionEntity.SectionEntity.Id == section.Id).ToList();
+            double suma = 0;
+            double puntosCorrectos = 0;
 
-        var notasSec = _context.NotasSections.Where(r => r.SectionId == section.Id && r.EvaluacionId == idEvaluacion).FirstOrDefault();
-
-        if(notasSec == null)
-        {
-          notasSec = new NotasSectionsEntity
-          {
-            EvaluacionEntity = _context.Evaluaciones.Where(s => s.Id == idEvaluacion).FirstOrDefault(),
-            SectionEntity = _context.Sections.Where(s => s.Id == section.Id).FirstOrDefault()
-          };
-
-          _context.NotasSections.Add(notasSec);
-        }
-
-        SectionAdd.Notas = notasSec.Notas;
-
-        //Para calcular el progreso
-        SectionAdd = this.CalculateSectionInfoProgress(SectionAdd, idEvaluacion);
-        
-        var listaRespuestas = Respuestas.Where(r => r.PreguntaEntity.AsignacionEntity.SectionEntity.Id == section.Id).ToList();
-        double suma = 0;
-        double puntosCorrectos = 0;
-
-        foreach (var resp in listaRespuestas)
-        {
-          if (resp.PreguntaEntity.Correcta != null)
-          {
-            var maxPuntos = Respuestas.Where(r => r.PreguntaEntity.Correcta != null && r.PreguntaEntity.AsignacionId == resp.PreguntaEntity.AsignacionId).Count();
-            var puntos = (double)resp.PreguntaEntity.AsignacionEntity.Peso / maxPuntos;
-
-            puntosCorrectos += puntos;
-
-            if (resp.Estado == 1 && resp.PreguntaEntity.Correcta.Equals("Si"))
+            foreach (var resp in listaRespuestas)
             {
-              suma += puntos;
+                if (resp.PreguntaEntity.Correcta != null)
+                {
+                    var maxPuntos = Respuestas.Where(r => r.PreguntaEntity.Correcta != null && r.PreguntaEntity.AsignacionId == resp.PreguntaEntity.AsignacionId).Count();
+                    var puntos = (double)resp.PreguntaEntity.AsignacionEntity.Peso / maxPuntos;
+
+                    puntosCorrectos += puntos;
+
+                    if (resp.Estado == 1 && resp.PreguntaEntity.Correcta.Equals("Si"))
+                    {
+                        suma += puntos;
+                    }
+
+                    else if (resp.Estado == 2 && resp.PreguntaEntity.Correcta.Equals("No"))
+                    {
+                        suma += puntos;
+                    }
+
+                }
             }
 
-            else if (resp.Estado == 2 && resp.PreguntaEntity.Correcta.Equals("No"))
-            {
-              suma += puntos;
-            }
-
-          }
+            sectionInfo.RespuestasCorrectas = Math.Round(100 * suma / puntosCorrectos, 1);
+            return sectionInfo;
         }
 
-        SectionAdd.RespuestasCorrectas = Math.Round(100 * suma/puntosCorrectos, 1);
-
-        ListadoSectionInformacion.Add(SectionAdd);
-      }
-
-      return ListadoSectionInformacion.OrderBy(x => x.Id);
-    }
-
-    //Devolvemos las asignaciones de una section
-    IEnumerable<AsignacionEntity> ISectionsInfoRepository.GetAsignacionesFromSection(SectionEntity section)
-    {
-      var sectionSelected = _context.Sections.Where(p => p == section).FirstOrDefault();
-      return sectionSelected.Asignaciones;
-    }
-
-    //Encuentra una asignacion filtrada por una section y la id de esa asignación
-    AsignacionEntity ISectionsInfoRepository.GetAsignacionFromSection(SectionEntity section, int idAsignacion)
-    {
-      var sectionSelected = _context.Sections.Where(p => p == section).FirstOrDefault();
-      return sectionSelected.Asignaciones.Where(a => a.Id == idAsignacion).FirstOrDefault();
-    }
-
-    //Recoge una sección por su id y puedes incluir las sections o no
-    SectionEntity ISectionsInfoRepository.GetSection(int id, bool IncluirAsignaciones)
-    {
-
-      if (IncluirAsignaciones)
-      {
-        //Si se quiere incluir las asignaciones de la section entrara aquí
-        //Incluimos las asignaciones de la section especificada (Include extiende de Microsoft.EntityFrameworkCore)
-        return _context.Sections.Include(s => s.Asignaciones).
-            Where(s => s.Id == id).FirstOrDefault();
-      }
-      else
-      {
-        //Si no es así devolveremos solo la section
-        return _context.Sections.Where(p => p.Id == id).FirstOrDefault();
-      }
-    }
-
-    //Recoge todas las sections
-    IEnumerable<SectionEntity> ISectionsInfoRepository.GetSections()
-    {
-      return _context.Sections.ToList();
-    }
-
-    //Metodo encargado de obtener las repsuestas dadas en la seccion y calcular el progreso actual de esta
-    public SectionInfoDto CalculateSectionInfoProgress(SectionInfoDto sectionInfo, int evaluationId)
-    {
-      List<RespuestaEntity> questionsAnswered;
-      List<int> enablingQuestiontsSi;
-
-      //Respuestas de las preguntas contenstadas de la seccion
-      questionsAnswered = (from r in _context.Respuestas
-      join p in _context.Preguntas on r.PreguntaId equals p.Id
-      join a in _context.Asignaciones on p.AsignacionId equals a.Id
-      where r.EvaluacionId == evaluationId
-      && a.SectionId == sectionInfo.Id
-      && r.Estado != 0
-      select r)
-      .ToList()
-      ;
-
-      //Preguntas habilitantes a la que se ha respondido SI
-      enablingQuestiontsSi = questionsAnswered.Where(r => r.Estado == 1
-      && r.PreguntaEntity.EsHabilitante).Select(p => p.PreguntaEntity.Id).ToList();
-
-      //Preguntas que NO dependen de una habilitante O cuya habilitante de la que dependan haya sido respondia con un SI
-      sectionInfo.Preguntas = (from p in _context.Preguntas 
-      join r in _context.Respuestas on p.Id equals r.PreguntaId
-      join a in _context.Asignaciones on p.AsignacionId equals a.Id
-      where r.EvaluacionId == evaluationId
-      && a.SectionId == sectionInfo.Id
-      && (enablingQuestiontsSi.Contains(p.PreguntaHabilitanteId.Value)
-      || p.PreguntaHabilitanteId == null) 
-      select p.Id).Count();
-
-      //Se establecen los valores del total de respuestas contestadas y del progreso
-      sectionInfo.Contestadas = questionsAnswered.Count();
-      sectionInfo.Progreso = Math.Round( ((double)sectionInfo.Contestadas / sectionInfo.Preguntas) * 100, 1);
-
-      return sectionInfo;
-    }
-
-    //Este metodo nos permite persistir los cambios en las entidades
-    public bool SaveChanges()
-    {
-      return (_context.SaveChanges() >= 0);
-    }
-
-    //Aqui introducimos una nueva section
-    public bool AddSection(SectionEntity section)
-    {
-
-      _context.Sections.Add(section);
-
-      return SaveChanges();
-    }
-
-    //Nos permite modificar una section
-    public bool AlterSection(SectionEntity section)
-    {
-      var SectionAlter = _context.Sections.Where(s => s.Id == section.Id).FirstOrDefault();
-
-      SectionAlter.Nombre = section.Nombre;
-
-      return SaveChanges();
-    }
-
-    //Nos permite modificar las notas una section
-    public bool AddNotasSection(SectionWithNotasDto section)
-    {
-      var SectionAlter = _context.NotasSections.Where(s => s.SectionId == section.SectionId && s.EvaluacionId == section.EvaluacionId).FirstOrDefault();
-
-      if(SectionAlter == null)
-      {
-        SectionAlter = new NotasSectionsEntity
+        //Devuelve un objeto estado con información extendida
+        public IEnumerable<SectionInfoDto> GetSectionsInfoFromEval(int idEvaluacion)
         {
-          EvaluacionEntity = _context.Evaluaciones.Where(s => s.Id == section.EvaluacionId).FirstOrDefault(),
-          SectionEntity = _context.Sections.Where(s => s.Id == section.SectionId).FirstOrDefault()
-        };
+            //Recoge las respuestas de la evaluación
+            List<SectionInfoDto> ListadoSectionInformacion = new List<SectionInfoDto>();
+            var Respuestas = _context.Respuestas.
+              Include(r => r.PreguntaEntity).
+                ThenInclude(rp => rp.AsignacionEntity).
+                  ThenInclude(rpa => rpa.SectionEntity).
+              Where(r => r.EvaluacionId == idEvaluacion).ToList();
 
-        _context.NotasSections.Add(SectionAlter);
-      }
+            //Saca las en que secciones estuvo en ese momento
+            var SectionsUtilizadas = Respuestas.Select(r => r.PreguntaEntity.AsignacionEntity.SectionEntity).Distinct().ToList();
 
-      SectionAlter.Notas = section.Notas;
 
-      return SaveChanges();
+            //Rellena los datos y los añade a la lista para cada sección
+            foreach (var section in SectionsUtilizadas)
+            {
+                SectionInfoDto SectionAdd = new SectionInfoDto
+                {
+                    Id = section.Id,
+                    // Nombre = section.Nombre,
+                    Nombre = "",
+                    Preguntas = Respuestas.Where(r => r.PreguntaEntity.AsignacionEntity.SectionEntity.Id == section.Id).Count(),
+                };
+
+                var notasSec = _context.NotasSections.Where(r => r.SectionId == section.Id && r.EvaluacionId == idEvaluacion).FirstOrDefault();
+
+                if (notasSec == null)
+                {
+                    notasSec = new NotasSectionsEntity
+                    {
+                        EvaluacionEntity = _context.Evaluaciones.Where(s => s.Id == idEvaluacion).FirstOrDefault(),
+                        SectionEntity = _context.Sections.Where(s => s.Id == section.Id).FirstOrDefault()
+                    };
+
+                    _context.NotasSections.Add(notasSec);
+                }
+
+                SectionAdd.Notas = notasSec.Notas;
+
+                //Para calcular el progreso
+                var listaAsignaciones = _context.Asignaciones.Where(r => r.SectionId == section.Id).ToList();
+
+                int contestadas = 0;
+                foreach (AsignacionEntity asig in listaAsignaciones)
+                {
+                    var respuestasAsig = Respuestas.Where(p => p.PreguntaEntity.AsignacionEntity.Id == asig.Id).ToList();
+
+                    //Para ver si la primera es de las que habilitan a las demás o no
+                    //y si está contestada a NO (para contar las demás como contestadas
+                    bool flag = false;
+                    if (respuestasAsig[0].PreguntaEntity.Correcta == null && respuestasAsig[0].Estado == 2)
+                    {
+                        flag = true;
+                    }
+
+
+                    foreach (RespuestaEntity resp in respuestasAsig)
+                    {
+                        if (flag)
+                        {
+                            contestadas++;
+                        }
+                        else if (resp.Estado != 0)
+                        {
+                            contestadas++;
+                        }
+                    }
+
+                }
+
+                SectionAdd.Contestadas = contestadas;
+                SectionAdd.Progreso = Math.Round(((double)SectionAdd.Contestadas / SectionAdd.Preguntas) * 100, 1);
+
+
+                var listaRespuestas = Respuestas.Where(r => r.PreguntaEntity.AsignacionEntity.SectionEntity.Id == section.Id).ToList();
+                double suma = 0;
+                double puntosCorrectos = 0;
+
+                foreach (var resp in listaRespuestas)
+                {
+                    if (resp.PreguntaEntity.Correcta != null)
+                    {
+                        var maxPuntos = Respuestas.Where(r => r.PreguntaEntity.Correcta != null && r.PreguntaEntity.AsignacionId == resp.PreguntaEntity.AsignacionId).Count();
+                        var puntos = (double)resp.PreguntaEntity.AsignacionEntity.Peso / maxPuntos;
+
+                        puntosCorrectos += puntos;
+
+                        if (resp.Estado == 1 && resp.PreguntaEntity.Correcta.Equals("Si"))
+                        {
+                            suma += puntos;
+                        }
+
+                        else if (resp.Estado == 2 && resp.PreguntaEntity.Correcta.Equals("No"))
+                        {
+                            suma += puntos;
+                        }
+
+                    }
+                }
+
+                SectionAdd.RespuestasCorrectas = Math.Round(100 * suma / puntosCorrectos, 1);
+
+                ListadoSectionInformacion.Add(SectionAdd);
+            }
+
+            return ListadoSectionInformacion;
+        }
+
+        public IEnumerable<SectionInfoDto> GetSectionsInfoFromEvalNew(int idEvaluacion, int assessmentId, int codigoIdioma)
+        {
+            //Recoge las respuestas de la evaluación
+            List<SectionInfoDto> ListadoSectionInformacion = new List<SectionInfoDto>();
+            var Respuestas = _context.Respuestas.
+              Include(r => r.PreguntaEntity).
+                ThenInclude(rp => rp.AsignacionEntity).
+                  ThenInclude(rpa => rpa.SectionEntity).
+              Where(r => r.EvaluacionId == idEvaluacion && r.PreguntaEntity.AsignacionEntity.SectionEntity.AssessmentId == assessmentId).ToList();
+
+            //Saca las en que secciones estuvo en ese momento
+            var SectionsUtilizadas = Respuestas.Select(r => r.PreguntaEntity.AsignacionEntity.SectionEntity).Distinct().ToList();
+
+
+            //Rellena los datos y los añade a la lista para cada sección
+            foreach (var section in SectionsUtilizadas)
+            {
+                var TraduccionSection = _context.TraduccionesSections.Where(t => t.SectionsId == section.Id && t.IdiomaId == codigoIdioma).FirstOrDefault();
+                SectionInfoDto SectionAdd = new SectionInfoDto
+                {
+                    Id = section.Id,
+                    //Nombre = section.Nombre,
+                    Nombre = TraduccionSection.Traduccion,
+                    Preguntas = Respuestas.Where(r => r.PreguntaEntity.AsignacionEntity.SectionEntity.Id == section.Id).Count(),
+                };
+
+                var notasSec = _context.NotasSections.Where(r => r.SectionId == section.Id && r.EvaluacionId == idEvaluacion).FirstOrDefault();
+
+                if (notasSec == null)
+                {
+                    notasSec = new NotasSectionsEntity
+                    {
+                        EvaluacionEntity = _context.Evaluaciones.Where(s => s.Id == idEvaluacion).FirstOrDefault(),
+                        SectionEntity = _context.Sections.Where(s => s.Id == section.Id).FirstOrDefault()
+                    };
+
+                    _context.NotasSections.Add(notasSec);
+                }
+
+                SectionAdd.Notas = notasSec.Notas;
+
+                //Para calcular el progreso
+                SectionAdd = this.CalculateSectionInfoProgress(SectionAdd, idEvaluacion);
+
+                var listaRespuestas = Respuestas.Where(r => r.PreguntaEntity.AsignacionEntity.SectionEntity.Id == section.Id).ToList();
+                double suma = 0;
+                double puntosCorrectos = 0;
+
+                foreach (var resp in listaRespuestas)
+                {
+                    if (resp.PreguntaEntity.Correcta != null)
+                    {
+                        var maxPuntos = Respuestas.Where(r => r.PreguntaEntity.Correcta != null && r.PreguntaEntity.AsignacionId == resp.PreguntaEntity.AsignacionId).Count();
+                        var puntos = (double)resp.PreguntaEntity.AsignacionEntity.Peso / maxPuntos;
+
+                        puntosCorrectos += puntos;
+
+                        if (resp.Estado == 1 && resp.PreguntaEntity.Correcta.Equals("Si"))
+                        {
+                            suma += puntos;
+                        }
+
+                        else if (resp.Estado == 2 && resp.PreguntaEntity.Correcta.Equals("No"))
+                        {
+                            suma += puntos;
+                        }
+
+                    }
+                }
+
+                SectionAdd.RespuestasCorrectas = Math.Round(100 * suma / puntosCorrectos, 1);
+
+                ListadoSectionInformacion.Add(SectionAdd);
+            }
+
+            return ListadoSectionInformacion.OrderBy(x => x.Id);
+        }
+
+        //Devolvemos las asignaciones de una section
+        IEnumerable<AsignacionSinPreguntasDto> ISectionsInfoRepository.GetAsignacionesFromSection(SectionEntity section, int codigoIdioma)
+        {
+            // var sectionSelected = _context.Sections.Where(p => p == section).FirstOrDefault();
+            // return sectionSelected.Asignaciones;
+
+            List<int> AsignacionesList = section.Asignaciones.Select(x => x.Id).ToList();
+            List<AsignacionSinPreguntasDto> asignaciones = new List<AsignacionSinPreguntasDto>();
+            var listaAsignaciones = _context.TraduccionesAsignaciones.Where(t => (AsignacionesList.Contains(t.AsignacionesId)) && codigoIdioma == t.IdiomaId).ToList();
+
+            foreach (var a in listaAsignaciones)
+            {
+                AsignacionSinPreguntasDto s = new AsignacionSinPreguntasDto();
+                s.Id = a.AsignacionesId;
+                s.Nombre = a.Traduccion;
+                asignaciones.Add(s);
+            }
+            return asignaciones;
+        }
+
+        //Encuentra una asignacion filtrada por una section y la id de esa asignación
+        AsignacionEntity ISectionsInfoRepository.GetAsignacionFromSection(SectionEntity section, int idAsignacion)
+        {
+            var sectionSelected = _context.Sections.Where(p => p == section).FirstOrDefault();
+            return sectionSelected.Asignaciones.Where(a => a.Id == idAsignacion).FirstOrDefault();
+        }
+
+        //Recoge una sección por su id y puedes incluir las sections o no
+        SectionEntity ISectionsInfoRepository.GetSection(int id, bool IncluirAsignaciones)
+        {
+
+            if (IncluirAsignaciones)
+            {
+                //Si se quiere incluir las asignaciones de la section entrara aquí
+                //Incluimos las asignaciones de la section especificada (Include extiende de Microsoft.EntityFrameworkCore)
+                return _context.Sections.Include(s => s.Asignaciones).
+                    Where(s => s.Id == id).FirstOrDefault();
+            }
+            else
+            {
+                //Si no es así devolveremos solo la section
+                return _context.Sections.Where(p => p.Id == id).FirstOrDefault();
+            }
+        }
+
+        //Recoge todas las sections
+        IEnumerable<SectionEntity> ISectionsInfoRepository.GetSections()
+        {
+            return _context.Sections.ToList();
+        }
+
+        //Metodo encargado de obtener las repsuestas dadas en la seccion y calcular el progreso actual de esta
+        public SectionInfoDto CalculateSectionInfoProgress(SectionInfoDto sectionInfo, int evaluationId)
+        {
+            List<RespuestaEntity> questionsAnswered;
+            List<int> enablingQuestiontsSi;
+
+            //Respuestas de las preguntas contenstadas de la seccion
+            questionsAnswered = (from r in _context.Respuestas
+                                 join p in _context.Preguntas on r.PreguntaId equals p.Id
+                                 join a in _context.Asignaciones on p.AsignacionId equals a.Id
+                                 where r.EvaluacionId == evaluationId
+                                 && a.SectionId == sectionInfo.Id
+                                 && r.Estado != 0
+                                 select r)
+            .ToList()
+            ;
+
+            //Preguntas habilitantes a la que se ha respondido SI
+            enablingQuestiontsSi = questionsAnswered.Where(r => r.Estado == 1
+            && r.PreguntaEntity.EsHabilitante).Select(p => p.PreguntaEntity.Id).ToList();
+
+            //Preguntas que NO dependen de una habilitante O cuya habilitante de la que dependan haya sido respondia con un SI
+            sectionInfo.Preguntas = (from p in _context.Preguntas
+                                     join r in _context.Respuestas on p.Id equals r.PreguntaId
+                                     join a in _context.Asignaciones on p.AsignacionId equals a.Id
+                                     where r.EvaluacionId == evaluationId
+                                     && a.SectionId == sectionInfo.Id
+                                     && (enablingQuestiontsSi.Contains(p.PreguntaHabilitanteId.Value)
+                                     || p.PreguntaHabilitanteId == null)
+                                     select p.Id).Count();
+
+            //Se establecen los valores del total de respuestas contestadas y del progreso
+            sectionInfo.Contestadas = questionsAnswered.Count();
+            sectionInfo.Progreso = Math.Round(((double)sectionInfo.Contestadas / sectionInfo.Preguntas) * 100, 1);
+
+            return sectionInfo;
+        }
+
+        //Este metodo nos permite persistir los cambios en las entidades
+        public bool SaveChanges()
+        {
+            return (_context.SaveChanges() >= 0);
+        }
+
+        //Aqui introducimos una nueva section
+        public bool AddSection(SectionEntity section)
+        {
+
+            _context.Sections.Add(section);
+
+            return SaveChanges();
+        }
+
+        //Nos permite modificar una section
+        public bool AlterSection(SectionEntity section)
+        {
+            var SectionAlter = _context.Sections.Where(s => s.Id == section.Id).FirstOrDefault();
+
+            //SectionAlter.Nombre = section.Nombre;
+            //Cuando se vayan a poder modificar las secciones hacer esta parte
+
+            return SaveChanges();
+        }
+
+        //Nos permite modificar las notas una section
+        public bool AddNotasSection(SectionWithNotasDto section)
+        {
+            var SectionAlter = _context.NotasSections.Where(s => s.SectionId == section.SectionId && s.EvaluacionId == section.EvaluacionId).FirstOrDefault();
+
+            if (SectionAlter == null)
+            {
+                SectionAlter = new NotasSectionsEntity
+                {
+                    EvaluacionEntity = _context.Evaluaciones.Where(s => s.Id == section.EvaluacionId).FirstOrDefault(),
+                    SectionEntity = _context.Sections.Where(s => s.Id == section.SectionId).FirstOrDefault()
+                };
+
+                _context.NotasSections.Add(SectionAlter);
+            }
+
+            SectionAlter.Notas = section.Notas;
+
+            return SaveChanges();
+        }
+
+        //Elimina una section
+        public bool DeleteSection(SectionEntity section)
+        {
+
+            _context.Sections.Remove(_context.Sections.Where(s => s == section).FirstOrDefault());
+
+            return SaveChanges();
+        }
     }
-
-    //Elimina una section
-    public bool DeleteSection(SectionEntity section)
-    {
-
-      _context.Sections.Remove(_context.Sections.Where(s => s == section).FirstOrDefault());
-
-      return SaveChanges();
-    }
-  }
 }

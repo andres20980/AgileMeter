@@ -26,10 +26,6 @@ namespace everisapi.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasMaxLength(50);
-
                     b.Property<int>("Peso")
                         .HasMaxLength(50);
 
@@ -92,6 +88,17 @@ namespace everisapi.API.Migrations
                     b.HasIndex("UserNombre");
 
                     b.ToTable("Evaluaciones");
+                });
+
+            modelBuilder.Entity("everisapi.API.Entities.IdiomasEntity", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Idiomas");
                 });
 
             modelBuilder.Entity("everisapi.API.Entities.LineaEntity", b =>
@@ -163,10 +170,6 @@ namespace everisapi.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("OficinaNombre")
-                        .IsRequired()
-                        .HasMaxLength(50);
-
                     b.HasKey("OficinaId");
 
                     b.ToTable("Oficina");
@@ -187,10 +190,6 @@ namespace everisapi.API.Migrations
                     b.Property<int>("Nivel");
 
                     b.Property<float>("Peso");
-
-                    b.Property<string>("Pregunta")
-                        .IsRequired()
-                        .HasMaxLength(120);
 
                     b.Property<int?>("PreguntaHabilitanteId");
 
@@ -292,9 +291,6 @@ namespace everisapi.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Role")
-                        .IsRequired();
-
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
@@ -307,10 +303,6 @@ namespace everisapi.API.Migrations
                         .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AssessmentId");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasMaxLength(120);
 
                     b.Property<int>("Peso")
                         .HasMaxLength(50);
@@ -326,6 +318,140 @@ namespace everisapi.API.Migrations
                     b.HasIndex("AssessmentId");
 
                     b.ToTable("Sections");
+                });
+
+            modelBuilder.Entity("everisapi.API.Entities.TraduccionesAsignacionesEntity", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AsignacionesId");
+
+                    b.Property<int>("IdiomaId");
+
+                    b.Property<string>("Traduccion")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("AsignacionesId");
+
+                    b.HasIndex("IdiomaId");
+
+                    b.ToTable("TraduccionesAsignaciones");
+                });
+
+            modelBuilder.Entity("everisapi.API.Entities.TraduccionesIdiomasEntity", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("IdiomaId");
+
+                    b.Property<string>("Traduccion")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("IdiomaId");
+
+                    b.ToTable("TraduccionesIdiomas");
+                });
+
+            modelBuilder.Entity("everisapi.API.Entities.TraduccionesOficinasEntity", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("IdiomaId");
+
+                    b.Property<int>("OficinaId");
+
+                    b.Property<string>("Traduccion")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("IdiomaId");
+
+                    b.HasIndex("OficinaId");
+
+                    b.ToTable("TraduccionesOficinas");
+                });
+
+            modelBuilder.Entity("everisapi.API.Entities.TraduccionesPreguntasEntity", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("IdiomaId");
+
+                    b.Property<int>("PreguntaId");
+
+                    b.Property<string>("Traduccion")
+                        .IsRequired()
+                        .HasMaxLength(500);
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("IdiomaId");
+
+                    b.HasIndex("PreguntaId");
+
+                    b.ToTable("TraduccionesPreguntas");
+                });
+
+            modelBuilder.Entity("everisapi.API.Entities.TraduccionesRolesEntity", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("IdiomaId");
+
+                    b.Property<int>("RoleId");
+
+                    b.Property<string>("Traduccion")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("IdiomaId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("TraduccionesRoles");
+                });
+
+            modelBuilder.Entity("everisapi.API.Entities.TraduccionesSectionsEntity", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("IdiomaId");
+
+                    b.Property<int>("SectionsId");
+
+                    b.Property<string>("Traduccion")
+                        .IsRequired()
+                        .HasMaxLength(120);
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("IdiomaId");
+
+                    b.HasIndex("SectionsId");
+
+                    b.ToTable("TraduccionesSections");
                 });
 
             modelBuilder.Entity("everisapi.API.Entities.UnidadEntity", b =>
@@ -503,6 +629,79 @@ namespace everisapi.API.Migrations
                     b.HasOne("everisapi.API.Entities.AssessmentEntity", "Assessment")
                         .WithMany()
                         .HasForeignKey("AssessmentId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("everisapi.API.Entities.TraduccionesAsignacionesEntity", b =>
+                {
+                    b.HasOne("everisapi.API.Entities.AsignacionEntity", "AsignacionEntity")
+                        .WithMany()
+                        .HasForeignKey("AsignacionesId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("everisapi.API.Entities.IdiomasEntity", "IdiomasEntity")
+                        .WithMany()
+                        .HasForeignKey("IdiomaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("everisapi.API.Entities.TraduccionesIdiomasEntity", b =>
+                {
+                    b.HasOne("everisapi.API.Entities.IdiomasEntity", "IdiomasEntity")
+                        .WithMany()
+                        .HasForeignKey("IdiomaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("everisapi.API.Entities.TraduccionesOficinasEntity", b =>
+                {
+                    b.HasOne("everisapi.API.Entities.IdiomasEntity", "IdiomasEntity")
+                        .WithMany()
+                        .HasForeignKey("IdiomaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("everisapi.API.Entities.OficinaEntity", "OficinaEntity")
+                        .WithMany()
+                        .HasForeignKey("OficinaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("everisapi.API.Entities.TraduccionesPreguntasEntity", b =>
+                {
+                    b.HasOne("everisapi.API.Entities.IdiomasEntity", "IdiomasEntity")
+                        .WithMany()
+                        .HasForeignKey("IdiomaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("everisapi.API.Entities.PreguntaEntity", "PreguntaEntity")
+                        .WithMany()
+                        .HasForeignKey("PreguntaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("everisapi.API.Entities.TraduccionesRolesEntity", b =>
+                {
+                    b.HasOne("everisapi.API.Entities.IdiomasEntity", "IdiomasEntity")
+                        .WithMany()
+                        .HasForeignKey("IdiomaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("everisapi.API.Entities.RoleEntity", "RoleEntity")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("everisapi.API.Entities.TraduccionesSectionsEntity", b =>
+                {
+                    b.HasOne("everisapi.API.Entities.IdiomasEntity", "IdiomasEntity")
+                        .WithMany()
+                        .HasForeignKey("IdiomaId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("everisapi.API.Entities.SectionEntity", "SectionEntity")
+                        .WithMany()
+                        .HasForeignKey("SectionsId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

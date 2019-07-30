@@ -41,7 +41,7 @@ export class ComentariosTableComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @Input() dataInput: any;//Array<EvaluacionInfo>;
   dataSource: MatTableDataSource<AsignacionConNotas>;
-  userRole: string;
+  userRole: number;
   //expandedElement: RespuestaConNotas;
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['section', 'asignacion', 'notas'];

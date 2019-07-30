@@ -41,12 +41,13 @@ export class RespuestasService {
 
   //Este metodo devuelve un listado con sus preguntas y respuestas de una evaluación y su asignación
   getRespuestasAsig(idEvaluacion: number, idAsig: number) {
+    var codigoIdioma = this._appComponent._storageDataService.codigoIdioma;   
     let Token = this._appComponent.ComprobarUserYToken();
     let headers = new Headers({
       'Authorization': Token
     });
 
-    return this._http.get(this.url + 'asignaciones/evaluacion/' + idEvaluacion + '/asignacion/' + idAsig, { headers: headers }).pipe(
+    return this._http.get(this.url + 'asignaciones/evaluacion/' + idEvaluacion + '/asignacion/' + idAsig + '/' + codigoIdioma , { headers: headers }).pipe(
       map((response: Response) => response.json()),
       catchError(this.errorHandler));
   }

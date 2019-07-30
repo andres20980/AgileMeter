@@ -31,6 +31,8 @@ import { PreviousevaluationComponent } from 'app/previousevaluation/previouseval
 import { Evaluacion } from 'app/Models/Evaluacion';
 import { Workbook } from 'exceljs';
 import * as fs from 'file-saver';
+import { TranslateService } from '@ngx-translate/core';
+import { EnumRol } from 'app/Models/EnumRol';
 
 export interface RespuestaConNotasTabla {
 
@@ -76,7 +78,7 @@ export class PdfgeneratorComponent implements OnInit {
   public Mostrar = false;
   public ErrorMessage = null;
   public AdminOn: boolean = false;
-  public UserRole: string = "";
+  public UserRole: number = 0;
 
   //Datos de la barras
   public barChartType: string = 'bar';
@@ -106,10 +108,14 @@ export class PdfgeneratorComponent implements OnInit {
   //CircleProgress
   public formatSubtitle = (sc: any): string => {
     if (sc.nivelAlcanzado == -1) {
-      return "del nivel mínimo"
+      var txt;
+      this._translateService.get('PDF_GENERATOR.CIRCLE_PROGRESS_MIN_LEVEL').subscribe(value => { txt = value; });
+      return txt;
     }
     else {
-      return "   Nivel  " + Math.trunc(sc.nivelAlcanzado);
+      var txt;
+      this._translateService.get('PDF_GENERATOR.CIRCLE_PROGRESS_LEVEL').subscribe(value => { txt = value; });
+      return txt + Math.trunc(sc.nivelAlcanzado);
     }
   }
 
@@ -124,7 +130,9 @@ export class PdfgeneratorComponent implements OnInit {
       }
     });
     //return "   Nivel  " + Math.trunc(minLevel);
-    return "  del Nivel máximo"
+    var txt;
+    this._translateService.get('PDF_GENERATOR.CIRCLE_PROGRESS_MAX_LEVEL').subscribe(value => { txt = value; });
+    return txt;
   }
 
   public formatLevel = (sc: any): string => {
@@ -225,6 +233,7 @@ export class PdfgeneratorComponent implements OnInit {
   public primeraVez: boolean = true;
   public doc = null;
   public iteracionResultados: number = 0;
+  public rol: EnumRol = new EnumRol();
 
   constructor(
     private _proyectoService: ProyectoService,
@@ -235,6 +244,7 @@ export class PdfgeneratorComponent implements OnInit {
     private prevEval: PreviousevaluationComponent,
     private http: Http,
     private datePipe: DatePipe,
+    private _translateService: TranslateService,
     private modalService: NgbModal) {
 
     //Recupera los datos y los comprueba
@@ -607,7 +617,7 @@ export class PdfgeneratorComponent implements OnInit {
   }
 
   saveNotas(model: Evaluacion): void {
-    if (this.UserRole == "Administrador" || this.UserRole == "Evaluador") {
+    if (this.UserRole == this.rol.Administrador || this.UserRole == this.rol.Evaluador) {
       this.prevEval._evaluacionService.updateEvaluacion(model).subscribe(
         res => {
           // console.log("success");
@@ -726,13 +736,13 @@ export class PdfgeneratorComponent implements OnInit {
     let respuesta: string = "";
     switch (row.estado) {
       case 0:
-        respuesta = "No Contestada";
+        this._translateService.get('PDF_GENERATOR.EXCEL_NC').subscribe(value => { respuesta = value; });
         break
       case 1:
-        respuesta = "Si";
+        this._translateService.get('PDF_GENERATOR.EXCEL_YES').subscribe(value => { respuesta = value; });
         break;
       case 2:
-        respuesta = "No";
+        this._translateService.get('PDF_GENERATOR.EXCEL_NO').subscribe(value => { respuesta = value; });
         break;
 
       default:
@@ -854,10 +864,13 @@ export class PdfgeneratorComponent implements OnInit {
       base64: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAGiSURBVHja7Ni/S1VhHMfx1zHLIdCmgpAuIbq4FUTUErW0hFCY1D/g0hzhjSAKN4eWpv6BC5WLgw1pQwQFuYiD0WKYeAni2iZeuS7PXeRI+px75BnuZzuH8zy8+Zzvr+fJWq2WlNQjMXWB/qfeMjev1Or7X13CUvthbeJcOUCVWj3DVVzGDhbxI+fTJZzHRtkOncIbDKEPDaxgBnMBsq2N44ihExgMMHAG1/Ee7zB63EGdBag83cE8xlLKskHUcDultO/DawwXTvuc9I3VRUzjAZqpFMYx3EipUp/E49RaxxVcSAmoHzfLBDrqUJWV7dBuxJqzZQFleILTqcxDU3gWse5PGd3+KV5ExtyvTjtUjYSBf/gY7dD+ya5SqxeBge8HORTTy6p4WfBXv+pUUFfxvCDMJ3woOsL2hNQu6szfsM92UYeu4VFBmCYm8bUTdegnvkVW5PZgfx9vO1UYN4NDsxEwc2F0nT1sbBxW63iIu/gcjjoHqYEvGMc9LOd0+/w+FHP7EcrACG6Fg99A6Glb+I0FrB61vkUDdW8/ukApA+0NAOX3VWtrBPEFAAAAAElFTkSuQmCC",
       extension: 'png',
     });
+    var txt, txt1;
+    this._translateService.get('PDF_GENERATOR.EXCEL_WORKSHEET').subscribe(value => { txt = value; });
+    let worksheet = workbook.addWorksheet(txt, { views: [{ showGridLines: false }], properties: { tabColor: { argb: '75c222' } } });
 
-    let worksheet = workbook.addWorksheet('Resultados', { views: [{ showGridLines: false }], properties: { tabColor: { argb: '75c222' } } });
-
-    let titleRow = worksheet.addRow(['', 'Resultados de la evaluación del ' + this.datePipe.transform(this.Evaluacion.fecha, 'dd-MM-yyyy') + ' del equipo ' + this.Project.nombre]);
+    this._translateService.get('PDF_GENERATOR.EXCEL_TITLE').subscribe(value => { txt = value; });
+    this._translateService.get('PDF_GENERATOR.EXCEL_TITLE_1').subscribe(value => { txt1 = value; });
+    let titleRow = worksheet.addRow(['', txt + this.datePipe.transform(this.Evaluacion.fecha, 'dd-MM-yyyy') + txt1 + this.Project.nombre]);
     titleRow.font = { name: 'Arial', family: 4, size: 16, color: { argb: '555555' }, bold: true }
     worksheet.addRow([]);
 
@@ -1003,7 +1016,8 @@ export class PdfgeneratorComponent implements OnInit {
           bottom: { style: 'medium', color: { argb: '5c981b' } },
           right: { style: 'medium', color: { argb: '5c981b' } }
         };
-        cellNotasSec.value = "Notas";
+
+        this._translateService.get('PDF_GENERATOR.EXCEL_NOTES').subscribe(value => { cellNotasSec.value = value; });
 
         worksheetSec.mergeCells(3, 2, 8, 17);
 
@@ -1057,7 +1071,7 @@ export class PdfgeneratorComponent implements OnInit {
           cellNotasMod.font = cellNotasSec.font;
           cellNotasMod.alignment = cellNotasSec.alignment;
           cellNotasMod.border = cellNotasSec.border;
-          cellNotasMod.value = "Notas";
+          this._translateService.get('PDF_GENERATOR.EXCEL_NOTES').subscribe(value => { cellNotasMod.value = value; });
 
           worksheetSec.mergeCells(offset + 3, 3, offset + 8, 18);
           var cellNotasModC = worksheetSec.getCell(offset + 3, 3);
@@ -1084,7 +1098,9 @@ export class PdfgeneratorComponent implements OnInit {
           cellPreg.border = {
             bottom: { style: 'thin', color: { argb: '5c981b' } }
           };
-          cellPreg.value = "Pregunta";
+          var txt;
+          this._translateService.get('PDF_GENERATOR.EXCEL_QUESTION').subscribe(value => { txt = value; });
+          cellPreg.value = txt;
 
           //// Respuesta ////
           worksheetSec.mergeCells(offset + 10, 12, offset + 10, 13);
@@ -1092,7 +1108,7 @@ export class PdfgeneratorComponent implements OnInit {
           cellRes.font = cellPreg.font;
           cellRes.alignment = cellPreg.alignment;
           cellRes.border = cellPreg.border;
-          cellRes.value = "Respuesta";
+          this._translateService.get('PDF_GENERATOR.EXCEL_ANSWER').subscribe(value => { cellRes.value = value; });
 
 
           //// Notas ////
@@ -1101,7 +1117,7 @@ export class PdfgeneratorComponent implements OnInit {
           cellNot.font = cellPreg.font;
           cellNot.alignment = cellPreg.alignment;
           cellNot.border = cellPreg.border;
-          cellNot.value = "Notas";
+          this._translateService.get('PDF_GENERATOR.EXCEL_NOTES').subscribe(value => { cellNot.value = value; });
 
           //// table content //
           modulo.preguntas.forEach((pregunta, index) => {
@@ -1232,7 +1248,8 @@ export class PdfgeneratorComponent implements OnInit {
           bottom: { style: 'medium', color: { argb: '5c981b' } },
           right: { style: 'medium', color: { argb: '5c981b' } }
         };
-        cellNotasEv.value = "Notas Evaluación";
+        this._translateService.get('PDF_GENERATOR.EXCEL_ASSESSMENT_NOTES').subscribe(value => { cellNotasEv.value = value; });
+
 
         worksheet.mergeCells(19, 2, 26, 11);
 
@@ -1257,7 +1274,7 @@ export class PdfgeneratorComponent implements OnInit {
         cellNotasOb.font = cell.font;
         cellNotasOb.alignment = cellNotasEv.alignment;
         cellNotasOb.border = cellNotasEv.border;
-        cellNotasOb.value = "Notas Objetivos";
+        this._translateService.get('PDF_GENERATOR.EXCEL_OBJETIVE_NOTES').subscribe(value => { cellNotasOb.value = value; });
 
         worksheet.mergeCells(19, 13, 26, 22);
 

@@ -146,10 +146,17 @@ namespace everisapi.API.Services
         }
 
         //Recoge todos los usuarios
-        public IEnumerable<UserEntity> GetUsers()
+        public IEnumerable<UsersWithRolesDto> GetUsers(int codigoIdioma)
         {
             //Devolvemos todos los usuarios activos ordenadas por Nombre 
-            return _context.Users.Include(r => r.Role).Where(u => u.Activo == true).OrderBy(c => c.Nombre).ToList();
+            //return _context.Users.Include(r => r.Role).Where(u => u.Activo == true).OrderBy(c => c.Nombre).ToList(); 
+            var UsersList = Mapper.Map<IEnumerable<UsersWithRolesDto>>(_context.Users.Include(r => r.Role).Where(u => u.Activo == true).ToList());
+            var roles = _context.TraduccionesRoles.Where(x => x.IdiomaId == codigoIdioma).ToList();
+            foreach (var u in UsersList)
+            {
+                u.Role.Role = roles.Where(x => x.RoleId == u.Role.Id).Select(x => x.Traduccion).FirstOrDefault();
+            }
+            return UsersList;
         }
 
         //Devuelve si el usuario existe
@@ -175,9 +182,20 @@ namespace everisapi.API.Services
         }
 
         //Devuelve todos los roles
-        public IEnumerable<RoleEntity> GetAllRoles()
+        public IEnumerable<RoleDto> GetAllRoles(int codigoIdioma)
         {
-            return _context.Roles.OrderBy(r => r.Role).ToList();
+            var traducciones = _context.TraduccionesRoles.Where(x => x.IdiomaId == codigoIdioma).ToList();
+            List<RoleDto> rolesTraducidos = new List<RoleDto>();
+
+            foreach (var rol in traducciones)
+            {
+                RoleDto rolDto = new RoleDto();
+                rolDto.Id = rol.RoleId;
+                rolDto.Role = rol.Traduccion;
+                rolesTraducidos.Add(rolDto);
+            }
+            return rolesTraducidos;
+
         }
 
         //Devuelve una lista con todos los datos del proyecto por su id

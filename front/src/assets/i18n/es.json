@@ -68,7 +68,7 @@
 		"FORM_PASSWORD_REQUIRED": "El campo Contraseña no puede estar vacio.",
 		"FORM_NAME": "Nombre",
 		"FORM_FULL_NAME_REQUIRED": "El campo nombre no puede estar vacio.",
-		"FORM_ROL" :"Rol",
+		"FORM_ROL": "Rol",
 		"BTN_GUARDAR": "Guardar",
 		"BTN_BACK": "Volver",
 		"MODAL_HEADER": "Importante",
@@ -163,7 +163,11 @@
 		"MODAL_NOTES_SECTION_TITLE": "Notas de la Sección",
 		"MODAL_NOTES_SECTION_PLACEHOLDER": "Inserte aquí el texto",
 		"MODALS_BTN_SAVE": "Guardar",
-		"MODALS_BTN_CANCEL": "Cancelar"
+		"MODALS_BTN_CANCEL": "Cancelar",
+		"BTN_PREVIOUS_MODULE": "Módulo anterior",
+		"BTN_NEXT_MODULE": "Siguiente módulo",
+		"BTN_NEXT_SECTION": "Siguiente sección",
+		"BTN_PREVIOUS_SECTION": "Sección anterior"
 	},
 	"BTN_FINALIZE_EVALUATION": {
 		"FINALIZE_EVALUATION": "Finalizar Evaluación",
@@ -191,7 +195,6 @@
 		"EXCEL_USER": "Usuario",
 		"EXCEL_ASSESSMENT": "Evaluación",
 		"EXCEL_SCORE": "Puntuación"
-
 	},
 	"SORTED_TABLE": {
 		"FILTER": " Filtro",
@@ -246,7 +249,24 @@
 		"MODAL_PLACEHOLDER": "Inserte aquí el texto",
 		"MODAL_BTN_SAVE": "Guardar",
 		"MODAL_BTN_CANCEL": "Cancelar",
-		"EXCEL_EXPORT": "Exportar a Excel"
+		"EXCEL_EXPORT": "Exportar a Excel",
+		"EXCEL_TITLE": "Resultados de la evaluación del ",
+		"EXCEL_TITLE_1": " del equipo ",
+		"EXCEL_EVALUATION_NOTES": "Notas Evaluación",
+		"EXCEL_EVALUATION_OBJETIVE": "Notas Objetivos",
+		"EXCEL_WORKSHEET": "Resultados",
+		"EXCEL_GLOBAL_VALORATION": "VALORACIÓN GLOBAL",
+		"EXCEL_ASSESSMENT_NOTES": "Notas Evaluación",
+		"EXCEL_OBJETIVE_NOTES": "Notas Objetivos",
+		"EXCEL_NOTES": "Notas",
+		"EXCEL_QUESTION": "Pregunta",
+		"EXCEL_ANSWER": "Respuesta",
+		"EXCEL_YES": "Si",
+		"EXCEL_NO": "No",
+		"EXCEL_NC": "No contestada",
+		"CIRCLE_PROGRESS_LEVEL": "Nivel ",
+		"CIRCLE_PROGRESS_MIN_LEVEL": "del nivel mínimo",
+		"CIRCLE_PROGRESS_MAX_LEVEL": "del Nivel máximo"
 	},
 	"SECTION_RESULTS": {
 		"SECTION_NOTES": "Notas",
@@ -258,7 +278,6 @@
 		"ICONS_NOT_ANSWERED": "No contestada",
 		"QUESTION_NOTES": "Notas",
 		"NO_NOTES": "No hay notas añadidas"
-
 	},
 	"PREGUNTAS_TABLE": {
 		"FILTER": "Filtro",

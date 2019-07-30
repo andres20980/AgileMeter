@@ -13,8 +13,8 @@ namespace everisapi.API.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int OficinaId { get; set; }
 
-        [Required]
-        [MaxLength(50)]
-        public string OficinaNombre { get; set; }
-    }    
+        // [Required]
+        // [MaxLength(50)]
+        // public string OficinaNombre { get; set; }
+    }
 }

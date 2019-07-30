@@ -10,7 +10,7 @@ namespace everisapi.API.Services
   public interface IUsersInfoRepository
   {
     //Devuelve todos los usuarios
-    IEnumerable<UserEntity> GetUsers();
+    IEnumerable<UsersWithRolesDto> GetUsers(int codigoIdioma);
 
     //Devuelve un usuario
     UserEntity GetUser(string userNombre, Boolean IncluirProyectos);
@@ -78,7 +78,7 @@ namespace everisapi.API.Services
     bool AddUserToProject(string UserNombre, int proyectoId);
 
     //Devuelve todos los roles disponibles
-    IEnumerable<RoleEntity> GetAllRoles();
+    IEnumerable<RoleDto> GetAllRoles(int codigoIdioma);
 
     //Desasigna un proyecto d eun usuario
     bool DeleteUserProject(string UserNombre, int ProyectoId);

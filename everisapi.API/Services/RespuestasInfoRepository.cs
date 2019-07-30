@@ -68,7 +68,7 @@ namespace everisapi.API.Services
                 respuestaAnterior.Estado = Respuesta.Estado;
                 respuestaAnterior.Notas = Respuesta.Notas;
                 respuestaAnterior.NotasAdmin = Respuesta.NotasAdmin;
-                
+
                 currentEvaluation.LastQuestionUpdated = respuestaAnterior.PreguntaId;
                 currentEvaluation.Fecha = DateTime.Now;
                 currentEvaluation.UserNombre = Respuesta.UserName;
@@ -93,7 +93,7 @@ namespace everisapi.API.Services
                 disabledsAnswers.ForEach(r => r.Estado = 0);
                 enablingAnswer.Estado = 2;
                 evaluation.LastQuestionUpdated = enablingQuestionId;
-                
+
                 return SaveChanges();
             }
             else
@@ -112,7 +112,6 @@ namespace everisapi.API.Services
                     Include(r => r.PreguntaEntity).
                       ThenInclude(p => p.AsignacionEntity).
                       ThenInclude(p => p.SectionEntity).
-                      // ThenInclude(p => p.AssessmentId == assessmentId).
                     Where(r => r.EvaluacionId == idEvaluacion && r.PreguntaEntity.AsignacionEntity.SectionEntity.AssessmentId == assessmentId).ToList();
             }
             else
@@ -128,7 +127,6 @@ namespace everisapi.API.Services
 
 
             List<RespuestaConNotasDto> lista = new List<RespuestaConNotasDto>();
-
             foreach (RespuestaEntity resp in respuestas)
             {
                 lista.Add(new RespuestaConNotasDto
@@ -138,9 +136,11 @@ namespace everisapi.API.Services
                     Correcta = resp.PreguntaEntity.Correcta,
                     Notas = resp.Notas,
                     NotasAdmin = resp.NotasAdmin,
-                    Asignacion = resp.PreguntaEntity.AsignacionEntity.Nombre,
-                    Section = resp.PreguntaEntity.AsignacionEntity.SectionEntity.Nombre,
-                    Pregunta = resp.PreguntaEntity.Pregunta,
+                    Asignacion = "",
+                    // Section = resp.PreguntaEntity.AsignacionEntity.SectionEntity.Nombre,
+                    Section = "",
+                    //Pregunta = resp.PreguntaEntity.Pregunta,
+                    Pregunta = "",
                     Peso = resp.PreguntaEntity.Peso,
                     Nivel = resp.PreguntaEntity.Nivel
                 });
@@ -149,17 +149,17 @@ namespace everisapi.API.Services
             return lista;
         }
 
-         public IEnumerable<SectionConAsignacionesDto> GetPreguntasNivelOrganizadas(int idEvaluacion, int assessmentId)
+        public IEnumerable<SectionConAsignacionesDto> GetPreguntasNivelOrganizadas(int idEvaluacion, int assessmentId, int codigoIdioma)
         {
 
             List<SectionConAsignacionesDto> sectionsConAsignaciones = new List<SectionConAsignacionesDto>();
-            
 
-            var sections = from s in _context.Sections.Where( x => x.AssessmentId == assessmentId)
-                join n in _context.NotasSections.Where( x => x.EvaluacionId == idEvaluacion) on s.Id equals n.SectionId into sn
-                from y1 in sn.DefaultIfEmpty()
-                orderby s.Id
-                select new {section = s, notas = y1.Notas};
+
+            var sections = from s in _context.Sections.Where(x => x.AssessmentId == assessmentId)
+                           join n in _context.NotasSections.Where(x => x.EvaluacionId == idEvaluacion) on s.Id equals n.SectionId into sn
+                           from y1 in sn.DefaultIfEmpty()
+                           orderby s.Id
+                           select new { section = s, notas = y1.Notas };
 
 
             foreach (var s in sections)
@@ -167,13 +167,14 @@ namespace everisapi.API.Services
                 SectionConAsignacionesDto sectionConAsignacion = new SectionConAsignacionesDto();
                 sectionConAsignacion.EvaluacionId = idEvaluacion;
                 sectionConAsignacion.SectionId = s.section.Id;
-                sectionConAsignacion.Nombre = s.section.Nombre;
+                // sectionConAsignacion.Nombre = s.section.Nombre;
+                sectionConAsignacion.Nombre = _context.TraduccionesSections.Where(sec => sec.IdiomaId == codigoIdioma && s.section.Id == sec.SectionsId).Select(sec => sec.Traduccion).FirstOrDefault();
                 sectionConAsignacion.Notas = s.notas;
                 sectionConAsignacion.Peso = s.section.Peso;
                 sectionConAsignacion.PesoNivel1 = s.section.PesoNivel1;
                 sectionConAsignacion.PesoNivel2 = s.section.PesoNivel2;
                 sectionConAsignacion.PesoNivel3 = s.section.PesoNivel3;
-                sectionConAsignacion.NumNotas = (s.notas == null || s.notas.Trim() == "") ? 0: 1;
+                sectionConAsignacion.NumNotas = (s.notas == null || s.notas.Trim() == "") ? 0 : 1;
 
                 List<AsignacionConPreguntaNivelDto> asignacionesConPreguntaNivel = new List<AsignacionConPreguntaNivelDto>();
                 //List<AsignacionEntity> asignaciones;
@@ -184,21 +185,22 @@ namespace everisapi.API.Services
                 // (a, n) => new { asignacion = a, notas = n })
                 // .Where(a => a.asignacion.SectionId == s.section.Id).ToList();
 
-                var asignaciones = from a in _context.Asignaciones.Where( x => x.SectionId == s.section.Id)
-                    join n in _context.NotasAsignaciones.Where( x => x.EvaluacionId == idEvaluacion) on a.Id equals n.AsignacionId into an
-                    from y1 in an.DefaultIfEmpty()
-                    orderby a.Id
-                    select new {asignacion = a, notas = y1.Notas};
+                var asignaciones = from a in _context.Asignaciones.Where(x => x.SectionId == s.section.Id)
+                                   join n in _context.NotasAsignaciones.Where(x => x.EvaluacionId == idEvaluacion) on a.Id equals n.AsignacionId into an
+                                   from y1 in an.DefaultIfEmpty()
+                                   orderby a.Id
+                                   select new { asignacion = a, notas = y1.Notas };
 
-
+                List<TraduccionesPreguntasEntity> traducciones = _context.TraduccionesPreguntas.Where(y => y.IdiomaId == codigoIdioma).ToList();
                 foreach (var a in asignaciones)
                 {
                     AsignacionConPreguntaNivelDto asignacionConPreguntaNivel = new AsignacionConPreguntaNivelDto();
                     asignacionConPreguntaNivel.Id = a.asignacion.Id;
-                    asignacionConPreguntaNivel.Nombre = a.asignacion.Nombre;
+                    // asignacionConPreguntaNivel.Nombre = a.asignacion.Nombre;
+                    asignacionConPreguntaNivel.Nombre = _context.TraduccionesAsignaciones.Where(asig => asig.IdiomaId == codigoIdioma && asig.AsignacionesId == a.asignacion.Id).Select(asig => asig.Traduccion).FirstOrDefault();
                     asignacionConPreguntaNivel.Peso = a.asignacion.Peso;
                     asignacionConPreguntaNivel.Notas = a.notas;
-                    asignacionConPreguntaNivel.NumNotas = (a.notas == null || a.notas.Trim() == "") ? 0: 1;
+                    asignacionConPreguntaNivel.NumNotas = (a.notas == null || a.notas.Trim() == "") ? 0 : 1;
 
                     List<PreguntaRespuestaNivelDto> preguntasRespuestaNivel = new List<PreguntaRespuestaNivelDto>();
                     List<RespuestaEntity> preguntas = new List<RespuestaEntity>();
@@ -206,27 +208,29 @@ namespace everisapi.API.Services
                     Include(r => r.PreguntaEntity).Where(p => p.EvaluacionId == idEvaluacion && p.PreguntaEntity.AsignacionId == a.asignacion.Id).ToList();
                     preguntas = preguntas.OrderBy(x => x.PreguntaEntity.Id).ToList();
 
-                     foreach (RespuestaEntity p in preguntas)
-                     {
-                         PreguntaRespuestaNivelDto preguntaRespuestaNivel = new PreguntaRespuestaNivelDto();
-                         preguntaRespuestaNivel.Id = p.PreguntaEntity.Id;
-                         preguntaRespuestaNivel.Nivel = p.PreguntaEntity.Nivel;
-                         preguntaRespuestaNivel.Notas = p.Notas;
-                         preguntaRespuestaNivel.NotasAdmin = p.NotasAdmin;
-                         preguntaRespuestaNivel.Peso = p.PreguntaEntity.Peso;
-                         preguntaRespuestaNivel.Pregunta = p.PreguntaEntity.Pregunta;
-                         preguntaRespuestaNivel.Estado = p.Estado;
-                         preguntaRespuestaNivel.Correcta = p.PreguntaEntity.Correcta;
+                    foreach (RespuestaEntity p in preguntas)
+                    {
+                        PreguntaRespuestaNivelDto preguntaRespuestaNivel = new PreguntaRespuestaNivelDto();
+                        preguntaRespuestaNivel.Id = p.PreguntaEntity.Id;
+                        preguntaRespuestaNivel.Nivel = p.PreguntaEntity.Nivel;
+                        preguntaRespuestaNivel.Notas = p.Notas;
+                        preguntaRespuestaNivel.NotasAdmin = p.NotasAdmin;
+                        preguntaRespuestaNivel.Peso = p.PreguntaEntity.Peso;
+                        //preguntaRespuestaNivel.Pregunta = p.PreguntaEntity.Pregunta;
+                        preguntaRespuestaNivel.Pregunta = traducciones.Where(tra => tra.PreguntaId == p.PreguntaId && tra.IdiomaId == codigoIdioma).Select(tra => tra.Traduccion).FirstOrDefault();
+                        preguntaRespuestaNivel.Estado = p.Estado;
+                        preguntaRespuestaNivel.Correcta = p.PreguntaEntity.Correcta;
 
-                         if(p.Notas != null && p.Notas.Trim() != "" ){
+                        if (p.Notas != null && p.Notas.Trim() != "")
+                        {
                             asignacionConPreguntaNivel.NumNotas++;
-                         }
+                        }
 
-                         preguntasRespuestaNivel.Add(preguntaRespuestaNivel);
+                        preguntasRespuestaNivel.Add(preguntaRespuestaNivel);
                     }
                     sectionConAsignacion.NumNotas += asignacionConPreguntaNivel.NumNotas;
                     asignacionConPreguntaNivel.Preguntas = preguntasRespuestaNivel;
-                    
+
                     asignacionesConPreguntaNivel.Add(asignacionConPreguntaNivel);
                 }
                 sectionConAsignacion.Asignaciones = asignacionesConPreguntaNivel;
@@ -235,14 +239,14 @@ namespace everisapi.API.Services
             }
 
 
-            foreach(SectionConAsignacionesDto seccion in sectionsConAsignaciones)
+            foreach (SectionConAsignacionesDto seccion in sectionsConAsignaciones)
             {
                 //calculamos los niveles individuales para cada asignacion
-                foreach(AsignacionConPreguntaNivelDto asignacion in seccion.Asignaciones)
+                foreach (AsignacionConPreguntaNivelDto asignacion in seccion.Asignaciones)
                 {
                     var maxLevel = asignacion.Preguntas.Max(x => x.Nivel);
                     bool nivelCompleto = true;
-                    for(int i = 1; i <= maxLevel && nivelCompleto; i++)
+                    for (int i = 1; i <= maxLevel && nivelCompleto; i++)
                     {
                         nivelCompleto = false;
                         var preguntas = asignacion.Preguntas.Where(p => p.Nivel == i);
@@ -250,19 +254,20 @@ namespace everisapi.API.Services
                         var preguntasCorrectas = asignacion.Preguntas
                         .Where(p => p.Nivel == i && ((p.Estado == 1 && p.Correcta == "Si") || (p.Estado == 2 && p.Correcta == "No")));
 
-                        if(preguntas.Count() == preguntasCorrectas.Count()){
+                        if (preguntas.Count() == preguntasCorrectas.Count())
+                        {
                             nivelCompleto = true;
                         }
 
                         asignacion.NivelAlcanzado = i;
-                        asignacion.Puntuacion = preguntasCorrectas.Sum( x => x.Peso);
-                    }                   
+                        asignacion.Puntuacion = preguntasCorrectas.Sum(x => x.Peso);
+                    }
                 }
 
                 //comparamos los niveles de cada asignacion y cogemos el mas bajo
                 var minLevel = seccion.Asignaciones.Min(x => x.NivelAlcanzado);
                 float sumaPesosAsignaciones = 0;
-                foreach(AsignacionConPreguntaNivelDto asignacion in seccion.Asignaciones)
+                foreach (AsignacionConPreguntaNivelDto asignacion in seccion.Asignaciones)
                 {
                     asignacion.NivelAlcanzado = minLevel;
                     asignacion.Puntuacion = asignacion.Preguntas
@@ -274,8 +279,9 @@ namespace everisapi.API.Services
 
                 seccion.NivelAlcanzado = minLevel;
                 seccion.Puntuacion = sumaPesosAsignaciones;
-                if (seccion.Puntuacion == 0 && seccion.NivelAlcanzado > 1){
-                    seccion.NivelAlcanzado = seccion.NivelAlcanzado -1;
+                if (seccion.Puntuacion == 0 && seccion.NivelAlcanzado > 1)
+                {
+                    seccion.NivelAlcanzado = seccion.NivelAlcanzado - 1;
                     seccion.Puntuacion = 100;
                 }
 

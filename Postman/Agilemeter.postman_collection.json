@@ -86,12 +86,12 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "{{server}}api/asignaciones/{{asignacionId}}/preguntas",
+					"raw": "{{server}}api/preguntas/{{asignacionId}}/preguntas",
 					"host": [
 						"{{server}}api"
 					],
 					"path": [
-						"asignaciones",
+						"preguntas",
 						"{{asignacionId}}",
 						"preguntas"
 					]
@@ -111,12 +111,12 @@
 					}
 				],
 				"url": {
-					"raw": "{{server}}api/asignaciones/{{asignacionId}}/pregunta/{{preguntaId}}",
+					"raw": "{{server}}api/preguntas/{{asignacionId}}/pregunta/{{preguntaId}}",
 					"host": [
 						"{{server}}api"
 					],
 					"path": [
-						"asignaciones",
+						"preguntas",
 						"{{asignacionId}}",
 						"pregunta",
 						"{{preguntaId}}"
@@ -146,12 +146,12 @@
 					"raw": "{\r\n\tPregunta: \"PreguntaTestInserccion\",\r\n\tRespuesta: true\r\n}"
 				},
 				"url": {
-					"raw": "{{server}}api/asignaciones/{{asignacionId}}/pregunta",
+					"raw": "{{server}}api/preguntas/{{asignacionId}}/pregunta",
 					"host": [
 						"{{server}}api"
 					],
 					"path": [
-						"asignaciones",
+						"preguntas",
 						"{{asignacionId}}",
 						"pregunta"
 					]
@@ -180,12 +180,12 @@
 					"raw": "{\r\n\tPregunta: \"PreguntaTestInserccion235_2\"\r\n}"
 				},
 				"url": {
-					"raw": "{{server}}api/asignaciones/{{asignacionId}}/pregunta/{{preguntaId}}",
+					"raw": "{{server}}api/preguntas/{{asignacionId}}/pregunta/{{preguntaId}}",
 					"host": [
 						"{{server}}api"
 					],
 					"path": [
-						"asignaciones",
+						"preguntas",
 						"{{asignacionId}}",
 						"pregunta",
 						"{{preguntaId}}"
@@ -213,12 +213,12 @@
 					}
 				],
 				"url": {
-					"raw": "{{server}}api/users/{{userName}}/fullproyectos",
+					"raw": "{{server}}api/proyectos/{{userName}}/fullproyectos",
 					"host": [
 						"{{server}}api"
 					],
 					"path": [
-						"users",
+						"proyectos",
 						"{{userName}}",
 						"fullproyectos"
 					]
@@ -266,12 +266,12 @@
 					}
 				],
 				"url": {
-					"raw": "{{server}}api/asignaciones/{{asignacionId}}/pregunta/{{preguntaId}}",
+					"raw": "{{server}}api/preguntas/{{asignacionId}}/pregunta/{{preguntaId}}",
 					"host": [
 						"{{server}}api"
 					],
 					"path": [
-						"asignaciones",
+						"preguntas",
 						"{{asignacionId}}",
 						"pregunta",
 						"{{preguntaId}}"

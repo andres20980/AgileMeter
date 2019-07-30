@@ -32,18 +32,18 @@ namespace everisapi.API.Controllers
 
         //Introduciendo la petición de la route devuelve todos los usuarios
         [Authorize]
-        [HttpGet("allusers")]
-        public IActionResult GetUsers()
+        [HttpGet("allusers/{codigoIdioma}")]
+        public IActionResult GetUsers(int codigoIdioma)
         {
             try
             {
-                var UsersEntities = _userInfoRepository.GetUsers();
+                var Users = _userInfoRepository.GetUsers(codigoIdioma);
 
-                var results = Mapper.Map<IEnumerable<UsersWithRolesDto>>(UsersEntities);
+                //var results = Mapper.Map<IEnumerable<UsersWithRolesDto>>(UsersEntities);
 
                 _logger.LogInformation("Mandamos correctamente todos los usuarios");
 
-                return Ok(results);
+                return Ok(Users);
             }
             catch (Exception ex)
             {
@@ -266,16 +266,16 @@ namespace everisapi.API.Controllers
         }
 
         //Introduciendo el nombre del usuario recogemos todos sus roles
-        [HttpGet("allroles")]
-        public IActionResult GetAllRoles()
+        [HttpGet("allroles/{codigoIdioma}")]
+        public IActionResult GetAllRoles(int codigoIdioma)
         {
 
             try
             {
-                var RolesEntities = _userInfoRepository.GetAllRoles();
+                // var RolesEntities = _userInfoRepository.GetAllRoles();
 
-                var results = Mapper.Map<IEnumerable<RoleDto>>(RolesEntities);
-
+                // var results = Mapper.Map<IEnumerable<RoleDto>>(RolesEntities);
+                var results = _userInfoRepository.GetAllRoles(codigoIdioma);                
                 _logger.LogInformation("Mandamos correctamente todos los roles");
 
                 return Ok(results);

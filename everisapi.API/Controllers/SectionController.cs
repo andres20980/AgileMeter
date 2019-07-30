@@ -191,15 +191,15 @@ namespace everisapi.API.Controllers
     }
 
 
-    [HttpGet("evaluacion/{id}/assessment/{assessmentId}")]
-    public IActionResult GetDatosEvaluacionFromEvalNew(int id,int assessmentId)
+    [HttpGet("evaluacion/{id}/assessment/{assessmentId}/{codigoIdioma}")]
+    public IActionResult GetDatosEvaluacionFromEvalNew(int id,int assessmentId, int codigoIdioma)
     {
 
       try
       {
         //Comprueba si existe la section y si existe manda un json con la información
         //si no existe mandara un error 404 el error 500 aparecera si el servidor falla
-        var SectionInfo = _sectionInfoRepository.GetSectionsInfoFromEvalNew(id,assessmentId);
+        var SectionInfo = _sectionInfoRepository.GetSectionsInfoFromEvalNew(id,assessmentId,codigoIdioma);
         if (SectionInfo == null)
         {
           _logger.LogInformation($"La section con id de evaluación" + id + " no pudo ser encontrado.");
@@ -217,8 +217,8 @@ namespace everisapi.API.Controllers
     }
 
     //Introduciendo el nombre del usuario recogemos todos sus roles
-    [HttpGet("{id}/asignaciones")]
-    public IActionResult GetAsignacionesFromSection(int id)
+    [HttpGet("{id}/asignaciones/{codigoIdioma}")]
+    public IActionResult GetAsignacionesFromSection(int id, int codigoIdioma)
     {
 
       try
@@ -233,12 +233,13 @@ namespace everisapi.API.Controllers
         }
 
         //Recogemos una lista de preguntas de la asignacion
-        var asignacionesDeSection = _sectionInfoRepository.GetAsignacionesFromSection(sectionExist);
+        var asignacionesDeSection = _sectionInfoRepository.GetAsignacionesFromSection(sectionExist,codigoIdioma);
 
         //Transformamos la lista anterior en una nueva con los datos que necesitamos
         //Ya que otros son relevantes
-        var AsignacionesResult = Mapper.Map<IEnumerable<AsignacionDto>>(asignacionesDeSection);
-        return Ok(AsignacionesResult);
+        // var AsignacionesResult = Mapper.Map<IEnumerable<AsignacionDto>>(asignacionesDeSection);        
+        //return Ok(AsignacionesResult);
+        return Ok(asignacionesDeSection);
 
       }
       catch (Exception ex)

@@ -1,14 +1,15 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { EvaluacionInfo } from 'app/Models/EvaluacionInfo';
-import {animate, state, style, transition, trigger} from '@angular/animations';
-import {PreviousevaluationComponent} from 'app/previousevaluation/previousevaluation.component'
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { PreviousevaluationComponent } from 'app/previousevaluation/previousevaluation.component'
 import { AppComponent } from 'app/app.component';
 import { RespuestaConNotas } from 'app/Models/RespuestaConNotas';
 import { RespuestaConNotasTabla } from 'app/pdfgenerator/pdfgenerator.component';
 import { RespuestasService } from 'app/services/RespuestasService';
 import { Respuesta } from 'app/Models/Respuesta';
 import { zip } from 'rxjs';
+import { EnumRol } from 'app/Models/EnumRol';
 
 // export interface Evaluacion {
 //   id: number,
@@ -28,10 +29,10 @@ import { zip } from 'rxjs';
   styleUrls: ['./preguntas-table.component.scss'],
   animations: [
     trigger('detailExpand', [
-    state('collapsed, void', style({ height: '0px', minHeight: '0', display: 'none' })),
-    state('expanded', style({ height: '*' })),
-    transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    transition('expanded <=> void', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)'))
+      state('collapsed, void', style({ height: '0px', minHeight: '0', display: 'none' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+      transition('expanded <=> void', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)'))
     ]),
   ],
 })
@@ -41,60 +42,61 @@ export class PreguntasTableComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @Input() dataInput: any;//Array<EvaluacionInfo>;
   dataSource: MatTableDataSource<RespuestaConNotas>;
-  userRole: string;
+  userRole: number;
   expandedElement: RespuestaConNotas;
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['section', 'asignacion', 'pregunta', 'estado', 'notas'];
+  public rol: EnumRol = new EnumRol();
 
   ngOnInit() {
-    let currentClass =  this;
+    let currentClass = this;
     this.dataSource = new MatTableDataSource(this.dataInput);
-    this.dataSource.sort= this.sort;
+    this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.userRole = this._appComponent._storageDataService.Role;
-    
-    this.dataSource.filterPredicate = function(data, filter: string): boolean {
+
+    this.dataSource.filterPredicate = function (data, filter: string): boolean {
 
       var resp = currentClass.displyRespuestaCorrecta(data);
       var incomp = "incompleta";
       var filterResp = resp.toLowerCase().startsWith(filter) || incomp.includes(resp);
 
-      return data.section.toLowerCase().includes(filter) 
-      ||  data.asignacion.toLowerCase().includes(filter)
-      ||  (data.pregunta.toLowerCase().includes(filter) && !data.pregunta.toLowerCase().includes("correcta") && !data.pregunta.toLowerCase().includes("incorrecta")&& !data.pregunta.toLowerCase().includes("incompleta") && !data.pregunta.toLowerCase().includes("no contestada"))
-      ||  (data.notas != null && data.notas.toLowerCase().includes(filter) && !data.pregunta.toLowerCase().includes("correcta") && !data.pregunta.toLowerCase().includes("incorrecta")&& !data.pregunta.toLowerCase().includes("incompleta") && !data.pregunta.toLowerCase().includes("no contestada"))
-      ||  (data.notasAdmin != null && data.notasAdmin.toLowerCase().includes(filter) && !data.pregunta.toLowerCase().includes("correcta") && !data.pregunta.toLowerCase().includes("incorrecta")&& !data.pregunta.toLowerCase().includes("incompleta") && !data.pregunta.toLowerCase().includes("no contestada"))
-      ||  filterResp
-      ||  currentClass.displayRespuesta(data).toLowerCase().includes(filter);
+      return data.section.toLowerCase().includes(filter)
+        || data.asignacion.toLowerCase().includes(filter)
+        || (data.pregunta.toLowerCase().includes(filter) && !data.pregunta.toLowerCase().includes("correcta") && !data.pregunta.toLowerCase().includes("incorrecta") && !data.pregunta.toLowerCase().includes("incompleta") && !data.pregunta.toLowerCase().includes("no contestada"))
+        || (data.notas != null && data.notas.toLowerCase().includes(filter) && !data.pregunta.toLowerCase().includes("correcta") && !data.pregunta.toLowerCase().includes("incorrecta") && !data.pregunta.toLowerCase().includes("incompleta") && !data.pregunta.toLowerCase().includes("no contestada"))
+        || (data.notasAdmin != null && data.notasAdmin.toLowerCase().includes(filter) && !data.pregunta.toLowerCase().includes("correcta") && !data.pregunta.toLowerCase().includes("incorrecta") && !data.pregunta.toLowerCase().includes("incompleta") && !data.pregunta.toLowerCase().includes("no contestada"))
+        || filterResp
+        || currentClass.displayRespuesta(data).toLowerCase().includes(filter);
       ;
-   };
+    };
 
-   this.dataSource.sortingDataAccessor = (data: any, sortHeaderId: string): string => {
-    if (sortHeaderId == "estado") {
-      if(data[sortHeaderId] == "0"){
-        return "2";
+    this.dataSource.sortingDataAccessor = (data: any, sortHeaderId: string): string => {
+      if (sortHeaderId == "estado") {
+        if (data[sortHeaderId] == "0") {
+          return "2";
+        }
+        else if ((data[sortHeaderId] == "1" && data["correcta"] == "Si") || (data[sortHeaderId] == "2" && data["correcta"] == "No") || data["correcta"] == null) {
+          return "1";
+        }
+        else {
+          return "3";
+        }
       }
-      else if((data[sortHeaderId] == "1" && data["correcta"]=="Si") || (data[sortHeaderId] == "2" && data["correcta"]=="No") || data["correcta"]== null){
-        return "1";
-      }
-      else{
-        return "3";
-      }
-    } 
-    return data[sortHeaderId];
-  };
-  
+      return data[sortHeaderId];
+    };
+
   }
 
-  applyFilter(filterValue: string){
+  applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
 
-  public parseDate(value: string): string{
+  public parseDate(value: string): string {
     let date = new Date(value);
-    console.log(date.getDay()+"/"+date.getMonth()+"/"+date.getFullYear());
-    return date.getDay()+"/"+date.getMonth()+1+"/"+date.getFullYear();
+    console.log(date.getDay() + "/" + date.getMonth() + "/" + date.getFullYear());
+    return date.getDay() + "/" + date.getMonth() + 1 + "/" + date.getFullYear();
   }
 
   public checkRespuestaCorrecta(row): string {
@@ -182,23 +184,23 @@ export class PreguntasTableComponent implements OnInit {
     }
     return respuesta;
   }
-  
+
   constructor(
     private _appComponent: AppComponent,
     private _respuestasService: RespuestasService
-    ){
-    }
+  ) {
+  }
 
-    saveNotas(model: RespuestaConNotas): void{
-      let resp: Respuesta  = new Respuesta(model.id, model.estado, 0, 0, model.notas, model.notasAdmin,"");
-      if(this.userRole == "Administrador" || this.userRole == "Evaluador"){
-        this._respuestasService.AlterRespuesta(resp).subscribe(
-          res => {
-          },
-          error => {
-          });
-      }
+  saveNotas(model: RespuestaConNotas): void {
+    let resp: Respuesta = new Respuesta(model.id, model.estado, 0, 0, model.notas, model.notasAdmin, "");
+    if (this.userRole == this.rol.Administrador || this.userRole == this.rol.Evaluador) {
+      this._respuestasService.AlterRespuesta(resp).subscribe(
+        res => {
+        },
+        error => {
+        });
     }
+  }
 
 
 }
