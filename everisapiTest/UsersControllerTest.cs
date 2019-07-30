@@ -40,20 +40,20 @@ namespace everisapiTest
             //Arrange            
             _controller = new UsersController(_logger, _userInfoRepository);
 
-            var usersEntities = new List<everisapi.API.Entities.UserEntity>()
+            var usersEntities = new List<everisapi.API.Models.UsersWithRolesDto>()
             {
-                new everisapi.API.Entities.UserEntity {
+                new everisapi.API.Models.UsersWithRolesDto {
                     Nombre = "Jose Antonio Beltran"
                 },
-                new everisapi.API.Entities.UserEntity {
+                new everisapi.API.Models.UsersWithRolesDto {
                     Nombre = "Francisco Javier Moreno"
                 }
             };
 
-            mockRepository.Setup(r => r.GetUsers()).Returns(usersEntities);
+            mockRepository.Setup(r => r.GetUsers(It.IsAny<int>())).Returns(usersEntities);
 
             //Act
-            var okResult = _controller.GetUsers();
+            var okResult = _controller.GetUsers(1);
 
             //Assert
             Assert.IsType<OkObjectResult>(okResult);
@@ -67,10 +67,10 @@ namespace everisapiTest
             _controller = new UsersController(_logger, _userInfoRepository);
 
 
-            mockRepository.Setup(r => r.GetUsers()).Throws(new Exception());
+            mockRepository.Setup(r => r.GetUsers(It.IsAny<int>())).Throws(new Exception());
 
             //Act
-            var okResult = _controller.GetUsers();
+            var okResult = _controller.GetUsers(1);
 
             //Assert
             Assert.IsType<ObjectResult>(okResult);
@@ -170,8 +170,7 @@ namespace everisapiTest
 
             var rolEntity = new everisapi.API.Entities.RoleEntity
             {
-                Id = 1,
-                Role = "Admin"
+                Id = 1
             };
             mockRepository.Setup(x => x.GetRolesUsuario(entity)).Returns(rolEntity);
 
@@ -635,10 +634,10 @@ namespace everisapiTest
             _controller = new UsersController(_logger, _userInfoRepository);
 
 
-            mockRepository.Setup(r => r.GetAllRoles()).Returns(new List<everisapi.API.Entities.RoleEntity>());
+            mockRepository.Setup(r => r.GetAllRoles(It.IsAny<int>())).Returns(new List<everisapi.API.Models.RoleDto>());
 
             //Act
-            var okResult = _controller.GetAllRoles();
+            var okResult = _controller.GetAllRoles(1);
 
             //Assert
             Assert.IsType<OkObjectResult>(okResult);
@@ -651,10 +650,10 @@ namespace everisapiTest
             _controller = new UsersController(_logger, _userInfoRepository);
 
 
-            mockRepository.Setup(r => r.GetAllRoles()).Throws(new Exception());
+            mockRepository.Setup(r => r.GetAllRoles(It.IsAny<int>())).Throws(new Exception());
 
             //Act
-            var okResult = _controller.GetAllRoles();
+            var okResult = _controller.GetAllRoles(1);
 
             //Assert
             Assert.IsType<ObjectResult>(okResult);

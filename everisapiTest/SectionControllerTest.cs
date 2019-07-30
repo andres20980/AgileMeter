@@ -44,10 +44,10 @@ namespace everisapiTest
             var sections = new List<everisapi.API.Entities.SectionEntity>()
             {
                 new everisapi.API.Entities.SectionEntity {
-                    Id = 1, Nombre = "Section_1"
+                    Id = 1
                 },
                 new everisapi.API.Entities.SectionEntity {
-                    Id = 2, Nombre = "Section_2"
+                    Id = 2
                 },
             };
 
@@ -69,10 +69,10 @@ namespace everisapiTest
             var sections = new List<everisapi.API.Entities.SectionEntity>()
             {
                 new everisapi.API.Entities.SectionEntity {
-                    Id = 1, Nombre = "Section_1"
+                    Id = 1
                 },
                 new everisapi.API.Entities.SectionEntity {
-                    Id = 2, Nombre = "Section_2"
+                    Id = 2
                 },
             };
 
@@ -139,8 +139,7 @@ namespace everisapiTest
 
             var section = new everisapi.API.Entities.SectionEntity
             {
-                Id = 1,
-                Nombre = "Section_1"
+                Id = 1
             };
 
             mockRepository.Setup(r => r.GetSection(It.IsAny<int>(), It.IsAny<bool>())).Returns(section);
@@ -161,8 +160,7 @@ namespace everisapiTest
 
             var section = new everisapi.API.Entities.SectionEntity
             {
-                Id = 1,
-                Nombre = "Section_1"
+                Id = 1
             };
 
             mockRepository.Setup(r => r.GetSection(It.IsAny<int>(), It.IsAny<bool>())).Returns(section);
@@ -200,8 +198,7 @@ namespace everisapiTest
 
             var section = new everisapi.API.Entities.SectionEntity
             {
-                Id = 1,
-                Nombre = "Section_1"
+                Id = 1
             };
 
             mockRepository.Setup(r => r.GetSection(It.IsAny<int>(), It.IsAny<bool>())).Throws(new Exception());
@@ -222,8 +219,7 @@ namespace everisapiTest
 
             var section = new everisapi.API.Entities.SectionEntity
             {
-                Id = 1,
-                Nombre = "Section_1"
+                Id = 1
             };
 
             mockRepository.Setup(r => r.GetSection(It.IsAny<int>(), It.IsAny<bool>())).Returns(section);
@@ -244,8 +240,7 @@ namespace everisapiTest
 
             var section = new everisapi.API.Entities.SectionEntity
             {
-                Id = 1,
-                Nombre = "Section_1"
+                Id = 1
             };
 
             mockRepository.Setup(r => r.GetSection(It.IsAny<int>(), It.IsAny<bool>())).Returns(section);
@@ -285,8 +280,7 @@ namespace everisapiTest
 
             var section = new everisapi.API.Entities.SectionEntity
             {
-                Id = 1,
-                Nombre = "Section_1"
+                Id = 1
             };
 
             mockRepository.Setup(r => r.GetSection(It.IsAny<int>(), It.IsAny<bool>())).Returns(section);
@@ -307,8 +301,7 @@ namespace everisapiTest
 
             var section = new everisapi.API.Entities.SectionEntity
             {
-                Id = 1,
-                Nombre = "Section_1"
+                Id = 1
             };
 
             mockRepository.Setup(r => r.GetSection(It.IsAny<int>(), It.IsAny<bool>())).Returns(section);
@@ -415,10 +408,10 @@ namespace everisapiTest
                 },
             };
 
-            mockRepository.Setup(r => r.GetSectionsInfoFromEvalNew(It.IsAny<int>(), It.IsAny<int>())).Returns(sections);
+            mockRepository.Setup(r => r.GetSectionsInfoFromEvalNew(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>())).Returns(sections);
 
             //Act
-            var okResult = _controller.GetDatosEvaluacionFromEvalNew(1, 1);
+            var okResult = _controller.GetDatosEvaluacionFromEvalNew(1, 1,1);
 
             //Assert
             Assert.IsType<OkObjectResult>(okResult);
@@ -432,10 +425,10 @@ namespace everisapiTest
 
             List<everisapi.API.Models.SectionInfoDto> sections = null;
 
-            mockRepository.Setup(r => r.GetSectionsInfoFromEvalNew(It.IsAny<int>(), It.IsAny<int>())).Returns(sections);
+            mockRepository.Setup(r => r.GetSectionsInfoFromEvalNew(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>())).Returns(sections);
 
             //Act
-            var okResult = _controller.GetDatosEvaluacionFromEvalNew(1, 1);
+            var okResult = _controller.GetDatosEvaluacionFromEvalNew(1, 1, 1);
 
             //Assert
             Assert.IsType<NotFoundResult>(okResult);
@@ -454,10 +447,10 @@ namespace everisapiTest
                 },
             };
 
-            mockRepository.Setup(r => r.GetSectionsInfoFromEvalNew(It.IsAny<int>(), It.IsAny<int>())).Throws(new Exception());
+            mockRepository.Setup(r => r.GetSectionsInfoFromEvalNew(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>())).Throws(new Exception());
 
             //Act
-            var okResult = _controller.GetDatosEvaluacionFromEvalNew(1, 1);
+            var okResult = _controller.GetDatosEvaluacionFromEvalNew(1, 1, 1);
 
             //Assert
             Assert.IsType<ObjectResult>(okResult);
@@ -472,22 +465,20 @@ namespace everisapiTest
 
             var section = new everisapi.API.Entities.SectionEntity
             {
-                Id = 1,
-                Nombre = "Section_1"
+                Id = 1
             };
 
-            var asignaciones = new List<everisapi.API.Entities.AsignacionEntity>{
-                new everisapi.API.Entities.AsignacionEntity{
-                    Id = 1,
-                    Nombre = "Asignacion_1"
+            var asignaciones = new List<everisapi.API.Models.AsignacionSinPreguntasDto>{
+                new everisapi.API.Models.AsignacionSinPreguntasDto{
+                    Id = 1
                 }
             };
 
             mockRepository.Setup(r => r.GetSection(It.IsAny<int>(), It.IsAny<bool>())).Returns(section);
-            mockRepository.Setup(r => r.GetAsignacionesFromSection(It.IsAny<everisapi.API.Entities.SectionEntity>())).Returns(asignaciones);
+            mockRepository.Setup(r => r.GetAsignacionesFromSection(It.IsAny<everisapi.API.Entities.SectionEntity>(), It.IsAny<int>())).Returns(asignaciones);
 
             //Act
-            var okResult = _controller.GetAsignacionesFromSection(1);
+            var okResult = _controller.GetAsignacionesFromSection(1,1);
 
             //Assert
             Assert.IsType<OkObjectResult>(okResult);
@@ -501,18 +492,17 @@ namespace everisapiTest
 
             everisapi.API.Entities.SectionEntity section = null;
 
-            var asignaciones = new List<everisapi.API.Entities.AsignacionEntity>{
-                new everisapi.API.Entities.AsignacionEntity{
-                    Id = 1,
-                    Nombre = "Asignacion_1"
+            var asignaciones = new List<everisapi.API.Models.AsignacionSinPreguntasDto>{
+                new everisapi.API.Models.AsignacionSinPreguntasDto{
+                    Id = 1
                 }
             };
 
             mockRepository.Setup(r => r.GetSection(It.IsAny<int>(), It.IsAny<bool>())).Returns(section);
-            mockRepository.Setup(r => r.GetAsignacionesFromSection(It.IsAny<everisapi.API.Entities.SectionEntity>())).Returns(asignaciones);
+            mockRepository.Setup(r => r.GetAsignacionesFromSection(It.IsAny<everisapi.API.Entities.SectionEntity>(), It.IsAny<int>())).Returns(asignaciones);
 
             //Act
-            var okResult = _controller.GetAsignacionesFromSection(1);
+            var okResult = _controller.GetAsignacionesFromSection(1,1);
 
             //Assert
             Assert.IsType<NotFoundResult>(okResult);
@@ -526,22 +516,20 @@ namespace everisapiTest
 
             var section = new everisapi.API.Entities.SectionEntity
             {
-                Id = 1,
-                Nombre = "Section_1"
+                Id = 1
             };
 
             var asignaciones = new List<everisapi.API.Entities.AsignacionEntity>{
                 new everisapi.API.Entities.AsignacionEntity{
-                    Id = 1,
-                    Nombre = "Asignacion_1"
+                    Id = 1
                 }
             };
 
             mockRepository.Setup(r => r.GetSection(It.IsAny<int>(), It.IsAny<bool>())).Returns(section);
-            mockRepository.Setup(r => r.GetAsignacionesFromSection(It.IsAny<everisapi.API.Entities.SectionEntity>())).Throws(new Exception());
+            mockRepository.Setup(r => r.GetAsignacionesFromSection(It.IsAny<everisapi.API.Entities.SectionEntity>(), It.IsAny<int>())).Throws(new Exception());
 
             //Act
-            var okResult = _controller.GetAsignacionesFromSection(1);
+            var okResult = _controller.GetAsignacionesFromSection(1, 1);
 
             //Assert
             Assert.IsType<ObjectResult>(okResult);
@@ -610,8 +598,7 @@ namespace everisapiTest
 
             var returnsSection = new everisapi.API.Entities.SectionEntity
             {
-                Id = 1,
-                Nombre = "Asignacion_1"
+                Id = 1
             };
 
             mockRepository.Setup(r => r.GetSection(1, false)).Returns(returnsSection);
@@ -633,8 +620,7 @@ namespace everisapiTest
             everisapi.API.Models.SectionWithoutAreaDto section = null;
             var returnsSection = new everisapi.API.Entities.SectionEntity
             {
-                Id = 1,
-                Nombre = "Asignacion_1"
+                Id = 1
             };
 
             mockRepository.Setup(r => r.GetSection(1, false)).Returns(returnsSection);
@@ -706,8 +692,7 @@ namespace everisapiTest
 
             var returnsSection = new everisapi.API.Entities.SectionEntity
             {
-                Id = 1,
-                Nombre = "Asignacion_1"
+                Id = 1
             };
 
             mockRepository.Setup(r => r.GetSection(It.IsAny<int>(), It.IsAny<bool>())).Returns(returnsSection);
@@ -734,8 +719,7 @@ namespace everisapiTest
 
             var returnsSection = new everisapi.API.Entities.SectionEntity
             {
-                Id = 1,
-                Nombre = "Asignacion_1"
+                Id = 1
             };
 
             mockRepository.Setup(r => r.GetSection(It.IsAny<int>(), It.IsAny<bool>())).Returns(returnsSection);
@@ -781,8 +765,7 @@ namespace everisapiTest
             everisapi.API.Models.SectionWithoutAreaDto section = null;
             var returnsSection = new everisapi.API.Entities.SectionEntity
             {
-                Id = 1,
-                Nombre = "Asignacion_1"
+                Id = 1
             };
 
             mockRepository.Setup(r => r.GetSection(1, false)).Returns(returnsSection);
@@ -810,8 +793,7 @@ namespace everisapiTest
 
             var returnsSection = new everisapi.API.Entities.SectionEntity
             {
-                Id = 1,
-                Nombre = "Asignacion_1"
+                Id = 1
             };
 
             mockRepository.Setup(r => r.GetSection(It.IsAny<int>(), It.IsAny<bool>())).Returns(returnsSection);
@@ -840,8 +822,7 @@ namespace everisapiTest
 
             var returnsSection = new everisapi.API.Entities.SectionEntity
             {
-                Id = 1,
-                Nombre = "Asignacion_1"
+                Id = 1
             };
 
             mockRepository.Setup(r => r.GetSection(It.IsAny<int>(), It.IsAny<bool>())).Returns(returnsSection);
@@ -869,8 +850,7 @@ namespace everisapiTest
 
             var returnsSection = new everisapi.API.Entities.SectionEntity
             {
-                Id = 1,
-                Nombre = "Asignacion_1"
+                Id = 1
             };
 
             mockRepository.Setup(r => r.GetSection(It.IsAny<int>(), It.IsAny<bool>())).Returns(returnsSection);
@@ -917,8 +897,7 @@ namespace everisapiTest
             everisapi.API.Models.SectionWithNotasDto section = null;
             var returnsSection = new everisapi.API.Entities.SectionEntity
             {
-                Id = 1,
-                Nombre = "Asignacion_1"
+                Id = 1
             };
 
             mockRepository.Setup(r => r.GetSection(It.IsAny<int>(), It.IsAny<bool>())).Returns(returnsSection);
@@ -947,8 +926,7 @@ namespace everisapiTest
 
             var returnsSection = new everisapi.API.Entities.SectionEntity
             {
-                Id = 1,
-                Nombre = "Asignacion_1"
+                Id = 1
             };
 
             mockRepository.Setup(r => r.GetSection(It.IsAny<int>(), It.IsAny<bool>())).Returns(returnsSection);
@@ -976,8 +954,7 @@ namespace everisapiTest
 
             var returnsSection = new everisapi.API.Entities.SectionEntity
             {
-                Id = 1,
-                Nombre = "Asignacion_1"
+                Id = 1
             };
 
             mockRepository.Setup(r => r.GetSection(It.IsAny<int>(), It.IsAny<bool>())).Returns(returnsSection);
@@ -1005,8 +982,7 @@ namespace everisapiTest
 
             var returnsSection = new everisapi.API.Entities.SectionEntity
             {
-                Id = 1,
-                Nombre = "Asignacion_1"
+                Id = 1
             };
 
             mockRepository.Setup(r => r.GetSection(It.IsAny<int>(), It.IsAny<bool>())).Returns(returnsSection);
@@ -1033,8 +1009,7 @@ namespace everisapiTest
 
             var returnsSection = new everisapi.API.Entities.SectionEntity
             {
-                Id = 1,
-                Nombre = "Asignacion_1"
+                Id = 1
             };
 
             mockRepository.Setup(r => r.GetSection(It.IsAny<int>(), It.IsAny<bool>())).Returns(returnsSection);
@@ -1080,8 +1055,7 @@ namespace everisapiTest
             everisapi.API.Models.SectionWithoutAreaDto section = null;
             var returnsSection = new everisapi.API.Entities.SectionEntity
             {
-                Id = 1,
-                Nombre = "Asignacion_1"
+                Id = 1
             };
 
             mockRepository.Setup(r => r.GetSection(1, false)).Returns(returnsSection);
@@ -1109,8 +1083,7 @@ namespace everisapiTest
 
             var returnsSection = new everisapi.API.Entities.SectionEntity
             {
-                Id = 1,
-                Nombre = "Asignacion_1"
+                Id = 1
             };
 
             mockRepository.Setup(r => r.GetSection(It.IsAny<int>(), It.IsAny<bool>())).Returns(returnsSection);

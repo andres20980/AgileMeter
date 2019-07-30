@@ -46,8 +46,7 @@ namespace everisapiTest
             {
                new everisapi.API.Entities.OficinaEntity
                {
-                   OficinaId = 1,
-                   OficinaNombre = "Sevilla"
+                   OficinaId = 1
                 }
             };
 

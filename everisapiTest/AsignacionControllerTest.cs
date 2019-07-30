@@ -41,13 +41,13 @@ namespace everisapiTest
             //Arrange            
             _controller = new AsignacionController(_logger, _asignacionInfoRepository);
 
-            var asignaciones = new List<everisapi.API.Entities.AsignacionEntity>()
+            var asignaciones = new List<everisapi.API.Models.AsignacionSinPreguntasDto>()
             {
-                new everisapi.API.Entities.AsignacionEntity {
-                    Id = 1, Nombre = "Asignacion_1"
+                new everisapi.API.Models.AsignacionSinPreguntasDto {
+                    Id = 1
                 },
-                new everisapi.API.Entities.AsignacionEntity {
-                    Id = 2, Nombre = "Asignacion_2"
+                new everisapi.API.Models.AsignacionSinPreguntasDto {
+                    Id = 2
                 },
             };
 
@@ -85,8 +85,7 @@ namespace everisapiTest
 
             var asignacion = new everisapi.API.Entities.AsignacionEntity 
             {
-                Id = 1, 
-                Nombre = "Asignacion_1"
+                Id = 1
             };
 
             mockRepository.Setup(r => r.AssignationLastQuestionUpdated(It.IsAny<int>())).Returns(asignacion);
@@ -170,10 +169,10 @@ namespace everisapiTest
                     Nombre = "Asignacion_1"
                 };
 
-            mockRepository.Setup(r => r.GetAsignFromEvalAndAsig(It.IsAny<int>(), It.IsAny<int>())).Returns(asignacion);
+            mockRepository.Setup(r => r.GetAsignFromEvalAndAsig(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>())).Returns(asignacion);
 
             //Act
-            var okResult = _controller.GetAsignacionFromEval(1,1);
+            var okResult = _controller.GetAsignacionFromEval(1);
 
             //Assert
             Assert.IsType<OkObjectResult>(okResult);
@@ -185,10 +184,10 @@ namespace everisapiTest
             //Arrange            
             _controller = new AsignacionController(_logger, _asignacionInfoRepository);
 
-            mockRepository.Setup(r => r.GetAsignFromEvalAndAsig(It.IsAny<int>(), It.IsAny<int>())).Throws(new Exception());
+            mockRepository.Setup(r => r.GetAsignFromEval(It.IsAny<int>())).Throws(new Exception());
 
             //Act
-            var okResult = _controller.GetAsignacionFromEval(1,1);
+            var okResult = _controller.GetAsignacionFromEval(1);
 
             //Assert
             Assert.IsType<ObjectResult>(okResult);
@@ -246,8 +245,7 @@ namespace everisapiTest
 
             var asignacion = new everisapi.API.Entities.AsignacionEntity 
                 {
-                    Id = 1, 
-                    Nombre = "Asignacion_1"
+                    Id = 1
                 };
 
             mockRepository.Setup(r => r.GetAsignacion(It.IsAny<int>(), It.IsAny<bool>())).Returns(asignacion);
@@ -267,8 +265,7 @@ namespace everisapiTest
 
             var asignacion = new everisapi.API.Entities.AsignacionEntity 
                 {
-                    Id = 1, 
-                    Nombre = "Asignacion_1"
+                    Id = 1
                 };
 
             mockRepository.Setup(r => r.GetAsignacion(It.IsAny<int>(), It.IsAny<bool>())).Returns(asignacion);
