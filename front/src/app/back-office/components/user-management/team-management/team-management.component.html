@@ -19,7 +19,7 @@
 
 -->
 
-    <div class="col-12 d-flex ml-4 p-3" *ngIf="user.role.id ===  roles.Administrador || user.role.role ===  roles.Evaluador">
+    <div class="col-12 d-flex ml-4 p-3" *ngIf="user.role.id ===  roles.Administrador || user.role.id ===  roles.Evaluador">
       <span class="text-danger"><strong>*</strong>{{ 'TEAM_MANAGEMENT.NO_USER_MESSAGE' | translate }}</span>
     </div>
     <div class="col-12 d-flex ml-4 p-3">
