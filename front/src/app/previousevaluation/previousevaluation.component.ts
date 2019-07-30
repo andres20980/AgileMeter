@@ -723,6 +723,10 @@ export class PreviousevaluationComponent implements OnInit {
 
   //Opciones para la grafica
   public setBarChartOptions(){
+    var level ;
+    this._translateService.get('PREVIOUS_EVALUATION.LEVEL').subscribe(value => { level = value; });
+    var ofLevel;
+    this._translateService.get('PREVIOUS_EVALUATION.OF_LEVEL').subscribe(value => { ofLevel = value; });
     var self = this;
     this.barChartOptions = {
     scaleShowVerticalLines: false,
@@ -777,11 +781,11 @@ export class PreviousevaluationComponent implements OnInit {
           }
           else{
           if (Number(tooltipItem.yLabel) % 100 == 0 && Number(tooltipItem.yLabel) >= 100){
-            let nivel: string = '%  del nivel ' +  Math.trunc(Number(tooltipItem.yLabel) / 100);
+            let nivel: string = '%  '+ ofLevel +' '+  Math.trunc(Number(tooltipItem.yLabel) / 100);
             return  data.datasets[tooltipItem.datasetIndex].label + ': 100' + nivel;
           }
           else{
-            let nivel: string = '%  del nivel ' +  Math.trunc(Number(tooltipItem.yLabel) / 100 + 1);
+            let nivel: string = '%  '+ ofLevel +' ' +  Math.trunc(Number(tooltipItem.yLabel) / 100 + 1);
             return  data.datasets[tooltipItem.datasetIndex].label + ': ' + Math.round((tooltipItem.yLabel%100) * 10)/10 + nivel;
           }
           }
@@ -808,9 +812,9 @@ export class PreviousevaluationComponent implements OnInit {
             if(self.allLegendsHidden){
               return "";
             }
-            else{
+            else{              
               if (Number(value) % 100 == 0 && Number(value) >= 100){
-                return 'Nivel ' + (Number(value) / 100 );
+                return level+' ' + (Number(value) / 100 );
               }
               else{
                 return Number(value)%100 + '%';

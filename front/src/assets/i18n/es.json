@@ -194,7 +194,9 @@
 		"EXCEL_DATE": "Fecha",
 		"EXCEL_USER": "Usuario",
 		"EXCEL_ASSESSMENT": "Evaluación",
-		"EXCEL_SCORE": "Puntuación"
+		"EXCEL_SCORE": "Puntuación",
+		"LEVEL": "Nivel",
+		"OF_LEVEL": "del nivel"
 	},
 	"SORTED_TABLE": {
 		"FILTER": " Filtro",
@@ -277,7 +279,9 @@
 		"ICONS_INCORRECT": "Incorrecta",
 		"ICONS_NOT_ANSWERED": "No contestada",
 		"QUESTION_NOTES": "Notas",
-		"NO_NOTES": "No hay notas añadidas"
+		"NO_NOTES": "No hay notas añadidas",
+		"YES": "Yes",
+		"NO": "No"
 	},
 	"PREGUNTAS_TABLE": {
 		"FILTER": "Filtro",
