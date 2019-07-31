@@ -27,10 +27,13 @@
       <div *ngFor="let datos of ListaSectionConAsignaciones; let i = index" [attr.data-index]="i"
         [attr.id]="datos.nombre" [ngClass]="formatLevel(ListaSectionConAsignaciones[i])"
         class="circle-progress">
-        <div *ngIf="datos.numNotas > 0" class="top-comment" data-html2canvas-ignore="true">
+
+        <!-- Eliminamos el comentario con el número de notas -->
+        <!-- <div *ngIf="datos.numNotas > 0" class="top-comment" data-html2canvas-ignore="true">
           <img class="" src="assets/comment_empty.png" title="{{ 'PDF_GENERATOR.NOTES' | translate }}" />
           <p>{{datos.numNotas}}</p>
-        </div>
+        </div> -->
+        
         <circle-progress [percent]="ListaSectionConAsignaciones[i].puntuacion" [toFixed]="1"
           [subtitle]="[formatSubtitle(ListaSectionConAsignaciones[i])]" [subtitleFontSize]="14" [titleFontSize]="26"
           [unitsFontSize]="14" [radius]="74" [space]="-10" [outerStrokeWidth]="10" [innerStrokeWidth]="10"
