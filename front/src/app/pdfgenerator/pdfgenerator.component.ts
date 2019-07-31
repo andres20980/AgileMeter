@@ -1286,8 +1286,10 @@ export class PdfgeneratorComponent implements OnInit {
 
         workbook.xlsx.writeBuffer().then((data) => {
           this.generatingExcel = false;
+          var nombre:string;
+          this._translateService.get('PDF_GENERATOR.EXCEL_DOCUMENT_NAME').subscribe(value => { nombre = value; });
           let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-          fs.saveAs(blob, 'Resultados_del_equipo_' + this.Project.nombre + '.xlsx');
+          fs.saveAs(blob, nombre + this.Project.nombre + '.xlsx');
 
         });
       });

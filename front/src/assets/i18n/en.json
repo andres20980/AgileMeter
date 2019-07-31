@@ -196,7 +196,8 @@
 		"EXCEL_ASSESSMENT": "Assessment",
 		"EXCEL_SCORE": "Score",
 		"LEVEL": "Level",
-		"OF_LEVEL": "of level"
+		"OF_LEVEL": "of level",
+		"EXCEL_DOCUMENT_NAME": "Completed_assessments_"
 	},
 	"SORTED_TABLE": {
 		"FILTER": " Filter",
@@ -268,7 +269,8 @@
 		"EXCEL_NC": "Not answered",
 		"CIRCLE_PROGRESS_LEVEL": "Level ",
 		"CIRCLE_PROGRESS_MIN_LEVEL": "of the level minimum",
-		"CIRCLE_PROGRESS_MAX_LEVEL": "of the level maximum"
+		"CIRCLE_PROGRESS_MAX_LEVEL": "of the level maximum",
+		"EXCEL_DOCUMENT_NAME": "Teams_results_"
 	},
 	"SECTION_RESULTS": {
 		"SECTION_NOTES": "Notes",
