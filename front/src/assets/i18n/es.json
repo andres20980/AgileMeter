@@ -196,7 +196,8 @@
 		"EXCEL_ASSESSMENT": "Evaluación",
 		"EXCEL_SCORE": "Puntuación",
 		"LEVEL": "Nivel",
-		"OF_LEVEL": "del nivel"
+		"OF_LEVEL": "del nivel",
+		"EXCEL_DOCUMENT_NAME": "Evaluaciones_finalizadas_"
 	},
 	"SORTED_TABLE": {
 		"FILTER": " Filtro",
@@ -268,7 +269,8 @@
 		"EXCEL_NC": "No contestada",
 		"CIRCLE_PROGRESS_LEVEL": "Nivel ",
 		"CIRCLE_PROGRESS_MIN_LEVEL": "del nivel mínimo",
-		"CIRCLE_PROGRESS_MAX_LEVEL": "del Nivel máximo"
+		"CIRCLE_PROGRESS_MAX_LEVEL": "del Nivel máximo",
+		"EXCEL_DOCUMENT_NAME": "Resultados_del_equipo_"
 	},
 	"SECTION_RESULTS": {
 		"SECTION_NOTES": "Notas",

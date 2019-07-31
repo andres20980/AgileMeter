@@ -453,10 +453,11 @@ export class PreviousevaluationComponent implements OnInit {
     worksheet.getColumn(2).width = 12;
     worksheet.getColumn(3).width = 12;
     worksheet.getColumn(4).width = 12;
-
+    var nombre:string;
+    this._translateService.get('PREVIOUS_EVALUATION.EXCEL_DOCUMENT_NAME').subscribe(value => { nombre = value; });
     workbook.xlsx.writeBuffer().then((data) => {
       let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-      fs.saveAs(blob, 'Evaluaciones_finalizadas_'+  this.Project.nombre+'.xlsx');
+      fs.saveAs(blob, nombre+  this.Project.nombre+'.xlsx');
     })
   }
 
