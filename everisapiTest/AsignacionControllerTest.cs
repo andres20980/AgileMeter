@@ -193,6 +193,43 @@ namespace everisapiTest
             Assert.IsType<ObjectResult>(okResult);
         }
 
+        //Method: GetAsignacionFromEval(int idEval, int idAsig, int codigoIdioma)
+        [Fact]
+        public void GetAsignacionFromEvalIdEvalIdAsigIdioma_WhenCalled_ReturnOkResult()
+        {
+            //Arrange            
+            _controller = new AsignacionController(_logger, _asignacionInfoRepository);
+
+            var asignacion = new everisapi.API.Models.AsignacionInfoDto 
+                {
+                    Id = 1, 
+                    Nombre = "Asignacion_1"
+                };
+
+            mockRepository.Setup(r => r.GetAsignFromEvalAndAsig(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>())).Returns(asignacion);
+
+            //Act
+            var okResult = _controller.GetAsignacionFromEval(1,1,1);
+
+            //Assert
+            Assert.IsType<OkObjectResult>(okResult);
+        }
+
+        [Fact]
+        public void GetAsignacionFromEvalIdEvalIdAsigIdioma_WhenCalled_ReturnsStatusCodeResult()
+        {
+            //Arrange            
+            _controller = new AsignacionController(_logger, _asignacionInfoRepository);
+
+            mockRepository.Setup(r => r.GetAsignFromEvalAndAsig(It.IsAny<int>(), It.IsAny<int>(), It.IsAny<int>())).Throws(new Exception());
+
+            //Act
+            var okResult = _controller.GetAsignacionFromEval(1,1,1);
+
+            //Assert
+            Assert.IsType<ObjectResult>(okResult);
+        }
+
         //Method: GetAsignacionFromSection(int idEval, int idSection)
         [Fact]
         public void GetAsignacionFromSection_WhenCalled_ReturnOkResult()
