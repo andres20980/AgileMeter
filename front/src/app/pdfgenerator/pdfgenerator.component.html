@@ -25,15 +25,14 @@
 
     <div class="circle-progress-container" *ngIf="ListaSectionConAsignaciones && ListaSectionConAsignaciones.length>0">
       <div *ngFor="let datos of ListaSectionConAsignaciones; let i = index" [attr.data-index]="i"
-        [attr.id]="datos.nombre" [ngClass]="formatLevel(ListaSectionConAsignaciones[i])"
-        class="circle-progress">
+        [attr.id]="datos.nombre" [ngClass]="formatLevel(ListaSectionConAsignaciones[i])" class="circle-progress">
 
         <!-- Eliminamos el comentario con el número de notas -->
         <!-- <div *ngIf="datos.numNotas > 0" class="top-comment" data-html2canvas-ignore="true">
           <img class="" src="assets/comment_empty.png" title="{{ 'PDF_GENERATOR.NOTES' | translate }}" />
           <p>{{datos.numNotas}}</p>
         </div> -->
-        
+
         <circle-progress [percent]="ListaSectionConAsignaciones[i].puntuacion" [toFixed]="1"
           [subtitle]="[formatSubtitle(ListaSectionConAsignaciones[i])]" [subtitleFontSize]="14" [titleFontSize]="26"
           [unitsFontSize]="14" [radius]="74" [space]="-10" [outerStrokeWidth]="10" [innerStrokeWidth]="10"
@@ -42,13 +41,14 @@
           [animation]="true" [renderOnClick]="false" [animationDuration]="300"></circle-progress>
         <div class="text-center circle-progress-title" data-html2canvas-ignore="true"><b>{{datos.nombre}}</b></div>
       </div>
-      <div [ngClass]="formatTotalLevel(ListaSectionConAsignaciones)"  [attr.id]="'total'">
+      <div [ngClass]="formatTotalLevel(ListaSectionConAsignaciones)" [attr.id]="'total'">
         <circle-progress [percent]="getTotalPercent(ListaSectionConAsignaciones)" [toFixed]="1" [showSubtitle]="false"
           [subtitle]="[formatTotalSubtitle(ListaSectionConAsignaciones)]" [subtitleFontSize]="14" [titleFontSize]="26"
           [unitsFontSize]="14" [radius]="74" [space]="-10" [outerStrokeWidth]="10" [innerStrokeWidth]="10"
           [innerStrokeColor]="'#b8457a30'" [outerStrokeColor]="'#b8457a'" [outerStrokeLinecap]="'square'"
           [animation]="true" [renderOnClick]="false" [animationDuration]="300"></circle-progress>
-        <div class="text-center circle-progress-title" data-html2canvas-ignore="true"><b>{{ 'PDF_GENERATOR.GLOBAL'| translate }}</b></div>
+        <div class="text-center circle-progress-title" data-html2canvas-ignore="true">
+          <b>{{ 'PDF_GENERATOR.GLOBAL'| translate }}</b></div>
         <!-- <div class="text-center"><b>GLOBAL</b></div> -->
       </div>
 
@@ -58,14 +58,15 @@
   <mat-expansion-panel class="notas-panel">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        {{ 'PDF_GENERATOR.NOTES'| translate }}
-        <img class="comment"
-          *ngIf="(Evaluacion.notasEvaluacion != null && Evaluacion.notasEvaluacion != '') || (Evaluacion.notasObjetivos != null && Evaluacion.notasObjetivos != '')"
-          src="assets/comment_filled.png" title="{{ 'PDF_GENERATOR.ICONS_NOTES_FILLED'| translate }}" />
-        <img class="comment"
-          *ngIf="(Evaluacion.notasEvaluacion == null || Evaluacion.notasEvaluacion == '') && (Evaluacion.notasObjetivos == null || Evaluacion.notasObjetivos == '')"
-          src="assets/comment_empty.png" title="{{ 'PDF_GENERATOR.ICONS_NOTES_EMPTY'| translate }}" />
-
+        <div class="col-11">{{ 'PDF_GENERATOR.GENERAL_INFORMATION'| translate }}</div>
+        <div class="col-1">
+          <img class="comment"
+            *ngIf="(Evaluacion.notasEvaluacion != null && Evaluacion.notasEvaluacion != '') || (Evaluacion.notasObjetivos != null && Evaluacion.notasObjetivos != '')"
+            src="assets/comment_filled.png" title="{{ 'PDF_GENERATOR.ICONS_NOTES_FILLED'| translate }}" />
+          <img class="comment"
+            *ngIf="(Evaluacion.notasEvaluacion == null || Evaluacion.notasEvaluacion == '') && (Evaluacion.notasObjetivos == null || Evaluacion.notasObjetivos == '')"
+            src="assets/comment_empty.png" title="{{ 'PDF_GENERATOR.ICONS_NOTES_EMPTY'| translate }}" />
+        </div>
       </mat-panel-title>
     </mat-expansion-panel-header>
     <div class="notas-row">

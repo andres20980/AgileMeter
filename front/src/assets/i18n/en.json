@@ -241,6 +241,7 @@
 		"ASSESMENT": "SCORE",
 		"GLOBAL": "GLOBAL SCORE",
 		"NOTES": "Notes",
+		"GENERAL_INFORMATION": "Assessment General Information",
 		"ICONS_NOTES_FILLED": "Notes available",
 		"ICONS_NOTES_EMPTY": "No notes added",
 		"EVALUATION_NOTES": "Assessment Notes",
