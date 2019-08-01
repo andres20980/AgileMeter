@@ -12,9 +12,6 @@
     <div class="row">
       <div class="col ml-5">
         <h3>{{ 'PDF_GENERATOR.ASSESSMENT_RESULTS' | translate }}
-          <button class="transparente" (click)="ExportToExcel();">
-            <img src="assets/excel.png" title="{{ 'PDF_GENERATOR.EXCEL_EXPORT' | translate }}" />
-          </button>
         </h3>
       </div>
     </div>
@@ -58,14 +55,17 @@
   <mat-expansion-panel class="notas-panel">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <div class="col-11">{{ 'PDF_GENERATOR.GENERAL_INFORMATION'| translate }}</div>
-        <div class="col-1">
-          <img class="comment"
+        <div class="col-10">{{ 'PDF_GENERATOR.GENERAL_INFORMATION'| translate }}</div>
+        <div class="col-2">
+          <img class="comment float-right"
             *ngIf="(Evaluacion.notasEvaluacion != null && Evaluacion.notasEvaluacion != '') || (Evaluacion.notasObjetivos != null && Evaluacion.notasObjetivos != '')"
             src="assets/comment_filled.png" title="{{ 'PDF_GENERATOR.ICONS_NOTES_FILLED'| translate }}" />
-          <img class="comment"
+          <img class="comment float-right"
             *ngIf="(Evaluacion.notasEvaluacion == null || Evaluacion.notasEvaluacion == '') && (Evaluacion.notasObjetivos == null || Evaluacion.notasObjetivos == '')"
             src="assets/comment_empty.png" title="{{ 'PDF_GENERATOR.ICONS_NOTES_EMPTY'| translate }}" />
+          <button class="transparente float-right" (click)="$event.stopPropagation();ExportToExcel();">
+            <img class="comment" src="assets/excel.png" title="{{ 'PDF_GENERATOR.EXCEL_EXPORT' | translate }}" />
+          </button>
         </div>
       </mat-panel-title>
     </mat-expansion-panel-header>
