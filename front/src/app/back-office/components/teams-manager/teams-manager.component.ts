@@ -22,7 +22,7 @@ export class TeamsManagerComponent implements OnInit {
   public ErrorMessage: string = null;
   public MensajeNotificacion: string = null;
   dataSource: MatTableDataSource<any>;
-  displayedColumns = ['oficina', 'unidad', 'linea', "nombre", "projectSize", "acciones"];
+  displayedColumns = ['oficina', 'unidad', 'codigo', 'linea', "nombre", "projectSize", "acciones"];
   encapsulation: ViewEncapsulation.None;
   selectedTeam;
   public nTeams: number = 0;
@@ -51,6 +51,8 @@ export class TeamsManagerComponent implements OnInit {
         //this.teamList = res;        
         //this.teamsListString = this.getTeamsString(res);        
         //this.dataSource = new MatTableDataSource(this.teamsListString);
+
+        console.log(res);
 
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
