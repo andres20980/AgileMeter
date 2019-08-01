@@ -50,7 +50,7 @@ export interface AssesmentEv{
 })
 export class PendingEvaluationComponent implements OnInit {
   public clicked: boolean = true;
-  public EvaluacionFiltrar: EvaluacionFilterInfo = { 'nombre': '', 'estado': 'false', 'fecha': '', 'userNombre': '', 'puntuacion': '', 'assessmentId': 0, 'oficinas':[], equipos:[] };
+  public EvaluacionFiltrar: EvaluacionFilterInfo = { 'nombre': '', 'estado': 'false', 'fecha': '', 'userNombre': '', 'puntuacion': '', 'assessmentId': 0, 'oficinas':[], equipos:[], 'idAssessment': [] };
   public Typing: boolean = false;
   public permisosDeUsuario: Array<Role> = [];
   public ListaDeEvaluacionesPaginada: Array<EvaluacionInfoWithProgress>;
@@ -276,7 +276,7 @@ export class PendingEvaluationComponent implements OnInit {
   }
 
   public changeChartAssessment($event){
-    let filter: EvaluacionFilterInfo = new EvaluacionFilterInfo("","","","","", this.selectedAssessment.id,[],[]);
+    let filter: EvaluacionFilterInfo = new EvaluacionFilterInfo("","","","","", this.selectedAssessment.id,[],[],[]);
     this.GetChartData(filter);
   }
 

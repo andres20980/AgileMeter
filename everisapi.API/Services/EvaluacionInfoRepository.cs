@@ -704,8 +704,8 @@ namespace everisapi.API.Services
             e.Estado == Boolean.Parse(EvaluacionParaFiltrar.Estado) &&
             e.ProyectoEntity.TestProject == false &&
             (EvaluacionParaFiltrar.Oficinas.Length > 0 ? (Array.Exists(EvaluacionParaFiltrar.Oficinas, element => element == e.ProyectoEntity.Oficina)) : 1 == 1) &&
-            (EvaluacionParaFiltrar.Equipos.Length > 0 ? (Array.Exists(EvaluacionParaFiltrar.Equipos, element => element == e.ProyectoId)) : 1 == 1) //&&
-            //(EvaluacionParaFiltrar.Nombre != "" ? (e.ProyectoEntity.Nombre == EvaluacionParaFiltrar.Nombre) : 1 == 1)
+            (EvaluacionParaFiltrar.Equipos.Length > 0 ? (Array.Exists(EvaluacionParaFiltrar.Equipos, element => element == e.ProyectoId)) : 1 == 1) &&
+            (EvaluacionParaFiltrar.IdAssessment.Length > 0 ? (Array.Exists(EvaluacionParaFiltrar.IdAssessment, element => element == e.AssessmentId)) : 1 == 1) //&&
             ).OrderByDescending(e => e.Fecha).ToList();
 
             //Encuentra la informacion de la evaluacion y lo introduce en un objeto

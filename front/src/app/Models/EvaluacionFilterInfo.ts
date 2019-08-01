@@ -8,5 +8,6 @@ export class EvaluacionFilterInfo {
     public assessmentId: number,    
     public oficinas:string[],
     public equipos:number[],
+    public idAssessment:number[],
   ) { }
 }

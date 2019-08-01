@@ -147,8 +147,16 @@ export class PendingEvaluationTableComponent implements OnInit {
         e.push(element.id);
       });
     }
-    var a = 0;//[] ;
-    this.parent.EvaluacionFiltrar ={ 'nombre': '', 'estado': 'false', 'fecha': '', 'userNombre': '', 'puntuacion': '', 'assessmentId': a, 'oficinas':o, equipos:e};
+    var a = [] ;
+    if (this.AssessmentSeleccionado.length === 0 || this.AssessmentSeleccionado[0].assessmentName == "TODAS") {
+      a = [];
+    } else {
+      this.AssessmentSeleccionado.forEach(function (element) {
+        a.push(element.assessmentId);
+      });
+    }
+    this.dataSource.filter ="";
+    this.parent.EvaluacionFiltrar ={ 'nombre': '', 'estado': 'false', 'fecha': '', 'userNombre': '', 'puntuacion': '', 'assessmentId': 0, 'oficinas':o, equipos:e, 'idAssessment': a};
     this.parent.GetPaginacion();
 
   }
@@ -388,6 +396,7 @@ export class PendingEvaluationTableComponent implements OnInit {
         }
       }
     }
+    this.refresh();
   }
   public seleccionarTodosAssessment() {
     //marcamos / desmarcamos todas las opciones    
@@ -396,6 +405,7 @@ export class PendingEvaluationTableComponent implements OnInit {
     } else {
       this.AssessmentSeleccionado = [];
     }
+    this.refresh();
   }
 
   public equiposDeLasOficinasSeleccionadas() {

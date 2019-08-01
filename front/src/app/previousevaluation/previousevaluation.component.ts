@@ -54,7 +54,7 @@ export interface AssesmentEv{
 })
 export class PreviousevaluationComponent implements OnInit {
   public clicked: boolean = true;
-  public EvaluacionFiltrar: EvaluacionFilterInfo = { 'nombre': '', 'estado': 'true', 'fecha': '', 'userNombre': '', 'puntuacion': '', 'assessmentId': 0 , 'oficinas':[], equipos:[]};
+  public EvaluacionFiltrar: EvaluacionFilterInfo = { 'nombre': '', 'estado': 'true', 'fecha': '', 'userNombre': '', 'puntuacion': '', 'assessmentId': 0 , 'oficinas':[], equipos:[], 'idAssessment': [] };
   public Typing: boolean = false;
   public permisosDeUsuario: Array<Role> = [];
   public ListaDeEvaluacionesPaginada: Array<EvaluacionInfo>;
@@ -372,7 +372,7 @@ export class PreviousevaluationComponent implements OnInit {
 
           if(this.selectedAssessment != null){
           // Filtro de la grafica para traer las evaluaciones
-          let filter: EvaluacionFilterInfo = new EvaluacionFilterInfo("","","","","true", this.selectedAssessment.id,[],[]);
+          let filter: EvaluacionFilterInfo = new EvaluacionFilterInfo("","","","","true", this.selectedAssessment.id,[],[],[]);
           this.GetChartData(filter);
           }
          
@@ -571,7 +571,7 @@ export class PreviousevaluationComponent implements OnInit {
   // }
 
   public changeChartAssessment(){
-    let filter: EvaluacionFilterInfo = new EvaluacionFilterInfo("","","","","true", this.selectedAssessment.id,[],[]);
+    let filter: EvaluacionFilterInfo = new EvaluacionFilterInfo("","","","","true", this.selectedAssessment.id,[],[],[]);
     this.GetChartData(filter);
   }
 

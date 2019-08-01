@@ -1,5 +1,5 @@
 <mat-form-field class = "ml-5">
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'PENDING_EVALUATION_TABLE.FILTER' | translate }}">
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'PENDING_EVALUATION_TABLE.FILTER' | translate }}"[value]=this.dataSource.filter>
 </mat-form-field>
 <mat-form-field class="ml-2 col-3">
   <mat-select placeholder="Oficina" [(value)]="OficinaSeleccionada" multiple>

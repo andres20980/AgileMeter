@@ -24,6 +24,7 @@ namespace everisapi.API.Models
 
     public string[] Oficinas{get;set;}
     public int[] Equipos{get;set;}
+    public int[] IdAssessment{get;set;}
 
   }
 }
