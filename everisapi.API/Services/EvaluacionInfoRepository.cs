@@ -432,6 +432,52 @@ namespace everisapi.API.Services
             return EvaluacionesInformativas.ToList();//.Skip(10 * pageNumber)
         }
 
+
+        //Metodo que devuelve un filtrado de todas las evaluaciones (de los equipos del usuario) y proyecto paginada
+        public List<EvaluacionInfoDto> GetAllEvaluationInfoAndPageFiltered(int pageNumber, EvaluacionInfoPaginationDto Evaluacion, string UsuarioLogeado)
+        {
+            UserEntity user = _context.Users.Where(u => u.Nombre == UsuarioLogeado).FirstOrDefault();
+            //Recogemos las evaluaciones y la paginamos
+            List<EvaluacionInfoDto> EvaluacionesInformativas = new List<EvaluacionInfoDto>();
+            List<EvaluacionEntity> Evaluaciones;
+
+            Evaluaciones = _context.Evaluaciones.
+            Include(r => r.ProyectoEntity).
+            ThenInclude(p => p.UserEntity).
+            Include(a => a.Assessment).
+            Where(e =>
+            e.Estado == Boolean.Parse(Evaluacion.Estado) &&
+            ((user.RoleId == (int)Roles.Admin || user.RoleId == (int)Roles.Evaluator) ? (e.ProyectoEntity.TestProject == false) : 1 == 1) &&
+            (Evaluacion.Oficinas.Length > 0 ? (Array.Exists(Evaluacion.Oficinas, element => element == e.ProyectoEntity.Oficina)) : 1 == 1) &&
+            (Evaluacion.Equipos.Length > 0 ? (Array.Exists(Evaluacion.Equipos, element => element == e.ProyectoId)) : 1 == 1) &&
+            (Evaluacion.IdAssessment.Length > 0 ? (Array.Exists(Evaluacion.IdAssessment, element => element == e.AssessmentId)) : 1 == 1) &&
+            e.Fecha.Date.ToString("dd/MM/yyyy").Contains(Evaluacion.Fecha)
+            ).OrderByDescending(e => e.Fecha).ToList();
+
+
+            //Encuentra la informacion de la evaluacion y lo introduce en un objeto
+            foreach (var evaluacion in Evaluaciones)
+            {
+                EvaluacionInfoDto EvaluacionInfo = new EvaluacionInfoDto
+                {
+                    Id = evaluacion.Id,
+                    Fecha = evaluacion.Fecha,
+                    Estado = evaluacion.Estado,
+                    Nombre = evaluacion.ProyectoEntity.Nombre,
+                    UserNombre = evaluacion.UserNombre,
+                    Oficina = evaluacion.ProyectoEntity.Oficina,
+                    NotasEvaluacion = evaluacion.NotasEvaluacion,
+                    NotasObjetivos = evaluacion.NotasObjetivos,
+                    AssessmentName = evaluacion.Assessment.AssessmentName,
+                    AssessmentId = evaluacion.AssessmentId,
+                    Puntuacion = (float)evaluacion.Puntuacion
+                };
+                //Añade el objeto en la lista
+                EvaluacionesInformativas.Add(EvaluacionInfo);
+            }
+            return EvaluacionesInformativas.ToList();
+        }
+
         public List<EvaluacionInfoWithSectionsDto> GetEvaluationsWithSectionsInfo(int IdProject, EvaluacionInfoPaginationDto Evaluacion, int codigoIdioma)
         {
             //Recogemos las evaluaciones y la paginamos
@@ -702,10 +748,10 @@ namespace everisapi.API.Services
             Where(e =>
             (equipos.Count > 0 ? (equipos.Contains(e.ProyectoId)) : 1 == 1) &&
             e.Estado == Boolean.Parse(EvaluacionParaFiltrar.Estado) &&
-            e.ProyectoEntity.TestProject == false &&
+            ((user.RoleId == (int)Roles.Admin || user.RoleId == (int)Roles.Evaluator) ? (e.ProyectoEntity.TestProject == false) : 1 == 1) &&
             (EvaluacionParaFiltrar.Oficinas.Length > 0 ? (Array.Exists(EvaluacionParaFiltrar.Oficinas, element => element == e.ProyectoEntity.Oficina)) : 1 == 1) &&
             (EvaluacionParaFiltrar.Equipos.Length > 0 ? (Array.Exists(EvaluacionParaFiltrar.Equipos, element => element == e.ProyectoId)) : 1 == 1) &&
-            (EvaluacionParaFiltrar.IdAssessment.Length > 0 ? (Array.Exists(EvaluacionParaFiltrar.IdAssessment, element => element == e.AssessmentId)) : 1 == 1) //&&
+            (EvaluacionParaFiltrar.IdAssessment.Length > 0 ? (Array.Exists(EvaluacionParaFiltrar.IdAssessment, element => element == e.AssessmentId)) : 1 == 1)
             ).OrderByDescending(e => e.Fecha).ToList();
 
             //Encuentra la informacion de la evaluacion y lo introduce en un objeto

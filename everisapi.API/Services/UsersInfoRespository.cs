@@ -2,12 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using everisapi.API.Entities;
-using Microsoft.EntityFrameworkCore;
 using AutoMapper;
+using everisapi.API.Entities;
 using everisapi.API.Models;
-
-
+using Microsoft.EntityFrameworkCore;
 
 namespace everisapi.API.Services
 {
@@ -51,7 +49,7 @@ namespace everisapi.API.Services
 
             if (usuario.RoleId != (int)Roles.User)
             {
-                var proyectosE = _context.Proyectos.Include(r => r.LineaEntity).Where(p => p.TestProject == false /* || p.UserNombre == userNombre*/).OrderBy(p => p.Proyecto).ToList();
+                var proyectosE = _context.Proyectos.Include(r => r.LineaEntity).Where(p => p.TestProject == false /* || p.UserNombre == userNombre*/ ).OrderBy(p => p.Proyecto).ToList();
                 foreach (ProyectoEntity pe in proyectosE)
                 {
                     ProyectoDto p = new ProyectoDto();
@@ -95,8 +93,32 @@ namespace everisapi.API.Services
         //Recoge todos los proyectos de un usuario con evaluaciones pendientes
         public IEnumerable<ProyectoDto> GetProyectosDeUsuarioConEvaluacionesPendientes(string userNombre)
         {
+            var user = this.GetUser(userNombre, false);
             var proyectos = this.GetProyectosDeUsuario(userNombre);
-            proyectos = proyectos.Where(p => p.numPendingEvals > 0).ToList();
+            if (user.RoleId == (int)Roles.User)
+            {
+                proyectos = proyectos.Where(p => p.numPendingEvals > 0).ToList();
+            }
+            else
+            {
+                proyectos = proyectos.Where(p => p.numPendingEvals > 0 && p.TestProject == false).ToList();
+            }
+            return proyectos;
+        }
+
+        //Recoge todos los proyectos de un usuario con evaluaciones pendientes
+        public IEnumerable<ProyectoDto> GetProyectosDeUsuarioConEvaluacionesFinalizadas(string userNombre)
+        {
+            var user = this.GetUser(userNombre, false);
+            var proyectos = this.GetProyectosDeUsuario(userNombre);
+            if (user.RoleId != (int)Roles.Admin || user.RoleId != (int)Roles.Evaluator)
+            {
+                proyectos = proyectos.Where(p => p.numFinishedEvals > 0).ToList();
+            }
+            else
+            {
+                proyectos = proyectos.Where(p => p.numFinishedEvals > 0 && p.TestProject == false).ToList();
+            }
             return proyectos;
         }
 
@@ -127,11 +149,11 @@ namespace everisapi.API.Services
         public IEnumerable<ProyectoEntity> GetAllNotTestProjects()
         {
             return _context.Proyectos
-                  .Include(r => r.OficinaEntity)
-                  .Include(r => r.UnidadEntity)
-                  .Include(r => r.LineaEntity)
-                  .Include(r => r.Evaluaciones)
-                  .Where(p => !p.TestProject).OrderBy(p => p.Proyecto).ToList();
+                .Include(r => r.OficinaEntity)
+                .Include(r => r.UnidadEntity)
+                .Include(r => r.LineaEntity)
+                .Include(r => r.Evaluaciones)
+                .Where(p => !p.TestProject).OrderBy(p => p.Proyecto).ToList();
         }
 
         public IEnumerable<AssessmentEntity> GetAllAssessments()
@@ -147,7 +169,7 @@ namespace everisapi.API.Services
                 //Si se quiere incluir los proyectos del usuario entrara aquí
                 //Incluimos los proyectos del usuario especificada (Include extiende de Microsoft.EntityFrameworkCore)
                 return _context.Users.Include(u => u.ProyectosDeUsuario).
-                    Where(u => u.Nombre == userNombre).FirstOrDefault();
+                Where(u => u.Nombre == userNombre).FirstOrDefault();
             }
             else
             {
@@ -213,12 +235,12 @@ namespace everisapi.API.Services
         public ProyectoEntity GetFullProject(int id)
         {
             return _context.Proyectos
-                    .Include(r => r.OficinaEntity)
-                    .Include(r => r.UnidadEntity)
-                    .Include(r => r.LineaEntity)
-                    .Include(p => p.Evaluaciones)
-                    .ThenInclude(Evaluacion => Evaluacion.Respuestas)
-                    .Where(p => p.Id == id).FirstOrDefault();
+                .Include(r => r.OficinaEntity)
+                .Include(r => r.UnidadEntity)
+                .Include(r => r.LineaEntity)
+                .Include(p => p.Evaluaciones)
+                .ThenInclude(Evaluacion => Evaluacion.Respuestas)
+                .Where(p => p.Id == id).FirstOrDefault();
         }
 
         //Devuelve si el usuario esta bien logeado o no
@@ -450,5 +472,3 @@ namespace everisapi.API.Services
 
     }
 }
-
-

@@ -1,99 +1,101 @@
-using everisapi.API.Entities;
-using everisapi.API.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using everisapi.API.Entities;
+using everisapi.API.Models;
 
 namespace everisapi.API.Services
 {
-  public interface IUsersInfoRepository
-  {
-    //Devuelve todos los usuarios
-    IEnumerable<UsersWithRolesDto> GetUsers(int codigoIdioma);
+    public interface IUsersInfoRepository
+    {
+        //Devuelve todos los usuarios
+        IEnumerable<UsersWithRolesDto> GetUsers(int codigoIdioma);
 
-    //Devuelve un usuario
-    UserEntity GetUser(string userNombre, Boolean IncluirProyectos);
+        //Devuelve un usuario
+        UserEntity GetUser(string userNombre, Boolean IncluirProyectos);
 
-    //Devuelve todos los proyectos de un usuario
-    IEnumerable<ProyectoDto> GetProyectosDeUsuario(string userNombre);
+        //Devuelve todos los proyectos de un usuario
+        IEnumerable<ProyectoDto> GetProyectosDeUsuario(string userNombre);
 
-    //Devuelve un proyecto de un usuario
-    ProyectoDto GetOneProyecto(string userNombre, int proyectoId);
+        //Devuelve un proyecto de un usuario
+        ProyectoDto GetOneProyecto(string userNombre, int proyectoId);
 
-    //Devuelve todos los proyectos de un usuario con evaluaciones pendientes
-     IEnumerable<ProyectoDto> GetProyectosDeUsuarioConEvaluacionesPendientes(string userNombre);
+        //Devuelve todos los proyectos de un usuario con evaluaciones pendientes
+        IEnumerable<ProyectoDto> GetProyectosDeUsuarioConEvaluacionesPendientes(string userNombre);
 
-    //Devuelve si un usuario existe o no
-    bool UserExiste(string userNombre);
+        //Devuelve todos los proyectos de un usuario con evaluaciones finalizadas
+        IEnumerable<ProyectoDto> GetProyectosDeUsuarioConEvaluacionesFinalizadas(string userNombre);
 
-    //Devuelve si un usuario esta activo o no
-    bool UserActivo(string userNombre);
+        //Devuelve si un usuario existe o no
+        bool UserExiste(string userNombre);
 
-    //Devuelve si un usuario existe o no y si esta bien logeado
-    bool UserAuth(UsersSinProyectosDto UserForAuth);
+        //Devuelve si un usuario esta activo o no
+        bool UserActivo(string userNombre);
 
-    //Devuelve todos los roles de este usuario
-    RoleEntity GetRolesUsuario(UserEntity usuario);
+        //Devuelve si un usuario existe o no y si esta bien logeado
+        bool UserAuth(UsersSinProyectosDto UserForAuth);
 
-    //Devuelve todos los proyectos de todos los usuarios
-    IEnumerable<ProyectoDto> GetFullProyectos();
+        //Devuelve todos los roles de este usuario
+        RoleEntity GetRolesUsuario(UserEntity usuario);
 
-    //Devuelve un listado con todos los proyectos dados de alta en el sistema que no sean de pruebas de usuarios
-    IEnumerable<ProyectoEntity> GetAllNotTestProjects();
+        //Devuelve todos los proyectos de todos los usuarios
+        IEnumerable<ProyectoDto> GetFullProyectos();
 
-    //Devuelve todos los assessments disponibles para todos los usuarios
-    IEnumerable<AssessmentEntity> GetAllAssessments();
+        //Devuelve un listado con todos los proyectos dados de alta en el sistema que no sean de pruebas de usuarios
+        IEnumerable<ProyectoEntity> GetAllNotTestProjects();
 
-    //Devuelve un proyecto con todos sus datos
-    ProyectoEntity GetFullProject(int id);
+        //Devuelve todos los assessments disponibles para todos los usuarios
+        IEnumerable<AssessmentEntity> GetAllAssessments();
 
-    //Aqui introducimos un nuevo usuario
-    bool AddUser(UserEntity usuario);
+        //Devuelve un proyecto con todos sus datos
+        ProyectoEntity GetFullProject(int id);
 
-    //Este metodo nos permite persistir los cambios en las entidades
-    bool SaveChanges();
+        //Aqui introducimos un nuevo usuario
+        bool AddUser(UserEntity usuario);
 
-    //Nos permite modificar un usuario
-    bool AlterUser(UserEntity usuario);
+        //Este metodo nos permite persistir los cambios en las entidades
+        bool SaveChanges();
 
-    bool AlterUserRole(UserEntity usuario);
+        //Nos permite modificar un usuario
+        bool AlterUser(UserEntity usuario);
 
-    //Elimina una pregunta concreta de una asignación
-    bool DeleteUser(UserEntity usuario);
+        bool AlterUserRole(UserEntity usuario);
 
-    //Aqui introducimos un nuevo proyecto
-    bool AddProj(ProyectoEntity proyecto);
+        //Elimina una pregunta concreta de una asignación
+        bool DeleteUser(UserEntity usuario);
 
-    //Nos permite modificar un proyecto
-    bool AlterProj(ProyectoEntity proyecto);
+        //Aqui introducimos un nuevo proyecto
+        bool AddProj(ProyectoEntity proyecto);
 
-    //Elimina un proyecto
-    bool DeleteProj(ProyectoEntity proyecto);
+        //Nos permite modificar un proyecto
+        bool AlterProj(ProyectoEntity proyecto);
 
-    //Elimina todo de lo que depende un usuario
-    void DeleteRolesOrProjects(UserEntity usuario);
+        //Elimina un proyecto
+        bool DeleteProj(ProyectoEntity proyecto);
 
-    //Devuelve si existe un proyecto
-    bool ProyectoExiste(int ProyectoId);
+        //Elimina todo de lo que depende un usuario
+        void DeleteRolesOrProjects(UserEntity usuario);
 
-    //Asigna un usuario a un proyecto
-    bool AddUserToProject(string UserNombre, int proyectoId);
+        //Devuelve si existe un proyecto
+        bool ProyectoExiste(int ProyectoId);
 
-    //Devuelve todos los roles disponibles
-    IEnumerable<RoleDto> GetAllRoles(int codigoIdioma);
+        //Asigna un usuario a un proyecto
+        bool AddUserToProject(string UserNombre, int proyectoId);
 
-    //Desasigna un proyecto d eun usuario
-    bool DeleteUserProject(string UserNombre, int ProyectoId);
+        //Devuelve todos los roles disponibles
+        IEnumerable<RoleDto> GetAllRoles(int codigoIdioma);
 
-    //Asigna un nuevo proyecto test a un nuevo usuario
-    bool AddProjectTest(string userNombre);
-    
-    //Añade un nuevo equipo
-    bool AddTeam(Equipos equipo);
+        //Desasigna un proyecto d eun usuario
+        bool DeleteUserProject(string UserNombre, int ProyectoId);
 
-    string getNombreCompleto(string usuario);
-  }
+        //Asigna un nuevo proyecto test a un nuevo usuario
+        bool AddProjectTest(string userNombre);
 
-  
+        //Añade un nuevo equipo
+        bool AddTeam(Equipos equipo);
+
+        string getNombreCompleto(string usuario);
+    }
+
 }

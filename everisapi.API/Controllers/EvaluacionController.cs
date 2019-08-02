@@ -20,12 +20,14 @@ namespace everisapi.API.Controllers
         //Inyectamos un logger
         private ILogger<EvaluacionController> _logger;
         private IEvaluacionInfoRepository _evaluacionInfoRepository;
+        private IUsersInfoRepository _userInfoRepository;
 
         //Utilizamos el constructor para inicializar el logger
-        public EvaluacionController(ILogger<EvaluacionController> logger, IEvaluacionInfoRepository evaluacionInfoRepository)
+        public EvaluacionController(ILogger<EvaluacionController> logger, IEvaluacionInfoRepository evaluacionInfoRepository, IUsersInfoRepository userInfoRepository)
         {
             _logger = logger;
             _evaluacionInfoRepository = evaluacionInfoRepository;
+            _userInfoRepository = userInfoRepository;
         }
 
         [HttpGet()]
@@ -202,6 +204,47 @@ namespace everisapi.API.Controllers
             catch (Exception ex)
             {
                 _logger.LogCritical("Se recogio un error al recibir la petición post de recoger una lista filtrada de evaluaciones con id de proyecto " + id + " y paginado con número " + pageNumber + ": " + ex);
+                return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
+            }
+        }
+
+        //Este metodo lanza mediante un post una petición que devolvera una lista de evaluaciones
+        //Es el que se usa en previousevaluation para la tabla
+        [HttpPost("{UsuarioLogeado}/proyecto/all/info/page/{pageNumber}")]
+        public IActionResult GetAllEvaluationInfoAndPageFiltered(int pageNumber, string UsuarioLogeado,
+                [FromBody] EvaluacionInfoPaginationDto EvaluacionParaFiltrar)
+        {
+            try
+            {
+                //Comprueba que el body del json es correcto sino devolvera null
+                //Si esto ocurre devolveremos un error
+                if (EvaluacionParaFiltrar == null)
+                {
+                    return BadRequest();
+                }
+
+                //Si no cumple con el modelo de creación devuelve error
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var EvaluacionesFiltradas = new List<EvaluacionInfoDto>();
+                var NumEvals = 0;
+
+                var Evals = _evaluacionInfoRepository.GetAllEvaluationInfoAndPageFiltered(pageNumber, EvaluacionParaFiltrar, UsuarioLogeado);
+                NumEvals = Evals.Count();
+                EvaluacionesFiltradas = Evals.ToList();//Skip(10 * pageNumber).Take(10).
+
+
+                //Hacemos un mapeo de la pregunta que recogimos
+                var EvaluacionesResult = Mapper.Map<List<EvaluacionInfoDto>>(EvaluacionesFiltradas);
+
+                return Ok(new { NumEvals, EvaluacionesResult });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("Se recogio un error al recibir la petición post de recoger una lista filtrada de evaluaciones y paginado con número " + pageNumber + ": " + ex);
                 return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
             }
         }
@@ -502,29 +545,29 @@ namespace everisapi.API.Controllers
             }
         }
 
-    //Introduciendo la id de la evaluación devuelve una evaluación especifica
-    [HttpGet("proyecto/{idEvaluacion}/assessment/{idAssessment}/totalprogress")]
-    public IActionResult CalculateEvaluationProgress(int idEvaluacion,  int idAssessment)
-    {
-      try
-      {
-        //Recoge si existe la evaluación si es asi la devuelve si no es así muestra un error
-        float? progress = _evaluacionInfoRepository.CalculateEvaluationProgress(idEvaluacion, idAssessment);
-        
-        //Se comenta este código ya que es imposible que entre por aquí, el método devuelve un float  y no un float?
-        // if (progress == null)
-        // {
-        //   _logger.LogInformation("La evaluación información con id " + idEvaluacion + " no pudo ser encontrado.");
-        //   return NotFound();
-        // }
+        //Introduciendo la id de la evaluación devuelve una evaluación especifica
+        [HttpGet("proyecto/{idEvaluacion}/assessment/{idAssessment}/totalprogress")]
+        public IActionResult CalculateEvaluationProgress(int idEvaluacion, int idAssessment)
+        {
+            try
+            {
+                //Recoge si existe la evaluación si es asi la devuelve si no es así muestra un error
+                float? progress = _evaluacionInfoRepository.CalculateEvaluationProgress(idEvaluacion, idAssessment);
 
-        return Ok(progress);
-      }
-      catch (Exception ex)
-      {
-        _logger.LogCritical("Se recogio un error al recibir la evaluación con toda su información con id " + idEvaluacion + ": " + ex);
-        return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
-      }
-    }
+                //Se comenta este código ya que es imposible que entre por aquí, el método devuelve un float  y no un float?
+                // if (progress == null)
+                // {
+                //   _logger.LogInformation("La evaluación información con id " + idEvaluacion + " no pudo ser encontrado.");
+                //   return NotFound();
+                // }
+
+                return Ok(progress);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("Se recogio un error al recibir la evaluación con toda su información con id " + idEvaluacion + ": " + ex);
+                return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
+            }
+        }
     }
 }

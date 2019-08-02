@@ -12,115 +12,115 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace everisapi.API.Controllers
 {
-  [Authorize]
-  [Route("api/proyectos")]
-  public class ProyectosController : Controller
-  {
-    //Inyectamos un logger
-    private ILogger<ProyectosController> _logger;
-    private IUsersInfoRepository _usersInfoRepository;
-
-    //Utilizamos el constructor para inicializar el logger
-    public ProyectosController(ILogger<ProyectosController> logger, IUsersInfoRepository usersInfoRepository)
+    [Authorize]
+    [Route("api/proyectos")]
+    public class ProyectosController : Controller
     {
-      _logger = logger;
-      _usersInfoRepository = usersInfoRepository;
-    }
+        //Inyectamos un logger
+        private ILogger<ProyectosController> _logger;
+        private IUsersInfoRepository _usersInfoRepository;
 
-    /*METODOS GET DE PREGUNTAS*/
-    [HttpGet("{nombreUsuario}/fullproyectos")]
-    public IActionResult GetFullProyectos()
-    {
-      try
-      {
-
-        //Recogemos la lista de todos los proyectos que no son del tipo test
-        var FullResult = _usersInfoRepository.GetFullProyectos();
-
-        return Ok(FullResult);
-      }
-      catch (Exception ex)
-      {
-        _logger.LogCritical("Ocurrio un error al pedir todos los proyectos de todos los usuarios: " + ex);
-        return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
-      }
-    }
-
-    //Devuelve un listado con todos los proyectos dados de alta en el sistema que no sean de pruebas de los usuarios
-    [HttpGet("allnottestprojects")]
-    public IActionResult GetAllNotTestProjects()
-    {
-      try
-      {
-        //Recogemos una lista de los proyectos
-        var projects = _usersInfoRepository.GetAllNotTestProjects();
-
-        //Transformamos la lista anterior en una nueva con los datos que necesitamos
-        //Ya que otros son relevantes
-        var FullResult = Mapper.Map<IEnumerable<ProyectoDto>>(projects);
-        return Ok(FullResult);
-      }
-      catch (Exception ex)
-      {
-        _logger.LogCritical("Ocurrio un error al pedir todos los proyectos de todos los usuarios: " + ex);
-        return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
-      }
-    }
-
-     /*METODOS GET DE PREGUNTAS*/
-    [HttpGet("allassessments")]
-    public IActionResult GetAllAssessments()
-    {
-      try
-      {
-
-        //Recogemos una lista de proyecto del usuario
-        var allAssessments = _usersInfoRepository.GetAllAssessments();
-
-        //Transformamos la lista anterior en una nueva con los datos que necesitamos
-        //Ya que otros son relevantes
-        var FullResult = Mapper.Map<IEnumerable<AssessmentDto>>(allAssessments);
-        return Ok(FullResult);
-      }
-      catch (Exception ex)
-      {
-        _logger.LogCritical("Ocurrio un error al pedir todos los assessments de todos los usuarios: " + ex);
-        return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
-      }
-    }
-
-    //Recoge todos los proyecto de un usuario mediante su nombre
-    [HttpGet("{nombreUsuario}/proyectos")]
-    public IActionResult GetProyectosUsuario(string nombreUsuario)
-    {
-      try
-      {
-        //Comprueba si existe el usuario y si existe manda un json con la información
-        //si no existe mandara un error 404 el error 500 aparecera si el servidor falla
-        if (!_usersInfoRepository.UserExiste(nombreUsuario))
+        //Utilizamos el constructor para inicializar el logger
+        public ProyectosController(ILogger<ProyectosController> logger, IUsersInfoRepository usersInfoRepository)
         {
-          _logger.LogInformation("El usuario con nombre " + nombreUsuario + " no pudo ser encontrado.");
-          return NotFound();
+            _logger = logger;
+            _usersInfoRepository = usersInfoRepository;
         }
 
-        //Recogemos una lista de proyecto del usuario
-        var ProyectosDeUsuarioResult = _usersInfoRepository.GetProyectosDeUsuario(nombreUsuario);
+        /*METODOS GET DE PREGUNTAS*/
+        [HttpGet("{nombreUsuario}/fullproyectos")]
+        public IActionResult GetFullProyectos()
+        {
+            try
+            {
 
-        //Transformamos la lista anterior en una nueva con los datos que necesitamos
-        //Ya que otros son relevantes
-        
-        //var ProyectosDeUsuarioResult = Mapper.Map<IEnumerable<ProyectoDto>>(ProyectosDeUsuario);
+                //Recogemos la lista de todos los proyectos que no son del tipo test
+                var FullResult = _usersInfoRepository.GetFullProyectos();
 
-        return Ok(ProyectosDeUsuarioResult);
-      }
-      catch (Exception ex)
-      {
-        _logger.LogCritical("Se recogio un error al recibir la petición de proyectos de usuario con nombre " + nombreUsuario + ": " + ex);
-        return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
-      }
-    }
+                return Ok(FullResult);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("Ocurrio un error al pedir todos los proyectos de todos los usuarios: " + ex);
+                return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
+            }
+        }
 
-[HttpGet("{nombreUsuario}/proyectosConEvaluacionesPendientes")]
+        //Devuelve un listado con todos los proyectos dados de alta en el sistema que no sean de pruebas de los usuarios
+        [HttpGet("allnottestprojects")]
+        public IActionResult GetAllNotTestProjects()
+        {
+            try
+            {
+                //Recogemos una lista de los proyectos
+                var projects = _usersInfoRepository.GetAllNotTestProjects();
+
+                //Transformamos la lista anterior en una nueva con los datos que necesitamos
+                //Ya que otros son relevantes
+                var FullResult = Mapper.Map<IEnumerable<ProyectoDto>>(projects);
+                return Ok(FullResult);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("Ocurrio un error al pedir todos los proyectos de todos los usuarios: " + ex);
+                return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
+            }
+        }
+
+        /*METODOS GET DE PREGUNTAS*/
+        [HttpGet("allassessments")]
+        public IActionResult GetAllAssessments()
+        {
+            try
+            {
+
+                //Recogemos una lista de proyecto del usuario
+                var allAssessments = _usersInfoRepository.GetAllAssessments();
+
+                //Transformamos la lista anterior en una nueva con los datos que necesitamos
+                //Ya que otros son relevantes
+                var FullResult = Mapper.Map<IEnumerable<AssessmentDto>>(allAssessments);
+                return Ok(FullResult);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("Ocurrio un error al pedir todos los assessments de todos los usuarios: " + ex);
+                return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
+            }
+        }
+
+        //Recoge todos los proyecto de un usuario mediante su nombre
+        [HttpGet("{nombreUsuario}/proyectos")]
+        public IActionResult GetProyectosUsuario(string nombreUsuario)
+        {
+            try
+            {
+                //Comprueba si existe el usuario y si existe manda un json con la información
+                //si no existe mandara un error 404 el error 500 aparecera si el servidor falla
+                if (!_usersInfoRepository.UserExiste(nombreUsuario))
+                {
+                    _logger.LogInformation("El usuario con nombre " + nombreUsuario + " no pudo ser encontrado.");
+                    return NotFound();
+                }
+
+                //Recogemos una lista de proyecto del usuario
+                var ProyectosDeUsuarioResult = _usersInfoRepository.GetProyectosDeUsuario(nombreUsuario);
+
+                //Transformamos la lista anterior en una nueva con los datos que necesitamos
+                //Ya que otros son relevantes
+
+                //var ProyectosDeUsuarioResult = Mapper.Map<IEnumerable<ProyectoDto>>(ProyectosDeUsuario);
+
+                return Ok(ProyectosDeUsuarioResult);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("Se recogio un error al recibir la petición de proyectos de usuario con nombre " + nombreUsuario + ": " + ex);
+                return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
+            }
+        }
+
+        [HttpGet("{nombreUsuario}/proyectosConEvaluacionesPendientes")]
         public IActionResult GetProyectosUsuarioConEvaluacionesPendientes(string nombreUsuario)
         {
             try
@@ -148,171 +148,201 @@ namespace everisapi.API.Controllers
             }
         }
 
-
-    //Este metodo nos permite recoger un proyecto especifico de un usuario
-    [HttpGet("{nombreUsuario}/proyectos/{id}", Name = "GetProyecto")]
-    public IActionResult GetProyectoUsuario(string nombreUsuario, int id)
-    {
-      try
-      {
-        //Comprueba si existe el usuario
-        if (!_usersInfoRepository.UserExiste(nombreUsuario))
+        [HttpGet("{nombreUsuario}/proyectosConEvaluacionesFinalizadas")]
+        public IActionResult GetProyectosUsuarioConEvaluacionesFinalizadas(string nombreUsuario)
         {
-          _logger.LogInformation("El usuario con nombre " + nombreUsuario + " no pudo ser encontrado.");
-          return NotFound();
+            try
+            {
+                //Comprueba si existe el usuario y si existe manda un json con la información
+                //si no existe mandara un error 404 el error 500 aparecera si el servidor falla
+                if (!_usersInfoRepository.UserExiste(nombreUsuario))
+                {
+                    _logger.LogInformation("El usuario con nombre " + nombreUsuario + " no pudo ser encontrado.");
+                    return NotFound();
+                }
+
+                //Recogemos una lista de proyecto del usuario
+                var ProyectosDeUsuario = _usersInfoRepository.GetProyectosDeUsuarioConEvaluacionesFinalizadas(nombreUsuario);
+
+                //Transformamos la lista anterior en una nueva con los datos que necesitamos
+                //Ya que otros son relevantes
+                var ProyectosDeUsuarioResult = Mapper.Map<IEnumerable<ProyectoDto>>(ProyectosDeUsuario);
+                return Ok(ProyectosDeUsuarioResult);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("Se recogio un error al recibir la petición de proyectos de usuario con nombre " + nombreUsuario + ": " + ex);
+                return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
+            }
         }
 
-        //Comprueba que el proyecto existe
-        var proyectoDeUsuario = _usersInfoRepository.GetOneProyecto(nombreUsuario, id);
 
-        if (proyectoDeUsuario == null)
+        //Este metodo nos permite recoger un proyecto especifico de un usuario
+        [HttpGet("{nombreUsuario}/proyectos/{id}", Name = "GetProyecto")]
+        public IActionResult GetProyectoUsuario(string nombreUsuario, int id)
         {
-          _logger.LogInformation("El proyecto con id " + id + " no pudo ser encontrado.");
-          return NotFound();
+            try
+            {
+                //Comprueba si existe el usuario
+                if (!_usersInfoRepository.UserExiste(nombreUsuario))
+                {
+                    _logger.LogInformation("El usuario con nombre " + nombreUsuario + " no pudo ser encontrado.");
+                    return NotFound();
+                }
+
+                //Comprueba que el proyecto existe
+                var proyectoDeUsuario = _usersInfoRepository.GetOneProyecto(nombreUsuario, id);
+
+                if (proyectoDeUsuario == null)
+                {
+                    _logger.LogInformation("El proyecto con id " + id + " no pudo ser encontrado.");
+                    return NotFound();
+                }
+
+                //ProyectoEncontrado = Mapper.Map<ProyectoDto>(proyectoDeUsuario);
+
+                return Ok(proyectoDeUsuario);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("Se recogio un error al recibir la petición de proyecto de usuario con id " + id + " del usuario " + nombreUsuario + ": " + ex);
+                return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
+            }
         }
 
-        //ProyectoEncontrado = Mapper.Map<ProyectoDto>(proyectoDeUsuario);
-
-        return Ok(proyectoDeUsuario);
-      }
-      catch (Exception ex)
-      {
-        _logger.LogCritical("Se recogio un error al recibir la petición de proyecto de usuario con id " + id + " del usuario " + nombreUsuario + ": " + ex);
-        return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
-      }
-    }
-
-    //Este metodo devuelve un proyecto por su id especifica
-    [HttpGet("proyecto/{id}")]
-    public IActionResult GetProyecto(int id)
-    {
-      try
-      {
-
-        //Comprueba que el proyecto existe
-        ProyectoEntity proyectoDeUsuario = _usersInfoRepository.GetFullProject(id);
-
-        if (proyectoDeUsuario == null)
+        //Este metodo devuelve un proyecto por su id especifica
+        [HttpGet("proyecto/{id}")]
+        public IActionResult GetProyecto(int id)
         {
-          _logger.LogInformation("El proyecto con id " + id + " no pudo ser encontrado.");
-          return NotFound();
+            try
+            {
+
+                //Comprueba que el proyecto existe
+                ProyectoEntity proyectoDeUsuario = _usersInfoRepository.GetFullProject(id);
+
+                if (proyectoDeUsuario == null)
+                {
+                    _logger.LogInformation("El proyecto con id " + id + " no pudo ser encontrado.");
+                    return NotFound();
+                }
+
+                //Creamos un proyecto nuevo con los  datos estrictamente necesarios
+                var ProyectoEncontrado = Mapper.Map<ProyectoWithEvaluacionesDto>(proyectoDeUsuario);
+                return Ok(ProyectoEncontrado);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("Se recogio un error al recibir la petición de proyecto de usuario con id " + id + ": " + ex);
+                return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
+            }
         }
 
-        //Creamos un proyecto nuevo con los  datos estrictamente necesarios
-        var ProyectoEncontrado = Mapper.Map<ProyectoWithEvaluacionesDto>(proyectoDeUsuario);        
-        return Ok(ProyectoEncontrado);
-      }
-      catch (Exception ex)
-      {
-        _logger.LogCritical("Se recogio un error al recibir la petición de proyecto de usuario con id " + id + ": " + ex);
-        return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
-      }
+        /*ADD PROYECTOS*/
+        [HttpPost("proyectos/add")]
+        public IActionResult AddProyecto([FromBody] ProyectoCreateUpdateDto ProyectoAdd)
+        {
+            try
+            {
+
+                //Si los datos son validos los guardara
+                if (ProyectoAdd == null || _usersInfoRepository.ProyectoExiste(ProyectoAdd.Id) || !_usersInfoRepository.UserExiste(ProyectoAdd.UserNombre))
+                {
+                    return BadRequest();
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                //Comprueba que se guardo bien y lo envia
+                if (_usersInfoRepository.AddProj(Mapper.Map<ProyectoEntity>(ProyectoAdd)))
+                {
+                    return Ok("El proyecto fue creado.");
+                }
+                else
+                {
+                    return BadRequest();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical($"Se recogio un error al insertar el proyecto: " + ex);
+                return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
+            }
+        }
+
+        /*UPDATE PROYECTOS*/
+        [HttpPut("proyectos/update")]
+        public IActionResult UpdateProyecto([FromBody] ProyectoCreateUpdateDto ProyectoUpdate)
+        {
+            //Si los datos son validos los guardara
+            if (ProyectoUpdate == null || !_usersInfoRepository.ProyectoExiste(ProyectoUpdate.Id) || !_usersInfoRepository.UserExiste(ProyectoUpdate.UserNombre))
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            //Comprueba que se guardo bien y lo envia
+            if (_usersInfoRepository.AlterProj(Mapper.Map<ProyectoEntity>(ProyectoUpdate)))
+            {
+                return Ok("El proyecto fue modificado correctamente.");
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
+        /*DELETE PROYECTOS*/
+        [HttpPost("proyectos/delete")]
+        public IActionResult DeleteProyecto([FromBody] ProyectoDto ProyectoDelete)
+        {
+            UserEntity u = _usersInfoRepository.GetUser(ProyectoDelete.UserNombre, false);
+            ProyectoDelete.UserEntity = Mapper.Map<UsersDto>(u);
+            //Si los datos son validos los guardara
+            if (!_usersInfoRepository.ProyectoExiste(ProyectoDelete.Id))
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            //Comprueba que se guardo bien y lo envia
+            if (_usersInfoRepository.DeleteProj(Mapper.Map<ProyectoEntity>(ProyectoDelete)))
+            {
+                return Ok("El proyecto fue eliminado correctamente.");
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
+        /*ADD-TEAMS */
+        [HttpPost("proyectos/addTeam")]
+        public IActionResult AddTeam([FromBody] Equipos equipo)
+        {
+            try
+            {
+                var results = _usersInfoRepository.AddTeam(equipo);
+                _logger.LogInformation("Returns equipo OK");
+                return Ok(results);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical($"Se recogio un error al insertar el equipo: " + ex);
+                return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
+            }
+        }
+
+
     }
-
-    /*ADD PROYECTOS*/
-    [HttpPost("proyectos/add")]
-    public IActionResult AddProyecto([FromBody] ProyectoCreateUpdateDto ProyectoAdd)
-    {
-      try{
-
-          //Si los datos son validos los guardara
-          if (ProyectoAdd == null || _usersInfoRepository.ProyectoExiste(ProyectoAdd.Id) || !_usersInfoRepository.UserExiste(ProyectoAdd.UserNombre))
-          {
-            return BadRequest();
-          }
-
-          if (!ModelState.IsValid)
-          {
-            return BadRequest(ModelState);
-          }
-
-          //Comprueba que se guardo bien y lo envia
-          if (_usersInfoRepository.AddProj(Mapper.Map<ProyectoEntity>(ProyectoAdd)))
-          {
-            return Ok("El proyecto fue creado.");
-          }
-          else
-          {
-            return BadRequest();
-          }
-      }catch (Exception ex)
-      {        
-        _logger.LogCritical($"Se recogio un error al insertar el proyecto: " + ex);
-        return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
-      }
-    }
-
-    /*UPDATE PROYECTOS*/
-    [HttpPut("proyectos/update")]
-    public IActionResult UpdateProyecto([FromBody] ProyectoCreateUpdateDto ProyectoUpdate)
-    {
-      //Si los datos son validos los guardara
-      if (ProyectoUpdate == null || !_usersInfoRepository.ProyectoExiste(ProyectoUpdate.Id) || !_usersInfoRepository.UserExiste(ProyectoUpdate.UserNombre))
-      {
-        return BadRequest();
-      }
-
-      if (!ModelState.IsValid)
-      {
-        return BadRequest(ModelState);
-      }
-
-      //Comprueba que se guardo bien y lo envia
-      if (_usersInfoRepository.AlterProj(Mapper.Map<ProyectoEntity>(ProyectoUpdate)))
-      {
-        return Ok("El proyecto fue modificado correctamente.");
-      }
-      else
-      {
-        return BadRequest();
-      }
-    }
-
-    /*DELETE PROYECTOS*/
-    [HttpPost("proyectos/delete")]
-    public IActionResult DeleteProyecto([FromBody] ProyectoDto ProyectoDelete)
-    {  
-      UserEntity u= _usersInfoRepository.GetUser(ProyectoDelete.UserNombre,false);
-      ProyectoDelete.UserEntity= Mapper.Map<UsersDto>(u);
-      //Si los datos son validos los guardara
-      if (!_usersInfoRepository.ProyectoExiste(ProyectoDelete.Id))
-      {
-        return BadRequest();
-      }
-
-      if (!ModelState.IsValid)
-      {
-        return BadRequest(ModelState);
-      }
-
-      //Comprueba que se guardo bien y lo envia
-      if (_usersInfoRepository.DeleteProj(Mapper.Map<ProyectoEntity>(ProyectoDelete)))
-      {
-        return Ok("El proyecto fue eliminado correctamente.");
-      }
-      else
-      {
-        return BadRequest();
-      }
-    }
-
-    /*ADD-TEAMS */
-  [HttpPost("proyectos/addTeam")]
-    public IActionResult AddTeam([FromBody] Equipos equipo)
-    {
-       try
-      {  
-        var results =_usersInfoRepository.AddTeam(equipo);
-        _logger.LogInformation("Returns equipo OK");
-        return Ok(results);
-      }
-      catch (Exception ex)
-      {        
-        _logger.LogCritical($"Se recogio un error al insertar el equipo: " + ex);
-        return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
-      }
-    }
-
-
-  }
 }
