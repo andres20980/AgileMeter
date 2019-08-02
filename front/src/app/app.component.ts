@@ -47,7 +47,15 @@ export class AppComponent {
     this.translate.use(lang);
     this.refreshBreadCrumb();
     this.obtenerCodigoIdioma(lang);
-    this._router.navigate(["/home"]);
+    if(this._router.url === "/evaluationsections")
+    {
+      //Solo redirigimos a la home cuando estamos haciendo una evaluación
+      this._router.navigate(["/home"])
+    }
+    else
+    {
+      this._router.navigateByUrl(this._router.url)
+    }
   }
 
   public obtenerCodigoIdioma(lang) {
