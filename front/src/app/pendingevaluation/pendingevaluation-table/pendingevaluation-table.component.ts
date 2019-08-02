@@ -155,7 +155,6 @@ export class PendingEvaluationTableComponent implements OnInit {
     this.dataSource.filter = "";
     this.parent.EvaluacionFiltrar = { 'nombre': '', 'estado': 'false', 'fecha': '', 'userNombre': '', 'puntuacion': '', 'assessmentId': 0, 'oficinas': o, equipos: e, 'idAssessment': a };
     this.parent.GetPaginacion();
-
   }
 
 
