@@ -74,8 +74,7 @@
         </div>
       </div>
 
-      <div class="row ng-card-box p-5 br-2 mt-4 mat-elevation-z5 mx-0"
-        [class.card-disabled]="!this.ProyectoSeleccionado">
+      <div class="row ng-card-box p-5 br-2 mt-4 mat-elevation-z5 mx-0">
         <div class="col" id="assessmentSelectorContainer">
           <div class="row">
             <div class="col">
@@ -83,6 +82,18 @@
             </div>
           </div>
           <div class="row mt-3">
+            <div class="col-4">
+              <mat-form-field class="dropdown-material">
+                <mat-select [(value)]="ProyectoSeleccionado" placeholder="Seleccione un equipo"
+                  (selectionChange)="SeleccionDeProyecto()">
+                  <mat-option class="dropdown-content" *ngFor="let proyecto of ListaDeProyectos; let i = index"
+                    [value]="proyecto">
+                    <div *ngIf="!proyecto.testProject">{{proyecto.proyecto}} - {{proyecto.nombre}}</div>
+                    <div *ngIf="proyecto.testProject">{{proyecto.nombre}}</div>
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
             <div class="col-4">
               <mat-form-field class="dropdown-material">
                 <mat-select [(value)]="AssessmentSelected" placeholder="{{ 'HOME.SELECT_ASSESSMENT' | translate }}"
@@ -94,7 +105,7 @@
             </div>
             <div class="col-4">
               <div class="main-button border-curve mat-elevation-z5 new-eval w-85 m-auto"
-                [class.card-disabled]="!this.AssessmentSelected" (click)="showModal(content)">
+                [class.card-disabled]="!this.AssessmentSelected || ProyectoSeleccionado == null" (click)="showModal(content)">
                 <a>{{ 'HOME.NEW_ASSESSMENT' | translate }}</a>
               </div>
             </div>

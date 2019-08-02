@@ -37,6 +37,7 @@ export class HomeComponent implements OnInit {
   public rol: EnumRol = new EnumRol();
   public evaluacionesPendientes: boolean = false;
   public evaluacionesFinalizadas: boolean = false;
+  public ListaDeOficinas: string[] = [];
 
   constructor(
     private _proyectoService: ProyectoService,
@@ -63,7 +64,7 @@ export class HomeComponent implements OnInit {
     this.NombreDeUsuario = this._proyectoService.UsuarioLogeado;
 
     //Reiniciamos los proyectos seleccionados en el servicio
-    this._appComponent._storageDataService.UserProjectSelected = { id: -1, nombre: '', codigo: null, fecha: null, numFinishedEvals: 0, numPendingEvals: 0, oficina:null};
+    this._appComponent._storageDataService.UserProjectSelected = { id: -1, nombre: '', codigo: null, fecha: null, numFinishedEvals: 0, numPendingEvals: 0, oficina: null };
 
     //Intentamos recoger los roles de los usuarios
     this._proyectoService.getRolesUsuario().subscribe(
@@ -117,56 +118,39 @@ export class HomeComponent implements OnInit {
 
   //Metodo que asigna los proyectos por permisos y usuario
   public RecogerProyectos() {
+    this._proyectoService.getProyectosDeUsuario().subscribe(
+      res => {
+        this.ListaDeProyectos = res;
+        this.comprobarEvaluaciones();
+        this.getListaDeOficinas(res);
+      },
+      error => {
+        //Si el servidor tiene algún tipo de problema mostraremos este error
+        if (error == 404) {
+          this.ErrorMessage = "Error: " + error + " El usuario o proyecto autenticado no existe.";
+        } else if (error == 500) {
+          this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+        } else if (error == 401) {
+          this.ErrorMessage = "Error: " + error + " El usuario es incorrecto o no tiene permisos, intente introducir su usuario nuevamente.";
+        } else {
+          this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+        }
+        setTimeout(() => {
+          this.fadeInError = false;
+          setTimeout(() => this.ErrorMessage = "", 900);
+        }, 2000);
+      });
+  }
 
-    //Segun el tipo de rol que tengas te permitira tener todos los proyectos o solo los tuyos
-    //El servicio se encargara de enviar una respuesta con el listado de proyecto
-    //El usuario necesario ya tendria que haber sido cargado en el logueo
-    if (!this.SeeAllProjects) {
-      //Aqui se entra solo si no tienes permisos de administrador dandote los proyectos que te tocan
-      this._proyectoService.getProyectosDeUsuario().subscribe(
-        res => {
-          this.ListaDeProyectos = res;
-          this.comprobarEvaluaciones();
-        },
-        error => {
-          //Si el servidor tiene algún tipo de problema mostraremos este error
-          if (error == 404) {
-            this.ErrorMessage = "Error: " + error + " El usuario o proyecto autenticado no existe.";
-          } else if (error == 500) {
-            this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
-          } else if (error == 401) {
-            this.ErrorMessage = "Error: " + error + " El usuario es incorrecto o no tiene permisos, intente introducir su usuario nuevamente.";
-          } else {
-            this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
-          }
-          setTimeout(() => {
-            this.fadeInError = false;
-            setTimeout(() => this.ErrorMessage = "", 900);
-          }, 2000);
-        });
-    } else {
-      //Aqui entra si eres administrador dandote todos los proyectos
-      this._proyectoService.getProyectosDeUsuario().subscribe(
-        res => {
-          this.ListaDeProyectos = res;
-        },
-        error => {
-          //Si el servidor tiene algún tipo de problema mostraremos este error
-          if (error == 404) {
-            this.ErrorMessage = "Error: " + error + " El usuario o proyecto autenticado no existe.";
-          } else if (error == 500) {
-            this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
-          } else if (error == 401) {
-            this.ErrorMessage = "Error: " + error + " El usuario es incorrecto o no tiene permisos, intente introducir su usuario nuevamente.";
-          } else {
-            this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
-          }
-          setTimeout(() => {
-            this.fadeInError = false;
-            setTimeout(() => this.ErrorMessage = "", 900);
-          }, 2000);
-        });
-    }
+  public getListaDeOficinas(res) {
+    var oficinas = [];
+    res.forEach(function (value) {
+      if (oficinas.indexOf(value.oficina) < 0) {
+        oficinas.push(value.oficina);
+      }
+    });
+    this.ListaDeOficinas = oficinas.sort();
+    //console.log(this.ListaDeOficinas);
   }
 
   public comprobarEvaluaciones() {
@@ -184,7 +168,7 @@ export class HomeComponent implements OnInit {
       this.evaluacionesFinalizadas = false;
     }
   }
-/* Eliminado en el nuevo home  
+
   //Este metodo guarda el proyecto que a sido seleccionado en el front
   public SeleccionDeProyecto() {
     //this.ProyectoSeleccionado = this.ListaDeProyectos[index];
@@ -229,7 +213,7 @@ export class HomeComponent implements OnInit {
       }
     }
   }
-  */
+
 
   public SeleccionDeAssessment() {
     // console.log("assessment",index);
