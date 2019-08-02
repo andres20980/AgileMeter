@@ -2,7 +2,7 @@
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'PENDING_EVALUATION_TABLE.FILTER' | translate }}"[value]=this.dataSource.filter>
 </mat-form-field>
 <mat-form-field class="ml-2 col-3">
-  <mat-select placeholder="Oficina" [(value)]="OficinaSeleccionada" multiple>
+  <mat-select placeholder="{{ 'PENDING_EVALUATION_TABLE.FILTER_OFFICE' | translate }}" [(value)]="OficinaSeleccionada" multiple>
     <mat-select-trigger>
       {{OficinaSeleccionada[0] ? OficinaSeleccionada[0] : ''}}
       <span *ngIf="OficinaSeleccionada?.length > 1">
@@ -18,7 +18,7 @@
 </mat-form-field>
 
 <mat-form-field class="ml-2 col-3">
-  <mat-select placeholder="Equipos" [(value)]="EquipoSeleccionado" multiple>
+  <mat-select placeholder="{{ 'PENDING_EVALUATION_TABLE.FILTER_TEAM' | translate }}" [(value)]="EquipoSeleccionado" multiple>
     <mat-select-trigger>
       <div>
         {{EquipoSeleccionado[0]?.proyecto ? EquipoSeleccionado[0]?.proyecto : ''}} -
@@ -37,7 +37,7 @@
 </mat-form-field>
 
 <mat-form-field class="ml-2 col-3">
-  <mat-select placeholder="Assessment" [(value)]="AssessmentSeleccionado" multiple>
+  <mat-select placeholder="{{ 'PENDING_EVALUATION_TABLE.FILTER_ASSESSMENT' | translate }}" [(value)]="AssessmentSeleccionado" multiple>
     <mat-select-trigger>
       {{AssessmentSeleccionado[0]?.assessmentName ? AssessmentSeleccionado[0]?.assessmentName : ''}}
       <span *ngIf="AssessmentSeleccionado?.length > 1">
@@ -70,13 +70,13 @@
 
     <!-- Oficina  -->
     <ng-container matColumnDef="oficina">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Oficina</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'PENDING_EVALUATION_TABLE.TABLE_COL_OFFICE' | translate }}</th>
       <td mat-cell *matCellDef="let row">{{row.oficina}}</td>
     </ng-container>
 
     <!-- Equipo  -->
     <ng-container matColumnDef="nombre">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Equipo</th>
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'PENDING_EVALUATION_TABLE.TABLE_COL_TEAM' | translate }}</th>
       <td mat-cell *matCellDef="let row">{{row.nombre}}</td>
     </ng-container>
 
