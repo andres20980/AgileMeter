@@ -44,12 +44,10 @@ namespace everisapiTest
             var preguntasEntities = new List<everisapi.API.Entities.PreguntaEntity>()
             {
                 new everisapi.API.Entities.PreguntaEntity {
-                    Id = 1,
-                    Pregunta = "Pregunta 1"
+                    Id = 1
                 },
                 new everisapi.API.Entities.PreguntaEntity {
-                    Id = 2,
-                    Pregunta = "Pregunta 2"
+                    Id = 2
                 }
             };
 
@@ -72,12 +70,10 @@ namespace everisapiTest
             var preguntasEntities = new List<everisapi.API.Entities.PreguntaEntity>()
             {
                 new everisapi.API.Entities.PreguntaEntity {
-                    Id = 1,
-                    Pregunta = "Pregunta 1"
+                    Id = 1
                 },
                 new everisapi.API.Entities.PreguntaEntity {
-                    Id = 2,
-                    Pregunta = "Pregunta 2"
+                    Id = 2
                 }
             };
 
@@ -116,7 +112,6 @@ namespace everisapiTest
 
             var preguntaEntity = new everisapi.API.Entities.PreguntaEntity {
                 Id = 1,
-                Pregunta = "Pregunta 1",
                 AsignacionId = 1
             };
 
@@ -138,7 +133,6 @@ namespace everisapiTest
 
             var preguntaEntity = new everisapi.API.Entities.PreguntaEntity {
                 Id = 1,
-                Pregunta = "Pregunta 1",
                 AsignacionId = 1
             };
 
@@ -352,7 +346,6 @@ namespace everisapiTest
                 EsHabilitante = true,
                 Nivel = 1,
                 Peso = 0,
-                Pregunta = "Pregunta 1",
                 PreguntaHabilitante = null,
                 PreguntaHabilitanteId = null
             };
@@ -403,7 +396,7 @@ namespace everisapiTest
             };
 
             everisapi.API.Entities.PreguntaEntity preguntaEncontrada = new everisapi.API.Entities.PreguntaEntity {
-                Pregunta = "Pregunta 1"
+                Id = 1
             };
 
             mockRepository.Setup(r => r.AsignacionExiste(It.IsAny<int>())).Returns(true);
@@ -426,7 +419,7 @@ namespace everisapiTest
             everisapi.API.Models.PreguntaUpdateDto preguntaCambiar = null;
 
             var preguntaEncontrada = new everisapi.API.Entities.PreguntaEntity {
-                Pregunta = "Pregunta 1"
+                Id = 1
             };
 
             mockRepository.Setup(r => r.AsignacionExiste(It.IsAny<int>())).Returns(true);
@@ -451,7 +444,7 @@ namespace everisapiTest
             };
 
             var preguntaEncontrada = new everisapi.API.Entities.PreguntaEntity {
-                Pregunta = "Pregunta 1"
+                Id = 1
             };
 
             mockRepository.Setup(r => r.AsignacionExiste(It.IsAny<int>())).Returns(true);
@@ -476,7 +469,7 @@ namespace everisapiTest
             };
 
             var preguntaEncontrada = new everisapi.API.Entities.PreguntaEntity {
-                Pregunta = "Pregunta 1"
+                Id = 1
             };
 
             mockRepository.Setup(r => r.AsignacionExiste(It.IsAny<int>())).Returns(false);
@@ -501,7 +494,7 @@ namespace everisapiTest
             };
 
             var preguntaEncontrada = new everisapi.API.Entities.PreguntaEntity {
-                Pregunta = "Pregunta 1"
+                Id = 1
             };
 
             mockRepository.Setup(r => r.AsignacionExiste(It.IsAny<int>())).Returns(true);
@@ -523,7 +516,7 @@ namespace everisapiTest
             _controller = new PreguntasController(_logger, _asignacionInfoRepository);
 
             var preguntaEncontrada = new everisapi.API.Entities.PreguntaEntity {
-                Pregunta = "Pregunta 1"
+                Id = 1
             };
 
             mockRepository.Setup(r => r.AsignacionExiste(It.IsAny<int>())).Returns(true);
@@ -563,7 +556,7 @@ namespace everisapiTest
             _controller = new PreguntasController(_logger, _asignacionInfoRepository);
 
             var preguntaEncontrada = new everisapi.API.Entities.PreguntaEntity {
-                Pregunta = "Pregunta 1"
+                Id = 1
             };
 
             mockRepository.Setup(r => r.AsignacionExiste(It.IsAny<int>())).Returns(true);
@@ -584,7 +577,7 @@ namespace everisapiTest
             _controller = new PreguntasController(_logger, _asignacionInfoRepository);
 
             var preguntaEncontrada = new everisapi.API.Entities.PreguntaEntity {
-                Pregunta = "Pregunta 1"
+                Id = 1
             };
 
             mockRepository.Setup(r => r.AsignacionExiste(It.IsAny<int>())).Returns(false);
@@ -605,7 +598,7 @@ namespace everisapiTest
             _controller = new PreguntasController(_logger, _asignacionInfoRepository);
 
             var preguntaEncontrada = new everisapi.API.Entities.PreguntaEntity {
-                Pregunta = "Pregunta 1"
+                Id = 1
             };
 
             mockRepository.Setup(r => r.AsignacionExiste(It.IsAny<int>())).Returns(true);

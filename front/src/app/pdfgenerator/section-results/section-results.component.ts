@@ -88,11 +88,11 @@ export class SectionResultsComponent implements OnInit {
       case 0:
         respuesta = "NC";
         break
-      case 1:
-        respuesta = "Sí";
+      case 1:        
+        this._translateService.get('SECTION_RESULTS.YES').subscribe(value => { respuesta = value; });
         break;
-      case 2:
-        respuesta = "No";
+      case 2:        
+        this._translateService.get('SECTION_RESULTS.NO').subscribe(value => { respuesta = value; });
         break;
 
       default:
