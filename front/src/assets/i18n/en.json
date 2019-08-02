@@ -142,7 +142,12 @@
 		"TABLE_COL_ASSESSMENT": "Assessment",
 		"TABLE_COL_PROGRESS": "Progress",
 		"TABLE_COL_ACTIONS": "Actions",
+		"TABLE_COL_TEAM": "Team",
+		"TABLE_COL_OFFICE": "Office",
 		"FILTER": "Filter",
+		"FILTER_OFFICE": "Office",
+		"FILTER_TEAM": "Team",
+		"FILTER_ASSESSMENT": "Assessment",
 		"ICON_CONTINUE": "Continue assessment",
 		"ICON_DELETE": "Discard assessment",
 		"MODAL_TITLE": "Important",
@@ -207,6 +212,8 @@
 		"DATE": "Date",
 		"USER": "User",
 		"ASSESSMENT": "Assessment",
+		"OFFICE": "Office",
+		"TEAM": "Team",
 		"SCORE": "Score",
 		"STATE": "Status",
 		"COMPLETED": "Completed",
@@ -217,7 +224,10 @@
 		"RESULTS": "Results",
 		"SHOW_RESULTS": "Show results",
 		"EVALUATION_NOTES": "Assessment notes",
-		"OBJETIVES_NOTES": "Objectives notes"
+		"OBJETIVES_NOTES": "Objectives notes",
+		"FILTER_OFFICE" :"Office",
+		"FILTER_TEAM" :"Team",
+		"FILTER_ASSESSMENT" :"Assessment"
 	},
 	"COMENTARIOS_TABLE": {
 		"FILTER": " Filter",
