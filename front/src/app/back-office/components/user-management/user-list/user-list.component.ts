@@ -1,3 +1,4 @@
+import { ProyectoService } from 'app/services/ProyectoService';
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
 import { UserService } from 'app/services/UserService';
@@ -7,6 +8,8 @@ import { Router } from '@angular/router';
 
 import { UserWithRole } from 'app/Models/UserWithRole';
 import { UserString } from 'app/Models/UserString';
+import { EventEmitterService } from 'app/services/event-emitter.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-list',
@@ -27,20 +30,37 @@ export class UserListComponent implements OnInit {
   public userList: UserWithRole[];
   public userListString = new Array();
   public userString: UserString;
-
   selectedUser;
-
   selectedUsuarioInfoWithProgress;
+  public MensajeNotificacion: string = null;
 
-  btnEditClick = function (row) {    
+  constructor(
+    private _userService: UserService,
+    private modalService: NgbModal,
+    private _router: Router,
+    private _proyectoService: ProyectoService,
+    private _eventService: EventEmitterService,
+    private _translateService : TranslateService
+  ) { }
+
+  ngOnInit() {
+    this.getUsers();
+  }
+
+  public btnAsigTeamsClick(row) {
     this.selectedUser = this.userList.filter(u => u.nombre == row.nombre);
-    this._userService.modificarUsuario(this.selectedUser[0]);
     this._userService.user = this.selectedUser[0];
+    this._router.navigate(['backoffice/usermanagement/teamsManagement']);
   };
 
-  btnAddClick = function () {
+  public btnEditClick(row) {
+    this.selectedUser = this.userList.filter(u => u.nombre == row.nombre);
+    this._userService.user = this.selectedUser[0];
+    this._router.navigate(['backoffice/usermanagement/addUser']);
+  };
+
+  public btnAddClick() {
     this._userService.user = null;
-    //this._userService.altaUsuario();
     this._router.navigateByUrl('/backoffice/usermanagement/addUser');
   };
 
@@ -51,16 +71,18 @@ export class UserListComponent implements OnInit {
 
   //Metodo encargado de eliminar la evaluacion pasandole una evaluacionId
   public UsuarioDelete(usuario: string) {
-
     this.selectedUser = this.userList.filter(u => u.nombre == usuario);
-
     if (this.selectedUser.length > 0) {
       //Actualizamos el campo activo a false para hacer un borrado logico
       this.selectedUser[0].activo = false;
+      this.selectedUser[0].password = null;
       this._userService.updateUser(this.selectedUser[0]).subscribe(
         res => {
-          this.getUsers();
+          this.getUsers();          
+          this._translateService.get('USER_LIST.NOTIFICATION_DELETE_USER').subscribe(value => {  this.MensajeNotificacion = value; } );
 
+          this._eventService.displayMessage(this.MensajeNotificacion,false);
+          setTimeout(() => { this.MensajeNotificacion = null }, 4000);
         },
         error => {
           if (error == 404) {
@@ -72,13 +94,15 @@ export class UserListComponent implements OnInit {
           } else {
             this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
           }
+          this._translateService.get('USER_LIST.NOTIFICATION_DELETE_USER_ERROR').subscribe(value => {  this.MensajeNotificacion = value; } );
+          this._eventService.displayMessage(this.MensajeNotificacion,true);
+          setTimeout(() => { this.MensajeNotificacion = null }, 4000);
         });
     }
   }
 
   // Metodo encargado de abrir la ventana confirmando la eliminacion de la evaluacion
   public AbrirModal(content, row) {
-    console.log(row);
     this.selectedUsuarioInfoWithProgress = row;
     this.modalService.open(content).result.then(
       (closeResult) => {
@@ -87,28 +111,18 @@ export class UserListComponent implements OnInit {
         if (dismissReason == 'Finish') {
           //Si decide finalizarlo usaremos el metodo para finalizar la evaluación
           this.UsuarioDelete(row.nombre);
+          if (this._proyectoService.UsuarioLogeado == row.nombre) {
+            this._router.navigate(['login']);
+            localStorage.removeItem("user");
+            localStorage.removeItem("userlongname");
+          }
         }
       })
-  }
-
-  constructor(
-    private _userService: UserService,
-    private modalService: NgbModal,
-    private _router: Router,
-  ) { }
-
-  ngOnInit() {
-
-    this.getUsers();
-
   }
 
   public getUsers() {
     this._userService.getUsers().subscribe(
       res => {
-
-        //console.log(res);
-
         this.userList = [];
         this.userListString = [];
 

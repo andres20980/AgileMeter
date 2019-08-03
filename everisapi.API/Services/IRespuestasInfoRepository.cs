@@ -25,16 +25,16 @@ namespace everisapi.API.Services
     IEnumerable<RespuestaEntity> GetRespuestasFromAsigEval(int IdProyecto, int IdPregunta);
 
     //Update de una respuesta
-    bool UpdateRespuesta(RespuestaDto respuesta);
+    bool UpdateRespuesta(RespuestaConUserDto respuesta);
 
     //Guardar cambio de las entidades
     bool SaveChanges();
 
     //Aqui introducimos una nueva respuesta
-    bool AddRespuesta(RespuestaEntity respuesta);
+    bool AddRespuesta(RespuestaDto respuesta);
 
     //Elimina una respuesta
-    bool DeleteRespuesta(RespuestaEntity respuesta);
+    bool DeleteRespuesta(RespuestaDto respuesta);
 
     //Muestra si existe la respuesta
     bool ExiteRespuesta(int idRespuesta);
@@ -42,7 +42,7 @@ namespace everisapi.API.Services
     //Introduciendo la id de evaluacion sacaremos una lista con todas las respuestas que tengan notas
     IEnumerable<RespuestaConNotasDto> GetRespuestasConNotas(int idEvaluacion,int? assessmentId);
 
-    IEnumerable<SectionConAsignacionesDto> GetPreguntasNivelOrganizadas(int idEvaluacion, int assessmentId);
+    IEnumerable<SectionConAsignacionesDto> GetPreguntasNivelOrganizadas(int idEvaluacion, int assessmentId, int codigoIdioma);
 
     //Este metodo se usa cuando se quiere poner todas las respuestas de una asignacion a No Contestado
     //Excepto la primera, que se pone a No

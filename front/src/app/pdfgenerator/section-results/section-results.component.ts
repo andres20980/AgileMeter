@@ -5,6 +5,7 @@ import { RespuestaConNotas } from 'app/Models/RespuestaConNotas';
 import { RespuestaConNotasTabla } from 'app/pdfgenerator/pdfgenerator.component';
 import { RespuestasService } from 'app/services/RespuestasService';
 import { Respuesta } from 'app/Models/Respuesta';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-section-results',
@@ -16,7 +17,7 @@ export class SectionResultsComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
   @Input() lSectionConAsignacionesDto: any; //IEnumerable<SectionConAsignacionesDto>
-  userRole: string = this._appComponent._storageDataService.Role;
+  userRole: number = this._appComponent._storageDataService.Role;
   dataSource: MatTableDataSource<any>;
   expandedElement: RespuestaConNotas;
 
@@ -25,12 +26,13 @@ export class SectionResultsComponent implements OnInit {
   
   constructor(
     private _appComponent: AppComponent,
-    private _respuestasService: RespuestasService
+    private _respuestasService: RespuestasService,
+    private _translateService: TranslateService,
     ){
     }
     saveNotas(model: RespuestaConNotas): void{
-      let answer: Respuesta  = new Respuesta(model.id, model.estado, 0, 0, model.notas, model.notasAdmin);
-      if(this.userRole == "Administrador" || this.userRole == "Evaluador"){
+      let answer: Respuesta  = new Respuesta(model.id, model.estado, 0, 0, model.notas, model.notasAdmin,"");
+      if(this.userRole == 2 || this.userRole == 3){//2 es admin, 3 es evaluador
         this._respuestasService.AlterRespuesta(answer).subscribe();
       }
     }
@@ -86,11 +88,11 @@ export class SectionResultsComponent implements OnInit {
       case 0:
         respuesta = "NC";
         break
-      case 1:
-        respuesta = "Sí";
+      case 1:        
+        this._translateService.get('SECTION_RESULTS.YES').subscribe(value => { respuesta = value; });
         break;
-      case 2:
-        respuesta = "No";
+      case 2:        
+        this._translateService.get('SECTION_RESULTS.NO').subscribe(value => { respuesta = value; });
         break;
 
       default:
@@ -101,9 +103,9 @@ export class SectionResultsComponent implements OnInit {
 
   //Metodo encargado de gestionar las notas de las secciones y modulos
   DisplayNotes(noteText: string): string{
-    noteText = noteText || null;
-    
-    var returnedText = "No hay notas añadidas";
+    noteText = noteText || null;   
+    var returnedText = "";
+    this._translateService.get('SECTION_RESULTS.NO_NOTES').subscribe(value => { returnedText = value; });
     if (noteText != null){
       returnedText = noteText;
     }

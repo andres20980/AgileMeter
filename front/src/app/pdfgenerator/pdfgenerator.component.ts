@@ -21,7 +21,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { ViewChild, Input } from '@angular/core';
 
 import * as jsPDF from 'jspdf';
-import * as html2canvas from 'html2canvas';
+import html2canvas from 'html2canvas';
 import * as imgTransform from 'img-transform';
 
 import { forEach } from '@angular/router/src/utils/collection';
@@ -29,7 +29,10 @@ import { concat } from 'rxjs-compat/operator/concat';
 import { NgCircleProgressModule, CircleProgressOptions } from 'ng-circle-progress';
 import { PreviousevaluationComponent } from 'app/previousevaluation/previousevaluation.component';
 import { Evaluacion } from 'app/Models/Evaluacion';
-
+import { Workbook } from 'exceljs';
+import * as fs from 'file-saver';
+import { TranslateService } from '@ngx-translate/core';
+import { EnumRol } from 'app/Models/EnumRol';
 
 export interface RespuestaConNotasTabla {
 
@@ -44,8 +47,8 @@ export interface RespuestaConNotasTabla {
 
 }
 
-export interface SectionsLevel{
-  levelReached:number,
+export interface SectionsLevel {
+  levelReached: number,
   percentOverLevel: number
 }
 
@@ -68,14 +71,14 @@ export interface SectionsLevel{
 export class PdfgeneratorComponent implements OnInit {
   public ListaDeDatos: Array<SectionInfo> = [];
   public ListaSectionLevels: Array<SectionsLevel> = [];
-  public ListaSectionConAsignaciones : any;
+  public ListaSectionConAsignaciones: any;
   public UserName: string = "";
   public Project: Proyecto = null;
   public Evaluacion: EvaluacionInfo;
   public Mostrar = false;
   public ErrorMessage = null;
   public AdminOn: boolean = false;
-  public UserRole: string = ""; 
+  public UserRole: number = 0;
 
   //Datos de la barras
   public barChartType: string = 'bar';
@@ -95,7 +98,7 @@ export class PdfgeneratorComponent implements OnInit {
   public mostrarNotasPreg: boolean = false;
   public ListaDeRespuestas: Array<RespuestaConNotas> = [];
   //public respuestasSource: MatTableDataSource<RespuestaConNotasTabla>;
-  public ListaDeAsignaciones: Array<AsignacionConNotas> = []; 
+  public ListaDeAsignaciones: Array<AsignacionConNotas> = [];
   public cargandoNotas: boolean = false;
   public textoModal: string;
   public anadeNota: string = null;
@@ -103,64 +106,71 @@ export class PdfgeneratorComponent implements OnInit {
   public MostrarComentarios: boolean = false;
 
   //CircleProgress
-  public formatSubtitle  = (sc: any) : string => {
-    if(sc.nivelAlcanzado == -1){
-      return "del nivel mínimo"
+  public formatSubtitle = (sc: any): string => {
+    if (sc.nivelAlcanzado == -1) {
+      var txt;
+      this._translateService.get('PDF_GENERATOR.CIRCLE_PROGRESS_MIN_LEVEL').subscribe(value => { txt = value; });
+      return txt;
     }
-    else{
-      return "   Nivel  " + Math.trunc(sc.nivelAlcanzado);
-    } 
+    else {
+      var txt;
+      this._translateService.get('PDF_GENERATOR.CIRCLE_PROGRESS_LEVEL').subscribe(value => { txt = value; });
+      return txt + Math.trunc(sc.nivelAlcanzado);
+    }
   }
 
-  public formatTotalSubtitle  = (sc: any) : string => {
+  //Excel
+  public generatingExcel: boolean = false;
+
+  public formatTotalSubtitle = (sc: any): string => {
     var minLevel = 99;
     sc.forEach(element => {
-      if(element.nivelAlcanzado < minLevel)
-      {
+      if (element.nivelAlcanzado < minLevel) {
         minLevel = element.nivelAlcanzado
       }
     });
     //return "   Nivel  " + Math.trunc(minLevel);
-    return "  del Nivel máximo"
+    var txt;
+    this._translateService.get('PDF_GENERATOR.CIRCLE_PROGRESS_MAX_LEVEL').subscribe(value => { txt = value; });
+    return txt;
   }
 
-  public formatLevel  = (sc: any) : string => {
-    return "lvl"+ (sc.nivelAlcanzado -1);
+  public formatLevel = (sc: any): string => {
+    return "lvl" + (sc.nivelAlcanzado - 1);
   }
 
-  public formatTotalLevel  = (sc: any) : string => {
+  public formatTotalLevel = (sc: any): string => {
     var minLevel = 99;
     sc.forEach(element => {
-      if(element.nivelAlcanzado < minLevel)
-      {
+      if (element.nivelAlcanzado < minLevel) {
         minLevel = element.nivelAlcanzado
       }
     });
-    return "lvl"+ (minLevel -1);
+    return "lvl" + (minLevel - 1);
   }
 
   //Metodo encargado de calcular el valor Total segun el peso de los diferentes Niveles.
 
-  public getTotalPercent = (sc: any) : number => {
+  public getTotalPercent = (sc: any): number => {
     var sumSections = 0;
     sc.forEach(element => {
 
       let sectionTotalValue;
 
-      if (element.nivelAlcanzado == 1){
-        sectionTotalValue = (element.pesoNivel1/100)* element.puntuacion;
-        sectionTotalValue = (sectionTotalValue * element.peso)/100;
+      if (element.nivelAlcanzado == 1) {
+        sectionTotalValue = (element.pesoNivel1 / 100) * element.puntuacion;
+        sectionTotalValue = (sectionTotalValue * element.peso) / 100;
 
       }
-      if (element.nivelAlcanzado == 2){
-        sectionTotalValue = element.pesoNivel1 + ((element.pesoNivel2/100)* element.puntuacion);
-        sectionTotalValue = (sectionTotalValue * element.peso)/100;
+      if (element.nivelAlcanzado == 2) {
+        sectionTotalValue = element.pesoNivel1 + ((element.pesoNivel2 / 100) * element.puntuacion);
+        sectionTotalValue = (sectionTotalValue * element.peso) / 100;
 
       }
 
-      if (element.nivelAlcanzado == 3){
-        sectionTotalValue = element.pesoNivel1 + element.pesoNivel2 + ((element.pesoNivel3/100)* element.puntuacion);
-        sectionTotalValue = (sectionTotalValue * element.peso)/100;
+      if (element.nivelAlcanzado == 3) {
+        sectionTotalValue = element.pesoNivel1 + element.pesoNivel2 + ((element.pesoNivel3 / 100) * element.puntuacion);
+        sectionTotalValue = (sectionTotalValue * element.peso) / 100;
 
       }
       sumSections += sectionTotalValue;
@@ -169,48 +179,48 @@ export class PdfgeneratorComponent implements OnInit {
 
     return sumSections;
   }
-  public getTotalColor  = (sc: any) : string => {
-    if(sc.nivelAlcanzado == 1){
+  public getTotalColor = (sc: any): string => {
+    if (sc.nivelAlcanzado == 1) {
       return "#000000";
     }
-    else  if(sc.nivelAlcanzado == 2){
+    else if (sc.nivelAlcanzado == 2) {
       return "#000000";
     }
-    else  if(sc.nivelAlcanzado == 3){
+    else if (sc.nivelAlcanzado == 3) {
       return "#000000";
     }
     return "#000000"
   }
 
-  public getLevelColorOuter  = (sc: any) : string => {
-    if(sc.nivelAlcanzado == 1){
+  public getLevelColorOuter = (sc: any): string => {
+    if (sc.nivelAlcanzado == 1) {
       return "#c1de5d";
     }
-    else  if(sc.nivelAlcanzado == 2){
+    else if (sc.nivelAlcanzado == 2) {
       return "#37bf59";
     }
-    else  if(sc.nivelAlcanzado == 3){
+    else if (sc.nivelAlcanzado == 3) {
       return "#0fb3d4";
     }
     return "#000000"
   }
 
-  
-  public getLevelColorInner  = (sc: any) : string => {
-    if(sc.nivelAlcanzado == 1){
+
+  public getLevelColorInner = (sc: any): string => {
+    if (sc.nivelAlcanzado == 1) {
       return "#c1de5d30";
     }
-    else  if(sc.nivelAlcanzado == 2){
+    else if (sc.nivelAlcanzado == 2) {
       return "#37bf5930";
     }
-    else  if(sc.nivelAlcanzado == 3){
+    else if (sc.nivelAlcanzado == 3) {
       return "#0fb3d430";
     }
     return "#000000"
   }
 
-  public getPercent = (nota: number, compliance: number) : number => {
-    return (nota/compliance - Math.trunc(nota/compliance)) *100;
+  public getPercent = (nota: number, compliance: number): number => {
+    return (nota / compliance - Math.trunc(nota / compliance)) * 100;
   }
 
 
@@ -223,6 +233,7 @@ export class PdfgeneratorComponent implements OnInit {
   public primeraVez: boolean = true;
   public doc = null;
   public iteracionResultados: number = 0;
+  public rol: EnumRol = new EnumRol();
 
   constructor(
     private _proyectoService: ProyectoService,
@@ -233,6 +244,7 @@ export class PdfgeneratorComponent implements OnInit {
     private prevEval: PreviousevaluationComponent,
     private http: Http,
     private datePipe: DatePipe,
+    private _translateService: TranslateService,
     private modalService: NgbModal) {
 
     //Recupera los datos y los comprueba
@@ -316,12 +328,12 @@ export class PdfgeneratorComponent implements OnInit {
     this.UserRole = this._appComponent._storageDataService.Role;
     //Recoge los datos de las secciones
     if (this.Evaluacion != null && this.Evaluacion != undefined) {
-      
+
       //if (this._appComponent._storageDataService.AssessmentSelected === undefined) { this._appComponent._storageDataService.AssessmentSelected.assessmentId = 1 }
-      this._sectionService.getSectionInfo(this.Evaluacion.id,this.Evaluacion.assessmentId).subscribe( //this._appComponent._storageDataService.AssessmentSelected.assessmentId
+      this._sectionService.getSectionInfo(this.Evaluacion.id, this.Evaluacion.assessmentId).subscribe( //this._appComponent._storageDataService.AssessmentSelected.assessmentId
         res => {
           this.ListaDeDatos = res;
-       
+
           //this.getSectionLevels();
           this.cambiarMostrarNotasPreg();
           //this.shareDataToChart();
@@ -340,10 +352,10 @@ export class PdfgeneratorComponent implements OnInit {
         }
       );
 
-      this._sectionService.GetPreguntasNivelOrganizadas(this.Evaluacion.id,this.Evaluacion.assessmentId).subscribe(
+      this._sectionService.GetPreguntasNivelOrganizadas(this.Evaluacion.id, this.Evaluacion.assessmentId).subscribe(
         res => {
-         
-         this.ListaSectionConAsignaciones = res;
+
+          this.ListaSectionConAsignaciones = res;
         },
         error => {
           if (error == 404) {
@@ -364,7 +376,7 @@ export class PdfgeneratorComponent implements OnInit {
 
     //Para que no de error en modo development
     setTimeout(() => {
-      this._appComponent.anadirUserProyecto(null,null, this.Evaluacion.nombre);
+      this._appComponent.anadirUserProyecto(null, null, this.Evaluacion.nombre);
     });
   }
 
@@ -604,8 +616,8 @@ export class PdfgeneratorComponent implements OnInit {
 
   }
 
-  saveNotas(model: Evaluacion): void{
-    if(this.UserRole == "Administrador" || this.UserRole == "Evaluador"){
+  saveNotas(model: Evaluacion): void {
+    if (this.UserRole == this.rol.Administrador || this.UserRole == this.rol.Evaluador) {
       this.prevEval._evaluacionService.updateEvaluacion(model).subscribe(
         res => {
           // console.log("success");
@@ -652,11 +664,11 @@ export class PdfgeneratorComponent implements OnInit {
     if (!this.mostrarNotasPreg && this.ListaDeRespuestas.length == 0) {
       this.cargandoNotas = true;
 
-      this._sectionService.getRespuestasConNotas(this.Evaluacion.id,this._appComponent._storageDataService.EvaluacionToPDF.assessmentId).subscribe(
+      this._sectionService.getRespuestasConNotas(this.Evaluacion.id, this._appComponent._storageDataService.EvaluacionToPDF.assessmentId).subscribe(
         res => {
           this.ListaDeRespuestas = res;
           this.cambiarMostrarNotasAsig();
-          
+
           //this.cargandoNotas = false;
           //this.mostrarNotasPreg = true;
         },
@@ -683,7 +695,7 @@ export class PdfgeneratorComponent implements OnInit {
   checkRespuestaCorrecta(row): string {
     //Pregunta correcta == null --> Si (habilitante)
     //Pregunta correcta != null --> Si o No
-    
+
 
     let classString: string;
     let respuestaString: string = this.displayRespuesta(row);
@@ -724,13 +736,13 @@ export class PdfgeneratorComponent implements OnInit {
     let respuesta: string = "";
     switch (row.estado) {
       case 0:
-        respuesta = "No Contestada";
+        this._translateService.get('PDF_GENERATOR.EXCEL_NC').subscribe(value => { respuesta = value; });
         break
       case 1:
-        respuesta = "Si";
+        this._translateService.get('PDF_GENERATOR.EXCEL_YES').subscribe(value => { respuesta = value; });
         break;
       case 2:
-        respuesta = "No";
+        this._translateService.get('PDF_GENERATOR.EXCEL_NO').subscribe(value => { respuesta = value; });
         break;
 
       default:
@@ -743,39 +755,39 @@ export class PdfgeneratorComponent implements OnInit {
   //Para mostrar o no las notas de asignacion
   public cambiarMostrarNotasAsig() {
 
-      //No se ha hecho la peticion al servidor aun
-      if (!this.mostrarNotasAsig && this.ListaDeAsignaciones.length == 0) {
-        this.cargandoNotas = true;
+    //No se ha hecho la peticion al servidor aun
+    if (!this.mostrarNotasAsig && this.ListaDeAsignaciones.length == 0) {
+      this.cargandoNotas = true;
 
-        this._sectionService.getAsignConNotas(this.Evaluacion.id).subscribe(
-          res => {
-            this.ListaDeAsignaciones = res;
-            
-            this.ListaDeDatos.forEach(element => {
-              if(element.notas != null && element.notas.trim() != ""){
-                this.ListaDeAsignaciones.unshift(new AsignacionConNotas(element.nombre, "-", element.notas));
-              }
-              
-            });
-          },
-          error => {
-            if (error == 404) {
-              this.ErrorMessage = "Error: " + error + "No pudimos recoger los datos de las preguntas.";
-            } else if (error == 500) {
-              this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
-            } else if (error == 401) {
-              this.ErrorMessage = "Error: " + error + " El usuario es incorrecto o no tiene permisos, intente introducir su usuario nuevamente.";
-            } else {
-              this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+      this._sectionService.getAsignConNotas(this.Evaluacion.id).subscribe(
+        res => {
+          this.ListaDeAsignaciones = res;
+
+          this.ListaDeDatos.forEach(element => {
+            if (element.notas != null && element.notas.trim() != "") {
+              this.ListaDeAsignaciones.unshift(new AsignacionConNotas(element.nombre, "-", element.notas));
             }
-          }
-        );
 
-      }
-      else {
-        this.mostrarNotasAsig = !this.mostrarNotasAsig;
-      }
-    
+          });
+        },
+        error => {
+          if (error == 404) {
+            this.ErrorMessage = "Error: " + error + "No pudimos recoger los datos de las preguntas.";
+          } else if (error == 500) {
+            this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+          } else if (error == 401) {
+            this.ErrorMessage = "Error: " + error + " El usuario es incorrecto o no tiene permisos, intente introducir su usuario nuevamente.";
+          } else {
+            this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+          }
+        }
+      );
+
+    }
+    else {
+      this.mostrarNotasAsig = !this.mostrarNotasAsig;
+    }
+
   }
 
   //Para volver a la pantalla de evaluaciones
@@ -808,7 +820,7 @@ export class PdfgeneratorComponent implements OnInit {
           }
 
           var resp = new Respuesta(this.ListaDeRespuestas[i].id, this.ListaDeRespuestas[i].estado,
-            1, 1, this.ListaDeRespuestas[i].notas, this.ListaDeRespuestas[i].notasAdmin);
+            1, 1, this.ListaDeRespuestas[i].notas, this.ListaDeRespuestas[i].notasAdmin, this.UserName);
 
 
           this._respuestasService.AlterRespuesta(resp).subscribe(
@@ -833,5 +845,498 @@ export class PdfgeneratorComponent implements OnInit {
         //Else, Click fuera, no se guarda
       })
   }
+
+  public ExportToExcel() {
+    this.generatingExcel = true;
+    let workbook = new Workbook();
+
+    var correct = workbook.addImage({
+      base64: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAFoSURBVHja7NivTsQwHMDx7w5e4AQJ4kJIgIQ/AcsbnMEgwICAYDA8AAKHQOAwJOAgIRMoDJo7EKA4RUh4AEDgSYBifqK5rF23tewS+jNL2zT9rGv7a5YopRikaDBgEUERFEGhY7i/IrlfCTneEDAHvALvAGrxsrYZmgGegR7wBhzU+cnmgTtgQqvbBbbqAC0BN0Azo205dw15jjZwZXnxz7+coTZwbRlDAYdFQCPAguyMEJhN4MEVtC/bsgc8AbMBMGeuu2wd2NPKU8AtMO0BA3BqwphAqxl1TaCTgxp3wJwA20VTx4dlTXWASQOmWxVjAh0BPxZUVwD9mFZVjAn0KOvIdNke1VBeMbaDMZXnBZBktLfk9G34xOSd1HmoMUtf69YuC3JBmTBrWl/vF7RUBlChMUVymQuqMqZocrWhvGDKZPsU2AC+tLpvuWhVxpS9D50DL8COlI8l13mJJP5siKAI+m+g3wEASotSPg/rK5YAAAAASUVORK5CYII=",
+      extension: 'png',
+    });
+
+    var incorrect = workbook.addImage({
+      base64: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAH+SURBVHja7NfBS1RRFAbw5xhGBOJCAzH6mghaBK2MDyrDICRD/xHDcNEmKGgzY7toG7SITIkStHIrGOSydg1RYuEmhfhoEVTETJv74CHz7tx73gwEzeLw4M275/0G7j3vnKTRaCT/UiRdUBf034BEpHFIxGkR5zL3YuOwiFMizqf3LKCSS7Ai4p2IZyIqkZCSiHERz0W8FbEs4rYVdFzEaxENF7/ctRoBGhOxlcnx010nLaAzInYzybIRgjoh4qWIepP1ixYQMv8oFjUlYtuz9rEFdEDEC0/SPFRZxIZnzRcRV62nbEhELRDVJ+KKw9Q9z9+xbuo0hgNRoyLee57ZEzEvYqQoKBT1SsTvnN9+iJjL5iwKCkXlxX0RR9oNsqB2RFxzBTLpBChFbQWCKiJ6muVpJygRcTkQlJujXaAeERdEPAkE3ew06JKIz5EbutopEESsGU9ZtZ2gXhHTIj61eGktBlUEdFLEZotv01xERTeDekVcFLEu4o/nJbci61TFCiqLeONJ/E3EXRFHDcVzytqgfc1J+F3EbIvi6UMtWUDHPB/LeyIGWxRPH+qRdQ+t7uuHP4qYEXEwsKdOUfVMX/5BxIT1lA041AMRT0XcMIxAw25yeShiQcT1osd+QES/CO5vISJi0M1mZ10XWrhSlwoMiU1zdGf7LqhT8XcA/RsjSgptej8AAAAASUVORK5CYII=",
+      extension: 'png',
+    });
+
+    var nc = workbook.addImage({
+      base64: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAGiSURBVHja7Ni/S1VhHMfx1zHLIdCmgpAuIbq4FUTUErW0hFCY1D/g0hzhjSAKN4eWpv6BC5WLgw1pQwQFuYiD0WKYeAni2iZeuS7PXeRI+px75BnuZzuH8zy8+Zzvr+fJWq2WlNQjMXWB/qfeMjev1Or7X13CUvthbeJcOUCVWj3DVVzGDhbxI+fTJZzHRtkOncIbDKEPDaxgBnMBsq2N44ihExgMMHAG1/Ee7zB63EGdBag83cE8xlLKskHUcDultO/DawwXTvuc9I3VRUzjAZqpFMYx3EipUp/E49RaxxVcSAmoHzfLBDrqUJWV7dBuxJqzZQFleILTqcxDU3gWse5PGd3+KV5ExtyvTjtUjYSBf/gY7dD+ya5SqxeBge8HORTTy6p4WfBXv+pUUFfxvCDMJ3woOsL2hNQu6szfsM92UYeu4VFBmCYm8bUTdegnvkVW5PZgfx9vO1UYN4NDsxEwc2F0nT1sbBxW63iIu/gcjjoHqYEvGMc9LOd0+/w+FHP7EcrACG6Fg99A6Glb+I0FrB61vkUDdW8/ukApA+0NAOX3VWtrBPEFAAAAAElFTkSuQmCC",
+      extension: 'png',
+    });
+    var txt, txt1;
+    this._translateService.get('PDF_GENERATOR.EXCEL_WORKSHEET').subscribe(value => { txt = value; });
+    let worksheet = workbook.addWorksheet(txt, { views: [{ showGridLines: false }], properties: { tabColor: { argb: '75c222' } } });
+
+    this._translateService.get('PDF_GENERATOR.EXCEL_TITLE').subscribe(value => { txt = value; });
+    this._translateService.get('PDF_GENERATOR.EXCEL_TITLE_1').subscribe(value => { txt1 = value; });
+    let titleRow = worksheet.addRow(['', txt + this.datePipe.transform(this.Evaluacion.fecha, 'dd-MM-yyyy') + txt1 + this.Project.nombre]);
+    titleRow.font = { name: 'Arial', family: 4, size: 16, color: { argb: '555555' }, bold: true }
+    worksheet.addRow([]);
+
+    //// logo ////
+    worksheet.getRow(1).height = 45;
+    var l = document.getElementById("logo");
+    html2canvas(l, { logging: false }).then(canvas => {
+
+      var logo = workbook.addImage({
+        base64: canvas.toDataURL("image/png"),
+        extension: 'png',
+      });
+
+      worksheet.addImage(logo, {
+        tl: { col: (17.3), row: 0 },
+        br: { col: (22), row: 1 }
+
+      });
+    });
+
+    //// GRADIENT LINE ////
+
+    worksheet.mergeCells(2, 1, 2, this.ListaSectionConAsignaciones.length * 3 + 7);
+    var cellLine = worksheet.getCell(2, 1);
+    cellLine.fill = {
+      type: 'gradient',
+      gradient: 'angle',
+      degree: 0,
+      stops: [
+        { position: 0, color: { argb: '87a900' } },
+        { position: 0.3333, color: { argb: '59971c' } },
+        { position: 0.6666, color: { argb: '2a8a41' } },
+        { position: 1, color: { argb: '317daf' } }
+      ]
+    };
+    worksheet.getRow(2).height = 3;
+
+    ////  ASSESSMENT NAME  ////
+    worksheet.mergeCells(4, 2, 4, this.ListaSectionConAsignaciones.length * 3 + 4);
+    var cellAss = worksheet.getCell(4, 2);
+    cellAss.fill = {
+      type: 'pattern',
+      pattern: 'solid',
+      fgColor: { argb: '5c981b' },
+      bgColor: { argb: '5c981b' }
+    };
+    cellAss.font = {
+      name: 'Arial',
+      color: { argb: 'ffffff' },
+      family: 2,
+      size: 14,
+      bold: true
+    };
+    cellAss.alignment = { vertical: 'top', horizontal: 'center', wrapText: true };
+    cellAss.value = this.Evaluacion.assessmentName;
+
+    let index = 0;
+
+    this.captureAndFill(index, workbook, worksheet, correct, incorrect, nc);
+
+  }
+
+  captureAndFill(index: number, workbook: any, worksheet: any, correct: any, incorrect: any, nc: any) {
+    let section = this.ListaSectionConAsignaciones[index];
+    //// SECTIONS ////
+    if (index < this.ListaSectionConAsignaciones.length) {
+      var elemento = document.getElementById(section.nombre);
+      html2canvas(elemento, { logging: false }).then(canvas => {
+
+        var imageId2 = workbook.addImage({
+          base64: canvas.toDataURL("image/png"),
+          extension: 'png',
+        });
+
+        worksheet.addImage(imageId2, {
+          tl: { col: (index * 3 + 1), row: 4 },
+          br: { col: (index * 3 + 4), row: 14 }
+        });
+
+        var h = section.nombre.length > 19 ? 16 : 15;
+
+        worksheet.mergeCells(15, index * 3 + 2, h, index * 3 + 4);
+
+        var cell = worksheet.getCell(15, index * 3 + 2);
+
+        cell.fill = {
+          type: 'pattern',
+          pattern: 'solid',
+          fgColor: { argb: '03a8c0' },
+          bgColor: { argb: '03a8c0' }
+        }
+        cell.font = {
+          name: 'Arial',
+          color: { argb: 'ffffff' },
+          family: 2,
+          size: 12,
+          bold: true
+        };
+        cell.alignment = { vertical: 'top', horizontal: 'center', wrapText: true };
+        cell.border = {
+          top: { style: 'thin', color: { argb: 'dfdfdf' } },
+          left: { style: 'thin', color: { argb: 'dfdfdf' } },
+          bottom: { style: 'thin', color: { argb: 'dfdfdf' } },
+          right: { style: 'thin', color: { argb: 'dfdfdf' } }
+        };
+
+        cell.value = section.nombre;
+
+        //// SECTION TAB ////
+        let worksheetSec = workbook.addWorksheet(section.nombre, { views: [{ showGridLines: false }], properties: { tabColor: { argb: '03bfda' } } });
+        worksheetSec.getColumn(2).width = 4;
+        worksheetSec.getColumn(19).width = 4;
+
+        //// SECTION TITLE ////
+        worksheetSec.getRow(1).height = 38;
+        worksheetSec.mergeCells(1, 2, 1, 17);
+        var cellTitleSec = worksheetSec.getCell(1, 2);
+        cellTitleSec.font = {
+          name: 'Arial',
+          color: { argb: '03a8c0' },
+          family: 4,
+          size: 20,
+          bold: true
+        };
+        cellTitleSec.alignment = { vertical: 'middle', horizontal: 'left', wrapText: true };
+        cellTitleSec.value = section.nombre;
+
+        /////// NOTAS SECCION /////
+        worksheetSec.mergeCells(2, 2, 2, 17);
+
+        var cellNotasSec = worksheetSec.getCell(2, 2);
+        cellNotasSec.fill = {
+          type: 'pattern',
+          pattern: 'solid',
+          fgColor: { argb: '5c981b' },
+          bgColor: { argb: '5c981b' }
+        };
+        cellNotasSec.font = cell.font;
+        cellNotasSec.alignment = { vertical: 'top', horizontal: 'left', wrapText: true, indent: 2 };
+        cellNotasSec.border = {
+          top: { style: 'medium', color: { argb: '5c981b' } },
+          left: { style: 'medium', color: { argb: '5c981b' } },
+          bottom: { style: 'medium', color: { argb: '5c981b' } },
+          right: { style: 'medium', color: { argb: '5c981b' } }
+        };
+
+        this._translateService.get('PDF_GENERATOR.EXCEL_NOTES').subscribe(value => { cellNotasSec.value = value; });
+
+        worksheetSec.mergeCells(3, 2, 8, 17);
+
+        var cellNotasSecC = worksheetSec.getCell(3, 2);
+        cellNotasSecC.font = {
+          name: 'Arial',
+          color: { argb: '555555' },
+          family: 2,
+          size: 11,
+          bold: false
+        };
+        cellNotasSecC.alignment = cellNotasSec.alignment;
+        cellNotasSecC.border = cellNotasSec.border;
+        cellNotasSecC.value = section.notas;
+
+
+        //// MODULOS ////
+
+        section.asignaciones.forEach((modulo, index) => {
+
+          let offset = 12;
+          if (index > 0) {
+            for (var i = 0; i < index; i++) {
+              offset += section.asignaciones[i].preguntas.length + 14;
+            }
+          }
+          worksheetSec.mergeCells(offset, 2, offset, 19);
+          var cellMod = worksheetSec.getCell(offset, 2);
+          cellMod.fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: '03a8c0' },
+            bgColor: { argb: '03a8c0' }
+          };
+          cellMod.font = cell.font;
+          cellMod.alignment = { vertical: 'top', horizontal: 'left', wrapText: true, indent: 2 };
+          cellMod.border = {
+            top: { style: 'medium', color: { argb: '03a8c0' } },
+            left: { style: 'medium', color: { argb: '03a8c0' } },
+            bottom: { style: 'medium', color: { argb: '03a8c0' } },
+            right: { style: 'medium', color: { argb: '03a8c0' } }
+          };
+          cellMod.value = modulo.nombre;
+
+          this.createOuterBorder(offset + 1, 2, offset + modulo.preguntas.length + 11, 19, worksheetSec, '03a8c0');
+
+          //// NOTAS MODULO ////
+          worksheetSec.mergeCells(offset + 2, 3, offset + 2, 18);
+          var cellNotasMod = worksheetSec.getCell(offset + 2, 3);
+          cellNotasMod.fill = cellNotasSec.fill;
+          cellNotasMod.font = cellNotasSec.font;
+          cellNotasMod.alignment = cellNotasSec.alignment;
+          cellNotasMod.border = cellNotasSec.border;
+          this._translateService.get('PDF_GENERATOR.EXCEL_NOTES').subscribe(value => { cellNotasMod.value = value; });
+
+          worksheetSec.mergeCells(offset + 3, 3, offset + 8, 18);
+          var cellNotasModC = worksheetSec.getCell(offset + 3, 3);
+          cellNotasModC.font = cellNotasSecC.font;
+          cellNotasModC.alignment = cellNotasSec.alignment;
+          cellNotasModC.border = cellNotasSec.border;
+          cellNotasModC.value = modulo.notas;
+
+
+          //// PREGUNTAS ////
+
+          //// Pregunta ////
+          worksheetSec.getRow(offset + 10).height = 32;
+          worksheetSec.mergeCells(offset + 10, 3, offset + 10, 11);
+          var cellPreg = worksheetSec.getCell(offset + 10, 3);
+          cellPreg.font = {
+            name: 'Arial',
+            color: { argb: '555555' },
+            family: 2,
+            size: 11,
+            bold: true
+          };
+          cellPreg.alignment = { vertical: 'middle', horizontal: 'left', wrapText: true, indent: 2 };
+          cellPreg.border = {
+            bottom: { style: 'thin', color: { argb: '5c981b' } }
+          };
+          var txt;
+          this._translateService.get('PDF_GENERATOR.EXCEL_QUESTION').subscribe(value => { txt = value; });
+          cellPreg.value = txt;
+
+          //// Respuesta ////
+          worksheetSec.mergeCells(offset + 10, 12, offset + 10, 13);
+          var cellRes = worksheetSec.getCell(offset + 10, 12);
+          cellRes.font = cellPreg.font;
+          cellRes.alignment = cellPreg.alignment;
+          cellRes.border = cellPreg.border;
+          this._translateService.get('PDF_GENERATOR.EXCEL_ANSWER').subscribe(value => { cellRes.value = value; });
+
+
+          //// Notas ////
+          worksheetSec.mergeCells(offset + 10, 14, offset + 10, 18);
+          var cellNot = worksheetSec.getCell(offset + 10, 14);
+          cellNot.font = cellPreg.font;
+          cellNot.alignment = cellPreg.alignment;
+          cellNot.border = cellPreg.border;
+          this._translateService.get('PDF_GENERATOR.EXCEL_NOTES').subscribe(value => { cellNot.value = value; });
+
+          //// table content //
+          modulo.preguntas.forEach((pregunta, index) => {
+            //preg
+            worksheetSec.getRow(offset + 11 + index).height = 32;
+            worksheetSec.mergeCells(offset + 11 + index, 3, offset + 11 + index, 11);
+            var cellPregC = worksheetSec.getCell(offset + 11 + index, 3);
+            cellPregC.font = {
+              name: 'Arial',
+              color: { argb: '555555' },
+              family: 2,
+              size: 10,
+              bold: false
+            };
+            cellPregC.alignment = cellPreg.alignment;
+            cellPregC.border = {
+              bottom: { style: 'thin', color: { argb: '5c981b' } }
+            };
+            cellPregC.value = pregunta.pregunta;
+
+            //resp
+            worksheetSec.mergeCells(offset + 11 + index, 12, offset + 11 + index, 13);
+            var cellResC = worksheetSec.getCell(offset + 11 + index, 12);
+            cellResC.font = cellPregC.font;
+            cellResC.alignment = { vertical: 'middle', horizontal: 'left', wrapText: true, indent: 3 };
+            cellResC.border = cellPregC.border;
+            cellResC.value = this.displayRespuesta(pregunta);
+
+            let check = this.checkRespuestaCorrecta(pregunta);
+            if (check == 'respuesta-correcta') {
+              worksheetSec.addImage(correct, {
+                tl: { col: 12, row: offset + 10.4 + index },
+                ext: { width: 26, height: 26 },
+                editAs: 'oneCell'
+              });
+            }
+            else if (check == 'respuesta-incorrecta') {
+              worksheetSec.addImage(incorrect, {
+                tl: { col: 12, row: offset + 10.4 + index },
+                ext: { width: 26, height: 26 },
+                editAs: 'oneCell'
+              });
+            }
+            else if (check == 'respuesta-no-contestada') {
+              worksheetSec.addImage(nc, {
+                tl: { col: 12, row: offset + 10.4 + index },
+                ext: { width: 26, height: 26 },
+                editAs: 'oneCell'
+              });
+            }
+
+
+            //notas
+            worksheetSec.mergeCells(offset + 11 + index, 14, offset + 11 + index, 18);
+            var cellNotC = worksheetSec.getCell(offset + 11 + index, 14);
+            cellNotC.font = cellPregC.font;
+            cellNotC.alignment = cellPregC.alignment;
+            cellNotC.border = cellPregC.border;
+            cellNotC.value = pregunta.notas;
+
+          });
+
+        });
+
+        if (index <= this.ListaSectionConAsignaciones.length) {
+          index++;
+          this.captureAndFill(index, workbook, worksheet, correct, incorrect, nc);
+        }
+      });
+    }
+    else if (index == this.ListaSectionConAsignaciones.length) {
+      var elementoT = document.getElementById("total");
+      html2canvas(elementoT, { logging: false }).then(canvas => {
+
+        var imageId = workbook.addImage({
+          base64: canvas.toDataURL("image/png"),
+          extension: 'png',
+        });
+
+        worksheet.addImage(imageId, {
+          tl: { col: (this.ListaSectionConAsignaciones.length * 3 + 1), row: 4 },
+          br: { col: (this.ListaSectionConAsignaciones.length * 3 + 4), row: 14 }
+        });
+
+        worksheet.mergeCells(15, this.ListaSectionConAsignaciones.length * 3 + 2, 15, this.ListaSectionConAsignaciones.length * 3 + 4);
+
+        var cell = worksheet.getCell(15, this.ListaSectionConAsignaciones.length * 3 + 2);
+
+        cell.fill = {
+          type: 'pattern',
+          pattern: 'solid',
+          fgColor: { argb: '03a8c0' },
+          bgColor: { argb: '03a8c0' }
+        };
+        cell.font = {
+          name: 'Arial',
+          color: { argb: 'ffffff' },
+          family: 2,
+          size: 12,
+          bold: true
+        };
+        cell.alignment = { vertical: 'top', horizontal: 'center', wrapText: true };
+        cell.border = {
+          top: { style: 'thin', color: { argb: 'dfdfdf' } },
+          left: { style: 'thin', color: { argb: 'dfdfdf' } },
+          bottom: { style: 'thin', color: { argb: 'dfdfdf' } },
+          right: { style: 'thin', color: { argb: 'dfdfdf' } }
+        };
+
+        cell.value = "VALORACIÓN GLOBAL";
+
+
+        /////// NOTAS EVALUACIÓN /////
+        worksheet.mergeCells(18, 2, 18, 11);
+
+        var cellNotasEv = worksheet.getCell(18, 2);
+        cellNotasEv.fill = {
+          type: 'pattern',
+          pattern: 'solid',
+          fgColor: { argb: '5c981b' },
+          bgColor: { argb: '5c981b' }
+        };
+        cellNotasEv.font = cell.font;
+        cellNotasEv.alignment = { vertical: 'top', horizontal: 'left', wrapText: true, indent: 2 };
+        cellNotasEv.border = {
+          top: { style: 'medium', color: { argb: '5c981b' } },
+          left: { style: 'medium', color: { argb: '5c981b' } },
+          bottom: { style: 'medium', color: { argb: '5c981b' } },
+          right: { style: 'medium', color: { argb: '5c981b' } }
+        };
+        this._translateService.get('PDF_GENERATOR.EXCEL_ASSESSMENT_NOTES').subscribe(value => { cellNotasEv.value = value; });
+
+
+        worksheet.mergeCells(19, 2, 26, 11);
+
+        var cellNotasEvC = worksheet.getCell(19, 2);
+        cellNotasEvC.font = {
+          name: 'Arial',
+          color: { argb: '555555' },
+          family: 2,
+          size: 11,
+          bold: false
+        };
+        cellNotasEvC.alignment = cellNotasEv.alignment;
+        cellNotasEvC.border = cellNotasEv.border;
+        cellNotasEvC.value = this.Evaluacion.notasEvaluacion;
+
+
+        /////// NOTAS OBJETIVOS /////
+        worksheet.mergeCells(18, 13, 18, 22);
+
+        var cellNotasOb = worksheet.getCell(18, 13);
+        cellNotasOb.fill = cellNotasEv.fill;
+        cellNotasOb.font = cell.font;
+        cellNotasOb.alignment = cellNotasEv.alignment;
+        cellNotasOb.border = cellNotasEv.border;
+        this._translateService.get('PDF_GENERATOR.EXCEL_OBJETIVE_NOTES').subscribe(value => { cellNotasOb.value = value; });
+
+        worksheet.mergeCells(19, 13, 26, 22);
+
+        var cellNotasObC = worksheet.getCell(19, 13);
+        cellNotasObC.font = cellNotasEvC.font;
+        cellNotasObC.alignment = cellNotasEv.alignment;
+        cellNotasObC.border = cellNotasEv.border;
+        cellNotasObC.value = this.Evaluacion.notasObjetivos;
+
+        workbook.xlsx.writeBuffer().then((data) => {
+          this.generatingExcel = false;
+          var nombre:string;
+          this._translateService.get('PDF_GENERATOR.EXCEL_DOCUMENT_NAME').subscribe(value => { nombre = value; });
+          let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+          fs.saveAs(blob, nombre + this.Project.nombre + '.xlsx');
+
+        });
+      });
+    }
+    //});
+  }
+
+
+
+  createOuterBorder = (startR, startC, endR, endC, worksheet, color) => {
+
+    //const startColNumber = ExcelUtils.alphaToNum(start.column);
+    //const endColNumber = ExcelUtils.alphaToNum(end.column);
+    //const colRange = startC - endR + 1;
+    const borderStyle = {
+      style: 'medium',
+      color: { argb: color }
+    };
+    const leftBorder = { left: borderStyle };
+    const rightBorder = { right: borderStyle };
+    const topBorder = { top: borderStyle };
+    const bottomBorder = { bottom: borderStyle };
+    const lefttop = { left: borderStyle, top: borderStyle };
+    const righttop = { right: borderStyle, top: borderStyle };
+    const letfbottom = { left: borderStyle, bottom: borderStyle };
+    const rightbottom = { right: borderStyle, bottom: borderStyle };
+
+
+    for (let i = startR; i <= endR; i++) {
+      const leftBorderCell = worksheet.getCell(i, startC);
+      const rightBorderCell = worksheet.getCell(i, endC);
+      leftBorderCell.border = leftBorder;
+      rightBorderCell.border = rightBorder;
+    }
+
+    for (let i = startC; i <= endC; i++) {
+
+      const topBorderCell = worksheet.getCell(startR, i);
+      const bottomBorderCell = worksheet.getCell(endR, i);
+      topBorderCell.border = topBorder;
+      bottomBorderCell.border = bottomBorder;
+    }
+
+    worksheet.getCell(startR, startC).border = lefttop;
+    worksheet.getCell(startR, endC).border = righttop;
+    worksheet.getCell(endR, startC).border = letfbottom;
+    worksheet.getCell(endR, endC).border = rightbottom;
+  };
 
 }

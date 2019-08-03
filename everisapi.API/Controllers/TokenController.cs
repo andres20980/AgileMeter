@@ -4,14 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 using Novell.Directory.Ldap;
-
 
 namespace everisapi.API.Controllers
 {
@@ -29,6 +25,12 @@ namespace everisapi.API.Controllers
         {
             Configuration = config;
             _usersInfoRespository = usersInfoRespository;
+        }
+
+        [HttpGet("health")]
+        public string Test()
+        {
+          return "API working successfully";
         }
 
         [HttpPost()]
@@ -85,6 +87,12 @@ namespace everisapi.API.Controllers
                 if (_usersInfoRespository.UserAuth(UserAuth))
                 {
                     string userNombreLargo = _usersInfoRespository.getNombreCompleto(UserAuth.Nombre);
+                    string[] ss = userNombreLargo.Split(' ');
+                    string s2 = ss[0];
+                    if(ss.Length > 1){
+                        s2 += " " + ss[1];
+                    }
+                    userNombreLargo = s2;
                     //create jwt token here and send it with response
                     var jwtToken = JwtTokenBuilder();
                     response = Ok(new { access_token = jwtToken, user_long_name = userNombreLargo });
@@ -93,73 +101,76 @@ namespace everisapi.API.Controllers
             return response;
         }
 
-        private void isNewUser(string userNombreLargo, string nombre)
-        {
-            Entities.UserEntity newUser = new Entities.UserEntity();
-                  newUser.Nombre = nombre;
-                  newUser.Password = "default-password";
-                  newUser.RoleId = (int)Roles.User;
-                  _usersInfoRespository.AddUser(newUser);
-                  _usersInfoRespository.AddProjectTest(newUser.Nombre);
-        }
+        // private void isNewUser(string userNombreLargo, string nombre)
+        // {
+        //     Entities.UserEntity newUser = new Entities.UserEntity();
+        //           newUser.Nombre = nombre;
+        //           newUser.Password = "default-password";
+        //           newUser.RoleId = (int)Roles.User;
+        //           _usersInfoRespository.AddUser(newUser);
+        //           _usersInfoRespository.AddProjectTest(newUser.Nombre);
+        // }
 
-        private string IsUserExistsLDAP(string name, string pwd)
-        {
-            // Metemos los valores de configuración para conectarnos al ldap de Everis.
-            int LdapPort = LdapConnection.DEFAULT_PORT;
-            //int searchScope = LdapConnection.SCOPE_ONE;
-            int LdapVersion = LdapConnection.Ldap_V3;
-            //bool attributeOnly=true;
-            String[] attrs = { LdapConnection.NO_ATTRS };
-            LdapConnection lc = new LdapConnection();
-            string resultado = "";
-            // Vamos a meter una restricción de tiempo.
-            LdapSearchConstraints constraints = new LdapSearchConstraints();
-            constraints.TimeLimit = 10000; // ms
+        // private string IsUserExistsLDAP(string name, string pwd)
+        // {
+        //     // Metemos los valores de configuración para conectarnos al ldap de Everis.
+        //     int LdapPort = LdapConnection.DEFAULT_PORT;
+        //     //int searchScope = LdapConnection.SCOPE_ONE;
+        //     int LdapVersion = LdapConnection.Ldap_V3;
+        //     //bool attributeOnly=true;
+        //     String[] attrs = { LdapConnection.NO_ATTRS };
+        //     LdapConnection lc = new LdapConnection();
+        //     string resultado = "";
+        //     // Vamos a meter una restricción de tiempo.
+        //     LdapSearchConstraints constraints = new LdapSearchConstraints();
+        //     constraints.TimeLimit = 10000; // ms
            
-            try{
-                // Nos conectamos al servidor.
-                lc.Connect(ldapHost,LdapPort);
-                // Accedemos con las credenciales del usuario para ver si está.
-                lc.Bind(LdapVersion, Configuration["connectionStrings:LDAPDomain"] + name, pwd);
+        //     try{
+        //         // Nos conectamos al servidor.
+        //         lc.Connect(ldapHost,LdapPort);
+        //         // Accedemos con las credenciales del usuario para ver si está.
+        //         lc.Bind(LdapVersion, Configuration["connectionStrings:LDAPDomain"] + name, pwd);
                 
-                // Set values to search
-                string base1="OU=Spain,OU=Europe,OU=Everis,DC=usersad,DC=everis,DC=int";
-                string[] attributes = new string[] {"displayName","samaccountname"};
-                string filter=String.Format("(&(objectClass=user)(samaccountname={0}))", name);
-                LdapSearchQueue lsc=lc.Search(base1,LdapConnection.SCOPE_SUB,filter,attributes,false,(LdapSearchQueue)null,(LdapSearchConstraints)null);
-                LdapMessage msg;
-                if((msg = lsc.getResponse()) != null) {
-                    if(msg is LdapSearchResult) {
-                         LdapEntry nextEntry = ((LdapSearchResult)msg).Entry;
-                         LdapAttributeSet attributeSet = nextEntry.getAttributeSet();
-                         Console.WriteLine("Nombre corto: "+attributeSet.getAttribute("samaccountname").StringValue);
-                         Console.WriteLine("Nombre Largo: "+attributeSet.getAttribute("displayName").StringValue);
-                         string[] ss = attributeSet.getAttribute("displayName").StringValue.Split(' ');
-                         string s2 = ss[0];
-                         if(ss.Length > 1){
-                             s2 += " " + ss[1];
-                         }
-                         return s2;
-                    }
-                }
+        //         // Set values to search
+        //         string base1="OU=Spain,OU=Europe,OU=Everis,DC=usersad,DC=everis,DC=int";
+        //         string[] attributes = new string[] {"displayName","samaccountname"};
+        //         string filter=String.Format("(&(objectClass=user)(samaccountname={0}))", name);
+        //         LdapSearchQueue lsc=lc.Search(base1,LdapConnection.SCOPE_SUB,filter,attributes,false,(LdapSearchQueue)null,(LdapSearchConstraints)null);
+        //         LdapMessage msg;
+        //         if((msg = lsc.getResponse()) != null) {
+        //             if(msg is LdapSearchResult) {
+        //                  LdapEntry nextEntry = ((LdapSearchResult)msg).Entry;
+        //                  LdapAttributeSet attributeSet = nextEntry.getAttributeSet();
+        //                  //Console.WriteLine("Nombre corto: "+attributeSet.getAttribute("samaccountname").StringValue);
+        //                  //Console.WriteLine("Nombre Largo: "+attributeSet.getAttribute("displayName").StringValue);
+        //                  string[] ss = attributeSet.getAttribute("displayName").StringValue.Split(' ');
+        //                  string s2 = ss[0];
+        //                  if(ss.Length > 1){
+        //                      s2 += " " + ss[1];
+        //                  }
+        //                  return s2;
+        //             }
+        //         }
                  
-                lc.Disconnect();
-           } catch (LdapException e) {
-                   Console.WriteLine(e.Message);
-                   return null;
-           } catch (Exception) { 
-               Console.WriteLine("error");
-               return null;
-           }
-           return resultado;
-        }
+        //         lc.Disconnect();
+        //    } catch (LdapException e) {
+        //            Console.WriteLine(e.Message);
+        //            return null;
+        //    } catch (Exception) { 
+        //        Console.WriteLine("error");
+        //        return null;
+        //    }
+        //    return resultado;
+        // }
 
         //Metodo para crear tokens
         private object JwtTokenBuilder()
         {
             //Preparamos la clave y las credenciales
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:key"]));
+
+            var keyConfiguration = Configuration["JWT:key"];
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(keyConfiguration));
 
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 

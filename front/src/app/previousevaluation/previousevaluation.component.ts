@@ -26,6 +26,7 @@ import { Workbook } from 'exceljs';
 import * as fs from 'file-saver';
 import { MatTable, MatTableDataSource } from '@angular/material';
 import { SortedTableComponent } from 'app/sorted-table/sorted-table.component';
+import { TranslateService } from '@ngx-translate/core';
 
 // import { setTimeout } from 'timers';
 
@@ -60,7 +61,7 @@ export class PreviousevaluationComponent implements OnInit {
   public EvaluationsWithSectionInfo: Array<EvaluacionInfoWithSections>;
   public nEvaluaciones: number = 0;
   public UserName: string = "";
-  public Project: Proyecto = { 'id': null, 'nombre': '', 'fecha': null, numFinishedEvals:0, numPendingEvals: 0};
+  public Project: Proyecto = { 'id': null, 'nombre': '', codigo: null, 'fecha': null, numFinishedEvals:0, numPendingEvals: 0};
   public Mostrar = false;
   public PageNow = 1;
   public NumMax = 0;
@@ -107,7 +108,8 @@ export class PreviousevaluationComponent implements OnInit {
     private _proyectoService: ProyectoService,
     private _sectionService: SectionService,
     private modalService: NgbModal,
-    private http: Http
+    private http: Http,
+    private _translateService: TranslateService
   ) { }
 
   ngOnInit() {
@@ -128,7 +130,7 @@ export class PreviousevaluationComponent implements OnInit {
         for (let num = 0; num < this.permisosDeUsuario.length; num++) {
           if (this.permisosDeUsuario[num].role == "Administrador") {
             if (this.Project == null || this.Project == undefined || this.Project.id == -1) {
-              this.Project = { id: 0, nombre: '', fecha: null, numFinishedEvals:0, numPendingEvals: 0};
+              this.Project = { id: 0, nombre: '',codigo:null, fecha: null, numFinishedEvals:0, numPendingEvals: 0};
               this.Admin = true;
             }
           }
@@ -163,7 +165,8 @@ export class PreviousevaluationComponent implements OnInit {
         //this.Restablecer();
       });
 
-      this._appComponent.pushBreadcrumb("Evaluaciones finalizadas", "/finishedevaluations");
+      //this._appComponent.pushBreadcrumb("Evaluaciones finalizadas", "/finishedevaluations");
+      this._appComponent.pushBreadcrumb("BREADCRUMB.FINISHED_EVALUATIONS", "/finishedevaluations");
       this._appComponent.pushBreadcrumb(this._appComponent._storageDataService.UserProjectSelected.nombre, null);
 
     if (this.Project.fecha != null) {
@@ -294,7 +297,8 @@ export class PreviousevaluationComponent implements OnInit {
     this._appComponent.pushBreadcrumb(evaluacion.assessmentName, null);
     var pipe = new DatePipe('en-US');
     this._appComponent.pushBreadcrumb(pipe.transform(evaluacion.fecha, 'dd/MM/yyyy'), null);
-    this._appComponent.pushBreadcrumb("Resultados", "/evaluationresults");  
+    //this._appComponent.pushBreadcrumb("Resultados", "/evaluationresults");
+    this._appComponent.pushBreadcrumb("BREADCRUMB.RESULTS", "/evaluationresults");
     this._router.navigate(['/evaluationresults']);
   }
 
@@ -409,14 +413,22 @@ export class PreviousevaluationComponent implements OnInit {
   }
 
   public ExportToExcel(){
+    var woorksheet = "",title="",date="",user="",assessment="",score="";
+    this._translateService.get('PREVIOUS_EVALUATION.EXCEL_WORKSHEET').subscribe(value => { woorksheet = value; });
+    this._translateService.get('PREVIOUS_EVALUATION.EXCEL_TITLE').subscribe(value => { title = value; });
+    this._translateService.get('PREVIOUS_EVALUATION.EXCEL_DATE').subscribe(value => { date = value; });
+    this._translateService.get('PREVIOUS_EVALUATION.EXCEL_USER').subscribe(value => { user = value; });
+    this._translateService.get('PREVIOUS_EVALUATION.EXCEL_ASSESSMENT').subscribe(value => { assessment = value; });
+    this._translateService.get('PREVIOUS_EVALUATION.EXCEL_SCORE').subscribe(value => { score = value; });
     let workbook = new Workbook();
-    let worksheet = workbook.addWorksheet('Evaluaciones finalizadas');
+    
+    let worksheet = workbook.addWorksheet(woorksheet);
 
-    let titleRow = worksheet.addRow(['Evaluaciones finalizadas del equipo ' +  this.Project.nombre]);
+    let titleRow = worksheet.addRow([title +" "+ this.Project.nombre]);
     titleRow.font = { name: 'Arial', family: 4, size: 16, bold: true }
     worksheet.addRow([]);
 
-    let header = ["Fecha", "Usuario", "Assessment" , "Puntuación"]
+    let header = [date,user , assessment , score ]
     //Add Header Row
     let headerRow = worksheet.addRow(header);
     
@@ -441,10 +453,11 @@ export class PreviousevaluationComponent implements OnInit {
     worksheet.getColumn(2).width = 12;
     worksheet.getColumn(3).width = 12;
     worksheet.getColumn(4).width = 12;
-
+    var nombre:string;
+    this._translateService.get('PREVIOUS_EVALUATION.EXCEL_DOCUMENT_NAME').subscribe(value => { nombre = value; });
     workbook.xlsx.writeBuffer().then((data) => {
       let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-      fs.saveAs(blob, 'Evaluaciones_finalizadas_'+  this.Project.nombre+'.xlsx');
+      fs.saveAs(blob, nombre+  this.Project.nombre+'.xlsx');
     })
   }
 
@@ -711,6 +724,10 @@ export class PreviousevaluationComponent implements OnInit {
 
   //Opciones para la grafica
   public setBarChartOptions(){
+    var level ;
+    this._translateService.get('PREVIOUS_EVALUATION.LEVEL').subscribe(value => { level = value; });
+    var ofLevel;
+    this._translateService.get('PREVIOUS_EVALUATION.OF_LEVEL').subscribe(value => { ofLevel = value; });
     var self = this;
     this.barChartOptions = {
     scaleShowVerticalLines: false,
@@ -765,11 +782,11 @@ export class PreviousevaluationComponent implements OnInit {
           }
           else{
           if (Number(tooltipItem.yLabel) % 100 == 0 && Number(tooltipItem.yLabel) >= 100){
-            let nivel: string = '%  del nivel ' +  Math.trunc(Number(tooltipItem.yLabel) / 100);
+            let nivel: string = '%  '+ ofLevel +' '+  Math.trunc(Number(tooltipItem.yLabel) / 100);
             return  data.datasets[tooltipItem.datasetIndex].label + ': 100' + nivel;
           }
           else{
-            let nivel: string = '%  del nivel ' +  Math.trunc(Number(tooltipItem.yLabel) / 100 + 1);
+            let nivel: string = '%  '+ ofLevel +' ' +  Math.trunc(Number(tooltipItem.yLabel) / 100 + 1);
             return  data.datasets[tooltipItem.datasetIndex].label + ': ' + Math.round((tooltipItem.yLabel%100) * 10)/10 + nivel;
           }
           }
@@ -796,9 +813,9 @@ export class PreviousevaluationComponent implements OnInit {
             if(self.allLegendsHidden){
               return "";
             }
-            else{
+            else{              
               if (Number(value) % 100 == 0 && Number(value) >= 100){
-                return 'Nivel ' + (Number(value) / 100 );
+                return level+' ' + (Number(value) / 100 );
               }
               else{
                 return Number(value)%100 + '%';

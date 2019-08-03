@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: agilemeterfront
+  annotations:
+    kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+  rules:
+  - host: agilemeterfront.bb993df2c6c84831a0b6.westeurope.aksapp.io
+    http:
+      paths:
+      - backend:
+          serviceName: agilemeterfront
+          servicePort: 4200
+        path: /

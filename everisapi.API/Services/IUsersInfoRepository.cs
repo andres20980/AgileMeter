@@ -10,7 +10,7 @@ namespace everisapi.API.Services
   public interface IUsersInfoRepository
   {
     //Devuelve todos los usuarios
-    IEnumerable<UserEntity> GetUsers();
+    IEnumerable<UsersWithRolesDto> GetUsers(int codigoIdioma);
 
     //Devuelve un usuario
     UserEntity GetUser(string userNombre, Boolean IncluirProyectos);
@@ -19,10 +19,13 @@ namespace everisapi.API.Services
     IEnumerable<ProyectoDto> GetProyectosDeUsuario(string userNombre);
 
     //Devuelve un proyecto de un usuario
-    ProyectoEntity GetOneProyecto(string userNombre, int proyectoId);
+    ProyectoDto GetOneProyecto(string userNombre, int proyectoId);
 
     //Devuelve si un usuario existe o no
     bool UserExiste(string userNombre);
+
+    //Devuelve si un usuario esta activo o no
+    bool UserActivo(string userNombre);
 
     //Devuelve si un usuario existe o no y si esta bien logeado
     bool UserAuth(UsersSinProyectosDto UserForAuth);
@@ -31,7 +34,7 @@ namespace everisapi.API.Services
     RoleEntity GetRolesUsuario(UserEntity usuario);
 
     //Devuelve todos los proyectos de todos los usuarios
-    IEnumerable<ProyectoEntity> GetFullProyectos(string userNombre);
+    IEnumerable<ProyectoDto> GetFullProyectos();
 
     //Devuelve un listado con todos los proyectos dados de alta en el sistema que no sean de pruebas de usuarios
     IEnumerable<ProyectoEntity> GetAllNotTestProjects();
@@ -75,7 +78,7 @@ namespace everisapi.API.Services
     bool AddUserToProject(string UserNombre, int proyectoId);
 
     //Devuelve todos los roles disponibles
-    IEnumerable<RoleEntity> GetAllRoles();
+    IEnumerable<RoleDto> GetAllRoles(int codigoIdioma);
 
     //Desasigna un proyecto d eun usuario
     bool DeleteUserProject(string UserNombre, int ProyectoId);

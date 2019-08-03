@@ -12,287 +12,288 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace everisapi.API.Controllers
 {
-  [Authorize]
-  [Route("api/asignaciones")]
-  public class AsignacionController : Controller
-  {
-
-    //Creamos un logger
-    private ILogger<AsignacionController> _logger;
-    private IAsignacionInfoRepository _asignacionInfoRepository;
-
-    public AsignacionController(ILogger<AsignacionController> logger, IAsignacionInfoRepository asignacionInfoRepository)
+    [Authorize]
+    [Route("api/asignaciones")]
+    public class AsignacionController : Controller
     {
-      _logger = logger;
-      _asignacionInfoRepository = asignacionInfoRepository;
 
-    }
+        //Creamos un logger
+        private ILogger<AsignacionController> _logger;
+        private IAsignacionInfoRepository _asignacionInfoRepository;
 
-    //Introduciendo la petición de la route devuelve todas las asignaciones y sus preguntas 
-    [HttpGet()]
-    public IActionResult GetAsignaciones()
-    {
-      try
-      {
-        var AsignacionEntities = _asignacionInfoRepository.GetAsignaciones();
-
-        var results = Mapper.Map<IEnumerable<AsignacionSinPreguntasDto>>(AsignacionEntities);
-
-        return Ok(results);
-      }
-      catch (Exception ex)
-      {
-        _logger.LogCritical("Se recogio un error al recibir todos los datos de las asignaciones: " + ex);
-        return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
-      }
-
-    }
-
-    //Devuelve la asignacion de la ultima pregunta cuya respuesta haya sido modificada o respondida
-    [HttpGet("evaluacion/{evaluationId}/last-question-updated")]
-    public IActionResult AssignationLastQuestionUpdated(int evaluationId)
-    {
-      try
-      {
-        AsignacionEntity assignation = _asignacionInfoRepository.AssignationLastQuestionUpdated(evaluationId);
-
-        return Ok(assignation);
-      }
-      catch (Exception ex)
-      {
-        _logger.LogCritical("Se recogio un error al recibir los datos de la asignacion: " + ex);
-        return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
-      }
-
-    }
-
-
-    //Recoge una lista de asignaciones con todas sus preguntas y su respuesta filtrada por id de una evaluación
-    [HttpGet("evaluacion/{id}")]
-    public IActionResult GetAsignacionFromEval(int id)
-    {
-      try
-      {
-        var AsignacionesWithInfo = _asignacionInfoRepository.GetAsignFromEval(id);
-
-        return Ok(AsignacionesWithInfo);
-      }
-      catch (Exception ex)
-      {
-        _logger.LogCritical("Se recogio un error al recibir todos los datos de las asignaciones: " + ex);
-        return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
-      }
-
-    }
-
-    //Recoge una asignación con todas sus preguntas y su respuesta filtrada por id de evaluación y otra de asignación
-    [HttpGet("evaluacion/{idEval}/asignacion/{idAsig}")]
-    public IActionResult GetAsignacionFromEval(int idEval, int idAsig)
-    {
-      try
-      {
-        var AsignacionesWithInfo = _asignacionInfoRepository.GetAsignFromEvalAndAsig(idEval, idAsig);
-
-        return Ok(AsignacionesWithInfo);
-      }
-      catch (Exception ex)
-      {
-        _logger.LogCritical("Se recogio un error al recibir todos los datos de las asignaciones: " + ex);
-        return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
-      }
-
-    }
-
-    //Recoge una asignación con todas sus preguntas y su respuesta filtrada por id de evaluación y otra de asignación
-    [HttpGet("evaluacion/{idEval}/section/{idSection}")]
-    public IActionResult GetAsignacionFromSection(int idEval, int idSection)
-    {
-      try
-      {
-        var AsignacionesWithInfo = _asignacionInfoRepository.GetAsignFromEvalAndSection(idEval, idSection);
-
-        return Ok(AsignacionesWithInfo);
-      }
-      catch (Exception ex)
-      {
-        _logger.LogCritical("Se recogio un error al recibir todos los datos de las asignaciones: " + ex);
-        return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
-      }
-
-    }
-
-    //Introduciendo la id de la asignacion devuelve una asignación especifica
-    [HttpGet("{id}")]
-    public IActionResult GetAsignacion(int id, bool IncluirPreguntas = false)
-    {
-      try
-      {
-        //Recoge si existe la asignación si es asi la devuelve si no es así muestra un error
-        var Asignacion = _asignacionInfoRepository.GetAsignacion(id, IncluirPreguntas);
-
-        if (Asignacion == null)
+        public AsignacionController(ILogger<AsignacionController> logger, IAsignacionInfoRepository asignacionInfoRepository)
         {
-          _logger.LogInformation("La asignación con id " + id + " no pudo ser encontrado.");
-          return NotFound();
+            _logger = logger;
+            _asignacionInfoRepository = asignacionInfoRepository;
+
         }
 
-        //Si tenemos como parametro recibir sus preguntas las incluira
-        //sino lo devolvera sin preguntas
-        if (IncluirPreguntas)
+        //Introduciendo la petición de la route devuelve todas las asignaciones y sus preguntas 
+        // no se le llama en ningun metodo de la app
+        [HttpGet()]
+        public IActionResult GetAsignaciones()
         {
-          var AsignacionResult = Mapper.Map<AsignacionDto>(Asignacion);
+            try
+            {
+                var Asignacion = _asignacionInfoRepository.GetAsignaciones();
 
-          return Ok(AsignacionResult);
+                //var results = Mapper.Map<IEnumerable<AsignacionSinPreguntasDto>>(AsignacionEntities);
+
+                return Ok(Asignacion);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("Se recogio un error al recibir todos los datos de las asignaciones: " + ex);
+                return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
+            }
 
         }
-        else
-        {
-          var AsignacionSinPregunta = Mapper.Map<AsignacionSinPreguntasDto>(Asignacion);
 
-          return Ok(AsignacionSinPregunta);
+        //Devuelve la asignacion de la ultima pregunta cuya respuesta haya sido modificada o respondida
+        [HttpGet("evaluacion/{evaluationId}/last-question-updated")]
+        public IActionResult AssignationLastQuestionUpdated(int evaluationId)
+        {
+            try
+            {
+                AsignacionEntity assignation = _asignacionInfoRepository.AssignationLastQuestionUpdated(evaluationId);
+
+                return Ok(assignation);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("Se recogio un error al recibir los datos de la asignacion: " + ex);
+                return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
+            }
+
         }
 
-      }
-      catch (Exception ex)
-      {
-        _logger.LogCritical("Se recogio un error al recibir la asignación con id " + id + ": " + ex);
-        return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
-      }
-    }
 
-    /*ADD ASIGNACIONES*/
-    [HttpPost("add")]
-    public IActionResult AddAsignacion([FromBody] AsignacionCreateUpdateDto AsignacionAdd)
-    {
-
-      //Si los datos son validos los guardara
-      if (AsignacionAdd == null || _asignacionInfoRepository.AsignacionExiste(AsignacionAdd.Id))
-      {
-        return BadRequest();
-      }
-
-      if (!ModelState.IsValid)
-      {
-        return BadRequest(ModelState);
-      }
-
-      //Comprueba que se guardo bien y lo envia
-      if (_asignacionInfoRepository.AddAsig(Mapper.Map<AsignacionEntity>(AsignacionAdd)))
-      {
-        return Ok("La asignación fue creada.");
-      }
-      else
-      {
-        return BadRequest();
-      }
-    }
-
-    /*UPDATE ASIGNACIONES*/
-    [HttpPut("update")]
-    public IActionResult UpdateAsignacion([FromBody] AsignacionCreateUpdateDto AsignacionUpdate)
-    {
-      //Si los datos son validos los guardara
-      if (AsignacionUpdate == null || !_asignacionInfoRepository.AsignacionExiste(AsignacionUpdate.Id))
-      {
-        return BadRequest();
-      }
-
-      if (!ModelState.IsValid)
-      {
-        return BadRequest(ModelState);
-      }
-
-      //Comprueba que se guardo bien y lo envia
-      if (_asignacionInfoRepository.AlterAsig(Mapper.Map<AsignacionEntity>(AsignacionUpdate)))
-      {
-        return Ok("La asignación fue modificada correctamente.");
-      }
-      else
-      {
-        return BadRequest();
-      }
-    }
-
-
-    //Añadir notas a una asignacion
-    [HttpPut("addNotas")]
-    public IActionResult AddNotasAsignacion([FromBody] AsignacionUpdateNotasDto AsignacionUpdate)
-    {
-      //Si los datos son validos los guardara
-      if (AsignacionUpdate == null || !_asignacionInfoRepository.AsignacionExiste(AsignacionUpdate.Id))
-      {
-        return BadRequest();
-      }
-
-      if (!ModelState.IsValid)
-      {
-        return BadRequest(ModelState);
-      }
-
-      try
-      {
-
-        //Comprueba que se guardo bien y lo envia
-        if (_asignacionInfoRepository.AddNotas(AsignacionUpdate))
+        //Recoge una lista de asignaciones con todas sus preguntas y su respuesta filtrada por id de una evaluación
+        [HttpGet("evaluacion/{id}")]
+        public IActionResult GetAsignacionFromEval(int id)
         {
-          return Ok("La asignación fue modificada correctamente.");
-        }
-        else
-        {
-          return BadRequest();
+            try
+            {
+                var AsignacionesWithInfo = _asignacionInfoRepository.GetAsignFromEval(id);
+
+                return Ok(AsignacionesWithInfo);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("Se recogio un error al recibir todos los datos de las asignaciones: " + ex);
+                return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
+            }
+
         }
 
-      }
-      catch (Exception ex)
-      {
-        _logger.LogCritical("Se recogio un error al recibir todos los datos de las asignaciones: " + ex);
-        return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
-      }
+        //Recoge una asignación con todas sus preguntas y su respuesta filtrada por id de evaluación y otra de asignación
+        [HttpGet("evaluacion/{idEval}/asignacion/{idAsig}/{codigoIdioma}")]
+        public IActionResult GetAsignacionFromEval(int idEval, int idAsig, int codigoIdioma)
+        {
+            try
+            {
+                var AsignacionesWithInfo = _asignacionInfoRepository.GetAsignFromEvalAndAsig(idEval, idAsig, codigoIdioma);
 
+                return Ok(AsignacionesWithInfo);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("Se recogio un error al recibir todos los datos de las asignaciones: " + ex);
+                return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
+            }
+
+        }
+
+        //Recoge una asignación con todas sus preguntas y su respuesta filtrada por id de evaluación y otra de asignación
+        [HttpGet("evaluacion/{idEval}/section/{idSection}")]
+        public IActionResult GetAsignacionFromSection(int idEval, int idSection)
+        {
+            try
+            {
+                var AsignacionesWithInfo = _asignacionInfoRepository.GetAsignFromEvalAndSection(idEval, idSection);
+
+                return Ok(AsignacionesWithInfo);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("Se recogio un error al recibir todos los datos de las asignaciones: " + ex);
+                return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
+            }
+
+        }
+
+        //Introduciendo la id de la asignacion devuelve una asignación especifica
+        [HttpGet("{id}")]
+        public IActionResult GetAsignacion(int id, bool IncluirPreguntas = false)
+        {
+            try
+            {
+                //Recoge si existe la asignación si es asi la devuelve si no es así muestra un error
+                var Asignacion = _asignacionInfoRepository.GetAsignacion(id, IncluirPreguntas);
+
+                if (Asignacion == null)
+                {
+                    _logger.LogInformation("La asignación con id " + id + " no pudo ser encontrado.");
+                    return NotFound();
+                }
+
+                //Si tenemos como parametro recibir sus preguntas las incluira
+                //sino lo devolvera sin preguntas
+                if (IncluirPreguntas)
+                {
+                    var AsignacionResult = Mapper.Map<AsignacionDto>(Asignacion);
+
+                    return Ok(AsignacionResult);
+
+                }
+                else
+                {
+                    var AsignacionSinPregunta = Mapper.Map<AsignacionSinPreguntasDto>(Asignacion);
+
+                    return Ok(AsignacionSinPregunta);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("Se recogio un error al recibir la asignación con id " + id + ": " + ex);
+                return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
+            }
+        }
+
+        /*ADD ASIGNACIONES*/
+        [HttpPost("add")]
+        public IActionResult AddAsignacion([FromBody] AsignacionCreateUpdateDto AsignacionAdd)
+        {
+
+            //Si los datos son validos los guardara
+            if (AsignacionAdd == null || _asignacionInfoRepository.AsignacionExiste(AsignacionAdd.Id))
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            //Comprueba que se guardo bien y lo envia
+            if (_asignacionInfoRepository.AddAsig(Mapper.Map<AsignacionEntity>(AsignacionAdd)))
+            {
+                return Ok("La asignación fue creada.");
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
+        /*UPDATE ASIGNACIONES*/
+        [HttpPut("update")]
+        public IActionResult UpdateAsignacion([FromBody] AsignacionCreateUpdateDto AsignacionUpdate)
+        {
+            //Si los datos son validos los guardara
+            if (AsignacionUpdate == null || !_asignacionInfoRepository.AsignacionExiste(AsignacionUpdate.Id))
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            //Comprueba que se guardo bien y lo envia
+            if (_asignacionInfoRepository.AlterAsig(Mapper.Map<AsignacionEntity>(AsignacionUpdate)))
+            {
+                return Ok("La asignación fue modificada correctamente.");
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
+
+        //Añadir notas a una asignacion
+        [HttpPut("addNotas")]
+        public IActionResult AddNotasAsignacion([FromBody] AsignacionUpdateNotasDto AsignacionUpdate)
+        {
+            //Si los datos son validos los guardara
+            if (AsignacionUpdate == null || !_asignacionInfoRepository.AsignacionExiste(AsignacionUpdate.Id))
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+
+                //Comprueba que se guardo bien y lo envia
+                if (_asignacionInfoRepository.AddNotas(AsignacionUpdate))
+                {
+                    return Ok("La asignación fue modificada correctamente.");
+                }
+                else
+                {
+                    return BadRequest();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("Se recogio un error al recibir todos los datos de las asignaciones: " + ex);
+                return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
+            }
+
+        }
+
+        //Recoge una lista de asignaciones con todas sus preguntas y su respuesta filtrada por id de una evaluación
+        [HttpGet("evaluacion/{id}/notas")]
+        public IActionResult GetNotasAsignaciones(int id)
+        {
+            try
+            {
+                var AsignacionesWithInfo = _asignacionInfoRepository.GetAsignConNotas(id);
+
+                return Ok(AsignacionesWithInfo);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("Se recogio un error al recibir todos los datos de las asignaciones: " + ex);
+                return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
+            }
+
+        }
+
+        /*DELETE ASIGNACIONES*/
+        [HttpDelete("delete")]
+        public IActionResult DeleteAsignacion([FromBody] AsignacionCreateUpdateDto AsignacionDelete)
+        {
+            //Si los datos son validos los guardara
+            if (AsignacionDelete == null || !_asignacionInfoRepository.AsignacionExiste(AsignacionDelete.Id))
+            {
+                return BadRequest();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            //Comprueba que se guardo bien y lo envia
+            if (_asignacionInfoRepository.DeleteAsig(Mapper.Map<AsignacionEntity>(AsignacionDelete)))
+            {
+                return Ok("La asignación fue eliminada correctamente.");
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
     }
-
-    //Recoge una lista de asignaciones con todas sus preguntas y su respuesta filtrada por id de una evaluación
-    [HttpGet("evaluacion/{id}/notas")]
-    public IActionResult GetNotasAsignaciones(int id)
-    {
-      try
-      {
-        var AsignacionesWithInfo = _asignacionInfoRepository.GetAsignConNotas(id);
-
-        return Ok(AsignacionesWithInfo);
-      }
-      catch (Exception ex)
-      {
-        _logger.LogCritical("Se recogio un error al recibir todos los datos de las asignaciones: " + ex);
-        return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
-      }
-
-    }
-
-    /*DELETE ASIGNACIONES*/
-    [HttpDelete("delete")]
-    public IActionResult DeleteAsignacion([FromBody] AsignacionCreateUpdateDto AsignacionDelete)
-    {
-      //Si los datos son validos los guardara
-      if (AsignacionDelete == null || !_asignacionInfoRepository.AsignacionExiste(AsignacionDelete.Id))
-      {
-        return BadRequest();
-      }
-
-      if (!ModelState.IsValid)
-      {
-        return BadRequest(ModelState);
-      }
-
-      //Comprueba que se guardo bien y lo envia
-      if (_asignacionInfoRepository.DeleteAsig(Mapper.Map<AsignacionEntity>(AsignacionDelete)))
-      {
-        return Ok("La asignación fue eliminada correctamente.");
-      }
-      else
-      {
-        return BadRequest();
-      }
-    }
-  }
 }

@@ -1,3 +1,4 @@
+import { StorageDataService } from './../services/StorageDataService';
 import { Component, OnInit } from '@angular/core';
 import { SectionService } from '../services/SectionService';
 import { RespuestasService } from '../services/RespuestasService';
@@ -53,17 +54,18 @@ export class NewevaluationComponent implements OnInit {
     private _router: Router,
     private _appComponent: AppComponent,
     private modalService: NgbModal,
-    private _proyectoService: ProyectoService) {
-      this.InitialiseComponent();
-    }
+    private _proyectoService: ProyectoService,
+    private _evaluacionService: EvaluacionService) {
+    this.InitialiseComponent();
+  }
 
   ngOnInit() {
 
     this.Evaluation = this._appComponent._storageDataService.Evaluacion;
   }
-  
-  private InitialiseComponent(){
-    
+
+  private InitialiseComponent() {
+
     this.PageNow = 1;
     this.SectionSelected = this._appComponent._storageDataService.SectionSelectedInfo;
     this.nextSection = this._appComponent._storageDataService.nextSection;
@@ -87,18 +89,19 @@ export class NewevaluationComponent implements OnInit {
 
     this.MostrarInfo = true;
 
-    if(this.Evaluation != null){
-      this._appComponent.pushBreadcrumb("Preguntas", "/evaluationquestions");
+    if (this.Evaluation != null) {
+      //this._appComponent.pushBreadcrumb("Preguntas", "/evaluationquestions");
+      this._appComponent.pushBreadcrumb("BREADCRUMB.QUESTIONS", "/evaluationquestions");
     }
 
     //Recoge todas las asignaciones de la section por id
     if (this.Evaluation != null && this.Evaluation != undefined && this.SectionSelected != null && this.SectionSelected != undefined) {
-     this._sectionService.getAsignacionesSection(this.SectionSelected.id).subscribe(
+      this._sectionService.getAsignacionesSection(this.SectionSelected.id).subscribe(
         res => {
           if (res != null) {
             this.ListaAsignaciones = res;
             this.NumMax = this.ListaAsignaciones.length;
-            
+
             let i = 0;
             this.pagesArray = [];
 
@@ -106,19 +109,19 @@ export class NewevaluationComponent implements OnInit {
               i++;
               this.pagesArray.push(i);
             }
-            
+
             //Se determina si es una nueva evaluacion o si se continua desde una asignacion pendiente
-            if (this.AreaAsignada.id != 0){
+            if (this.AreaAsignada.id != 0) {
               //Se resetea el valor de la global
               this._appComponent._storageDataService.currentAssignation = { 'id': 0, 'nombre': "undefined" };
               this.PageNow = this.ListaAsignaciones.findIndex(x => x.id == this.AreaAsignada.id) + 1;
-            } else{
+            } else {
               this.AreaAsignada = this.ListaAsignaciones[0]
             }
-            
+
             this.getAsignacionActual(this.Evaluation.id, this.AreaAsignada.id);
             this.Deshabilitar = false;
-            
+
           } else {
             this.ErrorMessage = "No se encontraron datos para esta sección.";
           }
@@ -133,6 +136,7 @@ export class NewevaluationComponent implements OnInit {
           } else {
             this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
           }
+          setTimeout(() => { this.ErrorMessage = null }, 4000);
         }
       );
     } else {
@@ -146,7 +150,7 @@ export class NewevaluationComponent implements OnInit {
       res => {
         if (res != null) {
           this.InfoAsignacion = res;
-          
+
           this.Deshabilitar = false;
         } else {
           this.ErrorMessage = "No se encontraron datos para esta asignación.";
@@ -162,31 +166,32 @@ export class NewevaluationComponent implements OnInit {
         } else {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
+        setTimeout(() => { this.ErrorMessage = null }, 4000);
       }
     );
   }
 
   public redirectToNextSection() {
     this._appComponent._storageDataService.SectionSelectedInfo = this.nextSection;
-    
+
     let index = this._appComponent._storageDataService.Sections.indexOf(this.nextSection);
 
     this._appComponent._storageDataService.nextSection = (index + 1) != this._appComponent._storageDataService.Sections.length
       ? this._appComponent._storageDataService.Sections[index + 1]
       : null;
 
-      this._appComponent._storageDataService.prevSection = (index - 1) != -1
+    this._appComponent._storageDataService.prevSection = (index - 1) != -1
       ? this._appComponent._storageDataService.Sections[index - 1]
       : null;
 
-      //console.log( this._appComponent._storageDataService.prevSection);
+    //console.log( this._appComponent._storageDataService.prevSection);
 
     this.InitialiseComponent();
   }
 
   public redirectToPrevSection() {
     this._appComponent._storageDataService.SectionSelectedInfo = this.prevSection;
-    
+
     let index = this._appComponent._storageDataService.Sections.indexOf(this.prevSection);
 
     this._appComponent._storageDataService.prevSection = (index - 1) != -1
@@ -201,35 +206,35 @@ export class NewevaluationComponent implements OnInit {
   }
 
   //Metodo que devuelve si una pregunta dependiente de otra habilitante se debe habilitar
-  public checkHabilitante = (pregunta: PreguntaInfo) : boolean => {
+  public checkHabilitante = (pregunta: PreguntaInfo): boolean => {
     let check: boolean = false;
     this.InfoAsignacion.preguntas.forEach(p => {
-      if((p.esHabilitante && !pregunta.esHabilitante && pregunta.preguntaHabilitanteId == p.id 
-        && p.respuesta.estado == 1) || pregunta.preguntaHabilitanteId == null)
-      {
-        check= true;
+      if ((p.esHabilitante && !pregunta.esHabilitante && pregunta.preguntaHabilitanteId == p.id
+        && p.respuesta.estado == 1) || pregunta.preguntaHabilitanteId == null) {
+        check = true;
       }
     });
     return check;
   }
 
   public AnswerQuestion(pregunta: PreguntaInfo, index: number, optionAnswered: number) {
+    var estadoOriginal = this.InfoAsignacion.preguntas[index].respuesta.estado;
     //Si la pregunta es Habilitante y se ha respondido NO
-    if (this.InfoAsignacion.preguntas[index].esHabilitante && optionAnswered == 2)
-    {
+    if (this.InfoAsignacion.preguntas[index].esHabilitante && optionAnswered == 2) {
       this.InfoAsignacion.preguntas[index].respuesta.estado = optionAnswered;
       this._respuestasService.updateRespuestasAsig(this.Evaluation.id, pregunta.id).subscribe(
         res => {
           //Se actualizan las respuestas de las preguntas dependientes de esta pregunta habilitante a NC
-          this.InfoAsignacion.preguntas.forEach(p =>{
+          this.InfoAsignacion.preguntas.forEach(p => {
             if (this.InfoAsignacion.preguntas[index].id == p.preguntaHabilitanteId)
               p.respuesta.estado = 0;
-            
-    this.changedQuestion = index;
-    this.changedAnswer = optionAnswered;
+
+            this.changedQuestion = index;
+            this.changedAnswer = optionAnswered;
           });
         },
         error => {
+          this.InfoAsignacion.preguntas[index].respuesta.estado = estadoOriginal;
           if (error == 404) {
             this.ErrorMessage = "Error: " + error + "No se pudo acceder a los datos de esta asignación.";
           } else if (error == 500) {
@@ -239,18 +244,21 @@ export class NewevaluationComponent implements OnInit {
           } else {
             this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
           }
+          setTimeout(() => { this.ErrorMessage = null }, 4000);
         }
       );
     } else {
       if (optionAnswered != pregunta.respuesta.estado) {
         this.InfoAsignacion.preguntas[index].respuesta.estado = optionAnswered;
         let respuesta = this.InfoAsignacion.preguntas[index].respuesta;
+        respuesta.userName = this.UserName;
         this._respuestasService.AlterRespuesta(respuesta).subscribe(
           res => {
             this.changedQuestion = index;
             this.changedAnswer = optionAnswered;
           },
           error => {
+            this.InfoAsignacion.preguntas[index].respuesta.estado = estadoOriginal;
             if (error == 404) {
               this.ErrorMessage = "Error: " + error + "No pudimos realizar la actualización de la respuesta, lo sentimos.";
             } else if (error == 500) {
@@ -260,7 +268,8 @@ export class NewevaluationComponent implements OnInit {
             } else {
               this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
             }
-        });
+            setTimeout(() => { this.ErrorMessage = null }, 4000);
+          });
       }
     }
   }
@@ -316,15 +325,17 @@ export class NewevaluationComponent implements OnInit {
           }
 
           var Respuesta = this.InfoAsignacion.preguntas[i].respuesta;
+          Respuesta.userName = this.UserName; //le añadimos el usuario que hace la nota
 
           this._respuestasService.AlterRespuesta(Respuesta).subscribe(
             res => {
 
-              this.anadeNota = "Nota añadida correctamente";
-              setTimeout(() => { this.anadeNota = null }, 2000);
+              // this.anadeNota = "Nota añadida correctamente";
+              // setTimeout(() => { this.anadeNota = null }, 4000);
             },
             error => {
-
+              this.InfoAsignacion.preguntas[i].respuesta.notas = null
+              this.Deshabilitar = false;
               if (error == 404) {
                 this.ErrorMessage = "Error: " + error + "No pudimos realizar la actualización de la respuesta, lo sentimos.";
               } else if (error == 500) {
@@ -334,6 +345,7 @@ export class NewevaluationComponent implements OnInit {
               } else {
                 this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
               }
+              setTimeout(() => { this.ErrorMessage = null }, 4000);
             },
             () => {
               this.Deshabilitar = false;
@@ -369,17 +381,35 @@ export class NewevaluationComponent implements OnInit {
           } else {
             this.InfoAsignacion.notas = null;
           }
-
           var asig = new AsignacionUpdate(this.Evaluation.id, this.InfoAsignacion.id, this.InfoAsignacion.notas);
 
           this._respuestasService.AddNotaAsig(asig).subscribe(
             res => {
+              // this.anadeNota = "Nota añadida correctamente";
+              // setTimeout(() => { this.anadeNota = null }, 4000);
 
-              this.anadeNota = "Nota añadida correctamente";
-              setTimeout(() => { this.anadeNota = null }, 2000);
+              this.Evaluation.userNombre = this.UserName;
+              this._evaluacionService.updateEvaluacion(this.Evaluation).subscribe(
+                res => {
+                  //usuario modificado correctamente                  
+                },
+                error => {
+                  this.InfoAsignacion.notas = null;
+                  this.Deshabilitar = false;
+                  if (error == 404) {
+                    this.ErrorMessage = "Error: " + error + "No pudimos realizar la actualización del usuario, lo sentimos.";
+                  } else if (error == 500) {
+                    this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+                  } else if (error == 401) {
+                    this.ErrorMessage = "Error: " + error + " El usuario es incorrecto o no tiene permisos, intente introducir su usuario nuevamente.";
+                  } else {
+                    this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+                  }
+                });
             },
             error => {
-
+              this.InfoAsignacion.notas = null;
+              this.Deshabilitar = false;
               if (error == 404) {
                 this.ErrorMessage = "Error: " + error + "No pudimos realizar la actualización de la respuesta, lo sentimos.";
               } else if (error == 500) {
@@ -389,6 +419,7 @@ export class NewevaluationComponent implements OnInit {
               } else {
                 this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
               }
+              setTimeout(() => { this.ErrorMessage = null }, 4000);
             },
             () => {
               this.Deshabilitar = false;
@@ -431,11 +462,32 @@ export class NewevaluationComponent implements OnInit {
           this._sectionService.addNota(SeccionModificada).subscribe(
             res => {
 
-              this.anadeNota = "Nota añadida correctamente";
-              setTimeout(() => { this.anadeNota = null }, 2000);
+              // this.anadeNota = "Nota añadida correctamente";
+              // setTimeout(() => { this.anadeNota = null }, 4000);
+
+              this.Evaluation.userNombre = this.UserName;
+              this._evaluacionService.updateEvaluacion(this.Evaluation).subscribe(
+                res => {
+                  //usuario modificado correctamente
+                },
+                error => {
+                  this.InfoAsignacion.notas = null;
+                  this.Deshabilitar = false;
+                  if (error == 404) {
+                    this.ErrorMessage = "Error: " + error + "No pudimos realizar la actualización del usuario, lo sentimos.";
+                  } else if (error == 500) {
+                    this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+                  } else if (error == 401) {
+                    this.ErrorMessage = "Error: " + error + " El usuario es incorrecto o no tiene permisos, intente introducir su usuario nuevamente.";
+                  } else {
+                    this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+                  }
+                });
+
             },
             error => {
-
+              this.SectionSelected.notas = null;
+              this.Deshabilitar = false;
               if (error == 404) {
                 this.ErrorMessage = "Error: " + error + "No pudimos realizar la actualización de la respuesta, lo sentimos.";
               } else if (error == 500) {
@@ -445,6 +497,7 @@ export class NewevaluationComponent implements OnInit {
               } else {
                 this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
               }
+              setTimeout(() => { this.ErrorMessage = null }, 4000);
             },
             () => {
               this.Deshabilitar = false;

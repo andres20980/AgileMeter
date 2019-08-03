@@ -1,12 +1,11 @@
-@import'theme.scss';
+@import "theme.scss";
 
 table {
   width: 100%;
-
 }
 
-img{
-  height:38px;
+img {
+  height: 38px;
 }
 
 mat-table {
@@ -18,7 +17,6 @@ mat-cell {
   /* display:flex !important; */
   justify-content: center !important;
 }
-
 
 th.mat-header-cell {
   font-weight: bold !important;
@@ -42,7 +40,7 @@ th.mat-header-cell {
   border-bottom-style: solid;
   font-size: 12px;
   text-align: center;
-  padding-left:25px;
+  padding-left: 25px;
 }
 
 .comments-form-field {
@@ -82,7 +80,6 @@ button.transparente {
   outline: none;
   width: 60px;
 }
-
 
 tr.example-detail-row {
   height: 0;
@@ -129,20 +126,9 @@ tr.example-element-row:not(.example-expanded-row):active {
   opacity: 0.5;
 }
 
-
-
-
-
-
-
-
-
-
 // fsdfasdfasdfasdfasdfa
 
-
 @media print {
-
   #no-print,
   #no-print * {
     display: none !important;
@@ -153,8 +139,6 @@ tr.example-element-row:not(.example-expanded-row):active {
     display: none !important;
   }
 }
-
-
 
 #Grafica {
   min-width: 350px;
@@ -177,15 +161,16 @@ tr.example-element-row:not(.example-expanded-row):active {
   text-align: center;
 }
 
-.cdk-column-pregunta, .cdk-column-respuesta{
-  text-align:left !important;
+.cdk-column-pregunta,
+.cdk-column-respuesta {
+  text-align: left !important;
 }
 
-.cdk-column-respuesta{
-  font-size:0.8rem !important;
+.cdk-column-respuesta {
+  font-size: 0.8rem !important;
 }
 
-.material-icons{
+.material-icons {
   font-size: 0.8rem !important;
 }
 
@@ -198,7 +183,6 @@ tr.example-element-row:not(.example-expanded-row):active {
   max-width: 600px;
   padding: 5px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-
 
   th {
     background: rgba(145, 188, 4, 0.36);
@@ -222,7 +206,7 @@ tr.example-element-row:not(.example-expanded-row):active {
   }
 
   tr:nth-child(odd) td {
-    background-color: #EBEBEB;
+    background-color: #ebebeb;
   }
 
   tr:nth-child(odd):hover td {
@@ -238,7 +222,7 @@ tr.example-element-row:not(.example-expanded-row):active {
   }
 
   td {
-    background: #FFFFFF;
+    background: #ffffff;
     padding: 10px;
     text-align: left;
     vertical-align: middle;
@@ -250,8 +234,6 @@ tr.example-element-row:not(.example-expanded-row):active {
     width: 100px !important;
   }
 
-
-
   .total {
     border-top: 1px solid black !important;
   }
@@ -260,7 +242,6 @@ tr.example-element-row:not(.example-expanded-row):active {
   p {
     white-space: pre-line;
   }
-
 }
 
 label {
@@ -296,7 +277,7 @@ h4 {
 
 h5 {
   font-size: 15px !important;
-  background-color: #EBEBEB;
+  background-color: #ebebeb;
   padding: 10px;
 }
 
@@ -332,7 +313,7 @@ label {
     border-radius: 50%;
     vertical-align: -6px;
     margin-right: 10px;
-    transition: background-color 150ms 200ms, transform 350ms cubic-bezier(.78, -1.22, .17, 1.89); // custom ease effect for bouncy animation
+    transition: background-color 150ms 200ms, transform 350ms cubic-bezier(0.78, -1.22, 0.17, 1.89); // custom ease effect for bouncy animation
 
     // Now we'll create the "tick" using pseudo elements - those will be basically two lines that will be rotated to form the "tick"
     &:before {
@@ -385,9 +366,9 @@ input[type="checkbox"] {
 
   // Let's add some effects after the checkbox is checked
   &:checked {
-    +label {
+    + label {
       span {
-        background-color: #9BAE0C;
+        background-color: #9bae0c;
         transform: scale(1.25); // enlarge the box
 
         &:after {
@@ -404,7 +385,6 @@ input[type="checkbox"] {
       }
 
       &:hover {
-
         // copy the states for onMouseOver to avoid flickering
         span {
           background-color: #1790b5;
@@ -432,13 +412,12 @@ input[type="checkbox"] {
   cursor: default;
 }
 
-
 input[type="checkbox"].disableCheck {
   display: none; // hide the system checkbox
   // Let's add some effects after the checkbox is checked
 
   &:checked {
-    +label {
+    + label {
       span {
         background-color: grey;
         transform: scale(1) !important;
@@ -455,7 +434,6 @@ input[type="checkbox"].disableCheck {
       }
 
       &:hover {
-
         // copy the states for onMouseOver to avoid flickering
         span {
           background-color: grey;
@@ -476,7 +454,6 @@ input[type="checkbox"].disableCheck {
   }
 }
 
-
 label.disable {
   display: inline-block; // to make it easier to click
   color: grey;
@@ -494,7 +471,7 @@ label.disable {
     border-radius: 50%;
     vertical-align: -6px;
     margin-right: 10px;
-    transition: background-color 150ms 200ms, transform 350ms cubic-bezier(.78, -1.22, .17, 1.89); // custom ease effect for bouncy animation
+    transition: background-color 150ms 200ms, transform 350ms cubic-bezier(0.78, -1.22, 0.17, 1.89); // custom ease effect for bouncy animation
 
     // Now we'll create the "tick" using pseudo elements - those will be basically two lines that will be rotated to form the "tick"
     &:before {
@@ -609,17 +586,14 @@ hr.textopdf {
 
 .textopdf {
   max-width: 600px;
-
 }
 
-
 .btnpdf {
-  
-  background-color: #99AD00;
+  background-color: #99ad00;
   display: inline-block;
   cursor: pointer;
   color: #ffffff;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-size: 16px;
   padding: 4px 10px;
   text-decoration: none;
@@ -636,9 +610,8 @@ hr.textopdf {
   background: -ms-linear-gradient(top, #337ab7 5%, #4c91cd 100%);
   background: linear-gradient(to bottom, #fefefe 5%, #fefefe 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#337ab7', endColorstr='#4c91cd', GradientType=0);
-  color: #99AD00;
-  border: 1px solid #99AD00;
-
+  color: #99ad00;
+  border: 1px solid #99ad00;
 }
 
 .btnpdf:active {
@@ -672,15 +645,29 @@ hr.textopdf {
   outline: none;
 }
 
-.circle-progress-container{
+.circle-progress-container {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
   align-items: baseline;
 }
 
-.circle-progress{
-  //display: flex;
+.circle-progress {
+  max-width: 11rem;
+  border-radius: 3px; 
+  position: relative;
+  //cursor: pointer;
+  //@extend .transition-animation;
+  //&:hover {
+   // @extend .transition-animation;
+    //box-shadow: 0 0 7px 1px mat-color($mat-everis, 300);
+  //}
+}
+
+.circle-progress-title{
+  // background-color: mat-color($mat-everis, 300);
+  // color: white;
+   border-radius: 0 0 3px 3px; 
 }
 
 .notas-container {
@@ -689,28 +676,26 @@ hr.textopdf {
   min-width: 50%;
   margin-bottom: -15px;
   margin-top: -10px;
-
-
 }
 .notas-row {
   display: flex;
 }
 .notas-panel {
   overflow: hidden;
- 
-  margin-top:30px;
+
+  margin-top: 30px;
   //margin-left: 10%;
   //margin-right: 10%;
-  
 }
 
-.comment{
-  margin-left: 90%;
+.comment {
+  //margin-left: 90%;
+  // padding-left: 1rem;
+  // margin-bottom: -12px;
+  margin-left: 0%;
 }
 
-
-
-.table-row{
+.table-row {
   text-align: left;
   // display: flex;
   // justify-content: center;
@@ -721,30 +706,30 @@ hr.textopdf {
   margin-top: 40px;
 }
 
-.button-disabled{
+.button-disabled {
   opacity: 0.5;
-  cursor:pointer;
+  cursor: pointer;
 }
-.botonPreguntas, .botonComentarios{
-  margin:0px;
+.botonPreguntas,
+.botonComentarios {
+  margin: 0px;
   cursor: default;
 }
 
-
-.botonesPregsOComents{
+.botonesPregsOComents {
   margin-bottom: -55px;
   margin-left: 92%;
   display: flex;
 }
 
-.lvl1{
+.lvl1 {
   background-image: url("/assets/lvl1.svg");
   background-repeat: no-repeat;
   background-size: 133px;
   background-position-x: 22.5px;
   background-position-y: 22.5px;
 }
-.lvl2{
+.lvl2 {
   background-image: url("/assets/lvl2.svg");
   background-repeat: no-repeat;
   background-size: 133px;
@@ -752,28 +737,30 @@ hr.textopdf {
   background-position-y: 22.5px;
 }
 
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-thick  {
-  color: mat-color($mat-everis, 50);
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  color: mat-color($mat-everis, 50) !important;
 }
 
-.button-disabled{
+.button-disabled {
   opacity: 0.5;
-  cursor:pointer;
+  cursor: pointer;
 }
-.botonPreg, .botonComents, .botonExcel{
-  margin:0px;
+.botonPreg,
+.botonComents,
+.botonExcel {
+  margin: 0px;
   cursor: default;
 }
 
 .transition-animation {
-  -webkit-transition: all .8s ease !important;
-  -moz-transition: all .8s ease !important;
-  -ms-transition: all .8s ease !important;
-  -o-transition: all .8s ease !important;
-  transition: all .8s ease !important;
+  -webkit-transition: all 0.8s ease !important;
+  -moz-transition: all 0.8s ease !important;
+  -ms-transition: all 0.8s ease !important;
+  -o-transition: all 0.8s ease !important;
+  transition: all 0.8s ease !important;
 }
 
-.ng-card-box{
+.ng-card-box {
   // box-shadow: 0 2px 2px rgba(10, 16, 20, 0.24), 0 0 2px rgba(10, 16, 20, 0.12);
   min-height: 200px;
   border-left: 4px solid mat-color($mat-everis, 50);
@@ -787,4 +774,24 @@ hr.textopdf {
   position: fixed;
   margin-top: 15%;
   margin-right: 5%;
+}
+
+.top-comment {
+  position: absolute;
+  left: 9rem;
+  top: 0.1rem;   
+}
+
+.top-comment img {
+  width: 28px;
+  height: 28px;
+}
+
+.top-comment p {
+  text-align: center;
+  margin-top: -28px;
+  font-size: 15px !important;
+  font-weight: bold;
+  color: mat-color($mat-everis, 300);
+  font-family: monospace;
 }

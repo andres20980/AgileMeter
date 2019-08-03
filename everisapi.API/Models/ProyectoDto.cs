@@ -11,6 +11,8 @@ namespace everisapi.API.Models
 
         public string Nombre { get; set; }
 
+        public string Codigo { get; set; }
+
         public string teamName { get; set; }
 
         public Oficina OficinaEntity { get; set; }
@@ -29,7 +31,6 @@ namespace everisapi.API.Models
         public bool TestProject { get; set; }
         public UsersDto UserEntity { get; set; }
         public ICollection<EvaluacionDto> Evaluaciones { get; set; } = new List<EvaluacionDto>();
-
         public string Oficina { get; set; }
         public string Unidad { get; set; }
         public string Proyecto { get; set; }

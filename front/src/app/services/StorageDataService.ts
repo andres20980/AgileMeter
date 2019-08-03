@@ -18,7 +18,7 @@ import { Asignacion } from 'app/Models/Asignacion';
 @Injectable()
 export class StorageDataService {
   public UserProjects: any = [];
-  public UserProjectSelected: Proyecto = { id: -1, fecha: null, nombre: '', numFinishedEvals:0, numPendingEvals: 0 };
+  public UserProjectSelected: Proyecto = { id: -1, fecha: null, nombre: '',codigo: null, numFinishedEvals:0, numPendingEvals: 0 };
   public UserData: User;
   public DataUnfinished: boolean = false;
   public SectionSelected: Section = null;
@@ -31,12 +31,13 @@ export class StorageDataService {
   public subscriptionTimer: Subscription;
   public AssessmentSelected: Assessment = null;
   public RoleAdmin: boolean;
-  public Role: string;
+  public Role: number;
   public nextSection : SectionInfo = null;
   public prevSection : SectionInfo = null;
   public Sections: SectionInfo[] = [];
   public currentAssignation: Asignacion = { 'id': 0, 'nombre': "undefined" };
   public breadcrumbList: Array<any> = [];
+  public codigoIdioma:number = 1;
 
 
   public GetToken() {

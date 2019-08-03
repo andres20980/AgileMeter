@@ -17,6 +17,8 @@ import { TeamsManagerComponent } from './back-office/components/teams-manager/te
 import { QuestionsManagerComponent } from './back-office/components/questions-manager/questions-manager.component';
 import { AddTeamComponent } from './back-office/components/teams-manager/add-team/add-team.component';
 import { AddUpdateUserComponent } from './back-office/components/user-management/add-update-user/add-update-user.component';
+import { TeamManagementComponent } from './back-office/components/user-management/team-management/team-management.component'
+import { UserListComponent } from './back-office/components/user-management/user-list/user-list.component';
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent },
@@ -25,11 +27,13 @@ const appRoutes: Routes = [
   {
     path: 'backoffice', component: BackOfficeComponent,
     children: [
-      { path: 'usermanagement', component: UserManagementComponent },
+      //{ path: 'usermanagement', component: UserManagementComponent },
+      { path: 'usermanagement', component: UserListComponent },
       { path: 'usermanagement/addUser', component: AddUpdateUserComponent },
+      { path: 'usermanagement/teamsManagement', component: TeamManagementComponent },
       { path: 'adduserproject', component: AddUserProjectComponent },
       { path: 'teamsmanager', component: TeamsManagerComponent },
-      { path: 'addteam', component: AddTeamComponent },
+      { path: 'teamsmanager/addteam', component: AddTeamComponent },
       { path: 'questions', component: QuestionsManagerComponent }
     ]
   },
@@ -38,7 +42,7 @@ const appRoutes: Routes = [
   { path: 'evaluationresults', component: PdfgeneratorComponent },
   { path: 'finishedevaluations', component: PreviousevaluationComponent },
   { path: 'pendingevaluations', component: PendingEvaluationComponent },
-  { path: '**', component: LoginComponent }
+  { path: '**', component: HomeComponent }
 
 ];
 

@@ -151,5 +151,25 @@ tr.example-element-row:not(.example-expanded-row):active {
   .mat-expansion-panel-body > .comments-form-field{
     padding-right: 24px;
   }
+
+  .right-comment{
+    padding-left: 1rem;
+    margin-bottom: -12px;    
+  }
+  
+  .right-comment img{
+    width: 28px;
+    height: 28px;
+  }
+  
+  .right-comment p{
+    width: 28px;
+    text-align: center;
+    margin-top: -27px;   
+    font-size: 15px !important;
+    font-weight: bold;
+    color:  mat-color($mat-everis, 300);
+    font-family: monospace;
+  }
 }
   

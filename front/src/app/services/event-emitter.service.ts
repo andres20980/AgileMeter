@@ -9,7 +9,7 @@ export class EventEmitterService {
 
   constructor() { }
 
-  displayMessage(message: string){
-    this.eventEmitter.emit(message);
+  displayMessage(message: string, error:boolean){
+    this.eventEmitter.emit({message:message,error:error});    
   }
 }

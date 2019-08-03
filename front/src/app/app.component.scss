@@ -1,4 +1,4 @@
-@import url(http://fonts.googleapis.com/css?family=Raleway);
+@import url(https://fonts.googleapis.com/css?family=Raleway);
 $primary-color:#5c981b;
 
 .container-fluid{
@@ -274,4 +274,12 @@ background-size:100% 3px ;
  
   width: 17rem;
   margin-top: -1.25rem;
+}
+
+.lang-select{
+  cursor: pointer;
+}
+
+.active-lang{
+  font-weight: bold;
 }

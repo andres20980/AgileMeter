@@ -22,13 +22,11 @@ import { UserProject } from 'app/Models/UserProject';
   selector: 'app-user-management',
   templateUrl: './user-management.component.html',
   styleUrls: ['./user-management.component.scss'],
-  providers: [UserService, ProyectoService]
+  //providers: [UserService, ProyectoService]
 })
 
 
 export class UserManagementComponent implements OnInit {
-
-
   public ErrorMessage: string = null;
   public ListaDeUsuarios: UserWithRole[] = [];
   public UsuarioSeleccionado: UserWithRole;
@@ -38,9 +36,8 @@ export class UserManagementComponent implements OnInit {
   public ListaDeProyectosUsuario: Proyecto[] = [];
   public radioSelected;
   public rolControl;
-  public showProjects:boolean = false;
-  public updateUser: string = null;
-
+  public showProjects: boolean = false;
+  public MensajeNotificacion: string = null;
 
   public projectsSelected: string[] = [];
   /** control for the selected bank */
@@ -74,7 +71,6 @@ export class UserManagementComponent implements OnInit {
     private _eventService: EventEmitterService,
     private _zone: NgZone
   ) {
-
   }
 
   ngOnInit() {
@@ -85,25 +81,17 @@ export class UserManagementComponent implements OnInit {
     }
 
     var local = localStorage.getItem("user");
- 
+
     this.getAllUsers();
     this.getAllRoles();
 
-    if(local == null){
+    if (local == null) {
       this.UsuarioLogueado = this._appComponent._storageDataService.UserData.nombre
       this.getAllProjects(this._appComponent._storageDataService.UserData.nombre);
-    }else
-    {
+    } else {
       this.UsuarioLogueado = local;
       this.getAllProjects(this.UsuarioLogueado);
     }
-    
-    
-
-    
-    
-
-    
 
     //listen for search field value changes
     this.userFilterCtrl.valueChanges
@@ -120,11 +108,7 @@ export class UserManagementComponent implements OnInit {
         this.getAllProjects(this.userCtrl.value.nombre);
         this.getUserProjects();
         this.filterProjectMulti();
-        
-        
-
       });
- 
 
     this.projectMultiFilterCtrl.valueChanges
       .pipe(takeUntil(this._onDestroy))
@@ -137,13 +121,9 @@ export class UserManagementComponent implements OnInit {
       .subscribe(() => {
         this.ListaDeProyectosUsuario = this.projectMultiCtrl.value;
       });
-
-
-
   }
 
   ngAfterViewInit() {
-    
   }
 
   ngOnDestroy() {
@@ -151,9 +131,7 @@ export class UserManagementComponent implements OnInit {
     this._onDestroy.complete();
   }
 
-
   private getAllUsers() {
-
     this._UserService.getUsers().subscribe(
       res => {
         this.ListaDeUsuarios = res;
@@ -174,7 +152,6 @@ export class UserManagementComponent implements OnInit {
   }
 
   private getAllRoles() {
-
     this._UserService.getAllRoles().subscribe(
       res => { this.ListaDeRoles = res; },
       error => {
@@ -191,7 +168,6 @@ export class UserManagementComponent implements OnInit {
   }
 
   private getAllProjects(userNombre: string) {
-
     this._proyectoService.getAllProyectos(userNombre).subscribe(
       res => {
         this.ListaDeProyectos = res;
@@ -210,10 +186,7 @@ export class UserManagementComponent implements OnInit {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
       });
-
   }
-
-  
 
   private filterUsers() {
     if (!this.ListaDeUsuarios) {
@@ -240,9 +213,7 @@ export class UserManagementComponent implements OnInit {
     // get the search keyword
     let search = this.projectMultiFilterCtrl.value;
     if (!search) {
-
       this.filteredProjectsMulti.next(this.ListaDeProyectos);
-
       return;
     } else {
       search = search.toLowerCase();
@@ -254,22 +225,18 @@ export class UserManagementComponent implements OnInit {
   }
 
   private getUserProjects() {
+    if (this.userCtrl.value.role.id == 1) {
+      this.showProjects = true;
+    }
 
-    if(this.userCtrl.value.role.id == 1){
-      this.showProjects=true;
-    } 
-    
     this._proyectoService.getProyectosDeUsuarioSeleccionado(this.userCtrl.value).subscribe(
       res => {
         this.ListaDeProyectosUsuario = res;
         this.projectsSelected = [];
 
-          this.ListaDeProyectosUsuario.forEach((element) => {
-            this.projectsSelected.push(`${element.id}`);
-            
-          });
-        
-
+        this.ListaDeProyectosUsuario.forEach((element) => {
+          this.projectsSelected.push(`${element.id}`);
+        });
       },
       error => {
         //Si el servidor tiene algún tipo de problema mostraremos este error
@@ -282,53 +249,50 @@ export class UserManagementComponent implements OnInit {
         } else {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
-        setTimeout(() => this.ErrorMessage = "", 2000);
+        setTimeout(() => this.ErrorMessage = "", 4000);
       });
-
   }
 
-  manageUserProjects(project){
-    let exists:boolean = false;
+  manageUserProjects(project) {
+    let exists: boolean = false;
     let i = 0;
 
-    this.ListaDeProyectosUsuario.forEach((element,index)=>{
-        if(element.id == project.id){exists=true;i=index;}
+    this.ListaDeProyectosUsuario.forEach((element, index) => {
+      if (element.id == project.id) { exists = true; i = index; }
     });
- 
-    if(exists){
+
+    if (exists) {
       var removeUP = new UserProject(this.userCtrl.value.nombre, project.id);
       this.removeUserProyect(removeUP);
-      this.ListaDeProyectosUsuario.splice(i,1);
-    }else{
-
+      this.ListaDeProyectosUsuario.splice(i, 1);
+    }
+    else {
       var addUP = new UserProject(this.userCtrl.value.nombre, project.id);
       this.addUserProyect(addUP);
-      
       this.ListaDeProyectosUsuario.push(project);
     }
   }
 
-  deleteSingleUserProjects(project){
+  deleteSingleUserProjects(project) {
     console.log("borrar single");
     let i = 0;
-    this.ListaDeProyectosUsuario.forEach((element,index)=>{
-      if(element.id == project.id){i=index;}
-  });
-      var removeUP = new UserProject(this.userCtrl.value.nombre, project.id);
-      this.removeUserProyect(removeUP);
-      this.ListaDeProyectosUsuario.splice(i,1);
-   
+    this.ListaDeProyectosUsuario.forEach((element, index) => {
+      if (element.id == project.id) { i = index; }
+    });
+    var removeUP = new UserProject(this.userCtrl.value.nombre, project.id);
+    this.removeUserProyect(removeUP);
+    this.ListaDeProyectosUsuario.splice(i, 1);
   }
 
   private updateUserRol(UsuarioSeleccionado) {
-
+    UsuarioSeleccionado.password = null;
     this._UserService.updateUser(UsuarioSeleccionado).subscribe(
       res => {
         this.getUserProjects();
-        
-        this.updateUser = "Rol del usuario actualizado correctamente";
-        this._eventService.displayMessage(this.updateUser);
-        setTimeout(()=>{this.updateUser = null},2000);
+
+        // this.MensajeNotificacion = "Rol del usuario actualizado correctamente";
+        // this._eventService.displayMessage(this.MensajeNotificacion,false);
+        // setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       },
       error => {
         //Si el servidor tiene algún tipo de problema mostraremos este error
@@ -341,18 +305,19 @@ export class UserManagementComponent implements OnInit {
         } else {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
+        this.MensajeNotificacion = "Ups, lo sentimos, no pudimos actualizar el rol del usuario";
+        this._eventService.displayMessage(this.MensajeNotificacion,true);
+        setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       });
-
   }
 
   private addUserProyect(usuarioProyecto) {
-
     this._UserService.addUserProject(usuarioProyecto).subscribe(
       res => {
-        this.getUserProjects();     
-        this.updateUser = "Proyecto asignado correctamente";
-        this._eventService.displayMessage(this.updateUser);
-        setTimeout(()=>{this.updateUser = null},2000);
+        this.getUserProjects();
+        // this.MensajeNotificacion = "Equipo asignado correctamente";
+        // this._eventService.displayMessage(this.MensajeNotificacion,false);
+        // setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       },
       error => {
         console.log(error);
@@ -366,18 +331,19 @@ export class UserManagementComponent implements OnInit {
         } else {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
+        this.MensajeNotificacion = "Ups , lo sentimos, no pudimos asignar el equipo";
+        this._eventService.displayMessage(this.MensajeNotificacion,true);
+        setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       });
-
   }
 
   private removeUserProyect(usuarioProyecto) {
-
     this._UserService.removeUserProject(usuarioProyecto).subscribe(
       res => {
-        this.getUserProjects();     
-        this.updateUser = "Proyecto eliminado correctamente";
-        this._eventService.displayMessage(this.updateUser);
-        setTimeout(()=>{this.updateUser = null},2000);
+        this.getUserProjects();
+        this.MensajeNotificacion = "Proyecto eliminado correctamente";
+        this._eventService.displayMessage(this.MensajeNotificacion,false);
+        setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       },
       error => {
         console.log("falla el borrar", error);
@@ -391,44 +357,37 @@ export class UserManagementComponent implements OnInit {
         } else {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
+        this.MensajeNotificacion = "Ups, lo sentimos, no pudimos eliminar el proyecto";
+        this._eventService.displayMessage(this.MensajeNotificacion,true);
+        setTimeout(() => { this.MensajeNotificacion = null }, 4000);
       });
-
   }
 
   showModal(content, role: Role) {
+    if (this.userCtrl.value.nombre == this.UsuarioLogueado && this.userCtrl.value.role.role == 'Administrador') {
+      if (role.id != 2) {
+        console.log("entra", this.userCtrl.value.role.role);
+        this.modalService.open(content).result.then(
+          (closeResult) => {
+          }, (dismissReason) => {
+            if (dismissReason == 'Cerrar') {
 
-    if (this.userCtrl.value.nombre == this.UsuarioLogueado && this.userCtrl.value.role.role == 'Administrador') 
-    {
-      if(role.id != 2){
-      console.log("entra",this.userCtrl.value.role.role);
-      this.modalService.open(content).result.then(
-        (closeResult) => {
-        }, (dismissReason) => {
-          if (dismissReason == 'Cerrar') {
-            
-          } else if (dismissReason == 'Aceptar') {          
-            this.seleccionDeRol(role);
-            this._router.navigate(['/login']);
-          } 
-        })
-      }  
-    } else {     
+            } else if (dismissReason == 'Aceptar') {
+              this.seleccionDeRol(role);
+              this._router.navigate(['/login']);
+            }
+          })
+      }
+    } else {
       this.seleccionDeRol(role);
     }
-    
-    
   }
 
   public seleccionDeRol(role: Role) {
-
     console.log("seleccion de rol", role.role)
     this.showProjects = false;
     this.userCtrl.value.role = role;
     this.UsuarioSeleccionado = this.userCtrl.value;
- 
     this.updateUserRol(this.UsuarioSeleccionado);
-
-
-  }
-
+  }  
 }

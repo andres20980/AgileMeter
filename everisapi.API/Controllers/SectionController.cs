@@ -191,15 +191,15 @@ namespace everisapi.API.Controllers
     }
 
 
-    [HttpGet("evaluacion/{id}/assessment/{assessmentId}")]
-    public IActionResult GetDatosEvaluacionFromEvalNew(int id,int assessmentId)
+    [HttpGet("evaluacion/{id}/assessment/{assessmentId}/{codigoIdioma}")]
+    public IActionResult GetDatosEvaluacionFromEvalNew(int id,int assessmentId, int codigoIdioma)
     {
 
       try
       {
         //Comprueba si existe la section y si existe manda un json con la información
         //si no existe mandara un error 404 el error 500 aparecera si el servidor falla
-        var SectionInfo = _sectionInfoRepository.GetSectionsInfoFromEvalNew(id,assessmentId);
+        var SectionInfo = _sectionInfoRepository.GetSectionsInfoFromEvalNew(id,assessmentId,codigoIdioma);
         if (SectionInfo == null)
         {
           _logger.LogInformation($"La section con id de evaluación" + id + " no pudo ser encontrado.");
@@ -217,8 +217,8 @@ namespace everisapi.API.Controllers
     }
 
     //Introduciendo el nombre del usuario recogemos todos sus roles
-    [HttpGet("{id}/asignaciones")]
-    public IActionResult GetAsignacionesFromSection(int id)
+    [HttpGet("{id}/asignaciones/{codigoIdioma}")]
+    public IActionResult GetAsignacionesFromSection(int id, int codigoIdioma)
     {
 
       try
@@ -233,12 +233,13 @@ namespace everisapi.API.Controllers
         }
 
         //Recogemos una lista de preguntas de la asignacion
-        var asignacionesDeSection = _sectionInfoRepository.GetAsignacionesFromSection(sectionExist);
+        var asignacionesDeSection = _sectionInfoRepository.GetAsignacionesFromSection(sectionExist,codigoIdioma);
 
         //Transformamos la lista anterior en una nueva con los datos que necesitamos
         //Ya que otros son relevantes
-        var AsignacionesResult = Mapper.Map<IEnumerable<AsignacionDto>>(asignacionesDeSection);
-        return Ok(AsignacionesResult);
+        // var AsignacionesResult = Mapper.Map<IEnumerable<AsignacionDto>>(asignacionesDeSection);        
+        //return Ok(AsignacionesResult);
+        return Ok(asignacionesDeSection);
 
       }
       catch (Exception ex)
@@ -254,7 +255,11 @@ namespace everisapi.API.Controllers
     {
 
       //Si los datos son validos los guardara
-      if (SectionAdd == null || _sectionInfoRepository.GetSection(SectionAdd.Id, false) != null)
+      if (SectionAdd == null) 
+      {
+        return BadRequest();
+      }
+      else if (_sectionInfoRepository.GetSection(SectionAdd.Id, false) != null)
       {
         return BadRequest();
       }
@@ -280,7 +285,11 @@ namespace everisapi.API.Controllers
     public IActionResult UpdateSection([FromBody] SectionWithoutAreaDto SectionUpdate)
     {
       //Si los datos son validos los guardara
-      if (SectionUpdate == null || _sectionInfoRepository.GetSection(SectionUpdate.Id, false) == null)
+      if (SectionUpdate == null)
+      {
+        return BadRequest();
+      }
+      else if (_sectionInfoRepository.GetSection(SectionUpdate.Id, false) == null)
       {
         return BadRequest();
       }
@@ -306,9 +315,13 @@ namespace everisapi.API.Controllers
     public IActionResult AddNotas([FromBody] SectionWithNotasDto SectionUpdate)
     {
       //Si los datos son validos
-      if (SectionUpdate == null || _sectionInfoRepository.GetSection(SectionUpdate.SectionId, false) == null)
+      if (SectionUpdate == null)
       {
         return BadRequest();
+      }
+      else if (_sectionInfoRepository.GetSection(SectionUpdate.SectionId, false) == null)
+      {
+          return BadRequest();
       }
 
       if (!ModelState.IsValid)
@@ -340,7 +353,11 @@ namespace everisapi.API.Controllers
     public IActionResult DeleteSection([FromBody] SectionWithoutAreaDto SectionDelete)
     {
       //Si los datos son validos los guardara
-      if (SectionDelete == null || _sectionInfoRepository.GetSection(SectionDelete.Id, false) == null)
+      if (SectionDelete == null)
+      {
+        return BadRequest();
+      }
+      else if (_sectionInfoRepository.GetSection(SectionDelete.Id, false) == null)
       {
         return BadRequest();
       }

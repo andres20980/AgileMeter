@@ -7,60 +7,60 @@ using System.Threading.Tasks;
 
 namespace everisapi.API.Services
 {
-  public interface IEvaluacionInfoRepository
-  {
-    //Devuelve todas las evaluaciones
-    IEnumerable<EvaluacionEntity> GetEvaluaciones();
+    public interface IEvaluacionInfoRepository
+    {
+        //Devuelve todas las evaluaciones
+        IEnumerable<EvaluacionEntity> GetEvaluaciones();
 
-    //Devuelve una evaluación
-    EvaluacionEntity GetEvaluacion(int IdEvaluacion, Boolean IncluirRespuestas);
+        //Devuelve una evaluación
+        EvaluacionEntity GetEvaluacion(int IdEvaluacion, Boolean IncluirRespuestas);
 
-    //Devuelve información detallada de una evaluacione
-    EvaluacionInfoDto GetEvaluationInfoFromIdEvaluation(int idEvaluacion);
+        //Devuelve información detallada de una evaluacione
+        EvaluacionInfoDto GetEvaluationInfoFromIdEvaluation(int idEvaluacion);
 
-    //Devuelve información detallada de las evaluaciones
-    List<EvaluacionInfoDto> GetEvaluationInfo(int IdProject);
+        //Devuelve información detallada de las evaluaciones
+        List<EvaluacionInfoDto> GetEvaluationInfo(int IdProject);
 
-    //Recoge una lista de evaluaciones con datos de información de muchas tablas filtrandola por paginado
-    List<EvaluacionInfoDto> GetEvaluationInfoAndPage(int IdProject, int pageNumber);
+        //Recoge una lista de evaluaciones con datos de información de muchas tablas filtrandola por paginado
+        List<EvaluacionInfoDto> GetEvaluationInfoAndPage(int IdProject, int pageNumber);
 
-    //Recoge una lista de evaluaciones con datos de información de muchas tablas filtrandola por paginado y los datos de una evaluación
-    List<EvaluacionInfoDto> GetEvaluationInfoAndPageFiltered(int IdProject, int pageNumber, EvaluacionInfoPaginationDto Evaluation);
+        //Recoge una lista de evaluaciones con datos de información de muchas tablas filtrandola por paginado y los datos de una evaluación
+        List<EvaluacionInfoDto> GetEvaluationInfoAndPageFiltered(int IdProject, int pageNumber, EvaluacionInfoPaginationDto Evaluation);
 
-    //Devuelve todas las evaluaciones de un proyecto
-    IEnumerable<EvaluacionEntity> GetEvaluacionesFromProject(int IdProject);
+        //Devuelve todas las evaluaciones de un proyecto
+        IEnumerable<EvaluacionEntity> GetEvaluacionesFromProject(int IdProject);
 
-    //Devuelve una evaluacion si existiera una evaluacion inacabada en la base de datos filtrado por id de projecto
-    EvaluacionEntity EvaluationIncompletaFromProject(int IdProject);
+        //Devuelve una evaluacion si existiera una evaluacion inacabada en la base de datos filtrado por id de projecto
+        EvaluacionEntity EvaluationIncompletaFromProject(int IdProject);
 
-    EvaluacionEntity EvaluationIncompletaFromProjectAndAssessment(int IdProject,int assessmentId);
+        EvaluacionEntity EvaluationIncompletaFromProjectAndAssessment(int IdProject, int assessmentId);
 
-    //Añadir una evaluación en un proyecto
-    void IncluirEvaluacion(EvaluacionEntity evaluacion);
+        //Añadir una evaluación en un proyecto
+        void IncluirEvaluacion(EvaluacionEntity evaluacion);
 
-    //Devuelve una lista de evaluaciones filtrada por una evaluacion de modelo y un paginado
-    List<EvaluacionInfoDto> GetEvaluationInfoAndPageFilteredAdmin(int pageNumber, EvaluacionInfoPaginationDto Evaluacion);
+        //Devuelve una lista de evaluaciones filtrada por una evaluacion de modelo y un paginado
+        List<EvaluacionInfoDto> GetEvaluationInfoAndPageFilteredAdmin(int pageNumber, EvaluacionInfoPaginationDto Evaluacion);
 
-    List<EvaluacionInfoWithSectionsDto> GetEvaluationsWithSectionsInfo(int IdProject, EvaluacionInfoPaginationDto Evaluacion);
+        List<EvaluacionInfoWithSectionsDto> GetEvaluationsWithSectionsInfo(int IdProject, EvaluacionInfoPaginationDto Evaluacion, int codigoIdioma);
 
-    List<EvaluacionInfoWithProgressDto> GetEvaluationsWithProgress(int IdProject, EvaluacionInfoPaginationDto Evaluacion);
+        List<EvaluacionInfoWithProgressDto> GetEvaluationsWithProgress(int IdProject, EvaluacionInfoPaginationDto Evaluacion);
 
-    //Devuelve un número entero de las evaluaciones por proyecto o todas las evaluaciones
-    int GetNumEval(int idProject);
+        //Devuelve un número entero de las evaluaciones por proyecto o todas las evaluaciones
+        int GetNumEval(int idProject);
 
-    //Guardar cambio de las entidades
-    bool SaveChanges();
+        //Guardar cambio de las entidades
+        bool SaveChanges();
 
-    //Modifica una evaluación concreta de un proyecto
-    bool ModificarEvaluacion(EvaluacionEntity evaluacion);
+        //Modifica una evaluación concreta de un proyecto
+        bool ModificarEvaluacion(EvaluacionEntity evaluacion);
 
-    //Elimina una evaluacion de la base de datos
-     bool EvaluationDelete(int evaluationId);
-  
-    //Metodo encargado de calcular el porcentaje respondido de la evaluacion
-    float CalculateEvaluationProgress(int idEvaluacion,  int idAssessment);
+        //Elimina una evaluacion de la base de datos
+        bool EvaluationDelete(int evaluationId);
 
-    //Metodo encargado generar un objeto SectionInfoDto a partir de una evaluationId
-    IEnumerable<SectionInfoDto> GetSectionsInfoFromEval(int idEvaluacion);
-  }
+        //Metodo encargado de calcular el porcentaje respondido de la evaluacion
+        float CalculateEvaluationProgress(int idEvaluacion, int idAssessment);
+
+        //Metodo encargado generar un objeto SectionInfoDto a partir de una evaluationId
+        IEnumerable<SectionInfoDto> GetSectionsInfoFromEval(int idEvaluacion);
+    }
 }

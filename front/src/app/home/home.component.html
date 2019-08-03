@@ -1,62 +1,75 @@
 <div class="corregir position-relative">
-  <div class="position-absolute error-msg" hidden>
+  <!--  CAPA PARA MOSTRAR LOS MENSAJES DE ERROR...
+     <div class="position-absolute error-msg" hidden>
     <div class="alert alert-danger" [ngClass]="{'fadeOut':!fadeInError, 'fadeIn':ErrorMessage?.length>0 && fadeInError}" id="danger">
       <strong>{{ErrorMessage}}</strong>
     </div>
-  </div>
+  </div> 
+-->
 
   <div *ngIf="MostrarInfo">
-  
+
     <div class="container">
       <app-breadcrumb></app-breadcrumb>
       <div class="row ng-card-box p-5 br-2 mat-elevation-z5 mx-0">
         <div class="col" id="proyectSelectorContainer">
           <div class="row">
             <div class="col">
-              <h3>Seleccione un equipo</h3>
+              <h3> {{ 'HOME.SELECT_TEAM' | translate }}</h3>
             </div>
           </div>
           <div class="row mt-3">
             <div class="col-4">
-              <mat-form-field class ="dropdown-material">
-              <mat-select [(value)]="ProyectoSeleccionado" placeholder="Seleccione un equipo"  (selectionChange)="SeleccionDeProyecto()">
-                <mat-option class="dropdown-content" *ngFor="let proyecto of ListaDeProyectos; let i = index" [value]="proyecto">{{proyecto.nombre}}</mat-option>
-              </mat-select>
-            </mat-form-field>
-        </div>
+              <mat-form-field class="dropdown-material">
+                <mat-select [(value)]="ProyectoSeleccionado" placeholder="{{ 'HOME.SELECT_TEAM' | translate }}"
+                  (selectionChange)="SeleccionDeProyecto()">
+                  <mat-option class="dropdown-content" *ngFor="let proyecto of ListaDeProyectos; let i = index"
+                    [value]="proyecto">
+                    <div *ngIf="!proyecto.testProject">{{proyecto.proyecto}} - {{proyecto.nombre}}</div>
+                    <div *ngIf="proyecto.testProject">{{proyecto.nombre}}</div>
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
             <div class="col-4">
-              <div class="main-button border-curve bajarmedia eval-ant mat-elevation-z5 w-85 m-auto" [class.card-disabled]="ProyectoSeleccionado == null || ProyectoSeleccionado.numFinishedEvals == 0"
+              <div class="main-button border-curve bajarmedia eval-ant mat-elevation-z5 w-85 m-auto"
+                [class.card-disabled]="ProyectoSeleccionado == null || ProyectoSeleccionado.numFinishedEvals == 0"
                 (click)="EvaluacionesAnteriores()">
-                <a>EVALUACIONES FINALIZADAS</a>
+                <a>{{ 'HOME.FINISHED_ASSESSMENTS' | translate }}</a>
               </div>
             </div>
             <div class="col-4">
-              <div class="secondary-button border-curve bajarmedia eval-ant mat-elevation-z5 w-85 m-auto" [class.card-disabled]="ProyectoSeleccionado == null || ProyectoSeleccionado.numPendingEvals == 0"
+              <div class="secondary-button border-curve bajarmedia eval-ant mat-elevation-z5 w-85 m-auto"
+                [class.card-disabled]="ProyectoSeleccionado == null || ProyectoSeleccionado.numPendingEvals == 0"
                 (click)="EvaluacionesPendientes()">
-                <a>EVALUACIONES PENDIENTES</a>
+                <a>{{ 'HOME.PENDING_ASSESSMENTS' | translate }}</a>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="row ng-card-box p-5 br-2 mt-4 mat-elevation-z5 mx-0" [class.card-disabled]="!this.ProyectoSeleccionado">
+      <div class="row ng-card-box p-5 br-2 mt-4 mat-elevation-z5 mx-0"
+        [class.card-disabled]="!this.ProyectoSeleccionado">
         <div class="col" id="assessmentSelectorContainer">
           <div class="row">
             <div class="col">
-              <h3>Seleccione un tipo de evaluación</h3>
+              <h3>{{ 'HOME.SELECT_ASSESSMENT' | translate }}</h3>
             </div>
           </div>
           <div class="row mt-3">
             <div class="col-4">
-                <mat-form-field class ="dropdown-material">
-                    <mat-select  [(value)]="AssessmentSelected" placeholder="Seleccione una evaluación"  (selectionChange)="SeleccionDeAssessment()">
-                      <mat-option *ngFor="let assessment of AllAssessments; let i = index" [value]="assessment">{{assessment.assessmentName}}</mat-option>
-                    </mat-select>
-                  </mat-form-field>
+              <mat-form-field class="dropdown-material">
+                <mat-select [(value)]="AssessmentSelected" placeholder="{{ 'HOME.SELECT_ASSESSMENT' | translate }}"
+                  (selectionChange)="SeleccionDeAssessment()">
+                  <mat-option *ngFor="let assessment of AllAssessments; let i = index" [value]="assessment">
+                    {{assessment.assessmentName}}</mat-option>
+                </mat-select>
+              </mat-form-field>
             </div>
             <div class="col-4">
-              <div class="main-button border-curve mat-elevation-z5 new-eval w-85 m-auto" [class.card-disabled]="!this.AssessmentSelected" (click)="showModal(content)">
-                <a>NUEVA EVALUACI&Oacute;N</a>
+              <div class="main-button border-curve mat-elevation-z5 new-eval w-85 m-auto"
+                [class.card-disabled]="!this.AssessmentSelected" (click)="showModal(content)">
+                <a>{{ 'HOME.NEW_ASSESSMENT' | translate }}</a>
               </div>
             </div>
 
@@ -76,21 +89,23 @@
   <ng-template #content let-cl="close" let-di="dismiss">
     <div class="modal-content">
       <div class="modal-header custom-modal-header">
-        <h5 class="modal-title">Importante</h5> 
+        <h5 class="modal-title">{{ 'HOME.MODAL_HEADER' | translate }}</h5>
         <!-- <button type="button" class="close" (click)="cl('Cerrar')">
           <span aria-hidden="true">×</span>
         </button> -->
       </div>
       <div class="modal-body">
-        <p>Este equipo tiene evaluaciones pendientes, ¿Qué desea hacer?</p>
+        <p>{{ 'HOME.MODAL_BODY' | translate }}</p>
       </div>
       <div class="container-fluid p-3 bt-1">
         <div class="row p-0">
           <div class="col">
-              <button type="button" class="main-button mat-elevation-z4 w-100 modal-btns border-curve" (click)="di('Nueva')">Nueva evaluación</button>
+            <button type="button" class="main-button mat-elevation-z4 w-100 modal-btns border-curve"
+              (click)="di('Nueva')">{{ 'HOME.NEW_ASSESSMENT_MODAL' | translate }}</button>
           </div>
           <div class="col">
-              <button type="button" class="secondary-button mat-elevation-z4 w-100 modal-btns border-curve" (click)="di('EvaluacionesPendientes')">Ver evaluaciones pendientes</button>
+            <button type="button" class="secondary-button mat-elevation-z4 w-100 modal-btns border-curve"
+              (click)="di('EvaluacionesPendientes')">{{ 'HOME.PENDING_ASSESSMENTS_MODAL' | translate }}</button>
           </div>
         </div>
       </div>

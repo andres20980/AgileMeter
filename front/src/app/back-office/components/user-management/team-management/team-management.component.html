@@ -1,0 +1,69 @@
+<div class="col-12 ng-card-box p-5 br-2 mat-elevation-z5 mb-4">
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <h3>{{ 'TEAM_MANAGEMENT.TEAM_ASSIGN' | translate }}</h3>
+    </div>
+
+    <!--
+
+      <div *ngIf="!ListaDeEvaluacionesPaginada" class="loading mt-5">
+        <app-loading></app-loading>
+    </div>
+
+    <div id="sortedtable" *ngIf="MostrarTabla && ListaDeEvaluacionesPaginada">
+      <sorted-table *ngIf="ListaDeEvaluacionesPaginada && ListaDeEvaluacionesPaginada.length > 0" [dataInput]="ListaDeEvaluacionesPaginada">
+        loading
+      </sorted-table>
+      
+    </div>
+
+-->
+
+    <div class="col-12 d-flex ml-4 p-3" *ngIf="user.role.id ===  roles.Administrador || user.role.id ===  roles.Evaluador">
+      <span class="text-danger"><strong>*</strong>{{ 'TEAM_MANAGEMENT.NO_USER_MESSAGE' | translate }}</span>
+    </div>
+    <div class="col-12 d-flex ml-4 p-3">
+      <div class="col-6">
+        <h4>{{ 'TEAM_MANAGEMENT.USER_TEAMS' | translate }} <strong *ngIf="user">{{user.nombre}}</strong></h4>
+        <div class="loading mt-5" *ngIf="!MostrarPending || !MostrarAsig">
+          <app-loading></app-loading>
+        </div>
+        <div id="proyectosAsig" cdkDropList [cdkDropListData]="proyectosAsig" cdkDropListConnectedTo="proyectosPending"
+          class="cdkDrop-list overflow-auto mat-elevation-z3" [ngClass]="{'div-scroll ': proyectosAsig.length > 5}"
+          (cdkDropListDropped)="drop($event)" *ngIf="MostrarPending && MostrarAsig">
+          <div class="cdkDrag-box" *ngFor="let proyecto of proyectosAsig" cdkDrag [cdkDragData]="proyecto"
+            [ngClass]="{'default': user.role.id ===  roles.Administrador || user.role.id ===  roles.Evaluador}"
+            [cdkDragDisabled]="user.role.id ===  roles.Administrador || user.role.id ===  roles.Evaluador">
+            <div class="cdkDrag-custom-placeholder" *cdkDragPlaceholder></div>
+            {{proyecto.proyecto + "-" + proyecto.nombre}}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <h4>{{ 'TEAM_MANAGEMENT.TEAMS' | translate }}</h4>
+        <div id="proyectosPending" cdkDropList [cdkDropListData]="proyectosPending"
+          cdkDropListConnectedTo="proyectosAsig" class="cdkDrop-list overflow-auto mat-elevation-z3"
+          [ngClass]="{'div-scroll': proyectosPending.length > 5}" (cdkDropListDropped)="drop($event)"
+          *ngIf="MostrarPending && MostrarAsig">
+          <div class="cdkDrag-box" *ngFor="let proyecto of proyectosPending" cdkDrag [cdkDragData]="proyecto">
+            <div class="cdkDrag-custom-placeholder" *cdkDragPlaceholder></div>
+            {{proyecto.proyecto + "-" + proyecto.nombre}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--BUTTONS-->
+    <div class="row btns col-12 justify-content-center">
+      <div _ngcontent-blt-c4="" class="col-4">
+        <div _ngcontent-blt-c4="" class="secondary-button border-curve bajarmedia eval-ant mat-elevation-z5 w-85 m-auto"
+          (click)="volver()">
+          <a _ngcontent-blt-c4="">{{ 'TEAM_MANAGEMENT.BTN_BACK' | translate }}</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

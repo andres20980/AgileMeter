@@ -35,7 +35,7 @@ export class PendingEvaluationTableComponent implements OnInit {
   @Input() ListaDeEvaluacionesPaginada: any;//Array<EvaluacionInfo>;
   public ErrorMessage: string = null;
   dataSource: MatTableDataSource<EvaluacionInfoWithProgress>;
-  userRole: string;
+  userRole: number;
   evaluationProgress : number;
   selectedEvaluacionInfoWithProgress;
   public ListaDeDatos: Array<SectionInfo> = [];
@@ -52,7 +52,7 @@ export class PendingEvaluationTableComponent implements OnInit {
     private _router: Router,
     private _appComponent: AppComponent,
     private modalService: NgbModal,
-    private parent: PendingEvaluationComponent
+    private parent: PendingEvaluationComponent   
     ){
     }
 
@@ -170,7 +170,8 @@ export class PendingEvaluationTableComponent implements OnInit {
               this._appComponent.pushBreadcrumb(this._appComponent._storageDataService.Evaluacion.assessmentName, null);
               var pipe = new DatePipe('en-US');
               this._appComponent.pushBreadcrumb(pipe.transform(this._appComponent._storageDataService.Evaluacion.fecha, 'dd/MM/yyyy'), null);
-              this._appComponent.pushBreadcrumb("Secciones", "/evaluationsections");
+              //this._appComponent.pushBreadcrumb("Secciones", "/evaluationsections");
+              this._appComponent.pushBreadcrumb("BREADCRUMB.SECTIONS", "/evaluationsections");              
 
               this._router.navigate(['/evaluationquestions']); 
 

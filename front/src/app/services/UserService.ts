@@ -30,22 +30,24 @@ export class UserService {
 
   //Este metodo recoge todos los usuarios de la base de datos
   getUsers() {
+    var codigoIdioma = this._appComponent._storageDataService.codigoIdioma;
     let Token = this._appComponent.ComprobarUserYToken();
     let headers = new Headers({
       'Authorization': Token
     });
-    return this._http.get(this.url + 'users/AllUsers', { headers: headers }).pipe(
+    return this._http.get(this.url + 'users/AllUsers/'+codigoIdioma, { headers: headers }).pipe(
       map((response: Response) => response.json()),
       catchError(this.errorHandler));
   }
 
   //Este metodo recoge todos los roles de la base de datos
   getAllRoles() {
+    var codigoIdioma = this._appComponent._storageDataService.codigoIdioma;
     let Token = this._appComponent.ComprobarUserYToken();
     let headers = new Headers({
       'Authorization': Token
     });
-    return this._http.get(this.url + 'users/AllRoles', { headers: headers }).pipe(
+    return this._http.get(this.url + 'users/AllRoles/'+ codigoIdioma, { headers: headers }).pipe(
       map((response: Response) => response.json()),
       catchError(this.errorHandler));
   }
@@ -121,13 +123,4 @@ export class UserService {
       map(res => res),
       catchError(this.errorHandler));
   }
-  altaUsuario() {
-    this.user = null;
-    this._router.navigate[('backoffice/usermanagement/addUser')];
-  }
-  modificarUsuario(u: UserCreateUpdate) {
-    this.user = u;
-    this._router.navigateByUrl('backoffice/usermanagement/addUser');
-  }
-
 }

@@ -1,65 +1,83 @@
 <div class="ng-card-box p-2 pt-4 br-2 mat-elevation-z5">
-<div class="row">
+  <div class="row">
     <div class="col ml-5 mb-3 mt-4">
-    <h3>Gestión de Equipos</h3>
+      <h3>{{ 'TEAM_MANAGER.TEAM_MANAGEMENT' | translate }}</h3>
+    </div>
   </div>
-</div>
-<div class="row">
+  <div class="row">
     <div class="ml-5">
-    <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
-    </mat-form-field>
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)"
+          placeholder="{{ 'TEAM_MANAGER.LIST_FILTER' | translate }}">
+      </mat-form-field>
+    </div>
+    <div class="col-9">
+      <button class="transparenteAdd col-3 float-right pt-3" (click)="btnAddClick();">
+        <img class="add" src="assets/team_add.png" title="{{ 'TEAM_MANAGER.ICON_ADD_TEAM' | translate }}" />
+      </button>
+    </div>
   </div>
-  <div class="col-9">
-    <button class="transparenteAdd col-3 float-right pt-3" (click)="btnAddClick();">
-      <img class="add" src="assets/team_add.png" title="Alta Equipo" />
-    </button>
-  </div>
-</div>
 
-  <div class="team-table col-12">
+  <div class="team-table">
+    <div class="loading mt-5" *ngIf="!dataSource">
+      <app-loading></app-loading>
+    </div>
     <div>
       <mat-table [dataSource]="dataSource" multiTemplateDataRows matSort aria-label="Elements">
         <!-- oficina  -->
         <ng-container matColumnDef="oficina">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>Oficina</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'TEAM_MANAGER.TABLE_COL_OFICCE' | translate }}
+          </mat-header-cell>
           <mat-cell *matCellDef="let row">{{row.oficina}} </mat-cell>
         </ng-container>
 
         <!-- unidad  -->
         <ng-container matColumnDef="unidad">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>Unidad</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'TEAM_MANAGER.TABLE_COL_UNIT' | translate }}
+          </mat-header-cell>
           <mat-cell *matCellDef="let row">{{row.unidad}} </mat-cell>
         </ng-container>
 
+        <!-- codigo  -->
+        <ng-container matColumnDef="codigo">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'TEAM_MANAGER.TABLE_COL_CODE' | translate }}
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.codigo}} </mat-cell>
+          </ng-container>
+
         <!-- proyecto  -->
         <ng-container matColumnDef="linea">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>Proyecto</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'TEAM_MANAGER.TABLE_COL_PROJECT' | translate }}
+          </mat-header-cell>
           <!--<mat-cell *matCellDef="let row">{{row.linea}} </mat-cell>-->
           <mat-cell *matCellDef="let row">{{row.proyecto}} </mat-cell>
         </ng-container>
 
         <!-- equipo  -->
         <ng-container matColumnDef="nombre">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>Equipo</mat-header-cell>-->
+          <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'TEAM_MANAGER.TABLE_COL_TEAM' | translate }}
+          </mat-header-cell>
+          -->
           <mat-cell *matCellDef="let row">{{row.nombre}} </mat-cell>
         </ng-container>
 
         <!-- tamaño  -->
         <ng-container matColumnDef="projectSize">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>Tamaño</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'TEAM_MANAGER.TABLE_COL_SIZE' | translate }}
+          </mat-header-cell>
           <mat-cell *matCellDef="let row">{{row.projectSize}} </mat-cell>
         </ng-container>
 
         <!-- Acciones  -->
         <ng-container matColumnDef="acciones">
-          <mat-header-cell *matHeaderCellDef mat-sort-header>Acciones</mat-header-cell>
+          <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'TEAM_MANAGER.TABLE_COL_ACTIONS' | translate }}
+          </mat-header-cell>
           <mat-cell *matCellDef="let row">
             <button class="transparente" (click)="modificarEquipo(row)">
-              <img class="informe" src="assets/edit.png" title="Modificar equipo" />
+              <img class="edit" src="assets/edit.png" title="{{ 'TEAM_MANAGER.ICON_MODIFY_TEAM' | translate }}" />
             </button>
             <button class="transparente" (click)="AbrirModal(content, row)">
-              <img class="informe" src="assets/delete.png" title="Eliminar equipo" />
+              <img class="informe" src="assets/delete.png" title="{{ 'TEAM_MANAGER.ICON_REMOVE_TEAM' | translate }}" />
             </button>
           </mat-cell>
         </ng-container>
@@ -75,26 +93,27 @@
 </div>
 <br>
 
-  <ng-template #content let-cl="close" let-di="dismiss">
-    <div class="modal-content border-0">
-      <div class="modal-header custom-modal-header border-curve">
-        <h5 class="modal-title">Importante</h5>
-      </div>
-      <div class="modal-body">
-        <p>El equipo {{selectedTeam.nombre}} se va a eliminar y por tanto sus {{selectedTeam.evaluaciones.length}}
-          evaluaciones se borrarán. ¿Desea continuar?</p>
-      </div>
-      <div class="container-fluid p-3 bt-1">
-        <div class="row p-0">
-          <div class="col">
-            <button type="button" class="main-button mat-elevation-z4 w-100 modal-btns border-curve"
-              (click)="di('Finish');">Aceptar</button>
-          </div>
-          <div class="col">
-            <button type="button" class="secondary-button mat-elevation-z4 w-100 modal-btns border-curve"
-              (click)="cl('Cerrar')">Cancelar</button>
-          </div>
+<ng-template #content let-cl="close" let-di="dismiss">
+  <div class="modal-content border-0">
+    <div class="modal-header custom-modal-header border-curve">
+      <h5 class="modal-title">{{ 'TEAM_MANAGER.MODAL_HEADER' | translate }}</h5>
+    </div>
+    <div class="modal-body">
+      <p>{{'TEAM_MANAGER.MODAL_BODY1' | translate }} {{selectedTeam.nombre}}
+        {{ 'TEAM_MANAGER.MODAL_BODY2' | translate }} {{selectedTeam.evaluaciones.length}}
+        {{'TEAM_MANAGER.MODAL_BODY3' | translate }}</p>
+    </div>
+    <div class="container-fluid p-3 bt-1">
+      <div class="row p-0">
+        <div class="col">
+          <button type="button" class="main-button mat-elevation-z4 w-100 modal-btns border-curve"
+            (click)="di('Finish');">{{ 'TEAM_MANAGER.MODAL_BTN_ACEPT' | translate }}</button>
+        </div>
+        <div class="col">
+          <button type="button" class="secondary-button mat-elevation-z4 w-100 modal-btns border-curve"
+            (click)="cl('Cerrar')">{{ 'TEAM_MANAGER.MODAL_BTN_CANCEL' | translate }}</button>
         </div>
       </div>
     </div>
-  </ng-template>
+  </div>
+</ng-template>

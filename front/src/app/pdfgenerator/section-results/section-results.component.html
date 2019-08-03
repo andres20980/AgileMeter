@@ -1,95 +1,101 @@
 <!--Secciones-->
-<mat-accordion> 
-  <mat-expansion-panel class="section-expansion-table" *ngFor="let sectionConAsignacionesDto of lSectionConAsignacionesDto;">
+<mat-accordion>
+  <mat-expansion-panel class="section-expansion-table"
+    *ngFor="let sectionConAsignacionesDto of lSectionConAsignacionesDto;">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        {{sectionConAsignacionesDto.nombre}}
+        <div class="col-11">{{sectionConAsignacionesDto.nombre}}</div>
+        <div class="col-1">
+          <div *ngIf="sectionConAsignacionesDto.numNotas > 0" class="right-comment">
+            <img class="" src="assets/comment_empty.png" title="Notas" />
+            <p>{{sectionConAsignacionesDto.numNotas}}</p>
+          </div>
+        </div>
       </mat-panel-title>
     </mat-expansion-panel-header>
-    
+
     <!-- Notas de la sección -->
-    <mat-form-field [floatLabel]="never" class="comments-form-field" >
-     <p><b>Notas</b></p>
-      <textarea matInput 
-        cdkTextareaAutosize
-        #autosize="cdkTextareaAutosize"
-        cdkAutosizeMinRows="2"
-        cdkAutosizeMaxRows="6"
-        [ngModel]="DisplayNotes(sectionConAsignacionesDto.notas)"
-        [readonly]="true">
+    <mat-form-field [floatLabel]="never" class="comments-form-field">
+      <p><b>{{ 'SECTION_RESULTS.SECTION_NOTES' | translate }}</b></p>
+      <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"
+        cdkAutosizeMaxRows="6" [ngModel]="DisplayNotes(sectionConAsignacionesDto.notas)" [readonly]="true">
       </textarea>
     </mat-form-field>
-    
+
     <!--Lista de Modulos---------------------------->
-    <mat-accordion> 
-      <ng-template matExpansionPanelContent>            
-        <mat-expansion-panel class="section-expansion-table mat-elevation-z0" *ngFor="let asignacionConPreguntaNivelDto of sectionConAsignacionesDto.asignaciones;">
+    <mat-accordion>
+      <ng-template matExpansionPanelContent>
+        <mat-expansion-panel class="section-expansion-table mat-elevation-z0"
+          *ngFor="let asignacionConPreguntaNivelDto of sectionConAsignacionesDto.asignaciones;">
           <mat-expansion-panel-header>
             <mat-panel-title>
-              {{asignacionConPreguntaNivelDto.nombre}}
+              <div class="col-11">{{asignacionConPreguntaNivelDto.nombre}}</div>
+              <div class="col-1">
+                <div *ngIf="asignacionConPreguntaNivelDto.numNotas > 0" class="right-comment">
+                  <img class="" src="assets/comment_empty.png" title="Notas" />
+                  <p>{{asignacionConPreguntaNivelDto.numNotas}}</p>
+                </div>
+              </div>
             </mat-panel-title>
           </mat-expansion-panel-header>
 
           <!--Notas del modulo-->
           <mat-form-field [floatLabel]="never" class="comments-form-field">
-           <p><b>Notas</b></p>
-            <textarea matInput 
-              cdkTextareaAutosize
-              #autosize="cdkTextareaAutosize"
-              cdkAutosizeMinRows="2"
-              cdkAutosizeMaxRows="6"
-              [ngModel]="'' + DisplayNotes(asignacionConPreguntaNivelDto.notas)"
+            <p><b>{{ 'SECTION_RESULTS.MODULE_NOTES' | translate }}</b></p>
+            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"
+              cdkAutosizeMaxRows="6" [ngModel]="'' + DisplayNotes(asignacionConPreguntaNivelDto.notas)"
               [readonly]="true"></textarea>
           </mat-form-field>
-          
+
           <!--Tabla de preguntas----------------------------------->
           <ng-template matExpansionPanelContent>
             <div class="table-row">
               <div>
-                <table mat-table [dataSource]="asignacionConPreguntaNivelDto.preguntas" multiTemplateDataRows matSort aria-label="Elements">
+                <table mat-table [dataSource]="asignacionConPreguntaNivelDto.preguntas" multiTemplateDataRows matSort
+                  aria-label="Elements">
                   <!-- Pregunta  -->
                   <ng-container matColumnDef="pregunta">
-                    <th mat-header-cell *matHeaderCellDef>Pregunta</th>
+                    <th mat-header-cell *matHeaderCellDef>{{ 'SECTION_RESULTS.QUESTION' | translate }}</th>
                     <td mat-cell *matCellDef="let row">{{row.pregunta}}</td>
                   </ng-container>
-                  
+
                   <!-- Respuesta -->
                   <ng-container matColumnDef="estado">
-                    <th mat-header-cell *matHeaderCellDef>Respuesta</th>
+                    <th mat-header-cell *matHeaderCellDef>{{ 'SECTION_RESULTS.ANSWER' | translate }}</th>
                     <td mat-cell *matCellDef="let row">
                       {{displayRespuesta(row)}}
-                      <img class="answerIcon" *ngIf="checkRespuestaCorrecta(row) == 'respuesta-correcta'" src="assets/correct.png" title= "Correcta" />
-                      <img class="answerIcon" *ngIf="checkRespuestaCorrecta(row) == 'respuesta-incorrecta'" src="assets/incorrect.png" title="Incorrecta" />
-                      <img class="answerIcon" *ngIf="checkRespuestaCorrecta(row) == 'respuesta-no-contestada'" src="assets/incompleted.png" title="No contestada" />
+                      <img class="answerIcon" *ngIf="checkRespuestaCorrecta(row) == 'respuesta-correcta'"
+                        src="assets/correct.png" title="{{ 'SECTION_RESULTS.ICONS_CORRECT' | translate }}" />
+                      <img class="answerIcon" *ngIf="checkRespuestaCorrecta(row) == 'respuesta-incorrecta'"
+                        src="assets/incorrect.png" title="{{ 'SECTION_RESULTS.ICONS_INCORRECT' | translate }}" />
+                      <img class="answerIcon" *ngIf="checkRespuestaCorrecta(row) == 'respuesta-no-contestada'"
+                        src="assets/incompleted.png" title="{{ 'SECTION_RESULTS.ICONS_NOT_ANSWERED' | translate }}" />
                     </td>
                   </ng-container>
-                  
+
                   <!--Notas de la pregunta-->
                   <ng-container matColumnDef="notas">
-                    <th mat-header-cell *matHeaderCellDef>Notas</th>
+                    <th mat-header-cell *matHeaderCellDef>{{ 'SECTION_RESULTS.QUESTION_NOTES' | translate }}</th>
                     <td mat-cell *matCellDef="let row">
-                        <div class="example-element-detail" >
-                        
-                          <div class="question-note">
-                            <mat-form-field [floatLabel]="never" class="comments-form-field">
-                              <textarea matInput 
-                                cdkTextareaAutosize
-                                #autosize="cdkTextareaAutosize"
-                                cdkAutosizeMinRows="2"
-                                cdkAutosizeMaxRows="6"        
-                                [ngModel]="DisplayQuestionNote(row.notas)"
-                                [readonly] = "true"> 
+                      <div class="example-element-detail">
+
+                        <div class="question-note">
+                          <mat-form-field [floatLabel]="never" class="comments-form-field">
+                            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                              cdkAutosizeMinRows="2" cdkAutosizeMaxRows="6" [ngModel]="DisplayQuestionNote(row.notas)"
+                              [readonly]="true">
                               </textarea>
-                            </mat-form-field>
-                          </div>
+                          </mat-form-field>
                         </div>
+                      </div>
                     </td>
-                    
-                  </ng-container>                      
-                  
+
+                  </ng-container>
+
                   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                   <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row"
-                    [class.example-expanded-row]="expandedElement === element" (click)="expandedElement = (expandedElement == element ? null : element)">
+                    [class.example-expanded-row]="expandedElement === element"
+                    (click)="expandedElement = (expandedElement == element ? null : element)">
                   </tr>
                 </table>
               </div>

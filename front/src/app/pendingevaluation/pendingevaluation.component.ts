@@ -24,6 +24,7 @@ import { SectionsLevel } from 'app/pdfgenerator/pdfgenerator.component';
 import { Assessment } from 'app/Models/Assessment';
 import { EvaluacionInfoWithProgress } from 'app/Models/EvaluacionInfoWithProgress';
 import { EvaluacionInfoWithSections } from 'app/Models/EvaluacionInfoWithSections';
+import {TranslateService} from '@ngx-translate/core';
 
 export interface ComplianceLevels {
 
@@ -55,7 +56,7 @@ export class PendingEvaluationComponent implements OnInit {
   public ListaDeEvaluacionesPaginada: Array<EvaluacionInfoWithProgress>;
   public nEvaluaciones: number = 0;
   public UserName: string = "";
-  public Project: Proyecto = { 'id': null, 'nombre': '', 'fecha': null, numFinishedEvals:0, numPendingEvals: 0};
+  public Project: Proyecto = { 'id': null, 'nombre': '',codigo: null, 'fecha': null, numFinishedEvals:0, numPendingEvals: 0};
   public Mostrar = false;
   public ErrorMessage: string = null;
   public NumEspera = 750;
@@ -100,7 +101,8 @@ export class PendingEvaluationComponent implements OnInit {
     private _proyectoService: ProyectoService,
     private _sectionService: SectionService,
     private modalService: NgbModal,
-    private http: Http
+    private http: Http,
+    private _translateService : TranslateService
   ) { }
 
   ngOnInit() {
@@ -121,7 +123,7 @@ export class PendingEvaluationComponent implements OnInit {
         for (let num = 0; num < this.permisosDeUsuario.length; num++) {
           if (this.permisosDeUsuario[num].role == "Administrador") {
             if (this.Project == null || this.Project == undefined || this.Project.id == -1) {
-              this.Project = { id: 0, nombre: '', fecha: null, numFinishedEvals:0, numPendingEvals: 0};
+              this.Project = { id: 0, nombre: '',codigo: null, fecha: null, numFinishedEvals:0, numPendingEvals: 0};
               this.Admin = true;
             }
           }
@@ -156,7 +158,8 @@ export class PendingEvaluationComponent implements OnInit {
         //this.Restablecer();
       });
 
-      this._appComponent.pushBreadcrumb("Evaluaciones pendientes", "/pendingevaluations");
+      //this._appComponent.pushBreadcrumb("Evaluaciones pendientes", "/pendingevaluations");
+      this._appComponent.pushBreadcrumb("BREADCRUMB.PENDING_ASSESSMENTS", "/pendingevaluations");
       this._appComponent.pushBreadcrumb(this._appComponent._storageDataService.UserProjectSelected.nombre, null);
 
     if (this.Project.fecha != null) {

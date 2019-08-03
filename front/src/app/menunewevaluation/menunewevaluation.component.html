@@ -1,5 +1,6 @@
-<div class="corregir position-relative">
-  <div class="position-absolute error-msg">
+<div class="d-flex justify-content-center notificacion">
+  <!-- Mensajes de error y añadir notas
+    <div class="position-fixed text-center notificacion">
     <div *ngIf="(ErrorMessage != null || ErrorMessage != undefined )" class="alert alert-danger" id="danger">
       <strong>{{ErrorMessage}}</strong>
     </div>
@@ -7,10 +8,10 @@
       {{anadeNota}}
     </div>
 
-    <!-- <div *ngIf="cargar">
+    <! -- <div *ngIf="cargar">
       <app-loading></app-loading>
-    </div> -->
-  </div>
+    </div> -- >
+  </div> -->
 
   <div class="container">
       <app-breadcrumb></app-breadcrumb>
@@ -23,7 +24,7 @@
 
     <div class="row">
       <div class="col">
-        <h3>Secciones de evaluación</h3>
+        <h3>{{ 'MENU_EVALUATION.ASSESSMENT_SECTIONS' | translate }}</h3>
       </div>
     </div>
 
@@ -36,9 +37,9 @@
       </div>
 
       <div class="col-xs-6 col-sm-1 col-md-1" id="barraespacio" *ngIf="ScreenWidth >= 576">
-        <img class="icon" *ngIf="dato.progreso!=100 && dato.progreso > 0" src="assets/green_no.png" title="No completado"
+        <img class="icon" *ngIf="dato.progreso!=100 && dato.progreso > 0" src="assets/green_no.png" title="{{ 'MENU_EVALUATION.DONT_COMPLETED' | translate }}"
           alt="No completado">
-        <img class="icon" *ngIf="dato.progreso==100" src="assets/green_si.png" alt="Completado" title="Completado">
+        <img class="icon" *ngIf="dato.progreso==100" src="assets/green_si.png" alt="Completado" title="{{ 'MENU_EVALUATION.COMPLETED' | translate }}">
       </div>
 
       <div class="col-4 btn-container">
@@ -62,14 +63,14 @@
           <span class="progress-text">{{dato.progreso}}%</span>
         </ngb-progressbar>
 
-        <p class="mt-1 font-italic">Respondidas {{dato.contestadas}} de {{dato.preguntas}} </p>
+        <p class="mt-1 font-italic"> {{ 'MENU_EVALUATION.ANSWERED' | translate }} {{dato.contestadas}} {{ 'MENU_EVALUATION.OF' | translate }} {{dato.preguntas}} </p>
       </div>
 
 
       <div class="col-1">
         <button class="transparente" (click)="AbrirModalNotas(notas, i)">
-          <img class="comment" *ngIf="dato.notas != null" src="assets/comment filled.png" title="Hay notas" />
-          <img class="comment" *ngIf="dato.notas == null" src="assets/comment empty.png" title="No hay notas" />
+          <img class="comment" *ngIf="dato.notas != null" src="assets/comment_filled.png" title="{{ 'MENU_EVALUATION.ICONS_NOTES_FILLED' | translate }}" />
+          <img class="comment" *ngIf="dato.notas == null" src="assets/comment_empty.png" title="{{ 'MENU_EVALUATION.ICONS_NOTES_EMPTY' | translate }}" />
         </button>
       </div>
 
@@ -91,13 +92,13 @@
   <ng-template #notas let-cl="close" let-di="dismiss">
     <div class="modal-content mat-elevation-z8 border-0">
       <div class="modal-header custom-modal-header">
-        <h5 class="modal-title">Notas de la Sección</h5> 
+        <h5 class="modal-title">{{ 'MENU_EVALUATION.MODAL_TITLE' | translate }}</h5> 
         <!-- <button type="button" class="close" (click)="cl('Cerrar')">
           <span aria-hidden="true">×</span>
         </button> -->
       </div>
       <div class="modal-body">
-        <textarea class="form-control custom-text-area" maxlength="4000" placeholder="Inserte aquí el texto" rows="10" [(ngModel)]="textoModal"></textarea>
+        <textarea class="form-control custom-text-area" maxlength="4000" placeholder="{{ 'MENU_EVALUATION.MODAL_PLACEHOLDER' | translate }}" rows="10" [(ngModel)]="textoModal"></textarea>
         <p id="numletras" class="mr-2 mt-2 mb-0">{{textoModal.length}}/4000</p>
 
       </div>
@@ -108,10 +109,10 @@
         </div> -->
         <div class="row p-0">
           <div class="col">
-            <button type="button" class="main-button w-100 modal-btns border-curve" (click)="di('Guardar')">Guardar</button>
+            <button type="button" class="main-button w-100 modal-btns border-curve" (click)="di('Guardar')">{{ 'MENU_EVALUATION.MODAL_BTN_SAVE' | translate }}</button>
           </div>
           <div class="col">
-            <button type="button" class="secondary-button w-100 modal-btns border-curve" (click)="cl('Cerrar')">Cancelar</button>
+            <button type="button" class="secondary-button w-100 modal-btns border-curve" (click)="cl('Cerrar')">{{ 'MENU_EVALUATION.MODAL_BTN_CANCEL' | translate }}</button>
           </div>
           
         </div>

@@ -54,7 +54,7 @@ export class ProyectoService {
     let headers = new Headers({
       'Authorization': Token
     });
-    return this._http.get(this.url + 'users/' + userNombre + "/fullproyectos", { headers: headers }).pipe(
+    return this._http.get(this.url + 'proyectos/' + userNombre + "/fullproyectos", { headers: headers }).pipe(
       map((response: Response) => response.json()),
       catchError(this.errorHandler));
   }
@@ -64,7 +64,7 @@ export class ProyectoService {
     let headers = new Headers({
       'Authorization': Token
     });
-    return this._http.get(this.url + 'users/allassessments', { headers: headers }).pipe(
+    return this._http.get(this.url + 'proyectos/allassessments', { headers: headers }).pipe(
       map((response: Response) => response.json()),
       catchError(this.errorHandler));
   }
@@ -75,7 +75,7 @@ export class ProyectoService {
     let headers = new Headers({
       'Authorization': Token
     });
-    return this._http.get(this.url + 'users/' + this.UsuarioLogeado + '/proyectos', { headers: headers }).pipe(
+    return this._http.get(this.url + 'proyectos/' + this.UsuarioLogeado + '/proyectos', { headers: headers }).pipe(
       map((response: Response) => response.json()),
       catchError(this.errorHandler));
   }
@@ -85,7 +85,7 @@ export class ProyectoService {
     let headers = new Headers({
       'Authorization': Token
     });
-    return this._http.get(this.url + 'users/' + user.nombre + "/proyectos", { headers: headers }).pipe(
+    return this._http.get(this.url + 'proyectos/' + user.nombre + "/proyectos", { headers: headers }).pipe(
       map((response: Response) => response.json()),
       catchError(this.errorHandler));
   }
@@ -107,7 +107,7 @@ export class ProyectoService {
     let headers = new Headers({
       'Authorization': Token
     });
-    return this._http.get(this.url + 'users/allnottestprojects', { headers: headers }).pipe(
+    return this._http.get(this.url + 'proyectos/allnottestprojects', { headers: headers }).pipe(
       map((response: Response) => response.json()),
       catchError(this.errorHandler));
   }
@@ -166,7 +166,7 @@ export class ProyectoService {
       'Content-Type': 'application/json',
       'Authorization': Token
     });
-    return this._http.post(this.url + 'users/proyectos/addTeam', params, { headers: headers }).pipe(
+    return this._http.post(this.url + 'proyectos/proyectos/addTeam', params, { headers: headers }).pipe(
       map(res => res));
   }
 
@@ -178,7 +178,7 @@ export class ProyectoService {
       'Content-Type': 'application/json',
       'Authorization': Token
     });
-    return this._http.post(this.url + 'users/proyectos/delete', params, { headers: headers }).pipe(
+    return this._http.post(this.url + 'proyectos/proyectos/delete', params, { headers: headers }).pipe(
       map(res => res),
       catchError(this.errorHandler));
   }
@@ -188,7 +188,7 @@ export class ProyectoService {
     let headers = new Headers({
       'Authorization': Token
     });
-    return this._http.get(this.url + 'users/' + 'proyecto/' + idProyecto, { headers: headers }).pipe(
+    return this._http.get(this.url + 'proyectos/' + 'proyecto/' + idProyecto, { headers: headers }).pipe(
       map((response: Response) => response.json()),
       catchError(this.errorHandler));
   }
@@ -200,11 +200,7 @@ export class ProyectoService {
       'Content-Type': 'application/json',
       'Authorization': Token
     });
-    return this._http.put(this.url + 'users/proyectos/update', params, { headers: headers }).pipe(
+    return this._http.put(this.url + 'proyectos/proyectos/update', params, { headers: headers }).pipe(
       map(res => res));
-  }
-  modificarEquipo(row){
-    this.equipo = row;
-    this._router.navigate(['backoffice/addteam']);
-  }
+  }  
 }

@@ -12,6 +12,7 @@ import { EvaluacionCreate } from 'app/Models/EvaluacionCreate';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Assessment } from '../Models/Assessment';
 import { BreadcrumbComponent } from 'app/breadcrumb/breadcrumb.component';
+import { EnumRol } from 'app/Models/EnumRol';
 
 @Component({
   selector: 'app-home',
@@ -33,6 +34,7 @@ export class HomeComponent implements OnInit {
   public SendingInfo = false;
   public existeRepetida = false;
   public fadeInError = false;
+  public rol: EnumRol = new EnumRol();
 
   constructor(
     private _proyectoService: ProyectoService,
@@ -50,7 +52,7 @@ export class HomeComponent implements OnInit {
     //console.log(this._proyectoService.UserLongName);
 
     this._appComponent.popBreadcrumb(0);
-    this._appComponent.pushBreadcrumb("Home", "/home");
+    this._appComponent.pushBreadcrumb("BREADCRUMB.HOME", "/home");
     //console.log(this._breadcrumb.breadcrumbList);
 
     this.getUserRole();
@@ -59,7 +61,7 @@ export class HomeComponent implements OnInit {
     this.NombreDeUsuario = this._proyectoService.UsuarioLogeado;
 
     //Reiniciamos los proyectos seleccionados en el servicio
-    this._appComponent._storageDataService.UserProjectSelected = { id: -1, nombre: '', fecha: null, numFinishedEvals: 0, numPendingEvals: 0};
+    this._appComponent._storageDataService.UserProjectSelected = { id: -1, nombre: '', codigo: null, fecha: null, numFinishedEvals: 0, numPendingEvals: 0 };
 
     //Intentamos recoger los roles de los usuarios
     this._proyectoService.getRolesUsuario().subscribe(
@@ -91,10 +93,10 @@ export class HomeComponent implements OnInit {
         } else {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
-        setTimeout(()=>{
-          this.fadeInError=false;
-          setTimeout(()=>this.ErrorMessage="",900);
-        },2000);
+        setTimeout(() => {
+          this.fadeInError = false;
+          setTimeout(() => this.ErrorMessage = "", 900);
+        }, 2000);
       });
 
     //Para que no de error en modo development
@@ -107,7 +109,7 @@ export class HomeComponent implements OnInit {
 
   public GetAssessments(): any {
     this._proyectoService.getAllAssessments().subscribe(
-      res => {this.AllAssessments = res; }
+      res => { this.AllAssessments = res; }
     )
   }
 
@@ -134,10 +136,10 @@ export class HomeComponent implements OnInit {
           } else {
             this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
           }
-          setTimeout(()=>{
-            this.fadeInError=false;
-            setTimeout(()=>this.ErrorMessage="",900);
-          },2000);
+          setTimeout(() => {
+            this.fadeInError = false;
+            setTimeout(() => this.ErrorMessage = "", 900);
+          }, 2000);
         });
     } else {
       //Aqui entra si eres administrador dandote todos los proyectos
@@ -156,10 +158,10 @@ export class HomeComponent implements OnInit {
           } else {
             this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
           }
-          setTimeout(()=>{
-            this.fadeInError=false;
-            setTimeout(()=>this.ErrorMessage="",900);
-          },2000);
+          setTimeout(() => {
+            this.fadeInError = false;
+            setTimeout(() => this.ErrorMessage = "", 900);
+          }, 2000);
         });
     }
   }
@@ -176,14 +178,14 @@ export class HomeComponent implements OnInit {
       //Comprueba si ya termino de enviarse la información desde la api
       if (!this.SendingInfo) {
         this.SendingInfo = true;
-        this._evaluacionService.getIncompleteEvaluacionFromProjectAndAssessment(this.ProyectoSeleccionado.id,this.AssessmentSelected.assessmentId).subscribe(
+        this._evaluacionService.getIncompleteEvaluacionFromProjectAndAssessment(this.ProyectoSeleccionado.id, this.AssessmentSelected.assessmentId).subscribe(
           res => {
             //Lo guarda en el storage
             this._appComponent._storageDataService.Evaluacion = res;
             //Si hay un proyecto sin finalizar
             if (res != null) {
               this.existeRepetida = true;
-            } 
+            }
           },
           error => {
             //Habilitamos la pagina nuevamente
@@ -197,10 +199,10 @@ export class HomeComponent implements OnInit {
             } else {
               this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
             }
-            setTimeout(()=>{
-              this.fadeInError=false;
-              setTimeout(()=>this.ErrorMessage="",900);
-            },2000);
+            setTimeout(() => {
+              this.fadeInError = false;
+              setTimeout(() => this.ErrorMessage = "", 900);
+            }, 2000);
           },
           () => {
             this.SendingInfo = false;
@@ -212,10 +214,10 @@ export class HomeComponent implements OnInit {
 
   public SeleccionDeAssessment() {
     // console.log("assessment",index);
-    
+
     // this.AssessmentSelected = this.AllAssessments[index];
     // console.log(this.AssessmentSelected);
-    
+
     this._appComponent._storageDataService.AssessmentSelected = this.AssessmentSelected;
     this.existeRepetida = false;
 
@@ -225,7 +227,7 @@ export class HomeComponent implements OnInit {
       //Comprueba si ya termino de enviarse la información desde la api
       if (!this.SendingInfo) {
         this.SendingInfo = true;
-        this._evaluacionService.getIncompleteEvaluacionFromProjectAndAssessment(this.ProyectoSeleccionado.id,this.AssessmentSelected.assessmentId).subscribe(
+        this._evaluacionService.getIncompleteEvaluacionFromProjectAndAssessment(this.ProyectoSeleccionado.id, this.AssessmentSelected.assessmentId).subscribe(
           res => {
             //Lo guarda en el storage
             this._appComponent._storageDataService.Evaluacion = res;
@@ -233,7 +235,7 @@ export class HomeComponent implements OnInit {
             // console.log("XXXXX",res);
             if (res != null) {
               this.existeRepetida = true;
-            } 
+            }
           },
           error => {
             //Habilitamos la pagina nuevamente
@@ -247,10 +249,10 @@ export class HomeComponent implements OnInit {
             } else {
               this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
             }
-            setTimeout(()=>{
-              this.fadeInError=false;
-              setTimeout(()=>this.ErrorMessage="",900);
-            },2000);
+            setTimeout(() => {
+              this.fadeInError = false;
+              setTimeout(() => this.ErrorMessage = "", 900);
+            }, 2000);
           },
           () => {
             this.SendingInfo = false;
@@ -265,7 +267,7 @@ export class HomeComponent implements OnInit {
 
     var NuevaEvaluacion: EvaluacionCreate = { 'estado': false, 'proyectoid': this.ProyectoSeleccionado.id, 'userNombre': this._proyectoService.UsuarioLogeado, 'assessmentId': this.AssessmentSelected.assessmentId, 'assesmentName': this.AssessmentSelected.assessmentName };    // console.log("assessmeeeent", this.AssessmentSelected);
     // console.log(NuevaEvaluacion);
-    
+
     this._evaluacionService.addEvaluacion(NuevaEvaluacion).subscribe(
       res => {
         this._appComponent._storageDataService.Evaluacion = res;
@@ -274,7 +276,7 @@ export class HomeComponent implements OnInit {
 
         this._appComponent.pushBreadcrumb(this._appComponent._storageDataService.UserProjectSelected.nombre, null);
         this._appComponent.pushBreadcrumb(this._appComponent._storageDataService.Evaluacion.assessmentName, null);
-        this._appComponent.pushBreadcrumb("Nueva evaluación", null);
+        this._appComponent.pushBreadcrumb("BREADCRUMB.NEW_ASSESSMENT", null);
         this._router.navigate(['/evaluationsections']);
       },
       error => {
@@ -287,10 +289,10 @@ export class HomeComponent implements OnInit {
         } else {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
-        setTimeout(()=>{
-          this.fadeInError=false;
-          setTimeout(()=>this.ErrorMessage="",900);
-        },2000);
+        setTimeout(() => {
+          this.fadeInError = false;
+          setTimeout(() => this.ErrorMessage = "", 900);
+        }, 2000);
         this.SendingInfo = false;
       });
   }
@@ -301,10 +303,10 @@ export class HomeComponent implements OnInit {
       this._router.navigate(['/finishedevaluations']);
     } else {
       this.ErrorMessage = "Seleccione un proyecto para realizar esta acción.";
-      setTimeout(()=>{
-        this.fadeInError=false;
-        setTimeout(()=>this.ErrorMessage="",900);
-      },2000);
+      setTimeout(() => {
+        this.fadeInError = false;
+        setTimeout(() => this.ErrorMessage = "", 900);
+      }, 2000);
     }
   }
 
@@ -314,10 +316,10 @@ export class HomeComponent implements OnInit {
       this._router.navigate(['/pendingevaluations']);
     } else {
       this.ErrorMessage = "Seleccione un proyecto para realizar esta acción.";
-      setTimeout(()=>{
-        this.fadeInError=false;
-        setTimeout(()=>this.ErrorMessage="",900);
-      },2000);
+      setTimeout(() => {
+        this.fadeInError = false;
+        setTimeout(() => this.ErrorMessage = "", 900);
+      }, 2000);
     }
   }
 
@@ -346,52 +348,52 @@ export class HomeComponent implements OnInit {
         } else {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
-        setTimeout(()=>{
-          this.fadeInError=false;
-          setTimeout(()=>this.ErrorMessage="",900);
-        },2000);
+        setTimeout(() => {
+          this.fadeInError = false;
+          setTimeout(() => this.ErrorMessage = "", 900);
+        }, 2000);
         this.SendingInfo = false;
       });
   }
 
-  checkIfIsSet(x: any):boolean{
-    if(x != null && x != undefined) return true;
+  checkIfIsSet(x: any): boolean {
+    if (x != null && x != undefined) return true;
   }
 
   //Muestra un modal con lo que se debe hacer en cada caso
   showModal(content) {
-       
+
     //Comprueba que no esta vacia el proyecto elegido
     if (this.checkIfIsSet(this.ProyectoSeleccionado) && this.checkIfIsSet(this.AssessmentSelected)) {
       //Comprueba si ya termino de enviarse la información desde la api
       if (!this.SendingInfo) {
         if (this.existeRepetida) {
-                this.modalService.open(content).result.then(
-                  (closeResult) => {
-                  }, (dismissReason) => {
-                    //Si selecciona continuar cargara la valuación que no termino
-                    if (dismissReason == 'EvaluacionesPendientes') {
-                      this.EvaluacionesPendientes();
-                    } else if (dismissReason == 'Nueva') {
-                      //Crea una nueva evaluacion
-                      //this.FinishEvaluation(); //termina la evaluacion
-                      this.GuardarEvaluacion();
-                    } 
-                  })
-              } else {
-                //Si no encuentra ninguna repetida directamente te crea una nueva evaluación
+          this.modalService.open(content).result.then(
+            (closeResult) => {
+            }, (dismissReason) => {
+              //Si selecciona continuar cargara la valuación que no termino
+              if (dismissReason == 'EvaluacionesPendientes') {
+                this.EvaluacionesPendientes();
+              } else if (dismissReason == 'Nueva') {
+                //Crea una nueva evaluacion
+                //this.FinishEvaluation(); //termina la evaluacion
                 this.GuardarEvaluacion();
               }
-            }
+            })
+        } else {
+          //Si no encuentra ninguna repetida directamente te crea una nueva evaluación
+          this.GuardarEvaluacion();
+        }
+      }
     } else {
-      let item = this.checkIfIsSet(this.ProyectoSeleccionado) ? "una evaluación": "un proyecto";
+      let item = this.checkIfIsSet(this.ProyectoSeleccionado) ? "una evaluación" : "un proyecto";
       this.ErrorMessage = `Seleccione ${item} para realizar esta acción.`;
       this.fadeInError = true;
-      setTimeout(()=>{
-        this.fadeInError=false;
-        setTimeout(()=>this.ErrorMessage="",900);
-      },2000);
-      
+      setTimeout(() => {
+        this.fadeInError = false;
+        setTimeout(() => this.ErrorMessage = "", 900);
+      }, 2000);
+
     }
   }
 
@@ -400,28 +402,28 @@ export class HomeComponent implements OnInit {
     this._router.navigate(['/evaluationsections']);
   }
 
-  public getUserRole(){
+  public getUserRole() {
     this._proyectoService.getRolesUsuario().subscribe(
       res => {
         var permisosDeUsuario = res;
         //console.log("permisos de usuario en getUserRole", permisosDeUsuario);
-        this._appComponent._storageDataService.Role = permisosDeUsuario.role;
+        this._appComponent._storageDataService.Role = permisosDeUsuario.id;
         //Si no hay errores y son recogidos busca si tienes permisos de usuario
-          if (permisosDeUsuario.role == "Administrador") {
-            //this._appComponent.RolDeUsuario = true;
-            // console.log("this._appComponent.RolDeUsuario", this._appComponent.RolDeUsuario);
-            // console.log("this._appComponent._storageDataService.RoleAdmin", this._appComponent._storageDataService.RoleAdmin);
-            this._appComponent._storageDataService.RoleAdmin = true;
-          }else{
-            this._appComponent._storageDataService.RoleAdmin = false;
-          }
-        
+        if (permisosDeUsuario.id == this.rol.Administrador) {
+          //this._appComponent.RolDeUsuario = true;
+          // console.log("this._appComponent.RolDeUsuario", this._appComponent.RolDeUsuario);
+          // console.log("this._appComponent._storageDataService.RoleAdmin", this._appComponent._storageDataService.RoleAdmin);
+          this._appComponent._storageDataService.RoleAdmin = true;
+        } else {
+          this._appComponent._storageDataService.RoleAdmin = false;
+        }
+
         //Llamamos al metodo para asignar proyectos
-        
+
 
       },
       error => {
-        
+
       });
   }
 }

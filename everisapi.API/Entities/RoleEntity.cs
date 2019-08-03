@@ -13,8 +13,7 @@ namespace everisapi.API.Entities
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [Required]
-        public string Role { get; set; }
-
+        // [Required]
+        // public string Role { get; set; }
     }
 }
