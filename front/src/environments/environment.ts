@@ -10,6 +10,6 @@
 
 export const environment = {
   production: false,
-  backendHost: window.location.hostname, 
-  backendPort: 60406,
+  backendHost: "agilemeterbackend.everis.com", 
+  backendPort: 443,
 };
