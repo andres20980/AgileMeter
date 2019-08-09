@@ -50,7 +50,7 @@ metadata:
     kubernetes.io/ingress.class: addon-http-application-routing
 spec:
   rules:
-  - host: agilemeter.7d07ee6a441f4fc2ac9d.westeurope.aksapp.io
+  - host: agilemeter.4fad901eba544c68aeb3.westeurope.aksapp.io
     http:
       paths:
       - backend:

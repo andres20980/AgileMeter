@@ -1,0 +1,32 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    service: caddy
+  name: caddy
+  namespace: monitoring
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: caddy
+    spec:
+      containers:
+      - env:
+        - name: ADMIN_PASSWORD
+          value: admin
+        - name: ADMIN_USER
+          value: admin
+        image: stefanprodan/caddy
+        name: caddy
+        ports:
+        - containerPort: 3000
+        - containerPort: 9090
+        - containerPort: 9093
+        - containerPort: 9091
+        resources: {}
+      restartPolicy: Always
+status: {}
