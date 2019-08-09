@@ -445,11 +445,13 @@ namespace everisapiTest
             };
 
             mockRepository.Setup(r => r.GetEvaluationsWithSectionsInfo(It.IsAny<int>(),
-                                                It.IsAny<everisapi.API.Models.EvaluacionInfoPaginationDto>() 
+                                                It.IsAny<everisapi.API.Models.EvaluacionInfoPaginationDto>(),
+                                                It.IsAny<int>() 
                                             )).Returns(evaluaciones);
 
             //Act
             var okResult = _controller.GetEvaluationsWithSectionsInfo(
+                            1,
                             1,
                             new everisapi.API.Models.EvaluacionInfoPaginationDto());
 
@@ -469,11 +471,13 @@ namespace everisapiTest
             };
 
             mockRepository.Setup(r => r.GetEvaluationsWithSectionsInfo(It.IsAny<int>(),
-                                                It.IsAny<everisapi.API.Models.EvaluacionInfoPaginationDto>() 
+                                                It.IsAny<everisapi.API.Models.EvaluacionInfoPaginationDto>(),
+                                                It.IsAny<int>()
                                             )).Returns(evaluaciones);
 
             //Act
             var okResult = _controller.GetEvaluationsWithSectionsInfo(
+                            1,
                             1,
                             new everisapi.API.Models.EvaluacionInfoPaginationDto());
 
@@ -494,11 +498,13 @@ namespace everisapiTest
             everisapi.API.Models.EvaluacionInfoPaginationDto evaluacionInfoPaginationDto = null;
 
             mockRepository.Setup(r => r.GetEvaluationsWithSectionsInfo(It.IsAny<int>(),
-                                                evaluacionInfoPaginationDto 
+                                                evaluacionInfoPaginationDto,
+                                                It.IsAny<int>() 
                                             )).Returns(evaluaciones);
 
             //Act
             var okResult = _controller.GetEvaluationsWithSectionsInfo(
+                            1,
                             1,
                             evaluacionInfoPaginationDto);
 
@@ -513,11 +519,13 @@ namespace everisapiTest
             _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
 
             mockRepository.Setup(r => r.GetEvaluationsWithSectionsInfo(It.IsAny<int>(),
-                                                It.IsAny<everisapi.API.Models.EvaluacionInfoPaginationDto>()  
+                                                It.IsAny<everisapi.API.Models.EvaluacionInfoPaginationDto>(),
+                                                It.IsAny<int>()  
                                             )).Throws(new Exception());
 
             //Act
             var okResult = _controller.GetEvaluationsWithSectionsInfo(
+                            1,
                             1,
                             new everisapi.API.Models.EvaluacionInfoPaginationDto());
 

@@ -33,6 +33,21 @@ namespace everisapiTest
             var autoMapperInstance = AutoMapperConfig.Instance;
         }
 
+         //Method: Test
+
+        [Fact]
+        public void Test_WhenCalled_ReturnOkRequest()
+        {
+            //Arrange            
+            _controller = new TokenController(_configuration, _usersInfoRepository);
+
+            //Act
+            var okResult = _controller.Test();
+
+            //Assert
+            Assert.Equal("API working successfully",okResult);
+        }
+
         //Method: GetTokens
 
         [Fact]

@@ -86,6 +86,7 @@
 		"ICON_ADD_TEAM": "Add Team",
 		"TABLE_COL_OFICCE": "Office",
 		"TABLE_COL_UNIT": "Unit",
+		"TABLE_COL_CODE": "Project Code",
 		"TABLE_COL_PROJECT": "Project",
 		"TABLE_COL_TEAM": "Team",
 		"TABLE_COL_SIZE": "Size",
@@ -194,7 +195,10 @@
 		"EXCEL_DATE": "Date",
 		"EXCEL_USER": "User",
 		"EXCEL_ASSESSMENT": "Assessment",
-		"EXCEL_SCORE": "Score"
+		"EXCEL_SCORE": "Score",
+		"LEVEL": "Level",
+		"OF_LEVEL": "of level",
+		"EXCEL_DOCUMENT_NAME": "Completed_assessments_"
 	},
 	"SORTED_TABLE": {
 		"FILTER": " Filter",
@@ -238,6 +242,7 @@
 		"ASSESMENT": "SCORE",
 		"GLOBAL": "GLOBAL SCORE",
 		"NOTES": "Notes",
+		"GENERAL_INFORMATION": "Assessment General Information",
 		"ICONS_NOTES_FILLED": "Notes available",
 		"ICONS_NOTES_EMPTY": "No notes added",
 		"EVALUATION_NOTES": "Assessment Notes",
@@ -266,7 +271,8 @@
 		"EXCEL_NC": "Not answered",
 		"CIRCLE_PROGRESS_LEVEL": "Level ",
 		"CIRCLE_PROGRESS_MIN_LEVEL": "of the level minimum",
-		"CIRCLE_PROGRESS_MAX_LEVEL": "of the level maximum"
+		"CIRCLE_PROGRESS_MAX_LEVEL": "of the level maximum",
+		"EXCEL_DOCUMENT_NAME": "Teams_results_"
 	},
 	"SECTION_RESULTS": {
 		"SECTION_NOTES": "Notes",
@@ -277,7 +283,9 @@
 		"ICONS_INCORRECT": "Incorrect",
 		"ICONS_NOT_ANSWERED": "Not answered",
 		"QUESTION_NOTES": "Notes",
-		"NO_NOTES": "No notes added"
+		"NO_NOTES": "No notes added",
+		"YES": "Yes",
+		"NO": "No"
 	},
 	"PREGUNTAS_TABLE": {
 		"FILTER": "Filter",

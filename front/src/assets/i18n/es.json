@@ -86,6 +86,7 @@
 		"ICON_ADD_TEAM": "ALta Equipo",
 		"TABLE_COL_OFICCE": "Oficina",
 		"TABLE_COL_UNIT": "Unidad",
+		"TABLE_COL_CODE": "Código de Proyecto",
 		"TABLE_COL_PROJECT": "Proyecto",
 		"TABLE_COL_TEAM": "Equipo",
 		"TABLE_COL_SIZE": "Tamaño",
@@ -194,7 +195,10 @@
 		"EXCEL_DATE": "Fecha",
 		"EXCEL_USER": "Usuario",
 		"EXCEL_ASSESSMENT": "Evaluación",
-		"EXCEL_SCORE": "Puntuación"
+		"EXCEL_SCORE": "Puntuación",
+		"LEVEL": "Nivel",
+		"OF_LEVEL": "del nivel",
+		"EXCEL_DOCUMENT_NAME": "Evaluaciones_finalizadas_"
 	},
 	"SORTED_TABLE": {
 		"FILTER": " Filtro",
@@ -238,6 +242,7 @@
 		"ASSESMENT": "VALORACIÓN",
 		"GLOBAL": "VALORACIÓN GLOBAL",
 		"NOTES": "Notas",
+		"GENERAL_INFORMATION": "Información General de la Evaluación",
 		"ICONS_NOTES_FILLED": "Hay notas",
 		"ICONS_NOTES_EMPTY": "No hay notas",
 		"EVALUATION_NOTES": "Notas Evaluación",
@@ -266,7 +271,8 @@
 		"EXCEL_NC": "No contestada",
 		"CIRCLE_PROGRESS_LEVEL": "Nivel ",
 		"CIRCLE_PROGRESS_MIN_LEVEL": "del nivel mínimo",
-		"CIRCLE_PROGRESS_MAX_LEVEL": "del Nivel máximo"
+		"CIRCLE_PROGRESS_MAX_LEVEL": "del Nivel máximo",
+		"EXCEL_DOCUMENT_NAME": "Resultados_del_equipo_"
 	},
 	"SECTION_RESULTS": {
 		"SECTION_NOTES": "Notas",
@@ -277,7 +283,9 @@
 		"ICONS_INCORRECT": "Incorrecta",
 		"ICONS_NOT_ANSWERED": "No contestada",
 		"QUESTION_NOTES": "Notas",
-		"NO_NOTES": "No hay notas añadidas"
+		"NO_NOTES": "No hay notas añadidas",
+		"YES": "Yes",
+		"NO": "No"
 	},
 	"PREGUNTAS_TABLE": {
 		"FILTER": "Filtro",

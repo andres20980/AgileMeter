@@ -38,6 +38,13 @@
           <mat-cell *matCellDef="let row">{{row.unidad}} </mat-cell>
         </ng-container>
 
+        <!-- codigo  -->
+        <ng-container matColumnDef="codigo">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'TEAM_MANAGER.TABLE_COL_CODE' | translate }}
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.codigo}} </mat-cell>
+          </ng-container>
+
         <!-- proyecto  -->
         <ng-container matColumnDef="linea">
           <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'TEAM_MANAGER.TABLE_COL_PROJECT' | translate }}

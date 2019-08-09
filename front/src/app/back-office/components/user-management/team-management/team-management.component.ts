@@ -9,6 +9,7 @@ import { UserWithRole } from 'app/Models/UserWithRole';
 import { UserProject } from 'app/Models/UserProject';
 import { EventEmitterService } from 'app/services/event-emitter.service';
 import { TranslateService } from '@ngx-translate/core';
+import { EnumRol} from 'app/Models/EnumRol';
 
 
 @Component({
@@ -29,6 +30,7 @@ export class TeamManagementComponent implements OnInit {
   public user: UserCreateUpdate;
   public MostrarPending: boolean = false;
   public MostrarAsig: boolean = false;
+  public roles = new EnumRol();
 
   constructor(
     private _router: Router,
@@ -42,7 +44,6 @@ export class TeamManagementComponent implements OnInit {
 
     //Obtenemos el usuario para el que queremos asignar los proyectos
     this.getUser();
-
     //Obtenemos todos los proyectos
     this.getTeams();
   }
