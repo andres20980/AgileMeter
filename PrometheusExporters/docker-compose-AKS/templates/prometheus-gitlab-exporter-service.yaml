@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus-gitlab-exporter
+  namespace: monitoring  
+spec:
+  ports:
+  - name: "8123"
+    port: 8123
+    targetPort: 8123
+  selector:
+    service: prometheus-gitlab-exporter
+status:
+  loadBalancer: {}

@@ -1,0 +1,7 @@
+name: docker-compose-AKS
+description: A generated Helm Chart for docker-compose-AKS from Skippbox Kompose
+version: 0.0.1
+keywords:
+  - docker-compose-AKS
+sources:
+home:
