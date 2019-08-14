@@ -11,13 +11,52 @@
   </actions>
   <description></description>
   <keepDependencies>false</keepDependencies>
-  <properties/>
-  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.72">
+  <properties>
+    <org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+      <triggers>
+        <com.dabsquared.gitlabjenkins.GitLabPushTrigger plugin="gitlab-plugin@1.5.12">
+          <spec></spec>
+          <triggerOnPush>true</triggerOnPush>
+          <triggerOnMergeRequest>true</triggerOnMergeRequest>
+          <triggerOnPipelineEvent>false</triggerOnPipelineEvent>
+          <triggerOnAcceptedMergeRequest>false</triggerOnAcceptedMergeRequest>
+          <triggerOnClosedMergeRequest>false</triggerOnClosedMergeRequest>
+          <triggerOnApprovedMergeRequest>false</triggerOnApprovedMergeRequest>
+          <triggerOnNoteRequest>true</triggerOnNoteRequest>
+          <noteRegex></noteRegex>
+          <ciSkip>true</ciSkip>
+          <skipWorkInProgressMergeRequest>false</skipWorkInProgressMergeRequest>
+          <setBuildDescription>true</setBuildDescription>
+          <branchFilterType>All</branchFilterType>
+          <cancelPendingBuildsOnUpdate>false</cancelPendingBuildsOnUpdate>
+        </com.dabsquared.gitlabjenkins.GitLabPushTrigger>
+      </triggers>
+    </org.jenkinsci.plugins.workflow.job.properties.PipelineTriggersJobProperty>
+    <com.dabsquared.gitlabjenkins.connection.GitLabConnectionProperty plugin="gitlab-plugin@1.5.12">
+      <gitLabConnection>GitSteps</gitLabConnection>
+    </com.dabsquared.gitlabjenkins.connection.GitLabConnectionProperty>
+  </properties>
+  <definition class="org.jenkinsci.plugins.workflow.cps.CpsFlowDefinition" plugin="workflow-cps@2.73">
     <script>pipeline {
-    agent{
-        label{
-            label &apos;&apos;
-        }
+    //agent{
+    //    label{
+    //        label &apos;&apos;
+    //    }
+    //}
+    agent any
+	post {
+      failure {
+        updateGitlabCommitStatus name: &apos;build&apos;, state: &apos;failed&apos;
+      }
+      success {
+        updateGitlabCommitStatus name: &apos;build&apos;, state: &apos;success&apos;
+      }
+    }
+    options {
+      gitLabConnection(&apos;GitSteps&apos;)
+    }
+    triggers {
+        gitlab(triggerOnPush: true, triggerOnMergeRequest: true, branchFilterType: &quot;All&quot;)
     }
 	stages {
 	    stage(&apos;Clean workspace&apos;){
@@ -26,7 +65,7 @@
                 cleanWs()
 	        }
 	    }
-	    stage(&apos;Donwload Source&apos;) {
+	    stage(&apos;Download Source&apos;) {
         	steps {
         	    script{
         	        sh &apos;/usr/bin/git clone ssh://git@steps.everis.com:766/INNOVASEV/ScrumMeter.git -b Development&apos;
@@ -53,8 +92,8 @@
     	stage(&apos;Execute test&apos;){
     	    steps{
     	        script{
-    	            sh &apos;dotnet test $WORKSPACE/ScrumMeter/everisapiTest/everisapiTest.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=&quot;$WORKSPACE/ScrumMeter/everisapiTest/TestResult/&quot; /p:Exclude=&quot;[xunit*]*&quot;&apos;
-    	            sh &apos;cd $WORKSPACE/ScrumMeter/everisapiTest/ &amp;&amp; dotnet reportgenerator everisapiTest.csproj &quot;-reports:./TestResult/coverage.opencover.xml&quot; -targetdir:&quot;./TestResults/Reports&quot; -reporttypes:HTML&apos;
+    	            sh &apos;dotnet test $WORKSPACE/ScrumMeter/everisapiTest/everisapiTest.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=&quot;$WORKSPACE/ScrumMeter/everisapiTest/TestResults/&quot; /p:Exclude=&quot;[xunit*]*&quot;&apos;
+    	            sh &apos;cd $WORKSPACE/ScrumMeter/everisapiTest/ &amp;&amp; dotnet reportgenerator everisapiTest.csproj &quot;-reports:./TestResults/coverage.opencover.xml&quot; -targetdir:&quot;./TestResults/Reports&quot; -reporttypes:HTML&apos;
     	        }
     	    }
     	}
@@ -63,9 +102,20 @@
                 script{
                     sh &apos;cd $WORKSPACE/ScrumMeter &amp;&amp; dotnet restore&apos;
                     sh &apos;pwd&apos;
-                    sh &apos;cd $WORKSPACE/ScrumMeter &amp;&amp; dotnet sonarscanner begin /k:&quot;AgileMeter&quot; /d:sonar.host.url=&quot;http://sonarqube:9000&quot; /d:sonar.login=&quot;931a6181cf7c0c6830854da5d48714dcb9ffddb7&quot; /d:sonar.language=&quot;cs&quot;&apos;
+                    sh &apos;cd $WORKSPACE/ScrumMeter &amp;&amp; dotnet build-server shutdown&apos;
+                    sh &apos;cd $WORKSPACE/ScrumMeter &amp;&amp; dotnet sonarscanner begin /k:&quot;AgileMeter&quot; /d:sonar.host.url=&quot;http://sonarqube:9000&quot; /d:sonar.login=&quot;afade98019d79d310cc9c3c42d557f74e4b336be&quot; /d:sonar.language=&quot;cs&quot; /d:sonar.cs.opencover.reportsPaths=&quot;$WORKSPACE/ScrumMeter/everisapiTest/TestResults/coverage.opencover.xml&quot;&apos;
                     sh &apos;cd $WORKSPACE/ScrumMeter &amp;&amp; dotnet build&apos;
-                    sh &apos;cd $WORKSPACE/ScrumMeter &amp;&amp; dotnet sonarscanner end /d:sonar.login=&quot;931a6181cf7c0c6830854da5d48714dcb9ffddb7&quot;&apos;
+                    sh &apos;cd $WORKSPACE/ScrumMeter &amp;&amp; dotnet sonarscanner end /d:sonar.login=&quot;afade98019d79d310cc9c3c42d557f74e4b336be&quot;&apos;
+                }
+            }
+        }
+        stage(&apos;Registry&apos;) {
+            steps {
+                script{
+                    sh &apos;cd /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter &amp;&amp; docker-compose -f docker-compose-AKS.yml build --no-cache agilemeter&apos;
+                    sh &apos;az acr login --name amapiback -u amapiback -p DO9emiMF654C1WwOgdilnCX=cK=ficJj&apos;
+                    sh &apos;docker push amapiback.azurecr.io/agilemeter_dev:latest&apos;
+                    //sh &apos;az acr repository show -n amapiback --image agilemeter_dev&apos;
                 }
             }
         }
