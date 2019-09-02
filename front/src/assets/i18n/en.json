@@ -21,7 +21,7 @@
 		"NEW_ASSESSMENT_MODAL": "NEW",
 		"MODAL_HEADER": "Important",
 		"MODAL_BODY": "This team has pending assessments, do you want to create a new one or manage the pending ones?",
-		"ASSESSMENT_CONSULT": "Consult Assessment"
+		"ASSESSMENT_CONSULT": "Consult assessment"
 	},
 	"BACKOFFICE": {
 		"BTN_USER_MANAGEMENT": "USER MANAGEMENT",
