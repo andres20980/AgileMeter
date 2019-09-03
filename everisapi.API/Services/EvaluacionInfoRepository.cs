@@ -436,7 +436,19 @@ namespace everisapi.API.Services
         //Metodo que devuelve un filtrado de todas las evaluaciones (de los equipos del usuario) y proyecto paginada
         public List<EvaluacionInfoDto> GetAllEvaluationInfoAndPageFiltered(int pageNumber, EvaluacionInfoPaginationDto Evaluacion, string UsuarioLogeado)
         {
+            //Vemos los equipos a los que pertenece el usuario en el caso de tener perfil User
             UserEntity user = _context.Users.Where(u => u.Nombre == UsuarioLogeado).FirstOrDefault();
+            List<UserProyectoEntity> equiposUsuario = new List<UserProyectoEntity>();
+            List<int> equipos = new List<int>();
+            if (user.RoleId == (int)Roles.User)
+            {
+                equiposUsuario = _context.UserProyectos.Where(up => up.UserNombre == UsuarioLogeado).ToList();
+                foreach (var eu in equiposUsuario)
+                {
+                    equipos.Add(eu.ProyectoId);
+                }
+            }
+
             //Recogemos las evaluaciones y la paginamos
             List<EvaluacionInfoDto> EvaluacionesInformativas = new List<EvaluacionInfoDto>();
             List<EvaluacionEntity> Evaluaciones;
@@ -446,6 +458,7 @@ namespace everisapi.API.Services
             ThenInclude(p => p.UserEntity).
             Include(a => a.Assessment).
             Where(e =>
+            (equipos.Count > 0 ? (equipos.Contains(e.ProyectoId)) : 1 == 1) &&
             e.Estado == Boolean.Parse(Evaluacion.Estado) &&
             ((user.RoleId == (int)Roles.Admin || user.RoleId == (int)Roles.Evaluator) ? (e.ProyectoEntity.TestProject == false) : 1 == 1) &&
             (Evaluacion.Oficinas.Length > 0 ? (Array.Exists(Evaluacion.Oficinas, element => element == e.ProyectoEntity.Oficina)) : 1 == 1) &&
@@ -463,7 +476,7 @@ namespace everisapi.API.Services
                     Id = evaluacion.Id,
                     Fecha = evaluacion.Fecha,
                     Estado = evaluacion.Estado,
-                    Nombre = evaluacion.ProyectoEntity.Nombre,
+                    Nombre = evaluacion.ProyectoEntity.Proyecto + " - " + evaluacion.ProyectoEntity.Nombre,
                     UserNombre = evaluacion.UserNombre,
                     Oficina = evaluacion.ProyectoEntity.Oficina,
                     NotasEvaluacion = evaluacion.NotasEvaluacion,
@@ -761,7 +774,7 @@ namespace everisapi.API.Services
                 {
                     Id = evaluacion.Id,
                     Fecha = evaluacion.Fecha,
-                    Nombre = evaluacion.ProyectoEntity.Nombre,
+                    Nombre = evaluacion.ProyectoEntity.Proyecto + " - " + evaluacion.ProyectoEntity.Nombre,
                     UserNombre = evaluacion.UserNombre,
                     AssessmentName = evaluacion.Assessment.AssessmentName,
                     AssessmentId = evaluacion.AssessmentId,

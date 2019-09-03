@@ -44,7 +44,7 @@ export class SortedTableComponent implements OnInit {
   userRole: number;
   expandedElement: Evaluacion;
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['fecha', 'oficina', 'nombre', 'userNombre', 'assessmentName', 'puntuacion', 'notas', 'informe'];
+  displayedColumns = ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName', 'puntuacion', 'notas', 'informe'];
   public rol: EnumRol = new EnumRol();
   public ListaDeOficinas: string[] = [];
   public OficinaSeleccionada: string[] = [];
@@ -91,7 +91,7 @@ export class SortedTableComponent implements OnInit {
 
   public parseDate(value: string): string {
     let date = new Date(value);
-    console.log(date.getDay() + "/" + date.getMonth() + "/" + date.getFullYear());
+    //console.log(date.getDay() + "/" + date.getMonth() + "/" + date.getFullYear());
     return date.getDay() + "/" + date.getMonth() + 1 + "/" + date.getFullYear();
   }
 
@@ -141,7 +141,7 @@ export class SortedTableComponent implements OnInit {
       });
     }
     this.dataSource.filter = "";
-    this.prevEval.EvaluacionFiltrar = { 'nombre': '', 'estado': 'false', 'fecha': '', 'userNombre': '', 'puntuacion': '', 'assessmentId': 0, 'oficinas': o, equipos: e, 'idAssessment': a };
+    this.prevEval.EvaluacionFiltrar = { 'nombre': '', 'estado': 'true', 'fecha': '', 'userNombre': '', 'puntuacion': '', 'assessmentId': 0, 'oficinas': o, equipos: e, 'idAssessment': a };
     this.prevEval.GetPaginacion();
   }
 

@@ -126,6 +126,7 @@ export class PreviousevaluationComponent implements OnInit {
       res => {
 
         this.permisosDeUsuario = res;
+        //console.log(res);
         //Si no hay errores y son recogidos busca si tienes permisos de usuario
         for (let num = 0; num < this.permisosDeUsuario.length; num++) {
           if (this.permisosDeUsuario[num].role == "Administrador") {
@@ -352,6 +353,7 @@ export class PreviousevaluationComponent implements OnInit {
   public GetPaginacion() {
     this.Mostrar = false;
     // this._evaluacionService.getEvaluacionInfoFiltered(this.PageNow - 1, this.Project.id, this.EvaluacionFiltrar)
+    //console.log(this.EvaluacionFiltrar);
     this._evaluacionService.getAllEvaluacionInfoFiltered(this.PageNow - 1, this.EvaluacionFiltrar)
       .subscribe(
         res => {
