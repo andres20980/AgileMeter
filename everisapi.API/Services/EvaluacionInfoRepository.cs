@@ -476,7 +476,7 @@ namespace everisapi.API.Services
                     Id = evaluacion.Id,
                     Fecha = evaluacion.Fecha,
                     Estado = evaluacion.Estado,
-                    Nombre = evaluacion.ProyectoEntity.Proyecto + " - " + evaluacion.ProyectoEntity.Nombre,
+                    Nombre = String.IsNullOrEmpty(evaluacion.ProyectoEntity.Proyecto)? evaluacion.ProyectoEntity.Nombre : evaluacion.ProyectoEntity.Proyecto + " - " + evaluacion.ProyectoEntity.Nombre,
                     UserNombre = evaluacion.UserNombre,
                     Oficina = evaluacion.ProyectoEntity.Oficina,
                     NotasEvaluacion = evaluacion.NotasEvaluacion,
@@ -774,7 +774,7 @@ namespace everisapi.API.Services
                 {
                     Id = evaluacion.Id,
                     Fecha = evaluacion.Fecha,
-                    Nombre = evaluacion.ProyectoEntity.Proyecto + " - " + evaluacion.ProyectoEntity.Nombre,
+                    Nombre = String.IsNullOrEmpty(evaluacion.ProyectoEntity.Proyecto)? evaluacion.ProyectoEntity.Nombre : evaluacion.ProyectoEntity.Proyecto + " - " + evaluacion.ProyectoEntity.Nombre,
                     UserNombre = evaluacion.UserNombre,
                     AssessmentName = evaluacion.Assessment.AssessmentName,
                     AssessmentId = evaluacion.AssessmentId,
