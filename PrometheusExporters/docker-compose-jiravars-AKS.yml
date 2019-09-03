@@ -1,0 +1,12 @@
+version: '3'
+ 
+services:
+  jiravars-exporter:
+    image: jiravars.azurecr.io/jiravars-exporter:latest
+    build: 
+      context: ./jiravars
+      dockerfile: Dockerfile
+    container_name: jiravars-exporter
+    hostname: jiravars-exporter
+    ports:
+      - "9300:9300"

@@ -19,6 +19,9 @@ spec:
   - name: "9091"
     port: 9091
     targetPort: 9091
+  - name: "9300"
+    port: 9300
+    targetPort: 9300
   selector:
     service: caddy
 status:

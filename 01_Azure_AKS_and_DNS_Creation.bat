@@ -5,7 +5,11 @@ set https_proxy=
 
 REM ## Logging in through command line is not supported. Is required to use 'az login' to authenticate through browser.
 REM CALL az login -u alberto.muriel.devops@hotmail.com -p Passw0rd10!
-REM ## CALL az login -u bjabinn1978_2@hotmail.com -p va5Kuge,,,
+REM ## CALL az login -u bjabinn1978_2@hotmail.com -p 
+
+REM ## Delete context and cluster in Kube config local file
+CALL kubectl config delete-context AgileMeterClusterResource
+CALL kubectl config delete-cluster AgileMeterClusterResource
 
 REM ## CREATE RESOURCE GROUP AND KUBERNETES CLUSTER
 CALL az group create --name AgileMeterResourceGroup --location westeurope

@@ -37,3 +37,12 @@
     errors stderr
     tls off
 }
+
+:3000 {
+    proxy / jiravars-exporter:9300 {
+            transparent
+        }
+
+    errors stderr
+    tls off
+}

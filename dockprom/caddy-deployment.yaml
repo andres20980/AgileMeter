@@ -27,6 +27,7 @@ spec:
         - containerPort: 9090
         - containerPort: 9093
         - containerPort: 9091
+        - containerPort: 9300
         resources: {}
       restartPolicy: Always
 status: {}

@@ -1,0 +1,10 @@
+baseURL: https://steps.everis.com/jiraito
+login: "amurielb"
+password: "aM06032033"
+metrics:
+    - name: JIRA_AgileMeter_tickets_unresolved
+      help: "Number of items unresolved inside our backlog"
+      interval: 2m
+      jql: |
+          project = AGILEMETER
+          AND resolution = Unresolved

@@ -1,0 +1,39 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    service: sonarqube
+  name: sonarqube
+  namespace: ci-cd
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: sonarqube
+    spec:
+      containers:
+      - env:
+        - name: SONARQUBE_JDBC_PASSWORD
+          value: sonar
+        - name: SONARQUBE_JDBC_URL
+          value: jdbc:postgresql://db:5432/sonar
+        - name: SONARQUBE_JDBC_USERNAME
+          value: sonar
+#        args:
+#        - -Dsonar.search.javaAdditionalOpts=-Dnode.store.allow_mmapfs=false
+        image: sonarqube:lts
+        name: agilemeter-sonarqube
+        ports:
+        - containerPort: 9000
+#        lifecycle:
+#           postStart:
+#            exec:
+##              command: ["/bin/sh", "-c", {{cmd}}]
+#              command: ["sysctl", "-w", "vm.max_map_count=262144", "-c"]
+##              command: "-Dsonar.search.javaAdditionalOpts=-Dnode.store.allow_mmapfs=false"
+        resources: {}
+      restartPolicy: Always
+status: {}

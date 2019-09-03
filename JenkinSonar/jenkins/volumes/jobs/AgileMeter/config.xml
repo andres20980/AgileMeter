@@ -1,5 +1,5 @@
 <?xml version='1.1' encoding='UTF-8'?>
-<flow-definition plugin="workflow-job@2.33">
+<flow-definition plugin="workflow-job@2.34">
   <actions>
     <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobAction plugin="pipeline-model-definition@1.3.9"/>
     <org.jenkinsci.plugins.pipeline.modeldefinition.actions.DeclarativeJobPropertyTrackerAction plugin="pipeline-model-definition@1.3.9">
@@ -103,9 +103,9 @@
                     sh &apos;cd $WORKSPACE/ScrumMeter &amp;&amp; dotnet restore&apos;
                     sh &apos;pwd&apos;
                     sh &apos;cd $WORKSPACE/ScrumMeter &amp;&amp; dotnet build-server shutdown&apos;
-                    sh &apos;cd $WORKSPACE/ScrumMeter &amp;&amp; dotnet sonarscanner begin /k:&quot;AgileMeter&quot; /d:sonar.host.url=&quot;http://sonarqube:9000&quot; /d:sonar.login=&quot;afade98019d79d310cc9c3c42d557f74e4b336be&quot; /d:sonar.language=&quot;cs&quot; /d:sonar.cs.opencover.reportsPaths=&quot;$WORKSPACE/ScrumMeter/everisapiTest/TestResults/coverage.opencover.xml&quot;&apos;
+                    sh &apos;cd $WORKSPACE/ScrumMeter &amp;&amp; dotnet sonarscanner begin /k:&quot;AgileMeter&quot; /d:sonar.host.url=&quot;http://sonarqube:9000&quot; /d:sonar.login=&quot;9f3279b5aa1fcc42e8b2dbde1ff87db597e0581d&quot; /d:sonar.language=&quot;cs&quot; /d:sonar.cs.opencover.reportsPaths=&quot;$WORKSPACE/ScrumMeter/everisapiTest/TestResults/coverage.opencover.xml&quot;&apos;
                     sh &apos;cd $WORKSPACE/ScrumMeter &amp;&amp; dotnet build&apos;
-                    sh &apos;cd $WORKSPACE/ScrumMeter &amp;&amp; dotnet sonarscanner end /d:sonar.login=&quot;afade98019d79d310cc9c3c42d557f74e4b336be&quot;&apos;
+                    sh &apos;cd $WORKSPACE/ScrumMeter &amp;&amp; dotnet sonarscanner end /d:sonar.login=&quot;9f3279b5aa1fcc42e8b2dbde1ff87db597e0581d&quot;&apos;
                 }
             }
         }

@@ -30,7 +30,7 @@ services:
       context: ./front
       dockerfile: Dockerfile
       args:
-        - 'BACKEND_HOST=agilemeter.4fad901eba544c68aeb3.westeurope.aksapp.io'
+        - 'BACKEND_HOST=agilemeter.e958234032a5485b8c40.westeurope.aksapp.io'
         - 'BACKEND_PORT=80'
 #    networks:
 #      - AgilemeterNetwork

@@ -46,7 +46,13 @@ data:
        honor_labels: true
        static_configs:
          - targets: ['prometheus-gitlab-exporter:8123']
-         
+   
+     - job_name: 'jiravars-exporter'
+       scrape_interval: 10s
+       honor_labels: true
+       static_configs:
+         - targets: ['jiravars-exporter:9300']
+   
    alerting:
      alertmanagers:
      - scheme: http
