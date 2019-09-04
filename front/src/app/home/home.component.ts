@@ -150,7 +150,7 @@ export class HomeComponent implements OnInit {
       }
     });
     this.ListaDeOficinas = oficinas.sort();
-    //console.log(this.ListaDeOficinas);
+    console.log(this.ListaDeOficinas);
   }
 
   public comprobarEvaluaciones() {

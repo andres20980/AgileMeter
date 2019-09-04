@@ -13,7 +13,9 @@
 	},
 	"HOME": {
 		"SELECT_TEAM": "Select a team",
+		"SELECT_OFFICE": "Select a office",
 		"SELECT_ASSESSMENT": "Select an assessment type",
+		"CREATE_ASSESSMENT": "Create a new assessment",
 		"FINISHED_ASSESSMENTS": "COMPLETED ASSESSMENT",
 		"PENDING_ASSESSMENTS": "PENDING ASSESSMENTS",
 		"PENDING_ASSESSMENTS_MODAL": "PENDING",

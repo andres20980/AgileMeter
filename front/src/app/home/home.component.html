@@ -78,13 +78,26 @@
         <div class="col" id="assessmentSelectorContainer">
           <div class="row">
             <div class="col">
-              <h3>{{ 'HOME.SELECT_ASSESSMENT' | translate }}</h3>
+              <h3>{{ 'HOME.CREATE_ASSESSMENT' | translate }}</h3>
             </div>
           </div>
           <div class="row mt-3">
             <div class="col-4">
               <mat-form-field class="dropdown-material">
-                <mat-select [(value)]="ProyectoSeleccionado" placeholder="Seleccione un equipo"
+                <mat-select [(value)]="Seleccionado" placeholder="{{ 'HOME.SELECT_OFFICE' | translate }}"
+                  (selectionChange)="SeleccionDeProyecto()">
+                  <mat-option class="dropdown-content" *ngFor="let oficina of ListaDeOficinas; let i = index"
+                    [value]="oficina">
+                    {{oficina}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-4">
+              <mat-form-field class="dropdown-material">
+                <mat-select [(value)]="ProyectoSeleccionado" placeholder="{{ 'HOME.SELECT_TEAM' | translate }}"
                   (selectionChange)="SeleccionDeProyecto()">
                   <mat-option class="dropdown-content" *ngFor="let proyecto of ListaDeProyectos; let i = index"
                     [value]="proyecto">
