@@ -281,8 +281,8 @@ export class PendingEvaluationTableComponent implements OnInit {
   }
 
   public selectOficinas() {
-    this.refresh();
     this.equiposDeLasOficinasSeleccionadas();
+    this.refresh();
   }
 
   // FUNCIONES SELECT DE EQUIPOS

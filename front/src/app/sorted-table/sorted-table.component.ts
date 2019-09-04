@@ -146,7 +146,7 @@ export class SortedTableComponent implements OnInit {
   }
 
   public getProyectos() {
-    this._proyectoService.getProyectosDeUsuarioConEvaluacionesPendientes().subscribe(
+    this._proyectoService.getProyectosDeUsuarioConEvaluacionesFinalizadas().subscribe(
       res => {
         this.ListaDeProyectos = res;
         this.getOficinasDeUsuario(res);
@@ -178,8 +178,8 @@ export class SortedTableComponent implements OnInit {
   }
 
   public selectOficinas() {
-    this.refresh();
     this.equiposDeLasOficinasSeleccionadas();
+    this.refresh();
   }
 
   // FUNCIONES SELECT DE EQUIPOS
