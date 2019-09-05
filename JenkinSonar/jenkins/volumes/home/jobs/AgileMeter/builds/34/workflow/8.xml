@@ -2,23 +2,26 @@
 <Tag plugin="workflow-support@3.3">
   <node class="cps.n.StepAtomNode" plugin="workflow-cps@2.73">
     <parentIds>
-      <string>14</string>
+      <string>7</string>
     </parentIds>
-    <id>15</id>
-    <descriptorId>org.jenkinsci.plugins.workflow.steps.durable_task.ShellStep</descriptorId>
+    <id>8</id>
+    <descriptorId>org.jenkinsci.plugins.workflow.steps.CoreStep</descriptorId>
   </node>
   <actions>
     <cps.a.ArgumentsActionImpl plugin="workflow-cps@2.73">
       <arguments>
         <entry>
-          <string>script</string>
-          <string>/usr/bin/git clone ssh://git@steps.everis.com:766/INNOVASEV/ScrumMeter.git -b Development</string>
+          <string>delegate</string>
+          <org.jenkinsci.plugins.structs.describable.UninstantiatedDescribable plugin="structs@1.20">
+            <symbol>cleanWs</symbol>
+            <arguments class="tree-map"/>
+          </org.jenkinsci.plugins.structs.describable.UninstantiatedDescribable>
         </entry>
       </arguments>
       <isUnmodifiedBySanitization>true</isUnmodifiedBySanitization>
     </cps.a.ArgumentsActionImpl>
     <wf.a.TimingAction plugin="workflow-api@2.36">
-      <startTime>1566815168374</startTime>
+      <startTime>1566815167535</startTime>
     </wf.a.TimingAction>
     <s.a.LogStorageAction/>
   </actions>

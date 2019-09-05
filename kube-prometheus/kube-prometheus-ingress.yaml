@@ -1,0 +1,33 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: agilemeter-grafanaingress-helm
+  namespace: monitoring
+  annotations:
+    kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+  rules:
+  - host: agilemeter-grafana-helm.e958234032a5485b8c40.westeurope.aksapp.io
+    http:
+      paths:
+      - backend:
+          serviceName: kube-prometheus-grafana
+          servicePort: 3000
+        path: /
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: agilemeter-prometheusingress-helm
+  namespace: monitoring
+  annotations:
+    kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+  rules:
+  - host: agilemeter-prometheus-helm.e958234032a5485b8c40.westeurope.aksapp.io
+    http:
+      paths:
+      - backend:
+          serviceName: kube-prometheus
+          servicePort: 9090
+        path: /

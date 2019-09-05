@@ -2,18 +2,18 @@
 <Tag plugin="workflow-support@3.3">
   <node class="cps.n.StepStartNode" plugin="workflow-cps@2.73">
     <parentIds>
-      <string>11</string>
+      <string>5</string>
     </parentIds>
-    <id>12</id>
+    <id>6</id>
     <descriptorId>org.jenkinsci.plugins.workflow.support.steps.StageStep</descriptorId>
   </node>
   <actions>
     <wf.a.BodyInvocationAction plugin="workflow-api@2.36"/>
     <wf.a.LabelAction plugin="workflow-api@2.36">
-      <displayName>Download Source</displayName>
+      <displayName>Clean workspace</displayName>
     </wf.a.LabelAction>
     <wf.a.TimingAction plugin="workflow-api@2.36">
-      <startTime>1566815168042</startTime>
+      <startTime>1566815166959</startTime>
     </wf.a.TimingAction>
   </actions>
 </Tag>

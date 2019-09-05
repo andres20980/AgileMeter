@@ -16,6 +16,8 @@ services:
       - 8082
       - 50002
     volumes:
+      - ./jenkins/volumes/users:/var/jenkins_home/users
+      - ./jenkins/volumes/jobs:/var/jenkins_home/jobs
       - ./jenkins/configs/credentials/credentials.xml:/var/jenkins_home/credentials.xml
       #- ./jenkins/configs/credentials/.ssh:/root/.ssh/
       - ./jenkins/configs/credentials/.ssh/:/var/jenkins_home/.ssh/

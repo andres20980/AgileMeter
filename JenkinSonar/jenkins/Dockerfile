@@ -38,7 +38,7 @@ USER jenkins
 COPY /configs/plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 # Add the admin user  
-COPY /volumes/users/ ${JENKINS_HOME}/users/
+COPY /volumes/home/ ${JENKINS_HOME}/
 # Add the main config file to the jenkins path  
 COPY /configs/jenkins_home_config.xml /usr/share/jenkins/ref/config.xml.override
 

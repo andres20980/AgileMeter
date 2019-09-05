@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: agilemeter-prometheus-ingress
+  namespace: monitoring
+  annotations:
+    kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+  rules:
+  - host: agilemeter-prometheus.844fb4050a5e485d9f0a.westeurope.aksapp.io
+    http:
+      paths:
+      - backend:
+          serviceName: kube-prometheus
+          servicePort: 9090
+        path: /

@@ -26,8 +26,18 @@ spec:
         - containerPort: 8080
         - containerPort: 50000
         resources: {}
+        volumeMounts:
+        - mountPath: /var/run/docker.sock
+          name: docker-socket-volume
+        securityContext:
+          privileged: true
       imagePullSecrets:
         - name: jenkinsonar-regsecret
       hostname: jenkins
       restartPolicy: Always
+      volumes:
+      - name: docker-socket-volume
+        hostPath:
+          path: /var/run/docker.sock
+          type: File
 status: {}

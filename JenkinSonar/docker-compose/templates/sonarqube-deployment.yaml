@@ -22,8 +22,8 @@ spec:
           value: jdbc:postgresql://db:5432/sonar
         - name: SONARQUBE_JDBC_USERNAME
           value: sonar
-#        args:
-#        - -Dsonar.search.javaAdditionalOpts=-Dnode.store.allow_mmapfs=false
+        args:
+        - -Dsonar.search.javaAdditionalOpts=-Dnode.store.allow_mmapfs=false
         image: sonarqube:lts
         name: agilemeter-sonarqube
         ports:
