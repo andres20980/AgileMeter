@@ -23,10 +23,12 @@ import { EnumRol } from 'app/Models/EnumRol';
 export class HomeComponent implements OnInit {
   public ErrorMessage: string = null;
   public ListaDeProyectos: Array<Proyecto> = [];
+  public ProyectosUser: Array<Proyecto> = [];
   public AllAssessments: Assessment[] = [];
   public permisosDeUsuario: Role;
   public SeeAllProjects = false;
   public ProyectoSeleccionado: Proyecto;
+  public OficinaSeleccionada: string;
   public AssessmentSelected: Assessment;
   public NombreDeUsuario: string;
   public Deshabilitar = false;
@@ -121,6 +123,7 @@ export class HomeComponent implements OnInit {
     this._proyectoService.getProyectosDeUsuario().subscribe(
       res => {
         this.ListaDeProyectos = res;
+        this.ProyectosUser = res;
         this.comprobarEvaluaciones();
         this.getListaDeOficinas(res);
       },
@@ -150,7 +153,7 @@ export class HomeComponent implements OnInit {
       }
     });
     this.ListaDeOficinas = oficinas.sort();
-    console.log(this.ListaDeOficinas);
+    //console.log(this.ListaDeOficinas);
   }
 
   public comprobarEvaluaciones() {
@@ -169,9 +172,36 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  //Método que selecciona los equipos en función de la oficna seleccionada
+  public SeleccionDeOficina() {
+    this.refresh();
+    this.equiposDeLasOficinasSeleccionadas();
+  }
+
+  //Método que refresca los datos
+  public refresh() {
+    this.ListaDeProyectos = this.ProyectosUser;
+  }
+
+  public equiposDeLasOficinasSeleccionadas() {
+    //ponemos los equipos seleccionados y la lista de equipos a vacio
+    this.ProyectoSeleccionado = null;
+
+    if (this.OficinaSeleccionada !== "" && this.OficinaSeleccionada !== undefined) {
+      this.ListaDeProyectos = this.ListaDeProyectos.filter(x => this.OficinaSeleccionada == x.oficina);
+    }
+  }
+
+
   //Este metodo guarda el proyecto que a sido seleccionado en el front
   public SeleccionDeProyecto() {
-    //this.ProyectoSeleccionado = this.ListaDeProyectos[index];
+
+    //Actualizamos la oficina en el caso de que no esté asignada
+    if (this.OficinaSeleccionada === undefined)
+    {
+      this.OficinaSeleccionada = this.ProyectoSeleccionado.oficina;
+    }
+
     this._appComponent._storageDataService.UserProjectSelected = this.ProyectoSeleccionado;
     this.existeRepetida = false;
 
