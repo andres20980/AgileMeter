@@ -274,7 +274,7 @@ export class UserManagementComponent implements OnInit {
   }
 
   deleteSingleUserProjects(project) {
-    console.log("borrar single");
+    //console.log("borrar single");
     let i = 0;
     this.ListaDeProyectosUsuario.forEach((element, index) => {
       if (element.id == project.id) { i = index; }
@@ -366,7 +366,7 @@ export class UserManagementComponent implements OnInit {
   showModal(content, role: Role) {
     if (this.userCtrl.value.nombre == this.UsuarioLogueado && this.userCtrl.value.role.role == 'Administrador') {
       if (role.id != 2) {
-        console.log("entra", this.userCtrl.value.role.role);
+        //console.log("entra", this.userCtrl.value.role.role);
         this.modalService.open(content).result.then(
           (closeResult) => {
           }, (dismissReason) => {
@@ -384,7 +384,7 @@ export class UserManagementComponent implements OnInit {
   }
 
   public seleccionDeRol(role: Role) {
-    console.log("seleccion de rol", role.role)
+    //console.log("seleccion de rol", role.role)
     this.showProjects = false;
     this.userCtrl.value.role = role;
     this.UsuarioSeleccionado = this.userCtrl.value;

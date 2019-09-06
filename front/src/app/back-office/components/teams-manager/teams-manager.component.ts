@@ -52,7 +52,7 @@ export class TeamsManagerComponent implements OnInit {
         //this.teamsListString = this.getTeamsString(res);        
         //this.dataSource = new MatTableDataSource(this.teamsListString);
 
-        console.log(res);
+        //console.log(res);
 
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;

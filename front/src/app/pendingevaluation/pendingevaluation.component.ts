@@ -50,13 +50,13 @@ export interface AssesmentEv{
 })
 export class PendingEvaluationComponent implements OnInit {
   public clicked: boolean = true;
-  public EvaluacionFiltrar: EvaluacionFilterInfo = { 'nombre': '', 'estado': 'false', 'fecha': '', 'userNombre': '', 'puntuacion': '', 'assessmentId': 0 };
+  public EvaluacionFiltrar: EvaluacionFilterInfo = { 'nombre': '', 'estado': 'false', 'fecha': '', 'userNombre': '', 'puntuacion': '', 'assessmentId': 0, 'oficinas':[], equipos:[], 'idAssessment': [] };
   public Typing: boolean = false;
   public permisosDeUsuario: Array<Role> = [];
   public ListaDeEvaluacionesPaginada: Array<EvaluacionInfoWithProgress>;
   public nEvaluaciones: number = 0;
   public UserName: string = "";
-  public Project: Proyecto = { 'id': null, 'nombre': '',codigo: null, 'fecha': null, numFinishedEvals:0, numPendingEvals: 0};
+  public Project: Proyecto = { 'id': null, 'nombre': '',codigo: null, 'fecha': null, numFinishedEvals:0, numPendingEvals: 0, oficina:null};
   public Mostrar = false;
   public ErrorMessage: string = null;
   public NumEspera = 750;
@@ -119,16 +119,17 @@ export class PendingEvaluationComponent implements OnInit {
       res => {
 
         this.permisosDeUsuario = res;
+        //console.log(res);
         //Si no hay errores y son recogidos busca si tienes permisos de usuario
         for (let num = 0; num < this.permisosDeUsuario.length; num++) {
           if (this.permisosDeUsuario[num].role == "Administrador") {
             if (this.Project == null || this.Project == undefined || this.Project.id == -1) {
-              this.Project = { id: 0, nombre: '',codigo: null, fecha: null, numFinishedEvals:0, numPendingEvals: 0};
+              this.Project = { id: 0, nombre: '',codigo: null, fecha: null, numFinishedEvals:0, numPendingEvals: 0, oficina:null};
               this.Admin = true;
             }
           }
         }
-
+        /*obsoleto en el nuevo home
         //Comprueba que tenga  un proyecto seleccionado y si no es asi lo devuelve a home
         if (this.Project == null || this.Project == undefined) {
           this._router.navigate(['/home']);
@@ -136,7 +137,7 @@ export class PendingEvaluationComponent implements OnInit {
           this._router.navigate(['/home']);
         } else {
           this.MostrarInfo = true;
-        }
+        }*/
         
         this.GetPaginacion();
 
@@ -276,7 +277,7 @@ export class PendingEvaluationComponent implements OnInit {
   }
 
   public changeChartAssessment($event){
-    let filter: EvaluacionFilterInfo = new EvaluacionFilterInfo("","","","","", this.selectedAssessment.id);
+    let filter: EvaluacionFilterInfo = new EvaluacionFilterInfo("","","","","", this.selectedAssessment.id,[],[],[]);
     this.GetChartData(filter);
   }
 
@@ -317,7 +318,9 @@ export class PendingEvaluationComponent implements OnInit {
   //Recarga los elementos en la pagina en la que se encuentra 
   public GetPaginacion() {
     this.Mostrar = false;
-    this._evaluacionService.GetEvaluationsWithProgress(this.Project.id, this.EvaluacionFiltrar)
+    //this._evaluacionService.GetEvaluationsWithProgress(this.Project.id, this.EvaluacionFiltrar)
+    //console.log(this.EvaluacionFiltrar);
+    this._evaluacionService.GetAllEvaluationsWithProgress(this.EvaluacionFiltrar)
       .subscribe(
         res => {
           this.nEvaluaciones = res.numEvals;

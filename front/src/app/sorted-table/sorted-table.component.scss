@@ -117,16 +117,12 @@ table {
     opacity: 0.5;
   } 
 
-  .mat-column-userNombre, .mat-column-assessmentName, .mat-column-puntuacion, .mat-column-notas, .mat-column-informe {
-    width: 16%;
-  }
-  
-  .mat-column-fecha {
+  .mat-column-oficina, .mat-column-nombre {
     width: 20%;
   }
-
-  .table-container{
-    //margin-top: -1rem;
+  
+  .mat-column-userNombre, .mat-column-fecha, .mat-column-assessmentName, .mat-column-puntuacion,  .mat-column-notas,  .mat-column-informe {
+    width: 10%;
   }
 
   .transparente {

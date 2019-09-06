@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, Input, SimpleChanges } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource, MatCellDef } from '@angular/material';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Router } from "@angular/router";
 import { AppComponent } from 'app/app.component';
 import { EvaluacionInfoWithProgress } from 'app/Models/EvaluacionInfoWithProgress';
@@ -8,10 +8,13 @@ import { EvaluacionService } from '../../services/EvaluacionService';
 import { SectionService } from 'app/services/SectionService';
 import { AssignationService } from 'app/services/AssignationService';
 import { Evaluacion } from 'app/Models/Evaluacion';
-import { NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PendingEvaluationComponent } from '../pendingevaluation.component';
 import { SectionInfo } from 'app/Models/SectionInfo';
 import { DatePipe } from '@angular/common';
+import { Proyecto } from 'app/Models/Proyecto';
+import { Assessment } from 'app/Models/Assessment';
+import { ProyectoService } from 'app/services/ProyectoService';
 
 
 
@@ -21,10 +24,10 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./pendingevaluation-table.component.scss'],
   animations: [
     trigger('detailExpand', [
-    state('collapsed, void', style({ height: '0px', minHeight: '0', display: 'none' })),
-    state('expanded', style({ height: '*' })),
-    transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    transition('expanded <=> void', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)'))
+      state('collapsed, void', style({ height: '0px', minHeight: '0', display: 'none' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+      transition('expanded <=> void', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)'))
     ]),
   ],
 })
@@ -36,14 +39,26 @@ export class PendingEvaluationTableComponent implements OnInit {
   public ErrorMessage: string = null;
   dataSource: MatTableDataSource<EvaluacionInfoWithProgress>;
   userRole: number;
-  evaluationProgress : number;
+  evaluationProgress: number;
   selectedEvaluacionInfoWithProgress;
   public ListaDeDatos: Array<SectionInfo> = [];
   public Evaluacion: Evaluacion = null;
   public sectionId: number;
   //expandedElement: Evaluacion;
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['fecha', 'userNombre', 'assessmentName', 'progress', 'actions'];
+  displayedColumns = ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName', 'progress', 'actions'];
+
+  public ListaDeOficinas: string[] = [];
+  public OficinaSeleccionada: string[] = [];
+
+  public EquipoSeleccionado: Proyecto[] = [];
+  public ListaDeProyectos: Array<Proyecto> = [];
+  public ListaDeProyectosFiltrada: Array<Proyecto> = [];
+
+  public ListaDeAssessment: Array<Assessment> = [];
+  public AssessmentSeleccionado: Assessment[] = [];
+  public ListaDeAssessmentFiltrada: Array<Assessment> = [];
+
 
   constructor(
     private _evaluacionService: EvaluacionService,
@@ -52,53 +67,56 @@ export class PendingEvaluationTableComponent implements OnInit {
     private _router: Router,
     private _appComponent: AppComponent,
     private modalService: NgbModal,
-    private parent: PendingEvaluationComponent   
-    ){
-    }
+    private parent: PendingEvaluationComponent,
+    private _proyectoService: ProyectoService,
+  ) {
+  }
 
   ngOnInit() {
     this.LoadDataSource();
+    this.getProyectos();
+    this.getAssessmentDeUsuario();
   }
-  
+
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.ListaDeEvaluacionesPaginada){
+    if (changes.ListaDeEvaluacionesPaginada) {
       this.LoadDataSource();
     }
   }
-  
-  private LoadDataSource(){
+
+  private LoadDataSource() {
     this.dataSource = new MatTableDataSource(this.ListaDeEvaluacionesPaginada);
-    this.dataSource.sort= this.sort;
+    this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.userRole = this._appComponent._storageDataService.Role;
 
-      this.dataSource.filterPredicate = function(data, filter: string): boolean {
+    this.dataSource.filterPredicate = function (data, filter: string): boolean {
       let date = new Date(data.fecha);
-      return data.nombre.toLowerCase().includes(filter) 
-      ||  data.assessmentName.toLowerCase().includes(filter)
-      ||  (data.userNombre != null && data.userNombre.toLowerCase().includes(filter) )
-      ||  (data.progress != null && data.progress.toString().includes(filter))
-      ||  ((date.getDate()<10?"0":"")+date.getDate()+"/"+(date.getMonth()<10?"0":"")+(date.getMonth()+1)+"/"+date.getFullYear()).includes(filter)
-      ;
-   };
+      return data.nombre.toLowerCase().includes(filter)
+        || data.assessmentName.toLowerCase().includes(filter)
+        || (data.userNombre != null && data.userNombre.toLowerCase().includes(filter))
+        || (data.progress != null && data.progress.toString().includes(filter))
+        || ((date.getDate() < 10 ? "0" : "") + date.getDate() + "/" + (date.getMonth() < 10 ? "0" : "") + (date.getMonth() + 1) + "/" + date.getFullYear()).includes(filter)
+        ;
+    };
   }
 
-  applyFilter(filterValue: string){
+  applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  public parseDate(value: string): string{
+  public parseDate(value: string): string {
     let date = new Date(value);
-    return date.getDay()+"/"+date.getMonth()+1+"/"+date.getFullYear();
+    return date.getDay() + "/" + date.getMonth() + 1 + "/" + date.getFullYear();
   }
 
   //Metodo encargado de establecer la información de la evaluacion en StorageData
-  public ContinueEvaluation(evaluation: EvaluacionInfoWithProgress){
-        this._evaluacionService.getEvaluacion(evaluation.id).subscribe(
+  public ContinueEvaluation(evaluation: EvaluacionInfoWithProgress) {
+    this._evaluacionService.getEvaluacion(evaluation.id).subscribe(
       res => {
         this._appComponent._storageDataService.Evaluacion = res;
         this._appComponent._storageDataService.Evaluacion.assessmentName = evaluation.assessmentName;
-        this._appComponent._storageDataService.AssessmentSelected = {'assessmentId': evaluation.assessmentId, 'assessmentName': evaluation.assessmentName};
+        this._appComponent._storageDataService.AssessmentSelected = { 'assessmentId': evaluation.assessmentId, 'assessmentName': evaluation.assessmentName };
         this.GetAssignation(evaluation.id);
       },
       error => {
@@ -112,12 +130,31 @@ export class PendingEvaluationTableComponent implements OnInit {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
       }
-      );
+    );
   }
   //Metodo encargado de refrescar la tabla 
-  public refresh(){
-    this.parent.GetPaginacion();
+  public refresh() {
+    var o = this.OficinaSeleccionada;
 
+    var e = [];
+    if (this.EquipoSeleccionado.length === 0) {
+      e = [];
+    } else {
+      this.EquipoSeleccionado.forEach(function (element) {
+        e.push(element.id);
+      });
+    }
+    var a = [];
+    if (this.AssessmentSeleccionado.length === 0) {
+      a = [];
+    } else {
+      this.AssessmentSeleccionado.forEach(function (element) {
+        a.push(element.assessmentId);
+      });
+    }
+    this.dataSource.filter = "";
+    this.parent.EvaluacionFiltrar = { 'nombre': '', 'estado': 'false', 'fecha': '', 'userNombre': '', 'puntuacion': '', 'assessmentId': 0, 'oficinas': o, equipos: e, 'idAssessment': a };
+    this.parent.GetPaginacion();
   }
 
 
@@ -126,7 +163,6 @@ export class PendingEvaluationTableComponent implements OnInit {
     this._evaluacionService.EvaluationDelete(evaluationId).subscribe(
       res => {
         this.refresh();
-
       },
       error => {
         if (error == 404) {
@@ -139,59 +175,59 @@ export class PendingEvaluationTableComponent implements OnInit {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
       });
-      }
- // Metodo encargado de abrir la ventana confirmando la eliminacion de la evaluacion
+  }
+  // Metodo encargado de abrir la ventana confirmando la eliminacion de la evaluacion
   public AbrirModal(content, row) {
     this.selectedEvaluacionInfoWithProgress = row;
     this.modalService.open(content).result.then(
       (closeResult) => {
         //Esto realiza la acción de cerrar la ventana
       }, (dismissReason) => {
-          if (dismissReason == 'Finish') {
+        if (dismissReason == 'Finish') {
           //Si decide finalizarlo usaremos el metodo para finalizar la evaluación
           this.EvaluationDelete(row.id);
         }
       })
   }
   // Metodo encargado de establecer la información necesaria sobre las secciones en el StorageData y redirigir a la siguiente vista
-  public GetAllSections(evaluationId: number, assessmentId: number){
-          this._sectionService.getSectionInfo(evaluationId, assessmentId).subscribe(
-            res => {
-              this.ListaDeDatos = res;
-              this._appComponent._storageDataService.Sections = this.ListaDeDatos;
-              this._appComponent._storageDataService.SectionSelectedInfo = this.ListaDeDatos.filter(x => x.id == this.sectionId)[0];
+  public GetAllSections(evaluationId: number, assessmentId: number) {
+    this._sectionService.getSectionInfo(evaluationId, assessmentId).subscribe(
+      res => {
+        this.ListaDeDatos = res;
+        this._appComponent._storageDataService.Sections = this.ListaDeDatos;
+        this._appComponent._storageDataService.SectionSelectedInfo = this.ListaDeDatos.filter(x => x.id == this.sectionId)[0];
 
-              //Se establece la siguiente sección validando si es la ultima
-              let index = this.ListaDeDatos.indexOf(this._appComponent._storageDataService.SectionSelectedInfo);
-              this._appComponent._storageDataService.nextSection = index != this.ListaDeDatos.length ? this.ListaDeDatos[index+1] : null;
-              this._appComponent._storageDataService.prevSection = index != -1 ? this.ListaDeDatos[index-1] : null;
+        //Se establece la siguiente sección validando si es la ultima
+        let index = this.ListaDeDatos.indexOf(this._appComponent._storageDataService.SectionSelectedInfo);
+        this._appComponent._storageDataService.nextSection = index != this.ListaDeDatos.length ? this.ListaDeDatos[index + 1] : null;
+        this._appComponent._storageDataService.prevSection = index != -1 ? this.ListaDeDatos[index - 1] : null;
 
-              //this._appComponent.pushBreadcrumb(this._appComponent._storageDataService.UserProjectSelected.nombre, null);
-              this._appComponent.pushBreadcrumb(this._appComponent._storageDataService.Evaluacion.assessmentName, null);
-              var pipe = new DatePipe('en-US');
-              this._appComponent.pushBreadcrumb(pipe.transform(this._appComponent._storageDataService.Evaluacion.fecha, 'dd/MM/yyyy'), null);
-              //this._appComponent.pushBreadcrumb("Secciones", "/evaluationsections");
-              this._appComponent.pushBreadcrumb("BREADCRUMB.SECTIONS", "/evaluationsections");              
+        //this._appComponent.pushBreadcrumb(this._appComponent._storageDataService.UserProjectSelected.nombre, null);
+        this._appComponent.pushBreadcrumb(this._appComponent._storageDataService.Evaluacion.assessmentName, null);
+        var pipe = new DatePipe('en-US');
+        this._appComponent.pushBreadcrumb(pipe.transform(this._appComponent._storageDataService.Evaluacion.fecha, 'dd/MM/yyyy'), null);
+        //this._appComponent.pushBreadcrumb("Secciones", "/evaluationsections");
+        this._appComponent.pushBreadcrumb("BREADCRUMB.SECTIONS", "/evaluationsections");
 
-              this._router.navigate(['/evaluationquestions']); 
+        this._router.navigate(['/evaluationquestions']);
 
-            },
-            error => {
-              if (error == 404) {
-                this.ErrorMessage = "Error: " + error + " No pudimos encontrar información de las secciones para esta evaluación.";
-              } else if (error == 500) {
-                this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
-              } else if (error == 401) {
-                this.ErrorMessage = "Error: " + error + " El usuario es incorrecto o no tiene permisos, intente introducir su usuario nuevamente.";
-              } else {
-                this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
-              }
-            }
-          );
+      },
+      error => {
+        if (error == 404) {
+          this.ErrorMessage = "Error: " + error + " No pudimos encontrar información de las secciones para esta evaluación.";
+        } else if (error == 500) {
+          this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+        } else if (error == 401) {
+          this.ErrorMessage = "Error: " + error + " El usuario es incorrecto o no tiene permisos, intente introducir su usuario nuevamente.";
+        } else {
+          this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
+      }
+    );
+  }
 
   //Metodo encargado de establecer la información de la asignacion en StorageData
-  public GetAssignation(evaluationId: number){
+  public GetAssignation(evaluationId: number) {
     this._assignationService.AssignationLastQuestionUpdated(evaluationId).subscribe(
       res => {
         this._appComponent._storageDataService.currentAssignation = res;
@@ -207,9 +243,107 @@ export class PendingEvaluationTableComponent implements OnInit {
           this.ErrorMessage = "Error: " + error + " El usuario es incorrecto o no tiene permisos, intente introducir su usuario nuevamente.";
         } else {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
-        }  
+        }
       }
-      );
+    );
+  }
 
+  public getProyectos() {
+    this._proyectoService.getProyectosDeUsuarioConEvaluacionesPendientes().subscribe(
+      res => {
+        this.ListaDeProyectos = res;
+        this.getOficinasDeUsuario(res);
+        this.ListaDeProyectosFiltrada = res;
+      },
+      error => {
+        //Si el servidor tiene algún tipo de problema mostraremos este error
+        if (error == 404) {
+          this.ErrorMessage = "Error: " + error + " El usuario o proyecto autenticado no existe.";
+        } else if (error == 500) {
+          this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+        } else if (error == 401) {
+          this.ErrorMessage = "Error: " + error + " El usuario es incorrecto o no tiene permisos, intente introducir su usuario nuevamente.";
+        } else {
+          this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+        }
+      });
+  }
+
+  // FUNCIONES SELECT DE OFICINAS
+  public getOficinasDeUsuario(res) {
+    var oficinas = [];
+    res.forEach(function (value) {
+      if (oficinas.indexOf(value.oficina) < 0) {
+        oficinas.push(value.oficina);
+      }
+    });
+    this.ListaDeOficinas = oficinas.sort();
+  }
+
+  public selectOficinas() {
+    this.equiposDeLasOficinasSeleccionadas();
+    this.refresh();
+  }
+
+  // FUNCIONES SELECT DE EQUIPOS
+  public selectEquipos() {
+    this.oficinasDeLosEquiposSeleccionados();    
+    this.refresh();
+  }
+
+  // FUNCIONES SELECT DE ASSESSMENT
+  public getAssessmentDeUsuario() {
+    var aux = []
+    var assessment = [];
+    var a: Assessment;
+    //creamos la lista    
+    this.parent.ListaDeEvaluacionesPaginada.forEach(function (value) {
+      if (aux.indexOf(value.assessmentId) < 0) {
+        a = { assessmentId: value.assessmentId, assessmentName: value.assessmentName };
+        assessment.push(a);
+        aux.push(value.assessmentId);
+      }
+    });
+    //ordenamos la lista por nombre
+    this.ListaDeAssessment = assessment.sort(function (a, b) {
+      if (a.assessmentName > b.assessmentName) {
+        return 1;
+      }
+      if (a.assessmentName < b.assessmentName) {
+        return -1;
+      }
+      // a must be equal to b
+      return 0;
+    });
+    this.ListaDeAssessmentFiltrada = this.ListaDeAssessment;
+  }
+
+  public selectAssessment() {
+    this.refresh();
+  }
+
+  public equiposDeLasOficinasSeleccionadas() {
+    //ponemos los equipos seleccionados y la lista de equipos a vacio
+    this.EquipoSeleccionado = [];
+    this.ListaDeProyectosFiltrada = [];
+
+    if (this.OficinaSeleccionada.length === 0) {
+      this.ListaDeProyectosFiltrada = this.ListaDeProyectos;
+    } else {
+      this.ListaDeProyectosFiltrada = this.ListaDeProyectos.filter(x => this.OficinaSeleccionada.indexOf(x.oficina) >= 0);
+    }
+  }
+
+  public oficinasDeLosEquiposSeleccionados() {
+    if (this.EquipoSeleccionado.length != 0) {
+      var oficinas = [];
+      this.EquipoSeleccionado.forEach(function (value) {
+        if (oficinas.indexOf(value.oficina) < 0) {
+          oficinas.push(value.oficina);
+        }
+      });
+      oficinas = oficinas.sort();
+      this.OficinaSeleccionada = oficinas;
+    }
   }
 }

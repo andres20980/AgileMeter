@@ -22,6 +22,7 @@ export class EvaluacionService {
   public identity;
   public token;
   public url: string;
+  public UsuarioLogeado: string;
 
   constructor(private _http: Http,
     private _appComponent: AppComponent,
@@ -30,7 +31,14 @@ export class EvaluacionService {
     //this.url = window.location.protocol +"//"+ window.location.hostname + ":60406/api/";    
     this.url = StaticHelper.ReturnUrlByEnvironment();
 
-
+    var local = localStorage.getItem("user");
+    var storage = this._appComponent._storageDataService.UserData;
+    if (local != null && local != undefined) {
+      this.UsuarioLogeado = localStorage.getItem("user");
+    }
+    else if (storage != undefined && storage != null) {
+      this.UsuarioLogeado = this._appComponent._storageDataService.UserData.nombre;
+    }
   }
 
   //Este metodo recoge todas las evaluaciones de la base de datos
@@ -91,6 +99,20 @@ export class EvaluacionService {
       catchError(this.errorHandler));
   }
 
+  //Nos permite recoger información de todas las envaluaciones filtrada y paginada
+  getAllEvaluacionInfoFiltered(NumPag: number, EvaluacionFiltrar: EvaluacionFilterInfo) {
+    let Token = this._appComponent.ComprobarUserYToken();
+    let params = JSON.stringify(EvaluacionFiltrar);
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': Token
+    });
+    return this._http.post(this.url + 'evaluaciones/'+ this.UsuarioLogeado +'/proyecto/all/info/page/' + NumPag, params, { headers: headers }).pipe(
+      map(res => res.json()),
+      // tap(r => console.log("OBSERVAAAAAAAAAAAAABLE",r)),
+      catchError(this.errorHandler));
+  }
+
   //Nos permite recoger información de las evaluaciones filtrada para la gráfica
   GetEvaluationsWithSectionsInfo(idProject: number, EvaluacionFiltrar: EvaluacionFilterInfo) {
     var codigoIdioma = this._appComponent._storageDataService.codigoIdioma;
@@ -117,6 +139,19 @@ export class EvaluacionService {
     return this._http.post(this.url + 'evaluaciones/proyecto/' + idProject + '/progress/', params, { headers: headers }).pipe(
       map(res => res.json()),
       // tap(r => console.log("OBSERVAAAAAAAAAAAAABLE",r)),
+      catchError(this.errorHandler));
+  }
+
+  //Nos permite recoger información de todas las evaluaciones de todos los equipos asignados a un usuario filtrada para la gráfica
+  GetAllEvaluationsWithProgress(EvaluacionFiltrar: EvaluacionFilterInfo) {
+    let Token = this._appComponent.ComprobarUserYToken();
+    let params = JSON.stringify(EvaluacionFiltrar);
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': Token
+    });
+    return this._http.post(this.url + 'evaluaciones/alluserprojects/' + this.UsuarioLogeado + '/progress/', params, { headers: headers }).pipe(
+      map(res => res.json()),
       catchError(this.errorHandler));
   }
 

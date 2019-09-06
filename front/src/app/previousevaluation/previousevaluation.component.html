@@ -159,7 +159,7 @@
         <app-loading></app-loading>
     </div>
 
-    <div id="sortedtable" *ngIf="MostrarTabla && ListaDeEvaluacionesPaginada">
+    <div id="sortedtable" *ngIf="MostrarTabla">
       <sorted-table *ngIf="ListaDeEvaluacionesPaginada && ListaDeEvaluacionesPaginada.length > 0" [dataInput]="ListaDeEvaluacionesPaginada">
         {{ 'PREVIOUS_EVALUATION.LOADING' | translate }}
       </sorted-table>

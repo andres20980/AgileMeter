@@ -12,15 +12,19 @@
 		"PENDING_ASSESSMENTS": "Evaluaciones pendientes"
 	},
 	"HOME": {
+		"SELECT_OFFICE": "Seleccione una oficina",
 		"SELECT_TEAM": "Seleccione un equipo",
 		"SELECT_ASSESSMENT": "Seleccione un tipo de evaluación",
+		"CREATE_ASSESSMENT": "Crear nueva evaluación",
 		"FINISHED_ASSESSMENTS": "EVALUACIONES FINALIZADAS",
 		"PENDING_ASSESSMENTS": "EVALUACIONES PENDIENTES",
 		"PENDING_ASSESSMENTS_MODAL": "PENDIENTES",
 		"NEW_ASSESSMENT": "NUEVA EVALUACIÓN",
 		"NEW_ASSESSMENT_MODAL": "NUEVA",
 		"MODAL_HEADER": "Importante",
-		"MODAL_BODY": "Este equipo tiene evaluaciones pendientes, ¿Desea crear una nueva o gestionar las pendientes?"
+		"MODAL_BODY": "Este equipo tiene evaluaciones pendientes, ¿Desea crear una nueva o gestionar las pendientes?",
+		"ASSESSMENT_CONSULT": "Consultar evaluaciones"
+
 	},
 	"BACKOFFICE": {
 		"BTN_USER_MANAGEMENT": "GESTIÓN DE USUARIOS",
@@ -140,8 +144,13 @@
 		"TABLE_COL_USER": "Usuario",
 		"TABLE_COL_ASSESSMENT": "Evaluación",
 		"TABLE_COL_PROGRESS": "Progreso",
+		"TABLE_COL_TEAM": "Equipo",
+		"TABLE_COL_OFFICE": "Oficina",
 		"TABLE_COL_ACTIONS": "Acciones",
 		"FILTER": "Filtro",
+		"FILTER_OFFICE": "Oficina",
+		"FILTER_TEAM": "Equipo",
+		"FILTER_ASSESSMENT": "Evaluación",
 		"ICON_CONTINUE": "Continuar evaluación",
 		"ICON_DELETE": "Descartar evaluación",
 		"MODAL_TITLE": "Importante",
@@ -205,6 +214,8 @@
 		"EXCEL_EXPORT": "Exportar a Excel",
 		"DATE": "Fecha",
 		"USER": "Usuario",
+		"OFFICE": "Oficina",
+		"TEAM": "Equipo",
 		"ASSESSMENT": "Evaluación",
 		"SCORE": "Puntuación",
 		"STATE": "Estado",
@@ -216,7 +227,10 @@
 		"RESULTS": "Resultados",
 		"SHOW_RESULTS": "Ver Resultados",
 		"EVALUATION_NOTES": "Notas Evaluación",
-		"OBJETIVES_NOTES": "Notas Objetivos"
+		"OBJETIVES_NOTES": "Notas Objetivos",
+		"FILTER_OFFICE" :"Oficina",
+		"FILTER_TEAM" :"Equipo",
+		"FILTER_ASSESSMENT" :"Evaluación"
 	},
 	"COMENTARIOS_TABLE": {
 		"FILTER": " Filtro",

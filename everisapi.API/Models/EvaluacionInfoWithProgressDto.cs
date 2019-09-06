@@ -24,5 +24,7 @@ namespace everisapi.API.Models
     public float progress { get; set; }
 
     public int numQuestions { get; set; }
+
+    public string oficina { get; set; }
   }
 }
