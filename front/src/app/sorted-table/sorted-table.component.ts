@@ -77,7 +77,7 @@ export class SortedTableComponent implements OnInit {
 
     this.dataSource.filterPredicate = function (data, filter: string): boolean {
       let date = new Date(data.fecha);
-      //console.log ((date.getDate()<10?"0":"")+date.getDate()+"/"+(date.getMonth()<10?"0":"")+(date.getMonth()+1)+"/"+date.getFullYear());
+      console.log ((date.getDate()<10?"0":"")+date.getDate()+"/"+(date.getMonth()<10?"0":"")+(date.getMonth()+1)+"/"+date.getFullYear());
       return data.nombre.toLowerCase().includes(filter)
         || data.assessmentName.toLowerCase().includes(filter)
         || data.userNombre.toLowerCase().includes(filter)
@@ -87,6 +87,10 @@ export class SortedTableComponent implements OnInit {
         || ((date.getDate() < 10 ? "0" : "") + date.getDate() + "/" + (date.getMonth() < 10 ? "0" : "") + (date.getMonth() + 1) + "/" + date.getFullYear()).includes(filter)
         ;
     };
+
+    //Temporalmente asignamos el primer proyecto de la tabla que cumple que su assessment es scrum
+    this.prevEval.Project.id = this.dataSource.filteredData.find(ev => ev.assessmentId == 1).proyectoId;
+    
   }
 
   public parseDate(value: string): string {

@@ -483,7 +483,8 @@ namespace everisapi.API.Services
                     NotasObjetivos = evaluacion.NotasObjetivos,
                     AssessmentName = evaluacion.Assessment.AssessmentName,
                     AssessmentId = evaluacion.AssessmentId,
-                    Puntuacion = (float)evaluacion.Puntuacion
+                    Puntuacion = (float)evaluacion.Puntuacion,
+                    ProyectoId = evaluacion.ProyectoId
                 };
                 //Añade el objeto en la lista
                 EvaluacionesInformativas.Add(EvaluacionInfo);

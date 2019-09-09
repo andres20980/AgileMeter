@@ -359,6 +359,7 @@ export class PreviousevaluationComponent implements OnInit {
         res => {
           this.nEvaluaciones = res.numEvals;
           this.ListaDeEvaluacionesPaginada = res.evaluacionesResult;
+
           this.Mostrar = true; 
 
           if(this.ListaDeEvaluacionesPaginada.length > 0){        
@@ -374,11 +375,11 @@ export class PreviousevaluationComponent implements OnInit {
             this.selectedAssessment = this.ListaAssessments[0];
           }
 
-          //if(this.selectedAssessment != null){
-          // Filtro de la grafica para traer las evaluaciones
-          // let filter: EvaluacionFilterInfo = new EvaluacionFilterInfo("","","","","true", this.selectedAssessment.id,[],[],[]);
-          // this.GetChartData(filter);
-          //}         
+          if(this.selectedAssessment != null && this.selectedAssessment != undefined){
+          //Filtro de la grafica para traer las evaluaciones
+           let filter: EvaluacionFilterInfo = new EvaluacionFilterInfo("","","","","true", this.selectedAssessment.id,[],[],[]);
+          this.GetChartData(filter);
+          }         
         },
         error => {
           if (error == 404) {
@@ -395,12 +396,15 @@ export class PreviousevaluationComponent implements OnInit {
   }
 
   public GetChartData(filter: EvaluacionFilterInfo){
-    this._evaluacionService.GetEvaluationsWithSectionsInfo( this.Project.id, filter)
+    this._evaluacionService.GetEvaluationsWithSectionsInfo(this.Project.id, filter)
       .subscribe(
         res => {
           this.Mostrar = true; 
           this.EvaluationsWithSectionInfo = res.evaluacionesResult;
-          this.shareDataToChart();         
+          if (this.EvaluationsWithSectionInfo !== undefined && this.EvaluationsWithSectionInfo.length > 0)
+          {
+            this.shareDataToChart();
+          }         
         },
         error => {
           if (error == 404) {

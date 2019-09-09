@@ -177,7 +177,7 @@
     <div id="Grafica" *ngIf="ListaPuntuacion && ListaPuntuacion.length > 0" class="mx-auto">
         <div class="row" >
             <div class="legend" >
-            <div *ngFor="let item of legend; let i = index" class="legend-item" [ngClass]="{'legend-item-disabled': chart.chart.config.data.datasets[i].hidden}" (click)="toggleChartData(i)" >
+            <div *ngFor="let item of legend; let i = index" class="legend-item" [ngClass]="{'legend-item-disabled': (chart == 'undefined') && chart.chart.config.data.datasets[i].hidden}" (click)="toggleChartData(i)" >
               <div class ="legend-bullet">           
                  <svg width="50" height="25" xmlns="http://www.w3.org/2000/svg">
                   <g>
@@ -200,7 +200,7 @@
             </div> 
         </div> 
         <div class="legend-global" >
-            <div class ="legend-global-item" [ngClass]="{'legend-item-disabled': chart && chart.chart.config.data.datasets[chart.chart.config.data.datasets.length - 1].hidden}" (click)="toggleGlobalData()">
+            <div class ="legend-global-item" [ngClass]="{'legend-item-disabled': (chart == 'undefined') && chart.chart.config.data.datasets[chart.chart.config.data.datasets.length - 1].hidden}" (click)="toggleGlobalData()">
             <div class ="legend-global-bullet">
                 <svg width="40" height="25" xmlns="http://www.w3.org/2000/svg">
                   <g>

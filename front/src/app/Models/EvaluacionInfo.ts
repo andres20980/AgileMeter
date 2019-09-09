@@ -13,6 +13,7 @@ export class EvaluacionInfo {
     public flagNotasSec: boolean,
     public flagNotasAsig: boolean,
     public assessmentId: number,
-    public assessmentName: string
+    public assessmentName: string,
+    public proyectoId: number
   ) { }
 }

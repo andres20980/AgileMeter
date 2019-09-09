@@ -36,5 +36,7 @@ namespace everisapi.API.Models
         public string UserNombre { get; set; }
 
         public string Oficina { get; set; }
+
+        public int ProyectoId {get; set;}
     }
 }
