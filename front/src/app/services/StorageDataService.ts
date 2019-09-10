@@ -38,6 +38,9 @@ export class StorageDataService {
   public currentAssignation: Asignacion = { 'id': 0, 'nombre': "undefined" };
   public breadcrumbList: Array<any> = [];
   public codigoIdioma:number = 1;
+  public OfficesSelected: string[];
+  public ProjectsSelected: Proyecto[] = [];
+  public AssessmentsSelected: Assessment[] = [];
 
 
   public GetToken() {

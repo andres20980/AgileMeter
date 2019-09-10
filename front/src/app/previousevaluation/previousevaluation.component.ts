@@ -196,6 +196,23 @@ export class PreviousevaluationComponent implements OnInit {
     }
   }
 
+  //Método para activar la gráfica
+  public ActivarGrafica()
+  {
+    var copiaLista = Array<EvaluacionInfo>();
+
+    if (this.ListaDeEvaluacionesPaginada != undefined)
+    {
+      this.ListaDeEvaluacionesPaginada.forEach(element => {
+        if (!copiaLista.find(c => c.proyectoId == element.proyectoId))
+        {
+          copiaLista.push(element);
+        }
+      });
+    }
+    return (copiaLista.length > 1? false:true);
+  }
+
   //Restablece los datos de la busqueda
   // public Restablecer() {
   //   if (this.clicked) {
@@ -371,6 +388,9 @@ export class PreviousevaluationComponent implements OnInit {
                 this.ListaAssessments.push(a);
               }
             });
+
+            //Temporalmente asignamos el primer proyecto de la tabla sin filtrar que cumple que su assessment es scrum
+            this.Project.id = this.ListaDeEvaluacionesPaginada.find(ev => ev.assessmentId == 1).proyectoId;
 
             this.selectedAssessment = this.ListaAssessments[0];
           }

@@ -75,6 +75,10 @@ export class SortedTableComponent implements OnInit {
     this.userRole = this._appComponent._storageDataService.Role;
     this.prevEval.TableFilteredData = this.dataSource.filteredData;
 
+    //Inicialmente asignamos el primer proyecto de la tabla sin filtrar
+    if (this.dataSource.data.length > 0)
+      this.prevEval.Project.id = this.dataSource.data[0].proyectoId;
+
     this.dataSource.filterPredicate = function (data, filter: string): boolean {
       let date = new Date(data.fecha);
       console.log ((date.getDate()<10?"0":"")+date.getDate()+"/"+(date.getMonth()<10?"0":"")+(date.getMonth()+1)+"/"+date.getFullYear());
@@ -88,8 +92,11 @@ export class SortedTableComponent implements OnInit {
         ;
     };
 
-    //Temporalmente asignamos el primer proyecto de la tabla que cumple que su assessment es scrum
-    this.prevEval.Project.id = this.dataSource.filteredData.find(ev => ev.assessmentId == 1).proyectoId;
+    //Temporalmente ñluego asignamos el primer proyecto de la tabla filtrada que cumple que su assessment es scrum
+    if (this.dataSource.filteredData.length > 0)
+    {
+      this.prevEval.Project.id = this.dataSource.filteredData[0].proyectoId;
+    }
     
   }
 
@@ -188,6 +195,15 @@ export class SortedTableComponent implements OnInit {
 
   // FUNCIONES SELECT DE EQUIPOS
   public selectEquipos() {
+    //Limpiamos la lista de equipos en storage y añadimos los nuevos equipos seleccionados
+    this._appComponent._storageDataService.ProjectsSelected = [];
+    this.EquipoSeleccionado.forEach(element => {
+      this._appComponent._storageDataService.ProjectsSelected.push(element);
+    });
+
+    console.log(this._appComponent._storageDataService.ProjectsSelected);
+
+    //Refrescamos las oficinas
     this.oficinasDeLosEquiposSeleccionados();    
     this.refresh();
   }
@@ -199,7 +215,7 @@ export class SortedTableComponent implements OnInit {
     var a: Assessment;
     //creamos la lista    
     this.prevEval.ListaDeEvaluacionesPaginada.forEach(function (value) {
-      if (aux.indexOf(value.assessmentId) < 0) {
+      if (aux.indexOf(value.assessmentId) < 0 ) {
         a = { assessmentId: value.assessmentId, assessmentName: value.assessmentName };
         assessment.push(a);
         aux.push(value.assessmentId);
@@ -245,6 +261,14 @@ export class SortedTableComponent implements OnInit {
       });
       oficinas = oficinas.sort();
       this.OficinaSeleccionada = oficinas;
+
+      //Limpiamos la lista de equipos en storage y añadimos los nuevos equipos seleccionados
+      this._appComponent._storageDataService.OfficesSelected = [];
+      this.OficinaSeleccionada.forEach(element => {
+        this._appComponent._storageDataService.OfficesSelected.push(element);
+       });
+
+      console.log(this._appComponent._storageDataService.OfficesSelected);
     }
   }
 
