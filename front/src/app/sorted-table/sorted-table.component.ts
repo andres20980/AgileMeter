@@ -189,6 +189,14 @@ export class SortedTableComponent implements OnInit {
   }
 
   public selectOficinas() {
+    //Limpiamos la lista de oficinas en storage y añadimos los nuevas oficinas seleccionadas
+    this._appComponent._storageDataService.OfficesSelected = [];
+      this.OficinaSeleccionada.forEach(element => {
+        this._appComponent._storageDataService.OfficesSelected.push(element);
+       });
+
+    console.log(this._appComponent._storageDataService.OfficesSelected);
+
     this.equiposDeLasOficinasSeleccionadas();
     this.refresh();
   }
@@ -248,6 +256,20 @@ export class SortedTableComponent implements OnInit {
       this.ListaDeProyectosFiltrada = this.ListaDeProyectos;
     } else {
       this.ListaDeProyectosFiltrada = this.ListaDeProyectos.filter(x => this.OficinaSeleccionada.indexOf(x.oficina) >= 0);
+    }
+
+    if (this.ListaDeProyectosFiltrada.length === 1)
+    {
+      //Limpiamos la lista de equipos en storage y añadimos el único equipo
+      this._appComponent._storageDataService.ProjectsSelected = [];
+      this.ListaDeProyectosFiltrada.forEach(element => {
+        this._appComponent._storageDataService.ProjectsSelected.push(element);
+      });
+
+      this.EquipoSeleccionado = this._appComponent._storageDataService.ProjectsSelected;
+
+    console.log(this._appComponent._storageDataService.ProjectsSelected);
+      
     }
   }
 
