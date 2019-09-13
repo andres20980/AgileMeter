@@ -468,7 +468,7 @@ namespace everisapiTest
             mockRepository.Setup(r => r.GetPreguntasNivelOrganizadas(1,1,1)).Returns(new List<everisapi.API.Models.SectionConAsignacionesDto>());
 
             //Act
-            var okResult = _controller.GetPreguntasNivelOrganizadas(idevaluacion: 1, assessmentid: 1, 1);
+            var okResult = _controller.GetPreguntasNivelOrganizadas(1, 1, 1);
 
             //Assert
             Assert.IsType<OkObjectResult>(okResult);
@@ -483,7 +483,7 @@ namespace everisapiTest
             mockRepository.Setup(r => r.GetPreguntasNivelOrganizadas(1,1,1)).Throws(new Exception());
 
             //Act
-            var okResult = _controller.GetPreguntasNivelOrganizadas(idevaluacion: 1, assessmentid: 1, 1);
+            var okResult = _controller.GetPreguntasNivelOrganizadas(1, 1, 1);
 
             //Assert
             Assert.IsType<ObjectResult>(okResult);

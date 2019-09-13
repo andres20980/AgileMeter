@@ -20,8 +20,11 @@ namespace everisapiTest
 
         private readonly IEvaluacionInfoRepository _evaluacionInfoRepository;
 
+        private readonly IUsersInfoRepository _usersInfoRepository;
+
         Mock<ILogger<EvaluacionController>> mockLogger;
         Mock<IEvaluacionInfoRepository> mockRepository;
+        Mock<IUsersInfoRepository> mockRepositoryUsersInfo;
 
         public EvaluacionControllerTest()
         {
@@ -31,6 +34,9 @@ namespace everisapiTest
             mockRepository = new Mock<IEvaluacionInfoRepository>();
             _evaluacionInfoRepository = mockRepository.Object;
 
+            mockRepositoryUsersInfo = new Mock<IUsersInfoRepository>();
+            _usersInfoRepository = mockRepositoryUsersInfo.Object;
+
             var autoMapperInstance = AutoMapperConfig.Instance;
         }
 
@@ -39,7 +45,7 @@ namespace everisapiTest
         public void GetEvaluaciones_WhenCalled_ReturnOkResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             var evaluacionesEntities = new List<everisapi.API.Entities.EvaluacionEntity>()
             {
@@ -64,7 +70,7 @@ namespace everisapiTest
         public void GetPreguntasAsignacion_WhenCalledThrowException_ReturnsStatusCodeResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             mockRepository.Setup(r => r.GetEvaluaciones()).Throws(new Exception());
 
@@ -80,7 +86,7 @@ namespace everisapiTest
         public void GetEvaluacion_WhenCalledWithRespuesta_ReturnsOkResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             var evaluacionEntity = new  everisapi.API.Entities.EvaluacionEntity{
                 Id = 1, 
@@ -100,7 +106,7 @@ namespace everisapiTest
         public void GetEvaluacion_WhenCalledWithoutRespuesta_ReturnsOkResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             var evaluacionEntity = new  everisapi.API.Entities.EvaluacionEntity{
                 Id = 1, Fecha = new DateTime()
@@ -119,7 +125,7 @@ namespace everisapiTest
         public void GetEvaluacion_WhenCalledNullEvaluacion_ReturnsNotFoundResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             everisapi.API.Entities.EvaluacionEntity evaluacionEntity = null;
 
@@ -136,7 +142,7 @@ namespace everisapiTest
         public void GetEvaluacion_WhenCalledThrowException_ReturnsStatusCodeResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             mockRepository.Setup(r => r.GetEvaluacion(It.IsAny<int>(),It.IsAny<bool>())).Throws(new Exception());
 
@@ -153,7 +159,7 @@ namespace everisapiTest
         public void GetEvaluationInfoFromIdEvaluation_WhenCalled_ReturnsOkResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             var evaluacionInfoDto = new  everisapi.API.Models.EvaluacionInfoDto{
                 Id = 1, Fecha = new DateTime()
@@ -172,7 +178,7 @@ namespace everisapiTest
         public void GetEvaluationInfoFromIdEvaluation_WhenCalledNullEvaluacion_ReturnNotFoundResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             everisapi.API.Models.EvaluacionInfoDto evaluacionInfoDto = null;
 
@@ -189,7 +195,7 @@ namespace everisapiTest
         public void GetEvaluationInfoFromIdEvaluation_WhenCalledThrowException_ReturnsStatusCodeResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             mockRepository.Setup(r => r.GetEvaluationInfoFromIdEvaluation(It.IsAny<int>())).Throws(new Exception());
 
@@ -206,7 +212,7 @@ namespace everisapiTest
         public void GetEvaluacionInfo_WhenCalled_ReturnsOkResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             var evaluaciones = new  List<everisapi.API.Models.EvaluacionInfoDto>{
                 new everisapi.API.Models.EvaluacionInfoDto{Id = 1, Fecha = new DateTime()}
@@ -225,7 +231,7 @@ namespace everisapiTest
         public void GetEvaluacionInfo_WhenCalledNullEvaluacion_ReturnNotFoundResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             List<everisapi.API.Models.EvaluacionInfoDto> evaluacionesInfoDto= null;
 
@@ -242,7 +248,7 @@ namespace everisapiTest
         public void GetEvaluacionInfo_WhenCalledThrowException_ReturnsStatusCodeResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             mockRepository.Setup(r => r.GetEvaluationInfo(It.IsAny<int>())).Throws(new Exception());
 
@@ -259,7 +265,7 @@ namespace everisapiTest
         public void GetEvaluacionInfoAndPage_WhenCalled_ReturnsOkResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             var evaluaciones = new  List<everisapi.API.Models.EvaluacionInfoDto>{
                 new everisapi.API.Models.EvaluacionInfoDto{Id = 1, Fecha = new DateTime()}
@@ -278,7 +284,7 @@ namespace everisapiTest
         public void GetEvaluacionInfoAndPage_WhenCalledNullEvaluacion_ReturnNotFoundResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             List<everisapi.API.Models.EvaluacionInfoDto> evaluacionesInfoDto= null;
 
@@ -295,7 +301,7 @@ namespace everisapiTest
         public void GetEvaluacionInfoAndPage_WhenCalledThrowException_ReturnsStatusCodeResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             mockRepository.Setup(r => r.GetEvaluationInfoAndPage(It.IsAny<int>(), It.IsAny<int>())).Throws(new Exception());
 
@@ -312,7 +318,7 @@ namespace everisapiTest
         public void GetEvaluationInfoAndPageFiltered_WhenCalledIdDistintZero_ReturnsOkResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             var evaluaciones = new  List<everisapi.API.Models.EvaluacionInfoDto>{
                 new everisapi.API.Models.EvaluacionInfoDto{Id = 1, Fecha = new DateTime()}
@@ -337,7 +343,7 @@ namespace everisapiTest
         public void GetEvaluationInfoAndPageFiltered_WhenCalledIdEqualZero_ReturnsOkResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             var evaluaciones = new  List<everisapi.API.Models.EvaluacionInfoDto>{
                 new everisapi.API.Models.EvaluacionInfoDto{Id = 1, Fecha = new DateTime()}
@@ -362,7 +368,7 @@ namespace everisapiTest
         public void GetEvaluationInfoAndPageFiltered_WhenCalledInvalidModel_ReturnsBadRequestResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
             _controller.ModelState.AddModelError("error", "some error");
 
             var evaluaciones = new  List<everisapi.API.Models.EvaluacionInfoDto>{
@@ -388,7 +394,7 @@ namespace everisapiTest
         public void GetEvaluationInfoAndPageFiltered_WhenCalledWithNull_ReturnsBadRequestResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             var evaluaciones = new  List<everisapi.API.Models.EvaluacionInfoDto>{
                             new everisapi.API.Models.EvaluacionInfoDto{Id = 1, Fecha = new DateTime()}
@@ -415,7 +421,7 @@ namespace everisapiTest
         public void GetEvaluationInfoAndPageFiltered_WhenCalledThrowException_ReturnsStatusCodeResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             mockRepository.Setup(r => r.GetEvaluationInfoAndPageFiltered(It.IsAny<int>(),
                                                 It.IsAny<int>(),
@@ -438,7 +444,7 @@ namespace everisapiTest
         public void GetEvaluationsWithSectionsInfo_WhenCalled_ReturnsOkResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             var evaluaciones = new  List<everisapi.API.Models.EvaluacionInfoWithSectionsDto>{
                 new everisapi.API.Models.EvaluacionInfoWithSectionsDto{Id = 1, Fecha = new DateTime()}
@@ -463,7 +469,7 @@ namespace everisapiTest
         public void GetEvaluationsWithSectionsInfo_WhenCalledInvalidModel_ReturnsBadRequestResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
             _controller.ModelState.AddModelError("error", "some error");
 
             var evaluaciones = new  List<everisapi.API.Models.EvaluacionInfoWithSectionsDto>{
@@ -489,7 +495,7 @@ namespace everisapiTest
         public void GetEvaluationsWithSectionsInfo_WhenCalledWithNull_ReturnsBadRequestResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             var evaluaciones = new  List<everisapi.API.Models.EvaluacionInfoWithSectionsDto>{
                 new everisapi.API.Models.EvaluacionInfoWithSectionsDto{Id = 1, Fecha = new DateTime()}
@@ -516,7 +522,7 @@ namespace everisapiTest
         public void GetEvaluationsWithSectionsInfo_WhenCalledThrowException_ReturnsStatusCodeResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             mockRepository.Setup(r => r.GetEvaluationsWithSectionsInfo(It.IsAny<int>(),
                                                 It.IsAny<everisapi.API.Models.EvaluacionInfoPaginationDto>(),
@@ -539,7 +545,7 @@ namespace everisapiTest
         public void GetEvaluationsWithProgress_WhenCalled_ReturnsOkResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             var evaluaciones = new  List<everisapi.API.Models.EvaluacionInfoWithProgressDto>{
                 new everisapi.API.Models.EvaluacionInfoWithProgressDto{Id = 1, Fecha = new DateTime()}
@@ -562,7 +568,7 @@ namespace everisapiTest
         public void GetEvaluationsWithProgress_WhenCalledInvalidModel_ReturnsBadRequestResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
             _controller.ModelState.AddModelError("error", "some error");
 
             var evaluaciones = new  List<everisapi.API.Models.EvaluacionInfoWithProgressDto>{
@@ -586,7 +592,7 @@ namespace everisapiTest
         public void GetEvaluationsWithProgress_WhenCalledWithNull_ReturnsBadRequestResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             var evaluaciones = new  List<everisapi.API.Models.EvaluacionInfoWithProgressDto>{
                 new everisapi.API.Models.EvaluacionInfoWithProgressDto{Id = 1, Fecha = new DateTime()}
@@ -611,7 +617,7 @@ namespace everisapiTest
         public void GetEvaluationsWithProgress_WhenCalledThrowException_ReturnsStatusCodeResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             mockRepository.Setup(r => r.GetEvaluationsWithProgress(It.IsAny<int>(),
                                                 It.IsAny<everisapi.API.Models.EvaluacionInfoPaginationDto>()  
@@ -632,7 +638,7 @@ namespace everisapiTest
         public void GetNumEvaluacionFromProject_WhenCalled_ReturnsOkResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             int numEvaluaciones = 1;
 
@@ -649,7 +655,7 @@ namespace everisapiTest
         public void GetNumEvaluacionFromProject_WhenCalledThrowException_ReturnsStatusCodeResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             mockRepository.Setup(r => r.GetNumEval(It.IsAny<int>())).Throws(new Exception());
 
@@ -666,7 +672,7 @@ namespace everisapiTest
         public void GetEvaluacionFromProject_WhenCalled_ReturnsOkResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             var  evaluations = new List<everisapi.API.Entities.EvaluacionEntity>{
                 new everisapi.API.Entities.EvaluacionEntity{
@@ -688,7 +694,7 @@ namespace everisapiTest
         public void GetEvaluacionFromProject_WhenCalledNull_ReturnsNotFoundResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             List<everisapi.API.Entities.EvaluacionEntity>  evaluations = null;
 
@@ -705,7 +711,7 @@ namespace everisapiTest
         public void GetEvaluacionFromProject_WhenCalledThrowException_ReturnsStatusCodeResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             mockRepository.Setup(r => r.GetEvaluacionesFromProject(It.IsAny<int>())).Throws(new Exception());
 
@@ -722,7 +728,7 @@ namespace everisapiTest
         public void GetIncompleteEvaluationFromProject_WhenCalled_ReturnsOkResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             var  evaluations = new everisapi.API.Entities.EvaluacionEntity{
                 Id = 1,
@@ -742,7 +748,7 @@ namespace everisapiTest
         public void GetIncompleteEvaluationFromProject_WhenCalledThrowException_ReturnsStatusCodeResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             mockRepository.Setup(r => r.EvaluationIncompletaFromProject(It.IsAny<int>())).Throws(new Exception());
 
@@ -759,7 +765,7 @@ namespace everisapiTest
         public void GetIncompleteEvaluationFromProjectAndAssessment_WhenCalled_ReturnsOkResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             var  evaluations = new everisapi.API.Entities.EvaluacionEntity{
                 Id = 1,
@@ -780,7 +786,7 @@ namespace everisapiTest
         public void GetIncompleteEvaluationFromProjectAndAssessment_WhenCalledThrowException_ReturnsStatusCodeResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             mockRepository.Setup(r => r.EvaluationIncompletaFromProjectAndAssessment(
                 It.IsAny<int>(), It.IsAny<int>())).Throws(new Exception());
@@ -798,7 +804,7 @@ namespace everisapiTest
         public void CreateEvaluacion_WhenCalled_ReturnsOkResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             var evaluacion = new  everisapi.API.Models.EvaluacionCreateUpdateDto
                                 {
@@ -819,7 +825,7 @@ namespace everisapiTest
         public void CreateEvaluacion_WhenCalled_ReturnsStatusCodeResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             var evaluacion = new  everisapi.API.Models.EvaluacionCreateUpdateDto
                                 {
@@ -840,7 +846,7 @@ namespace everisapiTest
         public void CreateEvaluacion_WhenCalledWithNull_ReturnsBadRequestResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             everisapi.API.Models.EvaluacionCreateUpdateDto evaluacion = null;
 
@@ -858,7 +864,7 @@ namespace everisapiTest
         public void CreateEvaluacion_WhenCalledThrowException_ReturnsStatusCodeResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             var evaluacion = new  everisapi.API.Models.EvaluacionCreateUpdateDto
                                 {
@@ -881,7 +887,7 @@ namespace everisapiTest
         public void UpdateEvaluacion_WhenCalled_ReturnsOkResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             var evaluacion = new  everisapi.API.Models.EvaluacionCreateUpdateDto
                                 {
@@ -902,7 +908,7 @@ namespace everisapiTest
         public void UpdateEvaluacion_WhenCalled_ReturnsStatusCodeResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             var evaluacion = new  everisapi.API.Models.EvaluacionCreateUpdateDto
                                 {
@@ -923,7 +929,7 @@ namespace everisapiTest
         public void UpdateEvaluacion_WhenCalledWithNull_ReturnsBadRequestResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             everisapi.API.Models.EvaluacionCreateUpdateDto evaluacion = null;
 
@@ -941,7 +947,7 @@ namespace everisapiTest
         public void UpdateEvaluacion_WhenCalledInvalidModel_ReturnsBadRequestResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
             _controller.ModelState.AddModelError("error", "some error");
 
             var evaluacion = new  everisapi.API.Models.EvaluacionCreateUpdateDto
@@ -963,7 +969,7 @@ namespace everisapiTest
         public void UpdateEvaluacion_WhenCalledThrowException_ReturnsStatusCodeResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             var evaluacion = new  everisapi.API.Models.EvaluacionCreateUpdateDto
                                 {
@@ -986,7 +992,7 @@ namespace everisapiTest
         public void EvaluationDelete_WhenCalled_ReturnsOkResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             var evaluacion = new  everisapi.API.Models.EvaluacionInfoDto
                                 {
@@ -1007,7 +1013,7 @@ namespace everisapiTest
         public void EvaluationDelete_WhenCalled_ReturnsBadRequestResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             var evaluacion = new  everisapi.API.Models.EvaluacionInfoDto
                                 {
@@ -1028,7 +1034,7 @@ namespace everisapiTest
         public void EvaluationDelete_WhenCalledWithNull_ReturnsBadRequestResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             everisapi.API.Models.EvaluacionInfoDto evaluacion = null;
 
@@ -1046,7 +1052,7 @@ namespace everisapiTest
         public void EvaluationDelete_WhenCalledInvalidModel_ReturnsBadRequestResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
             _controller.ModelState.AddModelError("error", "some error");
 
             var evaluacion = new  everisapi.API.Models.EvaluacionInfoDto
@@ -1070,7 +1076,7 @@ namespace everisapiTest
         public void CalculateEvaluationProgress_WhenCalled_ReturnsOkResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             mockRepository.Setup(r => r.CalculateEvaluationProgress(It.IsAny<int>(), It.IsAny<int>())).Returns(It.IsAny<float>());
 
@@ -1085,7 +1091,7 @@ namespace everisapiTest
         public void CalculateEvaluationProgress_WhenCalledThrowException_ReturnsStatusCodeResult()
         {
             //Arrange            
-            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository);
+            _controller = new EvaluacionController(_logger, _evaluacionInfoRepository, _usersInfoRepository);
 
             mockRepository.Setup(r => r.CalculateEvaluationProgress(It.IsAny<int>(), It.IsAny<int>())).Throws(new Exception());
 
