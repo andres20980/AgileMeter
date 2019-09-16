@@ -49,7 +49,11 @@ export class HomeComponent implements OnInit {
     private _appComponent: AppComponent) { }
 
   ngOnInit() {
-    //Empezamos cargando el usuario en el componente mientras verificamos si esta logueado
+    //Comenzamos limpiando el storage relativo a la selección de evaluaciones
+    this._appComponent._storageDataService.OfficesSelected = [];
+    this._appComponent._storageDataService.ProjectsSelected = [];
+    
+    //Cargamos cargando el usuario en el componente mientras verificamos si esta logueado
     //En casao de no estar logeado nos enviara devuelta al login
     if (!this._proyectoService.verificarUsuario()) {
       this._router.navigate(['/login']);

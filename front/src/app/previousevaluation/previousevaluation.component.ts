@@ -115,7 +115,7 @@ export class PreviousevaluationComponent implements OnInit {
   ngOnInit() {
     //Recogemos los proyectos y realizamos comprobaciones
     var Role;
-    this.Project = this._appComponent._storageDataService.UserProjectSelected;
+    //this.Project = this._appComponent._storageDataService.UserProjectSelected;
     if (!this._proyectoService.verificarUsuario()) {
       this._router.navigate(['/login']);
     }

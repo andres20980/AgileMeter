@@ -91,12 +91,6 @@ export class SortedTableComponent implements OnInit {
         || ((date.getDate() < 10 ? "0" : "") + date.getDate() + "/" + (date.getMonth() < 10 ? "0" : "") + (date.getMonth() + 1) + "/" + date.getFullYear()).includes(filter)
         ;
     };
-
-    //Temporalmente ñluego asignamos el primer proyecto de la tabla filtrada que cumple que su assessment es scrum
-    if (this.dataSource.filteredData.length > 0)
-    {
-      this.prevEval.Project.id = this.dataSource.filteredData[0].proyectoId;
-    }
     
   }
 
@@ -284,13 +278,40 @@ export class SortedTableComponent implements OnInit {
       oficinas = oficinas.sort();
       this.OficinaSeleccionada = oficinas;
 
+      //Actualizamos la lista de equipos asociados a la nueva lista de oficinas
+      this.refrescamosEquiposOficinasSeleccionadas();
+
       //Limpiamos la lista de equipos en storage y añadimos los nuevos equipos seleccionados
       this._appComponent._storageDataService.OfficesSelected = [];
       this.OficinaSeleccionada.forEach(element => {
         this._appComponent._storageDataService.OfficesSelected.push(element);
        });
 
+       //Marcamos los equipos previamnete seleccionados
+       this.EquipoSeleccionado = this._appComponent._storageDataService.ProjectsSelected;
+
       console.log(this._appComponent._storageDataService.OfficesSelected);
+    }
+  }
+
+
+  //Este método refresca los equipos una vez que actualizamos las oficinas tras seleccionar
+  //un equipo ya que solo debe mostrar los equipos de dicha oficina.
+  public refrescamosEquiposOficinasSeleccionadas() {
+
+    this.EquipoSeleccionado = [];
+    this.ListaDeProyectosFiltrada = [];
+
+    if (this.OficinaSeleccionada.length === 0) {
+      this.ListaDeProyectosFiltrada = this.ListaDeProyectos;
+    } else {
+      this.ListaDeProyectosFiltrada = this.ListaDeProyectos.filter(x => this.OficinaSeleccionada.indexOf(x.oficina) >= 0);
+    }
+
+    if (this.ListaDeProyectosFiltrada.length === 1)
+    {
+      this.EquipoSeleccionado = this._appComponent._storageDataService.ProjectsSelected;
+      console.log(this._appComponent._storageDataService.ProjectsSelected);      
     }
   }
 
