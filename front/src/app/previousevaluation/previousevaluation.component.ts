@@ -390,7 +390,7 @@ export class PreviousevaluationComponent implements OnInit {
             });
 
             //Temporalmente asignamos el primer proyecto de la tabla sin filtrar que cumple que su assessment es scrum
-            this.Project.id = this.ListaDeEvaluacionesPaginada.find(ev => ev.assessmentId == 1).proyectoId;
+            this.Project.id = this.ListaDeEvaluacionesPaginada.find(ev => ev.assessmentId == 1)?this.ListaDeEvaluacionesPaginada.find(ev => ev.assessmentId == 1).proyectoId:-1;
 
             this.selectedAssessment = this.ListaAssessments[0];
           }

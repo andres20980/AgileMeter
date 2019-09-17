@@ -160,7 +160,7 @@
     </div>
 
     <div id="sortedtable" *ngIf="MostrarTabla">
-      <sorted-table *ngIf="ListaDeEvaluacionesPaginada && ListaDeEvaluacionesPaginada.length > 0" [dataInput]="ListaDeEvaluacionesPaginada">
+      <sorted-table *ngIf="ListaDeEvaluacionesPaginada" [dataInput]="ListaDeEvaluacionesPaginada">
         {{ 'PREVIOUS_EVALUATION.LOADING' | translate }}
       </sorted-table>
       

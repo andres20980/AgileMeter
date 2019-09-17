@@ -81,7 +81,7 @@ export class SortedTableComponent implements OnInit {
 
     this.dataSource.filterPredicate = function (data, filter: string): boolean {
       let date = new Date(data.fecha);
-      console.log ((date.getDate()<10?"0":"")+date.getDate()+"/"+(date.getMonth()<10?"0":"")+(date.getMonth()+1)+"/"+date.getFullYear());
+      //console.log ((date.getDate()<10?"0":"")+date.getDate()+"/"+(date.getMonth()<10?"0":"")+(date.getMonth()+1)+"/"+date.getFullYear());
       return data.nombre.toLowerCase().includes(filter)
         || data.assessmentName.toLowerCase().includes(filter)
         || data.userNombre.toLowerCase().includes(filter)
@@ -189,7 +189,7 @@ export class SortedTableComponent implements OnInit {
         this._appComponent._storageDataService.OfficesSelected.push(element);
        });
 
-    console.log(this._appComponent._storageDataService.OfficesSelected);
+    //console.log(this._appComponent._storageDataService.OfficesSelected);
 
     this.equiposDeLasOficinasSeleccionadas();
     this.refresh();
@@ -203,7 +203,7 @@ export class SortedTableComponent implements OnInit {
       this._appComponent._storageDataService.ProjectsSelected.push(element);
     });
 
-    console.log(this._appComponent._storageDataService.ProjectsSelected);
+    //console.log(this._appComponent._storageDataService.ProjectsSelected);
 
     //Refrescamos las oficinas
     this.oficinasDeLosEquiposSeleccionados();    
@@ -262,7 +262,7 @@ export class SortedTableComponent implements OnInit {
 
       this.EquipoSeleccionado = this._appComponent._storageDataService.ProjectsSelected;
 
-    console.log(this._appComponent._storageDataService.ProjectsSelected);
+    //console.log(this._appComponent._storageDataService.ProjectsSelected);
       
     }
   }
@@ -290,7 +290,7 @@ export class SortedTableComponent implements OnInit {
        //Marcamos los equipos previamnete seleccionados
        this.EquipoSeleccionado = this._appComponent._storageDataService.ProjectsSelected;
 
-      console.log(this._appComponent._storageDataService.OfficesSelected);
+      //console.log(this._appComponent._storageDataService.OfficesSelected);
     }
   }
 
@@ -311,7 +311,7 @@ export class SortedTableComponent implements OnInit {
     if (this.ListaDeProyectosFiltrada.length === 1)
     {
       this.EquipoSeleccionado = this._appComponent._storageDataService.ProjectsSelected;
-      console.log(this._appComponent._storageDataService.ProjectsSelected);      
+      //console.log(this._appComponent._storageDataService.ProjectsSelected);      
     }
   }
 
