@@ -344,6 +344,23 @@ export class PendingEvaluationTableComponent implements OnInit {
       });
       oficinas = oficinas.sort();
       this.OficinaSeleccionada = oficinas;
+
+      //Actualizamos la lista de equipos asociados a la nueva lista de oficinas
+      this.refrescamosEquiposOficinasSeleccionadas();
+
+    }
+  }
+
+  //Este método refresca los equipos una vez que actualizamos las oficinas tras seleccionar
+  //un equipo como primera opción de filtrado,ya que solo debe mostrar los equipos de dicha oficina.
+  public refrescamosEquiposOficinasSeleccionadas() {
+
+    this.ListaDeProyectosFiltrada = [];
+
+    if (this.OficinaSeleccionada.length === 0) {
+      this.ListaDeProyectosFiltrada = this.ListaDeProyectos;
+    } else {
+      this.ListaDeProyectosFiltrada = this.ListaDeProyectos.filter(x => this.OficinaSeleccionada.indexOf(x.oficina) >= 0);
     }
   }
 }
