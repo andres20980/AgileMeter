@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: agiledatabaseingress
+  annotations:
+    kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+  rules:
+  - host: agiledatabase.e958234032a5485b8c40.westeurope.aksapp.io
+    http:
+      paths:
+      - backend:
+          serviceName: agiledatabase
+          servicePort: 3306
+        path: /

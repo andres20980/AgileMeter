@@ -1,0 +1,44 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    service: prometheus-gitlab-exporter
+  name: prometheus-gitlab-exporter
+  namespace: monitoring
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: prometheus-gitlab-exporter
+    spec:
+      containers:
+      - image: prometheusgitlabexporter.azurecr.io/prometheus-gitlab-exporter:latest
+        name: prometheus-gitlab-exporter
+      imagePullSecrets:
+      - name: prometheus-gitlab-exporter-regsecret
+#        ports:
+#        - containerPort: 8123
+      hostname: prometheus-gitlab-exporter
+      restartPolicy: Always
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: prometheus-gitlab-exporter
+  namespace: monitoring
+  labels:
+    service: prometheus-gitlab-exporter
+spec:
+  ports:
+  - name: "8123"
+    protocol: "TCP"
+    port: 8123
+    targetPort: 8123
+  selector:
+    service: prometheus-gitlab-exporter
+status:
+  loadBalancer: {}

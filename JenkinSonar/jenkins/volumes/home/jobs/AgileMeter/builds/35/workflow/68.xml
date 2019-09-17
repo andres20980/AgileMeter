@@ -1,0 +1,25 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<Tag plugin="workflow-support@3.3">
+  <node class="cps.n.StepAtomNode" plugin="workflow-cps@2.73">
+    <parentIds>
+      <string>67</string>
+    </parentIds>
+    <id>68</id>
+    <descriptorId>org.jenkinsci.plugins.workflow.steps.durable_task.ShellStep</descriptorId>
+  </node>
+  <actions>
+    <cps.a.ArgumentsActionImpl plugin="workflow-cps@2.73">
+      <arguments>
+        <entry>
+          <string>script</string>
+          <string>cd /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter &amp;&amp; docker-compose -f docker-compose-AKS.yml build --no-cache agilemeter</string>
+        </entry>
+      </arguments>
+      <isUnmodifiedBySanitization>true</isUnmodifiedBySanitization>
+    </cps.a.ArgumentsActionImpl>
+    <wf.a.TimingAction plugin="workflow-api@2.36">
+      <startTime>1566815980517</startTime>
+    </wf.a.TimingAction>
+    <s.a.LogStorageAction/>
+  </actions>
+</Tag>

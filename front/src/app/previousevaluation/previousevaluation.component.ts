@@ -54,14 +54,14 @@ export interface AssesmentEv{
 })
 export class PreviousevaluationComponent implements OnInit {
   public clicked: boolean = true;
-  public EvaluacionFiltrar: EvaluacionFilterInfo = { 'nombre': '', 'estado': 'true', 'fecha': '', 'userNombre': '', 'puntuacion': '', 'assessmentId': 0 };
+  public EvaluacionFiltrar: EvaluacionFilterInfo = { 'nombre': '', 'estado': 'true', 'fecha': '', 'userNombre': '', 'puntuacion': '', 'assessmentId': 0 , 'oficinas':[], equipos:[], 'idAssessment': [] };
   public Typing: boolean = false;
   public permisosDeUsuario: Array<Role> = [];
   public ListaDeEvaluacionesPaginada: Array<EvaluacionInfo>;
   public EvaluationsWithSectionInfo: Array<EvaluacionInfoWithSections>;
   public nEvaluaciones: number = 0;
   public UserName: string = "";
-  public Project: Proyecto = { 'id': null, 'nombre': '', codigo: null, 'fecha': null, numFinishedEvals:0, numPendingEvals: 0};
+  public Project: Proyecto = { 'id': null, 'nombre': '', codigo: null, 'fecha': null, numFinishedEvals:0, numPendingEvals: 0, oficina:null, proyecto: ''};
   public Mostrar = false;
   public PageNow = 1;
   public NumMax = 0;
@@ -115,7 +115,7 @@ export class PreviousevaluationComponent implements OnInit {
   ngOnInit() {
     //Recogemos los proyectos y realizamos comprobaciones
     var Role;
-    this.Project = this._appComponent._storageDataService.UserProjectSelected;
+    //this.Project = this._appComponent._storageDataService.UserProjectSelected;
     if (!this._proyectoService.verificarUsuario()) {
       this._router.navigate(['/login']);
     }
@@ -126,16 +126,17 @@ export class PreviousevaluationComponent implements OnInit {
       res => {
 
         this.permisosDeUsuario = res;
+        //console.log(res);
         //Si no hay errores y son recogidos busca si tienes permisos de usuario
         for (let num = 0; num < this.permisosDeUsuario.length; num++) {
           if (this.permisosDeUsuario[num].role == "Administrador") {
             if (this.Project == null || this.Project == undefined || this.Project.id == -1) {
-              this.Project = { id: 0, nombre: '',codigo:null, fecha: null, numFinishedEvals:0, numPendingEvals: 0};
+              this.Project = { id: 0, nombre: '',codigo:null, fecha: null, numFinishedEvals:0, numPendingEvals: 0, oficina:null, proyecto: ''};
               this.Admin = true;
             }
           }
         }
-
+        /*obsoleto en el listar evaluaciones
         //Comprueba que tenga  un proyecto seleccionado y si no es asi lo devuelve a home
         if (this.Project == null || this.Project == undefined) {
           this._router.navigate(['/home']);
@@ -143,7 +144,7 @@ export class PreviousevaluationComponent implements OnInit {
           this._router.navigate(['/home']);
         } else {
           this.MostrarInfo = true;
-        }
+        }*/
         
         this.GetPaginacion(); //TODO
         //this.changeChartAssessment();
@@ -193,6 +194,23 @@ export class PreviousevaluationComponent implements OnInit {
     } else {
       this.NumMax = NumeroDePaginas;
     }
+  }
+
+  //Método para activar la gráfica
+  public ActivarGrafica()
+  {
+    var copiaLista = Array<EvaluacionInfo>();
+
+    if (this.ListaDeEvaluacionesPaginada != undefined)
+    {
+      this.ListaDeEvaluacionesPaginada.forEach(element => {
+        if (!copiaLista.find(c => c.proyectoId == element.proyectoId))
+        {
+          copiaLista.push(element);
+        }
+      });
+    }
+    return (copiaLista.length > 1? false:true);
   }
 
   //Restablece los datos de la busqueda
@@ -261,21 +279,21 @@ export class PreviousevaluationComponent implements OnInit {
   // }
 
   //Para el desplegable de elegir proyecto
-  public SeleccionDeProyecto(index: number) {
+  // public SeleccionDeProyecto(index: number) {
 
-    //Ningun proyecto elegido
-    if (isNaN(index)) {
-      this.ProyectoSeleccionado = false;
-      this.EvaluacionFiltrar.nombre = "";
-    }
-    //Elegido algun proyecto
-    else {
-      this.ProyectoSeleccionado = true;
-      this.EvaluacionFiltrar.nombre = this.ListaDeProyectos[index].nombre;
-    }
+  //   //Ningun proyecto elegido
+  //   if (isNaN(index)) {
+  //     this.ProyectoSeleccionado = false;
+  //     this.EvaluacionFiltrar.nombre = "";
+  //   }
+  //   //Elegido algun proyecto
+  //   else {
+  //     this.ProyectoSeleccionado = true;
+  //     this.EvaluacionFiltrar.nombre = this.ListaDeProyectos[index].nombre;
+  //   }
 
-    this.TryHttpRequest(false);
-  }
+  //   this.TryHttpRequest(false);
+  // }
 
   //Este metodo devuelve la transforma la lista de evaluaciones dada en una lista paginada
   // public paginacionLista(pageNumber: number) {
@@ -322,6 +340,7 @@ export class PreviousevaluationComponent implements OnInit {
   //   }
   // }
 
+  /*Obsoleto con el listar
   //Este metodo es llamado cuando cambias un valor de filtrado y en 500 milisegundos te manda a la primera pagina y recarga el componente con
   //los nuevos elementos
   public TryHttpRequest(timeout: boolean) {
@@ -346,15 +365,18 @@ export class PreviousevaluationComponent implements OnInit {
     }
 
   }
-
+*/
   //Recarga los elementos en la pagina en la que se encuentra 
   public GetPaginacion() {
     this.Mostrar = false;
-    this._evaluacionService.getEvaluacionInfoFiltered(this.PageNow - 1, this.Project.id, this.EvaluacionFiltrar)
+    // this._evaluacionService.getEvaluacionInfoFiltered(this.PageNow - 1, this.Project.id, this.EvaluacionFiltrar)
+    //console.log(this.EvaluacionFiltrar);
+    this._evaluacionService.getAllEvaluacionInfoFiltered(this.PageNow - 1, this.EvaluacionFiltrar)
       .subscribe(
         res => {
           this.nEvaluaciones = res.numEvals;
-          this.ListaDeEvaluacionesPaginada = res.evaluacionesResult; 
+          this.ListaDeEvaluacionesPaginada = res.evaluacionesResult;
+
           this.Mostrar = true; 
 
           if(this.ListaDeEvaluacionesPaginada.length > 0){        
@@ -367,15 +389,17 @@ export class PreviousevaluationComponent implements OnInit {
               }
             });
 
+            //Temporalmente asignamos el primer proyecto de la tabla sin filtrar que cumple que su assessment es scrum
+            this.Project.id = this.ListaDeEvaluacionesPaginada.find(ev => ev.assessmentId == 1)?this.ListaDeEvaluacionesPaginada.find(ev => ev.assessmentId == 1).proyectoId:-1;
+
             this.selectedAssessment = this.ListaAssessments[0];
           }
 
-          if(this.selectedAssessment != null){
-          // Filtro de la grafica para traer las evaluaciones
-          let filter: EvaluacionFilterInfo = new EvaluacionFilterInfo("","","","","true", this.selectedAssessment.id);
+          if(this.selectedAssessment != null && this.selectedAssessment != undefined){
+          //Filtro de la grafica para traer las evaluaciones
+           let filter: EvaluacionFilterInfo = new EvaluacionFilterInfo("","","","","true", this.selectedAssessment.id,[],[],[]);
           this.GetChartData(filter);
-          }
-         
+          }         
         },
         error => {
           if (error == 404) {
@@ -392,12 +416,15 @@ export class PreviousevaluationComponent implements OnInit {
   }
 
   public GetChartData(filter: EvaluacionFilterInfo){
-    this._evaluacionService.GetEvaluationsWithSectionsInfo( this.Project.id, filter)
+    this._evaluacionService.GetEvaluationsWithSectionsInfo(this.Project.id, filter)
       .subscribe(
         res => {
           this.Mostrar = true; 
           this.EvaluationsWithSectionInfo = res.evaluacionesResult;
-          this.shareDataToChart();         
+          if (this.EvaluationsWithSectionInfo !== undefined && this.EvaluationsWithSectionInfo.length > 0)
+          {
+            this.shareDataToChart();
+          }         
         },
         error => {
           if (error == 404) {
@@ -572,7 +599,7 @@ export class PreviousevaluationComponent implements OnInit {
   // }
 
   public changeChartAssessment(){
-    let filter: EvaluacionFilterInfo = new EvaluacionFilterInfo("","","","","true", this.selectedAssessment.id);
+    let filter: EvaluacionFilterInfo = new EvaluacionFilterInfo("","","","","true", this.selectedAssessment.id,[],[],[]);
     this.GetChartData(filter);
   }
 

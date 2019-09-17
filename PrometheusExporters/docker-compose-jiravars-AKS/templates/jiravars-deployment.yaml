@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    service: jiravars
+  name: jiravars
+  namespace: monitoring
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: jiravars
+    spec:
+      containers:
+      - image: jiravars
+        name: jiravars
+        ports:
+        - containerPort: 9300
+        resources: {}
+      hostname: jiravars
+      restartPolicy: Always
+status: {}

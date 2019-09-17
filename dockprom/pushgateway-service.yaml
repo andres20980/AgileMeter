@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pushgateway
+  namespace: monitoring
+  labels:
+    service: pushgateway
+spec:
+  ports:
+  - name: "9091"
+    protocol: "TCP"
+    port: 9091
+    targetPort: 9091
+  selector:
+    service: pushgateway
+status:
+  loadBalancer: {}

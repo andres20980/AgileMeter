@@ -111,7 +111,7 @@ export class UserService {
   }
 
   addUser(user: UserCreateUpdate) {
-    console.log(user);
+    //console.log(user);
     let Token = this._appComponent.ComprobarUserYToken();
     let params = JSON.stringify(user);
     let headers = new Headers({

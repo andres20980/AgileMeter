@@ -1,0 +1,92 @@
+config:
+
+  target: "http:/"
+
+  phases:
+    - duration: 10
+      arrivalRate: 10
+      rampTo: 200
+      name: "Calentando motores"
+    - duration: 10
+      arrivalRate: 200
+      name: "Carga sostenida"
+
+  variables:
+      host:
+        - "agilemeter-pre-back.23.97.158.29.nip.io"
+      nombre:
+        - "jbeltrma"
+      password:
+        - "1234"
+      nombreCompleto:
+        - "Jose Ant. Beltrán"
+      asignacion:
+        - "1"
+        - "2"
+        - "3"
+        - "4"
+        - "5"
+      pregunta:
+        - "1"
+        - "2"
+        - "3"
+        - "4"
+        - "5"
+
+scenarios:
+  - name: "Genérico"
+
+    flow:
+
+      - post: # Obtener token
+          url: "/{{host}}/api/Token"
+          json:
+            nombre: "{{nombre}}"
+            password: "{{password}}"
+            nombreCompleto: "{{nombreCompleto}}"
+          capture:
+            json: "$.access_token"
+            as: "token"
+
+      - get: # Obtener preguntas de una asignación mediante el ID
+          url: "/{{host}}/api/asignaciones/{{asignacion}}/preguntas"
+          headers:
+            Authorization: "Bearer {{token}}"
+
+      - get: # Recoge una pregunta concreta de una asignación
+          url: "/{{host}}/api/asignaciones/{{asignacion}}/pregunta/{{pregunta}}"
+          headers:
+            Authorization: "Bearer {{token}}"
+
+      - post: # Insertar pregunta
+          url: "/{{host}}/api/asignaciones/{{asignacion}}/pregunta"
+          headers:
+            Authorization: "Bearer {{token}}"
+          json:
+            Pregunta: "Pregunta test Artillery"
+            Respuesta: true
+          capture:
+            json: "$.ID_PREGUNTA"
+            as: "id_pregunta"
+
+      - put: # Modificar la pregunta anterior
+          url: "/{{host}}/api/asignaciones/{{asignacion}}/pregunta/{{id_pregunta}}?"
+          headers:
+            Authorization: "Bearer {{token}}"
+          json:
+            Pregunta: "Pregunta test Artillery - Modificada"
+
+      - get: # Obtener todos los proyectos de un usuario
+          url: "/{{host}}/api/users/jbeltrma/fullproyectos"
+          headers:
+            Authorization: "Bearer {{token}}"
+
+      - get: # Obtener todas las secciones
+          url: "/{{host}}/api/sections"
+          headers:
+            Authorization: "Bearer {{token}}"
+
+      - delete: # Eliminar pregunta creada en el paso anterior
+          url: "/{{host}}/api/asignaciones/{{asignacion}}/pregunta/{{id_pregunta}}"
+          headers:
+            Authorization: "Bearer {{token}}"

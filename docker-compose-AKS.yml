@@ -1,27 +1,19 @@
 version: '3'
  
 services:
-
-# MySql
   agiledatabase:
     image: amapidatabase.azurecr.io/agiledatabase_dev:latest
     build: 
       context: ./AutoDumperAgile
       dockerfile: Dockerfile
-#    networks:
-#      - AgilemeterNetwork
+    command: "--default-authentication-plugin=mysql_native_password --skip-mysqlx"
     ports:
       - "3306:3306"
     container_name: agiledatabase
     hostname: agiledatabase
-    environment:
-      MYSQL_ROOT_PASSWORD:
-      MYSQL_USER: root
-      MYSQL_PASSWORD:
-      MYSQL_DATABASE: agilemeter
     volumes:
       - mysql:/var/lib/mysql
-    restart: always
+    restart: always 
 
 # Front
   agilemeterfront:
@@ -30,7 +22,7 @@ services:
       context: ./front
       dockerfile: Dockerfile
       args:
-        - 'BACKEND_HOST=agilemeter.7d07ee6a441f4fc2ac9d.westeurope.aksapp.io'
+        - 'BACKEND_HOST=agilemeter.4fad901eba544c68aeb3.westeurope.aksapp.io'
         - 'BACKEND_PORT=80'
 #    networks:
 #      - AgilemeterNetwork
@@ -55,11 +47,6 @@ services:
     hostname: agilemeter
     ports:
       - "60406:60406"
-
+      
 volumes:
   mysql:
-
-
-#networks:
-#  AgilemeterNetwork:
-#    driver: bridge

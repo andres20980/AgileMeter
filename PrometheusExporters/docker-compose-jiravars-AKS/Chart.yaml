@@ -1,0 +1,7 @@
+name: docker-compose-jiravars-AKS
+description: A generated Helm Chart for docker-compose-jiravars-AKS from Skippbox Kompose
+version: 0.0.1
+keywords:
+  - docker-compose-jiravars-AKS
+sources:
+home:

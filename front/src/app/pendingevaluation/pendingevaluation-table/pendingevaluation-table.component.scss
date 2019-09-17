@@ -118,12 +118,20 @@ table {
     opacity: 0.5;
   } 
 
-  .mat-column-userNombre, .mat-column-assessmentName, .mat-column-puntuacion, .mat-column-notas, .mat-column-informe {
-    width: 16%;
+  // .mat-column-userNombre, .mat-column-assessmentName, .mat-column-puntuacion, .mat-column-notas, .mat-column-informe {
+  //   width: 16%;
+  // }
+  
+  // .mat-column-fecha {
+  //   width: 20%;
+  // }
+
+  .mat-column-oficina, .mat-column-nombre, .mat-column-actions {
+    width: 20%;
   }
   
-  .mat-column-fecha {
-    width: 20%;
+  .mat-column-userNombre, .mat-column-fecha, .mat-column-assessmentName, .mat-column-progress {
+    width: 10%;
   }
 
   

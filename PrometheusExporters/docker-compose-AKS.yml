@@ -1,0 +1,19 @@
+version: '3'
+ 
+services:
+# Prometheus-Gitlab-Exporter
+  prometheus-gitlab-exporter:
+    image: prometheusgitlabexporter.azurecr.io/prometheus-gitlab-exporter:latest
+#    image: prometheus-gitlab-exporter:latest
+    build: 
+      context: ./prometheus-gitlab-exporter
+      dockerfile: Dockerfile
+      args:
+        - URL=https://steps.everis.com/git/
+        - TOKEN=5s8mQV1svsFtpJN9DSTT
+        - POLL_INTERVAL=1m
+        - BIND=localhost:8123
+    container_name: prometheus-gitlab-exporter
+    hostname: prometheus-gitlab-exporter
+    ports:
+      - "8123:8123"

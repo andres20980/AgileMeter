@@ -43,7 +43,7 @@ export class SectionResultsComponent implements OnInit {
   //Metodo para dar formato a la fecha introducida
   public parseDate(value: string): string{
     let date = new Date(value);
-    console.log(date.getDay()+"/"+date.getMonth()+"/"+date.getFullYear());
+    //console.log(date.getDay()+"/"+date.getMonth()+"/"+date.getFullYear());
     return date.getDay()+"/"+date.getMonth()+1+"/"+date.getFullYear();
   }
 

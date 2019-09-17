@@ -1,0 +1,7 @@
+name: JenkinSonar\docker-compose
+description: A generated Helm Chart for JenkinSonar\docker-compose from Skippbox Kompose
+version: 0.0.1
+keywords:
+  - JenkinSonar\docker-compose
+sources:
+home:

@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    service: nodeexporter
+  name: nodeexporter
+  namespace: monitoring
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: nodeexporter
+    spec:
+      containers:
+      - args:
+#        - --path.procfs=/host/proc
+#        - --path.rootfs=/rootfs
+#        - --path.sysfs=/host/sys
+        - --collector.filesystem.ignored-mount-points=^/(sys|proc|dev|host|etc)($|/)
+        image: prom/node-exporter:v0.18.1
+        name: nodeexporter
+        resources: {}
+      restartPolicy: Always
+status: {}

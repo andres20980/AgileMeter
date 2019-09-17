@@ -1,0 +1,22 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    service: cadvisor
+  name: cadvisor
+  namespace: monitoring
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: cadvisor
+    spec:
+      containers:
+      - image: google/cadvisor:v0.33.0
+        name: cadvisor
+        resources: {}
+      restartPolicy: Always
+status: {}
