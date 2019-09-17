@@ -6,6 +6,7 @@ export class Proyecto {
 		public fecha: Date,
 		public numFinishedEvals: number,
 		public numPendingEvals: number,
-		public oficina: string
+		public oficina: string,
+		public proyecto: string,
 	) { }
 }

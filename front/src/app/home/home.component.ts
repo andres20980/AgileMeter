@@ -70,7 +70,7 @@ export class HomeComponent implements OnInit {
     this.NombreDeUsuario = this._proyectoService.UsuarioLogeado;
 
     //Reiniciamos los proyectos seleccionados en el servicio
-    this._appComponent._storageDataService.UserProjectSelected = { id: -1, nombre: '', codigo: null, fecha: null, numFinishedEvals: 0, numPendingEvals: 0, oficina: null };
+    this._appComponent._storageDataService.UserProjectSelected = { id: -1, nombre: '', codigo: null, fecha: null, numFinishedEvals: 0, numPendingEvals: 0, oficina: null, proyecto: '' };
 
     //Intentamos recoger los roles de los usuarios
     this._proyectoService.getRolesUsuario().subscribe(
