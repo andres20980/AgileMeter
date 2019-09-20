@@ -150,7 +150,7 @@
         <button class="transparente botonTabla" (click)="MostrarGrafica = false; MostrarTabla = true">
             <img [class.button-disabled]="!MostrarTabla" src="assets/table.png" title="{{ 'PREVIOUS_EVALUATION.SHOW_TABLE' | translate }}" />
           </button>
-        <button *ngIf="ActivarGrafica() && false" class="transparente botonGrafica" (click)="MostrarGrafica = true; MostrarTabla = false">
+        <button *ngIf="ActivarGrafica()" class="transparente botonGrafica" (click)="MostrarGrafica = true; MostrarTabla = false">
             <img [class.button-disabled]="!MostrarGrafica" src="assets/chart.png" title="{{ 'PREVIOUS_EVALUATION.SHOW_GRAPH' | translate }}" />
           </button>         
     </div>

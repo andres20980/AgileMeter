@@ -75,6 +75,10 @@ export class PreviousevaluationComponent implements OnInit {
   public MostrarTabla: boolean = true;
   public MostrarGrafica: boolean = false;
   public TableFilteredData: Evaluacion[];
+
+  //Definimos los campos necesarios para mantener el filtrado del componente tabla
+  public DatosSelectOficinas: string[] = [];
+  public DatosSelectProyectos: Proyecto[] = [];
   //@ViewChild(SortedTableComponent) table: SortedTableComponent;
 
   public Admin: boolean = false;

@@ -58,9 +58,20 @@ export class SortedTableComponent implements OnInit {
   public ListaDeAssessmentFiltrada: Array<Assessment> = [];
 
   ngOnInit() {
+
+    if(this.prevEval.DatosSelectOficinas.length > 0 || this.prevEval.DatosSelectProyectos.length > 0)
+    {
+      this.ListaDeOficinas = this.prevEval.DatosSelectOficinas;
+      this.ListaDeProyectosFiltrada = this.prevEval.DatosSelectProyectos;
+    }
+    else
+    {
+      this.getProyectos();
+      this.getAssessmentDeUsuario();
+    }
+
     this.GetPaginacion();
-    this.getProyectos();
-    this.getAssessmentDeUsuario();
+
   }
 
   applyFilter(filterValue: string) {
@@ -156,6 +167,9 @@ export class SortedTableComponent implements OnInit {
         this.ListaDeProyectos = res;
         this.getOficinasDeUsuario(res);
         this.ListaDeProyectosFiltrada = res;
+
+        //Actualizamos los datos del componente padre
+        this.prevEval.DatosSelectProyectos = this.ListaDeProyectosFiltrada;
       },
       error => {
         //Si el servidor tiene algún tipo de problema mostraremos este error
@@ -180,6 +194,7 @@ export class SortedTableComponent implements OnInit {
       }
     });
     this.ListaDeOficinas = oficinas.sort();
+    this.prevEval.DatosSelectOficinas = this.ListaDeOficinas;
   }
 
   public selectOficinas() {
@@ -262,6 +277,10 @@ export class SortedTableComponent implements OnInit {
 
       this.EquipoSeleccionado = this._appComponent._storageDataService.ProjectsSelected;
 
+      //Actualizamos los datos del componente padre
+      this.prevEval.DatosSelectProyectos = this.ListaDeProyectosFiltrada;
+      this.prevEval.DatosSelectProyectos = this.ListaDeProyectosFiltrada;
+
     //console.log(this._appComponent._storageDataService.ProjectsSelected);
       
     }
@@ -313,11 +332,18 @@ export class SortedTableComponent implements OnInit {
       this.EquipoSeleccionado = this._appComponent._storageDataService.ProjectsSelected;
       //console.log(this._appComponent._storageDataService.ProjectsSelected);      
     }
+
+    //Actualizamos los datos del componente padre
+    this.prevEval.DatosSelectProyectos = this.ListaDeProyectosFiltrada;
+    this.prevEval.DatosSelectProyectos = this.ListaDeProyectosFiltrada;
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.dataInput) {
       this.GetPaginacion();
+
+      this.EquipoSeleccionado = this._appComponent._storageDataService.ProjectsSelected;
+      this.OficinaSeleccionada = this._appComponent._storageDataService.OfficesSelected;
     }
   }
 }
