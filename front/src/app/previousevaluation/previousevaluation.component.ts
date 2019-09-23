@@ -21,7 +21,7 @@ import { SectionService } from 'app/services/SectionService';
 import { EvaluacionInfoWithSections } from 'app/Models/EvaluacionInfoWithSections';
 import { forEach } from '@angular/router/src/utils/collection';
 import { SectionsLevel } from 'app/pdfgenerator/pdfgenerator.component';
-import { Assessment } from 'app/Models/Assessment';
+import { AssessmentEv } from 'app/Models/AssessmentEv';
 import { Workbook } from 'exceljs';
 import * as fs from 'file-saver';
 import { MatTable, MatTableDataSource } from '@angular/material';
@@ -39,11 +39,6 @@ export interface ComplianceLevels {
     levels:  {level: number, value: number}[]
   }[]
 
-}
-
-export interface AssesmentEv{
-  id: number,
-  name: string
 }
 
 @Component({
@@ -96,14 +91,13 @@ export class PreviousevaluationComponent implements OnInit {
   public ComplianceLevels: ComplianceLevels;
   public MaxLevelReached: number;
   public barChartOptions: any;
-  public ListaAssessments : AssesmentEv[] = [];
-  public selectedAssessment: AssesmentEv;
+  public ListaAssessments : AssessmentEv[] = [];
+  public selectedAssessment: AssessmentEv;
   public legend: any;
   public allLegendsHidden: boolean = false;
 
   //Para actualizar la grafica
   @ViewChild(BaseChartDirective) public chart: BaseChartDirective;
-
 
   constructor(
     private _appComponent: AppComponent,
@@ -214,7 +208,12 @@ export class PreviousevaluationComponent implements OnInit {
         }
       });
     }
-    return (copiaLista.length > 1? false:true);
+
+    //Activamos la gráfica cuando solo existe un equipo en la lista 
+    //y no contiene un assessment distinto de SCRUM
+    return (copiaLista.length > 1 
+              || (this.ListaDeEvaluacionesPaginada != undefined && this.ListaDeEvaluacionesPaginada.find(e => e.assessmentId != 1))
+              ? false : true);
   }
 
   //Restablece los datos de la busqueda
@@ -388,7 +387,7 @@ export class PreviousevaluationComponent implements OnInit {
               if(this.ListaAssessments.find(a => a.id == ev.assessmentId) == null){
                 let id: number = ev.assessmentId;
                 let name: string = ev.assessmentName;
-                let a: AssesmentEv= { id, name};
+                let a: AssessmentEv= { id, name};
                 this.ListaAssessments.push(a);
               }
             });
@@ -396,7 +395,10 @@ export class PreviousevaluationComponent implements OnInit {
             //Temporalmente asignamos el primer proyecto de la tabla sin filtrar que cumple que su assessment es scrum
             this.Project.id = this.ListaDeEvaluacionesPaginada.find(ev => ev.assessmentId == 1)?this.ListaDeEvaluacionesPaginada.find(ev => ev.assessmentId == 1).proyectoId:-1;
 
-            this.selectedAssessment = this.ListaAssessments[0];
+            if (this.ListaAssessments.find(a => a.id ==1))
+            {
+              this.selectedAssessment = this.ListaAssessments.find(a => a.id ==1);
+            }
           }
 
           if(this.selectedAssessment != null && this.selectedAssessment != undefined){

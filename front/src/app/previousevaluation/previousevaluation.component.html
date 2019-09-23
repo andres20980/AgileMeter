@@ -168,11 +168,11 @@
 
     <!--Grafica-->
     <div class="container-grafica" [hidden]="!MostrarGrafica">
-        <mat-form-field class = "mt-3 ml-5">
-            <mat-select [(value)]="selectedAssessment" placeholder="{{ 'PREVIOUS_EVALUATION.ASSESSMENT' | translate }}" (selectionChange)="changeChartAssessment()">
-                <mat-option *ngFor="let a of ListaAssessments" [value]="a">{{a.name}} </mat-option>
-              </mat-select>
-            </mat-form-field>
+      <mat-form-field class = "mt-3 ml-5">
+        <mat-select [(value)]="selectedAssessment" placeholder="{{ 'PREVIOUS_EVALUATION.ASSESSMENT' | translate }}" (selectionChange)="changeChartAssessment()">
+          <mat-option *ngFor="let a of ListaAssessments" [value]="a">{{a.name}} </mat-option>
+        </mat-select>
+      </mat-form-field>
     <div class="panelGrafica">
     <div id="Grafica" *ngIf="ListaPuntuacion && ListaPuntuacion.length > 0" class="mx-auto">
         <div class="row" >

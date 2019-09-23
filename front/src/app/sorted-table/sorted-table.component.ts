@@ -9,6 +9,7 @@ import { EnumRol } from 'app/Models/EnumRol';
 import { Assessment } from 'app/Models/Assessment';
 import { Proyecto } from 'app/Models/Proyecto';
 import { ProyectoService } from 'app/services/ProyectoService';
+import { AssessmentEv } from 'app/Models/AssessmentEv';
 
 // export interface Evaluacion {
 //   id: number,
@@ -63,6 +64,15 @@ export class SortedTableComponent implements OnInit {
     {
       this.ListaDeOficinas = this.prevEval.DatosSelectOficinas;
       this.ListaDeProyectosFiltrada = this.prevEval.DatosSelectProyectos;
+      this.prevEval.ListaAssessments.forEach(element => {
+        let a: Assessment = { assessmentId: element.id, assessmentName: element.name };
+        this.ListaDeAssessmentFiltrada.push(a);
+      });
+
+      console.log(this.ListaDeAssessmentFiltrada);
+      console.log(this.OficinaSeleccionada);
+      console.log(this.EquipoSeleccionado);
+      console.log(this.AssessmentSeleccionado);
     }
     else
     {
@@ -200,6 +210,7 @@ export class SortedTableComponent implements OnInit {
   public selectOficinas() {
     //Limpiamos la lista de oficinas en storage y añadimos los nuevas oficinas seleccionadas
     this._appComponent._storageDataService.OfficesSelected = [];
+    this._appComponent._storageDataService.ProjectsSelected = [];
       this.OficinaSeleccionada.forEach(element => {
         this._appComponent._storageDataService.OfficesSelected.push(element);
        });
@@ -253,6 +264,13 @@ export class SortedTableComponent implements OnInit {
   }
 
   public selectAssessment() {
+
+    //Limpiamos la lista de assessments en storage y añadimos los nuevas assessments seleccionadas
+    this._appComponent._storageDataService.AssessmentsSelected = [];
+      this.AssessmentSeleccionado.forEach(element => {
+        this._appComponent._storageDataService.AssessmentsSelected.push(element);
+       });
+
     this.refresh();
   }
 
@@ -278,7 +296,6 @@ export class SortedTableComponent implements OnInit {
       this.EquipoSeleccionado = this._appComponent._storageDataService.ProjectsSelected;
 
       //Actualizamos los datos del componente padre
-      this.prevEval.DatosSelectProyectos = this.ListaDeProyectosFiltrada;
       this.prevEval.DatosSelectProyectos = this.ListaDeProyectosFiltrada;
 
     //console.log(this._appComponent._storageDataService.ProjectsSelected);
@@ -334,7 +351,7 @@ export class SortedTableComponent implements OnInit {
     }
 
     //Actualizamos los datos del componente padre
-    this.prevEval.DatosSelectProyectos = this.ListaDeProyectosFiltrada;
+    //this.prevEval.DatosSelectProyectos = this.ListaDeProyectosFiltrada;
     this.prevEval.DatosSelectProyectos = this.ListaDeProyectosFiltrada;
   }
 
@@ -344,6 +361,7 @@ export class SortedTableComponent implements OnInit {
 
       this.EquipoSeleccionado = this._appComponent._storageDataService.ProjectsSelected;
       this.OficinaSeleccionada = this._appComponent._storageDataService.OfficesSelected;
+      this.AssessmentSeleccionado = this._appComponent._storageDataService.AssessmentsSelected;
     }
   }
 }
