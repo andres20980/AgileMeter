@@ -147,7 +147,7 @@
 
     <div class="botonesTablaOGrafica">
         
-        <button class="transparente botonTabla" (click)="MostrarGrafica = false; MostrarTabla = true">
+        <button class="transparente botonTabla" (click)="MostrarGrafica = false; MostrarTabla = true;">
             <img [class.button-disabled]="!MostrarTabla" src="assets/table.png" title="{{ 'PREVIOUS_EVALUATION.SHOW_TABLE' | translate }}" />
           </button>
         <button *ngIf="ActivarGrafica()" class="transparente botonGrafica" (click)="MostrarGrafica = true; MostrarTabla = false">
@@ -170,7 +170,7 @@
     <div class="container-grafica" [hidden]="!MostrarGrafica">
       <mat-form-field class = "mt-3 ml-5">
         <mat-select [(value)]="selectedAssessment" placeholder="{{ 'PREVIOUS_EVALUATION.ASSESSMENT' | translate }}" (selectionChange)="changeChartAssessment()">
-          <mat-option *ngFor="let a of ListaAssessments" [value]="a">{{a.name}} </mat-option>
+          <mat-option *ngFor="let a of ListaAssessmentGrafica" [value]="a">{{a.name}} </mat-option>
         </mat-select>
       </mat-form-field>
     <div class="panelGrafica">

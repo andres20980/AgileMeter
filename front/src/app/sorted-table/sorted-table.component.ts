@@ -69,10 +69,7 @@ export class SortedTableComponent implements OnInit {
         this.ListaDeAssessmentFiltrada.push(a);
       });
 
-      console.log(this.ListaDeAssessmentFiltrada);
-      console.log(this.OficinaSeleccionada);
-      console.log(this.EquipoSeleccionado);
-      console.log(this.AssessmentSeleccionado);
+      this.refresh();
     }
     else
     {
@@ -167,7 +164,7 @@ export class SortedTableComponent implements OnInit {
       });
     }
     this.dataSource.filter = "";
-    this.prevEval.EvaluacionFiltrar = { 'nombre': '', 'estado': 'true', 'fecha': '', 'userNombre': '', 'puntuacion': '', 'assessmentId': 0, 'oficinas': o, equipos: e, 'idAssessment': a };
+    this.prevEval.EvaluacionFiltrar = { 'nombre': '', 'estado': 'true', 'fecha': '', 'userNombre': '', 'puntuacion': '', 'assessmentId': 1, 'oficinas': o, equipos: e, 'idAssessment': a };
     this.prevEval.GetPaginacion();
   }
 
@@ -271,6 +268,7 @@ export class SortedTableComponent implements OnInit {
         this._appComponent._storageDataService.AssessmentsSelected.push(element);
        });
 
+    //Refrescamos los datos para que sea coherente con el select de assessment no seleccionado.
     this.refresh();
   }
 
@@ -361,7 +359,10 @@ export class SortedTableComponent implements OnInit {
 
       this.EquipoSeleccionado = this._appComponent._storageDataService.ProjectsSelected;
       this.OficinaSeleccionada = this._appComponent._storageDataService.OfficesSelected;
-      this.AssessmentSeleccionado = this._appComponent._storageDataService.AssessmentsSelected;
+
+      //Por el momento lo dejamos comentado ya que aunque lo asignenmos no refresca el select de assessment
+      //TODO
+      //this.AssessmentSeleccionado = this._appComponent._storageDataService.AssessmentsSelected;
     }
   }
 }

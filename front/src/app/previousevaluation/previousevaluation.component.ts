@@ -76,6 +76,9 @@ export class PreviousevaluationComponent implements OnInit {
   public DatosSelectProyectos: Proyecto[] = [];
   //@ViewChild(SortedTableComponent) table: SortedTableComponent;
 
+  //Definimos la lista de assessments para la gráfica que solo va a contener por el momento scrum
+  public ListaAssessmentGrafica: AssessmentEv[] = [];
+
   public Admin: boolean = false;
   public ListaDeProyectos: Array<Proyecto> = [];
   public ProyectoSeleccionado: boolean = false;
@@ -211,9 +214,9 @@ export class PreviousevaluationComponent implements OnInit {
 
     //Activamos la gráfica cuando solo existe un equipo en la lista 
     //y no contiene un assessment distinto de SCRUM
-    return (copiaLista.length > 1 
-              || (this.ListaDeEvaluacionesPaginada != undefined && this.ListaDeEvaluacionesPaginada.find(e => e.assessmentId != 1))
-              ? false : true);
+    return (copiaLista.length == 1 
+              && (this.ListaDeEvaluacionesPaginada != undefined && !this.ListaDeEvaluacionesPaginada.find(e => e.assessmentId != 1))
+              ? true : false);
   }
 
   //Restablece los datos de la busqueda
@@ -389,6 +392,12 @@ export class PreviousevaluationComponent implements OnInit {
                 let name: string = ev.assessmentName;
                 let a: AssessmentEv= { id, name};
                 this.ListaAssessments.push(a);
+
+                //Solo cargamos el assessment de scrum
+                if (a.id === 1)
+                {
+                  this.ListaAssessmentGrafica.push(a);
+                }
               }
             });
 
