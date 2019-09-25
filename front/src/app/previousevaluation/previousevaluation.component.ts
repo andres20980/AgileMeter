@@ -83,6 +83,8 @@ export class PreviousevaluationComponent implements OnInit {
   public ListaDeProyectos: Array<Proyecto> = [];
   public ProyectoSeleccionado: boolean = false;
 
+  public disabletoggleGlobalData: boolean;
+
 
   //Datos de la barras
   public barChartType: string = 'line';
@@ -114,6 +116,9 @@ export class PreviousevaluationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    //Deshabilitamos disabletoggleGlobalData
+    this.disabletoggleGlobalData = true;
+
     //Recogemos los proyectos y realizamos comprobaciones
     var Role;
     //this.Project = this._appComponent._storageDataService.UserProjectSelected;
@@ -760,6 +765,9 @@ export class PreviousevaluationComponent implements OnInit {
   }
 
   public toggleGlobalData(){
+    //Este es el código que tenía la propiedad 'legend-item-disabled' y que he sustituido por esta variable disabletoggleGlobalData
+    //(chart == 'undefined') && chart.chart.config.data.datasets[chart.chart.config.data.datasets.length - 1].hidden}
+    this.disabletoggleGlobalData = !this.disabletoggleGlobalData;
     this.chart.chart.config.data.datasets[this.chart.chart.config.data.datasets.length - 1].hidden = !this.chart.chart.config.data.datasets[this.chart.chart.config.data.datasets.length - 1].hidden;
     this.chart.chart.update();
   }
