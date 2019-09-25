@@ -200,7 +200,7 @@
             </div> 
         </div> 
         <div class="legend-global" >
-            <div class ="legend-global-item" [ngClass]="{'legend-item-disabled': (chart == 'undefined') && chart.chart.config.data.datasets[chart.chart.config.data.datasets.length - 1].hidden}" (click)="toggleGlobalData()">
+            <div class ="legend-global-item" [ngClass]="{'legend-item-disabled': disabletoggleGlobalData}" (click)="toggleGlobalData()">
             <div class ="legend-global-bullet">
                 <svg width="40" height="25" xmlns="http://www.w3.org/2000/svg">
                   <g>

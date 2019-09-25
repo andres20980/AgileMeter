@@ -174,7 +174,7 @@ export class PreviousevaluationComponent implements OnInit {
 
       //this._appComponent.pushBreadcrumb("Evaluaciones finalizadas", "/finishedevaluations");
       this._appComponent.pushBreadcrumb("BREADCRUMB.FINISHED_EVALUATIONS", "/finishedevaluations");
-      this._appComponent.pushBreadcrumb(this._appComponent._storageDataService.UserProjectSelected.nombre, null);
+      //this._appComponent.pushBreadcrumb(this._appComponent._storageDataService.UserProjectSelected.nombre, null);
 
     if (this.Project.fecha != null) {
       //Para que no de error en modo development
@@ -206,6 +206,7 @@ export class PreviousevaluationComponent implements OnInit {
   public ActivarGrafica()
   {
     var copiaLista = Array<EvaluacionInfo>();
+    var activar = false;
 
     if (this.ListaDeEvaluacionesPaginada != undefined)
     {
@@ -219,9 +220,21 @@ export class PreviousevaluationComponent implements OnInit {
 
     //Activamos la gráfica cuando solo existe un equipo en la lista 
     //y no contiene un assessment distinto de SCRUM
-    return (copiaLista.length == 1 
-              && (this.ListaDeEvaluacionesPaginada != undefined && !this.ListaDeEvaluacionesPaginada.find(e => e.assessmentId != 1))
-              ? true : false);
+
+    activar = copiaLista.length == 1 
+                && (this.ListaDeEvaluacionesPaginada != undefined 
+                      && !this.ListaDeEvaluacionesPaginada.find(e => e.assessmentId != 1))
+              ? true : false;
+    
+    if (copiaLista.length == 1 )
+    {
+      this._appComponent.pushBreadcrumb(copiaLista[0].nombre, null);
+    }else
+    {
+      this._appComponent.popBreadcrumb(2);
+    }
+
+    return activar;
   }
 
   //Restablece los datos de la busqueda
