@@ -1,0 +1,77 @@
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: {{ .Values.application.name }}-backend-git-repo-reference
+  labels:
+    app: {{ .Values.application.name | quote }}
+    deleteme: {{ .Values.application.deleteme | quote }}
+spec:
+  type: git
+  params:
+    - name: revision
+      value: {{ .Values.backend.source.repo.branch }}
+    - name: url
+      value: {{ .Values.backend.source.repo.url }}
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: {{ .Values.application.name }}-backend-image-registry-reference
+  labels:
+    app: {{ .Values.application.name | quote }}
+    deleteme: {{ .Values.application.deleteme | quote }}
+spec:
+  type: image
+  params:
+    - name: url
+      value: eassetsacr.azurecr.io/{{ .Values.application.name }}/{{ .Values.application.name }}-backend
+---
+apiVersion: tekton.dev/v1alpha1
+kind: Pipeline
+metadata:
+  name: {{ .Values.application.name }}-backend
+  labels:
+    app: {{ .Values.application.name | quote }}
+    deleteme: {{ .Values.application.deleteme | quote }}
+spec:
+  resources:
+    - name: git-repo
+      type: git
+    - name: image-registry
+      type: image
+  tasks:
+    - name: build-dockerfile
+      taskRef:
+        name: dockerfile
+      params:
+        - name: pathToDockerFile
+          value: /workspace/git-repo/everisapi.API/Dockerfile
+        - name: pathToContext
+          value: /workspace/git-repo
+      resources:
+        inputs:
+          - name: git-repo
+            resource: git-repo
+        outputs:
+          - name: image-registry
+            resource: image-registry
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineRun
+metadata:
+  name: {{ .Values.application.name }}-backend
+  labels:
+    app: {{ .Values.application.name | quote }}
+    deleteme: {{ .Values.application.deleteme | quote }}
+spec:
+  serviceAccount: pipeline
+  pipelineRef:
+    name: {{ .Values.application.name }}-backend
+  resources:
+    - name: git-repo
+      resourceRef:
+        name: {{ .Values.application.name }}-backend-git-repo-reference
+    - name: image-registry
+      resourceRef:
+        name: {{ .Values.application.name }}-backend-image-registry-reference

@@ -1,0 +1,17 @@
+# Default values
+
+application:
+  domain: 23.57.104.37
+
+frontend:
+  source:
+    repo:
+      user: deployer
+      password: none
+      url: https://steps.everis.com/git/INNOVASEV/ScrumMeter.git
+
+backend:
+  host: agilemeter.51.105.233.50.nip.io
+  port: 80
+  protocol: https
+  url: https://agilemeterbackend.everis.com

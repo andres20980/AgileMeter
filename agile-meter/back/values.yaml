@@ -1,0 +1,12 @@
+# Default values
+
+application:
+  domain: 23.57.104.37
+
+
+backend:
+  source:
+    repo:
+      user: deployer
+      password: none
+      url: https://steps.everis.com/git/INNOVASEV/ScrumMeter.git

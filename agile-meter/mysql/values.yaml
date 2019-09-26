@@ -1,0 +1,15 @@
+# Default values
+
+application:
+  domain: 23.57.104.37
+
+
+mysql:
+  capacity: 15Gi
+  data: /var/lib/mysql
+  agilemeter: /etc/mysql/mysql.conf.d/agilemeter.cnf
+  source:
+    repo:
+      user: deployer
+      password: none
+      url: https://steps.everis.com/git/INNOVASEV/ScrumMeter.git

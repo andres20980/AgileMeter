@@ -1,0 +1,36 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ .Values.application.name }}-backend
+  labels:
+    app: {{ .Values.application.name | quote }}
+    deleteme: {{ .Values.application.deleteme | quote }}
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: {{ .Values.application.name }}-backend
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.application.name }}-backend
+    spec:
+      securityContext:
+        fsGroup: 1001
+      containers:
+        - name: backend
+          image: 'eassetsacr.azurecr.io/{{ .Values.application.name }}/{{ .Values.application.name }}-backend'
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 60406
+          livenessProbe:
+            initialDelaySeconds: 30
+            tcpSocket:
+              port: 60406
+          readinessProbe:
+            initialDelaySeconds: 60
+            tcpSocket:
+              port: 60406
+          resources:

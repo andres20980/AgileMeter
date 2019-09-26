@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Values.application.name }}-{{ .Values.deployment.project_name }}-backend
+  labels:
+    app: {{ .Values.application.name | quote }}
+    deleteme: {{ .Values.application.deleteme | quote }}
+spec:
+  type: ClusterIP
+  ports:
+    - name: backend
+      port: 60406
+      targetPort: 60406
+      protocol: TCP
+  selector:
+    app: {{ .Values.application.name }}-{{ .Values.deployment.project_name }}-backend

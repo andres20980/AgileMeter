@@ -1,0 +1,63 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ .Values.application.name }}-mysql
+  labels:
+    app: {{ .Values.application.name | quote }}
+    deleteme: {{ .Values.application.deleteme | quote }}
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: {{ .Values.application.name }}-mysql
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.application.name }}-mysql
+    spec:
+      securityContext:
+        fsGroup: 1001
+      containers:
+        - name: mysql
+          image: 'eassetsacr.azurecr.io/{{ .Values.application.name }}/{{ .Values.application.name }}-mysql'
+          imagePullPolicy: IfNotPresent
+          args:
+            - '--ignore-db-dir=lost+found'
+          ports:
+            - containerPort: 3306
+          livenessProbe:
+            initialDelaySeconds: 30
+            tcpSocket:
+              port: 3306
+          readinessProbe:
+            initialDelaySeconds: 60
+            tcpSocket:
+              port: 3306
+          env:
+          - name: MYSQL_USER
+            value: {{ .Values.application.name }}-mysql
+          - name: MYSQL_PASSWORD
+            value: {{ .Values.application.name }}-mysql
+          - name: MYSQL_ROOT_PASSWORD
+            value: {{ .Values.application.name }}-mysql
+          - name: MYSQL_DATABASE
+            value: {{ .Values.application.name }}-mysql
+          resources:
+          volumeMounts:
+            - name: mysql-data
+              mountPath: {{ .Values.mysql.mountpath }}
+            - name: mysql-agilemeter
+              mountPath: {{ .Values.mysql.agilemeter }}
+              subPath: agilemeter.cnf
+      volumes:
+        - name: mysql-data
+          persistentVolumeClaim:
+            claimName: {{ .Values.application.name }}-mysql
+        - name: mysql-agilemeter
+          configMap:
+            name: ${APPLICATION_NAME}-mysql-config
+            items:
+              - key: agilemeter.cnf
+                path: agilemeter.cnf

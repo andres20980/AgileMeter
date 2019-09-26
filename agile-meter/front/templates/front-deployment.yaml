@@ -1,0 +1,45 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ .Values.application.name }}-frontend
+  labels:
+    app: {{ .Values.application.name | quote }}
+    deleteme: {{ .Values.application.deleteme | quote }}
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: {{ .Values.application.name }}-frontend
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.application.name }}-frontend
+    spec:
+      securityContext:
+        fsGroup: 1001
+      containers:
+        - name: frontend
+          image: 'eassetsacr.azurecr.io/{{ .Values.application.name }}/{{ .Values.application.name }}-frontend'
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 4200
+          livenessProbe:
+            initialDelaySeconds: 30
+            tcpSocket:
+              port: 4200
+          readinessProbe:
+            initialDelaySeconds: 60
+            tcpSocket:
+              port: 4200
+          env:
+          - name: BACKEND_HOST
+            value: {{ .Values.backend.host }}
+          - name: BACKEND_PORT
+            value: {{ .Values.backend.port }}
+          - name: BACKEND_PROTOCOL
+            value: {{ .Values.backend.protocol }}
+          - name: BACKEND_URL
+            value: {{ .Values.backend.url }}
+          resources:
