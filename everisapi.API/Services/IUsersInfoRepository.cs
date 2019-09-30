@@ -43,7 +43,11 @@ namespace everisapi.API.Services
         IEnumerable<ProyectoDto> GetFullProyectos();
 
         //Devuelve un listado con todos los proyectos dados de alta en el sistema que no sean de pruebas de usuarios
-        IEnumerable<ProyectoEntity> GetAllNotTestProjects();
+        IEnumerable<ProyectoDto> GetAllNotTestProjects();
+
+        //Devuelve un listado con todos los proyectos dados de alta en el sistema que no sean de pruebas de usuarios
+        //y atendiendo al código del idioma
+        IEnumerable<ProyectoDto> GetAllNotTestProjects(int codigoIdioma);
 
         //Devuelve todos los assessments disponibles para todos los usuarios
         IEnumerable<AssessmentEntity> GetAllAssessments();

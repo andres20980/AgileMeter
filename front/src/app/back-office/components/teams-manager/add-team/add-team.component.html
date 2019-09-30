@@ -6,20 +6,20 @@
         <h3 *ngIf="this.equipo == undefined">{{ 'ADD_TEAM.ADD_TEAM' | translate }}</h3>
         <h3 *ngIf="this.equipo != undefined">{{ 'ADD_TEAM.MODIFY_TEAM' | translate }}</h3>
       </div>
-      <!-- 
-    <!--COMBO PARA LAS OFICINAS-- >
-    <div class="col-4">
-      <mat-form-field class="col-12">
-        <mat-select [compareWith]="compareOficina" [value]="oficina" formControlName="OficinaEntity">
-          <mat-option *ngFor="let office of officeList" [value]="office" (click)="getAllUnidadesDe(office)">
-            {{ office.oficinaNombre }}
-          </mat-option>
-        </mat-select>
-        <mat-label>Oficina</mat-label>
-        <mat-error *ngIf="hasError('OficinaEntity','required')">Debe seleccionar una Oficina</mat-error>
-      </mat-form-field>
-    </div>
 
+      <!--COMBO PARA LAS OFICINAS-->
+      <div class="col-4">
+        <mat-form-field class="col-12">
+          <mat-select [compareWith]="compareOficina" [value]="oficina" formControlName="OficinaEntity">
+            <mat-option *ngFor="let office of officeList" [value]="office"> <!--(click)="getAllUnidadesDe(office)"> -->
+              {{ office.oficinaNombre }}
+            </mat-option>
+          </mat-select>
+          <mat-label>Oficina</mat-label>
+          <mat-error *ngIf="hasError('OficinaEntity','required')">Debe seleccionar una Oficina</mat-error>
+        </mat-form-field>
+      </div>
+<!--
     <!--COMBO PARA LAS UNIDADES-- >
     <div class="col-4">
       <mat-form-field class="col-12">
@@ -50,14 +50,14 @@
     </div>
   -->
       <!--INPUT TEXT PARA LAS OFICINAS-->
-      <div class="col-4">
+      <!-- <div class="col-4">
         <mat-form-field class="col-12">
           <input matInput type="text" formControlName="Oficina" id="Oficina"
             placeholder="{{ 'ADD_TEAM.FORM_OFFICE' | translate }}" value="{{this.equipo?.oficina}}">
           <mat-error *ngIf="hasError('Oficina','required')">{{ 'ADD_TEAM.FORM_OFFICE_REQUIRED' | translate }}
           </mat-error>
         </mat-form-field>
-      </div>
+      </div> -->
 
       <!--INPUT TEXT PARA LAS UNIDADES-->
       <div class="col-4">

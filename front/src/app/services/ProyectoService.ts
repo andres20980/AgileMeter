@@ -122,12 +122,14 @@ export class ProyectoService {
   }
 
   //Devuelve un listado con todos los proyectos dados de alta en el sistema que no pertenezca al grupo de pruebas de los usuarios
+  //y con las oficinas traducidas
   GetAllNotTestProjects() {
+    var codigoIdioma = this._appComponent._storageDataService.codigoIdioma;
     let Token = this._appComponent.ComprobarUserYToken();
     let headers = new Headers({
       'Authorization': Token
     });
-    return this._http.get(this.url + 'proyectos/allnottestprojects', { headers: headers }).pipe(
+    return this._http.get(this.url + 'proyectos/allnottestprojects/'+codigoIdioma, { headers: headers }).pipe(
       map((response: Response) => response.json()),
       catchError(this.errorHandler));
   }
@@ -149,11 +151,12 @@ export class ProyectoService {
   }
 
   public getAllOficinas() {
+    var codigoIdioma = this._appComponent._storageDataService.codigoIdioma;
     let Token = this._appComponent.ComprobarUserYToken();
     let headers = new Headers({
       'Authorization': Token
     });
-    return this._http.get(this.url + 'oficina/allOficina', { headers: headers }).pipe(
+    return this._http.get(this.url + 'oficina/allOficina/'+codigoIdioma, { headers: headers }).pipe(
       map((response: Response) => response.json()),
       catchError(this.errorHandler));
   }

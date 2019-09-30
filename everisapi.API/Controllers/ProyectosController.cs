@@ -53,11 +53,34 @@ namespace everisapi.API.Controllers
             try
             {
                 //Recogemos una lista de los proyectos
-                var projects = _usersInfoRepository.GetAllNotTestProjects();
+                var FullResult = _usersInfoRepository.GetAllNotTestProjects();
 
                 //Transformamos la lista anterior en una nueva con los datos que necesitamos
                 //Ya que otros son relevantes
-                var FullResult = Mapper.Map<IEnumerable<ProyectoDto>>(projects);
+                //var FullResult = Mapper.Map<IEnumerable<ProyectoDto>>(projects);
+
+                return Ok(FullResult);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("Ocurrio un error al pedir todos los proyectos de todos los usuarios: " + ex);
+                return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
+            }
+        }
+
+            //Devuelve un listado con todos los proyectos dados de alta en el sistema que no sean de pruebas de los usuarios
+        [HttpGet("allnottestprojects/{codigoIdioma}")]
+        public IActionResult GetAllNotTestProjects(int codigoIdioma)
+        {
+            try
+            {
+                //Recogemos una lista de los proyectos
+                var FullResult = _usersInfoRepository.GetAllNotTestProjects(codigoIdioma);
+
+                //Transformamos la lista anterior en una nueva con los datos que necesitamos
+                //Ya que otros son relevantes
+                //var FullResult = Mapper.Map<IEnumerable<ProyectoDto>>(projects);
+
                 return Ok(FullResult);
             }
             catch (Exception ex)
