@@ -249,6 +249,48 @@ namespace everisapi.API.Controllers
             }
         }
 
+        //Este metodo lanza mediante un post una petición que devolvera una lista de evaluaciones
+        //atendiendo al codigoIdioma
+        //Es el que se usa en previousevaluation para la tabla
+        [HttpPost("{UsuarioLogeado}/proyecto/all/info/page/{pageNumber}/lan/{codigoIdioma}")]
+        public IActionResult GetAllEvaluationInfoAndPageFiltered(int codigoIdioma, int pageNumber, string UsuarioLogeado,
+                [FromBody] EvaluacionInfoPaginationDto EvaluacionParaFiltrar)
+        {
+            try
+            {
+                //Comprueba que el body del json es correcto sino devolvera null
+                //Si esto ocurre devolveremos un error
+                if (EvaluacionParaFiltrar == null)
+                {
+                    return BadRequest();
+                }
+
+                //Si no cumple con el modelo de creación devuelve error
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var EvaluacionesFiltradas = new List<EvaluacionInfoDto>();
+                var NumEvals = 0;
+
+                var Evals = _evaluacionInfoRepository.GetAllEvaluationInfoAndPageFiltered(codigoIdioma, pageNumber, EvaluacionParaFiltrar, UsuarioLogeado);
+                NumEvals = Evals.Count();
+                EvaluacionesFiltradas = Evals.ToList();//Skip(10 * pageNumber).Take(10).
+
+
+                //Hacemos un mapeo de la pregunta que recogimos
+                var EvaluacionesResult = Mapper.Map<List<EvaluacionInfoDto>>(EvaluacionesFiltradas);
+
+                return Ok(new { NumEvals, EvaluacionesResult });
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("Se recogio un error al recibir la petición post de recoger una lista filtrada de evaluaciones y paginado con número " + pageNumber + ": " + ex);
+                return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
+            }
+        }
+
         [HttpPost("proyecto/{id}/sectionsinfo/{codigoIdioma}")]
         public IActionResult GetEvaluationsWithSectionsInfo(int id, int codigoIdioma,
                 [FromBody] EvaluacionInfoPaginationDto EvaluacionParaFiltrar)

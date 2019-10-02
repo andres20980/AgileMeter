@@ -18,6 +18,9 @@ namespace everisapi.API.Services
         //Devuelve todos los proyectos de un usuario
         IEnumerable<ProyectoDto> GetProyectosDeUsuario(string userNombre);
 
+        //Devuelve todos los proyectos de un usuario
+        IEnumerable<ProyectoDto> GetProyectosDeUsuario(string userNombre, int codigoIdioma);
+
         //Devuelve un proyecto de un usuario
         ProyectoDto GetOneProyecto(string userNombre, int proyectoId);
 
@@ -26,6 +29,9 @@ namespace everisapi.API.Services
 
         //Devuelve todos los proyectos de un usuario con evaluaciones finalizadas
         IEnumerable<ProyectoDto> GetProyectosDeUsuarioConEvaluacionesFinalizadas(string userNombre);
+
+        //Devuelve todos los proyectos de un usuario con evaluaciones finalizadas atendiendo al idioma
+        IEnumerable<ProyectoDto> GetProyectosDeUsuarioConEvaluacionesFinalizadas(string userNombre, int codigoIdioma);
 
         //Devuelve si un usuario existe o no
         bool UserExiste(string userNombre);

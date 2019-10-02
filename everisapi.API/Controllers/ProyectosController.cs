@@ -143,6 +143,37 @@ namespace everisapi.API.Controllers
             }
         }
 
+                //Recoge todos los proyecto de un usuario mediante su nombre
+        [HttpGet("{nombreUsuario}/proyectos/{codigoIdioma}")]
+        public IActionResult GetProyectosUsuario(string nombreUsuario, int codigoIdioma)
+        {
+            try
+            {
+                //Comprueba si existe el usuario y si existe manda un json con la información
+                //si no existe mandara un error 404 el error 500 aparecera si el servidor falla
+                if (!_usersInfoRepository.UserExiste(nombreUsuario))
+                {
+                    _logger.LogInformation("El usuario con nombre " + nombreUsuario + " no pudo ser encontrado.");
+                    return NotFound();
+                }
+
+                //Recogemos una lista de proyecto del usuario
+                var ProyectosDeUsuarioResult = _usersInfoRepository.GetProyectosDeUsuario(nombreUsuario, codigoIdioma);
+
+                //Transformamos la lista anterior en una nueva con los datos que necesitamos
+                //Ya que otros son relevantes
+
+                //var ProyectosDeUsuarioResult = Mapper.Map<IEnumerable<ProyectoDto>>(ProyectosDeUsuario);
+
+                return Ok(ProyectosDeUsuarioResult);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("Se recogio un error al recibir la petición de proyectos de usuario con nombre " + nombreUsuario + ": " + ex);
+                return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
+            }
+        }
+
         [HttpGet("{nombreUsuario}/proyectosConEvaluacionesPendientes")]
         public IActionResult GetProyectosUsuarioConEvaluacionesPendientes(string nombreUsuario)
         {
@@ -186,6 +217,35 @@ namespace everisapi.API.Controllers
 
                 //Recogemos una lista de proyecto del usuario
                 var ProyectosDeUsuario = _usersInfoRepository.GetProyectosDeUsuarioConEvaluacionesFinalizadas(nombreUsuario);
+
+                //Transformamos la lista anterior en una nueva con los datos que necesitamos
+                //Ya que otros son relevantes
+                var ProyectosDeUsuarioResult = Mapper.Map<IEnumerable<ProyectoDto>>(ProyectosDeUsuario);
+                return Ok(ProyectosDeUsuarioResult);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogCritical("Se recogio un error al recibir la petición de proyectos de usuario con nombre " + nombreUsuario + ": " + ex);
+                return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
+            }
+        }
+
+        //Obtenemos las evaluaciones finalizadas atendiendo al codigoIdioma
+        [HttpGet("{nombreUsuario}/proyectosConEvaluacionesFinalizadas/{codigoIdioma}")]
+        public IActionResult GetProyectosUsuarioConEvaluacionesFinalizadas(string nombreUsuario, int codigoIdioma)
+        {
+            try
+            {
+                //Comprueba si existe el usuario y si existe manda un json con la información
+                //si no existe mandara un error 404 el error 500 aparecera si el servidor falla
+                if (!_usersInfoRepository.UserExiste(nombreUsuario))
+                {
+                    _logger.LogInformation("El usuario con nombre " + nombreUsuario + " no pudo ser encontrado.");
+                    return NotFound();
+                }
+
+                //Recogemos una lista de proyecto del usuario
+                var ProyectosDeUsuario = _usersInfoRepository.GetProyectosDeUsuarioConEvaluacionesFinalizadas(nombreUsuario, codigoIdioma);
 
                 //Transformamos la lista anterior en una nueva con los datos que necesitamos
                 //Ya que otros son relevantes

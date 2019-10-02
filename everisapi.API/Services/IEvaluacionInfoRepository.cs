@@ -30,6 +30,10 @@ namespace everisapi.API.Services
         //Recoge una lista de evaluaciones(todas las de los de los equipos del usuario) con datos de información de muchas tablas filtrandola por paginado y los datos de una evaluación
         List<EvaluacionInfoDto> GetAllEvaluationInfoAndPageFiltered(int pageNumber, EvaluacionInfoPaginationDto Evaluation, string UsuarioLogeado);
 
+        //Recoge una lista de evaluaciones(todas las de los de los equipos del usuario) con datos de información de muchas tablas filtrandola por paginado y los datos de una evaluación
+        //teniendo presente el codigoIdioma
+        List<EvaluacionInfoDto> GetAllEvaluationInfoAndPageFiltered(int codigoIdioma, int pageNumber, EvaluacionInfoPaginationDto Evaluation, string UsuarioLogeado);
+
         //Devuelve todas las evaluaciones de un proyecto
         IEnumerable<EvaluacionEntity> GetEvaluacionesFromProject(int IdProject);
 

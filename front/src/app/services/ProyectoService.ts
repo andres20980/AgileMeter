@@ -71,11 +71,12 @@ export class ProyectoService {
 
   //Este metodo recoge todos los proyectos de un usuario de la base de datos
   getProyectosDeUsuario() {
+    var codigoIdioma = this._appComponent._storageDataService.codigoIdioma;
     let Token = this._appComponent.ComprobarUserYToken();
     let headers = new Headers({
       'Authorization': Token
     });
-    return this._http.get(this.url + 'proyectos/' + this.UsuarioLogeado + '/proyectos', { headers: headers }).pipe(
+    return this._http.get(this.url + 'proyectos/' + this.UsuarioLogeado + '/proyectos/' + codigoIdioma, { headers: headers }).pipe(
       map((response: Response) => response.json()),
       catchError(this.errorHandler));
   }
@@ -91,11 +92,12 @@ export class ProyectoService {
   }
 
   getProyectosDeUsuarioConEvaluacionesFinalizadas() {
+    var codigoIdioma = this._appComponent._storageDataService.codigoIdioma;
     let Token = this._appComponent.ComprobarUserYToken();
     let headers = new Headers({
       'Authorization': Token
     });
-    return this._http.get(this.url + 'proyectos/' + this.UsuarioLogeado + '/proyectosConEvaluacionesFinalizadas', { headers: headers }).pipe(
+    return this._http.get(this.url + 'proyectos/' + this.UsuarioLogeado + '/proyectosConEvaluacionesFinalizadas/' + codigoIdioma, { headers: headers }).pipe(
       map((response: Response) => response.json()),
       catchError(this.errorHandler));
   }

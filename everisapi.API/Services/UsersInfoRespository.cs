@@ -90,6 +90,66 @@ namespace everisapi.API.Services
 
         }
 
+        //Recoge todos los proyectos de un usuario atendiendo al idioma
+        public IEnumerable<ProyectoDto> GetProyectosDeUsuario(string userNombre, int codigoIdioma)
+        {
+            List<ProyectoDto> proyectos = new List<ProyectoDto>();
+
+            UserEntity usuario = _context.Users.Where(u => u.Nombre == userNombre).FirstOrDefault();
+
+            if (usuario.RoleId != (int)Roles.User)
+            {
+                var proyectosE = _context.Proyectos.Include(r => r.LineaEntity).Include(o => o.OficinaEntity).Where(p => p.TestProject == false /* || p.UserNombre == userNombre*/ ).OrderBy(p => p.Proyecto).ToList();
+                foreach (ProyectoEntity pe in proyectosE)
+                {
+                    ProyectoDto p = new ProyectoDto();
+                    p.Id = pe.Id;
+                    //p.Nombre = pe.TestProject ? pe.Nombre : String.Concat(pe.Nombre, " - " , pe.LineaEntity.LineaNombre);
+                    p.Nombre = pe.Nombre;
+                    p.Fecha = pe.Fecha;
+                    p.Proyecto = pe.Proyecto;
+                    p.numFinishedEvals = _context.Evaluaciones.Where(e => e.ProyectoId == pe.Id && e.Estado).Count();
+                    p.numPendingEvals = _context.Evaluaciones.Where(e => e.ProyectoId == pe.Id && !e.Estado).Count();
+                    p.TestProject = pe.TestProject;
+                    //p.Oficina = pe.Oficina;
+                    p.Oficina = (string) _context.TraduccionesOficinas
+                                    .Where(t => t.OficinaId == pe.OficinaEntity.OficinaId 
+                                                &&
+                                                t.IdiomaId == codigoIdioma)
+                                    .Select(s => s.Traduccion).First();
+                    proyectos.Add(p);
+                }
+            }
+            else
+            {
+                var ProyectosUsuario = _context.UserProyectos.Where(up => up.UserNombre == userNombre).ToList();
+
+                foreach (UserProyectoEntity userProyecto in ProyectosUsuario)
+                {
+                    var pe = _context.Proyectos.Include(o => o.OficinaEntity).Where(pr => pr.Id == userProyecto.ProyectoId).FirstOrDefault();
+                    ProyectoDto p = new ProyectoDto();
+                    p.Id = pe.Id;
+                    p.Nombre = pe.Nombre;
+                    p.Proyecto = pe.Proyecto;
+                    p.Fecha = pe.Fecha;
+                    p.numFinishedEvals = _context.Evaluaciones.Where(e => e.ProyectoId == pe.Id && e.Estado).Count();
+                    p.numPendingEvals = _context.Evaluaciones.Where(e => e.ProyectoId == pe.Id && !e.Estado).Count();
+                    p.TestProject = pe.TestProject;
+                    //p.Oficina = pe.Oficina;
+                    p.Oficina = (string) _context.TraduccionesOficinas
+                                    .Where(t => t.OficinaId == pe.OficinaEntity.OficinaId 
+                                                &&
+                                                t.IdiomaId == codigoIdioma)
+                                    .Select(s => s.Traduccion).First();
+                    proyectos.Add(p);
+                }
+                proyectos = proyectos.OrderBy(pro => pro.Proyecto).ToList();
+            }
+
+            return proyectos;
+
+        }
+
         //Recoge todos los proyectos de un usuario con evaluaciones pendientes
         public IEnumerable<ProyectoDto> GetProyectosDeUsuarioConEvaluacionesPendientes(string userNombre)
         {
@@ -106,7 +166,7 @@ namespace everisapi.API.Services
             return proyectos;
         }
 
-        //Recoge todos los proyectos de un usuario con evaluaciones pendientes
+        //Recoge todos los proyectos de un usuario con evaluaciones finalizadas
         public IEnumerable<ProyectoDto> GetProyectosDeUsuarioConEvaluacionesFinalizadas(string userNombre)
         {
             var user = this.GetUser(userNombre, false);
@@ -119,6 +179,23 @@ namespace everisapi.API.Services
             {
                 proyectos = proyectos.Where(p => p.numFinishedEvals > 0 && p.TestProject == false).ToList();
             }
+            return proyectos;
+        }
+
+        //Recoge todos los proyectos de un usuario con evaluaciones finalizadas atendiendo al codigoIdioma
+        public IEnumerable<ProyectoDto> GetProyectosDeUsuarioConEvaluacionesFinalizadas(string userNombre, int codigoIdioma)
+        {
+            var user = this.GetUser(userNombre, false);
+            var proyectos = this.GetProyectosDeUsuario(userNombre, codigoIdioma);
+            if (user.RoleId != (int)Roles.Admin || user.RoleId != (int)Roles.Evaluator)
+            {
+                proyectos = proyectos.Where(p => p.numFinishedEvals > 0).ToList();
+            }
+            else
+            {
+                proyectos = proyectos.Where(p => p.numFinishedEvals > 0 && p.TestProject == false).ToList();
+            }
+
             return proyectos;
         }
 

@@ -101,13 +101,14 @@ export class EvaluacionService {
 
   //Nos permite recoger información de todas las envaluaciones filtrada y paginada
   getAllEvaluacionInfoFiltered(NumPag: number, EvaluacionFiltrar: EvaluacionFilterInfo) {
+    var codigoIdioma = this._appComponent._storageDataService.codigoIdioma;
     let Token = this._appComponent.ComprobarUserYToken();
     let params = JSON.stringify(EvaluacionFiltrar);
     let headers = new Headers({
       'Content-Type': 'application/json',
       'Authorization': Token
     });
-    return this._http.post(this.url + 'evaluaciones/'+ this.UsuarioLogeado +'/proyecto/all/info/page/' + NumPag, params, { headers: headers }).pipe(
+    return this._http.post(this.url + 'evaluaciones/'+ this.UsuarioLogeado +'/proyecto/all/info/page/' + NumPag +'/lan/' + codigoIdioma, params, { headers: headers }).pipe(
       map(res => res.json()),
       // tap(r => console.log("OBSERVAAAAAAAAAAAAABLE",r)),
       catchError(this.errorHandler));

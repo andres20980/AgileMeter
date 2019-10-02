@@ -492,6 +492,99 @@ namespace everisapi.API.Services
             return EvaluacionesInformativas.ToList();
         }
 
+        //Metodo que devuelve un filtrado de todas las evaluaciones (de los equipos del usuario) y proyecto paginada
+        //atendiendo al codigoIdioma
+        public List<EvaluacionInfoDto> GetAllEvaluationInfoAndPageFiltered(int codigoIdioma, int pageNumber, EvaluacionInfoPaginationDto Evaluacion, string UsuarioLogeado)
+        {
+            //Vemos los equipos a los que pertenece el usuario en el caso de tener perfil User
+            UserEntity user = _context.Users.Where(u => u.Nombre == UsuarioLogeado).FirstOrDefault();
+            List<UserProyectoEntity> equiposUsuario = new List<UserProyectoEntity>();
+            List<int> equipos = new List<int>();
+            if (user.RoleId == (int)Roles.User)
+            {
+                equiposUsuario = _context.UserProyectos.Where(up => up.UserNombre == UsuarioLogeado).ToList();
+                foreach (var eu in equiposUsuario)
+                {
+                    equipos.Add(eu.ProyectoId);
+                }
+            }
+
+            //Recogemos las evaluaciones y la paginamos
+            List<EvaluacionInfoDto> EvaluacionesInformativas = new List<EvaluacionInfoDto>();
+            List<EvaluacionEntity> Evaluaciones;
+
+            //Recogemos las traducciones de oficinas para poder filtrarlas
+            List<TraduccionesOficinasEntity> OficinasTraducidas;
+
+            OficinasTraducidas = _context.TraduccionesOficinas.Include(o => o.OficinaEntity)
+                                    .Where(to => to.IdiomaId == codigoIdioma).ToList();
+
+            var resultado = OficinasTraducidas
+                                        .Where(o => o.OficinaEntity.OficinaId == 1)
+                                        .Select(o =>o).First();
+
+            Evaluaciones = _context.Evaluaciones.
+            Include(r => r.ProyectoEntity).
+            ThenInclude(p => p.UserEntity).
+            Include(r => r.ProyectoEntity).
+            ThenInclude(o => o.OficinaEntity).
+            Include(a => a.Assessment).
+            Where(e =>
+            (
+                equipos.Count > 0 ? (equipos.Contains(e.ProyectoId)) : 1 == 1) 
+            &&
+                e.Estado == Boolean.Parse(Evaluacion.Estado) 
+            &&
+                ((user.RoleId == (int)Roles.Admin || user.RoleId == (int)Roles.Evaluator) ? (e.ProyectoEntity.TestProject == false) : 1 == 1) 
+            //&& 
+            //Este filtrado se realiza más tarde una vez recuperada la traducción de la oficina, ya que complica
+            //mucho el filtrado de oficinas si se hace en este punto.
+                //(Evaluacion.Oficinas.Length > 0 ? (Array.Exists(Evaluacion.Oficinas, element => element == e.ProyectoEntity.Oficina)) : 1 == 1)
+            &&
+                (Evaluacion.Equipos.Length > 0 ? (Array.Exists(Evaluacion.Equipos, element => element == e.ProyectoId)) : 1 == 1) 
+            &&
+                (Evaluacion.IdAssessment.Length > 0 ? (Array.Exists(Evaluacion.IdAssessment, element => element == e.AssessmentId)) : 1 == 1) 
+            &&
+                e.Fecha.Date.ToString("dd/MM/yyyy").Contains(Evaluacion.Fecha)
+            )
+            .OrderByDescending(e => e.Fecha).ToList();
+
+
+            //Encuentra la informacion de la evaluacion y lo introduce en un objeto
+            foreach (var evaluacion in Evaluaciones)
+            {
+                EvaluacionInfoDto EvaluacionInfo = new EvaluacionInfoDto
+                {
+                    Id = evaluacion.Id,
+                    Fecha = evaluacion.Fecha,
+                    Estado = evaluacion.Estado,
+                    Nombre = String.IsNullOrEmpty(evaluacion.ProyectoEntity.Proyecto)? evaluacion.ProyectoEntity.Nombre : evaluacion.ProyectoEntity.Proyecto + " - " + evaluacion.ProyectoEntity.Nombre,
+                    UserNombre = evaluacion.UserNombre,
+                    //Oficina = evaluacion.ProyectoEntity.Oficina,
+                    Oficina = (string) _context.TraduccionesOficinas
+                                    .Where(t => t.OficinaId == evaluacion.ProyectoEntity.OficinaEntity.OficinaId
+                                                &&
+                                                t.IdiomaId == codigoIdioma)
+                                    .Select(s => s.Traduccion).First(),
+                    NotasEvaluacion = evaluacion.NotasEvaluacion,
+                    NotasObjetivos = evaluacion.NotasObjetivos,
+                    AssessmentName = evaluacion.Assessment.AssessmentName,
+                    AssessmentId = evaluacion.AssessmentId,
+                    Puntuacion = (float)evaluacion.Puntuacion,
+                    ProyectoId = evaluacion.ProyectoId
+                };
+
+                //Añade el objeto en la lista
+                EvaluacionesInformativas.Add(EvaluacionInfo);
+            }
+
+            //Filtramos por las oficinas seleccionadas por el combo
+            var EvaluacionesInformativasFiltradas = EvaluacionesInformativas.Where(e => (Evaluacion.Oficinas.Length > 0 ? (Array.Exists(Evaluacion.Oficinas, element => element == e.Oficina)) : 1 == 1));
+
+            //return EvaluacionesInformativas.ToList();
+            return EvaluacionesInformativasFiltradas.ToList();
+        }
+
         public List<EvaluacionInfoWithSectionsDto> GetEvaluationsWithSectionsInfo(int IdProject, EvaluacionInfoPaginationDto Evaluacion, int codigoIdioma)
         {
             //Recogemos las evaluaciones y la paginamos
