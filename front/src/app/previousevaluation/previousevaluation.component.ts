@@ -21,7 +21,7 @@ import { SectionService } from 'app/services/SectionService';
 import { EvaluacionInfoWithSections } from 'app/Models/EvaluacionInfoWithSections';
 import { forEach } from '@angular/router/src/utils/collection';
 import { SectionsLevel } from 'app/pdfgenerator/pdfgenerator.component';
-import { Assessment } from 'app/Models/Assessment';
+import { AssessmentEv } from 'app/Models/AssessmentEv';
 import { Workbook } from 'exceljs';
 import * as fs from 'file-saver';
 import { MatTable, MatTableDataSource } from '@angular/material';
@@ -39,11 +39,6 @@ export interface ComplianceLevels {
     levels:  {level: number, value: number}[]
   }[]
 
-}
-
-export interface AssesmentEv{
-  id: number,
-  name: string
 }
 
 @Component({
@@ -75,11 +70,20 @@ export class PreviousevaluationComponent implements OnInit {
   public MostrarTabla: boolean = true;
   public MostrarGrafica: boolean = false;
   public TableFilteredData: Evaluacion[];
+
+  //Definimos los campos necesarios para mantener el filtrado del componente tabla
+  public DatosSelectOficinas: string[] = [];
+  public DatosSelectProyectos: Proyecto[] = [];
   //@ViewChild(SortedTableComponent) table: SortedTableComponent;
+
+  //Definimos la lista de assessments para la gráfica que solo va a contener por el momento scrum
+  public ListaAssessmentGrafica: AssessmentEv[] = [];
 
   public Admin: boolean = false;
   public ListaDeProyectos: Array<Proyecto> = [];
   public ProyectoSeleccionado: boolean = false;
+
+  public disabletoggleGlobalData: boolean;
 
 
   //Datos de la barras
@@ -92,14 +96,13 @@ export class PreviousevaluationComponent implements OnInit {
   public ComplianceLevels: ComplianceLevels;
   public MaxLevelReached: number;
   public barChartOptions: any;
-  public ListaAssessments : AssesmentEv[] = [];
-  public selectedAssessment: AssesmentEv;
+  public ListaAssessments : AssessmentEv[] = [];
+  public selectedAssessment: AssessmentEv;
   public legend: any;
   public allLegendsHidden: boolean = false;
 
   //Para actualizar la grafica
   @ViewChild(BaseChartDirective) public chart: BaseChartDirective;
-
 
   constructor(
     private _appComponent: AppComponent,
@@ -113,6 +116,9 @@ export class PreviousevaluationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    //Deshabilitamos disabletoggleGlobalData
+    this.disabletoggleGlobalData = true;
+
     //Recogemos los proyectos y realizamos comprobaciones
     var Role;
     //this.Project = this._appComponent._storageDataService.UserProjectSelected;
@@ -168,7 +174,7 @@ export class PreviousevaluationComponent implements OnInit {
 
       //this._appComponent.pushBreadcrumb("Evaluaciones finalizadas", "/finishedevaluations");
       this._appComponent.pushBreadcrumb("BREADCRUMB.FINISHED_EVALUATIONS", "/finishedevaluations");
-      this._appComponent.pushBreadcrumb(this._appComponent._storageDataService.UserProjectSelected.nombre, null);
+      //this._appComponent.pushBreadcrumb(this._appComponent._storageDataService.UserProjectSelected.nombre, null);
 
     if (this.Project.fecha != null) {
       //Para que no de error en modo development
@@ -200,6 +206,7 @@ export class PreviousevaluationComponent implements OnInit {
   public ActivarGrafica()
   {
     var copiaLista = Array<EvaluacionInfo>();
+    var activar = false;
 
     if (this.ListaDeEvaluacionesPaginada != undefined)
     {
@@ -210,7 +217,24 @@ export class PreviousevaluationComponent implements OnInit {
         }
       });
     }
-    return (copiaLista.length > 1? false:true);
+
+    //Activamos la gráfica cuando solo existe un equipo en la lista 
+    //y no contiene un assessment distinto de SCRUM
+
+    activar = copiaLista.length == 1 
+                && (this.ListaDeEvaluacionesPaginada != undefined 
+                      && !this.ListaDeEvaluacionesPaginada.find(e => e.assessmentId != 1))
+              ? true : false;
+    
+    if (copiaLista.length == 1 )
+    {
+      this._appComponent.pushBreadcrumb(copiaLista[0].nombre, null);
+    }else
+    {
+      this._appComponent.popBreadcrumb(2);
+    }
+
+    return activar;
   }
 
   //Restablece los datos de la busqueda
@@ -384,15 +408,24 @@ export class PreviousevaluationComponent implements OnInit {
               if(this.ListaAssessments.find(a => a.id == ev.assessmentId) == null){
                 let id: number = ev.assessmentId;
                 let name: string = ev.assessmentName;
-                let a: AssesmentEv= { id, name};
+                let a: AssessmentEv= { id, name};
                 this.ListaAssessments.push(a);
+
+                //Solo cargamos el assessment de scrum
+                if (a.id === 1)
+                {
+                  this.ListaAssessmentGrafica.push(a);
+                }
               }
             });
 
             //Temporalmente asignamos el primer proyecto de la tabla sin filtrar que cumple que su assessment es scrum
             this.Project.id = this.ListaDeEvaluacionesPaginada.find(ev => ev.assessmentId == 1)?this.ListaDeEvaluacionesPaginada.find(ev => ev.assessmentId == 1).proyectoId:-1;
 
-            this.selectedAssessment = this.ListaAssessments[0];
+            if (this.ListaAssessments.find(a => a.id ==1))
+            {
+              this.selectedAssessment = this.ListaAssessments.find(a => a.id ==1);
+            }
           }
 
           if(this.selectedAssessment != null && this.selectedAssessment != undefined){
@@ -745,6 +778,9 @@ export class PreviousevaluationComponent implements OnInit {
   }
 
   public toggleGlobalData(){
+    //Este es el código que tenía la propiedad 'legend-item-disabled' y que he sustituido por esta variable disabletoggleGlobalData
+    //(chart == 'undefined') && chart.chart.config.data.datasets[chart.chart.config.data.datasets.length - 1].hidden}
+    this.disabletoggleGlobalData = !this.disabletoggleGlobalData;
     this.chart.chart.config.data.datasets[this.chart.chart.config.data.datasets.length - 1].hidden = !this.chart.chart.config.data.datasets[this.chart.chart.config.data.datasets.length - 1].hidden;
     this.chart.chart.update();
   }

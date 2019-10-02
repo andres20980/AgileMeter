@@ -9,6 +9,7 @@ import { EnumRol } from 'app/Models/EnumRol';
 import { Assessment } from 'app/Models/Assessment';
 import { Proyecto } from 'app/Models/Proyecto';
 import { ProyectoService } from 'app/services/ProyectoService';
+import { AssessmentEv } from 'app/Models/AssessmentEv';
 
 // export interface Evaluacion {
 //   id: number,
@@ -58,9 +59,26 @@ export class SortedTableComponent implements OnInit {
   public ListaDeAssessmentFiltrada: Array<Assessment> = [];
 
   ngOnInit() {
+
+    if(this.prevEval.DatosSelectOficinas.length > 0 || this.prevEval.DatosSelectProyectos.length > 0)
+    {
+      this.ListaDeOficinas = this.prevEval.DatosSelectOficinas;
+      this.ListaDeProyectosFiltrada = this.prevEval.DatosSelectProyectos;
+      this.prevEval.ListaAssessments.forEach(element => {
+        let a: Assessment = { assessmentId: element.id, assessmentName: element.name };
+        this.ListaDeAssessmentFiltrada.push(a);
+      });
+
+      this.refresh();
+    }
+    else
+    {
+      this.getProyectos();
+      this.getAssessmentDeUsuario();
+    }
+
     this.GetPaginacion();
-    this.getProyectos();
-    this.getAssessmentDeUsuario();
+
   }
 
   applyFilter(filterValue: string) {
@@ -146,7 +164,7 @@ export class SortedTableComponent implements OnInit {
       });
     }
     this.dataSource.filter = "";
-    this.prevEval.EvaluacionFiltrar = { 'nombre': '', 'estado': 'true', 'fecha': '', 'userNombre': '', 'puntuacion': '', 'assessmentId': 0, 'oficinas': o, equipos: e, 'idAssessment': a };
+    this.prevEval.EvaluacionFiltrar = { 'nombre': '', 'estado': 'true', 'fecha': '', 'userNombre': '', 'puntuacion': '', 'assessmentId': 1, 'oficinas': o, equipos: e, 'idAssessment': a };
     this.prevEval.GetPaginacion();
   }
 
@@ -156,6 +174,9 @@ export class SortedTableComponent implements OnInit {
         this.ListaDeProyectos = res;
         this.getOficinasDeUsuario(res);
         this.ListaDeProyectosFiltrada = res;
+
+        //Actualizamos los datos del componente padre
+        this.prevEval.DatosSelectProyectos = this.ListaDeProyectosFiltrada;
       },
       error => {
         //Si el servidor tiene algún tipo de problema mostraremos este error
@@ -180,11 +201,13 @@ export class SortedTableComponent implements OnInit {
       }
     });
     this.ListaDeOficinas = oficinas.sort();
+    this.prevEval.DatosSelectOficinas = this.ListaDeOficinas;
   }
 
   public selectOficinas() {
     //Limpiamos la lista de oficinas en storage y añadimos los nuevas oficinas seleccionadas
     this._appComponent._storageDataService.OfficesSelected = [];
+    this._appComponent._storageDataService.ProjectsSelected = [];
       this.OficinaSeleccionada.forEach(element => {
         this._appComponent._storageDataService.OfficesSelected.push(element);
        });
@@ -238,6 +261,14 @@ export class SortedTableComponent implements OnInit {
   }
 
   public selectAssessment() {
+
+    //Limpiamos la lista de assessments en storage y añadimos los nuevas assessments seleccionadas
+    this._appComponent._storageDataService.AssessmentsSelected = [];
+      this.AssessmentSeleccionado.forEach(element => {
+        this._appComponent._storageDataService.AssessmentsSelected.push(element);
+       });
+
+    //Refrescamos los datos para que sea coherente con el select de assessment no seleccionado.
     this.refresh();
   }
 
@@ -261,6 +292,9 @@ export class SortedTableComponent implements OnInit {
       });
 
       this.EquipoSeleccionado = this._appComponent._storageDataService.ProjectsSelected;
+
+      //Actualizamos los datos del componente padre
+      this.prevEval.DatosSelectProyectos = this.ListaDeProyectosFiltrada;
 
     //console.log(this._appComponent._storageDataService.ProjectsSelected);
       
@@ -313,11 +347,22 @@ export class SortedTableComponent implements OnInit {
       this.EquipoSeleccionado = this._appComponent._storageDataService.ProjectsSelected;
       //console.log(this._appComponent._storageDataService.ProjectsSelected);      
     }
+
+    //Actualizamos los datos del componente padre
+    //this.prevEval.DatosSelectProyectos = this.ListaDeProyectosFiltrada;
+    this.prevEval.DatosSelectProyectos = this.ListaDeProyectosFiltrada;
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.dataInput) {
       this.GetPaginacion();
+
+      this.EquipoSeleccionado = this._appComponent._storageDataService.ProjectsSelected;
+      this.OficinaSeleccionada = this._appComponent._storageDataService.OfficesSelected;
+
+      //Por el momento lo dejamos comentado ya que aunque lo asignenmos no refresca el select de assessment
+      //TODO
+      //this.AssessmentSeleccionado = this._appComponent._storageDataService.AssessmentsSelected;
     }
   }
 }
