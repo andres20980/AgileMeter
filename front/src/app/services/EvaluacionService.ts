@@ -145,13 +145,14 @@ export class EvaluacionService {
 
   //Nos permite recoger información de todas las evaluaciones de todos los equipos asignados a un usuario filtrada para la gráfica
   GetAllEvaluationsWithProgress(EvaluacionFiltrar: EvaluacionFilterInfo) {
+    var codigoIdioma = this._appComponent._storageDataService.codigoIdioma;
     let Token = this._appComponent.ComprobarUserYToken();
     let params = JSON.stringify(EvaluacionFiltrar);
     let headers = new Headers({
       'Content-Type': 'application/json',
       'Authorization': Token
     });
-    return this._http.post(this.url + 'evaluaciones/alluserprojects/' + this.UsuarioLogeado + '/progress/', params, { headers: headers }).pipe(
+    return this._http.post(this.url + 'evaluaciones/alluserprojects/' + this.UsuarioLogeado + '/progress/' + codigoIdioma, params, { headers: headers }).pipe(
       map(res => res.json()),
       catchError(this.errorHandler));
   }

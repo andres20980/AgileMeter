@@ -27,6 +27,9 @@ namespace everisapi.API.Services
         //Devuelve todos los proyectos de un usuario con evaluaciones pendientes
         IEnumerable<ProyectoDto> GetProyectosDeUsuarioConEvaluacionesPendientes(string userNombre);
 
+        //Devuelve todos los proyectos de un usuario con evaluaciones pendientes atendiendo al idioma
+        IEnumerable<ProyectoDto> GetProyectosDeUsuarioConEvaluacionesPendientes(string userNombre, int codigoIdioma);
+
         //Devuelve todos los proyectos de un usuario con evaluaciones finalizadas
         IEnumerable<ProyectoDto> GetProyectosDeUsuarioConEvaluacionesFinalizadas(string userNombre);
 

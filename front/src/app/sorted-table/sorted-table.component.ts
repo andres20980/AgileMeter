@@ -64,6 +64,7 @@ export class SortedTableComponent implements OnInit {
     {
       this.ListaDeOficinas = this.prevEval.DatosSelectOficinas;
       this.ListaDeProyectosFiltrada = this.prevEval.DatosSelectProyectos;
+      this.ListaDeProyectos = this.prevEval.ListaDeProyectos;
       this.prevEval.ListaAssessments.forEach(element => {
         let a: Assessment = { assessmentId: element.id, assessmentName: element.name };
         this.ListaDeAssessmentFiltrada.push(a);
@@ -177,6 +178,7 @@ export class SortedTableComponent implements OnInit {
 
         //Actualizamos los datos del componente padre
         this.prevEval.DatosSelectProyectos = this.ListaDeProyectosFiltrada;
+        this.prevEval.ListaDeProyectos = this.ListaDeProyectos;
       },
       error => {
         //Si el servidor tiene algún tipo de problema mostraremos este error

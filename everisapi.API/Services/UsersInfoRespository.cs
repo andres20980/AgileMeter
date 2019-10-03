@@ -166,6 +166,22 @@ namespace everisapi.API.Services
             return proyectos;
         }
 
+        //Recoge todos los proyectos de un usuario con evaluaciones pendientes atendiendo al idioma
+        public IEnumerable<ProyectoDto> GetProyectosDeUsuarioConEvaluacionesPendientes(string userNombre, int codigoIdioma)
+        {
+            var user = this.GetUser(userNombre, false);
+            var proyectos = this.GetProyectosDeUsuario(userNombre, codigoIdioma);
+            if (user.RoleId == (int)Roles.User)
+            {
+                proyectos = proyectos.Where(p => p.numPendingEvals > 0).ToList();
+            }
+            else
+            {
+                proyectos = proyectos.Where(p => p.numPendingEvals > 0 && p.TestProject == false).ToList();
+            }
+            return proyectos;
+        }
+
         //Recoge todos los proyectos de un usuario con evaluaciones finalizadas
         public IEnumerable<ProyectoDto> GetProyectosDeUsuarioConEvaluacionesFinalizadas(string userNombre)
         {

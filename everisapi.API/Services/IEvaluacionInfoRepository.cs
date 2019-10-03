@@ -52,6 +52,9 @@ namespace everisapi.API.Services
 
         List<EvaluacionInfoWithProgressDto> GetEvaluationsWithProgress(int IdProject, EvaluacionInfoPaginationDto Evaluacion);
         List<EvaluacionInfoWithProgressDto> GetAllEvaluationsWithProgress(EvaluacionInfoPaginationDto Evaluacion, string userNombre);
+
+        //Listado de Evaluaciones en progreso atendiendo al idioma
+        List<EvaluacionInfoWithProgressDto> GetAllEvaluationsWithProgress(EvaluacionInfoPaginationDto Evaluacion, string userNombre, int codigoIdioma);
         //Devuelve un número entero de las evaluaciones por proyecto o todas las evaluaciones
         int GetNumEval(int idProject);
 
