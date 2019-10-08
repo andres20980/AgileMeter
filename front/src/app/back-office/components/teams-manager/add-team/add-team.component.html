@@ -15,8 +15,8 @@
               {{ office.oficinaNombre }}
             </mat-option>
           </mat-select>
-          <mat-label>Oficina</mat-label>
-          <mat-error *ngIf="hasError('OficinaEntity','required')">Debe seleccionar una Oficina</mat-error>
+          <mat-label>{{ 'ADD_TEAM.FORM_OFFICE' | translate }}</mat-label>
+          <mat-error *ngIf="hasError('OficinaEntity','required')">{{ 'ADD_TEAM.FORM_OFFICE_REQUIRED' | translate }}</mat-error>
         </mat-form-field>
       </div>
 <!--

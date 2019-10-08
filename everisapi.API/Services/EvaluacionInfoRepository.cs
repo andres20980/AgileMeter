@@ -515,9 +515,8 @@ namespace everisapi.API.Services
 
             Evaluaciones = _context.Evaluaciones.
             Include(r => r.ProyectoEntity).
-            ThenInclude(p => p.UserEntity).
-            Include(r => r.ProyectoEntity).
-            ThenInclude(o => o.OficinaEntity).
+            Include("ProyectoEntity.UserEntity").
+            Include("ProyectoEntity.OficinaEntity").
             Include(a => a.Assessment).
             Where(e =>
             (
@@ -896,9 +895,8 @@ namespace everisapi.API.Services
 
             Evaluaciones = _context.Evaluaciones.
             Include(r => r.ProyectoEntity).
-            ThenInclude(p => p.UserEntity).
-            Include(r => r.ProyectoEntity).
-            ThenInclude(p => p.OficinaEntity).
+            Include("ProyectoEntity.UserEntity").
+            Include("ProyectoEntity.OficinaEntity").
             Include(a => a.Assessment).
             Where(e =>
             (equipos.Count > 0 ? (equipos.Contains(e.ProyectoId)) : 1 == 1) &&
