@@ -56,6 +56,7 @@ import 'hammerjs';
 import { TranslateModule, TranslateService, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientTrans } from './translateHttp';
+import { NombreProyectoComponent } from './nombre-proyecto/nombre-proyecto.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -90,6 +91,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AddUpdateUserComponent,
     UserListComponent,
     TeamManagementComponent,
+    NombreProyectoComponent,
   ],
   imports: [
     BrowserModule,
