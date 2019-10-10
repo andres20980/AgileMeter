@@ -14,6 +14,7 @@ export class EvaluacionInfo {
     public flagNotasAsig: boolean,
     public assessmentId: number,
     public assessmentName: string,
+    public oficina: string,
     public proyectoId: number
   ) { }
 }

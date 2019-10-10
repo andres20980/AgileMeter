@@ -10,6 +10,10 @@ import { Team } from 'app/Models/Team';
 import { EventEmitterService } from 'app/services/event-emitter.service';
 import { TranslateService } from '@ngx-translate/core';
 
+//Excel
+import * as fs from 'file-saver';
+import { Workbook } from 'exceljs';
+
 @Component({
   selector: 'app-teams-manager',
   templateUrl: './teams-manager.component.html',
@@ -150,5 +154,55 @@ export class TeamsManagerComponent implements OnInit {
   btnAddClick() {
     this._proyectoService.equipo = null;
     this.router.navigate(['backoffice/teamsmanager/addteam']);
+  }
+
+  public ExportToExcel(){
+    var woorksheet = "",title="",oficina="",unidad="",proyecto="",nombre="", projectSize="";
+    this._translateService.get('TEAM_MANAGER.EXCEL_WORKSHEET').subscribe(value => { woorksheet = value; });
+    this._translateService.get('TEAM_MANAGER.EXCEL_TITLE').subscribe(value => { title = value; });
+    this._translateService.get('TEAM_MANAGER.TABLE_COL_OFICCE').subscribe(value => { oficina = value; });
+    this._translateService.get('TEAM_MANAGER.TABLE_COL_UNIT').subscribe(value => { unidad = value; });
+    this._translateService.get('TEAM_MANAGER.TABLE_COL_PROJECT').subscribe(value => { proyecto = value; });
+    this._translateService.get('TEAM_MANAGER.TABLE_COL_TEAM').subscribe(value => { nombre = value; });
+    this._translateService.get('TEAM_MANAGER.TABLE_COL_SIZE').subscribe(value => { projectSize = value; });
+    let workbook = new Workbook();
+    
+    let worksheet = workbook.addWorksheet(woorksheet);
+
+    let titleRow = worksheet.addRow([title]);
+    titleRow.font = { name: 'Arial', family: 4, size: 16, bold: true }
+    worksheet.addRow([]);
+
+    let header = [oficina, unidad , proyecto , nombre, projectSize ]
+    //Add Header Row
+    let headerRow = worksheet.addRow(header);
+    
+    // Cell Style : Fill and Border
+    headerRow.eachCell((cell, number) => {
+      cell.fill = {
+        type: 'pattern',
+        pattern: 'solid',
+        fgColor: { argb: 'FFEEEEEE' },
+        bgColor: { argb: '110000' }
+      }
+      cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } }
+    })
+
+
+    this.dataSource.filteredData.forEach(d => {
+      worksheet.addRow([d.oficina, d.unidad, d.proyecto, d.nombre, d.projectSize]);
+      }
+    );
+
+    worksheet.getColumn(1).width = 12;
+    worksheet.getColumn(2).width = 12;
+    worksheet.getColumn(3).width = 12;
+    worksheet.getColumn(4).width = 12;
+    var nombre:string;
+    this._translateService.get('TEAM_MANAGER.EXCEL_DOCUMENT_NAME').subscribe(value => { nombre = value; });
+    workbook.xlsx.writeBuffer().then((data) => {
+      let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+      fs.saveAs(blob, nombre+ '.xlsx');
+    })
   }
 }

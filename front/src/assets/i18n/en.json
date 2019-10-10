@@ -103,7 +103,10 @@
 		"MODAL_BTN_ACEPT": "Accept",
 		"MODAL_BTN_CANCEL": "Cancel",
 		"NOTIFICATION_DELETE_TEAM": "Team deleted successfully",
-		"NOTIFICATION_ERROR_DELETE_TEAM": "Sorry, we couldn't remove the team"
+		"NOTIFICATION_ERROR_DELETE_TEAM": "Sorry, we couldn't remove the team",
+		"EXCEL_WORKSHEET": "Teams",
+		"EXCEL_TITLE": "Teams List",
+		"EXCEL_DOCUMENT_NAME":"Teams_List"
 	},
 	"ADD_TEAM": {
 		"ADD_TEAM": "Add team",
@@ -199,9 +202,11 @@
 		"MODAL_BTN_SAVE": "Save",
 		"MODAL_BTN_CANCEL": "Cancel",
 		"EXCEL_WORKSHEET": "Completed assessments",
-		"EXCEL_TITLE": "Team´s Completed assessments",
+		"EXCEL_TITLE": "Completed assessments",
 		"EXCEL_DATE": "Date",
 		"EXCEL_USER": "User",
+		"EXCEL_OFFICE": "Office",
+		"EXCEL_TEAM": "Team",
 		"EXCEL_ASSESSMENT": "Assessment",
 		"EXCEL_SCORE": "Score",
 		"LEVEL": "Level",

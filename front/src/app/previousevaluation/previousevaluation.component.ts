@@ -473,22 +473,24 @@ export class PreviousevaluationComponent implements OnInit {
   }
 
   public ExportToExcel(){
-    var woorksheet = "",title="",date="",user="",assessment="",score="";
+    var woorksheet = "",title="",date="",user="",office="",team="",assessment="",score="";
     this._translateService.get('PREVIOUS_EVALUATION.EXCEL_WORKSHEET').subscribe(value => { woorksheet = value; });
     this._translateService.get('PREVIOUS_EVALUATION.EXCEL_TITLE').subscribe(value => { title = value; });
     this._translateService.get('PREVIOUS_EVALUATION.EXCEL_DATE').subscribe(value => { date = value; });
     this._translateService.get('PREVIOUS_EVALUATION.EXCEL_USER').subscribe(value => { user = value; });
+    this._translateService.get('PREVIOUS_EVALUATION.EXCEL_OFFICE').subscribe(value => { office = value; });
+    this._translateService.get('PREVIOUS_EVALUATION.EXCEL_TEAM').subscribe(value => { team = value; });
     this._translateService.get('PREVIOUS_EVALUATION.EXCEL_ASSESSMENT').subscribe(value => { assessment = value; });
     this._translateService.get('PREVIOUS_EVALUATION.EXCEL_SCORE').subscribe(value => { score = value; });
     let workbook = new Workbook();
     
     let worksheet = workbook.addWorksheet(woorksheet);
 
-    let titleRow = worksheet.addRow([title +" "+ this.Project.nombre]);
+    let titleRow = worksheet.addRow([title]);
     titleRow.font = { name: 'Arial', family: 4, size: 16, bold: true }
     worksheet.addRow([]);
 
-    let header = [date,user , assessment , score ]
+    let header = [date, user, office, team , assessment , score ]
     //Add Header Row
     let headerRow = worksheet.addRow(header);
     
@@ -505,7 +507,7 @@ export class PreviousevaluationComponent implements OnInit {
 
 
     this.TableFilteredData.forEach(d => {
-      worksheet.addRow([new Date(d.fecha), d.userNombre, d.assessmentName, d.puntuacion+'%']);
+      worksheet.addRow([new Date(d.fecha), d.userNombre, d.oficina, d.nombre, d.assessmentName, d.puntuacion+'%']);
       }
     );
 

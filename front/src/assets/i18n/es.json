@@ -104,7 +104,10 @@
 		"MODAL_BTN_ACEPT": "Aceptar",
 		"MODAL_BTN_CANCEL": "Cancelar",
 		"NOTIFICATION_DELETE_TEAM": "Equipo eliminado correctamente",
-		"NOTIFICATION_ERROR_DELETE_TEAM": "Ups , tuvimos problemas técnicos para eliminar el equipo, disculpe las molestias"
+		"NOTIFICATION_ERROR_DELETE_TEAM": "Ups , tuvimos problemas técnicos para eliminar el equipo, disculpe las molestias",
+		"EXCEL_WORKSHEET": "Equipos",
+		"EXCEL_TITLE": "Listado de Equipos",
+		"EXCEL_DOCUMENT_NAME":"Listado_Equipos"
 	},
 	"ADD_TEAM": {
 		"ADD_TEAM": "Alta de Equipo",
@@ -200,9 +203,11 @@
 		"MODAL_BTN_SAVE": "Guardar",
 		"MODAL_BTN_CANCEL": "Cancelar",
 		"EXCEL_WORKSHEET": "Evaluaciones finalizadas",
-		"EXCEL_TITLE": "Evaluaciones finalizadas del equipo",
+		"EXCEL_TITLE": "Evaluaciones finalizadas",
 		"EXCEL_DATE": "Fecha",
 		"EXCEL_USER": "Usuario",
+		"EXCEL_OFFICE": "Oficina",
+		"EXCEL_TEAM": "Equipo",
 		"EXCEL_ASSESSMENT": "Evaluación",
 		"EXCEL_SCORE": "Puntuación",
 		"LEVEL": "Nivel",
