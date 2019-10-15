@@ -57,21 +57,21 @@ export class BtnExportToExcelComponent implements OnInit {
     
     let worksheet = workbook.addWorksheet(woorksheet);
 
+    var header : string[] = [];
+
     for(var i = 0; i < this.fields.length; i++)
-    {
-      this._translateService.get(this.objectTranslate + '.' + this.fields[i][2]).subscribe(value => { this.fields[i][0] = value; });
+    { 
+      this._translateService.get(this.objectTranslate + '.' + this.fields[i][1]).subscribe(value => { header[i] = value; });
     }
 
     let titleRow = worksheet.addRow([title]);
     titleRow.font = { name: 'Arial', family: 4, size: 16, bold: true }
     worksheet.addRow([]);
 
-    var header = [];
     var field = []
 
     this.fields.forEach(element => {
-      header.push(element[0]);
-      field.push(element[1])
+      field.push(element[0])
     });
     //Add Header Row
     let headerRow = worksheet.addRow(header);
@@ -94,7 +94,7 @@ export class BtnExportToExcelComponent implements OnInit {
 
       for(var i = 0; i < this.fields.length; i++)
       {
-        switch (this.fields[i][5]) {
+        switch (this.fields[i][4]) {
           case "Date":
             data = new Date(d[field[i]]);
             break;
@@ -117,8 +117,8 @@ export class BtnExportToExcelComponent implements OnInit {
 
     for(var i = 1; i <= this.fields.length; i++)
     {
-      worksheet.getColumn(i).width = this.fields[i-1][3]; //Asignamos ancho columna
-      worksheet.getColumn(i).numFmt = this.fields[i-1][4]; //Asignamos formato columna      
+      worksheet.getColumn(i).width = this.fields[i-1][2]; //Asignamos ancho columna
+      worksheet.getColumn(i).numFmt = this.fields[i-1][3]; //Asignamos formato columna      
     }
 
     workbook.xlsx.writeBuffer().then((data) => {

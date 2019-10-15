@@ -52,13 +52,13 @@ export class TeamsManagerComponent implements OnInit {
     this.datosFiltrados = [];
     this.getTeams();
 
-    //fieldsTable = [header, data, translate, size, formato, tipo]
+    //fieldsTable = [data, translate, size, formato(date, percentage), tipo]
     this.fieldsTable = [
-      ["", "oficina", "TABLE_COL_OFICCE", 30,"", "String"],
-      ["", "unidad", "TABLE_COL_UNIT",20,"", "String"],
-      ["", "proyecto", "TABLE_COL_PROJECT", 40,"", "String"],
-      ["", "nombre", "TABLE_COL_TEAM", 40,"", "String"], 
-      ["", "projectSize", "TABLE_COL_SIZE", 10,"", "String"]];
+      ["oficina", "TABLE_COL_OFICCE", 30,"", "String"],
+      ["unidad", "TABLE_COL_UNIT",20,"", "String"],
+      ["proyecto", "TABLE_COL_PROJECT", 40,"", "String"],
+      ["nombre", "TABLE_COL_TEAM", 40,"", "String"], 
+      ["projectSize", "TABLE_COL_SIZE", 10,"", "String"]];
 
     this.objectTranslate = "TEAM_MANAGER";
   }

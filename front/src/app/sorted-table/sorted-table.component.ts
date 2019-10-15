@@ -63,14 +63,14 @@ export class SortedTableComponent implements OnInit {
 
   ngOnInit() {
 
-    //fieldsTable = [header, data, translate, size, formato, tipo]
+    //fieldsTable = [data, translate, size, formato(date, percentage), tipo]
     this.fieldsTable = [
-        ["date", "fecha", "EXCEL_DATE", 12,"dd/mm/yyyy", "Date"],
-        ["user", "userNombre", "EXCEL_USER",20,"", "String"],
-        ["office", "oficina", "EXCEL_OFFICE", 25,"", "String"],
-        ["team", "nombre", "EXCEL_TEAM", 40,"", "String"], 
-        ["assessment", "assessmentName", "EXCEL_ASSESSMENT", 20,"", "String"],
-        ["score", "puntuacion", "EXCEL_SCORE", 12,"0.00%", "Percentage"]];
+        ["fecha", "EXCEL_DATE", 12,"dd/mm/yyyy", "Date"],
+        ["userNombre", "EXCEL_USER",20,"", "String"],
+        ["oficina", "EXCEL_OFFICE", 25,"", "String"],
+        ["nombre", "EXCEL_TEAM", 50,"", "String"], 
+        ["assessmentName", "EXCEL_ASSESSMENT", 20,"", "String"],
+        ["puntuacion", "EXCEL_SCORE", 12,"0.00%", "Percentage"]];
     this.objectTranslate = "PREVIOUS_EVALUATION";
 
     if(this.prevEval.DatosSelectOficinas.length > 0 || this.prevEval.DatosSelectProyectos.length > 0)
