@@ -58,7 +58,20 @@ export class SortedTableComponent implements OnInit {
   public AssessmentSeleccionado: Assessment[] = [];
   public ListaDeAssessmentFiltrada: Array<Assessment> = [];
 
+  public fieldsTable : any[];
+  public objectTranslate : string;
+
   ngOnInit() {
+
+    //fieldsTable = [header, data, translate, size, formato, tipo]
+    this.fieldsTable = [
+        ["date", "fecha", "EXCEL_DATE", 12,"dd/mm/yyyy", "Date"],
+        ["user", "userNombre", "EXCEL_USER",20,"", "String"],
+        ["office", "oficina", "EXCEL_OFFICE", 25,"", "String"],
+        ["team", "nombre", "EXCEL_TEAM", 40,"", "String"], 
+        ["assessment", "assessmentName", "EXCEL_ASSESSMENT", 20,"", "String"],
+        ["score", "puntuacion", "EXCEL_SCORE", 12,"0.00%", "Percentage"]];
+    this.objectTranslate = "PREVIOUS_EVALUATION";
 
     if(this.prevEval.DatosSelectOficinas.length > 0 || this.prevEval.DatosSelectProyectos.length > 0)
     {
@@ -104,6 +117,8 @@ export class SortedTableComponent implements OnInit {
       return data.nombre.toLowerCase().includes(filter)
         || data.assessmentName.toLowerCase().includes(filter)
         || data.userNombre.toLowerCase().includes(filter)
+        || data.oficina.toLowerCase().includes(filter)
+        || data.nombre.toLowerCase().includes(filter)
         || data.puntuacion.toString().concat("%").includes(filter)
         || (data.notasEvaluacion != null && data.notasEvaluacion.toLowerCase().includes(filter))
         || (data.notasObjetivos != null && data.notasObjetivos.toLowerCase().includes(filter))

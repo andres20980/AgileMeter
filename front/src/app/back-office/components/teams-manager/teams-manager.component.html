@@ -10,10 +10,11 @@
         <input matInput (keyup)="applyFilter($event.target.value)"
           placeholder="{{ 'TEAM_MANAGER.LIST_FILTER' | translate }}">
       </mat-form-field>
-      <button class="transparente botonExcel" (click)="ExportToExcel()">
-        <img class="excel" [class.button-disabled]="!dataSource || dataSource.length == 0"
-          src="assets/excel.png" title="{{ 'SORTED_TABLE.EXCEL_EXPORT' | translate }}" />
-      </button>
+      <btn-export-to-excel 
+        [dataTableInput]="datosFiltrados"  
+        [fieldsInput] = "fieldsTable"
+        [objectTranslateInput] = "objectTranslate">
+      </btn-export-to-excel>
   </div>
     <div class="col-8 ml-4">
       <button class="transparenteAdd col-3 float-right pt-3" (click)="btnAddClick();">

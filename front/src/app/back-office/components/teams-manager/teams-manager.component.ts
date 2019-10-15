@@ -35,6 +35,10 @@ export class TeamsManagerComponent implements OnInit {
   public teamsListString = new Array();
   public teamString: Team;
 
+  public fieldsTable : any[];
+  public objectTranslate : string;
+  public datosFiltrados: any[];
+
 
   constructor(
     private _proyectoService: ProyectoService,
@@ -45,25 +49,30 @@ export class TeamsManagerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.datosFiltrados = [];
     this.getTeams();
+
+    //fieldsTable = [header, data, translate, size, formato, tipo]
+    this.fieldsTable = [
+      ["", "oficina", "TABLE_COL_OFICCE", 30,"", "String"],
+      ["", "unidad", "TABLE_COL_UNIT",20,"", "String"],
+      ["", "proyecto", "TABLE_COL_PROJECT", 40,"", "String"],
+      ["", "nombre", "TABLE_COL_TEAM", 40,"", "String"], 
+      ["", "projectSize", "TABLE_COL_SIZE", 10,"", "String"]];
+
+    this.objectTranslate = "TEAM_MANAGER";
   }
   public getTeams() {
     this.teamsListString = [];
     this._proyectoService.GetAllNotTestProjects().subscribe(
       res => {
-        //eliminado temporalmente hasta tener la lista de oficinas, unidades y proyectos 
-        //this.teamList = res;        
-        //this.teamsListString = this.getTeamsString(res);        
-        //this.dataSource = new MatTableDataSource(this.teamsListString);
-
-        //console.log(res);
-
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
         if ((res.length / this.paginator.pageSize) <= this.paginator.pageIndex) {
           this.paginator.pageIndex--;
         }
         this.dataSource.sort = this.sort;
+        this.datosFiltrados = this.dataSource.data;
       },
       error => {
         if (error == 404) {
@@ -139,9 +148,6 @@ export class TeamsManagerComponent implements OnInit {
   }
 
   public modificarEquipo(row) {
-    //this.selectedTeam = this.teamList.filter(team => team.id == row.id);    
-    //this._proyectoService.modificarEquipo(this.selectedTeam[0]);
-    //this._proyectoService.modificarEquipo(row);
     this._proyectoService.equipo = row;
     this.router.navigate(['backoffice/teamsmanager/addteam']);
 
@@ -149,60 +155,11 @@ export class TeamsManagerComponent implements OnInit {
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.datosFiltrados = this.dataSource.filteredData;
   }
 
   btnAddClick() {
     this._proyectoService.equipo = null;
     this.router.navigate(['backoffice/teamsmanager/addteam']);
-  }
-
-  public ExportToExcel(){
-    var woorksheet = "",title="",oficina="",unidad="",proyecto="",nombre="", projectSize="";
-    this._translateService.get('TEAM_MANAGER.EXCEL_WORKSHEET').subscribe(value => { woorksheet = value; });
-    this._translateService.get('TEAM_MANAGER.EXCEL_TITLE').subscribe(value => { title = value; });
-    this._translateService.get('TEAM_MANAGER.TABLE_COL_OFICCE').subscribe(value => { oficina = value; });
-    this._translateService.get('TEAM_MANAGER.TABLE_COL_UNIT').subscribe(value => { unidad = value; });
-    this._translateService.get('TEAM_MANAGER.TABLE_COL_PROJECT').subscribe(value => { proyecto = value; });
-    this._translateService.get('TEAM_MANAGER.TABLE_COL_TEAM').subscribe(value => { nombre = value; });
-    this._translateService.get('TEAM_MANAGER.TABLE_COL_SIZE').subscribe(value => { projectSize = value; });
-    let workbook = new Workbook();
-    
-    let worksheet = workbook.addWorksheet(woorksheet);
-
-    let titleRow = worksheet.addRow([title]);
-    titleRow.font = { name: 'Arial', family: 4, size: 16, bold: true }
-    worksheet.addRow([]);
-
-    let header = [oficina, unidad , proyecto , nombre, projectSize ]
-    //Add Header Row
-    let headerRow = worksheet.addRow(header);
-    
-    // Cell Style : Fill and Border
-    headerRow.eachCell((cell, number) => {
-      cell.fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FFEEEEEE' },
-        bgColor: { argb: '110000' }
-      }
-      cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } }
-    })
-
-
-    this.dataSource.filteredData.forEach(d => {
-      worksheet.addRow([d.oficina, d.unidad, d.proyecto, d.nombre, d.projectSize]);
-      }
-    );
-
-    worksheet.getColumn(1).width = 12;
-    worksheet.getColumn(2).width = 12;
-    worksheet.getColumn(3).width = 12;
-    worksheet.getColumn(4).width = 12;
-    var nombre:string;
-    this._translateService.get('TEAM_MANAGER.EXCEL_DOCUMENT_NAME').subscribe(value => { nombre = value; });
-    workbook.xlsx.writeBuffer().then((data) => {
-      let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-      fs.saveAs(blob, nombre+ '.xlsx');
-    })
   }
 }

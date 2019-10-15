@@ -94,6 +94,7 @@ export class PendingEvaluationTableComponent implements OnInit {
       let date = new Date(data.fecha);
       return data.nombre.toLowerCase().includes(filter)
         || data.assessmentName.toLowerCase().includes(filter)
+        || data.oficina.toLowerCase().includes(filter)
         || (data.userNombre != null && data.userNombre.toLowerCase().includes(filter))
         || (data.progress != null && data.progress.toString().includes(filter))
         || ((date.getDate() < 10 ? "0" : "") + date.getDate() + "/" + (date.getMonth() < 10 ? "0" : "") + (date.getMonth() + 1) + "/" + date.getFullYear()).includes(filter)

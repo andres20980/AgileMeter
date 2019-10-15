@@ -57,6 +57,7 @@ import { TranslateModule, TranslateService, TranslateLoader } from '@ngx-transla
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientTrans } from './translateHttp';
 import { NombreProyectoComponent } from './nombre-proyecto/nombre-proyecto.component';
+import { BtnExportToExcelComponent } from './btn-export-to-excel/btn-export-to-excel.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -92,6 +93,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     UserListComponent,
     TeamManagementComponent,
     NombreProyectoComponent,
+    BtnExportToExcelComponent,
   ],
   imports: [
     BrowserModule,

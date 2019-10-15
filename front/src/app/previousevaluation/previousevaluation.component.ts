@@ -472,167 +472,9 @@ export class PreviousevaluationComponent implements OnInit {
         });
   }
 
-  public ExportToExcel(){
-    var woorksheet = "",title="",date="",user="",office="",team="",assessment="",score="";
-    this._translateService.get('PREVIOUS_EVALUATION.EXCEL_WORKSHEET').subscribe(value => { woorksheet = value; });
-    this._translateService.get('PREVIOUS_EVALUATION.EXCEL_TITLE').subscribe(value => { title = value; });
-    this._translateService.get('PREVIOUS_EVALUATION.EXCEL_DATE').subscribe(value => { date = value; });
-    this._translateService.get('PREVIOUS_EVALUATION.EXCEL_USER').subscribe(value => { user = value; });
-    this._translateService.get('PREVIOUS_EVALUATION.EXCEL_OFFICE').subscribe(value => { office = value; });
-    this._translateService.get('PREVIOUS_EVALUATION.EXCEL_TEAM').subscribe(value => { team = value; });
-    this._translateService.get('PREVIOUS_EVALUATION.EXCEL_ASSESSMENT').subscribe(value => { assessment = value; });
-    this._translateService.get('PREVIOUS_EVALUATION.EXCEL_SCORE').subscribe(value => { score = value; });
-    let workbook = new Workbook();
-    
-    let worksheet = workbook.addWorksheet(woorksheet);
-
-    let titleRow = worksheet.addRow([title]);
-    titleRow.font = { name: 'Arial', family: 4, size: 16, bold: true }
-    worksheet.addRow([]);
-
-    let header = [date, user, office, team , assessment , score ]
-    //Add Header Row
-    let headerRow = worksheet.addRow(header);
-    
-    // Cell Style : Fill and Border
-    headerRow.eachCell((cell, number) => {
-      cell.fill = {
-        type: 'pattern',
-        pattern: 'solid',
-        fgColor: { argb: 'FFEEEEEE' },
-        bgColor: { argb: '110000' }
-      }
-      cell.border = { top: { style: 'thin' }, left: { style: 'thin' }, bottom: { style: 'thin' }, right: { style: 'thin' } }
-    })
-
-
-    this.TableFilteredData.forEach(d => {
-      worksheet.addRow([new Date(d.fecha), d.userNombre, d.oficina, d.nombre, d.assessmentName, d.puntuacion+'%']);
-      }
-    );
-
-    worksheet.getColumn(1).width = 12;
-    worksheet.getColumn(2).width = 12;
-    worksheet.getColumn(3).width = 12;
-    worksheet.getColumn(4).width = 12;
-    var nombre:string;
-    this._translateService.get('PREVIOUS_EVALUATION.EXCEL_DOCUMENT_NAME').subscribe(value => { nombre = value; });
-    workbook.xlsx.writeBuffer().then((data) => {
-      let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-      fs.saveAs(blob, nombre+  this.Project.nombre+'.xlsx');
-    })
-  }
-
-  //Modal de notas evaluacion y objetivos
-  //tipo=0 -> Evaluacion
-  //tipo=1 -> Objetivos
-  // public AbrirModal(content, numeroEv, tipo) {
-
-  //   this.anadeNota = null;
-
-  //   if (tipo == 0) {
-  //     if (this.ListaDeEvaluacionesPaginada[numeroEv].notasEvaluacion != null) {
-  //       this.textoModal = this.ListaDeEvaluacionesPaginada[numeroEv].notasEvaluacion;
-  //     } else {
-  //       this.textoModal = "";
-  //     }
-  //   } else if (tipo == 1) {
-  //     if (this.ListaDeEvaluacionesPaginada[numeroEv].notasObjetivos != null) {
-  //       this.textoModal = this.ListaDeEvaluacionesPaginada[numeroEv].notasObjetivos;
-  //     } else {
-  //       this.textoModal = "";
-  //     }
-  //   }
-
-  //   this.modalService.open(content).result.then(
-  //     (closeResult) => {
-  //       //Si cierra, no se guarda
-
-  //     }, (dismissReason) => {
-  //       if (dismissReason == 'Guardar') {
-
-  //         this.Mostrar = false;
-
-  //         if (tipo == 0) {
-  //           if (this.textoModal != "") {
-  //             this.ListaDeEvaluacionesPaginada[numeroEv].notasEvaluacion = this.textoModal;
-  //           } else {
-  //             this.ListaDeEvaluacionesPaginada[numeroEv].notasEvaluacion = null;
-  //           }
-  //         } else {
-  //           if (this.textoModal != "") {
-  //             this.ListaDeEvaluacionesPaginada[numeroEv].notasObjetivos = this.textoModal;
-  //           } else {
-  //             this.ListaDeEvaluacionesPaginada[numeroEv].notasObjetivos = null;
-  //           }
-  //         }
-
-  //         var evalu = new Evaluacion(
-  //           this.ListaDeEvaluacionesPaginada[numeroEv].id,
-  //           this.ListaDeEvaluacionesPaginada[numeroEv].fecha,
-  //           this.ListaDeEvaluacionesPaginada[numeroEv].estado,
-  //           this.ListaDeEvaluacionesPaginada[numeroEv].notasOb,
-  //           this.ListaDeEvaluacionesPaginada[numeroEv].notasEv,
-  //           this.ListaDeEvaluacionesPaginada[numeroEv].puntuacion,
-  //         );
-
-  //         this._evaluacionService.updateEvaluacion(evalu)
-  //           .subscribe(
-  //             res => {
-  //               this.anadeNota = "Se guardó la nota correctamente";
-  //             },
-  //             error => {
-  //               if (error == 404) {
-  //                 this.ErrorMessage = "Error: " + error + " No pudimos recoger la información de las evaluaciones, lo sentimos.";
-  //               } else if (error == 500) {
-  //                 this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
-  //               } else if (error == 401) {
-  //                 this.ErrorMessage = "Error: " + error + " El usuario es incorrecto o no tiene permisos, intente introducir su usuario nuevamente.";
-  //               } else {
-  //                 this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
-  //               }
-  //             },
-  //             () => {
-  //               this.Mostrar = true;
-  //             });
-
-
-  //       }
-  //       //Else, Click fuera, no se guarda
-  //     })
-  // }
-
   public VolverInicio() {
     this._router.navigate(['/home']);
   }
-
-  //Para cambiar la fecha y que aparezca en el formato correcto en la caja tenemos que liar to esto
-  // public changeDate() {
-  //   if (this.fechaPicker.day < 10) {
-  //     this.EvaluacionFiltrar.fecha = "0" + this.fechaPicker.day + "/";
-  //   } else {
-  //     this.EvaluacionFiltrar.fecha = this.fechaPicker.day + "/";
-  //   }
-
-  //   if (this.fechaPicker.month < 10) {
-  //     this.EvaluacionFiltrar.fecha = this.EvaluacionFiltrar.fecha + "0" + this.fechaPicker.month + "/" + this.fechaPicker.year;
-  //   } else {
-  //     this.EvaluacionFiltrar.fecha = this.EvaluacionFiltrar.fecha + this.fechaPicker.month + "/" + this.fechaPicker.year;
-  //   }
-
-  //   this.PageNow = 1;
-  //   this.GetPaginacion();
-
-  // }
-
-  //Limpiamos la caja de fecha
-  // public limpiar() {
-  //   this.EvaluacionFiltrar.fecha = "";
-
-  //   this.PageNow = 1;
-  //   this.GetPaginacion();
-  // }
-
   public changeChartAssessment(){
     let filter: EvaluacionFilterInfo = new EvaluacionFilterInfo("","","","","true", this.selectedAssessment.id,[],[],[]);
     this.GetChartData(filter);
@@ -680,17 +522,11 @@ export class PreviousevaluationComponent implements OnInit {
     //Cogemos los datos a añadir
     for (var i = this.EvaluationsWithSectionInfo.length - 1; i >= 0; i--) {
       listaGlobal[i] = this.EvaluationsWithSectionInfo[i].puntuacion;
-      for(var j: number = 0; j < listaSections.length; j++) {
-        // if(j >= this.EvaluationsWithSectionInfo[0].sectionsInfo.length){
-        //   listaSections[j][index] = this.EvaluationsWithSectionInfo[i].puntuacion;
-        // }
-        // else{         
+      for(var j: number = 0; j < listaSections.length; j++) {      
           listaSections[j][index] = listaSectionLevels[i][j].percentOverLevel + (listaSectionLevels[i][j].levelReached -1) * 100;//this.EvaluationsWithSectionInfo[i].sectionsInfo[j].respuestasCorrectas;
           if(listaSectionLevels[i][j].levelReached > this.MaxLevelReached){
             this.MaxLevelReached = listaSectionLevels[i][j].levelReached -1;
           }
-        //}
-
       }
       index++;
       var pipe = new DatePipe('en-US');
@@ -707,22 +543,11 @@ export class PreviousevaluationComponent implements OnInit {
     }
 
 
-    for(var j: number = 0; j <  this.EvaluationsWithSectionInfo[0].sectionsInfo.length; j++) { //this.EvaluationsWithSectionInfo[0].sectionsInfo.length + 1
-
-      // if(j >= this.EvaluationsWithSectionInfo[0].sectionsInfo.length){
-      //   this.ListaPuntuacion.push({
-      //     data: listaSections[j], label: "Global", backgroundColor: "#2ECC71", fill: 'false', lineTension : 0.1,
-      //     borderColor: "#2ECC71", pointRadius: 2, pointHoverRadius: 4, borderWidth: 3});
-      // }
-      // else{
+    for(var j: number = 0; j <  this.EvaluationsWithSectionInfo[0].sectionsInfo.length; j++) { 
         this.ListaPuntuacion.push({ type: "line",
           data: listaSections[j], label: this.EvaluationsWithSectionInfo[0].sectionsInfo[j].nombre, backgroundColor: colorList[j], fill: 'false', lineTension : 0.1,
           borderColor: colorList[j], pointRadius: 2, pointHoverRadius: 4, borderWidth: 3});
-      //}
     }
-    
-    
-
     for(var i: number = 0; i <= this.MaxLevelReached; i++) {
       let level: number[] = [];
       for(var j: number = 0; j < listaSections[0].length +1; j++) {
@@ -831,17 +656,6 @@ export class PreviousevaluationComponent implements OnInit {
     animation: false,
       callbacks: {
         label: function (tooltipItem, data) {
-          // const datasetLabel = data.datasets[tooltipItem.datasetIndex].label || '';
-          // console.log(data);
-          // var labels = [];
-          // for (let index = 0; index < this.ListaDeSectionInfo[tooltipItem.datasetIndex].length; index++) {
-          //   const sectionInfo = this.ListaDeSectionInfo[tooltipItem.datasetIndex][index];
-          //     labels.push(sectionInfo.nombre + ': ' + sectionInfo.respuestasCorrectas + '%');
-          //   }
-          // let nivel: string = '%  del nivel mínimo';
-          //if(Number(tooltipItem.yLabel) > 100){
-            
-          //}
           if(data.datasets[tooltipItem.datasetIndex].label.includes('Global')){
             return  data.datasets[tooltipItem.datasetIndex].label + ': ' + Math.round((tooltipItem.yLabel) * 10)/10 + '%';
           }
@@ -856,12 +670,6 @@ export class PreviousevaluationComponent implements OnInit {
           }
           }
         },
-        // footer: function(tooltipItem, data) {
-        //   return " Total" + ':     ' + tooltipItem[0].yLabel + '%';
-        // },
-        // title: function(tooltipItem, data) {
-        //   return " " + tooltipItem[0].xLabel;
-        // },
       }
     },
     scales: {
