@@ -2,31 +2,38 @@
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'PENDING_EVALUATION_TABLE.FILTER' | translate }}"[value]=this.dataSource.filter>
 </mat-form-field>
 <mat-form-field class="ml-2 col-3">
-  <mat-select placeholder="{{ 'PENDING_EVALUATION_TABLE.FILTER_OFFICE' | translate }}" [(value)]="OficinaSeleccionada" multiple>
-    <mat-select-trigger>
-      {{OficinaSeleccionada[0] ? OficinaSeleccionada[0] : ''}}
-      <span *ngIf="OficinaSeleccionada?.length > 1">
-        (+{{OficinaSeleccionada.length - 1}} {{OficinaSeleccionada.length > 1 ? 'others' : 'other'}})
-      </span>
-    </mat-select-trigger>
-    <div *ngFor="let oficina of ListaDeOficinas">      
-      <mat-option [value]="oficina" (click)="selectOficinas()">
-        {{oficina}}
-      </mat-option>
-    </div>
-  </mat-select>
+    <mat-select #mySelectOffice (click)="onSelectOfficeOpened()" placeholder="{{ 'PENDING_EVALUATION_TABLE.FILTER_OFFICE' | translate }}" [(value)]="OficinaSeleccionada" multiple>
+      <mat-select-trigger>
+        {{OficinaSeleccionada[0] ? OficinaSeleccionada[0] : ''}}
+        <span *ngIf="OficinaSeleccionada?.length > 1">
+          (+{{OficinaSeleccionada.length - 1}} 
+          <span *ngIf="OficinaSeleccionada.length > 2"> {{ 'CUSTOM_SELECT.OTHERS' | translate }}</span>
+          <span *ngIf="OficinaSeleccionada.length === 2"> {{ 'CUSTOM_SELECT.OTHER' | translate }}</span>
+          )
+        </span>
+      </mat-select-trigger>
+        <div *ngFor="let oficina of ListaDeOficinas">      
+          <mat-option [value]="oficina" (click)="selectOficinas()">
+            {{oficina}}
+          </mat-option>
+        </div>
+    </mat-select>
+
 </mat-form-field>
 
 <mat-form-field class="ml-2 col-3">
-  <mat-select placeholder="{{ 'PENDING_EVALUATION_TABLE.FILTER_TEAM' | translate }}" [(value)]="EquipoSeleccionado" multiple>
+  <mat-select #mySelectTeam (click)="onSelectTeamOpened()" placeholder="{{ 'PENDING_EVALUATION_TABLE.FILTER_TEAM' | translate }}" 
+      [compareWith]="compareTeams"
+      [(ngModel)]="EquipoSeleccionado" multiple>
     <mat-select-trigger>
-      <div>
         {{EquipoSeleccionado[0]?.proyecto ? EquipoSeleccionado[0]?.proyecto : ''}} -
         {{EquipoSeleccionado[0]?.nombre ? EquipoSeleccionado[0]?.nombre : ''}}
         <span *ngIf="EquipoSeleccionado?.length > 1">
-          (+{{EquipoSeleccionado.length - 1}} {{EquipoSeleccionado.length > 1 ? 'others' : 'other'}})
-        </span>
-      </div>      
+          (+{{EquipoSeleccionado.length - 1}} 
+          <span *ngIf="EquipoSeleccionado.length > 2"> {{ 'CUSTOM_SELECT.OTHERS' | translate }}</span>
+          <span *ngIf="EquipoSeleccionado.length === 2"> {{ 'CUSTOM_SELECT.OTHER' | translate }}</span>
+          )
+        </span>   
     </mat-select-trigger>
     <div *ngFor="let equipo of ListaDeProyectosFiltrada">
       <mat-option [value]="equipo"(click)="selectEquipos()">
@@ -37,7 +44,9 @@
 </mat-form-field>
 
 <mat-form-field class="ml-2 col-3">
-  <mat-select placeholder="{{ 'PENDING_EVALUATION_TABLE.FILTER_ASSESSMENT' | translate }}" [(value)]="AssessmentSeleccionado" multiple>
+  <mat-select #mySelectAssessment (click)="onSelectAssessmentOpened()" placeholder="{{ 'PENDING_EVALUATION_TABLE.FILTER_ASSESSMENT' | translate }}" 
+      [compareWith]="compareAssessments"
+      [(ngModel)]="AssessmentSeleccionado" multiple>
     <mat-select-trigger>
       {{AssessmentSeleccionado[0]?.assessmentName ? AssessmentSeleccionado[0]?.assessmentName : ''}}
       <span *ngIf="AssessmentSeleccionado?.length > 1">

@@ -138,3 +138,15 @@ table {
   img{
     height:32px;
   }
+
+.mat-select {
+  &.mouseleave {
+    .mat-select {
+      padding: 0;
+      > div {
+        padding-top: 8px;
+        padding-bottom: 8px;
+      }
+    }
+  }
+}

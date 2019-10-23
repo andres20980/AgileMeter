@@ -9,11 +9,15 @@
 </btn-export-to-excel>
 
 <mat-form-field class="ml-2 col-2">
-  <mat-select placeholder="{{ 'SORTED_TABLE.FILTER_OFFICE' | translate }}" [(value)]="OficinaSeleccionada" multiple>
+  <mat-select #mySelectOffice  (click)="onSelectOfficeOpened()" placeholder="{{ 'SORTED_TABLE.FILTER_OFFICE' | translate }}" 
+    [(value)]="OficinaSeleccionada" multiple >
     <mat-select-trigger>
       {{OficinaSeleccionada[0] ? OficinaSeleccionada[0] : ''}}
       <span *ngIf="OficinaSeleccionada?.length > 1">
-        (+{{OficinaSeleccionada.length - 1}} {{OficinaSeleccionada.length > 1 ? 'others' : 'other'}})
+        (+{{OficinaSeleccionada.length - 1}} 
+        <span *ngIf="OficinaSeleccionada.length > 2"> {{ 'CUSTOM_SELECT.OTHERS' | translate }}</span>
+        <span *ngIf="OficinaSeleccionada.length === 2"> {{ 'CUSTOM_SELECT.OTHER' | translate }}</span>
+        )
       </span>
     </mat-select-trigger>
     <div *ngFor="let oficina of ListaDeOficinas">      
@@ -25,15 +29,16 @@
 </mat-form-field>
 
 <mat-form-field class="ml-2 col-3">
-  <mat-select placeholder="{{ 'SORTED_TABLE.FILTER_TEAM' | translate }}" [(value)]="EquipoSeleccionado" multiple>
+  <mat-select #mySelectTeam (click)="onSelectTeamOpened()" placeholder="{{ 'SORTED_TABLE.FILTER_TEAM' | translate }}" [(value)]="EquipoSeleccionado" multiple>
     <mat-select-trigger>
-      <div>
-        {{EquipoSeleccionado[0]?.proyecto ? EquipoSeleccionado[0]?.proyecto : ''}} -
-        {{EquipoSeleccionado[0]?.nombre ? EquipoSeleccionado[0]?.nombre : ''}}
-        <span *ngIf="EquipoSeleccionado?.length > 1">
-          (+{{EquipoSeleccionado.length - 1}} {{EquipoSeleccionado.length > 1 ? 'others' : 'other'}})
-        </span>
-      </div>      
+      {{EquipoSeleccionado[0]?.proyecto ? EquipoSeleccionado[0]?.proyecto : ''}} -
+      {{EquipoSeleccionado[0]?.nombre ? EquipoSeleccionado[0]?.nombre : ''}}
+      <span *ngIf="EquipoSeleccionado?.length > 1">
+        (+{{EquipoSeleccionado.length - 1}} 
+        <span *ngIf="EquipoSeleccionado.length > 2"> {{ 'CUSTOM_SELECT.OTHERS' | translate }}</span>
+        <span *ngIf="EquipoSeleccionado.length === 2"> {{ 'CUSTOM_SELECT.OTHER' | translate }}</span>
+        )
+      </span>
     </mat-select-trigger>
     <div *ngFor="let equipo of ListaDeProyectosFiltrada">
       <mat-option [value]="equipo"(click)="selectEquipos()">
@@ -44,7 +49,9 @@
 </mat-form-field>
 
 <mat-form-field class="ml-2 col-2">
-  <mat-select placeholder="{{ 'SORTED_TABLE.FILTER_ASSESSMENT' | translate }}" [(value)]="AssessmentSeleccionado" multiple>
+  <mat-select #mySelectAssessment (click)="onSelectAssessmentOpened()" placeholder="{{ 'SORTED_TABLE.FILTER_ASSESSMENT' | translate }}" 
+      [compareWith]="compareAssessments"
+      [(ngModel)]="AssessmentSeleccionado" multiple>
     <mat-select-trigger>
       {{AssessmentSeleccionado[0]?.assessmentName ? AssessmentSeleccionado[0]?.assessmentName : ''}}
       <span *ngIf="AssessmentSeleccionado?.length > 1">
@@ -54,7 +61,7 @@
     <div *ngFor="let assessment of ListaDeAssessmentFiltrada">
       <mat-option [value]="assessment" (click)="selectAssessment()">
         <div>{{assessment.assessmentName}}</div>
-      </mat-option>      
+      </mat-option>
     </div>
   </mat-select>
 </mat-form-field>

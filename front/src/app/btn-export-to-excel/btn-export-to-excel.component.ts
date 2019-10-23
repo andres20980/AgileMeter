@@ -102,6 +102,18 @@ export class BtnExportToExcelComponent implements OnInit {
           case "Percentage":
             data = d[field[i]]/100;
             break;
+
+          case "String":
+            switch (this.fields[i][3]) {
+              case "##?##":
+                data = d[field[i]].replace("##?##"," - ");
+                break;
+
+              default:
+                  data =  d[field[i]];
+                  break;
+            }
+            break;
         
           default:
             data =  d[field[i]];

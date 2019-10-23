@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, Input, SimpleChanges } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource, MatCellDef } from '@angular/material';
+import { Component, OnInit, ViewChild, Input, SimpleChanges, Renderer } from '@angular/core';
+import { MatPaginator, MatSort, MatTableDataSource, MatCellDef, MatSelect } from '@angular/material';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Router } from "@angular/router";
 import { AppComponent } from 'app/app.component';
@@ -15,8 +15,6 @@ import { DatePipe } from '@angular/common';
 import { Proyecto } from 'app/Models/Proyecto';
 import { Assessment } from 'app/Models/Assessment';
 import { ProyectoService } from 'app/services/ProyectoService';
-
-
 
 @Component({
   selector: 'pendingevaluation-table',
@@ -35,6 +33,9 @@ import { ProyectoService } from 'app/services/ProyectoService';
 export class PendingEvaluationTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('mySelectOffice') mySelectOffice: any;
+  @ViewChild('mySelectTeam') mySelectTeam: any;
+  @ViewChild('mySelectAssessment') mySelectAssessment: any;
   @Input() ListaDeEvaluacionesPaginada: any;//Array<EvaluacionInfo>;
   public ErrorMessage: string = null;
   dataSource: MatTableDataSource<EvaluacionInfoWithProgress>;
@@ -59,17 +60,17 @@ export class PendingEvaluationTableComponent implements OnInit {
   public AssessmentSeleccionado: Assessment[] = [];
   public ListaDeAssessmentFiltrada: Array<Assessment> = [];
 
-
   constructor(
-    private _evaluacionService: EvaluacionService,
-    private _assignationService: AssignationService,
-    private _sectionService: SectionService,
-    private _router: Router,
-    private _appComponent: AppComponent,
-    private modalService: NgbModal,
-    private parent: PendingEvaluationComponent,
-    private _proyectoService: ProyectoService,
-  ) {
+      private _evaluacionService: EvaluacionService,
+      private _assignationService: AssignationService,
+      private _sectionService: SectionService,
+      private _router: Router,
+      private _appComponent: AppComponent,
+      private modalService: NgbModal,
+      private parent: PendingEvaluationComponent,
+      private _proyectoService: ProyectoService,
+      private renderer: Renderer
+    ){
   }
 
   ngOnInit() {
@@ -245,6 +246,12 @@ export class PendingEvaluationTableComponent implements OnInit {
         } else {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
+      },
+      () => {
+        //Limpiamos storage
+        this._appComponent._storageDataService.OfficeSelected = "";
+        this._appComponent._storageDataService.ProjectSelected = null;
+        this._appComponent._storageDataService.AssessmentSelected = null;
       }
     );
   }
@@ -267,17 +274,35 @@ export class PendingEvaluationTableComponent implements OnInit {
         } else {
           this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
         }
-      });
+      },
+      () =>{
+              //Asignamos la oficina seleccionada
+              if (this._appComponent._storageDataService.OfficeSelected !== "")
+              {
+                this.OficinaSeleccionada.push(this._appComponent._storageDataService.OfficeSelected);
+                this._appComponent._storageDataService.OfficeSelected = "";
+              }
+
+              // Asignamos el proyecto seleccionado
+              if (this._appComponent._storageDataService.ProjectSelected !== null)
+              {
+                this.EquipoSeleccionado.push(this._appComponent._storageDataService.ProjectSelected);
+                this._appComponent._storageDataService.ProjectSelected = null;
+              }
+            }
+    );
   }
 
   // FUNCIONES SELECT DE OFICINAS
   public getOficinasDeUsuario(res) {
     var oficinas = [];
+
     res.forEach(function (value) {
       if (oficinas.indexOf(value.oficina) < 0) {
         oficinas.push(value.oficina);
       }
     });
+
     this.ListaDeOficinas = oficinas.sort();
   }
 
@@ -288,7 +313,13 @@ export class PendingEvaluationTableComponent implements OnInit {
 
   // FUNCIONES SELECT DE EQUIPOS
   public selectEquipos() {
-    this.oficinasDeLosEquiposSeleccionados();    
+
+    //Refrescamos las oficinas
+    if(!(this.OficinaSeleccionada && this.OficinaSeleccionada.length > 1))
+    {
+      this.oficinasDeLosEquiposSeleccionados();   
+    } 
+
     this.refresh();
   }
 
@@ -297,6 +328,7 @@ export class PendingEvaluationTableComponent implements OnInit {
     var aux = []
     var assessment = [];
     var a: Assessment;
+
     //creamos la lista    
     this.parent.ListaDeEvaluacionesPaginada.forEach(function (value) {
       if (aux.indexOf(value.assessmentId) < 0) {
@@ -305,6 +337,7 @@ export class PendingEvaluationTableComponent implements OnInit {
         aux.push(value.assessmentId);
       }
     });
+
     //ordenamos la lista por nombre
     this.ListaDeAssessment = assessment.sort(function (a, b) {
       if (a.assessmentName > b.assessmentName) {
@@ -316,7 +349,15 @@ export class PendingEvaluationTableComponent implements OnInit {
       // a must be equal to b
       return 0;
     });
+
     this.ListaDeAssessmentFiltrada = this.ListaDeAssessment;
+
+    // Asignamos el assessment seleccionado
+    if (this._appComponent._storageDataService.AssessmentSelected !== null)
+    {
+      this.AssessmentSeleccionado.push(this._appComponent._storageDataService.AssessmentSelected);
+      this._appComponent._storageDataService.AssessmentSelected = null;
+    }
   }
 
   public selectAssessment() {
@@ -348,7 +389,6 @@ export class PendingEvaluationTableComponent implements OnInit {
 
       //Actualizamos la lista de equipos asociados a la nueva lista de oficinas
       this.refrescamosEquiposOficinasSeleccionadas();
-
     }
   }
 
@@ -363,5 +403,38 @@ export class PendingEvaluationTableComponent implements OnInit {
     } else {
       this.ListaDeProyectosFiltrada = this.ListaDeProyectos.filter(x => this.OficinaSeleccionada.indexOf(x.oficina) >= 0);
     }
+  }
+
+  public onSelectOfficeOpened(){
+    this.renderer.listen(this.mySelectOffice.panel.nativeElement, 'mouseleave', (event) => {
+        if(event.toElement.nodeName !== "MAT-OPTION"){
+          this.mySelectOffice.close();
+      }     
+    })
+  }
+
+  public onSelectTeamOpened(){
+    this.renderer.listen(this.mySelectTeam.panel.nativeElement, 'mouseleave', (event) => {
+        if(event.toElement.nodeName !== "MAT-OPTION"){
+          this.mySelectTeam.close();
+      }     
+    })
+  }
+
+  public onSelectAssessmentOpened(){
+    this.renderer.listen(this.mySelectAssessment.panel.nativeElement, 'mouseleave', (event) => {
+        if(event.toElement.nodeName !== "MAT-OPTION"){
+          this.mySelectAssessment.close();
+      }     
+    })
+  }
+
+  //Compara los objetos assessment para asignar los select
+  compareAssessments(o1: any, o2: any): boolean {
+    return o1.assessmentId === o2.assessmentId;
+  }
+
+  compareTeams(o1: any, o2: any): boolean {
+    return o1.id === o2.id;
   }
 }

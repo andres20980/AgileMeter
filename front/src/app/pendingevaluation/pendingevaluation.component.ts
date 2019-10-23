@@ -109,6 +109,7 @@ export class PendingEvaluationComponent implements OnInit {
     //Recogemos los proyectos y realizamos comprobaciones
     var Role;
     this.Project = this._appComponent._storageDataService.UserProjectSelected;
+
     if (!this._proyectoService.verificarUsuario()) {
       this._router.navigate(['/login']);
     }
@@ -318,8 +319,25 @@ export class PendingEvaluationComponent implements OnInit {
   //Recarga los elementos en la pagina en la que se encuentra 
   public GetPaginacion() {
     this.Mostrar = false;
-    //this._evaluacionService.GetEvaluationsWithProgress(this.Project.id, this.EvaluacionFiltrar)
-    //console.log(this.EvaluacionFiltrar);
+    //Configuramos nuestro filtro para el caso en el que hemos seleccionado la oficina, el proyecto y el assessment
+
+    if (this._appComponent._storageDataService.OfficeSelected !== "")
+    {
+      this.EvaluacionFiltrar.oficinas.push(this._appComponent._storageDataService.OfficeSelected);
+    }
+
+    if (this._appComponent._storageDataService.ProjectSelected !== null)
+    {
+      this.EvaluacionFiltrar.equipos.push(this._appComponent._storageDataService.ProjectSelected.id);
+    }
+
+    if (this._appComponent._storageDataService.AssessmentSelected !== null)
+    {
+      this.EvaluacionFiltrar.assessmentId =this._appComponent._storageDataService.AssessmentSelected.assessmentId;
+      this.EvaluacionFiltrar.idAssessment.push(this._appComponent._storageDataService.AssessmentSelected.assessmentId);
+    }
+
+
     this._evaluacionService.GetAllEvaluationsWithProgress(this.EvaluacionFiltrar)
       .subscribe(
         res => {

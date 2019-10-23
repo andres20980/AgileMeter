@@ -336,5 +336,9 @@
 		"RANGE_PAGE_LABEL_1": "0 of {{length}}",
 		"RANGE_PAGE_LABEL_2": "{{startIndex}} - {{endIndex}} of {{length}}",
 		"OF": "of"
+	},
+	"CUSTOM_SELECT": {
+		"OTHER": "other",
+		"OTHERS": "others"
 	}
 }

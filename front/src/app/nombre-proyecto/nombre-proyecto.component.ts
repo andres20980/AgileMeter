@@ -18,7 +18,7 @@ export class NombreProyectoComponent implements OnInit {
 
   ngOnInit() {
     this.nombreCompleto = this.dataImput;
-    this.arrayNombre = this.nombreCompleto.split("-");
+    this.arrayNombre = this.nombreCompleto.split("##?##");
 
     this.proyecto = this.arrayNombre[0].trim();
     if (this.arrayNombre.length > 1)

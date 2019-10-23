@@ -29,7 +29,7 @@ export class StorageDataService {
   public TokenUser: string = "";
   public UserLongName: string = "";
   public subscriptionTimer: Subscription;
-  public AssessmentSelected: Assessment = null;
+
   public RoleAdmin: boolean;
   public Role: number;
   public nextSection : SectionInfo = null;
@@ -41,6 +41,12 @@ export class StorageDataService {
   public OfficesSelected: string[];
   public ProjectsSelected: Proyecto[] = [];
   public AssessmentsSelected: Assessment[] = [];
+
+  //Necesarios para acceder a las evaluaciones pendientes, una vez que se intenta crear una nueva evaluación
+  //si se opta por acceder a las pendientes
+  public OfficeSelected: string = "";
+  public ProjectSelected: Proyecto = null;
+  public AssessmentSelected: Assessment = null;
 
 
   public GetToken() {

@@ -56,6 +56,7 @@ export class TeamsManagerComponent implements OnInit {
     this.fieldsTable = [
       ["oficina", "TABLE_COL_OFICCE", 30,"", "String"],
       ["unidad", "TABLE_COL_UNIT",20,"", "String"],
+      ["codigo", "TABLE_COL_CODE", 30,"", "String"],
       ["proyecto", "TABLE_COL_PROJECT", 40,"", "String"],
       ["nombre", "TABLE_COL_TEAM", 40,"", "String"], 
       ["projectSize", "TABLE_COL_SIZE", 10,"", "String"]];

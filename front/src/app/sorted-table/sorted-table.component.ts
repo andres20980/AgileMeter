@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, ɵConsole, SimpleChanges } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, SimpleChanges, Renderer } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { EvaluacionInfo } from 'app/Models/EvaluacionInfo';
 import { animate, state, style, transition, trigger } from '@angular/animations';
@@ -9,19 +9,6 @@ import { EnumRol } from 'app/Models/EnumRol';
 import { Assessment } from 'app/Models/Assessment';
 import { Proyecto } from 'app/Models/Proyecto';
 import { ProyectoService } from 'app/services/ProyectoService';
-import { AssessmentEv } from 'app/Models/AssessmentEv';
-
-// export interface Evaluacion {
-//   id: number,
-//   fecha: string;
-//   nombre: string,
-//   userNombre: string;
-//   puntuacion: number;
-//   estado: boolean;
-//   notasEv: string;
-//   notasOb: string;
-//   assessmentName: string;
-// }
 
 @Component({
   selector: 'sorted-table',
@@ -40,6 +27,9 @@ import { AssessmentEv } from 'app/Models/AssessmentEv';
 export class SortedTableComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('mySelectOffice') mySelectOffice: any;
+  @ViewChild('mySelectTeam') mySelectTeam: any;
+  @ViewChild('mySelectAssessment') mySelectAssessment: any;
   @Input() dataInput: any;//Array<EvaluacionInfo>;
   dataSource: MatTableDataSource<Evaluacion>;
   userRole: number;
@@ -68,7 +58,7 @@ export class SortedTableComponent implements OnInit {
         ["fecha", "EXCEL_DATE", 12,"dd/mm/yyyy", "Date"],
         ["userNombre", "EXCEL_USER",20,"", "String"],
         ["oficina", "EXCEL_OFFICE", 25,"", "String"],
-        ["nombre", "EXCEL_TEAM", 50,"", "String"], 
+        ["nombre", "EXCEL_TEAM", 50,"##?##", "String"], 
         ["assessmentName", "EXCEL_ASSESSMENT", 20,"", "String"],
         ["puntuacion", "EXCEL_SCORE", 12,"0.00%", "Percentage"]];
     this.objectTranslate = "PREVIOUS_EVALUATION";
@@ -116,12 +106,12 @@ export class SortedTableComponent implements OnInit {
       //console.log ((date.getDate()<10?"0":"")+date.getDate()+"/"+(date.getMonth()<10?"0":"")+(date.getMonth()+1)+"/"+date.getFullYear());
       return data.nombre.toLowerCase().includes(filter)
         || data.assessmentName.toLowerCase().includes(filter)
-        || data.userNombre.toLowerCase().includes(filter)
+        || (data.userNombre != null && data.userNombre.toLowerCase().includes(filter))
         || data.oficina.toLowerCase().includes(filter)
         || data.nombre.toLowerCase().includes(filter)
         || data.puntuacion.toString().concat("%").includes(filter)
-        || (data.notasEvaluacion != null && data.notasEvaluacion.toLowerCase().includes(filter))
-        || (data.notasObjetivos != null && data.notasObjetivos.toLowerCase().includes(filter))
+        // || (data.notasEvaluacion != null && data.notasEvaluacion.toLowerCase().includes(filter))
+        // || (data.notasObjetivos != null && data.notasObjetivos.toLowerCase().includes(filter))
         || ((date.getDate() < 10 ? "0" : "") + date.getDate() + "/" + (date.getMonth() < 10 ? "0" : "") + (date.getMonth() + 1) + "/" + date.getFullYear()).includes(filter)
         ;
     };
@@ -135,13 +125,19 @@ export class SortedTableComponent implements OnInit {
   }
 
   constructor(
-    public prevEval: PreviousevaluationComponent,
-    private _appComponent: AppComponent,
-    private _proyectoService: ProyectoService
-  ) {
+      public prevEval: PreviousevaluationComponent,
+      private _appComponent: AppComponent,
+      private _proyectoService: ProyectoService,
+      private renderer: Renderer
+    ){
   }
 
   SaveDataToPDF(evaluacion: EvaluacionInfo): void {
+    //Limpiamos el storage
+    this._appComponent._storageDataService.OfficesSelected = [];
+    this._appComponent._storageDataService.ProjectsSelected = [];
+    this._appComponent._storageDataService.AssessmentsSelected = [];
+
     this.prevEval.SaveDataToPDF(evaluacion);
   }
 
@@ -229,8 +225,6 @@ export class SortedTableComponent implements OnInit {
         this._appComponent._storageDataService.OfficesSelected.push(element);
        });
 
-    //console.log(this._appComponent._storageDataService.OfficesSelected);
-
     this.equiposDeLasOficinasSeleccionadas();
     this.refresh();
   }
@@ -243,10 +237,11 @@ export class SortedTableComponent implements OnInit {
       this._appComponent._storageDataService.ProjectsSelected.push(element);
     });
 
-    //console.log(this._appComponent._storageDataService.ProjectsSelected);
-
     //Refrescamos las oficinas
-    this.oficinasDeLosEquiposSeleccionados();    
+    if(!(this.OficinaSeleccionada && this.OficinaSeleccionada.length > 1))
+    {
+      this.oficinasDeLosEquiposSeleccionados();   
+    } 
     this.refresh();
   }
 
@@ -311,10 +306,7 @@ export class SortedTableComponent implements OnInit {
       this.EquipoSeleccionado = this._appComponent._storageDataService.ProjectsSelected;
 
       //Actualizamos los datos del componente padre
-      this.prevEval.DatosSelectProyectos = this.ListaDeProyectosFiltrada;
-
-    //console.log(this._appComponent._storageDataService.ProjectsSelected);
-      
+      this.prevEval.DatosSelectProyectos = this.ListaDeProyectosFiltrada;     
     }
   }
 
@@ -361,12 +353,10 @@ export class SortedTableComponent implements OnInit {
 
     if (this.ListaDeProyectosFiltrada.length === 1)
     {
-      this.EquipoSeleccionado = this._appComponent._storageDataService.ProjectsSelected;
-      //console.log(this._appComponent._storageDataService.ProjectsSelected);      
+      this.EquipoSeleccionado = this._appComponent._storageDataService.ProjectsSelected;   
     }
 
     //Actualizamos los datos del componente padre
-    //this.prevEval.DatosSelectProyectos = this.ListaDeProyectosFiltrada;
     this.prevEval.DatosSelectProyectos = this.ListaDeProyectosFiltrada;
   }
 
@@ -374,12 +364,39 @@ export class SortedTableComponent implements OnInit {
     if (changes.dataInput) {
       this.GetPaginacion();
 
-      this.EquipoSeleccionado = this._appComponent._storageDataService.ProjectsSelected;
+      //Asignamos el criterio de seleccion
       this.OficinaSeleccionada = this._appComponent._storageDataService.OfficesSelected;
-
-      //Por el momento lo dejamos comentado ya que aunque lo asignenmos no refresca el select de assessment
-      //TODO
-      //this.AssessmentSeleccionado = this._appComponent._storageDataService.AssessmentsSelected;
+      this.EquipoSeleccionado = this._appComponent._storageDataService.ProjectsSelected;
+      this.AssessmentSeleccionado = this._appComponent._storageDataService.AssessmentsSelected;
     }
+  }
+
+  public onSelectOfficeOpened(){
+    this.renderer.listen(this.mySelectOffice.panel.nativeElement, 'mouseleave', (event) => {
+        if(event.toElement.nodeName !== "MAT-OPTION"){
+          this.mySelectOffice.close();
+      }     
+    })
+  }
+
+  public onSelectTeamOpened(){
+    this.renderer.listen(this.mySelectTeam.panel.nativeElement, 'mouseleave', (event) => {
+        if(event.toElement.nodeName !== "MAT-OPTION"){
+          this.mySelectTeam.close();
+      }     
+    })
+  }
+
+  public onSelectAssessmentOpened(){
+    this.renderer.listen(this.mySelectAssessment.panel.nativeElement, 'mouseleave', (event) => {
+        if(event.toElement.nodeName !== "MAT-OPTION"){
+          this.mySelectAssessment.close();
+      }     
+    })
+  }
+
+  //Compara los objetos assessment para asignar los select
+  compareAssessments(o1: any, o2: any): boolean {
+    return o1.assessmentId === o2.assessmentId;
   }
 }

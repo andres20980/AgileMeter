@@ -49,9 +49,15 @@ export class HomeComponent implements OnInit {
     private _appComponent: AppComponent) { }
 
   ngOnInit() {
-    //Comenzamos limpiando el storage relativo a la selección de evaluaciones
+    //Comenzamos limpiando el storage relativo a la selección de evaluaciones finalizadas
     this._appComponent._storageDataService.OfficesSelected = [];
     this._appComponent._storageDataService.ProjectsSelected = [];
+    this._appComponent._storageDataService.AssessmentsSelected = [];
+
+    //Comenzamos limpiando el storage relativo a la selección de evaluaciones pendientes
+    this._appComponent._storageDataService.OfficeSelected = "";
+    this._appComponent._storageDataService.ProjectSelected = null;
+    this._appComponent._storageDataService.AssessmentSelected = null;
     
     //Cargamos cargando el usuario en el componente mientras verificamos si esta logueado
     //En casao de no estar logeado nos enviara devuelta al login
@@ -178,6 +184,7 @@ export class HomeComponent implements OnInit {
 
   //Método que selecciona los equipos en función de la oficna seleccionada
   public SeleccionDeOficina() {
+    this._appComponent._storageDataService.OfficeSelected = this.OficinaSeleccionada;
     this.refresh();
     this.equiposDeLasOficinasSeleccionadas();
   }
@@ -207,6 +214,7 @@ export class HomeComponent implements OnInit {
     }
 
     this._appComponent._storageDataService.UserProjectSelected = this.ProyectoSeleccionado;
+    this._appComponent._storageDataService.ProjectSelected = this.ProyectoSeleccionado;
     this.existeRepetida = false;
 
 
