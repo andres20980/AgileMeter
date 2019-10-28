@@ -60,6 +60,9 @@ export class PendingEvaluationTableComponent implements OnInit {
   public AssessmentSeleccionado: Assessment[] = [];
   public ListaDeAssessmentFiltrada: Array<Assessment> = [];
 
+  public fieldsTable : any[];
+  public objectTranslate : string;
+
   constructor(
       private _evaluacionService: EvaluacionService,
       private _assignationService: AssignationService,
@@ -74,6 +77,16 @@ export class PendingEvaluationTableComponent implements OnInit {
   }
 
   ngOnInit() {
+    //fieldsTable = [data, translate, size, formato(date, percentage), tipo]
+    this.fieldsTable = [
+      ["fecha", "EXCEL_DATE", 12,"dd/mm/yyyy", "Date"],
+      ["userNombre", "EXCEL_USER",20,"", "String"],
+      ["oficina", "EXCEL_OFFICE", 25,"", "String"],
+      ["nombre", "EXCEL_TEAM", 50,"##?##", "String"], 
+      ["assessmentName", "EXCEL_ASSESSMENT", 20,"", "String"],
+      ["progress", "EXCEL_PROGRESS", 12,"0.00%", "Percentage"]];
+    this.objectTranslate = "PENDING_EVALUATION";
+
     this.LoadDataSource();
     this.getProyectos();
     this.getAssessmentDeUsuario();

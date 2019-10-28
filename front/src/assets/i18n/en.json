@@ -139,7 +139,16 @@
 		"MODAL1_BTN_CANCEL": "Cancel",
 		"MODAL2_TITLE": "Objective Notes",
 		"MODAL2_BTN_SAVE": "Save",
-		"MODAL2_BTN_CANCEL": "Cancel"
+		"MODAL2_BTN_CANCEL": "Cancel",
+		"EXCEL_WORKSHEET": "Pending assessments",
+		"EXCEL_TITLE": "Pending assessments",
+		"EXCEL_DATE": "Date",
+		"EXCEL_USER": "User",
+		"EXCEL_OFFICE": "Office",
+		"EXCEL_TEAM": "Team",
+		"EXCEL_ASSESSMENT": "Assessment",
+		"EXCEL_PROGRESS": "Progress",
+		"EXCEL_DOCUMENT_NAME": "Pending_assessments_"
 	},
 	"PENDING_EVALUATION_TABLE": {
 		"TABLE_COL_DATE": "Date",

@@ -1,7 +1,14 @@
-<mat-form-field class = "ml-5">
+<mat-form-field class = "ml-5 px-0 col-2">
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'PENDING_EVALUATION_TABLE.FILTER' | translate }}"[value]=this.dataSource.filter>
 </mat-form-field>
-<mat-form-field class="ml-2 col-3">
+
+<btn-export-to-excel class="px-0" 
+    [dataTableInput]="dataSource.filteredData"  
+    [fieldsInput] = "fieldsTable"
+    [objectTranslateInput] = "objectTranslate">
+</btn-export-to-excel>
+
+<mat-form-field class="ml-2 col-2">
     <mat-select #mySelectOffice (click)="onSelectOfficeOpened()" placeholder="{{ 'PENDING_EVALUATION_TABLE.FILTER_OFFICE' | translate }}" [(value)]="OficinaSeleccionada" multiple>
       <mat-select-trigger>
         {{OficinaSeleccionada[0] ? OficinaSeleccionada[0] : ''}}
@@ -43,7 +50,7 @@
   </mat-select>
 </mat-form-field>
 
-<mat-form-field class="ml-2 col-3">
+<mat-form-field class="ml-2 col-2">
   <mat-select #mySelectAssessment (click)="onSelectAssessmentOpened()" placeholder="{{ 'PENDING_EVALUATION_TABLE.FILTER_ASSESSMENT' | translate }}" 
       [compareWith]="compareAssessments"
       [(ngModel)]="AssessmentSeleccionado" multiple>

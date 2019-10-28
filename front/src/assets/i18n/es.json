@@ -140,7 +140,16 @@
 		"MODAL1_BTN_CANCEL": "Cancelar",
 		"MODAL2_TITLE": "Notas Objetivos",
 		"MODAL2_BTN_SAVE": "Guardar",
-		"MODAL2_BTN_CANCEL": "Cancelar"
+		"MODAL2_BTN_CANCEL": "Cancelar",
+		"EXCEL_WORKSHEET": "Evaluaciones pendientes",
+		"EXCEL_TITLE": "Evaluaciones pendientes",
+		"EXCEL_DATE": "Fecha",
+		"EXCEL_USER": "Usuario",
+		"EXCEL_OFFICE": "Oficina",
+		"EXCEL_TEAM": "Equipo",
+		"EXCEL_ASSESSMENT": "Evaluación",
+		"EXCEL_PROGRESS": "Progreso",
+		"EXCEL_DOCUMENT_NAME": "Evaluaciones_pendientes_"
 	},
 	"PENDING_EVALUATION_TABLE": {
 		"TABLE_COL_DATE": "Fecha",
