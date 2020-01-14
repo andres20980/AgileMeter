@@ -11,7 +11,7 @@ import { AsignacionInfo } from 'app/Models/AsignacionInfo';
 import { AsignacionUpdate } from 'app/Models/AsignacionUpdate';
 import { Router } from "@angular/router";
 import { Evaluacion } from 'app/Models/Evaluacion';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { Section } from 'app/Models/Section';
 import { SectionInfo } from 'app/Models/SectionInfo';
 import { SectionModify } from 'app/Models/SectionModify';
@@ -46,6 +46,7 @@ export class NewevaluationComponent implements OnInit {
   public prevSection: SectionInfo = null;
   public changedQuestion: number;
   public changedAnswer: number;
+  modalOption: NgbModalOptions = {};
 
   //Recogemos todos los datos de la primera area segun su id y las colocamos en la lista
   constructor(
@@ -57,6 +58,9 @@ export class NewevaluationComponent implements OnInit {
     private _proyectoService: ProyectoService,
     private _evaluacionService: EvaluacionService) {
     this.InitialiseComponent();
+
+    this.modalOption.backdrop = 'static';
+    this.modalOption.keyboard = false;
   }
 
   ngOnInit() {
@@ -309,7 +313,7 @@ export class NewevaluationComponent implements OnInit {
       this.textoModal = "";
     }
 
-    this.modalService.open(content).result.then(
+    this.modalService.open(content, this.modalOption).result.then(
       (closeResult) => {
         //Si cierra, no se guarda
 
@@ -367,7 +371,7 @@ export class NewevaluationComponent implements OnInit {
       this.textoModal = "";
     }
 
-    this.modalService.open(content).result.then(
+    this.modalService.open(content, this.modalOption).result.then(
       (closeResult) => {
         //Si cierra, no se guarda
 
@@ -441,7 +445,7 @@ export class NewevaluationComponent implements OnInit {
       this.textoModal = "";
     }
 
-    this.modalService.open(content).result.then(
+    this.modalService.open(content, this.modalOption).result.then(
       (closeResult) => {
         //Si cierra, no se guarda
 

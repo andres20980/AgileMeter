@@ -9,7 +9,7 @@ import { Proyecto } from 'app/Models/Proyecto';
 import { Evaluacion } from 'app/Models/Evaluacion';
 import { SectionInfo } from 'app/Models/SectionInfo';
 import { SectionModify } from 'app/Models/SectionModify';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-menunewevaluation',
@@ -29,6 +29,8 @@ export class MenunewevaluationComponent implements OnInit {
   public anadeNota: string = null;
   public ScreenWidth;
   public cargar: boolean = false;
+  modalOption: NgbModalOptions = {};
+
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
@@ -44,6 +46,9 @@ export class MenunewevaluationComponent implements OnInit {
     private modalService: NgbModal) {
 
     this.ScreenWidth = window.innerWidth;
+
+    this.modalOption.backdrop = 'static';
+    this.modalOption.keyboard = false;
 
   }
 
@@ -135,7 +140,7 @@ export class MenunewevaluationComponent implements OnInit {
       this.textoModal = "";
     }
 
-    this.modalService.open(content).result.then(
+    this.modalService.open(content,  this.modalOption).result.then(
       (closeResult) => {
         //Si cierra, no se guarda
 
