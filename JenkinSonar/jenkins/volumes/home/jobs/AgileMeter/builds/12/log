@@ -1,0 +1,374 @@
+Started by user [8mha:////4Asr4qhDGweJ7qlYAWhnbWC7OJrEtxyCa0A7ujJpL8XTAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzWEgZu/dLi1CL9xJTczDwAj6GcLcAAAAA=[0madmin
+Running in Durability level: MAX_SURVIVABILITY
+[8mha:////4Bi42ElOmpPqkxnxj5vbDeBWCPLDTQtTd/4uvFYhxNk4AAAAoh+LCAAAAAAAAP9tjTEOwjAQBM8BClpKHuFItIiK1krDC0x8GCfWnbEdkooX8TX+gCESFVvtrLSa5wtWKcKBo5UdUu8otU4GP9jS5Mixv3geZcdn2TIl9igbHBs2eJyx4YwwR1SwULBGaj0nRzbDRnX6rmuvydanHMu2V1A5c4MHCFXMWcf8hSnC9jqYxPTz/BXAFEIGsfuclm8zQVqFvQAAAA==[0m[Pipeline] Start of Pipeline
+[8mha:////4Mpa8+5DgFY6d3jeNG+d0WwNABBbsnqsmVMP8E0b7pj6AAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycohUghExsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jduZBmjwAAAAA==[0m[Pipeline] node
+Running on [8mha:////4NaStoue/4YXg6m8dlOuxqafmt0Wb2KQZA8i2k2B0ZSdAAAAnh+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAz2EgZh/eT83ILSktQifY3cxGIgrakPAHib2iPIAAAA[0mJenkins in /var/jenkins_home/jobs/AgileMeter/workspace
+[8mha:////4K7NpVbtJMXXdN5QbyB5K5FporZ1WKU553VQyoIBgX1sAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0gA0xsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jfoP95RwAAAAA==[0m[Pipeline] {
+[8mha:////4IPRb5JnoC4qdE0SeRpBvFjCj/bZW7iw3DDyNb7yi7iZAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0gQkxsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jc09154wAAAAA==[0m[Pipeline] stage
+[8mha:////4BbbqYMtVCZtWynVrCMMBPtLLdc5BL17qVKbPgl2LCxPAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0ggUxsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jek7ggRwAAAAA==[0m[Pipeline] { (Clean workspace)
+[8mha:////4Fwv2PUQXL5pAME203jOiLnCPp2wO/lAskPPNjhAj21HAAAAoh+LCAAAAAAAAP9tjTEOAiEURD9rLGwtPQTbaWGsbAmNJ0AWEZb8zwLrbuWJvJp3kLiJlZNMMm+a93rDOic4UbLcG+wdZu14DKOti0+U+lugiXu6ck2YKRguzSSpM+cFJRUDS1gDKwEbgzpQdmgLbIVXD9UGhba9lFS/o4DGdQM8gYlqLiqVL8wJdvexy4Q/z18BzLEA29ce4gfg7KmOvAAAAA==[0m[Pipeline] echo
+Se limpia el workspace
+[8mha:////4Ah025G7eX3MjJ99WqAMcGDPDsj/XgqRYF7QHVvXGgklAAAAoh+LCAAAAAAAAP9tjTEOAiEURD9rLGwtPQTbGRNjZUtoPAGyiLDkfxZYdytP5NW8g8RNrJxkknnTvNcb1jnBiZLl3mDvMGvHYxhtXXyi1N8CTdzTlWvCTMFwaSZJnTkvKKkYWMIaWAnYGNSBskNbYCu8eqg2KLTtpaT6HQU0rhvgCUxUc1GpfGFOsLuPXSb8ef4KYI4F2L72ED8v8DEJvAAAAA==[0m[Pipeline] cleanWs
+[WS-CLEANUP] Deleting project workspace...
+[WS-CLEANUP] Deferred wipeout is used...
+[WS-CLEANUP] done
+[8mha:////4KjNrkJ7KG6hk7Uhjb3nR0w9Odut3Xu13yDusGWbOtnBAAAAoh+LCAAAAAAAAP9tjTEOAiEURD9rLGwtPQTbmRhjZUtoPAGyiLDkfxZYdytP5NW8g8RNrJxkknnTvNcb1jnBiZLl3mDvMGvHYxhtXXyi1N8CTdzTlWvCTMFwaSZJnTkvKKkYWMIaWAnYGNSBskNbYCu8eqg2KLTtpaT6HQU0rhvgCUxUc1GpfGFOsLuPXSb8ef4KYI6xADvU7j/zqggXvAAAAA==[0m[Pipeline] }
+[8mha:////4BRvehzR4t9wDs40H0kJbBSapXn7xoT/kZrJoL14c1SzAAAAox+LCAAAAAAAAP9tjTESgjAQRT84FraWHiJoYeVY2WZoPEGEGAOZXUwWofJEXs07yMiMlb/67zXv9cYyRRw5OtVYaj2lyqsu9G56auDYXgMPquGLqpgSB6tKO5Rc29OMJYvFvCzHQmNlqQqcPDnBWjfmYYpgyBVniZM7aOS+vuOJTE9lMVG+MEZsbn2dmH6dvwGMXSfId1tBtv8AExtCpb0AAAA=[0m[Pipeline] // stage
+[8mha:////4EmpEp9jPAKzKnhS/62E72EPNFiMTEBu3vawYPJvHym2AAAAph+LCAAAAAAAAP9tjTEOwjAQBC9BKWgpeYSjSHSIitZywwtMbIwT6y7YF5KKF/E1/oAhEhVb7ay0mucLqhThQNGJzmLvMbVeDGF0uYmJYn8JNImOzqIlTBSsUHZSZOxxQUVsYUlRwkrC2mIbKHl0DBvZ6buug0ZXnzjmbS+h9OYGDyhkNrOO/IU5wvY6mkT48/wVwDwwFDuGsmk+x+oNEzd2msEAAAA=[0m[Pipeline] stage
+[8mha:////4HnFEWUVtK8hNlQhmjIduN/2FSfYAHRkYJHr2Pvjmk2VAAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUZUVMrFEWThCaEJJG/7dJSjpxIq7GHWipxIQHy7ZkvdcbqhjgRMEwp7GzGFvLej+aObFMobt5yszRlbWEkbxmQmdBSp/XKihpWFWUsOGw1dh6ihZNgh138iFrL9HUlxTm7cihtGqAJxR8JicZ0rdMAfb3UUXCH+cvAKY+Qdk0ix2WZ/UBbwyqm8IAAAA=[0m[Pipeline] { (Donwload Source)
+[8mha:////4FMuu4AKW4haurKs+W0dT8LjrDusk5WYoGjDzCvtBRMuAAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUwIiYukZZOEFoQkgb/V9+UtqJE3E17kBLJSY8WLYl673eUESGE7ETjcXWY6y96ELvpiQG4vYaaBANXURNGClYoeygyNhqqYqShUVZDisJa4t1oOjRJdjIRj90GTS68px42o4Scm/u8IRMTuSkOX3LyLC99SYS/jh/ATB2CfLdfrbD/Cw+y7kUycIAAAA=[0m[Pipeline] script
+[8mha:////4IddYvjSF66ty54eNw/5mfUuVha2YLqcHIF0Mcy/gQljAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUCDbE1DXKwglCE0La6P/yk9JOnIircQdaKjHhwbItWe/1hiIynIidaCy2HmPtRRd6NyUxELfXQINo6CJqwkjBCmUHRcZWS1WULCzKclhJWFusA0WPLsFGNvqhy6DRlefE03aUkHtzhydkciInzelbRobtrTeR8Mf5C4CxS5Dv9rMd5mfxAbNWnxXCAAAA[0m[Pipeline] {
+[8mha:////4F+HQ10B26uMEG8AVUtdxAUCeOiChRgjGbd5qyjXqI5pAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiJKgQVVrLDS8wsTFOrDtjOyQVL+Jr/IFAJCq2WO1sM88XLFOEI0eLraHOUWocBt/baeHAsbt4HrDlMzZMib1BaQbJ2tQzSs4G5hQlLASsDDWekyObYS1adVeVV2SrU47TdxBQOn2DBxRiMmcV8xfGCJtrrxPTz/NXAGPIUG53n9qHN8W7Eii+AAAA[0m[Pipeline] sh
++ /usr/bin/git clone ssh://git@steps.everis.com:766/INNOVASEV/ScrumMeter.git -b Development
+Cloning into 'ScrumMeter'...
+Checking out files:   1% (54/4119)   Checking out files:   2% (83/4119)   Checking out files:   2% (122/4119)   Checking out files:   3% (124/4119)   Checking out files:   4% (165/4119)   Checking out files:   4% (197/4119)   Checking out files:   5% (206/4119)   Checking out files:   6% (248/4119)   Checking out files:   7% (289/4119)   Checking out files:   7% (297/4119)   Checking out files:   8% (330/4119)   Checking out files:   9% (371/4119)   Checking out files:   9% (379/4119)   Checking out files:  10% (412/4119)   Checking out files:  10% (450/4119)   Checking out files:  11% (454/4119)   Checking out files:  12% (495/4119)   Checking out files:  13% (536/4119)   Checking out files:  13% (544/4119)   Checking out files:  14% (577/4119)   Checking out files:  15% (618/4119)   Checking out files:  15% (633/4119)   Checking out files:  16% (660/4119)   Checking out files:  17% (701/4119)   Checking out files:  17% (724/4119)   Checking out files:  18% (742/4119)   Checking out files:  19% (783/4119)   Checking out files:  19% (792/4119)   Checking out files:  20% (824/4119)   Checking out files:  21% (865/4119)   Checking out files:  21% (885/4119)   Checking out files:  22% (907/4119)   Checking out files:  23% (948/4119)   Checking out files:  23% (982/4119)   Checking out files:  24% (989/4119)   Checking out files:  25% (1030/4119)   Checking out files:  26% (1071/4119)   Checking out files:  26% (1080/4119)   Checking out files:  27% (1113/4119)   Checking out files:  28% (1154/4119)   Checking out files:  28% (1176/4119)   Checking out files:  29% (1195/4119)   Checking out files:  30% (1236/4119)   Checking out files:  30% (1256/4119)   Checking out files:  31% (1277/4119)   Checking out files:  32% (1319/4119)   Checking out files:  32% (1350/4119)   Checking out files:  33% (1360/4119)   Checking out files:  34% (1401/4119)   Checking out files:  35% (1442/4119)   Checking out files:  35% (1445/4119)   Checking out files:  36% (1483/4119)   Checking out files:  37% (1525/4119)   Checking out files:  37% (1533/4119)   Checking out files:  38% (1566/4119)   Checking out files:  39% (1607/4119)   Checking out files:  39% (1631/4119)   Checking out files:  40% (1648/4119)   Checking out files:  41% (1689/4119)   Checking out files:  42% (1730/4119)   Checking out files:  42% (1752/4119)   Checking out files:  43% (1772/4119)   Checking out files:  44% (1813/4119)   Checking out files:  45% (1854/4119)   Checking out files:  45% (1861/4119)   Checking out files:  46% (1895/4119)   Checking out files:  47% (1936/4119)   Checking out files:  48% (1978/4119)   Checking out files:  48% (2007/4119)   Checking out files:  49% (2019/4119)   Checking out files:  50% (2060/4119)   Checking out files:  50% (2077/4119)   Checking out files:  50% (2078/4119)   Checking out files:  50% (2094/4119)   Checking out files:  51% (2101/4119)   Checking out files:  52% (2142/4119)   Checking out files:  52% (2166/4119)   Checking out files:  53% (2184/4119)   Checking out files:  54% (2225/4119)   Checking out files:  54% (2230/4119)   Checking out files:  54% (2255/4119)   Checking out files:  55% (2266/4119)   Checking out files:  55% (2297/4119)   Checking out files:  56% (2307/4119)   Checking out files:  56% (2342/4119)   Checking out files:  57% (2348/4119)   Checking out files:  57% (2370/4119)   Checking out files:  58% (2390/4119)   Checking out files:  58% (2410/4119)   Checking out files:  59% (2431/4119)   Checking out files:  59% (2465/4119)   Checking out files:  60% (2472/4119)   Checking out files:  60% (2511/4119)   Checking out files:  61% (2513/4119)   Checking out files:  61% (2553/4119)   Checking out files:  62% (2554/4119)   Checking out files:  62% (2582/4119)   Checking out files:  62% (2593/4119)   Checking out files:  63% (2595/4119)   Checking out files:  63% (2599/4119)   Checking out files:  63% (2602/4119)   Checking out files:  63% (2612/4119)   Checking out files:  64% (2637/4119)   Checking out files:  64% (2647/4119)   Checking out files:  65% (2678/4119)   Checking out files:  65% (2690/4119)   Checking out files:  66% (2719/4119)   Checking out files:  66% (2729/4119)   Checking out files:  67% (2760/4119)   Checking out files:  67% (2780/4119)   Checking out files:  67% (2800/4119)   Checking out files:  68% (2801/4119)   Checking out files:  69% (2843/4119)   Checking out files:  69% (2851/4119)   Checking out files:  70% (2884/4119)   Checking out files:  70% (2904/4119)   Checking out files:  71% (2925/4119)   Checking out files:  72% (2966/4119)   Checking out files:  72% (2968/4119)   Checking out files:  73% (3007/4119)   Checking out files:  73% (3030/4119)   Checking out files:  74% (3049/4119)   Checking out files:  75% (3090/4119)   Checking out files:  75% (3119/4119)   Checking out files:  76% (3131/4119)   Checking out files:  77% (3172/4119)   Checking out files:  77% (3187/4119)   Checking out files:  78% (3213/4119)   Checking out files:  78% (3249/4119)   Checking out files:  79% (3255/4119)   Checking out files:  79% (3264/4119)   Checking out files:  80% (3296/4119)   Checking out files:  81% (3337/4119)   Checking out files:  82% (3378/4119)   Checking out files:  82% (3381/4119)   Checking out files:  83% (3419/4119)   Checking out files:  84% (3460/4119)   Checking out files:  84% (3492/4119)   Checking out files:  85% (3502/4119)   Checking out files:  86% (3543/4119)   Checking out files:  87% (3584/4119)   Checking out files:  87% (3623/4119)   Checking out files:  88% (3625/4119)   Checking out files:  89% (3666/4119)   Checking out files:  89% (3697/4119)   Checking out files:  90% (3708/4119)   Checking out files:  91% (3749/4119)   Checking out files:  92% (3790/4119)   Checking out files:  92% (3797/4119)   Checking out files:  93% (3831/4119)   Checking out files:  94% (3872/4119)   Checking out files:  95% (3914/4119)   Checking out files:  95% (3949/4119)   Checking out files:  96% (3955/4119)   Checking out files:  97% (3996/4119)   Checking out files:  98% (4037/4119)   Checking out files:  99% (4078/4119)   Checking out files:  99% (4093/4119)   [8mha:////4A/5cwi8eAdXZeZibD/EcB7te1JUYfY4/BlOerZn4bgLAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiJESDqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDhnK7+9Q+vAEG6D8DvgAAAA==[0m[Pipeline] sh
++ chown -R jenkins:jenkins /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/
+[8mha:////4K6mqt6kBkQAKu3UmpFgPw23enffxzTBqIDhJP7HDOmpAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiJCQKRJXWcsMLTGyME+vO2A5JxYv4Gn8gEImKLVY728zzBcsU4cjRYmuoc5Qah8H3dlo4cOwungds+YwNU2JvUJpBsjb1jJKzgTlFCQsBK0ON5+TIZliLVt1V5RXZ6pTj9B0ElE7f4AGFmMxZxfyFMcLm2uvE9PP8FcAYQoZyu//U7g0YU4IMvgAAAA==[0m[Pipeline] }
+[8mha:////4GrIK1IVL79/jJfURgzu5N+2a3/I8iKt6LVug2lIOOq9AAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiRIOEqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFBu95/avQFudLBjvgAAAA==[0m[Pipeline] // script
+[8mha:////4H3h7tgJ/KXi6+Eurxm4NJme5y6W4jiW5icDbx34OFLMAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIi6BCiSmu54QUmNsaJdWdsh6TiRXyNPxCIRMUWq51t5vmCZYpw5GixNdQ5So3D4Hs7LRw4dhfPA7Z8xoYpsTcozSBZm3pGydnAnKKEhYCVocZzcmQzrEWr7qryimx1ynH6DgJKp2/wgEJM5qxi/sIYYXPtdWL6ef4KYAwhQ7ndf2r3Bl2X69++AAAA[0m[Pipeline] }
+[8mha:////4Krms7vfjE8OKbaoL/l3hWZTeFCzN8HIZdB8DUBNgPfMAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPMIhtIgqrZWGF5j4ME6sO2M7JBUv4mv8AYtIVGyx2tlmXm9YxwAnDkb0SIOl2Fnh3WjyEhOH4ep4Ej1fRMcU2aFocWpZY7NgywlhSVHCSsIGqXMcLZkEW9mrh6qcIlOdU8jfUUJp9R2eUMhsTiqkL8wBdrdRR6af568AZu8TlId9rrr+ALKNBVC+AAAA[0m[Pipeline] // stage
+[8mha:////4OeNDQVuVg+8vVcaye77iFbatjczxk31T6oMfEeLo5KkAAAAph+LCAAAAAAAAP9tjTEOwjAQBM9BKWgpeYQjEB2iorXc8AITG+PEugv2haTiRXyNPxCIRMVWOyut5vmCMic4UPKycdgGzHWQXez91ORAqb1EGmRDZ1kTZopOajdosu44oyZ2MEcUsFCwdFhHygE9w0o15m6qaNBXJ07TtldQBHuDBwg1mdkk/sKYYH3tbSb8ef4KYOwYxI6h2G4+x/INji2eq8EAAAA=[0m[Pipeline] stage
+[8mha:////4G9mDBOtkHw7by+Pq30FipcCwslhVv3MiZPPZj061iN1AAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+DOrAycohUdEVMrFEXThCaEJJG/7dJSjpxIq7GHWipxIQHy7ZkvdcbyhjgRMFwp7GzGFvLez+aOfFMobt5ytzRlbeEkbzmjc4NKX1ea0NJw6qCwUbAVmPrKVo0CXbCyYesvERTXVKYt6MAZtUATyjETE4ypG+ZAuzvo4qEP85fAEx9AlYfFquXZ/kBAsTc3cIAAAA=[0m[Pipeline] { (Install package and build)
+[8mha:////4N8C84eYgW62Q2vqvEGNuhMX4nM0YDb/q+Y+DOdHImCPAAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUKiNiYo2ycILQhJA0+r9NUtKJE3E17kBLJSY8WLYl673eUMUAJwqGOY2dxdha1vvRzIllCt3NU2aOrqwljOQ1EzoLUvq8VkFJw6qihA2HrcbWU7RoEuy4kw9Ze4mmvqQwb0cOpVUDPKHgMznJkL5lCrC/jyoS/jh/ATD1CcqmWeywPKsPpnFij8IAAAA=[0m[Pipeline] script
+[8mha:////4KteN3X1gF3c2hC6DYej/I7s5MXlZHagOq8XEIVCmBmeAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUAjbE1DXKwglCE0La6P/yk9JOnIircQdaKjHhwbItWe/1hiIynIidaCy2HmPtRRd6NyUxELfXQINo6CJqwkjBCmUHRcZWS1WULCzKclhJWFusA0WPLsFGNvqhy6DRlefE03aUkHtzhydkciInzelbRobtrTeR8Mf5C4CxS5Dv9rMd5mfxAd6e6VPCAAAA[0m[Pipeline] {
+[8mha:////4POMusYZ9vqv2+nMUvlPiyw1xgtiWSmwBOd0mRk03eswAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiIagQVVrLDS8wsTFOrDtjOyQVL+Jr/IFAJCq2WO1sM88XLFOEI0eLraHOUWocBt/baeHAsbt4HrDlMzZMib1BaQbJ2tQzSs4G5hQlLASsDDWekyObYS1adVeVV2SrU47TdxBQOn2DBxRiMmcV8xfGCJtrrxPTz/NXAGPIUG53n9qHN38C26S+AAAA[0m[Pipeline] sh
++ dotnet build /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/
+Microsoft (R) Build Engine version 16.1.76+g14b0a930a7 for .NET Core
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  Restore completed in 12.76 sec for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj.
+  Restore completed in 15.5 sec for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj.
+  everisapi.API -> /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/bin/Debug/netcoreapp2.1/everisapi.API.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:23.52
+[8mha:////4BZ01rXzI1UinZx8pbzilqmmvKdhUNKaS4lXakAMkg6iAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiIUSDqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFBu95/avQHjyRvdvgAAAA==[0m[Pipeline] }
+[8mha:////4C0DHCdkAJ3MrZSKSJybXL0HyIvM7JjqKHXzEw/YL/7kAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiQUGBqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFBu95/avQHljyOIvgAAAA==[0m[Pipeline] // script
+[8mha:////4M+VaQFoas07Qs+4mLW6jG0iK2ffnSOKs6CxIHE4Jc+eAAAApB+LCAAAAAAAAP9tjbEOwiAURV9rHFwd/QiadDIxTq6ExS/AFhFK3qNApZNf5K/5D6JNnLzDzT13Oc8XrGOAIwXNrMLBYOwM827SZbFMYbg6yszShXWEkZxiQmVBvTotKCgpWFLVsOKwUdg5igZ1gi238i4bJ1E35xTKd+BQm36EB1S8mJMM6QtzgN1t6iPhz/NXALP3Cep2/6n2DaYNcg6+AAAA[0m[Pipeline] }
+[8mha:////4NJAd75flpFcvJkIaDf5omHCEaHCBoGry0jxJslzcGmgAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIi6BCiSmu54QUmNsaJdWdsh6TiRXyNPxCIRMUWq51t5vmCZYpw5GixNdQ5So3D4Hs7LRw4dhfPA7Z8xoYpsTcozSBZm3pGydnAnKKEhYCVocZzcmQzrEWr7qryimx1ynH6DgJKp2/wgEJM5qxi/sIYYXPtdWL6ef4KYAwhQ7nbf2r7BrmPJ1y+AAAA[0m[Pipeline] // stage
+[8mha:////4EL0iQ9noTOLjXFKptDBwRyKiw6OSa0UtBJT/yT1CnepAAAAph+LCAAAAAAAAP9tjTEOwjAQBM9BKWgpeYSDBB2iorXc8AITG+PEugv2haTiRXyNPxCIRMVWOyut5vmCMic4UPKycdgGzHWQXez91ORAqb1EGmRDZ1kTZopOajdosu44oyZ2MEcUsFCwdFhHygE9w0o15m6qaNBXJ07TtldQBHuDBwg1mdkk/sKYYH3tbSb8ef4KYOwYxI6h2G4+x/INn/W1xsEAAAA=[0m[Pipeline] stage
+[8mha:////4EBs30i/9uYZlfP60xnyx5MaSa7wr7HboZ/qQiiZDNZDAAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycogUxIiYukZZOEFoQkgb/V9+UtqJE3E17kBLJSY8WLYl673eUESGE7ETjcXWY6y96ELvpiQG4vYaaBANXURNGClYoeygyNhqqYqShUVZDisJa4t1oOjRJdjIRj90GTS68px42o4Scm/u8IRMTuSkOX3LyLC99SYS/jh/ATB2CfLDbrb9/Cw+ty4Up8IAAAA=[0m[Pipeline] { (Build test)
+[8mha:////4GUTNvxNYBYTY3KOM0NGbHayzckKopHVjsyBGQFvUb82AAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUwIiYukZZOEFoQkgb/V9+UtqJE3E17kBLJSY8WLYl673eUESGE7ETjcXWY6y96ELvpiQG4vYaaBANXURNGClYoeygyNhqqYqShUVZDisJa4t1oOjRJdjIRj90GTS68px42o4Scm/u8IRMTuSkOX3LyLC99SYS/jh/ATB2CfLDbrb9/Cw+2YMO4MIAAAA=[0m[Pipeline] script
+[8mha:////4Oa7IaiP4wjadrQoeLcK5vBzwaiyn/T14NL+iIepjpBoAAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+DOrAycohUoiNiYo26cILQhJA0+r9NUtKJE3E17kBLJSY8WLYl673eUMYAJwqGO42dxdha3vvRzIlnCt3NU+aOrrwljOQ1b3RuSOnzWhtKGlYVDDYCthpbT9GiSbATTj5k5SWa6pLCvB0FMKsGeEIhZnKSIX3LFGB/H1Uk/HH+AmDqE7D6sFi9PMsPfTawssIAAAA=[0m[Pipeline] {
+[8mha:////4OXhF1uQVx+sA8ItgfVNUrsFQHwvbtFSWPYl6Isib8CuAAAAox+LCAAAAAAAAP9tjTESwiAURH/iWNhaeghSxM6xsmVoPAEmiBDmfwJEUnkir+YdRDNj5RY7+7Z5zxesY4AjBc2swsFg7AzzbtJlsUxhuDrKzNKFdYSRnGJCZUG9Oi0oKClYUtWw4rBR2DmKBnWCLbfyLhsnUTfnFMp34FCbfoQHVLyYkwzpC3OA3W3qI+HP81cAs09Qt+2n9v4NGWcPtb4AAAA=[0m[Pipeline] sh
++ dotnet add /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/everisapiTest.csproj package dotnet-reportgenerator-cli --version 4.2.2
+  Writing /tmp/tmpmAecve.tmp
+info : Adding PackageReference for package 'dotnet-reportgenerator-cli' into project '/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/everisapiTest.csproj'.
+info : Restoring packages for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/everisapiTest.csproj...
+info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.net.test.sdk/index.json
+info :   GET https://api.nuget.org/v3-flatcontainer/moq/index.json
+info :   GET https://api.nuget.org/v3-flatcontainer/coverlet.msbuild/index.json
+info :   GET https://api.nuget.org/v3-flatcontainer/xunit/index.json
+info :   GET https://api.nuget.org/v3-flatcontainer/xunit.runner.visualstudio/index.json
+info :   GET https://api.nuget.org/v3-flatcontainer/dotnet-reportgenerator-cli/index.json
+info :   OK https://api.nuget.org/v3-flatcontainer/coverlet.msbuild/index.json 1032ms
+info :   OK https://api.nuget.org/v3-flatcontainer/xunit.runner.visualstudio/index.json 1026ms
+info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.net.test.sdk/index.json 1184ms
+info :   GET https://api.nuget.org/v3-flatcontainer/xunit.runner.visualstudio/2.4.0/xunit.runner.visualstudio.2.4.0.nupkg
+info :   GET https://api.nuget.org/v3-flatcontainer/coverlet.msbuild/2.6.2/coverlet.msbuild.2.6.2.nupkg
+info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.net.test.sdk/16.0.1/microsoft.net.test.sdk.16.0.1.nupkg
+info :   OK https://api.nuget.org/v3-flatcontainer/xunit.runner.visualstudio/2.4.0/xunit.runner.visualstudio.2.4.0.nupkg 19ms
+info :   OK https://api.nuget.org/v3-flatcontainer/coverlet.msbuild/2.6.2/coverlet.msbuild.2.6.2.nupkg 25ms
+info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.net.test.sdk/16.0.1/microsoft.net.test.sdk.16.0.1.nupkg 27ms
+info :   OK https://api.nuget.org/v3-flatcontainer/moq/index.json 1169ms
+info :   GET https://api.nuget.org/v3-flatcontainer/moq/4.11.0/moq.4.11.0.nupkg
+info :   OK https://api.nuget.org/v3-flatcontainer/dotnet-reportgenerator-cli/index.json 1168ms
+info :   GET https://api.nuget.org/v3-flatcontainer/dotnet-reportgenerator-cli/4.2.2/dotnet-reportgenerator-cli.4.2.2.nupkg
+info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.testplatform.testhost/index.json
+info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.codecoverage/index.json
+info :   OK https://api.nuget.org/v3-flatcontainer/xunit/index.json 1205ms
+info :   OK https://api.nuget.org/v3-flatcontainer/moq/4.11.0/moq.4.11.0.nupkg 39ms
+info :   GET https://api.nuget.org/v3-flatcontainer/xunit/2.4.0/xunit.2.4.0.nupkg
+info :   OK https://api.nuget.org/v3-flatcontainer/xunit/2.4.0/xunit.2.4.0.nupkg 28ms
+info :   GET https://api.nuget.org/v3-flatcontainer/xunit.core/index.json
+info :   GET https://api.nuget.org/v3-flatcontainer/xunit.assert/index.json
+info :   GET https://api.nuget.org/v3-flatcontainer/xunit.analyzers/index.json
+info :   GET https://api.nuget.org/v3-flatcontainer/castle.core/index.json
+info :   OK https://api.nuget.org/v3-flatcontainer/dotnet-reportgenerator-cli/4.2.2/dotnet-reportgenerator-cli.4.2.2.nupkg 507ms
+info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.testplatform.testhost/index.json 519ms
+info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.testplatform.testhost/16.0.1/microsoft.testplatform.testhost.16.0.1.nupkg
+info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.testplatform.testhost/16.0.1/microsoft.testplatform.testhost.16.0.1.nupkg 24ms
+info :   OK https://api.nuget.org/v3-flatcontainer/xunit.assert/index.json 494ms
+info :   GET https://api.nuget.org/v3-flatcontainer/xunit.assert/2.4.0/xunit.assert.2.4.0.nupkg
+info :   OK https://api.nuget.org/v3-flatcontainer/xunit.core/index.json 522ms
+info :   OK https://api.nuget.org/v3-flatcontainer/xunit.assert/2.4.0/xunit.assert.2.4.0.nupkg 21ms
+info :   GET https://api.nuget.org/v3-flatcontainer/xunit.core/2.4.0/xunit.core.2.4.0.nupkg
+info :   OK https://api.nuget.org/v3-flatcontainer/xunit.core/2.4.0/xunit.core.2.4.0.nupkg 23ms
+info :   GET https://api.nuget.org/v3-flatcontainer/xunit.extensibility.core/index.json
+info :   GET https://api.nuget.org/v3-flatcontainer/xunit.extensibility.execution/index.json
+info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.codecoverage/index.json 625ms
+info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.codecoverage/16.0.1/microsoft.codecoverage.16.0.1.nupkg
+info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.codecoverage/16.0.1/microsoft.codecoverage.16.0.1.nupkg 27ms
+info :   OK https://api.nuget.org/v3-flatcontainer/castle.core/index.json 531ms
+info :   GET https://api.nuget.org/v3-flatcontainer/castle.core/4.4.0/castle.core.4.4.0.nupkg
+info :   OK https://api.nuget.org/v3-flatcontainer/xunit.analyzers/index.json 678ms
+info :   GET https://api.nuget.org/v3-flatcontainer/xunit.analyzers/0.10.0/xunit.analyzers.0.10.0.nupkg
+info :   OK https://api.nuget.org/v3-flatcontainer/castle.core/4.4.0/castle.core.4.4.0.nupkg 96ms
+info :   OK https://api.nuget.org/v3-flatcontainer/xunit.analyzers/0.10.0/xunit.analyzers.0.10.0.nupkg 209ms
+info :   OK https://api.nuget.org/v3-flatcontainer/xunit.extensibility.core/index.json 555ms
+info :   OK https://api.nuget.org/v3-flatcontainer/xunit.extensibility.execution/index.json 556ms
+info :   GET https://api.nuget.org/v3-flatcontainer/xunit.extensibility.core/2.4.0/xunit.extensibility.core.2.4.0.nupkg
+info :   GET https://api.nuget.org/v3-flatcontainer/xunit.extensibility.execution/2.4.0/xunit.extensibility.execution.2.4.0.nupkg
+info :   OK https://api.nuget.org/v3-flatcontainer/xunit.extensibility.core/2.4.0/xunit.extensibility.core.2.4.0.nupkg 18ms
+info :   GET https://api.nuget.org/v3-flatcontainer/xunit.abstractions/index.json
+info :   OK https://api.nuget.org/v3-flatcontainer/xunit.extensibility.execution/2.4.0/xunit.extensibility.execution.2.4.0.nupkg 44ms
+info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.testplatform.objectmodel/index.json
+info :   CACHE https://api.nuget.org/v3-flatcontainer/microsoft.extensions.dependencymodel/index.json
+info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.extensions.dependencymodel/1.0.3/microsoft.extensions.dependencymodel.1.0.3.nupkg
+info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.extensions.dependencymodel/1.0.3/microsoft.extensions.dependencymodel.1.0.3.nupkg 21ms
+info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.dotnet.platformabstractions/index.json
+info :   CACHE https://api.nuget.org/v3-flatcontainer/system.diagnostics.tracesource/index.json
+info :   GET https://api.nuget.org/v3-flatcontainer/system.diagnostics.tracesource/4.3.0/system.diagnostics.tracesource.4.3.0.nupkg
+info :   OK https://api.nuget.org/v3-flatcontainer/system.diagnostics.tracesource/4.3.0/system.diagnostics.tracesource.4.3.0.nupkg 28ms
+info :   OK https://api.nuget.org/v3-flatcontainer/xunit.abstractions/index.json 490ms
+info :   GET https://api.nuget.org/v3-flatcontainer/xunit.abstractions/2.0.2/xunit.abstractions.2.0.2.nupkg
+info :   OK https://api.nuget.org/v3-flatcontainer/xunit.abstractions/2.0.2/xunit.abstractions.2.0.2.nupkg 18ms
+info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.testplatform.objectmodel/index.json 531ms
+info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.testplatform.objectmodel/16.0.1/microsoft.testplatform.objectmodel.16.0.1.nupkg
+info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.testplatform.objectmodel/16.0.1/microsoft.testplatform.objectmodel.16.0.1.nupkg 20ms
+info :   GET https://api.nuget.org/v3-flatcontainer/system.componentmodel.eventbasedasync/index.json
+info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.dotnet.platformabstractions/index.json 566ms
+info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.dotnet.platformabstractions/1.0.3/microsoft.dotnet.platformabstractions.1.0.3.nupkg
+info :   GET https://api.nuget.org/v3-flatcontainer/system.diagnostics.textwritertracelistener/index.json
+info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.dotnet.platformabstractions/1.0.3/microsoft.dotnet.platformabstractions.1.0.3.nupkg 23ms
+info :   OK https://api.nuget.org/v3-flatcontainer/system.diagnostics.textwritertracelistener/index.json 496ms
+info :   GET https://api.nuget.org/v3-flatcontainer/system.diagnostics.textwritertracelistener/4.0.0/system.diagnostics.textwritertracelistener.4.0.0.nupkg
+info :   OK https://api.nuget.org/v3-flatcontainer/system.diagnostics.textwritertracelistener/4.0.0/system.diagnostics.textwritertracelistener.4.0.0.nupkg 15ms
+info :   OK https://api.nuget.org/v3-flatcontainer/system.componentmodel.eventbasedasync/index.json 536ms
+info :   GET https://api.nuget.org/v3-flatcontainer/system.componentmodel.eventbasedasync/4.0.11/system.componentmodel.eventbasedasync.4.0.11.nupkg
+info :   OK https://api.nuget.org/v3-flatcontainer/system.componentmodel.eventbasedasync/4.0.11/system.componentmodel.eventbasedasync.4.0.11.nupkg 24ms
+info : Installing System.ComponentModel.EventBasedAsync 4.0.11.
+info : Installing System.Diagnostics.TextWriterTraceListener 4.0.0.
+info : Installing Microsoft.DotNet.PlatformAbstractions 1.0.3.
+info : Installing xunit.abstractions 2.0.2.
+info : Installing Microsoft.TestPlatform.ObjectModel 16.0.1.
+info : Installing Microsoft.Extensions.DependencyModel 1.0.3.
+info : Installing xunit.extensibility.core 2.4.0.
+info : Installing xunit.extensibility.execution 2.4.0.
+info : Installing System.Diagnostics.TraceSource 4.3.0.
+info : Installing Microsoft.TestPlatform.TestHost 16.0.1.
+info : Installing Microsoft.CodeCoverage 16.0.1.
+info : Installing xunit.core 2.4.0.
+info : Installing xunit.analyzers 0.10.0.
+info : Installing xunit.assert 2.4.0.
+info : Installing Castle.Core 4.4.0.
+info : Installing Microsoft.NET.Test.Sdk 16.0.1.
+info : Installing xunit 2.4.0.
+info : Installing xunit.runner.visualstudio 2.4.0.
+info : Installing Moq 4.11.0.
+info : Installing coverlet.msbuild 2.6.2.
+info : Installing dotnet-reportgenerator-cli 4.2.2.
+info : Package 'dotnet-reportgenerator-cli' is compatible with all the specified frameworks in project '/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/everisapiTest.csproj'.
+info : PackageReference for package 'dotnet-reportgenerator-cli' version '4.2.2' added to file '/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/everisapiTest.csproj'.
+info : Committing restore...
+info : Generating MSBuild file /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/obj/everisapiTest.csproj.nuget.g.props.
+info : Generating MSBuild file /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/obj/everisapiTest.csproj.nuget.g.targets.
+info : Writing assets file to disk. Path: /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/obj/project.assets.json
+log  : Restore completed in 5.12 sec for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/everisapiTest.csproj.
+[8mha:////4P6d6ygpQa5jLZHFNJ/mWq6PH++MTw2mG020s59zgrzaAAAAox+LCAAAAAAAAP9tjTESwiAURH/iWNhaeghSZKwcK1uGxhNggghh/idAJJUn8mreQTQzVm6xs2+b93zBOgY4UtDMKhwMxs4w7yZdFssUhqujzCxdWEcYySkmVBbUq9OCgpKCJVUNKw4bhZ2jaFAn2HIr77JxEnVzTqF8Bw616Ud4QMWLOcmQvjAH2N2mPhL+PH8FMPsEddt+au/fWFYUrL4AAAA=[0m[Pipeline] sh
++ dotnet build /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/
+Microsoft (R) Build Engine version 16.1.76+g14b0a930a7 for .NET Core
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+  Restore completed in 66.95 ms for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj.
+  Restore completed in 66.21 ms for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/everisapiTest.csproj.
+  Restore completed in 9.38 ms for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj.
+  Restore completed in 5.16 sec for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/everisapiTest.csproj.
+  everisapi.API -> /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/bin/Debug/netcoreapp2.1/everisapi.API.dll
+  everisapiTest -> /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/bin/Debug/netcoreapp2.1/everisapiTest.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:10.00
+[8mha:////4Cqj+1Pn+Ly+6cNQ2dzzEBVZYarYsYNe0vUDLdc6wfFXAAAApB+LCAAAAAAAAP9tjTESwiAURH/iWNhaeghSZMbGsbJlaDwBJogQ5n8CRFJ5Iq/mHUQzY+UWO/u2ec8XrGOAIwXNrMLBYOwM827SZbFMYbg6yszShXWEkZxiQmVBvTotKCgpWFLVsOKwUdg5igZ1gi238i4bJ1E35xTKd+BQm36EB1S8mJMM6QtzgN1t6iPhz/NXALP3Cep2/6n2DbVmE/y+AAAA[0m[Pipeline] }
+[8mha:////4KS23tEHSbOo0eHdQnU43Bykc9KBoTuIIEw3m28ZRKLwAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiQUGBqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFDu9p/avgGGhUhAvgAAAA==[0m[Pipeline] // script
+[8mha:////4I03lxTWEHkcarCV3B5sTnxK+Iy2F8kfkcVKxNYxp6QuAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiRIOEqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFDu9p/avgHpZhcovgAAAA==[0m[Pipeline] }
+[8mha:////4DHe6kFauhjij4DTD0UnSi5n2DycTX/A0aEbhInFNEglAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOKCRIUQVVrLDS8wsTFOrDtjOyQVL+Jr/IFAJCq2WO1sM88XLFOEI0eLraHOUWocBt/baeHAsbt4HrDlMzZMib1BaQbJ2tQzSs4G5hQlLASsDDWekyObYS1adVeVV2SrU47TdxBQOn2DBxRiMmcV8xfGCJtrrxPTz/NXAGMIGcrd/lPbN9qFTJS+AAAA[0m[Pipeline] // stage
+[8mha:////4DBJnciGA35VqMIH0qWVJcCEKIHuSIgleAPPfbnH0UDgAAAAph+LCAAAAAAAAP9tjTEOwjAQBM9BKWgpeYRDkQ5R0VpueIFJjHFi3QX7QlLxIr7GHzBEomKrnZVW83xBmSIcKDrZWew9psbLIYwuNzlR7C+BJtnRWTaEiYKV2k6aWntcUBNbWCIKWClYW2wCJY+OYaM6czdVMOiqE8e87RUUvr3BA4TKZjaRvzBH2F7HNhH+PH8FMA8MomYo6t3nWL4BEcsSA8EAAAA=[0m[Pipeline] stage
+[8mha:////4PD5ygQSK9jT6cmFAkwhfG9BXMImiNR1tO4KOUMXbCHbAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycogUJDbE1DXKwglCE0La6P/yk9JOnIircQdaKjHhwbItWe/1hiIynIidaCy2HmPtRRd6NyUxELfXQINo6CJqwkjBCmUHRcZWS1WULCzKclhJWFusA0WPLsFGNvqhy6DRlefE03aUkHtzhydkciInzelbRobtrTeR8Mf5C4CxS5AfdrPt52fxAbb5KxbCAAAA[0m[Pipeline] { (Execute test)
+[8mha:////4EFs4kKI8u9e6EZeqn4Qz+QY+nUvKBwHVYwSOLrbyOuSAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUIDbE1DXKwglCE0La6P/yk9JOnIircQdaKjHhwbItWe/1hiIynIidaCy2HmPtRRd6NyUxELfXQINo6CJqwkjBCmUHRcZWS1WULCzKclhJWFusA0WPLsFGNvqhy6DRlefE03aUkHtzhydkciInzelbRobtrTeR8Mf5C4CxS5AfdrPt52fxAdhUMVHCAAAA[0m[Pipeline] script
+[8mha:////4HtlnEf+1MewOmWykwWoXSdshFC5JXDnk2lZEKkaCH1KAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUAjbE1DXKwglCE0La6P/yk9JOnIircQdaKjHhwbItWe/1hiIynIidaCy2HmPtRRd6NyUxELfXQINo6CJqwkjBCmUHRcZWS1WULCzKclhJWFusA0WPLsFGNvqhy6DRlefE03aUkHtzhydkciInzelbRobtrTeR8Mf5C4CxS5AfdrPt52fxAXzhjwPCAAAA[0m[Pipeline] {
+[8mha:////4KgVtN0iEzLt9A4A0Y5VsHSC6LwFsj29cPNAjQX40xeKAAAAox+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOJSkA5R0VppeIFJjLFj3Tm2g1PxIr7GHwhEomKL1c4283zBOgY4ctBoFfWGYmvQu1HPCzOH/uo4o+ULtkyRncJG5YY7dVqw4aRgSVHCSsBGUes4GtIJtsLKu6ycJF2dU5i/g4DSdAM8oBCzOcmQvjAF2N3GLjL9PH8FMPkEZb3/VO3fhXiFur4AAAA=[0m[Pipeline] sh
++ dotnet test /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/everisapiTest.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/TestResult/ /p:Exclude=[xunit*]*
+Test run for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/bin/Debug/netcoreapp2.1/everisapiTest.dll(.NETCoreApp,Version=v2.1)
+Microsoft (R) Test Execution Command Line Tool Version 16.1.0
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+Starting test execution, please wait...
+
+Test Run Successful.
+Total tests: 76
+     Passed: 76
+ Total time: 5.1614 Seconds
+
+Calculating coverage result...
+  Generating report '/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/TestResult/coverage.opencover.xml'
+
++---------------+-------+--------+--------+
+| Module        | Line  | Branch | Method |
++---------------+-------+--------+--------+
+| everisapi.API | 4.46% | 4.74%  | 19.06% |
++---------------+-------+--------+--------+
+
++---------+-------+--------+--------+
+|         | Line  | Branch | Method |
++---------+-------+--------+--------+
+| Total   | 4.46% | 4.74%  | 19.06% |
++---------+-------+--------+--------+
+| Average | 4.46% | 4.74%  | 19.06% |
++---------+-------+--------+--------+
+
+[8mha:////4BFxXKL2QCVvL+89sn/A321lNxer8Z5+l403I2LcCqykAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOJSABWiSmu54QUmNsaJdWdsh6TiRXyNPxCIRMUWq51t5vmCZYpw5GixNdQ5So3D4Hs7LRw4dhfPA7Z8xoYpsTcozSBZm3pGydnAnKKEhYCVocZzcmQzrEWr7qryimx1ynH6DgJKp2/wgEJM5qxi/sIYYXPtdWL6ef4KYAwZyt32U/vwBsRJnqO+AAAA[0m[Pipeline] sh
++ cd /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/
++ dotnet reportgenerator everisapiTest.csproj -reports:./TestResult/coverage.opencover.xml -targetdir:./TestResults/Reports -reporttypes:HTML
+Loading report '/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/./TestResult/coverage.opencover.xml'
+ Preprocessing report
+ Initiating parser for OpenCover
+  Current Assembly: everisapi.API
+Coverage report parsing took 0.3 seconds
+Initializing report builders for report types: HTML
+Analyzing 101 classes
+ Creating report 3/101 (Assembly: everisapi.API, Class: everisapi.API.AsignacionInfoContextExtensions)
+ Creating report 3/101 (Assembly: everisapi.API, Class: everisapi.API.Controllers.AsignacionController)
+ Creating report 3/101 (Assembly: everisapi.API, Class: everisapi.API.Controllers.EvaluacionController)
+ Creating report 5/101 (Assembly: everisapi.API, Class: everisapi.API.Controllers.OficinaController)
+ Creating report 5/101 (Assembly: everisapi.API, Class: everisapi.API.Controllers.LineaController)
+ Creating report 6/101 (Assembly: everisapi.API, Class: everisapi.API.Controllers.PreguntasController)
+ Creating report 7/101 (Assembly: everisapi.API, Class: everisapi.API.Controllers.ProyectosController)
+ Creating report 8/101 (Assembly: everisapi.API, Class: everisapi.API.Controllers.RespuestaController)
+ Creating report 9/101 (Assembly: everisapi.API, Class: everisapi.API.Controllers.SectionController)
+ Creating report 10/101 (Assembly: everisapi.API, Class: everisapi.API.Controllers.TokenController)
+ Creating report 11/101 (Assembly: everisapi.API, Class: everisapi.API.Controllers.UsersController)
+ Creating report 12/101 (Assembly: everisapi.API, Class: everisapi.API.Entities.AsignacionInfoContext)
+ Creating report 13/101 (Assembly: everisapi.API, Class: everisapi.API.Controllers.UnidadController)
+ Creating report 14/101 (Assembly: everisapi.API, Class: everisapi.API.Entities.AsignacionEntity)
+ Creating report 15/101 (Assembly: everisapi.API, Class: everisapi.API.Entities.AssessmentEntity)
+ Creating report 16/101 (Assembly: everisapi.API, Class: everisapi.API.Entities.EvaluacionEntity)
+ Creating report 17/101 (Assembly: everisapi.API, Class: everisapi.API.Entities.NotasAsignacionesEntity)
+ Creating report 18/101 (Assembly: everisapi.API, Class: everisapi.API.Entities.OficinaEntity)
+ Creating report 19/101 (Assembly: everisapi.API, Class: everisapi.API.Entities.LineaEntity)
+ Creating report 20/101 (Assembly: everisapi.API, Class: everisapi.API.Entities.NotasSectionsEntity)
+ Creating report 21/101 (Assembly: everisapi.API, Class: everisapi.API.Entities.PreguntaEntity)
+ Creating report 22/101 (Assembly: everisapi.API, Class: everisapi.API.Entities.ProyectoEntity)
+ Creating report 23/101 (Assembly: everisapi.API, Class: everisapi.API.Entities.RoleEntity)
+ Creating report 24/101 (Assembly: everisapi.API, Class: everisapi.API.Entities.UnidadEntity)
+ Creating report 25/101 (Assembly: everisapi.API, Class: everisapi.API.Entities.RespuestaEntity)
+ Creating report 26/101 (Assembly: everisapi.API, Class: everisapi.API.Entities.SectionEntity)
+ Creating report 27/101 (Assembly: everisapi.API, Class: everisapi.API.Entities.UserEntity)
+ Creating report 28/101 (Assembly: everisapi.API, Class: everisapi.API.Entities.UserProyectoEntity)
+ Creating report 29/101 (Assembly: everisapi.API, Class: everisapi.API.Migrations.AddLastQuestionUpdate)
+ Creating report 30/101 (Assembly: everisapi.API, Class: everisapi.API.Migrations.AñadirPesosASecciones)
+ Creating report 31/101 (Assembly: everisapi.API, Class: everisapi.API.Entities.User_RoleEntity)
+ Creating report 32/101 (Assembly: everisapi.API, Class: everisapi.API.Migrations.AsignacionInfoContextModelSnapshot)
+ Creating report 33/101 (Assembly: everisapi.API, Class: everisapi.API.Migrations.AddAssessments)
+ Creating report 34/101 (Assembly: everisapi.API, Class: everisapi.API.Migrations.AddTableOficinaUnidad_Linea)
+ Creating report 35/101 (Assembly: everisapi.API, Class: everisapi.API.Migrations.LinkAssessmentWithSections)
+ Creating report 36/101 (Assembly: everisapi.API, Class: everisapi.API.Migrations.AddColumnCodigoProyecto)
+ Creating report 37/101 (Assembly: everisapi.API, Class: everisapi.API.Migrations.AddUserNameToEvaluation)
+ Creating report 38/101 (Assembly: everisapi.API, Class: everisapi.API.Migrations.LinkEvaluationsWithAssessments)
+ Creating report 39/101 (Assembly: everisapi.API, Class: everisapi.API.Migrations.ModificacionTablaProyectos)
+ Creating report 40/101 (Assembly: everisapi.API, Class: everisapi.API.Migrations.AddUserProyecto)
+ Creating report 41/101 (Assembly: everisapi.API, Class: everisapi.API.Migrations.PreguntaHabilitante)
+ Creating report 42/101 (Assembly: everisapi.API, Class: everisapi.API.Migrations.NivelPreguntas)
+ Creating report 43/101 (Assembly: everisapi.API, Class: everisapi.API.Models.AsignacionConNotasDto)
+ Creating report 44/101 (Assembly: everisapi.API, Class: everisapi.API.Migrations.RemoveUserRoles)
+ Creating report 45/101 (Assembly: everisapi.API, Class: everisapi.API.Models.AsignacionConPreguntaNivelDto)
+ Creating report 46/101 (Assembly: everisapi.API, Class: everisapi.API.Migrations.NombreCompleto_Activo)
+ Creating report 47/101 (Assembly: everisapi.API, Class: everisapi.API.Migrations.SectionPesosNiveles)
+ Creating report 48/101 (Assembly: everisapi.API, Class: everisapi.API.Models.AsignacionCreateUpdateDto)
+ Creating report 49/101 (Assembly: everisapi.API, Class: everisapi.API.Migrations.TestProyects)
+ Creating report 50/101 (Assembly: everisapi.API, Class: everisapi.API.Migrations.PesoIntToFloat)
+ Creating report 51/101 (Assembly: everisapi.API, Class: everisapi.API.Models.AsignacionDto)
+ Creating report 52/101 (Assembly: everisapi.API, Class: everisapi.API.Models.AsignacionInfoDto)
+ Creating report 53/101 (Assembly: everisapi.API, Class: everisapi.API.Models.Equipos)
+ Creating report 54/101 (Assembly: everisapi.API, Class: everisapi.API.Models.EvaluacionInfoPaginationDto)
+ Creating report 55/101 (Assembly: everisapi.API, Class: everisapi.API.Models.AsignacionSinPreguntasDto)
+ Creating report 56/101 (Assembly: everisapi.API, Class: everisapi.API.Models.EvaluacionCreateUpdateDto)
+ Creating report 57/101 (Assembly: everisapi.API, Class: everisapi.API.Models.AsignacionUpdateNotasDto)
+ Creating report 58/101 (Assembly: everisapi.API, Class: everisapi.API.Models.EvaluacionInfoWithProgressDto)
+ Creating report 59/101 (Assembly: everisapi.API, Class: everisapi.API.Models.EvaluacionDto)
+ Creating report 60/101 (Assembly: everisapi.API, Class: everisapi.API.Models.AssessmentDto)
+ Creating report 61/101 (Assembly: everisapi.API, Class: everisapi.API.Models.EvaluacionInfoWithSectionsDto)
+ Creating report 62/101 (Assembly: everisapi.API, Class: everisapi.API.Models.EvaluacionInfoDto)
+ Creating report 63/101 (Assembly: everisapi.API, Class: everisapi.API.Models.Linea)
+ Creating report 64/101 (Assembly: everisapi.API, Class: everisapi.API.Models.EvaluacionesWithoutRespuestasDto)
+ Creating report 65/101 (Assembly: everisapi.API, Class: everisapi.API.Models.ProyectoCreateUpdateDto)
+ Creating report 66/101 (Assembly: everisapi.API, Class: everisapi.API.Models.Oficina)
+ Creating report 67/101 (Assembly: everisapi.API, Class: everisapi.API.Models.SectionDto)
+ Creating report 68/101 (Assembly: everisapi.API, Class: everisapi.API.Models.ProyectoDto)
+ Creating report 69/101 (Assembly: everisapi.API, Class: everisapi.API.Models.PreguntaCreateDto)
+ Creating report 70/101 (Assembly: everisapi.API, Class: everisapi.API.Models.SectionInfoDto)
+ Creating report 71/101 (Assembly: everisapi.API, Class: everisapi.API.Models.ProyectoWithEvaluacionesDto)
+ Creating report 72/101 (Assembly: everisapi.API, Class: everisapi.API.Models.PreguntaDto)
+ Creating report 73/101 (Assembly: everisapi.API, Class: everisapi.API.Models.SectionWithNotasDto)
+ Creating report 74/101 (Assembly: everisapi.API, Class: everisapi.API.Models.RespuestaConNotasDto)
+ Creating report 75/101 (Assembly: everisapi.API, Class: everisapi.API.Models.PreguntaRespuestaNivelDto)
+ Creating report 76/101 (Assembly: everisapi.API, Class: everisapi.API.Models.SectionWithoutAreaDto)
+ Creating report 77/101 (Assembly: everisapi.API, Class: everisapi.API.Models.RespuestaConUserDto)
+ Creating report 78/101 (Assembly: everisapi.API, Class: everisapi.API.Models.PreguntaUpdateDto)
+ Creating report 79/101 (Assembly: everisapi.API, Class: everisapi.API.Models.Unidad)
+ Creating report 80/101 (Assembly: everisapi.API, Class: everisapi.API.Models.RespuestaDto)
+ Creating report 81/101 (Assembly: everisapi.API, Class: everisapi.API.Models.PreguntaWithOneRespuestasDto)
+ Creating report 82/101 (Assembly: everisapi.API, Class: everisapi.API.Models.UserProyectoDto)
+ Creating report 83/101 (Assembly: everisapi.API, Class: everisapi.API.Models.RoleDto)
+ Creating report 84/101 (Assembly: everisapi.API, Class: everisapi.API.Models.PreguntaWithRespuestasDto)
+ Creating report 85/101 (Assembly: everisapi.API, Class: everisapi.API.Models.User_RoleCreateDto)
+ Creating report 86/101 (Assembly: everisapi.API, Class: everisapi.API.Models.SectionConAsignacionesDto)
+ Creating report 87/101 (Assembly: everisapi.API, Class: everisapi.API.Models.UsersDto)
+ Creating report 88/101 (Assembly: everisapi.API, Class: everisapi.API.Models.User_RoleDto)
+ Creating report 89/101 (Assembly: everisapi.API, Class: everisapi.API.Services.RespuestasInfoRepository)
+ Creating report 90/101 (Assembly: everisapi.API, Class: everisapi.API.Models.UsersSinProyectosDto)
+ Creating report 91/101 (Assembly: everisapi.API, Class: everisapi.API.Models.UsersWithRolesDto)
+ Creating report 92/101 (Assembly: everisapi.API, Class: everisapi.API.Services.SectionsInfoRepository)
+ Creating report 93/101 (Assembly: everisapi.API, Class: everisapi.API.Program)
+ Creating report 94/101 (Assembly: everisapi.API, Class: everisapi.API.Services.UnidadInfoRepository)
+ Creating report 95/101 (Assembly: everisapi.API, Class: everisapi.API.Services.AsignacionInfoRepository)
+ Creating report 96/101 (Assembly: everisapi.API, Class: everisapi.API.Services.UsersInfoRespository)
+ Creating report 97/101 (Assembly: everisapi.API, Class: everisapi.API.Services.EvaluacionInfoRepository)
+ Creating report 98/101 (Assembly: everisapi.API, Class: everisapi.API.Startup)
+ Creating report 100/101 (Assembly: everisapi.API, Class: everisapi.API.everisprojectdbContext)
+ Creating report 100/101 (Assembly: everisapi.API, Class: everisapi.API.Services.LineaInfoRepository)
+ Creating report 101/101 (Assembly: everisapi.API, Class: everisapi.API.Services.OficinaInfoRepository)
+ Creating summary
+Report generation took 1.7 seconds
+[8mha:////4N6Htpou1ZeKwLXM39tmS2SinrPQyMDBxz4R4D8iDjpCAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOJSgGgQVVrLDS8wsTFOrDtjOyQVL+Jr/IFAJCq2WO1sM88XLFOEI0eLraHOUWocBt/baeHAsbt4HrDlMzZMib1BaQbJ2tQzSs4G5hQlLASsDDWekyObYS1adVeVV2SrU47TdxBQOn2DBxRiMmcV8xfGCJtrrxPTz/NXAGMIGcrd/lPbN/zO9Xa+AAAA[0m[Pipeline] }
+[8mha:////4FFi97bakueBAhsP5iKqrBjEKc7jXK2Nbte+xxxw9t7AAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiISQKRJXWcsMLTGyME+vO2A5JxYv4Gn8gEImKLVY728zzBcsU4cjRYmuoc5Qah8H3dlo4cOwungds+YwNU2JvUJpBsjb1jJKzgTlFCQsBK0ON5+TIZliLVt1V5RXZ6pTj9B0ElE7f4AGFmMxZxfyFMcLm2uvE9PP8FcAYQoZyt//U9g3PLa7KvgAAAA==[0m[Pipeline] // script
+[8mha:////4EybAMvO+ipXFQKp+nZm6F7VQLZBmhs7JzCnRk2qjVJhAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiJAokRJXWcsMLTGyME+vO2A5JxYv4Gn8gEImKLVY728zzBcsU4cjRYmuoc5Qah8H3dlo4cOwungds+YwNU2JvUJpBsjb1jJKzgTlFCQsBK0ON5+TIZliLVt1V5RXZ6pTj9B0ElE7f4AGFmMxZxfyFMcLm2uvE9PP8FcAYQoZyt//U9g2gzvGivgAAAA==[0m[Pipeline] }
+[8mha:////4FyHyirFtn5offS6R7Tie4clD9s3gLfwkbzHRKis5aHMAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOJCQYMQVVrLDS8wsTFOrDtjOyQVL+Jr/IFAJCq2WO1sM88XLFOEI0eLraHOUWocBt/baeHAsbt4HrDlMzZMib1BaQbJ2tQzSs4G5hQlLASsDDWekyObYS1adVeVV2SrU47TdxBQOn2DBxRiMmcV8xfGCJtrrxPTz/NXAGMIGcrd/lPbN5Mtqh6+AAAA[0m[Pipeline] // stage
+[8mha:////4Jk3zsXhF6RgAWOdVkHWhjGzZiD6HoNG7AvP2ZZ1M2PqAAAAph+LCAAAAAAAAP9tjTEOwjAQBM9BKWgpeYRDARWiorXc8AITG+PEugv2haTiRXyNPxCIRMVWOyut5vmCMic4UPKycdgGzHWQXez91ORAqb1EGmRDZ1kTZopOajdosu44oyZ2MEcUsFCwdFhHygE9w0o15m6qaNBXJ07TtldQBHuDBwg1mdkk/sKYYH3tbSb8ef4KYOwYxJah2G0+x/INpcBlpcEAAAA=[0m[Pipeline] stage
+[8mha:////4LHopeDKX3dZPOIVctietNPRfEGd2Ukfyyg0vk4lM/9pAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycogUBibE1DXKwglCE0La6P/yk9JOnIircQdaKjHhwbItWe/1hiIynIidaCy2HmPtRRd6NyUxELfXQINo6CJqwkjBCmUHRcZWS1WULCzKclhJWFusA0WPLsFGNvqhy6DRlefE03aUkHtzhydkciInzelbRobtrTeR8Mf5C4CxS5AfdrPt52fxAW2++SvCAAAA[0m[Pipeline] { (Sonarqube)
+[8mha:////4FIwU1nr/ccJrICTjU3F3IDZLkN97EaEcw6HbkNM97dEAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUIDEhpq5RFk4QmhDSRv+Xn5R24kRcjTvQUokJD5ZtyXqvNxSR4UTsRGOx9RhrL7rQuymJgbi9BhpEQxdRE0YKVig7KDK2WqqiZGFRlsNKwtpiHSh6dAk2stEPXQaNrjwnnrajhNybOzwhkxM5aU7fMjJsb72JhD/OXwCMXYL8sJttPz+LDwMT42zCAAAA[0m[Pipeline] script
+[8mha:////4Cnt3jbUurIpFLWrI0s7iAEdPU7L5wiVMVvkAm+jxjquAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUAjEhpq5RFk4QmhDSRv+Xn5R24kRcjTvQUokJD5ZtyXqvNxSR4UTsRGOx9RhrL7rQuymJgbi9BhpEQxdRE0YKVig7KDK2WqqiZGFRlsNKwtpiHSh6dAk2stEPXQaNrjwnnrajhNybOzwhkxM5aU7fMjJsb72JhD/OXwCMXYL8sJttPz+LD6emXT7CAAAA[0m[Pipeline] {
+[8mha:////4CzSc9KdV557j8Jy162YN3WpYngiF6tj6LmZJAIg3cEqAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOJSABWiSmu54QUmNsaJdWdsh6TiRXyNPxCIRMUWq51t5vmCZYpw5GixNdQ5So3D4Hs7LRw4dhfPA7Z8xoYpsTcozSBZm3pGydnAnKKEhYCVocZzcmQzrEWr7qryimx1ynH6DgJKp2/wgEJM5qxi/sIYYXPtdWL6ef4KYAwZyv32U7vwBiwS7Xe+AAAA[0m[Pipeline] sh
++ cd /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/
++ dotnet restore
+  Restore completed in 93.32 ms for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/everisapiTest.csproj.
+  Restore completed in 14.42 ms for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj.
+  Restore completed in 33.82 ms for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj.
+  Restore completed in 33.88 ms for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/everisapiTest.csproj.
+[8mha:////4B5yJDJWgHweTdJjah9BwQ0eIrs3rIq2WdyfFXlCBPIcAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOJSoFSIitZKwwtMYowd686xHZyKF/E1/kAgEhVbrHa2mecL1jHAkYNGq6g3FFuD3o16Xpg59FfHGS1fsGWK7BQ2KjfcqdOCDScFS4oSVgI2ilrH0ZBOsBVW3mXlJOnqnML8HQSUphvgAYWYzUmG9IUpwO42dpHp5/krgMknKOv9p2r/Bm0j9m6+AAAA[0m[Pipeline] sh
++ cd /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/
++ dotnet sonarscanner begin /k:AgileMeter /d:sonar.host.url=http://sonarqube:9000 /d:sonar.login=165f63465af948bf37600b46d5bc0d05877e6d7b /d:sonar.language=cs
+SonarScanner for MSBuild 4.6.2
+Using the .NET Core version of the Scanner for MSBuild
+Pre-processing started.
+Preparing working directories...
+14:15:59.787  Updating build integration targets...
+14:16:00.162  Fetching analysis configuration settings...
+14:16:00.544  Failed to request and parse 'http://sonarqube:9000/api/settings/values?component=AgileMeter': The remote server returned an error: (401) .
+14:16:00.545  Could not authorize while connecting to the SonarQube server. Check your credentials and try again.
+14:16:00.546  Pre-processing failed. Exit code: 1
+[8mha:////4Pt58MGEWG/cYuBdZCH99oz69zWSht2oXe0XNLQWheIUAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOJSIGgQVVrLDS8wsTFOrDtjOyQVL+Jr/IFAJCq2WO1sM88XLFOEI0eLraHOUWocBt/baeHAsbt4HrDlMzZMib1BaQbJ2tQzSs4G5hQlLASsDDWekyObYS1adVeVV2SrU47TdxBQOn2DBxRiMmcV8xfGCJtrrxPTz/NXAGMIGcrd/lPbNwn0mcm+AAAA[0m[Pipeline] }
+[8mha:////4Fx4ryiXuq8glt5VGAglK03kA4uGSFzcslbq9cRbcnitAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiISEKRJXWcsMLTGyME+vO2A5JxYv4Gn8gEImKLVY728zzBcsU4cjRYmuoc5Qah8H3dlo4cOwungds+YwNU2JvUJpBsjb1jJKzgTlFCQsBK0ON5+TIZliLVt1V5RXZ6pTj9B0ElE7f4AGFmMxZxfyFMcLm2uvE9PP8FcAYQoZyt//U9g06F8J1vgAAAA==[0m[Pipeline] // script
+[8mha:////4KuZS1YLTP9Vm/Q36y9HxL365nGo30nVbGKIA6bokyp9AAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiCiQkRJXWcsMLTGyME+vO2A5JxYv4Gn8gEImKLVY728zzBcsU4cjRYmuoc5Qah8H3dlo4cOwungds+YwNU2JvUJpBsjb1jJKzgTlFCQsBK0ON5+TIZliLVt1V5RXZ6pTj9B0ElE7f4AGFmMxZxfyFMcLm2uvE9PP8FcAYQoZyt//U9g1V9J0dvgAAAA==[0m[Pipeline] }
+[8mha:////4DpCu+dq2OAkCeE3xAQjJTnmjRw3wT3Gwvf5UmQukpunAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOJCQ4EQVVrLDS8wsTFOrDtjOyQVL+Jr/IFAJCq2WO1sM88XLFOEI0eLraHOUWocBt/baeHAsbt4HrDlMzZMib1BaQbJ2tQzSs4G5hQlLASsDDWekyObYS1adVeVV2SrU47TdxBQOn2DBxRiMmcV8xfGCJtrrxPTz/NXAGMIGcrd/lPbN2YXxqG+AAAA[0m[Pipeline] // stage
+[8mha:////4FuPzGvyu4mfB3+j2gh1QOXQRuMeanQGi3v9WDDwHkSDAAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMKhQDSIitZKwwtMYowT6y7YF5KKF/E1/kBEJCq22plmXm8sU8SRo1ONpdZTqrzqQu+mpwaO7TXwoBq+qIopcbCqtEPJtT3NWLJYzMtyLDRWlqrAyZMTrHVjHqYIhlxxlji5g0bu6zueyPRUFhPlC2PE5tbXienX+RvA2HWCfL8VZLsPPRtAz70AAAA=[0m[Pipeline] }
+[8mha:////4ADJs2C08Us8bcB72x7lpP41sClZzmWQhj6F7xI7iaAOAAAApB+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMIRQqJBVLRWGl5gEmOcWHfBvpBUvIiv8QciIlGx1c4083pjmSKOHJ1qLLWeUuVVF3o3PTVwbK+BB9XwRVVMiYNVpR1Kru1pxpLFYl6WY6GxslQFTp6cYK0b8zBFMOSKs8TJHTRyX9/xRKanspgoXxgjNre+Tky/zt8Axq4T5PutINt9AC6nRGy9AAAA[0m[Pipeline] // node
+[8mha:////4CbOJHKW+1tic5odGuVkPFFHTsumTmYR+EliuoiqMDLcAAAAox+LCAAAAAAAAP9tjbEOgjAURS8YB1dHP6IkDC7GybVh8Qsq1Fpo3sP2IUx+kb/mP0gkcfJO95zlvN5Yp4gjR6daS52nVHvVh8HNT40cu2vgUbV8UTVT4mBVZceKG3tasGKxWJblWGlsLNWBkycn2OrWPEwRDLniLHF2B43cN3c8kem5LCbKF6aI3W1oEtOv8zeAqe8F+b4UZOUHaO3jXL0AAAA=[0m[Pipeline] End of Pipeline
+ERROR: script returned exit code 1
+Finished: FAILURE
