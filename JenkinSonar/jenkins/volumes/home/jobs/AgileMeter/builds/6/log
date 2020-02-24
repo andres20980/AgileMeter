@@ -1,230 +1,0 @@
-Started by user [8mha:////4DUXV9pWBU1pe2YfGWoh+JGxP6ket7Xz2z64C715aUj6AAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzWEgZu/dLi1CL9xJTczDwAj6GcLcAAAAA=[0madmin
-Running in Durability level: MAX_SURVIVABILITY
-[8mha:////4IYgUFn9oncf96Y6UnqjHIDN9yeSrcU2iv0dennBCw8+AAAAoh+LCAAAAAAAAP9tjTEOwjAQBM8BClpKHuFItIiK1krDC0x8GCfWnbEdkooX8TX+gCESFVvtrLSa5wtWKcKBo5UdUu8otU4GP9jS5Mixv3geZcdn2TIl9igbHBs2eJyx4YwwR1SwULBGaj0nRzbDRnX6rmuvydanHMu2V1A5c4MHCFXMWcf8hSnC9jqYxPTz/BXAFEIGsfuclm8zQVqFvQAAAA==[0m[Pipeline] Start of Pipeline
-[8mha:////4DRvy1eE+OIvM/6ZkkwiKGAbH5XkVHqb0SMtk1DIIWqbAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycohUghExsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jduZBmjwAAAAA==[0m[Pipeline] node
-Running on [8mha:////4H49qfpA4ZkOMwxCCJi6iGpHCGV2ViS5PmdDRLGjziGDAAAAnh+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAz2EgZh/eT83ILSktQifY3cxGIgrakPAHib2iPIAAAA[0mJenkins in /var/jenkins_home/jobs/AgileMeter/workspace
-[8mha:////4JN4lmoacpjn9lE06nzdsY7FDhOVWHnFuuMecQ4bShvBAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0gA0xsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jfoP95RwAAAAA==[0m[Pipeline] {
-[8mha:////4LI8IaBVNWM52ywUW91yehzvjfG7KXLZhcohlES4ktn/AAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0gQkxsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jc09154wAAAAA==[0m[Pipeline] stage
-[8mha:////4I6sK1XNC9KUQcGU91y6PfJ2g6rwR2XGoeelcZeIi8HoAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0ggUxsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jek7ggRwAAAAA==[0m[Pipeline] { (Clean workspace)
-[8mha:////4LlJTUujMO8RdYVN/t4jJFqBp0atJzfAEWjNVGb4rsq+AAAAoh+LCAAAAAAAAP9tjTEOAiEURD9rLGwtPQTbaWGsbAmNJ0AWEZb8zwLrbuWJvJp3kLiJlZNMMm+a93rDOic4UbLcG+wdZu14DKOti0+U+lugiXu6ck2YKRguzSSpM+cFJRUDS1gDKwEbgzpQdmgLbIVXD9UGhba9lFS/o4DGdQM8gYlqLiqVL8wJdvexy4Q/z18BzLEA29ce4gfg7KmOvAAAAA==[0m[Pipeline] echo
-Se limpia el workspace
-[8mha:////4G+LvWeI9EEzYUnEB0eLWLoBHcnlDkue8UTmF10uYzt6AAAAoh+LCAAAAAAAAP9tjTEOAiEURD9rLGwtPQTbGRNjZUtoPAGyiLDkfxZYdytP5NW8g8RNrJxkknnTvNcb1jnBiZLl3mDvMGvHYxhtXXyi1N8CTdzTlWvCTMFwaSZJnTkvKKkYWMIaWAnYGNSBskNbYCu8eqg2KLTtpaT6HQU0rhvgCUxUc1GpfGFOsLuPXSb8ef4KYI4F2L72ED8v8DEJvAAAAA==[0m[Pipeline] cleanWs
-[WS-CLEANUP] Deleting project workspace...
-[WS-CLEANUP] Deferred wipeout is used...
-[WS-CLEANUP] done
-[8mha:////4H3JUIG9U1wJK3YsK2BcPY2lZCAMq2XH7NS/Xy7yyYWeAAAAoh+LCAAAAAAAAP9tjTEOAiEURD9rLGwtPQTbmRhjZUtoPAGyiLDkfxZYdytP5NW8g8RNrJxkknnTvNcb1jnBiZLl3mDvMGvHYxhtXXyi1N8CTdzTlWvCTMFwaSZJnTkvKKkYWMIaWAnYGNSBskNbYCu8eqg2KLTtpaT6HQU0rhvgCUxUc1GpfGFOsLuPXSb8ef4KYI6xADvU7j/zqggXvAAAAA==[0m[Pipeline] }
-[8mha:////4OZwzBCCdiZ8bxbZoYt9MYynzJJwNdFtcO6y5P6S9WD8AAAAox+LCAAAAAAAAP9tjTESgjAQRT84FraWHiJoYeVY2WZoPEGEGAOZXUwWofJEXs07yMiMlb/67zXv9cYyRRw5OtVYaj2lyqsu9G56auDYXgMPquGLqpgSB6tKO5Rc29OMJYvFvCzHQmNlqQqcPDnBWjfmYYpgyBVniZM7aOS+vuOJTE9lMVG+MEZsbn2dmH6dvwGMXSfId1tBtv8AExtCpb0AAAA=[0m[Pipeline] // stage
-[8mha:////4OsqMrXdwNxiBLl4Zl/Vfmwgs70bV99OSN18rbJvfgisAAAAph+LCAAAAAAAAP9tjTEOwjAQBC9BKWgpeYSjSHSIitZywwtMbIwT6y7YF5KKF/E1/oAhEhVb7ay0mucLqhThQNGJzmLvMbVeDGF0uYmJYn8JNImOzqIlTBSsUHZSZOxxQUVsYUlRwkrC2mIbKHl0DBvZ6buug0ZXnzjmbS+h9OYGDyhkNrOO/IU5wvY6mkT48/wVwDwwFDuGsmk+x+oNEzd2msEAAAA=[0m[Pipeline] stage
-[8mha:////4GP7jMTm2JKXPy3tSK0xO2HRTpAa9rK0qi/sCzQsiQQ4AAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUZUVMrFEWThCaEJJG/7dJSjpxIq7GHWipxIQHy7ZkvdcbqhjgRMEwp7GzGFvLej+aObFMobt5yszRlbWEkbxmQmdBSp/XKihpWFWUsOGw1dh6ihZNgh138iFrL9HUlxTm7cihtGqAJxR8JicZ0rdMAfb3UUXCH+cvAKY+Qdk0ix2WZ/UBbwyqm8IAAAA=[0m[Pipeline] { (Donwload Source)
-[8mha:////4K/DZ0nVb3K/fkW7PQGoQf9cAPSvwHstTzXqsZAIMZ9nAAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUwIiYukZZOEFoQkgb/V9+UtqJE3E17kBLJSY8WLYl673eUESGE7ETjcXWY6y96ELvpiQG4vYaaBANXURNGClYoeygyNhqqYqShUVZDisJa4t1oOjRJdjIRj90GTS68px42o4Scm/u8IRMTuSkOX3LyLC99SYS/jh/ATB2CfLdfrbD/Cw+y7kUycIAAAA=[0m[Pipeline] script
-[8mha:////4LKxw9EdE5qMxHWt+q84b3EJxYJYCeYaTqzOBBmpTIx0AAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUCDbE1DXKwglCE0La6P/yk9JOnIircQdaKjHhwbItWe/1hiIynIidaCy2HmPtRRd6NyUxELfXQINo6CJqwkjBCmUHRcZWS1WULCzKclhJWFusA0WPLsFGNvqhy6DRlefE03aUkHtzhydkciInzelbRobtrTeR8Mf5C4CxS5Dv9rMd5mfxAbNWnxXCAAAA[0m[Pipeline] {
-[8mha:////4HWIEeG5rVEr7XZfBdRyyBfoNpoHF0HLu8Z0gHR7+fIXAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiJKgQVVrLDS8wsTFOrDtjOyQVL+Jr/IFAJCq2WO1sM88XLFOEI0eLraHOUWocBt/baeHAsbt4HrDlMzZMib1BaQbJ2tQzSs4G5hQlLASsDDWekyObYS1adVeVV2SrU47TdxBQOn2DBxRiMmcV8xfGCJtrrxPTz/NXAGPIUG53n9qHN8W7Eii+AAAA[0m[Pipeline] sh
-+ /usr/bin/git clone ssh://git@steps.everis.com:766/INNOVASEV/ScrumMeter.git -b Development
-Cloning into 'ScrumMeter'...
-Warning: Permanently added the ECDSA host key for IP address '[81.93.221.66]:766' to the list of known hosts.
-Checking out files:   0% (40/4080)   Checking out files:   1% (41/4080)   Checking out files:   1% (74/4080)   Checking out files:   2% (82/4080)   Checking out files:   2% (109/4080)   Checking out files:   3% (123/4080)   Checking out files:   3% (139/4080)   Checking out files:   4% (164/4080)   Checking out files:   4% (170/4080)   Checking out files:   4% (197/4080)   Checking out files:   5% (204/4080)   Checking out files:   5% (231/4080)   Checking out files:   6% (245/4080)   Checking out files:   6% (262/4080)   Checking out files:   7% (286/4080)   Checking out files:   7% (295/4080)   Checking out files:   7% (323/4080)   Checking out files:   8% (327/4080)   Checking out files:   8% (356/4080)   Checking out files:   9% (368/4080)   Checking out files:   9% (388/4080)   Checking out files:  10% (408/4080)   Checking out files:  10% (420/4080)   Checking out files:  11% (449/4080)   Checking out files:  11% (457/4080)   Checking out files:  12% (490/4080)   Checking out files:  12% (491/4080)   Checking out files:  13% (531/4080)   Checking out files:  13% (542/4080)   Checking out files:  14% (572/4080)   Checking out files:  14% (581/4080)   Checking out files:  15% (612/4080)   Checking out files:  15% (617/4080)   Checking out files:  16% (653/4080)   Checking out files:  16% (658/4080)   Checking out files:  17% (694/4080)   Checking out files:  17% (709/4080)   Checking out files:  18% (735/4080)   Checking out files:  18% (748/4080)   Checking out files:  19% (776/4080)   Checking out files:  19% (790/4080)   Checking out files:  20% (816/4080)   Checking out files:  20% (837/4080)   Checking out files:  21% (857/4080)   Checking out files:  21% (876/4080)   Checking out files:  22% (898/4080)   Checking out files:  22% (911/4080)   Checking out files:  23% (939/4080)   Checking out files:  23% (953/4080)   Checking out files:  24% (980/4080)   Checking out files:  24% (1004/4080)   Checking out files:  25% (1020/4080)   Checking out files:  25% (1045/4080)   Checking out files:  26% (1061/4080)   Checking out files:  26% (1082/4080)   Checking out files:  27% (1102/4080)   Checking out files:  27% (1131/4080)   Checking out files:  28% (1143/4080)   Checking out files:  28% (1169/4080)   Checking out files:  29% (1184/4080)   Checking out files:  29% (1201/4080)   Checking out files:  30% (1224/4080)   Checking out files:  30% (1243/4080)   Checking out files:  31% (1265/4080)   Checking out files:  31% (1289/4080)   Checking out files:  32% (1306/4080)   Checking out files:  32% (1335/4080)   Checking out files:  33% (1347/4080)   Checking out files:  33% (1370/4080)   Checking out files:  34% (1388/4080)   Checking out files:  34% (1411/4080)   Checking out files:  35% (1428/4080)   Checking out files:  35% (1454/4080)   Checking out files:  36% (1469/4080)   Checking out files:  36% (1497/4080)   Checking out files:  37% (1510/4080)   Checking out files:  37% (1533/4080)   Checking out files:  38% (1551/4080)   Checking out files:  38% (1569/4080)   Checking out files:  39% (1592/4080)   Checking out files:  39% (1609/4080)   Checking out files:  40% (1632/4080)   Checking out files:  40% (1654/4080)   Checking out files:  41% (1673/4080)   Checking out files:  41% (1701/4080)   Checking out files:  42% (1714/4080)   Checking out files:  42% (1744/4080)   Checking out files:  43% (1755/4080)   Checking out files:  43% (1786/4080)   Checking out files:  44% (1796/4080)   Checking out files:  44% (1822/4080)   Checking out files:  45% (1836/4080)   Checking out files:  45% (1861/4080)   Checking out files:  46% (1877/4080)   Checking out files:  46% (1902/4080)   Checking out files:  47% (1918/4080)   Checking out files:  47% (1947/4080)   Checking out files:  48% (1959/4080)   Checking out files:  48% (1992/4080)   Checking out files:  49% (2000/4080)   Checking out files:  49% (2030/4080)   Checking out files:  50% (2040/4080)   Checking out files:  50% (2073/4080)   Checking out files:  50% (2077/4080)   Checking out files:  51% (2081/4080)   Checking out files:  51% (2114/4080)   Checking out files:  52% (2122/4080)   Checking out files:  52% (2160/4080)   Checking out files:  53% (2163/4080)   Checking out files:  53% (2195/4080)   Checking out files:  54% (2204/4080)   Checking out files:  54% (2232/4080)   Checking out files:  55% (2244/4080)   Checking out files:  55% (2270/4080)   Checking out files:  56% (2285/4080)   Checking out files:  56% (2317/4080)   Checking out files:  57% (2326/4080)   Checking out files:  57% (2355/4080)   Checking out files:  58% (2367/4080)   Checking out files:  58% (2394/4080)   Checking out files:  59% (2408/4080)   Checking out files:  59% (2441/4080)   Checking out files:  60% (2448/4080)   Checking out files:  60% (2475/4080)   Checking out files:  61% (2489/4080)   Checking out files:  61% (2511/4080)   Checking out files:  62% (2530/4080)   Checking out files:  62% (2539/4080)   Checking out files:  63% (2571/4080)   Checking out files:  63% (2585/4080)   Checking out files:  64% (2612/4080)   Checking out files:  64% (2629/4080)   Checking out files:  65% (2652/4080)   Checking out files:  65% (2672/4080)   Checking out files:  66% (2693/4080)   Checking out files:  66% (2702/4080)   Checking out files:  67% (2734/4080)   Checking out files:  67% (2739/4080)   Checking out files:  67% (2774/4080)   Checking out files:  68% (2775/4080)   Checking out files:  68% (2810/4080)   Checking out files:  69% (2816/4080)   Checking out files:  69% (2847/4080)   Checking out files:  70% (2856/4080)   Checking out files:  70% (2893/4080)   Checking out files:  71% (2897/4080)   Checking out files:  71% (2933/4080)   Checking out files:  72% (2938/4080)   Checking out files:  72% (2970/4080)   Checking out files:  73% (2979/4080)   Checking out files:  73% (3004/4080)   Checking out files:  74% (3020/4080)   Checking out files:  74% (3049/4080)   Checking out files:  75% (3060/4080)   Checking out files:  75% (3076/4080)   Checking out files:  76% (3101/4080)   Checking out files:  76% (3107/4080)   Checking out files:  76% (3140/4080)   Checking out files:  77% (3142/4080)   Checking out files:  78% (3183/4080)   Checking out files:  79% (3224/4080)   Checking out files:  80% (3264/4080)   Checking out files:  80% (3265/4080)   Checking out files:  81% (3305/4080)   Checking out files:  81% (3310/4080)   Checking out files:  82% (3346/4080)   Checking out files:  82% (3350/4080)   Checking out files:  83% (3387/4080)   Checking out files:  83% (3393/4080)   Checking out files:  84% (3428/4080)   Checking out files:  84% (3431/4080)   Checking out files:  84% (3467/4080)   Checking out files:  85% (3468/4080)   Checking out files:  85% (3497/4080)   Checking out files:  86% (3509/4080)   Checking out files:  86% (3545/4080)   Checking out files:  87% (3550/4080)   Checking out files:  87% (3584/4080)   Checking out files:  88% (3591/4080)   Checking out files:  88% (3623/4080)   Checking out files:  89% (3632/4080)   Checking out files:  89% (3661/4080)   Checking out files:  90% (3672/4080)   Checking out files:  90% (3693/4080)   Checking out files:  90% (3700/4080)   Checking out files:  91% (3713/4080)   Checking out files:  91% (3733/4080)   Checking out files:  92% (3754/4080)   Checking out files:  92% (3766/4080)   Checking out files:  93% (3795/4080)   Checking out files:  93% (3803/4080)   Checking out files:  94% (3836/4080)   Checking out files:  94% (3843/4080)   Checking out files:  95% (3876/4080)   Checking out files:  95% (3881/4080)   Checking out files:  95% (3916/4080)   Checking out files:  96% (3917/4080)   Checking out files:  96% (3943/4080)   Checking out files:  97% (3958/4080)   Checking out files:  97% (3976/4080)   Checking out files:  98% (3999/4080)   Checking out files:  98% (4008/4080)   Checking out files:  99% (4040/4080)   Checking out files:  99% (4046/4080)   Checking out files: 100% (4080/4080)   Checking out files: 100% (4080/4080), done.
-[8mha:////4KVVl0wkuDkFFugQzUCHTfz7VmMZW4UdENMPwd6wHKXGAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiJESDqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDhnK7+9Q+vAEG6D8DvgAAAA==[0m[Pipeline] sh
-+ chown -R jenkins:jenkins /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/
-[8mha:////4BVYMZ3OuswAUcbbNMJRAYXFQ9CnlxxwnNNtddjB5bBDAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiJCQKRJXWcsMLTGyME+vO2A5JxYv4Gn8gEImKLVY728zzBcsU4cjRYmuoc5Qah8H3dlo4cOwungds+YwNU2JvUJpBsjb1jJKzgTlFCQsBK0ON5+TIZliLVt1V5RXZ6pTj9B0ElE7f4AGFmMxZxfyFMcLm2uvE9PP8FcAYQoZyu//U7g0YU4IMvgAAAA==[0m[Pipeline] }
-[8mha:////4MSXEtTaiyL1svoMRrkOIRWgZV8od5Wi4ACE2L4oM8x0AAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiRIOEqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFBu95/avQFudLBjvgAAAA==[0m[Pipeline] // script
-[8mha:////4HF4aRxCyx/0QZ/wcRUUNKflKzzMFQwvcOkK9cl+/Jp5AAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIi6BCiSmu54QUmNsaJdWdsh6TiRXyNPxCIRMUWq51t5vmCZYpw5GixNdQ5So3D4Hs7LRw4dhfPA7Z8xoYpsTcozSBZm3pGydnAnKKEhYCVocZzcmQzrEWr7qryimx1ynH6DgJKp2/wgEJM5qxi/sIYYXPtdWL6ef4KYAwhQ7ndf2r3Bl2X69++AAAA[0m[Pipeline] }
-[8mha:////4OfAUh28d+z9uRVsi2uLsyCF7quE+s25VMFO8nZX/RksAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPMIhtIgqrZWGF5j4ME6sO2M7JBUv4mv8AYtIVGyx2tlmXm9YxwAnDkb0SIOl2Fnh3WjyEhOH4ep4Ej1fRMcU2aFocWpZY7NgywlhSVHCSsIGqXMcLZkEW9mrh6qcIlOdU8jfUUJp9R2eUMhsTiqkL8wBdrdRR6af568AZu8TlId9rrr+ALKNBVC+AAAA[0m[Pipeline] // stage
-[8mha:////4ACmbhc5fkRSQSMadJ3Dwp8lYCzhaGnaIsuCNY00Jmt+AAAAph+LCAAAAAAAAP9tjTEOwjAQBM9BKWgpeYQjEB2iorXc8AITG+PEugv2haTiRXyNPxCIRMVWOyut5vmCMic4UPKycdgGzHWQXez91ORAqb1EGmRDZ1kTZopOajdosu44oyZ2MEcUsFCwdFhHygE9w0o15m6qaNBXJ07TtldQBHuDBwg1mdkk/sKYYH3tbSb8ef4KYOwYxI6h2G4+x/INji2eq8EAAAA=[0m[Pipeline] stage
-[8mha:////4LuiSHtTeps1s7CI48wykp/KXuR8qpP3+Up0WRT0tdieAAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+DOrAycohUdEVMrFEXThCaEJJG/7dJSjpxIq7GHWipxIQHy7ZkvdcbyhjgRMFwp7GzGFvLez+aOfFMobt5ytzRlbeEkbzmjc4NKX1ea0NJw6qCwUbAVmPrKVo0CXbCyYesvERTXVKYt6MAZtUATyjETE4ypG+ZAuzvo4qEP85fAEx9AlYfFquXZ/kBAsTc3cIAAAA=[0m[Pipeline] { (Install package and build)
-[8mha:////4CH1F72MXn15KPgyWnvN1QCALf/wJgQP1rWuAjLqVGesAAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUKiNiYo2ycILQhJA0+r9NUtKJE3E17kBLJSY8WLYl673eUMUAJwqGOY2dxdha1vvRzIllCt3NU2aOrqwljOQ1EzoLUvq8VkFJw6qihA2HrcbWU7RoEuy4kw9Ze4mmvqQwb0cOpVUDPKHgMznJkL5lCrC/jyoS/jh/ATD1CcqmWeywPKsPpnFij8IAAAA=[0m[Pipeline] script
-[8mha:////4PuO/HFzkx9Xp4wfgqF+pfL1CAD/O8uVGUzfTGWgphBJAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUAjbE1DXKwglCE0La6P/yk9JOnIircQdaKjHhwbItWe/1hiIynIidaCy2HmPtRRd6NyUxELfXQINo6CJqwkjBCmUHRcZWS1WULCzKclhJWFusA0WPLsFGNvqhy6DRlefE03aUkHtzhydkciInzelbRobtrTeR8Mf5C4CxS5Dv9rMd5mfxAd6e6VPCAAAA[0m[Pipeline] {
-[8mha:////4M48/ZD/LEsucyHxa/XWtFm+O5lmXbBC40lYQ52viYfUAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiIagQVVrLDS8wsTFOrDtjOyQVL+Jr/IFAJCq2WO1sM88XLFOEI0eLraHOUWocBt/baeHAsbt4HrDlMzZMib1BaQbJ2tQzSs4G5hQlLASsDDWekyObYS1adVeVV2SrU47TdxBQOn2DBxRiMmcV8xfGCJtrrxPTz/NXAGPIUG53n9qHN38C26S+AAAA[0m[Pipeline] sh
-+ dotnet build /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/
-Microsoft (R) Build Engine version 16.1.76+g14b0a930a7 for .NET Core
-Copyright (C) Microsoft Corporation. All rights reserved.
-
-  Restore completed in 12.01 sec for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj.
-  Restore completed in 12.96 sec for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj.
-  everisapi.API -> /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/bin/Debug/netcoreapp2.1/everisapi.API.dll
-
-Build succeeded.
-    0 Warning(s)
-    0 Error(s)
-
-Time Elapsed 00:00:23.55
-[8mha:////4BlNw2As0NWzJT9KNT6uCeTThwXzfI4+J6iWK5JTM7l5AAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiIUSDqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFBu95/avQHjyRvdvgAAAA==[0m[Pipeline] }
-[8mha:////4H1zpGehbGsuBBAeM+noxPXpkuXSruq8IBKx8PosbEIVAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiQUGBqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFBu95/avQHljyOIvgAAAA==[0m[Pipeline] // script
-[8mha:////4I2turCbeQpS64sfK1gv7KK0ErqOxfv28FUZF1tfidTfAAAApB+LCAAAAAAAAP9tjbEOwiAURV9rHFwd/QiadDIxTq6ExS/AFhFK3qNApZNf5K/5D6JNnLzDzT13Oc8XrGOAIwXNrMLBYOwM827SZbFMYbg6yszShXWEkZxiQmVBvTotKCgpWFLVsOKwUdg5igZ1gi238i4bJ1E35xTKd+BQm36EB1S8mJMM6QtzgN1t6iPhz/NXALP3Cep2/6n2DaYNcg6+AAAA[0m[Pipeline] }
-[8mha:////4DLyjTjo5RVgTGbW298DMSiGHHD4kXMzzH1SwCmnwCQ+AAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIi6BCiSmu54QUmNsaJdWdsh6TiRXyNPxCIRMUWq51t5vmCZYpw5GixNdQ5So3D4Hs7LRw4dhfPA7Z8xoYpsTcozSBZm3pGydnAnKKEhYCVocZzcmQzrEWr7qryimx1ynH6DgJKp2/wgEJM5qxi/sIYYXPtdWL6ef4KYAwhQ7nbf2r7BrmPJ1y+AAAA[0m[Pipeline] // stage
-[8mha:////4MTLGC1mVMPkoyomlr2QjL41dqQlS45vF9ua/e5PGm/6AAAAph+LCAAAAAAAAP9tjTEOwjAQBM9BKWgpeYSDBB2iorXc8AITG+PEugv2haTiRXyNPxCIRMVWOyut5vmCMic4UPKycdgGzHWQXez91ORAqb1EGmRDZ1kTZopOajdosu44oyZ2MEcUsFCwdFhHygE9w0o15m6qaNBXJ07TtldQBHuDBwg1mdkk/sKYYH3tbSb8ef4KYOwYxI6h2G4+x/INn/W1xsEAAAA=[0m[Pipeline] stage
-[8mha:////4Bgq7Sx8jngQimDzKQObn8QvSaMKIYITUBaoOmRbrm7pAAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycogUxIiYukZZOEFoQkgb/V9+UtqJE3E17kBLJSY8WLYl673eUESGE7ETjcXWY6y96ELvpiQG4vYaaBANXURNGClYoeygyNhqqYqShUVZDisJa4t1oOjRJdjIRj90GTS68px42o4Scm/u8IRMTuSkOX3LyLC99SYS/jh/ATB2CfLDbrb9/Cw+ty4Up8IAAAA=[0m[Pipeline] { (Build test)
-[8mha:////4OoLNhap2dWuUQxwAkfoL6O3zgTJf39sIMN1iZHVRaoWAAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUwIiYukZZOEFoQkgb/V9+UtqJE3E17kBLJSY8WLYl673eUESGE7ETjcXWY6y96ELvpiQG4vYaaBANXURNGClYoeygyNhqqYqShUVZDisJa4t1oOjRJdjIRj90GTS68px42o4Scm/u8IRMTuSkOX3LyLC99SYS/jh/ATB2CfLDbrb9/Cw+2YMO4MIAAAA=[0m[Pipeline] script
-[8mha:////4KI9hWxwv3SYL4QUIfrBpWjPQWRMo+FNh04U7Cmxq3vNAAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+DOrAycohUoiNiYo26cILQhJA0+r9NUtKJE3E17kBLJSY8WLYl673eUMYAJwqGO42dxdha3vvRzIlnCt3NU+aOrrwljOQ1b3RuSOnzWhtKGlYVDDYCthpbT9GiSbATTj5k5SWa6pLCvB0FMKsGeEIhZnKSIX3LFGB/H1Uk/HH+AmDqE7D6sFi9PMsPfTawssIAAAA=[0m[Pipeline] {
-[8mha:////4D578GqYH28hbDN88ftSUN37C0H29OUDoZqyRSTAV8ShAAAAox+LCAAAAAAAAP9tjTESwiAURH/iWNhaeghSxM6xsmVoPAEmiBDmfwJEUnkir+YdRDNj5RY7+7Z5zxesY4AjBc2swsFg7AzzbtJlsUxhuDrKzNKFdYSRnGJCZUG9Oi0oKClYUtWw4rBR2DmKBnWCLbfyLhsnUTfnFMp34FCbfoQHVLyYkwzpC3OA3W3qI+HP81cAs09Qt+2n9v4NGWcPtb4AAAA=[0m[Pipeline] sh
-+ dotnet add /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/everisapiTest.csproj package dotnet-reportgenerator-cli --version 4.2.2
-  Writing /tmp/tmp0HqIDO.tmp
-info : Adding PackageReference for package 'dotnet-reportgenerator-cli' into project '/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/everisapiTest.csproj'.
-info : Restoring packages for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/everisapiTest.csproj...
-info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.net.test.sdk/index.json
-info :   GET https://api.nuget.org/v3-flatcontainer/moq/index.json
-info :   GET https://api.nuget.org/v3-flatcontainer/coverlet.msbuild/index.json
-info :   GET https://api.nuget.org/v3-flatcontainer/xunit/index.json
-info :   GET https://api.nuget.org/v3-flatcontainer/xunit.runner.visualstudio/index.json
-info :   GET https://api.nuget.org/v3-flatcontainer/dotnet-reportgenerator-cli/index.json
-info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.net.test.sdk/index.json 917ms
-info :   OK https://api.nuget.org/v3-flatcontainer/xunit/index.json 700ms
-info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.net.test.sdk/16.0.1/microsoft.net.test.sdk.16.0.1.nupkg
-info :   GET https://api.nuget.org/v3-flatcontainer/xunit/2.4.0/xunit.2.4.0.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/xunit.runner.visualstudio/index.json 812ms
-info :   OK https://api.nuget.org/v3-flatcontainer/coverlet.msbuild/index.json 813ms
-info :   GET https://api.nuget.org/v3-flatcontainer/coverlet.msbuild/2.6.2/coverlet.msbuild.2.6.2.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/moq/index.json 820ms
-info :   GET https://api.nuget.org/v3-flatcontainer/xunit.runner.visualstudio/2.4.0/xunit.runner.visualstudio.2.4.0.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/dotnet-reportgenerator-cli/index.json 821ms
-info :   GET https://api.nuget.org/v3-flatcontainer/moq/4.11.0/moq.4.11.0.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/xunit/2.4.0/xunit.2.4.0.nupkg 27ms
-info :   GET https://api.nuget.org/v3-flatcontainer/dotnet-reportgenerator-cli/4.2.2/dotnet-reportgenerator-cli.4.2.2.nupkg
-info :   GET https://api.nuget.org/v3-flatcontainer/xunit.core/index.json
-info :   GET https://api.nuget.org/v3-flatcontainer/xunit.assert/index.json
-info :   GET https://api.nuget.org/v3-flatcontainer/xunit.analyzers/index.json
-info :   OK https://api.nuget.org/v3-flatcontainer/coverlet.msbuild/2.6.2/coverlet.msbuild.2.6.2.nupkg 85ms
-info :   OK https://api.nuget.org/v3-flatcontainer/xunit.runner.visualstudio/2.4.0/xunit.runner.visualstudio.2.4.0.nupkg 95ms
-info :   OK https://api.nuget.org/v3-flatcontainer/moq/4.11.0/moq.4.11.0.nupkg 95ms
-info :   OK https://api.nuget.org/v3-flatcontainer/dotnet-reportgenerator-cli/4.2.2/dotnet-reportgenerator-cli.4.2.2.nupkg 94ms
-info :   GET https://api.nuget.org/v3-flatcontainer/castle.core/index.json
-info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.net.test.sdk/16.0.1/microsoft.net.test.sdk.16.0.1.nupkg 513ms
-info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.testplatform.testhost/index.json
-info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.codecoverage/index.json
-info :   OK https://api.nuget.org/v3-flatcontainer/xunit.core/index.json 507ms
-info :   GET https://api.nuget.org/v3-flatcontainer/xunit.core/2.4.0/xunit.core.2.4.0.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/xunit.core/2.4.0/xunit.core.2.4.0.nupkg 14ms
-info :   GET https://api.nuget.org/v3-flatcontainer/xunit.extensibility.core/index.json
-info :   GET https://api.nuget.org/v3-flatcontainer/xunit.extensibility.execution/index.json
-info :   OK https://api.nuget.org/v3-flatcontainer/castle.core/index.json 536ms
-info :   GET https://api.nuget.org/v3-flatcontainer/castle.core/4.4.0/castle.core.4.4.0.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/castle.core/4.4.0/castle.core.4.4.0.nupkg 19ms
-info :   CACHE https://api.nuget.org/v3-flatcontainer/system.diagnostics.tracesource/index.json
-info :   GET https://api.nuget.org/v3-flatcontainer/system.diagnostics.tracesource/4.3.0/system.diagnostics.tracesource.4.3.0.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/xunit.analyzers/index.json 804ms
-info :   GET https://api.nuget.org/v3-flatcontainer/xunit.analyzers/0.10.0/xunit.analyzers.0.10.0.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/system.diagnostics.tracesource/4.3.0/system.diagnostics.tracesource.4.3.0.nupkg 17ms
-info :   OK https://api.nuget.org/v3-flatcontainer/xunit.analyzers/0.10.0/xunit.analyzers.0.10.0.nupkg 28ms
-info :   OK https://api.nuget.org/v3-flatcontainer/xunit.assert/index.json 854ms
-info :   GET https://api.nuget.org/v3-flatcontainer/xunit.assert/2.4.0/xunit.assert.2.4.0.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/xunit.assert/2.4.0/xunit.assert.2.4.0.nupkg 18ms
-info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.testplatform.testhost/index.json 522ms
-info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.testplatform.testhost/16.0.1/microsoft.testplatform.testhost.16.0.1.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.codecoverage/index.json 529ms
-info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.codecoverage/16.0.1/microsoft.codecoverage.16.0.1.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/xunit.extensibility.core/index.json 500ms
-info :   GET https://api.nuget.org/v3-flatcontainer/xunit.extensibility.core/2.4.0/xunit.extensibility.core.2.4.0.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/xunit.extensibility.execution/index.json 525ms
-info :   GET https://api.nuget.org/v3-flatcontainer/xunit.extensibility.execution/2.4.0/xunit.extensibility.execution.2.4.0.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/xunit.extensibility.core/2.4.0/xunit.extensibility.core.2.4.0.nupkg 28ms
-info :   OK https://api.nuget.org/v3-flatcontainer/xunit.extensibility.execution/2.4.0/xunit.extensibility.execution.2.4.0.nupkg 22ms
-info :   GET https://api.nuget.org/v3-flatcontainer/xunit.abstractions/index.json
-info :   OK https://api.nuget.org/v3-flatcontainer/xunit.abstractions/index.json 146ms
-info :   GET https://api.nuget.org/v3-flatcontainer/xunit.abstractions/2.0.2/xunit.abstractions.2.0.2.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/xunit.abstractions/2.0.2/xunit.abstractions.2.0.2.nupkg 16ms
-info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.codecoverage/16.0.1/microsoft.codecoverage.16.0.1.nupkg 488ms
-info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.testplatform.testhost/16.0.1/microsoft.testplatform.testhost.16.0.1.nupkg 750ms
-info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.testplatform.objectmodel/index.json
-info :   CACHE https://api.nuget.org/v3-flatcontainer/microsoft.extensions.dependencymodel/index.json
-info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.extensions.dependencymodel/1.0.3/microsoft.extensions.dependencymodel.1.0.3.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.extensions.dependencymodel/1.0.3/microsoft.extensions.dependencymodel.1.0.3.nupkg 20ms
-info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.dotnet.platformabstractions/index.json
-info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.testplatform.objectmodel/index.json 535ms
-info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.testplatform.objectmodel/16.0.1/microsoft.testplatform.objectmodel.16.0.1.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.dotnet.platformabstractions/index.json 494ms
-info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.dotnet.platformabstractions/1.0.3/microsoft.dotnet.platformabstractions.1.0.3.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.dotnet.platformabstractions/1.0.3/microsoft.dotnet.platformabstractions.1.0.3.nupkg 18ms
-info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.testplatform.objectmodel/16.0.1/microsoft.testplatform.objectmodel.16.0.1.nupkg 508ms
-info :   GET https://api.nuget.org/v3-flatcontainer/system.componentmodel.eventbasedasync/index.json
-info :   GET https://api.nuget.org/v3-flatcontainer/system.diagnostics.textwritertracelistener/index.json
-info :   OK https://api.nuget.org/v3-flatcontainer/system.componentmodel.eventbasedasync/index.json 517ms
-info :   GET https://api.nuget.org/v3-flatcontainer/system.componentmodel.eventbasedasync/4.0.11/system.componentmodel.eventbasedasync.4.0.11.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/system.componentmodel.eventbasedasync/4.0.11/system.componentmodel.eventbasedasync.4.0.11.nupkg 19ms
-info :   OK https://api.nuget.org/v3-flatcontainer/system.diagnostics.textwritertracelistener/index.json 505ms
-info :   GET https://api.nuget.org/v3-flatcontainer/system.diagnostics.textwritertracelistener/4.0.0/system.diagnostics.textwritertracelistener.4.0.0.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/system.diagnostics.textwritertracelistener/4.0.0/system.diagnostics.textwritertracelistener.4.0.0.nupkg 21ms
-info : Installing System.Diagnostics.TextWriterTraceListener 4.0.0.
-info : Installing System.ComponentModel.EventBasedAsync 4.0.11.
-info : Installing Microsoft.DotNet.PlatformAbstractions 1.0.3.
-info : Installing xunit.abstractions 2.0.2.
-info : Installing Microsoft.TestPlatform.ObjectModel 16.0.1.
-info : Installing Microsoft.Extensions.DependencyModel 1.0.3.
-info : Installing xunit.extensibility.core 2.4.0.
-info : Installing xunit.extensibility.execution 2.4.0.
-info : Installing System.Diagnostics.TraceSource 4.3.0.
-info : Installing Microsoft.TestPlatform.TestHost 16.0.1.
-info : Installing Microsoft.CodeCoverage 16.0.1.
-info : Installing xunit.core 2.4.0.
-info : Installing xunit.assert 2.4.0.
-info : Installing xunit.analyzers 0.10.0.
-info : Installing Castle.Core 4.4.0.
-info : Installing Microsoft.NET.Test.Sdk 16.0.1.
-info : Installing xunit 2.4.0.
-info : Installing coverlet.msbuild 2.6.2.
-info : Installing Moq 4.11.0.
-info : Installing dotnet-reportgenerator-cli 4.2.2.
-info : Installing xunit.runner.visualstudio 2.4.0.
-info : Package 'dotnet-reportgenerator-cli' is compatible with all the specified frameworks in project '/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/everisapiTest.csproj'.
-info : PackageReference for package 'dotnet-reportgenerator-cli' version '4.2.2' added to file '/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/everisapiTest.csproj'.
-info : Committing restore...
-info : Generating MSBuild file /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/obj/everisapiTest.csproj.nuget.g.props.
-info : Generating MSBuild file /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/obj/everisapiTest.csproj.nuget.g.targets.
-info : Writing assets file to disk. Path: /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/obj/project.assets.json
-log  : Restore completed in 9.68 sec for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/everisapiTest.csproj.
-[8mha:////4H48WPDt0xkh8mop6LAWQT8+aEdh3iHjTuz+KxRahuxMAAAAox+LCAAAAAAAAP9tjTESwiAURH/iWNhaeghSZKwcK1uGxhNggghh/idAJJUn8mreQTQzVm6xs2+b93zBOgY4UtDMKhwMxs4w7yZdFssUhqujzCxdWEcYySkmVBbUq9OCgpKCJVUNKw4bhZ2jaFAn2HIr77JxEnVzTqF8Bw616Ud4QMWLOcmQvjAH2N2mPhL+PH8FMPsEddt+au/fWFYUrL4AAAA=[0m[Pipeline] sh
-+ dotnet build /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/
-Microsoft (R) Build Engine version 16.1.76+g14b0a930a7 for .NET Core
-Copyright (C) Microsoft Corporation. All rights reserved.
-
-  Restore completed in 595.71 ms for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/everisapiTest.csproj.
-  Restore completed in 595.71 ms for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj.
-  Restore completed in 267.19 ms for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj.
-  Restore completed in 3.31 sec for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/everisapiTest.csproj.
-  everisapi.API -> /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/bin/Debug/netcoreapp2.1/everisapi.API.dll
-  everisapiTest -> /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/bin/Debug/netcoreapp2.1/everisapiTest.dll
-
-Build succeeded.
-    0 Warning(s)
-    0 Error(s)
-
-Time Elapsed 00:00:17.03
-[8mha:////4JCCeBDGca9wmeEpKnXWYH+zgK1ya4kz2f0cF39jwIykAAAApB+LCAAAAAAAAP9tjTESwiAURH/iWNhaeghSZMbGsbJlaDwBJogQ5n8CRFJ5Iq/mHUQzY+UWO/u2ec8XrGOAIwXNrMLBYOwM827SZbFMYbg6yszShXWEkZxiQmVBvTotKCgpWFLVsOKwUdg5igZ1gi238i4bJ1E35xTKd+BQm36EB1S8mJMM6QtzgN1t6iPhz/NXALP3Cep2/6n2DbVmE/y+AAAA[0m[Pipeline] }
-[8mha:////4LBaiPba3mi2ddyzdCxoxHkBWyeTzIewhpjOubwWD2teAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiQUGBqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFDu9p/avgGGhUhAvgAAAA==[0m[Pipeline] // script
-[8mha:////4FH5VsdmKUH9MCvUGBUV/SpGcflFv/LsFb/fuEJFexfnAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiRIOEqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFDu9p/avgHpZhcovgAAAA==[0m[Pipeline] }
-[8mha:////4AbJMlh11Wauz5MMHtp5i0Z2TVbmA/abIO6PWHefFyyvAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOKCRIUQVVrLDS8wsTFOrDtjOyQVL+Jr/IFAJCq2WO1sM88XLFOEI0eLraHOUWocBt/baeHAsbt4HrDlMzZMib1BaQbJ2tQzSs4G5hQlLASsDDWekyObYS1adVeVV2SrU47TdxBQOn2DBxRiMmcV8xfGCJtrrxPTz/NXAGMIGcrd/lPbN9qFTJS+AAAA[0m[Pipeline] // stage
-[8mha:////4HwkmbHJ4/t3C0SUfbybQJEVwz1ljiMsWHai7n/X7v2YAAAAph+LCAAAAAAAAP9tjTEOwjAQBM9BKWgpeYRDkQ5R0VpueIFJjHFi3QX7QlLxIr7GHzBEomKrnZVW83xBmSIcKDrZWew9psbLIYwuNzlR7C+BJtnRWTaEiYKV2k6aWntcUBNbWCIKWClYW2wCJY+OYaM6czdVMOiqE8e87RUUvr3BA4TKZjaRvzBH2F7HNhH+PH8FMA8MomYo6t3nWL4BEcsSA8EAAAA=[0m[Pipeline] stage
-[8mha:////4A2ezEiNf5XQAIpaQDmiBV6f+uyGR3hjykqCkyhYF6vRAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycogUJDbE1DXKwglCE0La6P/yk9JOnIircQdaKjHhwbItWe/1hiIynIidaCy2HmPtRRd6NyUxELfXQINo6CJqwkjBCmUHRcZWS1WULCzKclhJWFusA0WPLsFGNvqhy6DRlefE03aUkHtzhydkciInzelbRobtrTeR8Mf5C4CxS5AfdrPt52fxAbb5KxbCAAAA[0m[Pipeline] { (Execute test)
-[8mha:////4BAviNeZrEiGCrqQUd14jzLjFfYWzZaPKBY0QL8XJnkjAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUIDbE1DXKwglCE0La6P/yk9JOnIircQdaKjHhwbItWe/1hiIynIidaCy2HmPtRRd6NyUxELfXQINo6CJqwkjBCmUHRcZWS1WULCzKclhJWFusA0WPLsFGNvqhy6DRlefE03aUkHtzhydkciInzelbRobtrTeR8Mf5C4CxS5AfdrPt52fxAdhUMVHCAAAA[0m[Pipeline] script
-[8mha:////4DQRNgm5fxYXdUOJe7RA+dVXchCES7MuVtan8igWz2ACAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUAjbE1DXKwglCE0La6P/yk9JOnIircQdaKjHhwbItWe/1hiIynIidaCy2HmPtRRd6NyUxELfXQINo6CJqwkjBCmUHRcZWS1WULCzKclhJWFusA0WPLsFGNvqhy6DRlefE03aUkHtzhydkciInzelbRobtrTeR8Mf5C4CxS5AfdrPt52fxAXzhjwPCAAAA[0m[Pipeline] {
-[8mha:////4Mh/kEWdodkjztey/wkI/iZPCj/5crhZNRKuZDHI5sCeAAAAox+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOJSkA5R0VppeIFJjLFj3Tm2g1PxIr7GHwhEomKL1c4283zBOgY4ctBoFfWGYmvQu1HPCzOH/uo4o+ULtkyRncJG5YY7dVqw4aRgSVHCSsBGUes4GtIJtsLKu6ycJF2dU5i/g4DSdAM8oBCzOcmQvjAF2N3GLjL9PH8FMPkEZb3/VO3fhXiFur4AAAA=[0m[Pipeline] sh
-+ dotnet test /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/everisapiTest.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/TestResult/ /p:Exclude=[xunit*]*
-Resuming build at Fri Jul 05 11:54:43 UTC 2019 after Jenkins restart
-Waiting to resume part of AgileMeter #6: Finished waiting
-Ready to run at Fri Jul 05 11:54:58 UTC 2019
-Aborted by [8mha:////4BNJyObqN4VCTgLd0ixLXRecISSZTRrbsJ0Aud3oPsyIAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzWEgZu/dLi1CL9xJTczDwAj6GcLcAAAAA=[0madmin
-Sending interrupt signal to process
-Aborted by [8mha:////4BNJyObqN4VCTgLd0ixLXRecISSZTRrbsJ0Aud3oPsyIAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzWEgZu/dLi1CL9xJTczDwAj6GcLcAAAAA=[0madmin
-Sending interrupt signal to process
-[8mha:////4L0vMv9MQztG1fHSDWaoekoYTXksiMA73wbebyuAtuZbAAAA5h+LCAAAAAAAAP9djD1OAzEQhWc3ghqloEB09OMuFFEKFAqQwo+UXGATBse7ztiMxyQ0HIJrQIOUK3AILkBHTUHDoq3gFe99zfdePmEnCZwGsVgTN47TwmH02baE6yDNrQ9rTDnGIIpJKSZ0HLPi9dV0dvYQSbzj5jIo7b33tl/H3x8lFBPoZfEK/Uld3VfGV2zNVMWxHW4EDpf5JgXGReAUPOGfl8Ho+XX0FN9KKM9h1xNbXXZ3d/AIRasf/NPH3f7K0KUoATaxBVQojhT2TR3m5sQ6TxekJGZg2l79AKCvzin9AAAA[0mClick here to forcibly terminate running steps
-Pausing
-[8mha:////4L0vMv9MQztG1fHSDWaoekoYTXksiMA73wbebyuAtuZbAAAA5h+LCAAAAAAAAP9djD1OAzEQhWc3ghqloEB09OMuFFEKFAqQwo+UXGATBse7ztiMxyQ0HIJrQIOUK3AILkBHTUHDoq3gFe99zfdePmEnCZwGsVgTN47TwmH02baE6yDNrQ9rTDnGIIpJKSZ0HLPi9dV0dvYQSbzj5jIo7b33tl/H3x8lFBPoZfEK/Uld3VfGV2zNVMWxHW4EDpf5JgXGReAUPOGfl8Ho+XX0FN9KKM9h1xNbXXZ3d/AIRasf/NPH3f7K0KUoATaxBVQojhT2TR3m5sQ6TxekJGZg2l79AKCvzin9AAAA[0mClick here to forcibly terminate running steps
-Aborted by [8mha:////4BNJyObqN4VCTgLd0ixLXRecISSZTRrbsJ0Aud3oPsyIAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzWEgZu/dLi1CL9xJTczDwAj6GcLcAAAAA=[0madmin
-Sending interrupt signal to process
-[8mha:////4L0vMv9MQztG1fHSDWaoekoYTXksiMA73wbebyuAtuZbAAAA5h+LCAAAAAAAAP9djD1OAzEQhWc3ghqloEB09OMuFFEKFAqQwo+UXGATBse7ztiMxyQ0HIJrQIOUK3AILkBHTUHDoq3gFe99zfdePmEnCZwGsVgTN47TwmH02baE6yDNrQ9rTDnGIIpJKSZ0HLPi9dV0dvYQSbzj5jIo7b33tl/H3x8lFBPoZfEK/Uld3VfGV2zNVMWxHW4EDpf5JgXGReAUPOGfl8Ho+XX0FN9KKM9h1xNbXXZ3d/AIRasf/NPH3f7K0KUoATaxBVQojhT2TR3m5sQ6TxekJGZg2l79AKCvzin9AAAA[0mClick here to forcibly terminate running steps
-Sending interrupt signal to process
-[8mha:////4L0vMv9MQztG1fHSDWaoekoYTXksiMA73wbebyuAtuZbAAAA5h+LCAAAAAAAAP9djD1OAzEQhWc3ghqloEB09OMuFFEKFAqQwo+UXGATBse7ztiMxyQ0HIJrQIOUK3AILkBHTUHDoq3gFe99zfdePmEnCZwGsVgTN47TwmH02baE6yDNrQ9rTDnGIIpJKSZ0HLPi9dV0dvYQSbzj5jIo7b33tl/H3x8lFBPoZfEK/Uld3VfGV2zNVMWxHW4EDpf5JgXGReAUPOGfl8Ho+XX0FN9KKM9h1xNbXXZ3d/AIRasf/NPH3f7K0KUoATaxBVQojhT2TR3m5sQ6TxekJGZg2l79AKCvzin9AAAA[0mClick here to forcibly terminate running steps
-Aborted by [8mha:////4BNJyObqN4VCTgLd0ixLXRecISSZTRrbsJ0Aud3oPsyIAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzWEgZu/dLi1CL9xJTczDwAj6GcLcAAAAA=[0madmin
-Sending interrupt signal to process
-[8mha:////4L0vMv9MQztG1fHSDWaoekoYTXksiMA73wbebyuAtuZbAAAA5h+LCAAAAAAAAP9djD1OAzEQhWc3ghqloEB09OMuFFEKFAqQwo+UXGATBse7ztiMxyQ0HIJrQIOUK3AILkBHTUHDoq3gFe99zfdePmEnCZwGsVgTN47TwmH02baE6yDNrQ9rTDnGIIpJKSZ0HLPi9dV0dvYQSbzj5jIo7b33tl/H3x8lFBPoZfEK/Uld3VfGV2zNVMWxHW4EDpf5JgXGReAUPOGfl8Ho+XX0FN9KKM9h1xNbXXZ3d/AIRasf/NPH3f7K0KUoATaxBVQojhT2TR3m5sQ6TxekJGZg2l79AKCvzin9AAAA[0mClick here to forcibly terminate running steps
-Aborted by [8mha:////4BNJyObqN4VCTgLd0ixLXRecISSZTRrbsJ0Aud3oPsyIAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzWEgZu/dLi1CL9xJTczDwAj6GcLcAAAAA=[0madmin
-Sending interrupt signal to process
-Resuming
-[8mha:////4L0vMv9MQztG1fHSDWaoekoYTXksiMA73wbebyuAtuZbAAAA5h+LCAAAAAAAAP9djD1OAzEQhWc3ghqloEB09OMuFFEKFAqQwo+UXGATBse7ztiMxyQ0HIJrQIOUK3AILkBHTUHDoq3gFe99zfdePmEnCZwGsVgTN47TwmH02baE6yDNrQ9rTDnGIIpJKSZ0HLPi9dV0dvYQSbzj5jIo7b33tl/H3x8lFBPoZfEK/Uld3VfGV2zNVMWxHW4EDpf5JgXGReAUPOGfl8Ho+XX0FN9KKM9h1xNbXXZ3d/AIRasf/NPH3f7K0KUoATaxBVQojhT2TR3m5sQ6TxekJGZg2l79AKCvzin9AAAA[0mClick here to forcibly terminate running steps
-Terminating sh
-[8mha:////4IYnWL53W7sC+DK/yC0whNXYExCS5kTUxjctAxgwifyDAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOJSABWiSmu54QUmNsaJdWdsh6TiRXyNPxCIRMUWq51t5vmCZYpw5GixNdQ5So3D4Hs7LRw4dhfPA7Z8xoYpsTcozSBZm3pGydnAnKKEhYCVocZzcmQzrEWr7qryimx1ynH6DgJKp2/wgEJM5qxi/sIYYXPtdWL6ef4KYAwhQ7nbf2r7BlK8YfC+AAAA[0m[Pipeline] }
-[8mha:////4PzA8sPaWWjgdZaNJEbWorJTn0ZXRHbWmHGKoRpzqSqlAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiIUSDqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFDu9p/avgFq/vIBvgAAAA==[0m[Pipeline] // script
-[8mha:////4Iz+8yoGA/z7szPCItI9gdOrblAmqaSEqtk1hx9y/6L0AAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiJCQKRJXWcsMLTGyME+vO2A5JxYv4Gn8gEImKLVY728zzBcsU4cjRYmuoc5Qah8H3dlo4cOwungds+YwNU2JvUJpBsjb1jJKzgTlFCQsBK0ON5+TIZliLVt1V5RXZ6pTj9B0ElE7f4AGFmMxZxfyFMcLm2uvE9PP8FcAYQoZyt//U9g11fKdTvgAAAA==[0m[Pipeline] }
-[8mha:////4COta3cVXvLJB76wH7WovzCNpdUtle28oaWxi+pJWcM/AAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOJCQYGEqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFDu9p/avgE2/vbVvgAAAA==[0m[Pipeline] // stage
-[8mha:////4AoS5oWYZAXQgb9oGPLsFNmd9W0UQgxYo71FIpXp+xtxAAAAox+LCAAAAAAAAP9tjTESgjAQRT84FraWHiI0NI5jZZuh8QQRYgxkdjFZhMoTeTXvICMzVv7qv9e81xvrFHHk6FRrqfOUaq/6MLj5qZFjdw08qpYvqmZKHKyq7FhxY08LViwWy7IcK42NpTpw8uQEW92ahymCIVecJc7uoJH75o4nMj2XxUT5whSxuw1NYvp1/gYw9b0gL/eCrPwAR9iYj70AAAA=[0m[Pipeline] }
-[8mha:////4PcUxSjfgWOZnO8zqMjzGgjZK6TDg69Lz7joUwI/wEwiAAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMJBQlSIitZKwwtMYowT6y7YF5KKF/E1/kBEJCq22plmXm8sU8SRo1ONpdZTqrzqQu+mpwaO7TXwoBq+qIopcbCqtEPJtT3NWLJYzMtyLDRWlqrAyZMTrHVjHqYIhlxxlji5g0bu6zueyPRUFhPlC2PE5tbXienX+RvA2HWCfL8VZLsPMPyw170AAAA=[0m[Pipeline] // node
-[8mha:////4OYmKFNSv4TD9xmRcZh/s4M64XmvIayHtzkTaCqL1nCnAAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMIRSFSIitZKwwtMYowT6y7YF5KKF/E1/kBEJCq22plmXm8sU8SRo1ONpdZTqrzqQu+mpwaO7TXwoBq+qIopcbCqtEPJtT3NWLJYzMtyLDRWlqrAyZMTrHVjHqYIhlxxlji5g0bu6zueyPRUFhPlC2PE5tbXienX+RvA2HWCfL8VZLsPFuXXnb0AAAA=[0m[Pipeline] End of Pipeline
-Finished: ABORTED

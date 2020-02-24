@@ -1,1 +1,0 @@
-/usr/bin/git clone ssh://git@steps.everis.com:766/INNOVASEV/ScrumMeter.git -b Development

@@ -1,987 +1,0 @@
-Started by user [8mha:////4A71PkWda3ZtYXRL7gg7aPHUdC5Zde6t3gBXuwk9qHCjAAAAlx+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAzWEgZu/dLi1CL9xJTczDwAj6GcLcAAAAA=[0madmin
-Running in Durability level: MAX_SURVIVABILITY
-[8mha:////4PPP4UXld0KFkLZQEUkSNwewyXjxczdH6izjZ/k2w9pOAAAAoh+LCAAAAAAAAP9tjTEOwjAQBM8BClpKHuFItIiK1krDC0x8GCfWnbEdkooX8TX+gCESFVvtrLSa5wtWKcKBo5UdUu8otU4GP9jS5Mixv3geZcdn2TIl9igbHBs2eJyx4YwwR1SwULBGaj0nRzbDRnX6rmuvydanHMu2V1A5c4MHCFXMWcf8hSnC9jqYxPTz/BXAFEIGsfuclm8zQVqFvQAAAA==[0m[Pipeline] Start of Pipeline
-[8mha:////4MQP4eY0n5Azo7+WbkbzEfo4fGWLMehXEVmcTiPypZzmAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycohUghExsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jduZBmjwAAAAA==[0m[Pipeline] node
-Running on [8mha:////4Ij4OrT/mubnAqTK+iqWmM6Y6gaUFi+hdk8Jo+6G1ZcGAAAAnh+LCAAAAAAAAP9b85aBtbiIQTGjNKU4P08vOT+vOD8nVc83PyU1x6OyILUoJzMv2y+/JJUBAhiZGBgqihhk0NSjKDWzXb3RdlLBUSYGJk8GtpzUvPSSDB8G5tKinBIGIZ+sxLJE/ZzEvHT94JKizLx0a6BxUmjGOUNodHsLgAz2EgZh/eT83ILSktQifY3cxGIgrakPAHib2iPIAAAA[0mJenkins in /var/jenkins_home/jobs/AgileMeter/workspace
-[8mha:////4EV/ZP9qGUVVZHr0FgKDkgPfD8sCBhxixd0URu2oYKJqAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0gA0xsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jfoP95RwAAAAA==[0m[Pipeline] {
-[8mha:////4CGPD9rUmHS6z+YeUw+E1hfqv0yhjoH5EW1JdfWwZWfeAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0gQkxsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jc09154wAAAAA==[0m[Pipeline] stage
-[8mha:////4BZTbz787SQih2gz1qh5ja+AbZlY4kS7zgZkvRQZk2XDAAAApR+LCAAAAAAAAP9tjTEOwjAUQ3+KOrAycoh0ggUxsUZZOEFIQkgb/d8mKe3EibgadyBQiQlLlmxL1nu+oE4RjhQdby12HpP2vA+jK4lPFLtroIm3dOGaMFGwXNpJkrGnpUrKFhaxClYC1hZ1oOTRZdiIVt1VExS65pxj2Q4CKm8GeAAThZxVzN8yR9jeRpMIf5y/AJj7DGxXvP/86jek7ggRwAAAAA==[0m[Pipeline] { (Clean workspace)
-[8mha:////4JPSeXgXtTYtjn7P8NFF8N52/POea9zQj7a3ghHnsN0MAAAAoh+LCAAAAAAAAP9tjTEOAiEURD9rLGwtPQTbaWGsbAmNJ0AWEZb8zwLrbuWJvJp3kLiJlZNMMm+a93rDOic4UbLcG+wdZu14DKOti0+U+lugiXu6ck2YKRguzSSpM+cFJRUDS1gDKwEbgzpQdmgLbIVXD9UGhba9lFS/o4DGdQM8gYlqLiqVL8wJdvexy4Q/z18BzLEA29ce4gfg7KmOvAAAAA==[0m[Pipeline] echo
-Se limpia el workspace
-[8mha:////4Kt2HeHNU0g62WcTBFNNhs8njuNGf/dQF+gdPMHlPf6BAAAAoh+LCAAAAAAAAP9tjTEOAiEURD9rLGwtPQTbGRNjZUtoPAGyiLDkfxZYdytP5NW8g8RNrJxkknnTvNcb1jnBiZLl3mDvMGvHYxhtXXyi1N8CTdzTlWvCTMFwaSZJnTkvKKkYWMIaWAnYGNSBskNbYCu8eqg2KLTtpaT6HQU0rhvgCUxUc1GpfGFOsLuPXSb8ef4KYI4F2L72ED8v8DEJvAAAAA==[0m[Pipeline] cleanWs
-[WS-CLEANUP] Deleting project workspace...
-[WS-CLEANUP] Deferred wipeout is used...
-[WS-CLEANUP] done
-[8mha:////4O66IS2pVVODZoFNAzQCACvpmfPaqwjBaWUTh7YtF8uWAAAAoh+LCAAAAAAAAP9tjTEOAiEURD9rLGwtPQTbmRhjZUtoPAGyiLDkfxZYdytP5NW8g8RNrJxkknnTvNcb1jnBiZLl3mDvMGvHYxhtXXyi1N8CTdzTlWvCTMFwaSZJnTkvKKkYWMIaWAnYGNSBskNbYCu8eqg2KLTtpaT6HQU0rhvgCUxUc1GpfGFOsLuPXSb8ef4KYI6xADvU7j/zqggXvAAAAA==[0m[Pipeline] }
-[8mha:////4Md24KNBTNT+PR7yAR/0lG4xZckaZ60+r04K2IiisIyaAAAAox+LCAAAAAAAAP9tjTESgjAQRT84FraWHiJoYeVY2WZoPEGEGAOZXUwWofJEXs07yMiMlb/67zXv9cYyRRw5OtVYaj2lyqsu9G56auDYXgMPquGLqpgSB6tKO5Rc29OMJYvFvCzHQmNlqQqcPDnBWjfmYYpgyBVniZM7aOS+vuOJTE9lMVG+MEZsbn2dmH6dvwGMXSfId1tBtv8AExtCpb0AAAA=[0m[Pipeline] // stage
-[8mha:////4DaeugfG63UAXcO7MSbKJDtlqTbisB/uBGqiR8FaIpWLAAAAph+LCAAAAAAAAP9tjTEOwjAQBC9BKWgpeYSjSHSIitZywwtMbIwT6y7YF5KKF/E1/oAhEhVb7ay0mucLqhThQNGJzmLvMbVeDGF0uYmJYn8JNImOzqIlTBSsUHZSZOxxQUVsYUlRwkrC2mIbKHl0DBvZ6buug0ZXnzjmbS+h9OYGDyhkNrOO/IU5wvY6mkT48/wVwDwwFDuGsmk+x+oNEzd2msEAAAA=[0m[Pipeline] stage
-[8mha:////4FKJW1/vKeRSQY9iWhh5/YuLd43AuH55qW3S6FGKv0MsAAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUZUVMrFEWThCaEJJG/7dJSjpxIq7GHWipxIQHy7ZkvdcbqhjgRMEwp7GzGFvLej+aObFMobt5yszRlbWEkbxmQmdBSp/XKihpWFWUsOGw1dh6ihZNgh138iFrL9HUlxTm7cihtGqAJxR8JicZ0rdMAfb3UUXCH+cvAKY+Qdk0ix2WZ/UBbwyqm8IAAAA=[0m[Pipeline] { (Download Source)
-[8mha:////4MrrQaKLDFwHJndCG749FfAa4Ih0vtTrRwzVcLrDUjsCAAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUwIiYukZZOEFoQkgb/V9+UtqJE3E17kBLJSY8WLYl673eUESGE7ETjcXWY6y96ELvpiQG4vYaaBANXURNGClYoeygyNhqqYqShUVZDisJa4t1oOjRJdjIRj90GTS68px42o4Scm/u8IRMTuSkOX3LyLC99SYS/jh/ATB2CfLdfrbD/Cw+y7kUycIAAAA=[0m[Pipeline] script
-[8mha:////4NCFf3IvLAn1vZJ+3j9DboNQxwZydMXNaBFnpzFVfnieAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUCDbE1DXKwglCE0La6P/yk9JOnIircQdaKjHhwbItWe/1hiIynIidaCy2HmPtRRd6NyUxELfXQINo6CJqwkjBCmUHRcZWS1WULCzKclhJWFusA0WPLsFGNvqhy6DRlefE03aUkHtzhydkciInzelbRobtrTeR8Mf5C4CxS5Dv9rMd5mfxAbNWnxXCAAAA[0m[Pipeline] {
-[8mha:////4ITA0QuJBtIxS1MKsOSaQ095wfEollL8TESHnUFxj/nhAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiJKgQVVrLDS8wsTFOrDtjOyQVL+Jr/IFAJCq2WO1sM88XLFOEI0eLraHOUWocBt/baeHAsbt4HrDlMzZMib1BaQbJ2tQzSs4G5hQlLASsDDWekyObYS1adVeVV2SrU47TdxBQOn2DBxRiMmcV8xfGCJtrrxPTz/NXAGPIUG53n9qHN8W7Eii+AAAA[0m[Pipeline] sh
-+ /usr/bin/git clone ssh://git@steps.everis.com:766/INNOVASEV/ScrumMeter.git -b Development
-Cloning into 'ScrumMeter'...
-Checking out files:   2% (79/3371)   Checking out files:   3% (102/3371)   Checking out files:   3% (130/3371)   Checking out files:   4% (135/3371)   Checking out files:   4% (155/3371)   Checking out files:   5% (169/3371)   Checking out files:   6% (203/3371)   Checking out files:   6% (210/3371)   Checking out files:   7% (236/3371)   Checking out files:   7% (260/3371)   Checking out files:   8% (270/3371)   Checking out files:   9% (304/3371)   Checking out files:   9% (326/3371)   Checking out files:  10% (338/3371)   Checking out files:  11% (371/3371)   Checking out files:  11% (386/3371)   Checking out files:  12% (405/3371)   Checking out files:  13% (439/3371)   Checking out files:  13% (447/3371)   Checking out files:  14% (472/3371)   Checking out files:  14% (499/3371)   Checking out files:  15% (506/3371)   Checking out files:  16% (540/3371)   Checking out files:  16% (554/3371)   Checking out files:  17% (574/3371)   Checking out files:  17% (604/3371)   Checking out files:  18% (607/3371)   Checking out files:  19% (641/3371)   Checking out files:  19% (656/3371)   Checking out files:  20% (675/3371)   Checking out files:  20% (705/3371)   Checking out files:  21% (708/3371)   Checking out files:  22% (742/3371)   Checking out files:  22% (757/3371)   Checking out files:  23% (776/3371)   Checking out files:  23% (802/3371)   Checking out files:  24% (810/3371)   Checking out files:  25% (843/3371)   Checking out files:  26% (877/3371)   Checking out files:  27% (911/3371)   Checking out files:  27% (913/3371)   Checking out files:  28% (944/3371)   Checking out files:  29% (978/3371)   Checking out files:  29% (988/3371)   Checking out files:  30% (1012/3371)   Checking out files:  31% (1046/3371)   Checking out files:  31% (1055/3371)   Checking out files:  32% (1079/3371)   Checking out files:  33% (1113/3371)   Checking out files:  33% (1131/3371)   Checking out files:  34% (1147/3371)   Checking out files:  35% (1180/3371)   Checking out files:  35% (1208/3371)   Checking out files:  36% (1214/3371)   Checking out files:  37% (1248/3371)   Checking out files:  37% (1263/3371)   Checking out files:  38% (1281/3371)   Checking out files:  39% (1315/3371)   Checking out files:  39% (1321/3371)   Checking out files:  40% (1349/3371)   Checking out files:  40% (1375/3371)   Checking out files:  41% (1383/3371)   Checking out files:  42% (1416/3371)   Checking out files:  42% (1433/3371)   Checking out files:  43% (1450/3371)   Checking out files:  44% (1484/3371)   Checking out files:  45% (1517/3371)   Checking out files:  45% (1519/3371)   Checking out files:  46% (1551/3371)   Checking out files:  47% (1585/3371)   Checking out files:  47% (1595/3371)   Checking out files:  48% (1619/3371)   Checking out files:  49% (1652/3371)   Checking out files:  49% (1680/3371)   Checking out files:  50% (1686/3371)   Checking out files:  51% (1720/3371)   Checking out files:  52% (1753/3371)   Checking out files:  52% (1758/3371)   Checking out files:  53% (1787/3371)   Checking out files:  53% (1820/3371)   Checking out files:  54% (1821/3371)   Checking out files:  55% (1855/3371)   Checking out files:  56% (1888/3371)   Checking out files:  56% (1904/3371)   Checking out files:  57% (1922/3371)   Checking out files:  58% (1956/3371)   Checking out files:  58% (1979/3371)   Checking out files:  59% (1989/3371)   Checking out files:  60% (2023/3371)   Checking out files:  61% (2057/3371)   Checking out files:  61% (2063/3371)   Checking out files:  62% (2091/3371)   Checking out files:  63% (2124/3371)   Checking out files:  63% (2148/3371)   Checking out files:  64% (2158/3371)   Checking out files:  65% (2192/3371)   Checking out files:  66% (2225/3371)   Checking out files:  66% (2234/3371)   Checking out files:  67% (2259/3371)   Checking out files:  68% (2293/3371)   Checking out files:  68% (2305/3371)   Checking out files:  69% (2326/3371)   Checking out files:  70% (2360/3371)   Checking out files:  71% (2394/3371)   Checking out files:  72% (2428/3371)   Checking out files:  73% (2461/3371)   Checking out files:  73% (2463/3371)   Checking out files:  74% (2495/3371)   Checking out files:  75% (2529/3371)   Checking out files:  75% (2539/3371)   Checking out files:  76% (2562/3371)   Checking out files:  77% (2596/3371)   Checking out files:  78% (2630/3371)   Checking out files:  78% (2631/3371)   Checking out files:  79% (2664/3371)   Checking out files:  80% (2697/3371)   Checking out files:  80% (2723/3371)   Checking out files:  81% (2731/3371)   Checking out files:  82% (2765/3371)   Checking out files:  83% (2798/3371)   Checking out files:  83% (2815/3371)   Checking out files:  84% (2832/3371)   Checking out files:  85% (2866/3371)   Checking out files:  85% (2885/3371)   Checking out files:  85% (2888/3371)   Checking out files:  86% (2900/3371)   Checking out files:  87% (2933/3371)   Checking out files:  87% (2949/3371)   Checking out files:  88% (2967/3371)   Checking out files:  89% (3001/3371)   Checking out files:  89% (3032/3371)   Checking out files:  90% (3034/3371)   Checking out files:  91% (3068/3371)   Checking out files:  92% (3102/3371)   Checking out files:  92% (3121/3371)   Checking out files:  93% (3136/3371)   Checking out files:  94% (3169/3371)   Checking out files:  95% (3203/3371)   Checking out files:  95% (3206/3371)   Checking out files:  96% (3237/3371)   Checking out files:  97% (3270/3371)   Checking out files:  97% (3282/3371)   Checking out files:  98% (3304/3371)   Checking out files:  99% (3338/3371)   Checking out files:  99% (3367/3371)   
-[8mha:////4HdRcjwZVp9Zu9oQ0Q6UEyHm9B7cXY+rdS6Ul1X6AFhgAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiJESDqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDhnK7+9Q+vAEG6D8DvgAAAA==[0m[Pipeline] sh
-+ chown -R jenkins:jenkins /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/
-[8mha:////4A+57YDner28rSokyZI2Sra7NvsyvKzII8fciPm+OwgvAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiJCQKRJXWcsMLTGyME+vO2A5JxYv4Gn8gEImKLVY728zzBcsU4cjRYmuoc5Qah8H3dlo4cOwungds+YwNU2JvUJpBsjb1jJKzgTlFCQsBK0ON5+TIZliLVt1V5RXZ6pTj9B0ElE7f4AGFmMxZxfyFMcLm2uvE9PP8FcAYQoZyu//U7g0YU4IMvgAAAA==[0m[Pipeline] }
-[8mha:////4HtF9zDVjPUy+ksOOtIKFhVHQPiadn01b/zhf8tnGScwAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiRIOEqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFBu95/avQFudLBjvgAAAA==[0m[Pipeline] // script
-[8mha:////4Pz8GWbYeNGnxzMOhgH2eqRpPp5HvND8pKpx2E4kye4tAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIi6BCiSmu54QUmNsaJdWdsh6TiRXyNPxCIRMUWq51t5vmCZYpw5GixNdQ5So3D4Hs7LRw4dhfPA7Z8xoYpsTcozSBZm3pGydnAnKKEhYCVocZzcmQzrEWr7qryimx1ynH6DgJKp2/wgEJM5qxi/sIYYXPtdWL6ef4KYAwhQ7ndf2r3Bl2X69++AAAA[0m[Pipeline] }
-[8mha:////4HtHQySQ4+ebW+Cuo6btUI+plrxt1BLKkHAPz77Ptz8cAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPMIhtIgqrZWGF5j4ME6sO2M7JBUv4mv8AYtIVGyx2tlmXm9YxwAnDkb0SIOl2Fnh3WjyEhOH4ep4Ej1fRMcU2aFocWpZY7NgywlhSVHCSsIGqXMcLZkEW9mrh6qcIlOdU8jfUUJp9R2eUMhsTiqkL8wBdrdRR6af568AZu8TlId9rrr+ALKNBVC+AAAA[0m[Pipeline] // stage
-[8mha:////4Btrq6lqKECjzZOh82JaYOetjCuoiQMTT6Mq6wuInHrgAAAAph+LCAAAAAAAAP9tjTEOwjAQBM9BKWgpeYQjEB2iorXc8AITG+PEugv2haTiRXyNPxCIRMVWOyut5vmCMic4UPKycdgGzHWQXez91ORAqb1EGmRDZ1kTZopOajdosu44oyZ2MEcUsFCwdFhHygE9w0o15m6qaNBXJ07TtldQBHuDBwg1mdkk/sKYYH3tbSb8ef4KYOwYxI6h2G4+x/INji2eq8EAAAA=[0m[Pipeline] stage
-[8mha:////4JvBxACi0bMuUjS6U2W0qGx9izV9gA/OjVKrD+h80PmuAAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+DOrAycohUdEVMrFEXThCaEJJG/7dJSjpxIq7GHWipxIQHy7ZkvdcbyhjgRMFwp7GzGFvLez+aOfFMobt5ytzRlbeEkbzmjc4NKX1ea0NJw6qCwUbAVmPrKVo0CXbCyYesvERTXVKYt6MAZtUATyjETE4ypG+ZAuzvo4qEP85fAEx9AlYfFquXZ/kBAsTc3cIAAAA=[0m[Pipeline] { (Install package and build)
-[8mha:////4Dlst42MRY1AIo/XpguKciccw/JsiJlSTakhWtGhLoVkAAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUKiNiYo2ycILQhJA0+r9NUtKJE3E17kBLJSY8WLYl673eUMUAJwqGOY2dxdha1vvRzIllCt3NU2aOrqwljOQ1EzoLUvq8VkFJw6qihA2HrcbWU7RoEuy4kw9Ze4mmvqQwb0cOpVUDPKHgMznJkL5lCrC/jyoS/jh/ATD1CcqmWeywPKsPpnFij8IAAAA=[0m[Pipeline] script
-[8mha:////4Ha4zhqfFvmiWkdj3J3/v+VyZ59RQfrZvSrt29fT66rqAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUAjbE1DXKwglCE0La6P/yk9JOnIircQdaKjHhwbItWe/1hiIynIidaCy2HmPtRRd6NyUxELfXQINo6CJqwkjBCmUHRcZWS1WULCzKclhJWFusA0WPLsFGNvqhy6DRlefE03aUkHtzhydkciInzelbRobtrTeR8Mf5C4CxS5Dv9rMd5mfxAd6e6VPCAAAA[0m[Pipeline] {
-[8mha:////4DgNr8dNoeaZLYZIwnF+f0+tzznMzO5RpPZzgHI/rIWZAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiIagQVVrLDS8wsTFOrDtjOyQVL+Jr/IFAJCq2WO1sM88XLFOEI0eLraHOUWocBt/baeHAsbt4HrDlMzZMib1BaQbJ2tQzSs4G5hQlLASsDDWekyObYS1adVeVV2SrU47TdxBQOn2DBxRiMmcV8xfGCJtrrxPTz/NXAGPIUG53n9qHN38C26S+AAAA[0m[Pipeline] sh
-+ dotnet build /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/
-Microsoft (R) Build Engine version 16.1.76+g14b0a930a7 for .NET Core
-Copyright (C) Microsoft Corporation. All rights reserved.
-
-  Restore completed in 5.94 sec for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj.
-  Restore completed in 7.04 sec for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj.
-  everisapi.API -> /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/bin/Debug/netcoreapp2.1/everisapi.API.dll
-
-Build succeeded.
-    0 Warning(s)
-    0 Error(s)
-
-Time Elapsed 00:00:15.02
-[8mha:////4OyuLIFnACz0ntLOIP0fpNQRGcRCZCX9cue4CcA3Kt7AAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiIUSDqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFBu95/avQHjyRvdvgAAAA==[0m[Pipeline] }
-[8mha:////4CyabQE/v36Zx3c4XhLufjHu4HK5KUZOJakiqNA1KQilAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiQUGBqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFBu95/avQHljyOIvgAAAA==[0m[Pipeline] // script
-[8mha:////4M6mC/Ry0G92aLC6zgjn8dfkpRDfYf/YUFlwFHcyWH9NAAAApB+LCAAAAAAAAP9tjbEOwiAURV9rHFwd/QiadDIxTq6ExS/AFhFK3qNApZNf5K/5D6JNnLzDzT13Oc8XrGOAIwXNrMLBYOwM827SZbFMYbg6yszShXWEkZxiQmVBvTotKCgpWFLVsOKwUdg5igZ1gi238i4bJ1E35xTKd+BQm36EB1S8mJMM6QtzgN1t6iPhz/NXALP3Cep2/6n2DaYNcg6+AAAA[0m[Pipeline] }
-[8mha:////4LCb4c6c7+1tQP38wKUA+0RpFEgKpnBHTYsUqsX0Qx4WAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIi6BCiSmu54QUmNsaJdWdsh6TiRXyNPxCIRMUWq51t5vmCZYpw5GixNdQ5So3D4Hs7LRw4dhfPA7Z8xoYpsTcozSBZm3pGydnAnKKEhYCVocZzcmQzrEWr7qryimx1ynH6DgJKp2/wgEJM5qxi/sIYYXPtdWL6ef4KYAwhQ7nbf2r7BrmPJ1y+AAAA[0m[Pipeline] // stage
-[8mha:////4J8QycBnrWlAGjcYVdu+cw4HQyCSmVda9rzAJATAcKHeAAAAph+LCAAAAAAAAP9tjTEOwjAQBM9BKWgpeYSDBB2iorXc8AITG+PEugv2haTiRXyNPxCIRMVWOyut5vmCMic4UPKycdgGzHWQXez91ORAqb1EGmRDZ1kTZopOajdosu44oyZ2MEcUsFCwdFhHygE9w0o15m6qaNBXJ07TtldQBHuDBwg1mdkk/sKYYH3tbSb8ef4KYOwYxI6h2G4+x/INn/W1xsEAAAA=[0m[Pipeline] stage
-[8mha:////4Iv6kmanUyEtEFjmG+tkIfzqja/31JdZsbzvZEQ1ham2AAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycogUxIiYukZZOEFoQkgb/V9+UtqJE3E17kBLJSY8WLYl673eUESGE7ETjcXWY6y96ELvpiQG4vYaaBANXURNGClYoeygyNhqqYqShUVZDisJa4t1oOjRJdjIRj90GTS68px42o4Scm/u8IRMTuSkOX3LyLC99SYS/jh/ATB2CfLDbrb9/Cw+ty4Up8IAAAA=[0m[Pipeline] { (Build test)
-[8mha:////4LALLL6wv55dsbZQR0FvvVU21glnGGo2dU2N/zMBDFipAAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUwIiYukZZOEFoQkgb/V9+UtqJE3E17kBLJSY8WLYl673eUESGE7ETjcXWY6y96ELvpiQG4vYaaBANXURNGClYoeygyNhqqYqShUVZDisJa4t1oOjRJdjIRj90GTS68px42o4Scm/u8IRMTuSkOX3LyLC99SYS/jh/ATB2CfLDbrb9/Cw+2YMO4MIAAAA=[0m[Pipeline] script
-[8mha:////4NLeXla/W9PSFSJeQAfUAa0xhfJ8GV/DfxeU/NHuNd4qAAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+DOrAycohUoiNiYo26cILQhJA0+r9NUtKJE3E17kBLJSY8WLYl673eUMYAJwqGO42dxdha3vvRzIlnCt3NU+aOrrwljOQ1b3RuSOnzWhtKGlYVDDYCthpbT9GiSbATTj5k5SWa6pLCvB0FMKsGeEIhZnKSIX3LFGB/H1Uk/HH+AmDqE7D6sFi9PMsPfTawssIAAAA=[0m[Pipeline] {
-[8mha:////4DXZqfFhIQbBKBz8akULGpancAavYOK2N5hmqEEGEPPbAAAAox+LCAAAAAAAAP9tjTESwiAURH/iWNhaeghSxM6xsmVoPAEmiBDmfwJEUnkir+YdRDNj5RY7+7Z5zxesY4AjBc2swsFg7AzzbtJlsUxhuDrKzNKFdYSRnGJCZUG9Oi0oKClYUtWw4rBR2DmKBnWCLbfyLhsnUTfnFMp34FCbfoQHVLyYkwzpC3OA3W3qI+HP81cAs09Qt+2n9v4NGWcPtb4AAAA=[0m[Pipeline] sh
-+ dotnet add /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/everisapiTest.csproj package dotnet-reportgenerator-cli --version 4.2.2
-  Writing /tmp/tmpaS29wm.tmp
-info : Adding PackageReference for package 'dotnet-reportgenerator-cli' into project '/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/everisapiTest.csproj'.
-info : Restoring packages for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/everisapiTest.csproj...
-info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.net.test.sdk/index.json
-info :   GET https://api.nuget.org/v3-flatcontainer/moq/index.json
-info :   GET https://api.nuget.org/v3-flatcontainer/coverlet.msbuild/index.json
-info :   GET https://api.nuget.org/v3-flatcontainer/xunit/index.json
-info :   GET https://api.nuget.org/v3-flatcontainer/xunit.runner.visualstudio/index.json
-info :   GET https://api.nuget.org/v3-flatcontainer/dotnet-reportgenerator-cli/index.json
-info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.net.test.sdk/index.json 922ms
-info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.net.test.sdk/16.0.1/microsoft.net.test.sdk.16.0.1.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.net.test.sdk/16.0.1/microsoft.net.test.sdk.16.0.1.nupkg 17ms
-info :   OK https://api.nuget.org/v3-flatcontainer/coverlet.msbuild/index.json 791ms
-info :   GET https://api.nuget.org/v3-flatcontainer/coverlet.msbuild/2.6.2/coverlet.msbuild.2.6.2.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/xunit.runner.visualstudio/index.json 796ms
-info :   OK https://api.nuget.org/v3-flatcontainer/moq/index.json 798ms
-info :   GET https://api.nuget.org/v3-flatcontainer/xunit.runner.visualstudio/2.4.0/xunit.runner.visualstudio.2.4.0.nupkg
-info :   GET https://api.nuget.org/v3-flatcontainer/moq/4.11.0/moq.4.11.0.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/xunit/index.json 814ms
-info :   GET https://api.nuget.org/v3-flatcontainer/xunit/2.4.0/xunit.2.4.0.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/coverlet.msbuild/2.6.2/coverlet.msbuild.2.6.2.nupkg 22ms
-info :   OK https://api.nuget.org/v3-flatcontainer/xunit.runner.visualstudio/2.4.0/xunit.runner.visualstudio.2.4.0.nupkg 20ms
-info :   OK https://api.nuget.org/v3-flatcontainer/moq/4.11.0/moq.4.11.0.nupkg 21ms
-info :   OK https://api.nuget.org/v3-flatcontainer/dotnet-reportgenerator-cli/index.json 823ms
-info :   GET https://api.nuget.org/v3-flatcontainer/dotnet-reportgenerator-cli/4.2.2/dotnet-reportgenerator-cli.4.2.2.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/xunit/2.4.0/xunit.2.4.0.nupkg 25ms
-info :   GET https://api.nuget.org/v3-flatcontainer/xunit.core/index.json
-info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.testplatform.testhost/index.json
-info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.codecoverage/index.json
-info :   GET https://api.nuget.org/v3-flatcontainer/xunit.assert/index.json
-info :   GET https://api.nuget.org/v3-flatcontainer/xunit.analyzers/index.json
-info :   GET https://api.nuget.org/v3-flatcontainer/castle.core/index.json
-info :   OK https://api.nuget.org/v3-flatcontainer/dotnet-reportgenerator-cli/4.2.2/dotnet-reportgenerator-cli.4.2.2.nupkg 516ms
-info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.testplatform.testhost/index.json 488ms
-info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.testplatform.testhost/16.0.1/microsoft.testplatform.testhost.16.0.1.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/xunit.core/index.json 520ms
-info :   GET https://api.nuget.org/v3-flatcontainer/xunit.core/2.4.0/xunit.core.2.4.0.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/castle.core/index.json 493ms
-info :   GET https://api.nuget.org/v3-flatcontainer/castle.core/4.4.0/castle.core.4.4.0.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.testplatform.testhost/16.0.1/microsoft.testplatform.testhost.16.0.1.nupkg 26ms
-info :   OK https://api.nuget.org/v3-flatcontainer/castle.core/4.4.0/castle.core.4.4.0.nupkg 13ms
-info :   OK https://api.nuget.org/v3-flatcontainer/xunit.core/2.4.0/xunit.core.2.4.0.nupkg 18ms
-info :   GET https://api.nuget.org/v3-flatcontainer/xunit.extensibility.core/index.json
-info :   GET https://api.nuget.org/v3-flatcontainer/xunit.extensibility.execution/index.json
-info :   OK https://api.nuget.org/v3-flatcontainer/xunit.analyzers/index.json 628ms
-info :   GET https://api.nuget.org/v3-flatcontainer/xunit.analyzers/0.10.0/xunit.analyzers.0.10.0.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/xunit.assert/index.json 660ms
-info :   GET https://api.nuget.org/v3-flatcontainer/xunit.assert/2.4.0/xunit.assert.2.4.0.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.codecoverage/index.json 671ms
-info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.codecoverage/16.0.1/microsoft.codecoverage.16.0.1.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/xunit.analyzers/0.10.0/xunit.analyzers.0.10.0.nupkg 47ms
-info :   OK https://api.nuget.org/v3-flatcontainer/xunit.assert/2.4.0/xunit.assert.2.4.0.nupkg 33ms
-info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.codecoverage/16.0.1/microsoft.codecoverage.16.0.1.nupkg 31ms
-info :   CACHE https://api.nuget.org/v3-flatcontainer/system.diagnostics.tracesource/index.json
-info :   GET https://api.nuget.org/v3-flatcontainer/system.diagnostics.tracesource/4.3.0/system.diagnostics.tracesource.4.3.0.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/system.diagnostics.tracesource/4.3.0/system.diagnostics.tracesource.4.3.0.nupkg 32ms
-info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.testplatform.objectmodel/index.json
-info :   CACHE https://api.nuget.org/v3-flatcontainer/microsoft.extensions.dependencymodel/index.json
-info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.extensions.dependencymodel/1.0.3/microsoft.extensions.dependencymodel.1.0.3.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.extensions.dependencymodel/1.0.3/microsoft.extensions.dependencymodel.1.0.3.nupkg 29ms
-info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.dotnet.platformabstractions/index.json
-info :   OK https://api.nuget.org/v3-flatcontainer/xunit.extensibility.execution/index.json 508ms
-info :   GET https://api.nuget.org/v3-flatcontainer/xunit.extensibility.execution/2.4.0/xunit.extensibility.execution.2.4.0.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/xunit.extensibility.core/index.json 513ms
-info :   GET https://api.nuget.org/v3-flatcontainer/xunit.extensibility.core/2.4.0/xunit.extensibility.core.2.4.0.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/xunit.extensibility.execution/2.4.0/xunit.extensibility.execution.2.4.0.nupkg 25ms
-info :   OK https://api.nuget.org/v3-flatcontainer/xunit.extensibility.core/2.4.0/xunit.extensibility.core.2.4.0.nupkg 23ms
-info :   GET https://api.nuget.org/v3-flatcontainer/xunit.abstractions/index.json
-info :   OK https://api.nuget.org/v3-flatcontainer/xunit.abstractions/index.json 143ms
-info :   GET https://api.nuget.org/v3-flatcontainer/xunit.abstractions/2.0.2/xunit.abstractions.2.0.2.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/xunit.abstractions/2.0.2/xunit.abstractions.2.0.2.nupkg 18ms
-info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.testplatform.objectmodel/index.json 512ms
-info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.testplatform.objectmodel/16.0.1/microsoft.testplatform.objectmodel.16.0.1.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.dotnet.platformabstractions/index.json 489ms
-info :   GET https://api.nuget.org/v3-flatcontainer/microsoft.dotnet.platformabstractions/1.0.3/microsoft.dotnet.platformabstractions.1.0.3.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.testplatform.objectmodel/16.0.1/microsoft.testplatform.objectmodel.16.0.1.nupkg 18ms
-info :   OK https://api.nuget.org/v3-flatcontainer/microsoft.dotnet.platformabstractions/1.0.3/microsoft.dotnet.platformabstractions.1.0.3.nupkg 21ms
-info :   GET https://api.nuget.org/v3-flatcontainer/system.componentmodel.eventbasedasync/index.json
-info :   GET https://api.nuget.org/v3-flatcontainer/system.diagnostics.textwritertracelistener/index.json
-info :   OK https://api.nuget.org/v3-flatcontainer/system.diagnostics.textwritertracelistener/index.json 509ms
-info :   OK https://api.nuget.org/v3-flatcontainer/system.componentmodel.eventbasedasync/index.json 515ms
-info :   GET https://api.nuget.org/v3-flatcontainer/system.diagnostics.textwritertracelistener/4.0.0/system.diagnostics.textwritertracelistener.4.0.0.nupkg
-info :   GET https://api.nuget.org/v3-flatcontainer/system.componentmodel.eventbasedasync/4.0.11/system.componentmodel.eventbasedasync.4.0.11.nupkg
-info :   OK https://api.nuget.org/v3-flatcontainer/system.diagnostics.textwritertracelistener/4.0.0/system.diagnostics.textwritertracelistener.4.0.0.nupkg 23ms
-info :   OK https://api.nuget.org/v3-flatcontainer/system.componentmodel.eventbasedasync/4.0.11/system.componentmodel.eventbasedasync.4.0.11.nupkg 30ms
-info : Installing System.ComponentModel.EventBasedAsync 4.0.11.
-info : Installing System.Diagnostics.TextWriterTraceListener 4.0.0.
-info : Installing Microsoft.DotNet.PlatformAbstractions 1.0.3.
-info : Installing xunit.abstractions 2.0.2.
-info : Installing Microsoft.TestPlatform.ObjectModel 16.0.1.
-info : Installing Microsoft.Extensions.DependencyModel 1.0.3.
-info : Installing coverlet.msbuild 2.6.2.
-info : Installing xunit.runner.visualstudio 2.4.0.
-info : Installing dotnet-reportgenerator-cli 4.2.2.
-info : Installing xunit.extensibility.core 2.4.0.
-info : Installing xunit.extensibility.execution 2.4.0.
-info : Installing System.Diagnostics.TraceSource 4.3.0.
-info : Installing Microsoft.TestPlatform.TestHost 16.0.1.
-info : Installing Microsoft.CodeCoverage 16.0.1.
-info : Installing xunit.core 2.4.0.
-info : Installing xunit.analyzers 0.10.0.
-info : Installing xunit.assert 2.4.0.
-info : Installing Castle.Core 4.4.0.
-info : Installing Microsoft.NET.Test.Sdk 16.0.1.
-info : Installing xunit 2.4.0.
-info : Installing Moq 4.11.0.
-info : Package 'dotnet-reportgenerator-cli' is compatible with all the specified frameworks in project '/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/everisapiTest.csproj'.
-info : PackageReference for package 'dotnet-reportgenerator-cli' version '4.2.2' added to file '/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/everisapiTest.csproj'.
-info : Committing restore...
-info : Generating MSBuild file /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/obj/everisapiTest.csproj.nuget.g.props.
-info : Generating MSBuild file /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/obj/everisapiTest.csproj.nuget.g.targets.
-info : Writing assets file to disk. Path: /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/obj/project.assets.json
-log  : Restore completed in 4.98 sec for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/everisapiTest.csproj.
-[8mha:////4HuyIvUX8pwvexQHm++bXgnie+MJ3cRqht+Lwc887pV1AAAAox+LCAAAAAAAAP9tjTESwiAURH/iWNhaeghSZKwcK1uGxhNggghh/idAJJUn8mreQTQzVm6xs2+b93zBOgY4UtDMKhwMxs4w7yZdFssUhqujzCxdWEcYySkmVBbUq9OCgpKCJVUNKw4bhZ2jaFAn2HIr77JxEnVzTqF8Bw616Ud4QMWLOcmQvjAH2N2mPhL+PH8FMPsEddt+au/fWFYUrL4AAAA=[0m[Pipeline] sh
-+ dotnet build /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/
-Microsoft (R) Build Engine version 16.1.76+g14b0a930a7 for .NET Core
-Copyright (C) Microsoft Corporation. All rights reserved.
-
-  Restore completed in 78.8 ms for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/everisapiTest.csproj.
-  Restore completed in 76.12 ms for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj.
-  Restore completed in 68.36 ms for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj.
-  Restore completed in 4.99 sec for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/everisapiTest.csproj.
-  everisapi.API -> /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/bin/Debug/netcoreapp2.1/everisapi.API.dll
-  everisapiTest -> /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/bin/Debug/netcoreapp2.1/everisapiTest.dll
-
-Build succeeded.
-    0 Warning(s)
-    0 Error(s)
-
-Time Elapsed 00:00:11.78
-[8mha:////4H/cCtcoYjok3mTasAZ5qKGiNJVY3vzZxTVMHkZTeZ9xAAAApB+LCAAAAAAAAP9tjTESwiAURH/iWNhaeghSZMbGsbJlaDwBJogQ5n8CRFJ5Iq/mHUQzY+UWO/u2ec8XrGOAIwXNrMLBYOwM827SZbFMYbg6yszShXWEkZxiQmVBvTotKCgpWFLVsOKwUdg5igZ1gi238i4bJ1E35xTKd+BQm36EB1S8mJMM6QtzgN1t6iPhz/NXALP3Cep2/6n2DbVmE/y+AAAA[0m[Pipeline] }
-[8mha:////4PhfWbrOvj2Y0RRPZboESojtuC6UkdFkucyajcE//SUAAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiQUGBqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFDu9p/avgGGhUhAvgAAAA==[0m[Pipeline] // script
-[8mha:////4LBavXV1p4U0b6DwRBVKOpnKBJPJkRoJEundZccIe9BZAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiRIOEqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFDu9p/avgHpZhcovgAAAA==[0m[Pipeline] }
-[8mha:////4HgPtu2LlnAaWLYY/5qKNmDSwJQec18uN9i+uWqDKX3SAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOKCRIUQVVrLDS8wsTFOrDtjOyQVL+Jr/IFAJCq2WO1sM88XLFOEI0eLraHOUWocBt/baeHAsbt4HrDlMzZMib1BaQbJ2tQzSs4G5hQlLASsDDWekyObYS1adVeVV2SrU47TdxBQOn2DBxRiMmcV8xfGCJtrrxPTz/NXAGMIGcrd/lPbN9qFTJS+AAAA[0m[Pipeline] // stage
-[8mha:////4Aytl14A7cEVdWfYb6YDkGkiTBiHJodTUoGbvofcNaeTAAAAph+LCAAAAAAAAP9tjTEOwjAQBM9BKWgpeYRDkQ5R0VpueIFJjHFi3QX7QlLxIr7GHzBEomKrnZVW83xBmSIcKDrZWew9psbLIYwuNzlR7C+BJtnRWTaEiYKV2k6aWntcUBNbWCIKWClYW2wCJY+OYaM6czdVMOiqE8e87RUUvr3BA4TKZjaRvzBH2F7HNhH+PH8FMA8MomYo6t3nWL4BEcsSA8EAAAA=[0m[Pipeline] stage
-[8mha:////4GnVKpugqtPxULZBINLAp83pHQJG/mtTAlKOpIANTucLAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycogUJDbE1DXKwglCE0La6P/yk9JOnIircQdaKjHhwbItWe/1hiIynIidaCy2HmPtRRd6NyUxELfXQINo6CJqwkjBCmUHRcZWS1WULCzKclhJWFusA0WPLsFGNvqhy6DRlefE03aUkHtzhydkciInzelbRobtrTeR8Mf5C4CxS5AfdrPt52fxAbb5KxbCAAAA[0m[Pipeline] { (Execute test)
-[8mha:////4FveaO176Oxskxd108mEzK8ioNASHHD2iFFPNEeuKeDqAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUIDbE1DXKwglCE0La6P/yk9JOnIircQdaKjHhwbItWe/1hiIynIidaCy2HmPtRRd6NyUxELfXQINo6CJqwkjBCmUHRcZWS1WULCzKclhJWFusA0WPLsFGNvqhy6DRlefE03aUkHtzhydkciInzelbRobtrTeR8Mf5C4CxS5AfdrPt52fxAdhUMVHCAAAA[0m[Pipeline] script
-[8mha:////4GZATbom6Yav1HlBg9EAVNDxQQk83B0UJFLZV3kxtNM8AAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUAjbE1DXKwglCE0La6P/yk9JOnIircQdaKjHhwbItWe/1hiIynIidaCy2HmPtRRd6NyUxELfXQINo6CJqwkjBCmUHRcZWS1WULCzKclhJWFusA0WPLsFGNvqhy6DRlefE03aUkHtzhydkciInzelbRobtrTeR8Mf5C4CxS5AfdrPt52fxAXzhjwPCAAAA[0m[Pipeline] {
-[8mha:////4CHR+WoSCg4WIDvJoSfdV7rjS32rW9aVeppTEEf4+hvmAAAAox+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOJSkA5R0VppeIFJjLFj3Tm2g1PxIr7GHwhEomKL1c4283zBOgY4ctBoFfWGYmvQu1HPCzOH/uo4o+ULtkyRncJG5YY7dVqw4aRgSVHCSsBGUes4GtIJtsLKu6ycJF2dU5i/g4DSdAM8oBCzOcmQvjAF2N3GLjL9PH8FMPkEZb3/VO3fhXiFur4AAAA=[0m[Pipeline] sh
-+ dotnet test /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/everisapiTest.csproj /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/TestResults/ /p:Exclude=[xunit*]*
-Test run for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/bin/Debug/netcoreapp2.1/everisapiTest.dll(.NETCoreApp,Version=v2.1)
-Microsoft (R) Test Execution Command Line Tool Version 16.1.0
-Copyright (c) Microsoft Corporation.  All rights reserved.
-
-Starting test execution, please wait...
-
-Test Run Successful.
-Total tests: 272
-     Passed: 272
- Total time: 5.6677 Seconds
-
-Calculating coverage result...
-  Generating report '/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/TestResults/coverage.opencover.xml'
-
-+---------------+--------+--------+--------+
-| Module        | Line   | Branch | Method |
-+---------------+--------+--------+--------+
-| everisapi.API | 10.92% | 14.65% | 42.51% |
-+---------------+--------+--------+--------+
-
-+---------+--------+--------+--------+
-|         | Line   | Branch | Method |
-+---------+--------+--------+--------+
-| Total   | 10.92% | 14.65% | 42.51% |
-+---------+--------+--------+--------+
-| Average | 10.92% | 14.65% | 42.51% |
-+---------+--------+--------+--------+
-
-[8mha:////4J/vBMQuSqximZSLjAfS8KL17/J0ZUocr3ipBP2l2mpSAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOJSABWiSmu54QUmNsaJdWdsh6TiRXyNPxCIRMUWq51t5vmCZYpw5GixNdQ5So3D4Hs7LRw4dhfPA7Z8xoYpsTcozSBZm3pGydnAnKKEhYCVocZzcmQzrEWr7qryimx1ynH6DgJKp2/wgEJM5qxi/sIYYXPtdWL6ef4KYAwZyt32U/vwBsRJnqO+AAAA[0m[Pipeline] sh
-+ cd /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/
-+ dotnet reportgenerator everisapiTest.csproj -reports:./TestResults/coverage.opencover.xml -targetdir:./TestResults/Reports -reporttypes:HTML
-Loading report '/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/./TestResults/coverage.opencover.xml'
- Preprocessing report
- Initiating parser for OpenCover
-  Current Assembly: everisapi.API
-Coverage report parsing took 0.3 seconds
-Initializing report builders for report types: HTML
-Analyzing 118 classes
- Creating report 1/118 (Assembly: everisapi.API, Class: everisapi.API.AsignacionInfoContextExtensions)
- Creating report 2/118 (Assembly: everisapi.API, Class: everisapi.API.Controllers.AsignacionController)
- Creating report 3/118 (Assembly: everisapi.API, Class: everisapi.API.Controllers.EvaluacionController)
- Creating report 4/118 (Assembly: everisapi.API, Class: everisapi.API.Controllers.LineaController)
- Creating report 5/118 (Assembly: everisapi.API, Class: everisapi.API.Controllers.OficinaController)
- Creating report 6/118 (Assembly: everisapi.API, Class: everisapi.API.Controllers.PreguntasController)
- Creating report 7/118 (Assembly: everisapi.API, Class: everisapi.API.Controllers.ProyectosController)
- Creating report 8/118 (Assembly: everisapi.API, Class: everisapi.API.Controllers.SectionController)
- Creating report 9/118 (Assembly: everisapi.API, Class: everisapi.API.Controllers.RespuestaController)
- Creating report 10/118 (Assembly: everisapi.API, Class: everisapi.API.Controllers.TokenController)
- Creating report 11/118 (Assembly: everisapi.API, Class: everisapi.API.Controllers.UnidadController)
- Creating report 12/118 (Assembly: everisapi.API, Class: everisapi.API.Entities.AsignacionEntity)
- Creating report 13/118 (Assembly: everisapi.API, Class: everisapi.API.Controllers.UsersController)
- Creating report 14/118 (Assembly: everisapi.API, Class: everisapi.API.Entities.AssessmentEntity)
- Creating report 15/118 (Assembly: everisapi.API, Class: everisapi.API.Entities.AsignacionInfoContext)
- Creating report 16/118 (Assembly: everisapi.API, Class: everisapi.API.Entities.EvaluacionEntity)
- Creating report 17/118 (Assembly: everisapi.API, Class: everisapi.API.Entities.IdiomasEntity)
- Creating report 18/118 (Assembly: everisapi.API, Class: everisapi.API.Entities.NotasAsignacionesEntity)
- Creating report 19/118 (Assembly: everisapi.API, Class: everisapi.API.Entities.LineaEntity)
- Creating report 20/118 (Assembly: everisapi.API, Class: everisapi.API.Entities.NotasSectionsEntity)
- Creating report 21/118 (Assembly: everisapi.API, Class: everisapi.API.Entities.ProyectoEntity)
- Creating report 22/118 (Assembly: everisapi.API, Class: everisapi.API.Entities.OficinaEntity)
- Creating report 23/118 (Assembly: everisapi.API, Class: everisapi.API.Entities.RespuestaEntity)
- Creating report 24/118 (Assembly: everisapi.API, Class: everisapi.API.Entities.PreguntaEntity)
- Creating report 25/118 (Assembly: everisapi.API, Class: everisapi.API.Entities.RoleEntity)
- Creating report 26/118 (Assembly: everisapi.API, Class: everisapi.API.Entities.TraduccionesAsignacionesEntity)
- Creating report 27/118 (Assembly: everisapi.API, Class: everisapi.API.Entities.SectionEntity)
- Creating report 28/118 (Assembly: everisapi.API, Class: everisapi.API.Entities.TraduccionesIdiomasEntity)
- Creating report 29/118 (Assembly: everisapi.API, Class: everisapi.API.Entities.TraduccionesRolesEntity)
- Creating report 30/118 (Assembly: everisapi.API, Class: everisapi.API.Entities.TraduccionesOficinasEntity)
- Creating report 31/118 (Assembly: everisapi.API, Class: everisapi.API.Entities.TraduccionesSectionsEntity)
- Creating report 32/118 (Assembly: everisapi.API, Class: everisapi.API.Entities.TraduccionesPreguntasEntity)
- Creating report 33/118 (Assembly: everisapi.API, Class: everisapi.API.Entities.UnidadEntity)
- Creating report 34/118 (Assembly: everisapi.API, Class: everisapi.API.Entities.UserProyectoEntity)
- Creating report 35/118 (Assembly: everisapi.API, Class: everisapi.API.Entities.UserEntity)
- Creating report 36/118 (Assembly: everisapi.API, Class: everisapi.API.Entities.User_RoleEntity)
- Creating report 37/118 (Assembly: everisapi.API, Class: everisapi.API.Migrations.AddLastQuestionUpdate)
- Creating report 38/118 (Assembly: everisapi.API, Class: everisapi.API.Migrations.AddAssessments)
- Creating report 39/118 (Assembly: everisapi.API, Class: everisapi.API.Migrations.AddTableOficinaUnidad_Linea)
- Creating report 40/118 (Assembly: everisapi.API, Class: everisapi.API.Migrations.AddColumnCodigoProyecto)
- Creating report 41/118 (Assembly: everisapi.API, Class: everisapi.API.Migrations.AddTablesIdiomas)
- Creating report 42/118 (Assembly: everisapi.API, Class: everisapi.API.Migrations.AddUserProyecto)
- Creating report 43/118 (Assembly: everisapi.API, Class: everisapi.API.Migrations.AddUserNameToEvaluation)
- Creating report 44/118 (Assembly: everisapi.API, Class: everisapi.API.Migrations.AñadirPesosASecciones)
- Creating report 45/118 (Assembly: everisapi.API, Class: everisapi.API.Migrations.PesoIntToFloat)
- Creating report 46/118 (Assembly: everisapi.API, Class: everisapi.API.Migrations.AsignacionInfoContextModelSnapshot)
- Creating report 47/118 (Assembly: everisapi.API, Class: everisapi.API.Migrations.PreguntaHabilitante)
- Creating report 48/118 (Assembly: everisapi.API, Class: everisapi.API.Migrations.LinkAssessmentWithSections)
- Creating report 49/118 (Assembly: everisapi.API, Class: everisapi.API.Migrations.RemoveColsForTranslate)
- Creating report 50/118 (Assembly: everisapi.API, Class: everisapi.API.Migrations.LinkEvaluationsWithAssessments)
- Creating report 51/118 (Assembly: everisapi.API, Class: everisapi.API.Migrations.RemoveUserRoles)
- Creating report 52/118 (Assembly: everisapi.API, Class: everisapi.API.Migrations.ModificacionTablaProyectos)
- Creating report 53/118 (Assembly: everisapi.API, Class: everisapi.API.Migrations.SectionPesosNiveles)
- Creating report 54/118 (Assembly: everisapi.API, Class: everisapi.API.Migrations.NivelPreguntas)
- Creating report 55/118 (Assembly: everisapi.API, Class: everisapi.API.Migrations.TestProyects)
- Creating report 56/118 (Assembly: everisapi.API, Class: everisapi.API.Migrations.NombreCompleto_Activo)
- Creating report 57/118 (Assembly: everisapi.API, Class: everisapi.API.Models.AsignacionConNotasDto)
- Creating report 58/118 (Assembly: everisapi.API, Class: everisapi.API.Models.AsignacionConPreguntaNivelDto)
- Creating report 59/118 (Assembly: everisapi.API, Class: everisapi.API.Models.AsignacionCreateUpdateDto)
- Creating report 60/118 (Assembly: everisapi.API, Class: everisapi.API.Models.EvaluacionDto)
- Creating report 61/118 (Assembly: everisapi.API, Class: everisapi.API.Models.AsignacionDto)
- Creating report 62/118 (Assembly: everisapi.API, Class: everisapi.API.Models.EvaluacionInfoDto)
- Creating report 63/118 (Assembly: everisapi.API, Class: everisapi.API.Models.AsignacionInfoDto)
- Creating report 64/118 (Assembly: everisapi.API, Class: everisapi.API.Models.EvaluacionInfoPaginationDto)
- Creating report 65/118 (Assembly: everisapi.API, Class: everisapi.API.Models.AsignacionSinPreguntasDto)
- Creating report 66/118 (Assembly: everisapi.API, Class: everisapi.API.Models.EvaluacionInfoWithProgressDto)
- Creating report 67/118 (Assembly: everisapi.API, Class: everisapi.API.Models.AsignacionUpdateNotasDto)
- Creating report 68/118 (Assembly: everisapi.API, Class: everisapi.API.Models.EvaluacionInfoWithSectionsDto)
- Creating report 69/118 (Assembly: everisapi.API, Class: everisapi.API.Models.AssessmentDto)
- Creating report 70/118 (Assembly: everisapi.API, Class: everisapi.API.Models.EvaluacionesWithoutRespuestasDto)
- Creating report 71/118 (Assembly: everisapi.API, Class: everisapi.API.Models.Equipos)
- Creating report 72/118 (Assembly: everisapi.API, Class: everisapi.API.Models.Idiomas)
- Creating report 73/118 (Assembly: everisapi.API, Class: everisapi.API.Models.EvaluacionCreateUpdateDto)
- Creating report 74/118 (Assembly: everisapi.API, Class: everisapi.API.Models.Linea)
- Creating report 75/118 (Assembly: everisapi.API, Class: everisapi.API.Models.Oficina)
- Creating report 76/118 (Assembly: everisapi.API, Class: everisapi.API.Models.ProyectoDto)
- Creating report 77/118 (Assembly: everisapi.API, Class: everisapi.API.Models.PreguntaCreateDto)
- Creating report 78/118 (Assembly: everisapi.API, Class: everisapi.API.Models.ProyectoWithEvaluacionesDto)
- Creating report 79/118 (Assembly: everisapi.API, Class: everisapi.API.Models.PreguntaDto)
- Creating report 80/118 (Assembly: everisapi.API, Class: everisapi.API.Models.RespuestaConNotasDto)
- Creating report 81/118 (Assembly: everisapi.API, Class: everisapi.API.Models.PreguntaRespuestaNivelDto)
- Creating report 82/118 (Assembly: everisapi.API, Class: everisapi.API.Models.RespuestaConUserDto)
- Creating report 83/118 (Assembly: everisapi.API, Class: everisapi.API.Models.PreguntaUpdateDto)
- Creating report 84/118 (Assembly: everisapi.API, Class: everisapi.API.Models.RespuestaDto)
- Creating report 85/118 (Assembly: everisapi.API, Class: everisapi.API.Models.PreguntaWithOneRespuestasDto)
- Creating report 86/118 (Assembly: everisapi.API, Class: everisapi.API.Models.RoleDto)
- Creating report 87/118 (Assembly: everisapi.API, Class: everisapi.API.Models.PreguntaWithRespuestasDto)
- Creating report 88/118 (Assembly: everisapi.API, Class: everisapi.API.Models.SectionConAsignacionesDto)
- Creating report 89/118 (Assembly: everisapi.API, Class: everisapi.API.Models.ProyectoCreateUpdateDto)
- Creating report 90/118 (Assembly: everisapi.API, Class: everisapi.API.Models.SectionDto)
- Creating report 91/118 (Assembly: everisapi.API, Class: everisapi.API.Models.SectionInfoDto)
- Creating report 92/118 (Assembly: everisapi.API, Class: everisapi.API.Program)
- Creating report 93/118 (Assembly: everisapi.API, Class: everisapi.API.Models.SectionWithNotasDto)
- Creating report 94/118 (Assembly: everisapi.API, Class: everisapi.API.Services.AsignacionInfoRepository)
- Creating report 95/118 (Assembly: everisapi.API, Class: everisapi.API.Models.SectionWithoutAreaDto)
- Creating report 96/118 (Assembly: everisapi.API, Class: everisapi.API.Services.EvaluacionInfoRepository)
- Creating report 97/118 (Assembly: everisapi.API, Class: everisapi.API.Models.TraduccionesAsignaciones)
- Creating report 98/118 (Assembly: everisapi.API, Class: everisapi.API.Models.TraduccionesIdiomas)
- Creating report 99/118 (Assembly: everisapi.API, Class: everisapi.API.Services.IdiomasInfoRepository)
- Creating report 100/118 (Assembly: everisapi.API, Class: everisapi.API.Models.TraduccionesOficinas)
- Creating report 101/118 (Assembly: everisapi.API, Class: everisapi.API.Services.LineaInfoRepository)
- Creating report 102/118 (Assembly: everisapi.API, Class: everisapi.API.Models.TraduccionesPreguntas)
- Creating report 103/118 (Assembly: everisapi.API, Class: everisapi.API.Services.OficinaInfoRepository)
- Creating report 104/118 (Assembly: everisapi.API, Class: everisapi.API.Services.RespuestasInfoRepository)
- Creating report 105/118 (Assembly: everisapi.API, Class: everisapi.API.Models.TraduccionesRoles)
- Creating report 106/118 (Assembly: everisapi.API, Class: everisapi.API.Services.SectionsInfoRepository)
- Creating report 107/118 (Assembly: everisapi.API, Class: everisapi.API.Models.TraduccionesSections)
- Creating report 108/118 (Assembly: everisapi.API, Class: everisapi.API.Models.Unidad)
- Creating report 109/118 (Assembly: everisapi.API, Class: everisapi.API.Services.UnidadInfoRepository)
- Creating report 110/118 (Assembly: everisapi.API, Class: everisapi.API.Models.UserProyectoDto)
- Creating report 111/118 (Assembly: everisapi.API, Class: everisapi.API.Services.UsersInfoRespository)
- Creating report 112/118 (Assembly: everisapi.API, Class: everisapi.API.Models.User_RoleCreateDto)
- Creating report 113/118 (Assembly: everisapi.API, Class: everisapi.API.Startup)
- Creating report 114/118 (Assembly: everisapi.API, Class: everisapi.API.Models.User_RoleDto)
- Creating report 115/118 (Assembly: everisapi.API, Class: everisapi.API.everisprojectdbContext)
- Creating report 116/118 (Assembly: everisapi.API, Class: everisapi.API.Models.UsersDto)
- Creating report 117/118 (Assembly: everisapi.API, Class: everisapi.API.Models.UsersSinProyectosDto)
- Creating report 118/118 (Assembly: everisapi.API, Class: everisapi.API.Models.UsersWithRolesDto)
- Creating summary
-Report generation took 3.8 seconds
-[8mha:////4DUTDsO0ZOSfnvG3YVgUZUSK94hVLBDhd5juX2bhWqQfAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOJSgGgQVVrLDS8wsTFOrDtjOyQVL+Jr/IFAJCq2WO1sM88XLFOEI0eLraHOUWocBt/baeHAsbt4HrDlMzZMib1BaQbJ2tQzSs4G5hQlLASsDDWekyObYS1adVeVV2SrU47TdxBQOn2DBxRiMmcV8xfGCJtrrxPTz/NXAGMIGcrd/lPbN/zO9Xa+AAAA[0m[Pipeline] }
-[8mha:////4NlefNwaaTVC7K/saoaRSPmKU2RjWetKFjyK96Cc4gN4AAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiISQKRJXWcsMLTGyME+vO2A5JxYv4Gn8gEImKLVY728zzBcsU4cjRYmuoc5Qah8H3dlo4cOwungds+YwNU2JvUJpBsjb1jJKzgTlFCQsBK0ON5+TIZliLVt1V5RXZ6pTj9B0ElE7f4AGFmMxZxfyFMcLm2uvE9PP8FcAYQoZyt//U9g3PLa7KvgAAAA==[0m[Pipeline] // script
-[8mha:////4BRS+3vekMW/Iq3aQ46uiGOjz49LayjP6jTdgAPgK3ajAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiJAokRJXWcsMLTGyME+vO2A5JxYv4Gn8gEImKLVY728zzBcsU4cjRYmuoc5Qah8H3dlo4cOwungds+YwNU2JvUJpBsjb1jJKzgTlFCQsBK0ON5+TIZliLVt1V5RXZ6pTj9B0ElE7f4AGFmMxZxfyFMcLm2uvE9PP8FcAYQoZyt//U9g2gzvGivgAAAA==[0m[Pipeline] }
-[8mha:////4O1tJcFkO0MQZ+cXIrtwf2BBO9bx+86JagPsaEmDJ/KRAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOJCQYMQVVrLDS8wsTFOrDtjOyQVL+Jr/IFAJCq2WO1sM88XLFOEI0eLraHOUWocBt/baeHAsbt4HrDlMzZMib1BaQbJ2tQzSs4G5hQlLASsDDWekyObYS1adVeVV2SrU47TdxBQOn2DBxRiMmcV8xfGCJtrrxPTz/NXAGMIGcrd/lPbN5Mtqh6+AAAA[0m[Pipeline] // stage
-[8mha:////4NH6WK+ii4iVvTaBYkFVwx4cYL/zD+IqXPK637hT+LlDAAAAph+LCAAAAAAAAP9tjTEOwjAQBM9BKWgpeYRDARWiorXc8AITG+PEugv2haTiRXyNPxCIRMVWOyut5vmCMic4UPKycdgGzHWQXez91ORAqb1EGmRDZ1kTZopOajdosu44oyZ2MEcUsFCwdFhHygE9w0o15m6qaNBXJ07TtldQBHuDBwg1mdkk/sKYYH3tbSb8ef4KYOwYxJah2G0+x/INpcBlpcEAAAA=[0m[Pipeline] stage
-[8mha:////4IhkSMwIoVPjsKqAvFw4JWD1t6T8QX0leRY0pxMuT989AAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycogUBibE1DXKwglCE0La6P/yk9JOnIircQdaKjHhwbItWe/1hiIynIidaCy2HmPtRRd6NyUxELfXQINo6CJqwkjBCmUHRcZWS1WULCzKclhJWFusA0WPLsFGNvqhy6DRlefE03aUkHtzhydkciInzelbRobtrTeR8Mf5C4CxS5AfdrPt52fxAW2++SvCAAAA[0m[Pipeline] { (Sonarqube)
-[8mha:////4OuFXdUSR1267azAqvDlPxtYwJoaZbTVnX/4uIYtz+VoAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUIDEhpq5RFk4QmhDSRv+Xn5R24kRcjTvQUokJD5ZtyXqvNxSR4UTsRGOx9RhrL7rQuymJgbi9BhpEQxdRE0YKVig7KDK2WqqiZGFRlsNKwtpiHSh6dAk2stEPXQaNrjwnnrajhNybOzwhkxM5aU7fMjJsb72JhD/OXwCMXYL8sJttPz+LDwMT42zCAAAA[0m[Pipeline] script
-[8mha:////4K0YFsWS/mmMgtJVQZxfqPIOtLDhyzzDLEDr8IBjg7RrAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycohUAjEhpq5RFk4QmhDSRv+Xn5R24kRcjTvQUokJD5ZtyXqvNxSR4UTsRGOx9RhrL7rQuymJgbi9BhpEQxdRE0YKVig7KDK2WqqiZGFRlsNKwtpiHSh6dAk2stEPXQaNrjwnnrajhNybOzwhkxM5aU7fMjJsb72JhD/OXwCMXYL8sJttPz+LD6emXT7CAAAA[0m[Pipeline] {
-[8mha:////4GD3rlHJHc0z7FL6UzTT4o89YLfX24Y7r3CDpZQZE2bYAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOJSABWiSmu54QUmNsaJdWdsh6TiRXyNPxCIRMUWq51t5vmCZYpw5GixNdQ5So3D4Hs7LRw4dhfPA7Z8xoYpsTcozSBZm3pGydnAnKKEhYCVocZzcmQzrEWr7qryimx1ynH6DgJKp2/wgEJM5qxi/sIYYXPtdWL6ef4KYAwZyv32U7vwBiwS7Xe+AAAA[0m[Pipeline] sh
-+ cd /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter
-+ dotnet restore
-  Restore completed in 67.28 ms for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/everisapiTest.csproj.
-  Restore completed in 67.28 ms for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj.
-  Restore completed in 40.27 ms for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj.
-  Restore completed in 37.21 ms for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/everisapiTest.csproj.
-[8mha:////4KcTbby6/hsOy9N0wxHBxqSU/R8LFeNAa7zEfzXzPo2dAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOJSoFSIitZKwwtMYowd686xHZyKF/E1/kAgEhVbrHa2mecL1jHAkYNGq6g3FFuD3o16Xpg59FfHGS1fsGWK7BQ2KjfcqdOCDScFS4oSVgI2ilrH0ZBOsBVW3mXlJOnqnML8HQSUphvgAYWYzUmG9IUpwO42dpHp5/krgMknKOv9p2r/Bm0j9m6+AAAA[0m[Pipeline] sh
-+ pwd
-/var/jenkins_home/jobs/AgileMeter/workspace
-[8mha:////4IJvaWNKp5nFHfoKr9Xp6DKYbIsAL6Oz9HdV6dtURQc+AAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOJSIGgQVVrLDS8wsTFOrDtjOyQVL+Jr/IFAJCq2WO1sM88XLFOEI0eLraHOUWocBt/baeHAsbt4HrDlMzZMib1BaQbJ2tQzSs4G5hQlLASsDDWekyObYS1adVeVV2SrU47TdxBQOn2DBxRiMmcV8xfGCJtrrxPTz/NXAGPIUO62n9qHN65w20W+AAAA[0m[Pipeline] sh
-+ cd /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter
-+ dotnet build-server shutdown
-Shutting down MSBuild server...
-Shutting down VB/C# compiler server...
-MSBuild server shut down successfully.
-VB/C# compiler server shut down successfully.
-[8mha:////4E16xdHhnMA1vHEWk+wr9MVQJLyWklsqTqAMSYvwUuINAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOJSIESBqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDhnK3/dQ+vAHvQcBcvgAAAA==[0m[Pipeline] sh
-+ cd /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter
-+ dotnet sonarscanner begin /k:AgileMeter /d:sonar.host.url=http://sonarqube:9000 /d:sonar.login=9f3279b5aa1fcc42e8b2dbde1ff87db597e0581d /d:sonar.language=cs /d:sonar.cs.opencover.reportsPaths=/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/TestResults/coverage.opencover.xml
-SonarScanner for MSBuild 4.6.2
-Using the .NET Core version of the Scanner for MSBuild
-Pre-processing started.
-Preparing working directories...
-10:35:14.387  Updating build integration targets...
-10:35:14.454  Fetching analysis configuration settings...
-10:35:15.89  Provisioning analyzer assemblies for cs...
-10:35:15.891  Installing required Roslyn analyzers...
-10:35:16.452  Provisioning analyzer assemblies for vbnet...
-10:35:16.452  Installing required Roslyn analyzers...
-10:35:16.536  Pre-processing succeeded.
-[8mha:////4J6awRchtI25E+c9cD1hfIW5qhObYTYffsVlxOIvDmGxAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOJSICQkRJXWcsMLTGyME+vO2A5JxYv4Gn8gEImKLVY728zzBcsU4cjRYmuoc5Qah8H3dlo4cOwungds+YwNU2JvUJpBsjb1jJKzgTlFCQsBK0ON5+TIZliLVt1V5RXZ6pTj9B0ElE7f4AGFmMxZxfyFMcLm2uvE9PP8FcAYMpS77af24Q0gXVjbvgAAAA==[0m[Pipeline] sh
-+ cd /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter
-+ dotnet build
-Microsoft (R) Build Engine version 16.1.76+g14b0a930a7 for .NET Core
-Copyright (C) Microsoft Corporation. All rights reserved.
-
-  Restore completed in 65.18 ms for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/everisapiTest.csproj.
-  Restore completed in 65.18 ms for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj.
-  Restore completed in 2.6 ms for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/everisapiTest.csproj.
-  Restore completed in 8.63 ms for /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj.
-Controllers/AsignacionController.cs(40,17): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/EvaluacionController.cs(482,9): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/PreguntasController.cs(139,14): warning S1135: Complete the task associated to this 'TODO' comment. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/PreguntasController.cs(190,14): warning S1135: Complete the task associated to this 'TODO' comment. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/PreguntasController.cs(190,54): warning S1135: Complete the task associated to this 'TODO' comment. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/PreguntasController.cs(207,25): warning S1135: Complete the task associated to this 'TODO' comment. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/PreguntasController.cs(229,14): warning S1135: Complete the task associated to this 'TODO' comment. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/ProyectosController.cs(112,9): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/ProyectosController.cs(145,9): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/RespuestaController.cs(126,14): warning S1135: Complete the task associated to this 'TODO' comment. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/RespuestaController.cs(126,54): warning S1135: Complete the task associated to this 'TODO' comment. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/RespuestaController.cs(165,14): warning S1135: Complete the task associated to this 'TODO' comment. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/RespuestaController.cs(165,54): warning S1135: Complete the task associated to this 'TODO' comment. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/SectionController.cs(240,9): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/TokenController.cs(67,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/TokenController.cs(68,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/TokenController.cs(105,9): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/UsersController.cs(42,17): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/UsersController.cs(275,17): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Entities/AsignacionEntity.cs(18,9): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Entities/AsignacionInfoContext.cs(19,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Entities/OficinaEntity.cs(18,9): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Entities/PreguntaEntity.cs(18,9): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Entities/RoleEntity.cs(17,9): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Entities/SectionEntity.cs(19,9): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-everisprojectdbContext.cs(13,16): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Migrations/20181026062550_AddAssessments.cs(14,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Migrations/20181029085809_LinkAssessmentWithSections.cs(19,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Models/UserProyectoDto.cs(11,9): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/AsignacionInfoRepository.cs(78,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/AsignacionInfoRepository.cs(196,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/AsignacionInfoRepository.cs(212,1): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/AsignacionInfoRepository.cs(314,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/AsignacionInfoRepository.cs(319,1): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(62,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(176,21): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(379,17): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(495,21): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(509,25): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(589,21): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(728,17): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(769,21): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(824,17): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(838,21): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/IUsersInfoRepository.cs(71,15): warning S1135: Complete the task associated to this 'TODO' comment. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/RespuestasInfoRepository.cs(170,17): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/RespuestasInfoRepository.cs(180,17): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/RespuestasInfoRepository.cs(199,21): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/RespuestasInfoRepository.cs(219,25): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/SectionsInfoRepository.cs(326,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/SectionsInfoRepository.cs(432,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(58,21): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(152,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(216,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(242,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(253,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(338,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(363,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(413,1): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Startup.cs(82,7): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Startup.cs(149,7): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Startup.cs(168,7): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/AsignacionController.cs(21,47): warning S2933: Make '_logger' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/AsignacionController.cs(22,43): warning S2933: Make '_asignacionInfoRepository' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Enums/Roles.cs(1,13): warning S3903: Move 'Roles' into a named namespace. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/ProyectosController.cs(20,42): warning S2933: Make '_logger' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/ProyectosController.cs(21,34): warning S2933: Make '_usersInfoRepository' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/RespuestaController.cs(18,42): warning S2933: Make '_logger' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/RespuestaController.cs(19,39): warning S2933: Make '_respuestasInfoRepository' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/SectionController.cs(19,40): warning S2933: Make '_logger' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/SectionController.cs(20,37): warning S2933: Make '_sectionInfoRepository' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/EvaluacionController.cs(21,47): warning S2933: Make '_logger' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/EvaluacionController.cs(22,43): warning S2933: Make '_evaluacionInfoRepository' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/LineaController.cs(22,42): warning S2933: Make '_logger' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/LineaController.cs(23,38): warning S2933: Make '_lineaInfoRepository' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/OficinaController.cs(23,44): warning S2933: Make '_logger' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/OficinaController.cs(24,40): warning S2933: Make '_oficinaInfoRepository' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/PreguntasController.cs(20,42): warning S2933: Make '_logger' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/PreguntasController.cs(21,39): warning S2933: Make '_asignacionInfoRepository' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/TokenController.cs(19,32): warning S2933: Make 'Configuration' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/TokenController.cs(20,38): warning S2933: Make '_usersInfoRespository' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/TokenController.cs(22,38): warning S1313: Make sure using this hardcoded IP address '10.125.8.21' is safe here. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/UnidadController.cs(22,43): warning S2933: Make '_logger' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/UnidadController.cs(23,39): warning S2933: Make '_unidadInfoRepository' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/UsersController.cs(23,42): warning S2933: Make '_logger' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/UsersController.cs(24,38): warning S2933: Make '_userInfoRepository' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-everisprojectdbContext.cs(7,26): warning S101: Rename class 'everisprojectdbContext' to match pascal case naming rules, consider using 'EverisprojectdbContext'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Models/User_RoleCreateDto.cs(9,18): warning S101: Rename class 'User_RoleCreateDto' to match pascal case naming rules, consider using 'UserRoleCreateDto'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Models/User_RoleDto.cs(9,18): warning S101: Rename class 'User_RoleDto' to match pascal case naming rules, consider using 'UserRoleDto'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/AsignacionInfoRepository.cs(15,39): warning S2933: Make '_context' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Program.cs(14,18): warning S1118: Add a 'protected' constructor or the 'static' keyword to the class declaration. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(16,39): warning S2933: Make '_context' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/IdiomasInfoRepository.cs(15,35): warning S2933: Make '_context' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/LineaInfoRepository.cs(15,35): warning S2933: Make '_context' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/OficinaInfoRepository.cs(15,35): warning S2933: Make '_context' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/RespuestasInfoRepository.cs(14,39): warning S2933: Make '_context' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/SectionsInfoRepository.cs(14,39): warning S2933: Make '_context' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UnidadInfoRepository.cs(15,35): warning S2933: Make '_context' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(17,39): warning S2933: Make '_context' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Entities/User_RoleEntity.cs(10,18): warning S101: Rename class 'User_RoleEntity' to match pascal case naming rules, consider using 'UserRoleEntity'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-AsignacionInfoContextExtensions.cs(11,28): warning S1186: Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(97,79): warning S1125: Remove the unnecessary Boolean literal(s). [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(53,109): warning S1125: Remove the unnecessary Boolean literal(s). [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(132,76): warning S1006: Remove the default parameter value to match the signature of overridden method. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(153,128): warning S1125: Remove the unnecessary Boolean literal(s). [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(177,35): warning S1854: Remove this useless assignment to local variable 'RolUsuario'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-everisprojectdbContext.cs(18,33): warning S1186: Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Program.cs(16,28): warning S4823: Make sure that command line arguments are used safely here. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(39,72): warning S927: Rename parameter 'idEvaluation' to 'idEvaluacion' to match the interface declaration. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(136,42): warning S1125: Remove the unnecessary Boolean literal(s). [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(166,114): warning S1125: Remove the unnecessary Boolean literal(s). [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(112,40): warning S3776: Refactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/UsersController.cs(136,33): warning S4790: Make sure that hashing data is safe here. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Migrations/20181026062550_AddAssessments.cs(34,33): warning S1186: Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/EvaluacionController.cs(187,38): warning S2971: Use 'Count' property here instead. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/EvaluacionController.cs(193,38): warning S2971: Use 'Count' property here instead. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/EvaluacionController.cs(182,43): warning S1854: Remove this useless assignment to local variable 'EvaluacionesFiltradas'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/UsersController.cs(207,37): warning S4790: Make sure that hashing data is safe here. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(216,42): warning S1125: Remove the unnecessary Boolean literal(s). [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(246,114): warning S1125: Remove the unnecessary Boolean literal(s). [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(190,40): warning S3776: Refactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/UsersController.cs(245,33): warning S4790: Make sure that hashing data is safe here. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/EvaluacionController.cs(266,43): warning S1854: Remove this useless assignment to local variable 'EvaluacionesFiltradas'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/EvaluacionController.cs(229,43): warning S1854: Remove this useless assignment to local variable 'EvaluacionesFiltradas'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/TokenController.cs(31,23): warning S3400: Remove this method and declare a constant for this value. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/TokenController.cs(56,34): warning S4790: Make sure that hashing data is safe here. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/TokenController.cs(87,17): warning S1066: Merge this if statement with the enclosing one. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(288,82): warning S927: Rename parameter 'projectId' to 'IdProject' to match the interface declaration. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(359,61): warning S927: Rename parameter 'ProyectoId' to 'proyectoId' to match the interface declaration. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(424,48): warning S927: Rename parameter 'nombre' to 'usuario' to match the interface declaration. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(427,29): warning S1854: Remove this useless assignment to local variable 'user'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(314,46): warning S1125: Remove the unnecessary Boolean literal(s). [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(314,73): warning S1125: Remove the unnecessary Boolean literal(s). [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(331,132): warning S927: Rename parameter 'Evaluacion' to 'Evaluation' to match the interface declaration. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/AsignacionInfoRepository.cs(85,17): warning S2259: 'traduccion' is null on at least one execution path. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/AsignacionInfoRepository.cs(223,56): warning S2971: Drop 'Where' and move the condition into the 'FirstOrDefault'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(435,52): warning S3776: Refactor this method to reduce its Cognitive Complexity from 58 to the 15 allowed. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(514,57): warning S1854: Remove this useless assignment to local variable 'preguntas'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/RespuestasInfoRepository.cs(35,75): warning S927: Rename parameter 'idEvaluacion' to 'IdProyecto' to match the interface declaration. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/RespuestasInfoRepository.cs(35,93): warning S927: Rename parameter 'IdPregunta' to 'IdAsignacion' to match the interface declaration. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/RespuestasInfoRepository.cs(48,75): warning S927: Rename parameter 'idEvaluacion' to 'IdProyecto' to match the interface declaration. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/RespuestasInfoRepository.cs(48,93): warning S927: Rename parameter 'IdAsignacion' to 'IdPregunta' to match the interface declaration. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/RespuestasInfoRepository.cs(60,57): warning S927: Rename parameter 'Respuesta' to 'respuesta' to match the interface declaration. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/RespuestasInfoRepository.cs(85,52): warning S927: Rename parameter 'evaluationId' to 'idEvaluacion' to match the interface declaration. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(759,114): warning S1125: Remove the unnecessary Boolean literal(s). [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(682,40): warning S3776: Refactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(945,54): warning S927: Rename parameter 'idEvaluation' to 'idEvaluacion' to match the interface declaration. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(809,23): warning S3776: Refactor this method to reduce its Cognitive Complexity from 37 to the 15 allowed. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(843,53): warning S1854: Remove this useless assignment to local variable 'preguntas'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/RespuestasInfoRepository.cs(152,55): warning S3776: Refactor this method to reduce its Cognitive Complexity from 46 to the 15 allowed. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(996,44): warning S3776: Refactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(1018,44): warning S2971: Drop 'Where' and move the condition into the 'Count'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(1078,52): warning S2971: Drop 'Where' and move the condition into the 'Count'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/RespuestasInfoRepository.cs(206,53): warning S1854: Remove this useless assignment to local variable 'preguntas'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/SectionsInfoRepository.cs(35,31): warning S3776: Refactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/SectionsInfoRepository.cs(53,40): warning S2971: Drop 'Where' and move the condition into the 'Count'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/SectionsInfoRepository.cs(113,48): warning S2971: Drop 'Where' and move the condition into the 'Count'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/SectionsInfoRepository.cs(136,44): warning S3776: Refactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/SectionsInfoRepository.cs(158,44): warning S2971: Drop 'Where' and move the condition into the 'Count'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/SectionsInfoRepository.cs(219,52): warning S2971: Drop 'Where' and move the condition into the 'Count'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/SectionsInfoRepository.cs(245,44): warning S3776: Refactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/SectionsInfoRepository.cs(268,44): warning S2971: Drop 'Where' and move the condition into the 'Count'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/SectionsInfoRepository.cs(297,52): warning S2971: Drop 'Where' and move the condition into the 'Count'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/SectionsInfoRepository.cs(347,49): warning S2971: Drop 'Where' and move the condition into the 'FirstOrDefault'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/SectionsInfoRepository.cs(406,57): warning S2971: Use 'Count' property here instead. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/SectionsInfoRepository.cs(430,17): warning S1481: Remove the unused local variable 'SectionAlter'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-  everisapi.API -> /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/bin/Debug/netcoreapp2.1/everisapi.API.dll
-  everisapiTest -> /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/bin/Debug/netcoreapp2.1/everisapiTest.dll
-
-Build succeeded.
-
-Controllers/AsignacionController.cs(40,17): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/EvaluacionController.cs(482,9): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/PreguntasController.cs(139,14): warning S1135: Complete the task associated to this 'TODO' comment. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/PreguntasController.cs(190,14): warning S1135: Complete the task associated to this 'TODO' comment. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/PreguntasController.cs(190,54): warning S1135: Complete the task associated to this 'TODO' comment. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/PreguntasController.cs(207,25): warning S1135: Complete the task associated to this 'TODO' comment. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/PreguntasController.cs(229,14): warning S1135: Complete the task associated to this 'TODO' comment. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/ProyectosController.cs(112,9): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/ProyectosController.cs(145,9): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/RespuestaController.cs(126,14): warning S1135: Complete the task associated to this 'TODO' comment. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/RespuestaController.cs(126,54): warning S1135: Complete the task associated to this 'TODO' comment. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/RespuestaController.cs(165,14): warning S1135: Complete the task associated to this 'TODO' comment. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/RespuestaController.cs(165,54): warning S1135: Complete the task associated to this 'TODO' comment. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/SectionController.cs(240,9): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/TokenController.cs(67,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/TokenController.cs(68,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/TokenController.cs(105,9): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/UsersController.cs(42,17): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/UsersController.cs(275,17): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Entities/AsignacionEntity.cs(18,9): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Entities/AsignacionInfoContext.cs(19,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Entities/OficinaEntity.cs(18,9): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Entities/PreguntaEntity.cs(18,9): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Entities/RoleEntity.cs(17,9): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Entities/SectionEntity.cs(19,9): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-everisprojectdbContext.cs(13,16): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Migrations/20181026062550_AddAssessments.cs(14,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Migrations/20181029085809_LinkAssessmentWithSections.cs(19,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Models/UserProyectoDto.cs(11,9): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/AsignacionInfoRepository.cs(78,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/AsignacionInfoRepository.cs(196,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/AsignacionInfoRepository.cs(212,1): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/AsignacionInfoRepository.cs(314,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/AsignacionInfoRepository.cs(319,1): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(62,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(176,21): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(379,17): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(495,21): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(509,25): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(589,21): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(728,17): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(769,21): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(824,17): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(838,21): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/IUsersInfoRepository.cs(71,15): warning S1135: Complete the task associated to this 'TODO' comment. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/RespuestasInfoRepository.cs(170,17): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/RespuestasInfoRepository.cs(180,17): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/RespuestasInfoRepository.cs(199,21): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/RespuestasInfoRepository.cs(219,25): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/SectionsInfoRepository.cs(326,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/SectionsInfoRepository.cs(432,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(58,21): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(152,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(216,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(242,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(253,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(338,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(363,13): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(413,1): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Startup.cs(82,7): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Startup.cs(149,7): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Startup.cs(168,7): warning S125: Remove this commented out code. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/AsignacionController.cs(21,47): warning S2933: Make '_logger' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/AsignacionController.cs(22,43): warning S2933: Make '_asignacionInfoRepository' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Enums/Roles.cs(1,13): warning S3903: Move 'Roles' into a named namespace. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/ProyectosController.cs(20,42): warning S2933: Make '_logger' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/ProyectosController.cs(21,34): warning S2933: Make '_usersInfoRepository' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/RespuestaController.cs(18,42): warning S2933: Make '_logger' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/RespuestaController.cs(19,39): warning S2933: Make '_respuestasInfoRepository' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/SectionController.cs(19,40): warning S2933: Make '_logger' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/SectionController.cs(20,37): warning S2933: Make '_sectionInfoRepository' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/EvaluacionController.cs(21,47): warning S2933: Make '_logger' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/EvaluacionController.cs(22,43): warning S2933: Make '_evaluacionInfoRepository' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/LineaController.cs(22,42): warning S2933: Make '_logger' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/LineaController.cs(23,38): warning S2933: Make '_lineaInfoRepository' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/OficinaController.cs(23,44): warning S2933: Make '_logger' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/OficinaController.cs(24,40): warning S2933: Make '_oficinaInfoRepository' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/PreguntasController.cs(20,42): warning S2933: Make '_logger' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/PreguntasController.cs(21,39): warning S2933: Make '_asignacionInfoRepository' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/TokenController.cs(19,32): warning S2933: Make 'Configuration' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/TokenController.cs(20,38): warning S2933: Make '_usersInfoRespository' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/TokenController.cs(22,38): warning S1313: Make sure using this hardcoded IP address '10.125.8.21' is safe here. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/UnidadController.cs(22,43): warning S2933: Make '_logger' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/UnidadController.cs(23,39): warning S2933: Make '_unidadInfoRepository' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/UsersController.cs(23,42): warning S2933: Make '_logger' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/UsersController.cs(24,38): warning S2933: Make '_userInfoRepository' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-everisprojectdbContext.cs(7,26): warning S101: Rename class 'everisprojectdbContext' to match pascal case naming rules, consider using 'EverisprojectdbContext'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Models/User_RoleCreateDto.cs(9,18): warning S101: Rename class 'User_RoleCreateDto' to match pascal case naming rules, consider using 'UserRoleCreateDto'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Models/User_RoleDto.cs(9,18): warning S101: Rename class 'User_RoleDto' to match pascal case naming rules, consider using 'UserRoleDto'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/AsignacionInfoRepository.cs(15,39): warning S2933: Make '_context' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Program.cs(14,18): warning S1118: Add a 'protected' constructor or the 'static' keyword to the class declaration. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(16,39): warning S2933: Make '_context' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/IdiomasInfoRepository.cs(15,35): warning S2933: Make '_context' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/LineaInfoRepository.cs(15,35): warning S2933: Make '_context' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/OficinaInfoRepository.cs(15,35): warning S2933: Make '_context' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/RespuestasInfoRepository.cs(14,39): warning S2933: Make '_context' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/SectionsInfoRepository.cs(14,39): warning S2933: Make '_context' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UnidadInfoRepository.cs(15,35): warning S2933: Make '_context' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(17,39): warning S2933: Make '_context' 'readonly'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Entities/User_RoleEntity.cs(10,18): warning S101: Rename class 'User_RoleEntity' to match pascal case naming rules, consider using 'UserRoleEntity'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-AsignacionInfoContextExtensions.cs(11,28): warning S1186: Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(97,79): warning S1125: Remove the unnecessary Boolean literal(s). [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(53,109): warning S1125: Remove the unnecessary Boolean literal(s). [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(132,76): warning S1006: Remove the default parameter value to match the signature of overridden method. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(153,128): warning S1125: Remove the unnecessary Boolean literal(s). [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(177,35): warning S1854: Remove this useless assignment to local variable 'RolUsuario'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-everisprojectdbContext.cs(18,33): warning S1186: Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Program.cs(16,28): warning S4823: Make sure that command line arguments are used safely here. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(39,72): warning S927: Rename parameter 'idEvaluation' to 'idEvaluacion' to match the interface declaration. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(136,42): warning S1125: Remove the unnecessary Boolean literal(s). [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(166,114): warning S1125: Remove the unnecessary Boolean literal(s). [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(112,40): warning S3776: Refactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/UsersController.cs(136,33): warning S4790: Make sure that hashing data is safe here. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Migrations/20181026062550_AddAssessments.cs(34,33): warning S1186: Add a nested comment explaining why this method is empty, throw a 'NotSupportedException' or complete the implementation. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/EvaluacionController.cs(187,38): warning S2971: Use 'Count' property here instead. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/EvaluacionController.cs(193,38): warning S2971: Use 'Count' property here instead. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/EvaluacionController.cs(182,43): warning S1854: Remove this useless assignment to local variable 'EvaluacionesFiltradas'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/UsersController.cs(207,37): warning S4790: Make sure that hashing data is safe here. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(216,42): warning S1125: Remove the unnecessary Boolean literal(s). [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(246,114): warning S1125: Remove the unnecessary Boolean literal(s). [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(190,40): warning S3776: Refactor this method to reduce its Cognitive Complexity from 18 to the 15 allowed. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/UsersController.cs(245,33): warning S4790: Make sure that hashing data is safe here. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/EvaluacionController.cs(266,43): warning S1854: Remove this useless assignment to local variable 'EvaluacionesFiltradas'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/EvaluacionController.cs(229,43): warning S1854: Remove this useless assignment to local variable 'EvaluacionesFiltradas'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/TokenController.cs(31,23): warning S3400: Remove this method and declare a constant for this value. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/TokenController.cs(56,34): warning S4790: Make sure that hashing data is safe here. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Controllers/TokenController.cs(87,17): warning S1066: Merge this if statement with the enclosing one. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(288,82): warning S927: Rename parameter 'projectId' to 'IdProject' to match the interface declaration. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(359,61): warning S927: Rename parameter 'ProyectoId' to 'proyectoId' to match the interface declaration. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(424,48): warning S927: Rename parameter 'nombre' to 'usuario' to match the interface declaration. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/UsersInfoRespository.cs(427,29): warning S1854: Remove this useless assignment to local variable 'user'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(314,46): warning S1125: Remove the unnecessary Boolean literal(s). [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(314,73): warning S1125: Remove the unnecessary Boolean literal(s). [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(331,132): warning S927: Rename parameter 'Evaluacion' to 'Evaluation' to match the interface declaration. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/AsignacionInfoRepository.cs(85,17): warning S2259: 'traduccion' is null on at least one execution path. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/AsignacionInfoRepository.cs(223,56): warning S2971: Drop 'Where' and move the condition into the 'FirstOrDefault'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(435,52): warning S3776: Refactor this method to reduce its Cognitive Complexity from 58 to the 15 allowed. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(514,57): warning S1854: Remove this useless assignment to local variable 'preguntas'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/RespuestasInfoRepository.cs(35,75): warning S927: Rename parameter 'idEvaluacion' to 'IdProyecto' to match the interface declaration. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/RespuestasInfoRepository.cs(35,93): warning S927: Rename parameter 'IdPregunta' to 'IdAsignacion' to match the interface declaration. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/RespuestasInfoRepository.cs(48,75): warning S927: Rename parameter 'idEvaluacion' to 'IdProyecto' to match the interface declaration. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/RespuestasInfoRepository.cs(48,93): warning S927: Rename parameter 'IdAsignacion' to 'IdPregunta' to match the interface declaration. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/RespuestasInfoRepository.cs(60,57): warning S927: Rename parameter 'Respuesta' to 'respuesta' to match the interface declaration. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/RespuestasInfoRepository.cs(85,52): warning S927: Rename parameter 'evaluationId' to 'idEvaluacion' to match the interface declaration. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(759,114): warning S1125: Remove the unnecessary Boolean literal(s). [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(682,40): warning S3776: Refactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(945,54): warning S927: Rename parameter 'idEvaluation' to 'idEvaluacion' to match the interface declaration. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(809,23): warning S3776: Refactor this method to reduce its Cognitive Complexity from 37 to the 15 allowed. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(843,53): warning S1854: Remove this useless assignment to local variable 'preguntas'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/RespuestasInfoRepository.cs(152,55): warning S3776: Refactor this method to reduce its Cognitive Complexity from 46 to the 15 allowed. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(996,44): warning S3776: Refactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(1018,44): warning S2971: Drop 'Where' and move the condition into the 'Count'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/EvaluacionInfoRepository.cs(1078,52): warning S2971: Drop 'Where' and move the condition into the 'Count'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/RespuestasInfoRepository.cs(206,53): warning S1854: Remove this useless assignment to local variable 'preguntas'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/SectionsInfoRepository.cs(35,31): warning S3776: Refactor this method to reduce its Cognitive Complexity from 22 to the 15 allowed. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/SectionsInfoRepository.cs(53,40): warning S2971: Drop 'Where' and move the condition into the 'Count'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/SectionsInfoRepository.cs(113,48): warning S2971: Drop 'Where' and move the condition into the 'Count'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/SectionsInfoRepository.cs(136,44): warning S3776: Refactor this method to reduce its Cognitive Complexity from 31 to the 15 allowed. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/SectionsInfoRepository.cs(158,44): warning S2971: Drop 'Where' and move the condition into the 'Count'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/SectionsInfoRepository.cs(219,52): warning S2971: Drop 'Where' and move the condition into the 'Count'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/SectionsInfoRepository.cs(245,44): warning S3776: Refactor this method to reduce its Cognitive Complexity from 19 to the 15 allowed. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/SectionsInfoRepository.cs(268,44): warning S2971: Drop 'Where' and move the condition into the 'Count'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/SectionsInfoRepository.cs(297,52): warning S2971: Drop 'Where' and move the condition into the 'Count'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/SectionsInfoRepository.cs(347,49): warning S2971: Drop 'Where' and move the condition into the 'FirstOrDefault'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/SectionsInfoRepository.cs(406,57): warning S2971: Use 'Count' property here instead. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-Services/SectionsInfoRepository.cs(430,17): warning S1481: Remove the unused local variable 'SectionAlter'. [/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API/everisapi.API.csproj]
-    166 Warning(s)
-    0 Error(s)
-
-Time Elapsed 00:00:50.15
-[8mha:////4FSuAsa4jTAIZ+vaIvKgJBJrPWGXWjj0OJy1uMJZa8oiAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOJSIAqEqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDhnK3/dQ+vAFhbEPCvgAAAA==[0m[Pipeline] sh
-+ cd /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter
-+ dotnet sonarscanner end /d:sonar.login=9f3279b5aa1fcc42e8b2dbde1ff87db597e0581d
-SonarScanner for MSBuild 4.6.2
-Using the .NET Core version of the Scanner for MSBuild
-Post-processing started.
-WARNING: File '/root/.nuget/packages/microsoft.net.test.sdk/16.0.1/build/netcoreapp1.0/Microsoft.NET.Test.Sdk.Program.cs' is not located under the root directory '/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter' and will not be analyzed.
-WARNING: File '/root/.nuget/packages/xunit.runner.visualstudio/2.4.0/build/netcoreapp1.0/xunit.runner.visualstudio.dotnetcore.testadapter.dll' is not located under the root directory '/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter' and will not be analyzed.
-WARNING: File '/root/.nuget/packages/xunit.runner.visualstudio/2.4.0/build/netcoreapp1.0/xunit.runner.reporters.netcoreapp10.dll' is not located under the root directory '/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter' and will not be analyzed.
-WARNING: File '/root/.nuget/packages/xunit.runner.visualstudio/2.4.0/build/netcoreapp1.0/xunit.runner.utility.netcoreapp10.dll' is not located under the root directory '/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter' and will not be analyzed.
-Calling the SonarQube Scanner...
-INFO: Scanner configuration file: /root/.dotnet/tools/.store/dotnet-sonarscanner/4.6.2/dotnet-sonarscanner/4.6.2/tools/netcoreapp2.1/any/sonar-scanner-3.3.0.1492/conf/sonar-scanner.properties
-INFO: Project root configuration file: /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/.sonarqube/out/sonar-project.properties
-INFO: SonarQube Scanner 3.3.0.1492
-INFO: Java 1.8.0_212 Oracle Corporation (64-bit)
-INFO: Linux 4.9.125-linuxkit amd64
-INFO: User cache: /root/.sonar/cache
-INFO: SonarQube server 7.9.1
-INFO: Default locale: "en", source code encoding: "UTF-8" (analysis is platform dependent)
-WARN: SonarScanner will require Java 11+ to run starting in SonarQube 8.x
-INFO: Load global settings
-INFO: Load global settings (done) | time=113ms
-INFO: Server id: 243B8A4D-AWzNcjMyRnRs5blsbSmj
-INFO: User cache: /root/.sonar/cache
-INFO: Load/download plugins
-INFO: Load plugins index
-INFO: Load plugins index (done) | time=62ms
-INFO: Load/download plugins (done) | time=2364ms
-INFO: Process project properties
-INFO: Execute project builders
-INFO: Execute project builders (done) | time=97ms
-INFO: Project key: AgileMeter
-INFO: Base dir: /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter
-INFO: Working dir: /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/.sonarqube/out/.sonar
-INFO: Load project settings for component key: 'AgileMeter'
-INFO: Load project settings for component key: 'AgileMeter' (done) | time=20ms
-INFO: Load quality profiles
-INFO: Load quality profiles (done) | time=122ms
-INFO: Detected Jenkins
-INFO: Load active rules
-INFO: Load active rules (done) | time=1631ms
-INFO: Indexing files...
-INFO: Project configuration:
-INFO: Indexing files of module 'everisapiTest'
-INFO:   Base dir: /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest
-INFO:   Test paths: AsignacionControllerTest.cs, AutoMapperConfig.cs, AutomapperPro...
-INFO: Load project repositories
-INFO: Load project repositories (done) | time=35ms
-INFO: Indexing files of module 'everisapi.API'
-INFO:   Base dir: /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapi.API
-INFO:   Source paths: AsignacionInfoContextExtensions.cs, Controllers/AsignacionCon...
-INFO: Indexing files of module 'AgileMeter'
-INFO:   Base dir: /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter
-INFO: 168 files indexed
-INFO: 0 files ignored because of scm ignore settings
-INFO: Quality profile for cs: Sonar way
-INFO: Quality profile for js: Sonar way
-INFO: ------------- Run sensors on module everisapi.API
-INFO: Load metrics repository
-INFO: Load metrics repository (done) | time=98ms
-INFO: Sensor JaCoCo XML Report Importer [jacoco]
-INFO: Sensor JaCoCo XML Report Importer [jacoco] (done) | time=8ms
-INFO: Sensor SonarJS [javascript]
-INFO: 3 source files to be analyzed
-INFO: Sensor SonarJS [javascript] (done) | time=900ms
-INFO: 3/3 source files have been analyzed
-INFO: Sensor ESLint-based SonarJS [javascript]
-ERROR: Error when running: 'node -v'. Is Node.js available during analysis?
-org.sonarsource.nodejs.NodeCommandException: Error when running: 'node -v'. Is Node.js available during analysis?
-	at org.sonarsource.nodejs.NodeCommand.start(NodeCommand.java:77)
-	at org.sonarsource.nodejs.NodeCommandBuilderImpl.getVersion(NodeCommandBuilderImpl.java:171)
-	at org.sonarsource.nodejs.NodeCommandBuilderImpl.checkNodeCompatibility(NodeCommandBuilderImpl.java:144)
-	at org.sonarsource.nodejs.NodeCommandBuilderImpl.build(NodeCommandBuilderImpl.java:120)
-	at org.sonar.plugins.javascript.eslint.EslintBridgeServerImpl.initNodeCommand(EslintBridgeServerImpl.java:129)
-	at org.sonar.plugins.javascript.eslint.EslintBridgeServerImpl.startServer(EslintBridgeServerImpl.java:105)
-	at org.sonar.plugins.javascript.eslint.EslintBridgeServerImpl.startServerLazily(EslintBridgeServerImpl.java:145)
-	at org.sonar.plugins.javascript.eslint.EslintBasedRulesSensor.execute(EslintBasedRulesSensor.java:92)
-	at org.sonar.scanner.sensor.AbstractSensorWrapper.analyse(AbstractSensorWrapper.java:48)
-	at org.sonar.scanner.sensor.ModuleSensorsExecutor.execute(ModuleSensorsExecutor.java:85)
-	at org.sonar.scanner.sensor.ModuleSensorsExecutor.lambda$execute$1(ModuleSensorsExecutor.java:59)
-	at org.sonar.scanner.sensor.ModuleSensorsExecutor.withModuleStrategy(ModuleSensorsExecutor.java:77)
-	at org.sonar.scanner.sensor.ModuleSensorsExecutor.execute(ModuleSensorsExecutor.java:59)
-	at org.sonar.scanner.scan.ModuleScanContainer.doAfterStart(ModuleScanContainer.java:82)
-	at org.sonar.core.platform.ComponentContainer.startComponents(ComponentContainer.java:136)
-	at org.sonar.core.platform.ComponentContainer.execute(ComponentContainer.java:122)
-	at org.sonar.scanner.scan.ProjectScanContainer.scan(ProjectScanContainer.java:400)
-	at org.sonar.scanner.scan.ProjectScanContainer.scanRecursively(ProjectScanContainer.java:395)
-	at org.sonar.scanner.scan.ProjectScanContainer.scanRecursively(ProjectScanContainer.java:392)
-	at org.sonar.scanner.scan.ProjectScanContainer.doAfterStart(ProjectScanContainer.java:358)
-	at org.sonar.core.platform.ComponentContainer.startComponents(ComponentContainer.java:136)
-	at org.sonar.core.platform.ComponentContainer.execute(ComponentContainer.java:122)
-	at org.sonar.scanner.bootstrap.GlobalContainer.doAfterStart(GlobalContainer.java:141)
-	at org.sonar.core.platform.ComponentContainer.startComponents(ComponentContainer.java:136)
-	at org.sonar.core.platform.ComponentContainer.execute(ComponentContainer.java:122)
-	at org.sonar.batch.bootstrapper.Batch.doExecute(Batch.java:73)
-	at org.sonar.batch.bootstrapper.Batch.execute(Batch.java:67)
-	at org.sonarsource.scanner.api.internal.batch.BatchIsolatedLauncher.execute(BatchIsolatedLauncher.java:46)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at org.sonarsource.scanner.api.internal.IsolatedLauncherProxy.invoke(IsolatedLauncherProxy.java:60)
-	at com.sun.proxy.$Proxy0.execute(Unknown Source)
-	at org.sonarsource.scanner.api.EmbeddedScanner.doExecute(EmbeddedScanner.java:185)
-	at org.sonarsource.scanner.api.EmbeddedScanner.execute(EmbeddedScanner.java:137)
-	at org.sonarsource.scanner.cli.Main.execute(Main.java:111)
-	at org.sonarsource.scanner.cli.Main.execute(Main.java:75)
-	at org.sonarsource.scanner.cli.Main.main(Main.java:61)
-Caused by: java.io.IOException: Cannot run program "node": error=2, No such file or directory
-	at java.lang.ProcessBuilder.start(ProcessBuilder.java:1048)
-	at org.sonarsource.nodejs.NodeCommand$ProcessWrapperImpl.start(NodeCommand.java:154)
-	at org.sonarsource.nodejs.NodeCommand.start(NodeCommand.java:73)
-	... 38 common frames omitted
-Caused by: java.io.IOException: error=2, No such file or directory
-	at java.lang.UNIXProcess.forkAndExec(Native Method)
-	at java.lang.UNIXProcess.<init>(UNIXProcess.java:247)
-	at java.lang.ProcessImpl.start(ProcessImpl.java:134)
-	at java.lang.ProcessBuilder.start(ProcessBuilder.java:1029)
-	... 40 common frames omitted
-
-INFO: Sensor ESLint-based SonarJS [javascript] (done) | time=110329ms
-INFO: Sensor C# Properties [csharp]
-INFO: Sensor C# Properties [csharp] (done) | time=14ms
-INFO: Sensor JavaXmlSensor [java]
-INFO: Sensor JavaXmlSensor [java] (done) | time=7ms
-INFO: Sensor HTML [web]
-INFO: Sensor HTML [web] (done) | time=20ms
-INFO: ------------- Run sensors on module everisapiTest
-INFO: Sensor JaCoCo XML Report Importer [jacoco]
-INFO: Sensor JaCoCo XML Report Importer [jacoco] (done) | time=4ms
-INFO: Sensor C# Properties [csharp]
-INFO: Sensor C# Properties [csharp] (done) | time=4ms
-INFO: Sensor JavaXmlSensor [java]
-INFO: Sensor JavaXmlSensor [java] (done) | time=1ms
-INFO: ------------- Run sensors on module AgileMeter
-INFO: Sensor JaCoCo XML Report Importer [jacoco]
-INFO: Sensor JaCoCo XML Report Importer [jacoco] (done) | time=5ms
-INFO: Sensor JavaXmlSensor [java]
-INFO: Sensor JavaXmlSensor [java] (done) | time=1ms
-INFO: Sensor C# [csharp]
-INFO: Importing results from 5 proto files in '/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/.sonarqube/out/0/output-cs'
-INFO: Importing results from 5 proto files in '/var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/.sonarqube/out/1/output-cs'
-INFO: Importing 2 Roslyn reports
-INFO: Sensor C# [csharp] (done) | time=22576ms
-INFO: Sensor C# Tests Coverage Report Import [csharp]
-INFO: Parsing the OpenCover report /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/TestResults/coverage.opencover.xml
-INFO: Adding this code coverage report to the cache for later reuse: /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter/everisapiTest/TestResults/coverage.opencover.xml
-INFO: Sensor C# Tests Coverage Report Import [csharp] (done) | time=2700ms
-INFO: ------------- Run sensors on project
-INFO: Sensor Zero Coverage Sensor
-INFO: Sensor Zero Coverage Sensor (done) | time=190ms
-INFO: SCM provider for this project is: git
-INFO: 144 files to be analyzed
-INFO: 144/144 files analyzed
-INFO: 27 files had no CPD blocks
-INFO: Calculating CPD for 104 files
-INFO: CPD calculation finished
-INFO: Analysis report generated in 4072ms, dir size=1 MB
-INFO: Analysis report compressed in 15030ms, zip size=457 KB
-INFO: Analysis report uploaded in 152ms
-INFO: ANALYSIS SUCCESSFUL, you can browse http://sonarqube:9000/dashboard?id=AgileMeter
-INFO: Note that you will be able to access the updated dashboard once the server has processed the submitted analysis report
-INFO: More about the report processing at http://sonarqube:9000/api/ce/task?id=AWzNggtgRnRs5blsbUu9
-INFO: Analysis total time: 3:25.486 s
-INFO: ------------------------------------------------------------------------
-INFO: EXECUTION SUCCESS
-INFO: ------------------------------------------------------------------------
-INFO: Total time: 3:29.650s
-INFO: Final Memory: 16M/293M
-INFO: ------------------------------------------------------------------------
-The SonarQube Scanner has finished
-10:39:39.614  Post-processing succeeded.
-[8mha:////4C9E0MQpz/8qT+gFif/bqyFUuDKTp5dW6YJ44ycE0X+fAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOKChKBBqWgtN7zAJMY4se6C7eBUvIiv8QcsIlGxxWpnm3m9YRk81OwNdpp6S6GxOLjR5IWJfX91nLDjCzZMgZ1GqZPkVp9mlBw1zClKWAhYaWocB0smwlp06qEqp8hU5+jzdxRQ2vYOTyhENkfl4xcmD5vb2Aamn+evAKZhiFAetrn2uw+JDSguvgAAAA==[0m[Pipeline] }
-[8mha:////4BKzzX+HQZxZE5U9v5vTuivzvT73gnd8iDoheV+TcHM9AAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIikKBBqWgtN7zAJMY4se6C7eBUvIiv8QcsIlGxxWpnm3m9YRk81OwNdpp6S6GxOLjR5IWJfX91nLDjCzZMgZ1GqZPkVp9mlBw1zClKWAhYaWocB0smwlp06qEqp8hU5+jzdxRQ2vYOTyhENkfl4xcmD5vb2Aamn+evAKZhiFAetrn2uw+67nOSvgAAAA==[0m[Pipeline] // script
-[8mha:////4DUH3HqWbQq5Kl4C2hcQNTc8g+/pwRZTqswFke2t4wTQAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIikKBBqWgtN7zAJMY4se6C7eBUvIiv8QcsIlGxxWpnm3m9YRk81OwNdpp6S6GxOLjR5IWJfX91nLDjCzZMgZ1GqZPkVp9mlBw1zClKWAhYaWocB0smwlp06qEqp8hU5+jzdxRQ2vYOTyhENkfl4xcmD5vb2Aamn+evAKZhiFAedrn22w+uze6NvgAAAA==[0m[Pipeline] }
-[8mha:////4NT4GzU3aCfK2RWGgquWwNONoFgjhlYK3+aUkjfvZdQpAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOKChKBBqWgtN7zAJMY4se6C7eBUvIiv8QcsIlGxxWpnm3m9YRk81OwNdpp6S6GxOLjR5IWJfX91nLDjCzZMgZ1GqZPkVp9mlBw1zClKWAhYaWocB0smwlp06qEqp8hU5+jzdxRQ2vYOTyhENkfl4xcmD5vb2Aamn+evAKZhiFAedrn22w+dLrUxvgAAAA==[0m[Pipeline] // stage
-[8mha:////4OzMeA8IY+uT3wsu/XYCpl12Psc3ly3vPAhrz1FCuJ1pAAAAph+LCAAAAAAAAP9tjTEOwjAQBC9BKWgpeYTTRDSIitZywwtMbIwT6y7YF5KKF/E1/oAhEhVb7ay0mucLqhThQNGJzmLvMbVeDGF0uYmJYn8JNImOzqIlTBSsUHZSZOxxQUVsYUlRwkrC2mIbKHl0DBvZ6buug0ZXnzjmbS+h9OYGDyhkNrOO/IU5wvY6mkT48/wVwDwwFA1DuWs+x+oNLpgcD8EAAAA=[0m[Pipeline] stage
-[8mha:////4CJnR2q+vEkocKFDxK9oVXylPuzhxWvMGF5t19V9CUn6AAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycoh0ARbE1DXKwglCE0La6P/yk9JOnIircQdaKjHhwbItWe/1hiIynIidaCy2HmPtRRd6NyUxELfXQINo6CJqwkjBCmUHRcZWS1WULCzKclhJWFusA0WPLsFGNvqhy6DRlefE03aUkHtzhydkciInzelbRobtrTeR8Mf5C4CxS5AfdrPt52fxAZRHx0bCAAAA[0m[Pipeline] { (Registry)
-[8mha:////4DvKVPhxq1Ik5IVpBt2wUQErVHo3rxcUHAJ08cIMt1TLAAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+DOrAycoh0ogtiYo26cILQhJA0+r9NUtKJE3E17kBLJSY8WLYl673eUMYAJwqGO42dxdha3vvRzIlnCt3NU+aOrrwljOQ1b3RuSOnzWhtKGlYVDDYCthpbT9GiSbATTj5k5SWa6pLCvB0FMKsGeEIhZnKSIX3LFGB/H1Uk/HH+AmDqE7D6sFi9PMsP+urdAcIAAAA=[0m[Pipeline] script
-[8mha:////4KNicnRY674op5LZqGRspL7hRldx7ZgZt8UjimobQ0qvAAAAph+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycoh0KwNiYo2ycILQhJA0+r9NUtKJE3E17kBLJSY8WLYl673eUMUAJwqGOY2dxdha1vvRzIllCt3NU2aOrqwljOQ1EzoLUvq8VkFJw6qihA2HrcbWU7RoEuy4kw9Ze4mmvqQwb0cOpVUDPKHgMznJkL5lCrC/jyoS/jh/ATD1CcqmWeywPKsPXl9jU8IAAAA=[0m[Pipeline] {
-[8mha:////4FbBGy0dYlSn2jqB+gK9R4EN+fBj4Fz+Q8StuzJtcUL3AAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOLSARKiSmu54QUmNsaJdWdsh6TiRXyNPxCIRMUWq51t5vmCZYpw5GixNdQ5So3D4Hs7LRw4dhfPA7Z8xoYpsTcozSBZm3pGydnAnKKEhYCVocZzcmQzrEWr7qryimx1ynH6DgJKp2/wgEJM5qxi/sIYYXPtdWL6ef4KYAwZyu3uU/vwBonA3qO+AAAA[0m[Pipeline] sh
-+ cd /var/jenkins_home/jobs/AgileMeter/workspace/ScrumMeter
-+ docker-compose -f docker-compose-AKS.yml build --no-cache agilemeter
-Building agilemeter
-Step 1/8 : FROM microsoft/dotnet:sdk
-sdk: Pulling from microsoft/dotnet
-Digest: sha256:e1b19d391986f21b177c1ba47f8a8519bf5cff66a9459d04f3aea23e1a7ec30f
-Status: Downloaded newer image for microsoft/dotnet:sdk
- ---> 08657316a4cd
-Step 2/8 : WORKDIR /app
- ---> Running in 840c99fe8b88
-Removing intermediate container 840c99fe8b88
- ---> 1d8487e21514
-Step 3/8 : COPY *.csproj ./
- ---> 1ad9f580144e
-Step 4/8 : RUN dotnet restore
- ---> Running in 702742f23f9e
-  Restore completed in 6.89 sec for /app/everisapi.API.csproj.
-  Restore completed in 9.68 sec for /app/everisapi.API.csproj.
-Removing intermediate container 702742f23f9e
- ---> a62d93edad9b
-Step 5/8 : COPY . ./
- ---> 1f399acc52d5
-Step 6/8 : RUN dotnet publish -o out
- ---> Running in 853cec564984
-Microsoft (R) Build Engine version 16.2.32702+c4012a063 for .NET Core
-Copyright (C) Microsoft Corporation. All rights reserved.
-
-  Restore completed in 135.01 ms for /app/everisapi.API.csproj.
-  Restore completed in 50.2 ms for /app/everisapi.API.csproj.
-  everisapi.API -> /app/bin/Debug/netcoreapp2.1/everisapi.API.dll
-  everisapi.API -> /app/out/
-Removing intermediate container 853cec564984
- ---> 8c87a68a4025
-Step 7/8 : WORKDIR /app/out
- ---> Running in 24ff23eaa6c6
-Removing intermediate container 24ff23eaa6c6
- ---> b8110c74b01b
-Step 8/8 : ENTRYPOINT ["dotnet", "everisapi.API.dll"]
- ---> Running in 424cd8c305cf
-Removing intermediate container 424cd8c305cf
- ---> 1b063440c870
-Successfully built 1b063440c870
-Successfully tagged amapiback.azurecr.io/agilemeter_dev:latest
-[8mha:////4BTxqZMGuIrGhKKaILxJcWUpQCKRtHWsWwvJBqDWhiBqAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOLSgRCiSmu54QUmNsaJdWdsh6TiRXyNPxCIRMUWq51t5vmCZYpw5GixNdQ5So3D4Hs7LRw4dhfPA7Z8xoYpsTcozSBZm3pGydnAnKKEhYCVocZzcmQzrEWr7qryimx1ynH6DgJKp2/wgEJM5qxi/sIYYXPtdWL6ef4KYAwZyu3uU/vwBsjxxbq+AAAA[0m[Pipeline] sh
-+ az acr login --name amapiback -u amapiback -p DO9emiMF654C1WwOgdilnCX=cK=ficJj
-ERROR: Looks like you don't have access to registry 'amapiback.azurecr.io'. To see configured firewall rules, run 'az acr show --query networkRuleSet --name amapiback'. Details: https://docs.microsoft.com/en-us/azure/container-registry/container-registry-health-error-reference#connectivity_forbidden_error
-[8mha:////4HPLmf9+SJ5OVEvszwa6YlJtHazcXxcp7cohHT32jCraAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOJCRQpEldZKwwtMbIwT687YDknFi/gaf8AiEhVbrHa2mdcb1jHAiYPBXtNgKXYWvRtNXjhxGK6OJ+z5gh1TZKex1VPLSjcLtpw0LClKWAnYaOocR0smwVb08iErJ8lU5xTydxRQWnWHJxQim5MM6QtzgN1tVJHp5/krgNn7BGW9z3WoP+eRH6S+AAAA[0m[Pipeline] }
-[8mha:////4GU17kRQL9zn0ReTYISuFY1KdWuk3gYpt5TnIBfELyahAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPMIRTSgQVVorDS8w8WGcWHfGdkgqXsTX+AMWkajYYrWzzbzesI4BThyM6JEGS7GzwrvR5CUmDsPV8SR6voiOKbJD0eLUssZmwZYTwpKihJWEDVLnOFoyCbayVw9VOUWmOqeQv6OE0uo7PKGQ2ZxUSF+YA+xuo45MP89fAczeJygP+1x1/QHUckQYvgAAAA==[0m[Pipeline] // script
-[8mha:////4MGtpxBpz6X9/juK/f0JUMzN/XuyIixdcK3hmugVOIZgAAAAph+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOIiIQEFSkVrueEFJjHGiXUXbAen4kV8jT9gEYmKLVY728zrDcvgoWZvsNPUWwqNxcGNJi9M7Pur44QdX7BhCuw0Sp0kt/o0o+SoYU5RwkLASlPjOFgyEdaiUw9VOUWmOkefv6OA0rZ3eEIhsjkqH78wedjcxjYw/Tx/BTANQ4TysM21330AwFHZB74AAAA=[0m[Pipeline] }
-[8mha:////4PFM750D8IooMmkxQHPTreNZG+fbeyEyoO6ho0MxMH4eAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOJSgKBAqWgtN7zAJMY4se6C7eBUvIiv8QcsIlGxxWpnm3m9YRk81OwNdpp6S6GxOLjR5IWJfX91nLDjCzZMgZ1GqZPkVp9mlBw1zClKWAhYaWocB0smwlp06qEqp8hU5+jzdxRQ2vYOTyhENkfl4xcmD5vb2Aamn+evAKZhiFAetrn2uw/zsoK7vgAAAA==[0m[Pipeline] // stage
-[8mha:////4MfKKnTATfv3j3QVDBPdQ4ng4u+nFX5RdPtQBR9JZWJNAAAAph+LCAAAAAAAAP9tjTEOwjAQBC9BKWgpeYTTRKJAVLSWG15gYmOcWHfBvpBUvIiv8QcMkajYamel1TxfUKUIB4pOdBZ7j6n1Ygijy01MFPtLoEl0dBYtYaJghbKTImOPCypiC0uKElYS1hbbQMmjY9jITt91HTS6+sQxb3sJpTc3eEAhs5l15C/MEbbX0STCn+evAOaBoWgYyl3zOVZvmpNrqcEAAAA=[0m[Pipeline] stage
-[8mha:////4H5gHdYY02EP4vuBaKKtXhF18XpoF+F+iyNroaQ64L0FAAAApx+LCAAAAAAAAP9tjTEOwjAUQ3+LOrAycoh0ATEgpq5RFk4QmhDSRv+Xn5R24kRcjTvQUokJD5ZtyXqvNxSR4UTsRGOx9RhrL7rQuymJgbi9BhpEQxdRE0YKVig7KDK2WqqiZGFRlsNKwtpiHSh6dAk2stEPXQaNrjwnnrajhNybOzwhkxM5aU7fMjJsb72JhD/OXwCMXYL8sJttPz+LD08AFXvCAAAA[0m[Pipeline] { (Declarative: Post Actions)
-[8mha:////4JASNgh6LS6uE92LhMR16EodYHggktDjmkMIX+3iOgLtAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOJSAQWiSmu54QUmNsaJdWdsh6TiRXyNPxCIRMUWq51t5vmCZYpw5GixNdQ5So3D4Hs7LRw4dhfPA7Z8xoYpsTcozSBZm3pGydnAnKKEhYCVocZzcmQzrEWr7qryimx1ynH6DgJKp2/wgEJM5qxi/sIYYXPtdWL6ef4KYAwZyv32U7vwBoeWqme+AAAA[0m[Pipeline] updateGitlabCommitStatus
-[8mha:////4GZshWz1eMhsomE8d9wmnyEyQ56WxF+kK2Pcn4ysLEgNAAAApB+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOJSoRSIitZKwwtMYowd686xHZyKF/E1/kAgEhVbrHa2mecL1jHAkYNGq6g3FFuD3o16Xpg59FfHGS1fsGWK7BQ2KjfcqdOCDScFS4oSVgI2ilrH0ZBOsBVW3mXlJOnqnML8HQSUphvgAYWYzUmG9IUpwO42dpHp5/krgMn7BGVdf2r/BjLxD06+AAAA[0m[Pipeline] }
-[8mha:////4I8hvV4QvCMOM+YWhb3nnLctw1NASojob8kCvdOxOEIfAAAApR+LCAAAAAAAAP9tjTEOwjAQBC9BFLSUPOLSIIGEqNJabniBiY1xYt0Z2yGpeBFf4w8EIlGxxWpnm3m+YJkiHDlabA11jlLjMPjeTgsHjt3F84Atn7FhSuwNSjNI1qaeUXI2MKcoYSFgZajxnBzZDGvRqruqvCJbnXKcvoOA0ukbPKAQkzmrmL8wRthce52Yfp6/AhhDyFDu9p/avgFxc17IvgAAAA==[0m[Pipeline] // stage
-[8mha:////4FLQJAIWz+IAuT/WpgMSLATnIHER6v0pIVpdgZxqSjieAAAApB+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMJpkBBCVLRWGl5gEmOcWHfBvpBUvIiv8QciIlGx1c4083pjmSKOHJ1qLLWeUuVVF3o3PTVwbK+BB9XwRVVMiYNVpR1Kru1pxpLFYl6WY6GxslQFTp6cYK0b8zBFMOSKs8TJHTRyX9/xRKanspgoXxgjNre+Tky/zt8Axq4T5Lu9INt+AOmqDAm9AAAA[0m[Pipeline] }
-[8mha:////4Ea4kDeM0vdPy4Zmf09lI+BdcTVlHxEiXTNGTWpM8zH0AAAApB+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMJBokFCVLRWGl5gEmOcWHfBvpBUvIiv8QciIlGx1c4083pjmSKOHJ1qLLWeUuVVF3o3PTVwbK+BB9XwRVVMiYNVpR1Kru1pxpLFYl6WY6GxslQFTp6cYK0b8zBFMOSKs8TJHTRyX9/xRKanspgoXxgjNre+Tky/zt8Axq4T5PutINt9AO7vLmu9AAAA[0m[Pipeline] // node
-[8mha:////4MKTovk7hSxgoPSIrXF9xxNgblhfWwJpIcd8j7KR/r+3AAAAox+LCAAAAAAAAP9tjTEOwjAQBDdBFLSUPMIRVEiIitZKwwtMYowT6y7YF5KKF/E1/kBEJCq22plmXm8sU8SRo1ONpdZTqrzqQu+mpwaO7TXwoBq+qIopcbCqtEPJtT3NWLJYzMtyLDRWlqrAyZMTrHVjHqYIhlxxlji5g0bu6zueyPRUFhPlC2PE5tbXienX+RvA2HWCfL8VZLsPyPZJIb0AAAA=[0m[Pipeline] End of Pipeline
-ERROR: script returned exit code 1
-Finished: FAILURE
