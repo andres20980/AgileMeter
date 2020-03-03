@@ -30,7 +30,7 @@ EXPOSE 4200
 
 # start app (ng server), then prepare the listening port, and host; and then declare the file watching poll period
 #CMD ng serve --port 4200 --host 0.0.0.0 --disableHostCheck true
-RUN npm run build --prod
+RUN npm run build --prod --max-old-space-size=8192
 #CMD ["angular-http-server", "--path wwwroot"]
 CMD angular-http-server --path wwwroot -p 4200
 
