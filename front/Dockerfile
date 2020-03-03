@@ -25,6 +25,8 @@ RUN npm config set registry http://registry.npmjs.org/
 RUN npm install -g angular-http-server
 RUN npm install
 
+#RUN node --max-old-space-size=8192 ./Node.js
+
 # Prepare the port to be displayed
 EXPOSE 4200
 
