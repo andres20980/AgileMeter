@@ -1,4 +1,4 @@
-FROM node:9.6.1
+FROM node:12.16.1
 #ENV HTTP_PROXY "http://10.0.8.102:8080"
 #ENV HTTPS_PROXY "http://10.0.8.102:8080"
 # create & set working directory

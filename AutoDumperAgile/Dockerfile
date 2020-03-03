@@ -1,4 +1,4 @@
-FROM mysql:latest
+FROM mysql:8
 ADD dumplatest.sql /docker-entrypoint-initdb.d
 ENV MYSQL_ALLOW_EMPTY_PASSWORD 'true'
 ENV MYSQL_USER 'root'
