@@ -4,7 +4,7 @@ FROM node:12.16.1
 # create & set working directory
 RUN mkdir /app
 WORKDIR /app
-#RUN set NODE_OPTIONS=--max-old-space-size=6096
+RUN set NODE_OPTIONS=--max-old-space-size=8192
 
 # Copy the HeadCount source code
 COPY . .
