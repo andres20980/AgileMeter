@@ -158,6 +158,7 @@ export class HomeComponent implements OnInit {
   public getListaDeOficinas(res) {
     var oficinas = [];
     res.forEach(function (value) {
+      // para eliminar el test Office añadir && value.oficina !== "Oficina de Prueba" && value.oficina !== "Test Office"
       if (oficinas.indexOf(value.oficina) < 0) {
         oficinas.push(value.oficina);
       }
@@ -206,12 +207,13 @@ export class HomeComponent implements OnInit {
 
   //Este metodo guarda el proyecto que a sido seleccionado en el front
   public SeleccionDeProyecto() {
-
+    console.log(this.OficinaSeleccionada);
     //Actualizamos la oficina en el caso de que no esté asignada
     if (this.OficinaSeleccionada === undefined)
     {
       this.OficinaSeleccionada = this.ProyectoSeleccionado.oficina;
     }
+    console.log(this.OficinaSeleccionada);
 
     this._appComponent._storageDataService.UserProjectSelected = this.ProyectoSeleccionado;
     this._appComponent._storageDataService.ProjectSelected = this.ProyectoSeleccionado;

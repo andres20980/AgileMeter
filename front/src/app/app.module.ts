@@ -22,7 +22,7 @@ import { UserManagementComponent } from './back-office/components/user-managemen
 import { AddUserProjectComponent } from './back-office/components/add-user-project/add-user-project.component';
 import { SortedTableComponent } from './sorted-table/sorted-table.component';
 import { PreguntasTableComponent } from './preguntas-table/preguntas-table.component';
-import { MatTableModule, MatPaginatorModule, MatSortModule, MatInputModule } from '@angular/material';
+import { MatTableModule, MatPaginatorModule, MatSortModule, MatInputModule, MatButtonToggleModule } from '@angular/material';
 import { MatFormFieldModule, MatSelectModule } from '@angular/material';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { MatListModule } from '@angular/material/list';
@@ -31,8 +31,8 @@ import { QuestionsManagerComponent } from './back-office/components/questions-ma
 import { NgCircleProgressModule } from 'ng-circle-progress';
 import { ComentariosTableComponent } from './comentarios-table/comentarios-table.component';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { PendingEvaluationComponent } from './pendingevaluation/pendingevaluation.component';
-import { PendingEvaluationTableComponent } from './pendingevaluation/pendingevaluation-table/pendingevaluation-table.component';
+import { PendingevaluationComponent } from './pendingevaluation/pendingevaluation.component';
+import { PendingevaluationTableComponent } from './pendingevaluation/pendingevaluation-table/pendingevaluation-table.component';
 import { BtnFinalizeEvaluationComponent } from './btn-finalize-evaluation/btn-finalize-evaluation.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
@@ -43,6 +43,7 @@ import { AddTeamComponent } from './back-office/components/teams-manager/add-tea
 import { AddUpdateUserComponent } from './back-office/components/user-management/add-update-user/add-update-user.component';
 import { UserListComponent } from './back-office/components/user-management/user-list/user-list.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatTreeModule} from '@angular/material/tree';
 
 //Add custom paginator
 import { MatPaginatorIntl } from '@angular/material';
@@ -58,6 +59,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientTrans } from './translateHttp';
 import { NombreProyectoComponent } from './nombre-proyecto/nombre-proyecto.component';
 import { BtnExportToExcelComponent } from './btn-export-to-excel/btn-export-to-excel.component';
+import { EvaluationchartComponent } from './evaluationchart/evaluationchart.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -65,84 +67,87 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    HomeComponent,
-    BackOfficeComponent,
-    NewevaluationComponent,
-    PreviousevaluationComponent,
-    PendingEvaluationComponent,
-    MenunewevaluationComponent,
-    PdfgeneratorComponent,
-    LoadingComponent,
-    UserManagementComponent,
-    AddUserProjectComponent,
-    SortedTableComponent,
-    PreguntasTableComponent,
-    ComentariosTableComponent,
-    PendingEvaluationTableComponent,
-    DebounceDirective,
-    QuestionsManagerComponent,
-    BtnFinalizeEvaluationComponent,
-    SectionResultsComponent,
-    TeamsManagerComponent,
-    BreadcrumbComponent,
-    AddTeamComponent,
-    AddUpdateUserComponent,
-    UserListComponent,
-    TeamManagementComponent,
-    NombreProyectoComponent,
-    BtnExportToExcelComponent,
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    routing,
-    HttpModule,
-    ChartsModule,
-    NgbModule.forRoot(),
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatSelectModule,
-    MatFormFieldModule,
-    NgxMatSelectSearchModule,
-    MatListModule,
-    NgCircleProgressModule,
-    MatExpansionModule,
-    MatCheckboxModule,
-    MatIconModule,
-    MatSidenavModule,
-    DragDropModule,
-    HttpClientModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClientTrans]
+   declarations: [
+      AppComponent,
+      LoginComponent,
+      HomeComponent,
+      BackOfficeComponent,
+      NewevaluationComponent,
+      PreviousevaluationComponent,
+      MenunewevaluationComponent,
+      PdfgeneratorComponent,
+      LoadingComponent,
+      UserManagementComponent,
+      AddUserProjectComponent,
+      SortedTableComponent,
+      PreguntasTableComponent,
+      ComentariosTableComponent,
+      PendingevaluationComponent,
+      PendingevaluationTableComponent,
+      DebounceDirective,
+      QuestionsManagerComponent,
+      BtnFinalizeEvaluationComponent,
+      SectionResultsComponent,
+      TeamsManagerComponent,
+      BreadcrumbComponent,
+      AddTeamComponent,
+      AddUpdateUserComponent,
+      UserListComponent,
+      TeamManagementComponent,
+      NombreProyectoComponent,
+      BtnExportToExcelComponent,
+      EvaluationchartComponent
+   ],
+   imports: [
+      BrowserModule,
+      FormsModule,
+      routing,
+      HttpModule,
+      ChartsModule,
+      NgbModule.forRoot(),
+      MatTableModule,
+      MatPaginatorModule,
+      MatSortModule,
+      BrowserAnimationsModule,
+      ReactiveFormsModule,
+      MatInputModule,
+      MatButtonToggleModule,
+      MatSelectModule,
+      MatFormFieldModule,
+      NgxMatSelectSearchModule,
+      MatListModule,
+      NgCircleProgressModule,
+      MatExpansionModule,
+      MatCheckboxModule,
+      MatIconModule,
+      MatSidenavModule,
+      MatTreeModule,
+      DragDropModule,
+      HttpClientModule,
+      TranslateModule.forRoot({
+        loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClientTrans]
+        }
+      }),
+    ],
+    providers: [
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: RequestInterceptorService,
+        multi: true
+      },
+      {
+        provide: MatPaginatorIntl,
+        useFactory: (translateService) => {
+          const service = new MatPaginationIntlService();
+          service.injectTranslateService(translateService);
+          return service;
+        }, deps: [TranslateService]
       }
-    }),
-  ],
-  providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: RequestInterceptorService,
-      multi: true
-    },
-    {
-      provide: MatPaginatorIntl,
-      useFactory: (translateService) => {
-        const service = new MatPaginationIntlService();
-        service.injectTranslateService(translateService);
-        return service;
-      }, deps: [TranslateService]
-    }
-  ],
-  bootstrap: [AppComponent]
-})
-export class AppModule { }
-
+    ],
+    bootstrap: [AppComponent]
+  })
+  export class AppModule { }
+  

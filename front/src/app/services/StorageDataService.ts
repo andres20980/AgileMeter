@@ -29,6 +29,7 @@ export class StorageDataService {
   public TokenUser: string = "";
   public UserLongName: string = "";
   public subscriptionTimer: Subscription;
+  public dataInputTable: any;
 
   public RoleAdmin: boolean;
   public Role: number;

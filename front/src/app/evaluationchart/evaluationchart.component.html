@@ -1,0 +1,17 @@
+<div class="container">
+  <h2>{{nombreProyecto}}</h2>
+    <div id="chart-container"> 
+      <canvas id="line-chart" width="700" height="350"></canvas>
+  </div>
+  <br />
+  <div>
+   <ul style="list-style: none;" *ngFor="let info of infoResult">
+       <li>
+         <div class="row">
+         <div class="col-xs" [ngStyle]="{'width': '15px', 'height': '15px', 'border-radius': '50%','background-color': info.color }"></div>
+
+         <div class="col ml-2"><h6> {{info.name}} - {{info.data}}</h6></div>
+        </div></li>
+    </ul>
+  </div>
+</div>

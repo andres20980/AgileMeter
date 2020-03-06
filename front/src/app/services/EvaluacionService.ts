@@ -10,7 +10,7 @@ import { Evaluacion } from 'app/Models/Evaluacion';
 import { EvaluacionCreate } from 'app/Models/EvaluacionCreate';
 import { EvaluacionFilterInfo } from 'app/Models/EvaluacionFilterInfo';
 import { EvaluacionInfo } from 'app/Models/EvaluacionInfo';
-import { map, tap, catchError } from 'rxjs/operators';
+import { map, tap, catchError, mergeMap } from 'rxjs/operators';
 import { User } from 'app/Models/User';
 import { AppComponent } from 'app/app.component';
 import { ProyectoService } from './ProyectoService';
@@ -113,6 +113,35 @@ export class EvaluacionService {
       // tap(r => console.log("OBSERVAAAAAAAAAAAAABLE",r)),
       catchError(this.errorHandler));
   }
+
+
+  getAllEvaluacionInfoFilteredToMerge(NumPag: number, EvaluacionFiltrar: EvaluacionFilterInfo) {
+    var codigoIdioma = this._appComponent._storageDataService.codigoIdioma;
+    let Token = this._appComponent.ComprobarUserYToken();
+    let params = JSON.stringify(EvaluacionFiltrar);
+    let headers = new Headers({
+      'Content-Type': 'application/json',
+      'Authorization': Token
+    });
+    return this._http.post(this.url + 'evaluaciones/'+ this.UsuarioLogeado +'/proyecto/all/info/page/' + NumPag +'/lan/' + codigoIdioma, params, { headers: headers }).pipe(
+      map(res => res.json().evaluacionesResult),
+      mergeMap(x => x))
+  }
+
+    //Nos permite recoger información de las evaluaciones filtrada para la gráfica
+    GetEvaluationsWithSectionsInfoToMerge(idProject: number, EvaluacionFiltrar: EvaluacionFilterInfo) {
+      var codigoIdioma = this._appComponent._storageDataService.codigoIdioma;
+      let Token = this._appComponent.ComprobarUserYToken();
+      let params = JSON.stringify(EvaluacionFiltrar);
+      let headers = new Headers({
+        'Content-Type': 'application/json',
+        'Authorization': Token
+      });
+      return this._http.post(this.url + 'evaluaciones/proyecto/' + idProject + '/sectionsinfo/' + codigoIdioma, params, { headers: headers }).pipe(
+        map(res => res.json().evaluacionesResult),
+        mergeMap(x => x)
+        );
+    }
 
   //Nos permite recoger información de las evaluaciones filtrada para la gráfica
   GetEvaluationsWithSectionsInfo(idProject: number, EvaluacionFiltrar: EvaluacionFilterInfo) {

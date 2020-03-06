@@ -1,116 +1,130 @@
-<mat-form-field class = "ml-5 px-0 col-2">
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'PENDING_EVALUATION_TABLE.FILTER' | translate }}"[value]=this.dataSource.filter>
-</mat-form-field>
+<div class="container">
+  <div class="row">
+    <div class="col-md">
+      <mat-form-field class="ml-3">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'SORTED_TABLE.FILTER' | translate }}"
+          [value]=this.dataSource.filter>
+      </mat-form-field>
 
-<btn-export-to-excel class="px-0" 
-    [dataTableInput]="dataSource.filteredData"  
-    [fieldsInput] = "fieldsTable"
-    [objectTranslateInput] = "objectTranslate">
-</btn-export-to-excel>
+    </div>
+    <div class="col-md-8">
 
-<mat-form-field class="ml-2 col-2">
-    <mat-select #mySelectOffice (click)="onSelectOfficeOpened()" placeholder="{{ 'PENDING_EVALUATION_TABLE.FILTER_OFFICE' | translate }}" [(value)]="OficinaSeleccionada" multiple>
-      <mat-select-trigger>
-        {{OficinaSeleccionada[0] ? OficinaSeleccionada[0] : ''}}
-        <span *ngIf="OficinaSeleccionada?.length > 1">
-          (+{{OficinaSeleccionada.length - 1}} 
-          <span *ngIf="OficinaSeleccionada.length > 2"> {{ 'CUSTOM_SELECT.OTHERS' | translate }}</span>
-          <span *ngIf="OficinaSeleccionada.length === 2"> {{ 'CUSTOM_SELECT.OTHER' | translate }}</span>
-          )
-        </span>
-      </mat-select-trigger>
-        <div *ngFor="let oficina of ListaDeOficinas">      
-          <mat-option [value]="oficina" (click)="selectOficinas()">
-            {{oficina}}
-          </mat-option>
+      <mat-form-field class="col-sm-3">
+        <mat-select #mySelectOffice placeholder="{{ 'SORTED_TABLE.FILTER_OFFICE' | translate }}"
+          [(value)]="OficinaSeleccionada"
+           multiple >
+          <mat-select-trigger>
+            {{OficinaSeleccionada[0] ? OficinaSeleccionada[0] : ''}}
+            <span *ngIf="OficinaSeleccionada?.length > 1">
+              (+{{OficinaSeleccionada.length - 1}} 
+              <span *ngIf="OficinaSeleccionada.length > 2"> {{ 'CUSTOM_SELECT.OTHERS' | translate }}</span>
+              <span *ngIf="OficinaSeleccionada.length === 2"> {{ 'CUSTOM_SELECT.OTHER' | translate }}</span>
+              )
+            </span>
+          </mat-select-trigger>
+          <div (mouseleave)="closingSelect()">
+          <div *ngFor="let oficina of ListaDeOficinas">      
+            <mat-option [value]="oficina" (click)="filterData('oficina')">
+              {{oficina}}
+            </mat-option>
+          </div>
         </div>
-    </mat-select>
+        </mat-select>
+      </mat-form-field>
+      <!-- class="ml-2 col-3" -->
+      <mat-form-field class="ml-2 col-sm-3">
+        <mat-select #mySelectTeam placeholder="{{ 'SORTED_TABLE.FILTER_TEAM' | translate }}"
+        [(value)]="EquipoSeleccionado"
+        multiple>
+        <mat-select-trigger>
+          {{EquipoSeleccionado[0] ? EquipoSeleccionado[0] : ''}}
+          <span *ngIf="EquipoSeleccionado?.length > 1">
+            (+{{EquipoSeleccionado.length - 1}} 
+            <span *ngIf="EquipoSeleccionado.length > 2"> {{ 'CUSTOM_SELECT.OTHERS' | translate }}</span>
+            <span *ngIf="EquipoSeleccionado.length === 2"> {{ 'CUSTOM_SELECT.OTHER' | translate }}</span>
+            )
+          </span>
+        </mat-select-trigger>
+        <div (mouseleave)="closingSelect()">
+          <div *ngFor="let equipo of ListaDeEquipos">
+            <mat-option [value]="equipo" (click)="filterData('equipo')">
+              <div >{{equipo}}</div>        
+            </mat-option>      
+          </div>
+        </div>
+        </mat-select>
+      </mat-form-field>
 
-</mat-form-field>
-
-<mat-form-field class="ml-2 col-3">
-  <mat-select #mySelectTeam (click)="onSelectTeamOpened()" placeholder="{{ 'PENDING_EVALUATION_TABLE.FILTER_TEAM' | translate }}" 
-      [compareWith]="compareTeams"
-      [(ngModel)]="EquipoSeleccionado" multiple>
-    <mat-select-trigger>
-        {{EquipoSeleccionado[0]?.proyecto ? EquipoSeleccionado[0]?.proyecto : ''}} -
-        {{EquipoSeleccionado[0]?.nombre ? EquipoSeleccionado[0]?.nombre : ''}}
-        <span *ngIf="EquipoSeleccionado?.length > 1">
-          (+{{EquipoSeleccionado.length - 1}} 
-          <span *ngIf="EquipoSeleccionado.length > 2"> {{ 'CUSTOM_SELECT.OTHERS' | translate }}</span>
-          <span *ngIf="EquipoSeleccionado.length === 2"> {{ 'CUSTOM_SELECT.OTHER' | translate }}</span>
-          )
-        </span>   
-    </mat-select-trigger>
-    <div *ngFor="let equipo of ListaDeProyectosFiltrada">
-      <mat-option [value]="equipo"(click)="selectEquipos()">
-        <div >{{equipo.proyecto}} - {{equipo.nombre}}</div>        
-      </mat-option>      
+      <mat-form-field class="ml-2 col-sm-3">
+        <mat-select #mySelectAssessment placeholder="{{ 'SORTED_TABLE.FILTER_ASSESSMENT' | translate }}"
+        [(value)]="assessmentSeleccionado"
+        multiple>
+        <mat-select-trigger>
+          {{assessmentSeleccionado[0] ? assessmentSeleccionado[0] : ''}}
+          <span *ngIf="assessmentSeleccionado?.length > 1">
+            (+{{assessmentSeleccionado.length - 1}} 
+            <span *ngIf="assessmentSeleccionado.length > 2"> {{ 'CUSTOM_SELECT.OTHERS' | translate }}</span>
+            <span *ngIf="assessmentSeleccionado.length === 2"> {{ 'CUSTOM_SELECT.OTHER' | translate }}</span>
+            )
+          </span>
+        </mat-select-trigger>
+        <div (mouseleave)="closingSelect()">
+          <div *ngFor="let assessment of listaDeAssessment">
+            <mat-option [value]="assessment" (click)="filterData('assessment')">
+              <div >{{assessment}}</div>        
+            </mat-option>      
+          </div>
+        </div>
+        </mat-select>
+      </mat-form-field>
     </div>
-  </mat-select>
-</mat-form-field>
 
-<mat-form-field class="ml-2 col-2">
-  <mat-select #mySelectAssessment (click)="onSelectAssessmentOpened()" placeholder="{{ 'PENDING_EVALUATION_TABLE.FILTER_ASSESSMENT' | translate }}" 
-      [compareWith]="compareAssessments"
-      [(ngModel)]="AssessmentSeleccionado" multiple>
-    <mat-select-trigger>
-      {{AssessmentSeleccionado[0]?.assessmentName ? AssessmentSeleccionado[0]?.assessmentName : ''}}
-      <span *ngIf="AssessmentSeleccionado?.length > 1">
-        (+{{AssessmentSeleccionado.length - 1}} {{AssessmentSeleccionado.length > 1 ? 'others' : 'other'}})
-      </span>
-    </mat-select-trigger>
-    <div *ngFor="let assessment of ListaDeAssessmentFiltrada">
-      <mat-option [value]="assessment" (click)="selectAssessment()">
-        <div>{{assessment.assessmentName}}</div>
-      </mat-option>      
+    <div class="col-sm text-center mt-3">
+      <btn-export-to-excel
+      [dataTableInput]="dataSource.filteredData"  
+      [fieldsInput] = "fieldsTable"
+      [objectTranslateInput] = "objectTranslate">
+      </btn-export-to-excel>
+
     </div>
-  </mat-select>
-</mat-form-field>
 
-
+  </div>
+</div>
 <div class="table-container">
   <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort aria-label="Elements">
 
-    <!-- Fecha  -->
     <ng-container matColumnDef="fecha">
       <th mat-header-cell *matHeaderCellDef mat-sort-header >{{ 'PENDING_EVALUATION_TABLE.TABLE_COL_DATE' | translate }}</th>
       <td mat-cell *matCellDef="let row">{{row.fecha| date:'dd/MM/yyyy'}}</td>
     </ng-container>
 
-    <!-- Usuario  -->
     <ng-container matColumnDef="userNombre">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'PENDING_EVALUATION_TABLE.TABLE_COL_USER' | translate }}</th>
       <td mat-cell *matCellDef="let row">{{row.userNombre}}</td>
     </ng-container>
 
-    <!-- Oficina  -->
+
     <ng-container matColumnDef="oficina">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'PENDING_EVALUATION_TABLE.TABLE_COL_OFFICE' | translate }}</th>
       <td mat-cell *matCellDef="let row">{{row.oficina}}</td>
     </ng-container>
 
-    <!-- Equipo  -->
     <ng-container matColumnDef="nombre">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'PENDING_EVALUATION_TABLE.TABLE_COL_TEAM' | translate }}</th>
-      <!-- <td mat-cell *matCellDef="let row">{{row.nombre}}</td> -->
       <td mat-cell *matCellDef="let row"><nombre-proyecto [dataImput] = "row.nombre"></nombre-proyecto></td>
     </ng-container>
 
-    <!-- Nombre  -->
+
     <ng-container matColumnDef="assessmentName">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'PENDING_EVALUATION_TABLE.TABLE_COL_ASSESSMENT' | translate }}</th>
       <td mat-cell *matCellDef="let row">{{row.assessmentName}}</td>
     </ng-container>
 
-
-    <!--  Progreso -->
     <ng-container matColumnDef="progress">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'PENDING_EVALUATION_TABLE.TABLE_COL_PROGRESS' | translate }}</th>
       <td mat-cell *matCellDef="let row">{{row.progress}} %</td>
     </ng-container>
- 
-    <!--  Informe -->
+
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef mat-sort-header disabled>{{ 'PENDING_EVALUATION_TABLE.TABLE_COL_ACTIONS' | translate }}</th>
       <td mat-cell *matCellDef="let row">
@@ -128,8 +142,7 @@
 
   </table>
 
-
-  <mat-paginator #paginator [length]="ListaDeEvaluacionesPaginada.length" [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[10, 20, 50]">
+ <mat-paginator #paginator [length]="listaDeEvaluaciones.length" [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[10, 20, 50]">
   </mat-paginator>
 </div>
 

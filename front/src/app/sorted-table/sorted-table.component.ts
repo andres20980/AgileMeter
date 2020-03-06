@@ -1,14 +1,12 @@
-import { Component, OnInit, ViewChild, Input, SimpleChanges, Renderer } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { EvaluacionInfo } from 'app/Models/EvaluacionInfo';
+import { Assessment } from './../Models/Assessment';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { PreviousevaluationComponent } from 'app/previousevaluation/previousevaluation.component'
-import { AppComponent } from 'app/app.component';
+import { Component, OnInit, Input, Output,ViewChild, EventEmitter, Renderer,OnChanges, SimpleChanges,  OnDestroy } from '@angular/core';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Evaluacion } from 'app/Models/Evaluacion';
-import { EnumRol } from 'app/Models/EnumRol';
-import { Assessment } from 'app/Models/Assessment';
-import { Proyecto } from 'app/Models/Proyecto';
-import { ProyectoService } from 'app/services/ProyectoService';
+import { AppComponent } from 'app/app.component';
+import { EvaluacionInfo } from 'app/Models/EvaluacionInfo';
+import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'sorted-table',
@@ -24,379 +22,173 @@ import { ProyectoService } from 'app/services/ProyectoService';
   ],
 })
 
-export class SortedTableComponent implements OnInit {
+export class SortedTableComponent implements OnInit, OnDestroy {
+
+  @Input() dataInput: any
+  @Input() dataInputMerged: any
+  @Input() recoverProject: string;
+  @Input() enableScrumColums: boolean = false;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  @ViewChild('mySelectOffice') mySelectOffice: any;
-  @ViewChild('mySelectTeam') mySelectTeam: any;
   @ViewChild('mySelectAssessment') mySelectAssessment: any;
-  @Input() dataInput: any;//Array<EvaluacionInfo>;
+  @ViewChild('mySelectTeam') mySelectTeam: any;
+  @ViewChild('mySelectOffice') mySelectOffice: any;
   dataSource: MatTableDataSource<Evaluacion>;
-  userRole: number;
-  expandedElement: Evaluacion;
-  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName', 'puntuacion', 'notas', 'informe'];
-  public rol: EnumRol = new EnumRol();
+  dataSourceMerge: MatTableDataSource<Evaluacion>;
+  displayedColumns = ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','puntuacion', 'notas', 'informe'];
+  displayedColumnsMerge = ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName', 'equipo','eventos','herramientas','mindset','aplicacion','puntuacion', 'notas', 'informe'];
   public ListaDeOficinas: string[] = [];
   public OficinaSeleccionada: string[] = [];
-
-  public EquipoSeleccionado: Proyecto[] = [];
-  public ListaDeProyectos: Array<Proyecto> = [];
-  public ListaDeProyectosFiltrada: Array<Proyecto> = [];
-
-  public ListaDeAssessment: Array<Assessment> = [];
-  public AssessmentSeleccionado: Assessment[] = [];
-  public ListaDeAssessmentFiltrada: Array<Assessment> = [];
-
+  public ListaDeEquipos: string[] = [];
+  public EquipoSeleccionado: string[] = [];
+  public assessmentSeleccionado: string[] = [];
+  public listaDeAssessment: string[] = [];
+  public originDataSource: any;
+  public originListOficina: string[] = [];
+  public origingListEquipos: string[] = [];
+  public originListaAssessment: string[] = [];
   public fieldsTable : any[];
   public objectTranslate : string;
+  @Output() propagar = new EventEmitter<any>();
+  @Output() propagar2 = new EventEmitter<any>();
+  public datamerge: boolean = false;
 
-  ngOnInit() {
+  constructor(private _appComponent: AppComponent,  private _router: Router, private renderer: Renderer) { }
 
-    //fieldsTable = [data, translate, size, formato(date, percentage), tipo]
-    this.fieldsTable = [
+  ngOnDestroy(){
+    // alert("destroyed")
+  }
+
+  ngOnInit()
+  {
+    if(this.dataInputMerged){
+      this.dataSourceMerge = new MatTableDataSource(this.dataInputMerged);
+      this.datamerge = true;
+      this.fieldsTable = [
+        ["fecha", "EXCEL_DATE", 12,"dd/mm/yyyy", "Date"],
+        ["userNombre", "EXCEL_USER",20,"", "String"],
+        ["oficina", "EXCEL_OFFICE", 25,"", "String"],
+        ["nombre", "EXCEL_TEAM", 50,"##?##", "String"],
+        ["equipo", "EXCEL_PT_TEAM",  12,"0.00%", "Percentage"], 
+        ["eventos", "EXCEL_PT_EVENTS",  12,"0.00%", "Percentage"], 
+        ["herramientas", "EXCEL_PT_TOOLS", 12,"0.00%", "Percentage"], 
+        ["mindset", "EXCEL_PT_MINDSET", 12,"0.00%", "Percentage"],
+        ["aplicacion", "EXCEL_PT_APP", 12,"0.00%", "Percentage"],
+        ["assessmentName", "EXCEL_ASSESSMENT", 20,"", "String"],
+        ["puntuacion", "EXCEL_SCORE", 12,"0.00%", "Percentage"]];
+        
+    } else {
+      this.fieldsTable = [
         ["fecha", "EXCEL_DATE", 12,"dd/mm/yyyy", "Date"],
         ["userNombre", "EXCEL_USER",20,"", "String"],
         ["oficina", "EXCEL_OFFICE", 25,"", "String"],
         ["nombre", "EXCEL_TEAM", 50,"##?##", "String"], 
         ["assessmentName", "EXCEL_ASSESSMENT", 20,"", "String"],
         ["puntuacion", "EXCEL_SCORE", 12,"0.00%", "Percentage"]];
-    this.objectTranslate = "PREVIOUS_EVALUATION";
-
-    if(this.prevEval.DatosSelectOficinas.length > 0 || this.prevEval.DatosSelectProyectos.length > 0)
-    {
-      this.ListaDeOficinas = this.prevEval.DatosSelectOficinas;
-      this.ListaDeProyectosFiltrada = this.prevEval.DatosSelectProyectos;
-      this.ListaDeProyectos = this.prevEval.ListaDeProyectos;
-      this.prevEval.ListaAssessments.forEach(element => {
-        let a: Assessment = { assessmentId: element.id, assessmentName: element.name };
-        this.ListaDeAssessmentFiltrada.push(a);
-      });
-
-      this.refresh();
     }
-    else
-    {
-      this.getProyectos();
-      this.getAssessmentDeUsuario();
-    }
+  this.objectTranslate = "PREVIOUS_EVALUATION";
 
-    this.GetPaginacion();
-
+    this.GetPagination();
+    this._appComponent.pushBreadcrumb("BREADCRUMB.FINISHED_EVALUATIONS", "/finishedevaluations");
+    this.originDataSource = this.dataInput
+    this.originListOficina = this.dataInput.map(x => x).reduce((x,y) => x.includes(y.oficina) ? x : [...x, y.oficina],[]);
+    this.origingListEquipos = this.dataInput.map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+    this.originListaAssessment = this.dataInput.map(x => x).reduce((x,y) => x.includes(y.assessmentName) ? x : [...x, y.assessmentName],[]);
+    this.ListaDeOficinas= this.dataInput.map(x => x).reduce((x,y) => x.includes(y.oficina) ? x : [...x, y.oficina],[]);
+    this.listaDeAssessment = this.dataInput.map(x => x).reduce((x,y) => x.includes(y.assessmentName) ? x : [...x, y.assessmentName],[]);
+    this.ListaDeEquipos = this.dataInput.map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
   }
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    this.prevEval.TableFilteredData = this.dataSource.filteredData;
-  }
-
-  public GetPaginacion() {
+  public GetPagination()
+  {
     this.dataSource = new MatTableDataSource(this.dataInput);
+    console.log(this.dataSource);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    this.userRole = this._appComponent._storageDataService.Role;
-    this.prevEval.TableFilteredData = this.dataSource.filteredData;
-
-    //Inicialmente asignamos el primer proyecto de la tabla sin filtrar
-    if (this.dataSource.data.length > 0)
-      this.prevEval.Project.id = this.dataSource.data[0].proyectoId;
-
-    this.dataSource.filterPredicate = function (data, filter: string): boolean {
-      let date = new Date(data.fecha);
-      //console.log ((date.getDate()<10?"0":"")+date.getDate()+"/"+(date.getMonth()<10?"0":"")+(date.getMonth()+1)+"/"+date.getFullYear());
-      return data.nombre.toLowerCase().includes(filter)
-        || data.assessmentName.toLowerCase().includes(filter)
-        || (data.userNombre != null && data.userNombre.toLowerCase().includes(filter))
-        || data.oficina.toLowerCase().includes(filter)
-        || data.nombre.toLowerCase().includes(filter)
-        || data.puntuacion.toString().concat("%").includes(filter)
-        // || (data.notasEvaluacion != null && data.notasEvaluacion.toLowerCase().includes(filter))
-        // || (data.notasObjetivos != null && data.notasObjetivos.toLowerCase().includes(filter))
-        || ((date.getDate() < 10 ? "0" : "") + date.getDate() + "/" + (date.getMonth() < 10 ? "0" : "") + (date.getMonth() + 1) + "/" + date.getFullYear()).includes(filter)
-        ;
-    };
-    
   }
 
-  public parseDate(value: string): string {
-    let date = new Date(value);
-    //console.log(date.getDay() + "/" + date.getMonth() + "/" + date.getFullYear());
-    return date.getDay() + "/" + date.getMonth() + 1 + "/" + date.getFullYear();
+  public SaveDataToPDF(evaluacion: EvaluacionInfo)
+  {
+    this._appComponent._storageDataService.EvaluacionToPDF = evaluacion;
+    this._appComponent.pushBreadcrumb(evaluacion.assessmentName, null);
+    let pipe = new DatePipe('en-US');
+    this._appComponent.pushBreadcrumb(pipe.transform(evaluacion.fecha, 'dd/MM/yyyy'), null);
+    this._appComponent.pushBreadcrumb("BREADCRUMB.RESULTS", "/evaluationresults");
+    this._router.navigate(['/evaluationresults']);
   }
 
-  constructor(
-      public prevEval: PreviousevaluationComponent,
-      private _appComponent: AppComponent,
-      private _proyectoService: ProyectoService,
-      private renderer: Renderer
-    ){
+  closingSelect(){
+    this.mySelectTeam.close();
+    this.mySelectOffice.close();
+    this.mySelectAssessment.close();
   }
 
-  SaveDataToPDF(evaluacion: EvaluacionInfo): void {
-    //Limpiamos el storage
-    this._appComponent._storageDataService.OfficesSelected = [];
-    this._appComponent._storageDataService.ProjectsSelected = [];
-    this._appComponent._storageDataService.AssessmentsSelected = [];
-
-    this.prevEval.SaveDataToPDF(evaluacion);
+  applyFilter(filterValue: string)
+  {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  saveNotas(model: Evaluacion): void {
-    if (this.userRole == this.rol.Administrador || this.userRole == this.rol.Evaluador) {
-      this.prevEval._evaluacionService.updateEvaluacion(model).subscribe(
-        res => {
-          // console.log("success");
-        },
-        error => {
-          // console.log("error");
-        },
-        () => {
-          // this.Mostrar = true;
-        });
-    }
-  }
-   //Metodo encargado de refrescar la tabla 
-   public refresh() {
-    var o = this.OficinaSeleccionada;
+  filterData(origen: string)
+  {
+    let oficinaSel = this.OficinaSeleccionada.length !== 0 ? this.OficinaSeleccionada : this.originListOficina;
+    let equipoSel = this.EquipoSeleccionado.length !== 0 ? this.EquipoSeleccionado : this.origingListEquipos;
+    let assessmentSel = this.assessmentSeleccionado.length !== 0 ? this.assessmentSeleccionado : this.originListaAssessment;
 
-    var e = [];
-    if (this.EquipoSeleccionado.length === 0) {
-      e = [];
-    } else {
-      this.EquipoSeleccionado.forEach(function (element) {
-        e.push(element.id);
-      });
-    }
-    var a = [];
-    if (this.AssessmentSeleccionado.length === 0) {
-      a = [];
-    } else {
-      this.AssessmentSeleccionado.forEach(function (element) {
-        a.push(element.assessmentId);
-      });
-    }
-    this.dataSource.filter = "";
-    this.prevEval.EvaluacionFiltrar = { 'nombre': '', 'estado': 'true', 'fecha': '', 'userNombre': '', 'puntuacion': '', 'assessmentId': 1, 'oficinas': o, equipos: e, 'idAssessment': a };
-    this.prevEval.GetPaginacion();
-  }
+    let selected = {oficina: oficinaSel , team: equipoSel, assessment: assessmentSel};
+    let nuevo = this.originDataSource.filter(x =>selected.oficina.includes(x.oficina) && selected.team.includes(x.nombre) && selected.assessment.includes(x.assessmentName));
 
-  public getProyectos() {
-    this._proyectoService.getProyectosDeUsuarioConEvaluacionesFinalizadas().subscribe(
-      res => {
-        this.ListaDeProyectos = res;
-        this.getOficinasDeUsuario(res);
-        this.ListaDeProyectosFiltrada = res;
-
-        //Actualizamos los datos del componente padre
-        this.prevEval.DatosSelectProyectos = this.ListaDeProyectosFiltrada;
-        this.prevEval.ListaDeProyectos = this.ListaDeProyectos;
-      },
-      error => {
-        //Si el servidor tiene algún tipo de problema mostraremos este error
-        if (error == 404) {
-          console.log("Error: " + error + " El usuario o proyecto autenticado no existe.");
-        } else if (error == 500) {
-          console.log("Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.");
-        } else if (error == 401) {
-          console.log("Error: " + error + " El usuario es incorrecto o no tiene permisos, intente introducir su usuario nuevamente.");
-        } else {
-          console.log("Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.");
-        }
-      });
-  }
-
-  // FUNCIONES SELECT DE OFICINAS
-  public getOficinasDeUsuario(res) {
-    var oficinas = [];
-    res.forEach(function (value) {
-      if (oficinas.indexOf(value.oficina) < 0) {
-        oficinas.push(value.oficina);
+    if(origen === 'oficina') {
+      this.ListaDeEquipos = this.originDataSource.filter(x => selected.oficina.includes(x.oficina)).map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+      this.listaDeAssessment = this.originDataSource.filter(x => selected.oficina.includes(x.oficina)).map(x => x.assessmentName).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+      if(this.ListaDeEquipos.length === 1 && this.EquipoSeleccionado.length > 1) {
+        this.ListaDeEquipos = this.EquipoSeleccionado;
       }
-    });
-    this.ListaDeOficinas = oficinas.sort();
-    this.prevEval.DatosSelectOficinas = this.ListaDeOficinas;
-  }
-
-  public selectOficinas() {
-    //Limpiamos la lista de oficinas en storage y añadimos los nuevas oficinas seleccionadas
-    this._appComponent._storageDataService.OfficesSelected = [];
-    this._appComponent._storageDataService.ProjectsSelected = [];
-      this.OficinaSeleccionada.forEach(element => {
-        this._appComponent._storageDataService.OfficesSelected.push(element);
-       });
-
-    this.equiposDeLasOficinasSeleccionadas();
-    this.refresh();
-  }
-
-  // FUNCIONES SELECT DE EQUIPOS
-  public selectEquipos() {
-    //Limpiamos la lista de equipos en storage y añadimos los nuevos equipos seleccionados
-    this._appComponent._storageDataService.ProjectsSelected = [];
-    this.EquipoSeleccionado.forEach(element => {
-      this._appComponent._storageDataService.ProjectsSelected.push(element);
-    });
-
-    //Refrescamos las oficinas
-    if(!(this.OficinaSeleccionada && this.OficinaSeleccionada.length > 1))
-    {
-      this.oficinasDeLosEquiposSeleccionados();   
-    } 
-    this.refresh();
-  }
-
-  // FUNCIONES SELECT DE ASSESSMENT
-  public getAssessmentDeUsuario() {
-    var aux = []
-    var assessment = [];
-    var a: Assessment;
-    //creamos la lista    
-    this.prevEval.ListaDeEvaluacionesPaginada.forEach(function (value) {
-      if (aux.indexOf(value.assessmentId) < 0 ) {
-        a = { assessmentId: value.assessmentId, assessmentName: value.assessmentName };
-        assessment.push(a);
-        aux.push(value.assessmentId);
+    }
+    if(origen === 'equipo') {
+      this.ListaDeOficinas = this.originDataSource.filter(x => selected.team.includes(x.nombre)).map(x => x.oficina).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+      this.listaDeAssessment = this.originDataSource.filter(x => selected.team.includes(x.nombre)).map(x => x.assessmentName).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+      if(this.ListaDeOficinas.length === 1 && this.OficinaSeleccionada.length > 1) {
+        this.ListaDeOficinas = this.OficinaSeleccionada;
       }
-    });
-    //ordenamos la lista por nombre
-    this.ListaDeAssessment = assessment.sort(function (a, b) {
-      if (a.assessmentName > b.assessmentName) {
-        return 1;
-      }
-      if (a.assessmentName < b.assessmentName) {
-        return -1;
-      }
-      // a must be equal to b
-      return 0;
-    });
-    this.ListaDeAssessmentFiltrada = this.ListaDeAssessment;
-  }
+    }
+    if(origen === 'assessment') {
+      this.ListaDeOficinas = this.originDataSource.filter(x => selected.assessment.includes(x.assessmentName)).map(x => x.oficina).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+      this.ListaDeEquipos = this.originDataSource.filter(x => selected.assessment.includes(x.assessmentName)).map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+    }
 
-  public selectAssessment() {
+    this.dataSource.data = nuevo;
 
-    //Limpiamos la lista de assessments en storage y añadimos los nuevas assessments seleccionadas
-    this._appComponent._storageDataService.AssessmentsSelected = [];
-      this.AssessmentSeleccionado.forEach(element => {
-        this._appComponent._storageDataService.AssessmentsSelected.push(element);
-       });
+    if(this.OficinaSeleccionada.length === 0 && this.EquipoSeleccionado.length === 0 && this.assessmentSeleccionado.length === 0) {
+      this.dataSource.data = this.originDataSource;
+      this.ListaDeEquipos = this.originDataSource.reduce((x,y) => x.includes(y.nombre) ? x : [...x, y.nombre],[]);
+      this.ListaDeOficinas = this.originDataSource.reduce((x,y) => x.includes(y.oficina) ? x : [...x, y.oficina],[]);
+      this.listaDeAssessment = this.originDataSource.reduce((x,y) => x.includes(y.assessmentName) ? x : [...x, y.assessmentName],[])
+      this.propagar.emit(false);
+    }
 
-    //Refrescamos los datos para que sea coherente con el select de assessment no seleccionado.
-    this.refresh();
-  }
-
-  public equiposDeLasOficinasSeleccionadas() {
-    //ponemos los equipos seleccionados y la lista de equipos a vacio
-    this.EquipoSeleccionado = [];
-    this.ListaDeProyectosFiltrada = [];
-
-    if (this.OficinaSeleccionada.length === 0) {
-      this.ListaDeProyectosFiltrada = this.ListaDeProyectos;
+    if(this.EquipoSeleccionado.length === 1 && this.assessmentSeleccionado[0] === "SCRUM") {
+      this.activateToMerge();
+      this.activateChartToParent();
     } else {
-      this.ListaDeProyectosFiltrada = this.ListaDeProyectos.filter(x => this.OficinaSeleccionada.indexOf(x.oficina) >= 0);
+      this.propagar.emit(false);
     }
 
-    if (this.ListaDeProyectosFiltrada.length === 1)
-    {
-      //Limpiamos la lista de equipos en storage y añadimos el único equipo
-      this._appComponent._storageDataService.ProjectsSelected = [];
-      this.ListaDeProyectosFiltrada.forEach(element => {
-        this._appComponent._storageDataService.ProjectsSelected.push(element);
-      });
-
-      this.EquipoSeleccionado = this._appComponent._storageDataService.ProjectsSelected;
-
-      //Actualizamos los datos del componente padre
-      this.prevEval.DatosSelectProyectos = this.ListaDeProyectosFiltrada;     
-    }
+    // si toca cualquiera elimina el merge
+    this.datamerge = false;
+  
   }
 
-  public oficinasDeLosEquiposSeleccionados() {
-    if (this.EquipoSeleccionado.length != 0) {
-      var oficinas = [];
-      this.EquipoSeleccionado.forEach(function (value) {
-        if (oficinas.indexOf(value.oficina) < 0) {
-          oficinas.push(value.oficina);
-        }
-      });
-      oficinas = oficinas.sort();
-      this.OficinaSeleccionada = oficinas;
-
-      //Actualizamos la lista de equipos asociados a la nueva lista de oficinas
-      this.refrescamosEquiposOficinasSeleccionadas();
-
-      //Limpiamos la lista de equipos en storage y añadimos los nuevos equipos seleccionados
-      this._appComponent._storageDataService.OfficesSelected = [];
-      this.OficinaSeleccionada.forEach(element => {
-        this._appComponent._storageDataService.OfficesSelected.push(element);
-       });
-
-       //Marcamos los equipos previamnete seleccionados
-       this.EquipoSeleccionado = this._appComponent._storageDataService.ProjectsSelected;
-
-      //console.log(this._appComponent._storageDataService.OfficesSelected);
-    }
+  activateChartToParent()
+  {
+    //this.dataSource.data.find(x => x.fecha === this.dataSource.data.map(x => x.fecha ).sort().slice(-1).pop())
+    let lastProyect = this.dataSource.data.map(x => {return {id: x.proyectoId, name: x.nombre ,assessmentId: x.assessmentId}}).sort().slice(-1).pop();
+    this.propagar.emit({idProyecto: lastProyect.id, idAssessment: lastProyect.assessmentId});
   }
 
-
-  //Este método refresca los equipos una vez que actualizamos las oficinas tras seleccionar
-  //un equipo ya que solo debe mostrar los equipos de dicha oficina.
-  public refrescamosEquiposOficinasSeleccionadas() {
-
-    this.EquipoSeleccionado = [];
-    this.ListaDeProyectosFiltrada = [];
-
-    if (this.OficinaSeleccionada.length === 0) {
-      this.ListaDeProyectosFiltrada = this.ListaDeProyectos;
-    } else {
-      this.ListaDeProyectosFiltrada = this.ListaDeProyectos.filter(x => this.OficinaSeleccionada.indexOf(x.oficina) >= 0);
-    }
-
-    if (this.ListaDeProyectosFiltrada.length === 1)
-    {
-      this.EquipoSeleccionado = this._appComponent._storageDataService.ProjectsSelected;   
-    }
-
-    //Actualizamos los datos del componente padre
-    this.prevEval.DatosSelectProyectos = this.ListaDeProyectosFiltrada;
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes.dataInput) {
-      this.GetPaginacion();
-
-      //Asignamos el criterio de seleccion
-      this.OficinaSeleccionada = this._appComponent._storageDataService.OfficesSelected;
-      this.EquipoSeleccionado = this._appComponent._storageDataService.ProjectsSelected;
-      this.AssessmentSeleccionado = this._appComponent._storageDataService.AssessmentsSelected;
-    }
-  }
-
-  public onSelectOfficeOpened(){
-    this.renderer.listen(this.mySelectOffice.panel.nativeElement, 'mouseleave', (event) => {
-        if(event.toElement.nodeName !== "MAT-OPTION"){
-          this.mySelectOffice.close();
-      }     
-    })
-  }
-
-  public onSelectTeamOpened(){
-    this.renderer.listen(this.mySelectTeam.panel.nativeElement, 'mouseleave', (event) => {
-        if(event.toElement.nodeName !== "MAT-OPTION"){
-          this.mySelectTeam.close();
-      }     
-    })
-  }
-
-  public onSelectAssessmentOpened(){
-    this.renderer.listen(this.mySelectAssessment.panel.nativeElement, 'mouseleave', (event) => {
-        if(event.toElement.nodeName !== "MAT-OPTION"){
-          this.mySelectAssessment.close();
-      }     
-    })
-  }
-
-  //Compara los objetos assessment para asignar los select
-  compareAssessments(o1: any, o2: any): boolean {
-    return o1.assessmentId === o2.assessmentId;
+  activateToMerge()
+  {
+    //this.dataSource.data.find(x => x.fecha === this.dataSource.data.map(x => x.fecha ).sort().slice(-1).pop())
+    let lastProyect = this.dataSource.data.map(x => {return {id: x.proyectoId, name: x.nombre ,assessmentId: x.assessmentId}}).sort().slice(-1).pop();
+    this.propagar2.emit({idProyecto: lastProyect.id, nombre: lastProyect.name, idAssessment: lastProyect.assessmentId});
   }
 }

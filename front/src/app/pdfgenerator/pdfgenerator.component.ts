@@ -618,7 +618,7 @@ export class PdfgeneratorComponent implements OnInit {
 
   saveNotas(model: Evaluacion): void {
     if (this.UserRole == this.rol.Administrador || this.UserRole == this.rol.Evaluador) {
-      this.prevEval._evaluacionService.updateEvaluacion(model).subscribe(
+      this.prevEval.evaluacionService.updateEvaluacion(model).subscribe(
         res => {
           // console.log("success");
         },
