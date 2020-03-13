@@ -25,9 +25,8 @@
     </div>
 
   <div id="sortedtable">
-     <sorted-table *ngIf="ListaDeEvaluacionesPaginada && !activateChart && finishMerge" 
+     <sorted-table *ngIf="ListaDeEvaluacionesPaginada && !activateChart" 
      [dataInput]="ListaDeEvaluacionesPaginada"
-     [dataInputMerged]="ListaDeEvaluacionesMerge"
      [enableScrumColums]="enableColumns"
      (propagar)="procesaPropagar($event)"
      (propagar2)="procesaMerge($event)">
@@ -36,7 +35,7 @@
   </div>
 
   <div *ngIf="activateChart" class="container">
-    <app-evaluationchart [result]="prevResult" [nombreProyecto]="ProjectSelectName"></app-evaluationchart>
+    <app-evaluationchart [result]="prevResult" [nombreProyecto]="ProjectSelectName" [nombreAssessment]="AssessmentSelectName"></app-evaluationchart>
    </div>
 </div>
 

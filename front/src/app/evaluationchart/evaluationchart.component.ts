@@ -1,10 +1,7 @@
-import { concat } from 'rxjs-compat/operator/concat';
 import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
-import { Observable, range } from 'rxjs'
-import { switchMap, toArray, take } from 'rxjs/operators';
-import { ChartType, ChartOptions, Chart } from 'chart.js';
-import { runInThisContext } from 'vm';
-import { TooltipComponent } from '@angular/material';
+import { AppComponent } from 'app/app.component';
+import { Chart } from 'chart.js';
+
 
 @Component({
   selector: 'app-evaluationchart',
@@ -13,7 +10,9 @@ import { TooltipComponent } from '@angular/material';
 })
 export class EvaluationchartComponent implements OnInit, AfterViewInit {
 
+
   @Input() nombreProyecto: string;
+  @Input() nombreAssessment: string;
   @Input() result: any;
   public chartType: string = 'bar';
   public maxLevel: number;
@@ -23,12 +22,16 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
   public ctx_datasets = new Array();
   public ctx_labels = new Array();
   public arrayScrum = new Array();
+  public arrayDevops = new Array();
+  public auxColors = ['rgba(255, 240, 155, 0.1)','rgba(137, 236, 160, 0.1)']
   public chartOptions: any
   public infoResult: Array<Object> = [];
   public previous: any;
   public post: any;
-  constructor() {
+  
+  constructor(private _appComponent: AppComponent) {
     
+
    this.arrayScrum = [
       {nombre: "EQUIPO", color: "red"},
       {nombre: "EVENTOS", color: "pink"},
@@ -36,17 +39,27 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
       {nombre: "MINDSET", color: "green"},
       {nombre: "APLICACIÓN PRÁCTICA", color: "blue"}
     ]
+  
+    this.arrayDevops = [
+      {nombre: "ORGANIZACION EQUIPOS", color: "red"},
+      {nombre: "CICLO DE VIDA", color: "pink"},
+      {nombre: "CONSTRUCCIÓN",color: "purple"},
+      {nombre: "TESTING Y CALIDAD", color: "green"},
+      {nombre: "DESPLIEGUE", color: "blue"},
+      {nombre: "MONITORIZACION", color: "lavender"},
+      {nombre: "APROVISIONAMIENTO", color: "orange"}
+    ];
 
   }
 
   ngOnInit() {
-    console.log(this.nombreProyecto)
+    this._appComponent.pushBreadcrumb(this.nombreProyecto, "/evaluationresults");
     this.previous = this.result.map(x => x.sectionsInfo);
     this.ctx_labels = this.result.map(x => {return this.parseDate(x.fecha)})
     this.ctx_labels.reverse();
     this.ctx_labels.push("");
     this.ctx_labels.unshift("");
-
+    console.log(this.previous)
     let levels = this.previous.flatMap(c => c).map(x => x.nivelAlcanzado)
     this.maxLevel = Math.max(...levels)
     this.post = this.previous.flatMap(c => c).reduce((x, y) => {
@@ -54,47 +67,62 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
                 this.arr.push(y.nombre);
                 return x },[])
 
-    this.arrayScrum.forEach((v,c) => {
-      this.ctx_datasets.push({
-        type: "line",
-        data: this.post[c],
-        label: v.nombre,
-        backgroundColor: v.color,
-        fill: "false",
-        lineTension: 0.1,
-        borderColor: v.color,
-        pointRadius: 2,
-        pointHoverRadius: 4,
-        borderWidth: 3
-      })
-    })
 
-    this.ctx_datasets.push({type: "line",
-      data:[100,100,100,100,100,100],
-      label: "aux0",
-      backgroundColor: 'rgba(255, 240, 155, 0.1)',
-      fill: "origin",
-      lineTension: 0.1,
-      borderColor: 'rgba(255, 240, 155 , 0.1)',
-      pointRadius: 0,
-      pointHoverRadius: 0,
-      borderWidth: 0.1
-    })
+      if(this.nombreAssessment === "SCRUM") {
+        this.arrayScrum.forEach((v,c) => {
+          this.ctx_datasets.push({
+            type: "line",
+            data: this.post[c],
+            label: v.nombre,
+            backgroundColor: v.color,
+            fill: "false",
+            lineTension: 0.1,
+            borderColor: v.color,
+            pointRadius: 2,
+            pointHoverRadius: 4,
+            borderWidth: 3
+          })
+        })
+      }
 
-    if(this.maxLevel === 2) {
+      if(this.nombreAssessment === "DEVOPS") {
+        this.arrayDevops.forEach((v,c) => {
+          this.ctx_datasets.push({
+            type: "line",
+            data: this.post[c],
+            label: v.nombre,
+            backgroundColor: v.color,
+            fill: "false",
+            lineTension: 0.1,
+            borderColor: v.color,
+            pointRadius: 2,
+            pointHoverRadius: 4,
+            borderWidth: 3
+          })
+        })
+      }
+
+
+
+   this.createAux(levels);
+  }
+
+  createAux(levels: [])
+  {
+    let fillevels = levels.filter((a, b) => levels.indexOf(a) === b)
+    let follow = [1,1,1,1,1,1]
+    fillevels.map((col, i) => {
       this.ctx_datasets.push({type: "line",
-          data:[200,200,200,200,200,200],
-          label: "aux1",
-          backgroundColor: 'rgba(137, 236, 160, 0.1)',
-          fill: "origin",
-          lineTension: 0.1,
-          borderColor: 'rgba(137, 236, 160, 0.1)',
-          pointRadius: 0,
-          pointHoverRadius: 0,
-          borderWidth: 0.1
-      })
-
-    }
+              data: follow.map(x => x * (col * 100)), 
+              label:"aux" + (col - 1),
+              backgroundColor: this.auxColors[i],
+              fill: "origin",
+              lineTension: 0.1,
+              borderColor: this.auxColors[i],
+              pointRadius: 0,
+              pointHoverRadius: 0,
+              borderWidth: 0.1})
+    })
   }
 
   

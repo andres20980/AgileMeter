@@ -1,5 +1,11 @@
 <div class="container">
-  <h2>{{nombreProyecto}}</h2>
+  <div class="col-md" [ngStyle]="{'background-color':'#F9FFF0','padding': '3px', 'border-radius': '25px'}">
+    <div class="row p-4 flex-row">
+      <div class="pl-4 justify-content-sm-between"> <h4>{{nombreProyecto}}</h4></div>
+      <div class="pl-3 mt-1 justify-content-sm-between"> - </div>
+      <div class="pl-3 mt-2"><h6>{{nombreAssessment}}</h6></div>
+    </div>
+  </div>
     <div id="chart-container"> 
       <canvas id="line-chart" width="700" height="350"></canvas>
   </div>

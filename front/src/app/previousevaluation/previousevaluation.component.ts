@@ -1,3 +1,4 @@
+
 import { Component, OnInit, isDevMode, Input} from '@angular/core';
 import { EvaluacionInfo } from 'app/Models/EvaluacionInfo';
 import { EvaluacionService } from '../services/EvaluacionService';
@@ -27,12 +28,13 @@ export class PreviousevaluationComponent implements OnInit {
   public activeTable: boolean = true;
   public activateChart: boolean = false;
   public ProjectSelectName: string;
+  public AssessmentSelectName: string;
   public prevResult: any;
   public finishMerge: boolean = true;
   public enableColumns: boolean = false;
 
   constructor(private _proyectoService: ProyectoService, public evaluacionService: EvaluacionService, 
-    private _router: Router ) { 
+    private _router: Router, private _appComponent: AppComponent ) { 
   }
 
   ngOnInit() {
@@ -43,33 +45,62 @@ export class PreviousevaluationComponent implements OnInit {
   }
 
   public GetPaginacion() {
-    this.evaluacionService.getAllEvaluacionInfoFiltered(0, this.EvaluacionFiltrar)
-      .subscribe(
-        res => {
-          this.ListaDeEvaluacionesPaginada = res.evaluacionesResult.reduce((acc, item) => {
-          item.nombre = item.nombre.replace("##?##", " - ")
-          return [...acc, item]
-        },[])
-        })
-    }
-
-    procesaPropagar(mensaje: any) {
-      if(!mensaje) {
-        this.uniqueSelectTeam = false;
-        this.enableColumns = false;
-        return
-      } else {
-        //this.uniqueSelectTeam = true;
-      }
-      this.ProjectSelectName = mensaje.nombre;
-      this.sectionsInfoProject$ = {nombre: mensaje.nombre, fecha: mensaje.fecha};
-      let filterEvaluation: EvaluacionFilterInfo = new EvaluacionFilterInfo("","","","","true",  mensaje.idAssessment,[],[],[]);
-      this.evaluacionService.GetEvaluationsWithSectionsInfo(mensaje.idProyecto, filterEvaluation)
+    let filterEvaluation: EvaluacionFilterInfo = new EvaluacionFilterInfo("","","","","true",  1,[],[],[]);
+      this.evaluacionService.GetEvaluationsWithSectionsInfo(2, filterEvaluation, 1)
         .subscribe(res => {
+          console.log("wininfo");
+          console.log(res);
           this.prevResult = res.evaluacionesResult;
+          this.ListaDeEvaluacionesPaginada = res.evaluacionesResult.reduce((acc, item) => {
+            item.oficina = item.oficina.trim()
+            return [...acc, item]
+          },[]);
           this.sectionsInfoNombres$ = res.evaluacionesResult.sectionsInfo
           this.sectionsInfoPuntuacion$ = res.evaluacionesResult.sectionsInfo
         });
+    // this.evaluacionService.getAllEvaluacionInfoFiltered(0, this.EvaluacionFiltrar)
+    //   .subscribe(
+    //     res => {
+    //       this.ListaDeEvaluacionesPaginada = res.evaluacionesResult.reduce((acc, item) => {
+    //       item.nombre = item.nombre.replace("##?##", " - ")
+    //       return [...acc, item]
+    //     },[])
+    //     })
+    }
+
+    procesaPropagar(mensaje: any) {
+    if(!mensaje) {
+       this.uniqueSelectTeam = false;
+         this.enableColumns = false;
+        return
+     } else {
+      this.ProjectSelectName = mensaje[0].nombre;
+      this.AssessmentSelectName = mensaje[0].assessmentName
+      this.prevResult = mensaje;
+      this.enableColumns = true;
+      this.uniqueSelectTeam = true;
+     }
+
+
+      // if(!mensaje) {
+      //   this.uniqueSelectTeam = false;
+      //   this.enableColumns = false;
+      //   return
+      // } else {
+      //   //this.uniqueSelectTeam = true;
+      // }
+      // this.ProjectSelectName = mensaje.nombre;
+      // this.sectionsInfoProject$ = {nombre: mensaje.nombre, fecha: mensaje.fecha};
+      // let filterEvaluation: EvaluacionFilterInfo = new EvaluacionFilterInfo("","","","","true",  mensaje.idAssessment,[],[],[]);
+      // this.evaluacionService.GetEvaluationsWithSectionsInfo(2, filterEvaluation, 0)
+      //   .subscribe(res => {
+      //     console.log("wininfo2");
+      //     console.log(res);
+      //     this.prevResult = res.evaluacionesResult;
+      //     this.ListaDeEvaluacionesPaginada = res.evaluacionesResult;
+      //     this.sectionsInfoNombres$ = res.evaluacionesResult.sectionsInfo
+      //     this.sectionsInfoPuntuacion$ = res.evaluacionesResult.sectionsInfo
+      //   });
       }
 
 
@@ -79,25 +110,25 @@ export class PreviousevaluationComponent implements OnInit {
       let filterEvaluation: EvaluacionFilterInfo = new EvaluacionFilterInfo("","","","","true",  mensaje.idAssessment,[],[],[]);
       let obm = this.evaluacionService.getAllEvaluacionInfoFilteredToMerge(0, this.EvaluacionFiltrar)//.subscribe(s => console.log(s))
       let obm2 = this.evaluacionService.GetEvaluationsWithSectionsInfoToMerge(mensaje.idProyecto,filterEvaluation)//.subscribe(s => console.log(s))
-      obm.pipe(mergeMap((j) => obm2.pipe(filter(f => f['id'] === j['id']),map(h => {
-        Object.assign(j,{ sectionsInfo: h['sectionsInfo']})
-        return j
-        })))).subscribe((r: any) => {
-          console.log(r);
-          r.nombre = r.nombre.replace("##?##", " - ")
-          r.sectionsInfo.map(x => {
-            let decimal = x.puntuacion.toString().indexOf(".")
-            x.puntuacion = x.puntuacion.toString().substring(0, decimal + 2);
-            return x;
-          })
-          this.ListaDeEvaluacionesMerge.push(r);
-        },
-        error => {},
-        () => {
-          this.finishMerge = true;
-          this.enableColumns = true;
-          this.uniqueSelectTeam = true;
-        })
+      // obm.pipe(mergeMap((j) => obm2.pipe(filter(f => f['id'] === j['id']),map(h => {
+      //   Object.assign(j,{ sectionsInfo: h['sectionsInfo']})
+      //   return j
+      //   })))).subscribe((r: any) => {
+      //     console.log(r);
+      //     r.nombre = r.nombre.replace("##?##", " - ")
+      //     r.sectionsInfo.map(x => {
+      //       let decimal = x.puntuacion.toString().indexOf(".")
+      //       x.puntuacion = x.puntuacion.toString().substring(0, decimal + 2);
+      //       return x;
+      //     })
+      //     this.ListaDeEvaluacionesMerge.push(r);
+      //   },
+      //   error => {},
+      //   () => {
+      //     this.finishMerge = true;
+      //     this.enableColumns = true;
+      //     this.uniqueSelectTeam = true;
+      //   })
     }
  
     setGreyOut()

@@ -1,6 +1,6 @@
 import { Assessment } from './../Models/Assessment';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit, Input, Output,ViewChild, EventEmitter, Renderer,OnChanges, SimpleChanges,  OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, Output,ViewChild, EventEmitter, Renderer,OnChanges, SimpleChanges} from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Evaluacion } from 'app/Models/Evaluacion';
 import { AppComponent } from 'app/app.component';
@@ -22,7 +22,7 @@ import { DatePipe } from '@angular/common';
   ],
 })
 
-export class SortedTableComponent implements OnInit, OnDestroy {
+export class SortedTableComponent implements OnInit{
 
   @Input() dataInput: any
   @Input() dataInputMerged: any
@@ -36,7 +36,6 @@ export class SortedTableComponent implements OnInit, OnDestroy {
   dataSource: MatTableDataSource<Evaluacion>;
   dataSourceMerge: MatTableDataSource<Evaluacion>;
   displayedColumns = ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','puntuacion', 'notas', 'informe'];
-  displayedColumnsMerge = ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName', 'equipo','eventos','herramientas','mindset','aplicacion','puntuacion', 'notas', 'informe'];
   public ListaDeOficinas: string[] = [];
   public OficinaSeleccionada: string[] = [];
   public ListaDeEquipos: string[] = [];
@@ -49,21 +48,15 @@ export class SortedTableComponent implements OnInit, OnDestroy {
   public originListaAssessment: string[] = [];
   public fieldsTable : any[];
   public objectTranslate : string;
+  public scrumassmnt: boolean = false;
+  public devopsassmnt: boolean = false;
   @Output() propagar = new EventEmitter<any>();
   @Output() propagar2 = new EventEmitter<any>();
-  public datamerge: boolean = false;
 
   constructor(private _appComponent: AppComponent,  private _router: Router, private renderer: Renderer) { }
 
-  ngOnDestroy(){
-    // alert("destroyed")
-  }
-
   ngOnInit()
   {
-    if(this.dataInputMerged){
-      this.dataSourceMerge = new MatTableDataSource(this.dataInputMerged);
-      this.datamerge = true;
       this.fieldsTable = [
         ["fecha", "EXCEL_DATE", 12,"dd/mm/yyyy", "Date"],
         ["userNombre", "EXCEL_USER",20,"", "String"],
@@ -76,27 +69,20 @@ export class SortedTableComponent implements OnInit, OnDestroy {
         ["aplicacion", "EXCEL_PT_APP", 12,"0.00%", "Percentage"],
         ["assessmentName", "EXCEL_ASSESSMENT", 20,"", "String"],
         ["puntuacion", "EXCEL_SCORE", 12,"0.00%", "Percentage"]];
-        
-    } else {
-      this.fieldsTable = [
-        ["fecha", "EXCEL_DATE", 12,"dd/mm/yyyy", "Date"],
-        ["userNombre", "EXCEL_USER",20,"", "String"],
-        ["oficina", "EXCEL_OFFICE", 25,"", "String"],
-        ["nombre", "EXCEL_TEAM", 50,"##?##", "String"], 
-        ["assessmentName", "EXCEL_ASSESSMENT", 20,"", "String"],
-        ["puntuacion", "EXCEL_SCORE", 12,"0.00%", "Percentage"]];
-    }
+      
   this.objectTranslate = "PREVIOUS_EVALUATION";
 
     this.GetPagination();
     this._appComponent.pushBreadcrumb("BREADCRUMB.FINISHED_EVALUATIONS", "/finishedevaluations");
     this.originDataSource = this.dataInput
-    this.originListOficina = this.dataInput.map(x => x).reduce((x,y) => x.includes(y.oficina) ? x : [...x, y.oficina],[]);
+    this.originListOficina = this.dataInput.map(x => x.oficina).reduce((x,y) => x.includes(y) ? x : [...x, y],[]);
     this.origingListEquipos = this.dataInput.map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
     this.originListaAssessment = this.dataInput.map(x => x).reduce((x,y) => x.includes(y.assessmentName) ? x : [...x, y.assessmentName],[]);
-    this.ListaDeOficinas= this.dataInput.map(x => x).reduce((x,y) => x.includes(y.oficina) ? x : [...x, y.oficina],[]);
+    this.ListaDeOficinas= this.dataInput.map(x => x.oficina).reduce((x,y) => x.includes(y) ? x : [...x, y],[]);
     this.listaDeAssessment = this.dataInput.map(x => x).reduce((x,y) => x.includes(y.assessmentName) ? x : [...x, y.assessmentName],[]);
     this.ListaDeEquipos = this.dataInput.map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+
+    this.propagar.emit(false)
   }
 
   public GetPagination()
@@ -163,32 +149,37 @@ export class SortedTableComponent implements OnInit, OnDestroy {
       this.ListaDeEquipos = this.originDataSource.reduce((x,y) => x.includes(y.nombre) ? x : [...x, y.nombre],[]);
       this.ListaDeOficinas = this.originDataSource.reduce((x,y) => x.includes(y.oficina) ? x : [...x, y.oficina],[]);
       this.listaDeAssessment = this.originDataSource.reduce((x,y) => x.includes(y.assessmentName) ? x : [...x, y.assessmentName],[])
-      this.propagar.emit(false);
+      
     }
+    this.showColumnAssessment();
+    this.activateChartToParent();
+  }
 
-    if(this.EquipoSeleccionado.length === 1 && this.assessmentSeleccionado[0] === "SCRUM") {
-      this.activateToMerge();
-      this.activateChartToParent();
+  showColumnAssessment()
+  {
+    if(this.assessmentSeleccionado.length === 1) {
+      if( this.assessmentSeleccionado[0] === "SCRUM") {
+        this.displayedColumns = ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','equipo','eventos','herramientas','mindset','aplicacion','puntuacion', 'notas', 'informe'];
+        this.scrumassmnt = true;
+      } else if(this.assessmentSeleccionado[0] === "DEVOPS") {
+        this.displayedColumns = ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','orgequipo','ciclovida','construccion','testing','despligue','monitorizacion','aprovisionamiento','puntuacion', 'notas', 'informe'];
+        this.devopsassmnt = true;
+      }
+
     } else {
+      this.displayedColumns = ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','puntuacion', 'notas', 'informe'];
+      this.scrumassmnt = false;
+      this.devopsassmnt = false;
       this.propagar.emit(false);
-    }
-
-    // si toca cualquiera elimina el merge
-    this.datamerge = false;
-  
+    } 
   }
 
   activateChartToParent()
   {
-    //this.dataSource.data.find(x => x.fecha === this.dataSource.data.map(x => x.fecha ).sort().slice(-1).pop())
-    let lastProyect = this.dataSource.data.map(x => {return {id: x.proyectoId, name: x.nombre ,assessmentId: x.assessmentId}}).sort().slice(-1).pop();
-    this.propagar.emit({idProyecto: lastProyect.id, idAssessment: lastProyect.assessmentId});
-  }
-
-  activateToMerge()
-  {
-    //this.dataSource.data.find(x => x.fecha === this.dataSource.data.map(x => x.fecha ).sort().slice(-1).pop())
-    let lastProyect = this.dataSource.data.map(x => {return {id: x.proyectoId, name: x.nombre ,assessmentId: x.assessmentId}}).sort().slice(-1).pop();
-    this.propagar2.emit({idProyecto: lastProyect.id, nombre: lastProyect.name, idAssessment: lastProyect.assessmentId});
+    if(this.EquipoSeleccionado.length === 1 && this.assessmentSeleccionado.length === 1) {
+      this.propagar.emit(this.dataSource.data)
+    } else {
+      this.propagar.emit(false);
+    }
   }
 }

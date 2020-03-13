@@ -574,36 +574,49 @@ namespace everisapi.API.Services
             return EvaluacionesInformativasFiltradas.ToList();
         }
 
-        public List<EvaluacionInfoWithSectionsDto> GetEvaluationsWithSectionsInfo(int IdProject, EvaluacionInfoPaginationDto Evaluacion, int codigoIdioma)
+        public List<EvaluacionInfoWithSectionsDto> GetEvaluationsWithSectionsInfo(int IdProject, EvaluacionInfoPaginationDto Evaluacion, int codigoIdioma, int PidAssessment)
         {
             //Recogemos las evaluaciones y la paginamos
             List<EvaluacionInfoWithSectionsDto> EvaluacionesInformativas = new List<EvaluacionInfoWithSectionsDto>();
             List<EvaluacionEntity> Evaluaciones;
-            if (Evaluacion.Estado != null && Evaluacion.Estado != "")
+            
+            if(PidAssessment == 1 || PidAssessment == 2)
             {
+
                 Evaluaciones = _context.Evaluaciones.
                 Include(r => r.ProyectoEntity).
                 ThenInclude(p => p.UserEntity).
                 Include(a => a.Assessment).
-                Where(e => e.ProyectoId == IdProject &&
-                e.Estado == Boolean.Parse(Evaluacion.Estado) &&
-                (Evaluacion.AssessmentId == 0 || e.AssessmentId == Evaluacion.AssessmentId) &&
-                e.Fecha.Date.ToString("dd/MM/yyyy").Contains(Evaluacion.Fecha) //&&
-                                                                               //e.ProyectoEntity.UserNombre.ToLower().Contains(Evaluacion.UserNombre.ToLower())
-                ).OrderByDescending(e => e.Fecha).ToList();
-            }
-            else
+                Where(e => e.ProyectoEntity.TestProject == false && e.Estado == true).OrderByDescending(e => e.Fecha).ToList();
+
+            } else
             {
-                Evaluaciones = _context.Evaluaciones.
-                Include(r => r.ProyectoEntity).
-                ThenInclude(p => p.UserEntity).
-                Include(a => a.Assessment).
-                Where(e => e.ProyectoId == IdProject &&
-                (Evaluacion.AssessmentId == 0 || e.AssessmentId == Evaluacion.AssessmentId) &&
-                e.Fecha.Date.ToString("dd/MM/yyyy").Contains(Evaluacion.Fecha) //&&
-                                                                               //e.ProyectoEntity.UserNombre.ToLower().Contains(Evaluacion.UserNombre.ToLower())
-                ).OrderByDescending(e => e.Fecha).ToList();
-            }
+
+              if(Evaluacion.Estado != null && Evaluacion.Estado != "")
+              {
+
+                  Evaluaciones = _context.Evaluaciones.
+                  Include(r => r.ProyectoEntity).
+                  ThenInclude(p => p.UserEntity).
+                  Include(a => a.Assessment).
+                  Where(e => e.ProyectoId == IdProject &&
+                  e.Estado == Boolean.Parse(Evaluacion.Estado) &&
+                  (Evaluacion.AssessmentId == 0 || e.AssessmentId == Evaluacion.AssessmentId) &&
+                  e.Fecha.Date.ToString("dd/MM/yyyy").Contains(Evaluacion.Fecha)).OrderByDescending(e => e.Fecha).ToList();
+              }
+              else
+              {
+                  Evaluaciones = _context.Evaluaciones.
+                  Include(r => r.ProyectoEntity).
+                  ThenInclude(p => p.UserEntity).
+                  Include(a => a.Assessment).
+                  Where(e => e.ProyectoId == IdProject &&
+                  (Evaluacion.AssessmentId == 0 || e.AssessmentId == Evaluacion.AssessmentId) &&
+                  e.Fecha.Date.ToString("dd/MM/yyyy").Contains(Evaluacion.Fecha) //&&
+                                                                                 //e.ProyectoEntity.UserNombre.ToLower().Contains(Evaluacion.UserNombre.ToLower())
+                  ).OrderByDescending(e => e.Fecha).ToList();
+              }
+             }
             //Encuentra la informacion de la evaluacion y lo introduce en un objeto
             foreach (var evaluacion in Evaluaciones)
             {
@@ -612,8 +625,10 @@ namespace everisapi.API.Services
                     Id = evaluacion.Id,
                     Fecha = evaluacion.Fecha,
                     Estado = evaluacion.Estado,
-                    Nombre = evaluacion.ProyectoEntity.Nombre,
+                    Oficina = evaluacion.ProyectoEntity.Oficina,
+                    Nombre = String.IsNullOrEmpty(evaluacion.ProyectoEntity.Proyecto)? evaluacion.ProyectoEntity.Nombre : evaluacion.ProyectoEntity.Proyecto + " - " + evaluacion.ProyectoEntity.Nombre,
                     UserNombre = evaluacion.UserNombre,
+                    NotasEvaluacion = evaluacion.NotasEvaluacion,
                     AssessmentName = evaluacion.Assessment.AssessmentName,
                     AssessmentId = evaluacion.AssessmentId,
                     //NotasEvaluacion = evaluacion.NotasEvaluacion

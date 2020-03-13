@@ -92,7 +92,7 @@
 </div>
 
 <div class="table-container">
-  <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort aria-label="Elements" *ngIf="!datamerge">
+  <table mat-table [dataSource]="dataSource" multiTemplateDataRows matSort aria-label="Elements">
 
     <!-- Fecha  -->
     <ng-container matColumnDef="fecha">
@@ -125,36 +125,80 @@
       <td mat-cell *matCellDef="let row">{{row.assessmentName}}</td>
     </ng-container>
 
-    <ng-container matColumnDef="equipo">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Equipo</th>
-      <td mat-cell *matCellDef="let row">{{row.sectionsInfo[0].puntuacion}} %</td>
-    </ng-container>
 
-    <!-- <ng-container matColumnDef="eventos">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Eventos</th>
-      <td mat-cell *matCellDef="let row">{{row.sectionsInfo[1].puntuacion}} %</td>
-    </ng-container>
+    <div *ngIf="scrumassmnt">
+      <ng-container matColumnDef="equipo"> 
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Equipo</th>
+        <td mat-cell *matCellDef="let row">{{row.sectionsInfo[0].puntuacion}} - N{{row.sectionsInfo[0].nivelAlcanzado}}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="herramientas">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Herramientas</th>
-      <td mat-cell *matCellDef="let row">{{row.sectionsInfo[2].puntuacion}} %</td>
-    </ng-container>
+      <ng-container matColumnDef="eventos">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Eventos</th>
+        <td mat-cell *matCellDef="let row">{{row.sectionsInfo[1].puntuacion}}% - N{{row.sectionsInfo[1].nivelAlcanzado}}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="mindset">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Mindset</th>
-      <td mat-cell *matCellDef="let row">{{row.sectionsInfo[3].puntuacion}} %</td>
-    </ng-container>
+      <ng-container matColumnDef="herramientas">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Herramientas</th>
+        <td mat-cell *matCellDef="let row">{{row.sectionsInfo[2].puntuacion}}% - N{{row.sectionsInfo[2].nivelAlcanzado}}</td>
+      </ng-container>
 
-    <ng-container matColumnDef="aplicacion">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Aplicacion Práctica</th>
-      <td mat-cell *matCellDef="let row">{{row.sectionsInfo[4].puntuacion}} %</td>
-    </ng-container> -->
+      <ng-container matColumnDef="mindset">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Mindset</th>
+        <td mat-cell *matCellDef="let row">{{row.sectionsInfo[3].puntuacion}}% - N{{row.sectionsInfo[3].nivelAlcanzado}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="aplicacion">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Aplicacion Práctica</th>
+        <td mat-cell *matCellDef="let row">{{row.sectionsInfo[4].puntuacion}}% - N{{row.sectionsInfo[4].nivelAlcanzado}}</td>
+      </ng-container>
+    </div>
+
+
+
+    <div *ngIf="devopsassmnt">
+      <ng-container matColumnDef="orgequipo"> 
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Organizacion Equipos</th>
+        <td mat-cell *matCellDef="let row">{{row.sectionsInfo[0].puntuacion}}% - N{{row.sectionsInfo[0].nivelAlcanzado}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="ciclovida">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ciclo de Vida</th>
+        <td mat-cell *matCellDef="let row">{{row.sectionsInfo[1].puntuacion}}% - N{{row.sectionsInfo[1].nivelAlcanzado}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="construccion">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Construcción</th>
+        <td mat-cell *matCellDef="let row">{{row.sectionsInfo[2].puntuacion}}% - N{{row.sectionsInfo[2].nivelAlcanzado}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="testing">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Testing y Calidad</th>
+        <td mat-cell *matCellDef="let row">{{row.sectionsInfo[3].puntuacion}}% - N{{row.sectionsInfo[3].nivelAlcanzado}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="despligue">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Despliuege</th>
+        <td mat-cell *matCellDef="let row">{{row.sectionsInfo[4].puntuacion}}% - N{{row.sectionsInfo[4].nivelAlcanzado}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="monitorizacion">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Monitorización</th>
+        <td mat-cell *matCellDef="let row">{{row.sectionsInfo[5].puntuacion}}% - N{{row.sectionsInfo[5].nivelAlcanzado}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="aprovisionamiento">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Aprovisionamiento</th>
+        <td mat-cell *matCellDef="let row">{{row.sectionsInfo[6].puntuacion}}% - N{{row.sectionsInfo[6].nivelAlcanzado}}</td>
+      </ng-container>
+    </div>
 
     <!--  Puntuacion -->
     <ng-container matColumnDef="puntuacion">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.SCORE' | translate }}</th>
       <td mat-cell *matCellDef="let row">{{row.puntuacion}}%</td>
     </ng-container>
+
+
 
     <!--  Estado -->
     <ng-container matColumnDef="estado">
@@ -225,149 +269,8 @@
       (click)="expandedElement = (expandedElement == element ? null : element)">
     </tr>
     <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-    <!-- texto -->
+
   </table>
-
-
-
-
-
-    <table mat-table [dataSource]="dataSourceMerge" multiTemplateDataRows matSort aria-label="Elements" *ngIf="datamerge">
-  
-      <!-- Fecha  -->
-      <ng-container matColumnDef="fecha">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.DATE' | translate }}</th>
-        <td mat-cell *matCellDef="let row">{{row.fecha| date:'dd/MM/yyyy'}}</td>
-      </ng-container>
-  
-      <!-- Usuario  -->
-      <ng-container matColumnDef="userNombre">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.USER' | translate }}</th>
-        <td mat-cell *matCellDef="let row">{{row.userNombre}}</td>
-      </ng-container>
-  
-      <!-- Oficina  -->
-      <ng-container matColumnDef="oficina">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.OFFICE' | translate }}</th>
-        <td mat-cell *matCellDef="let row">{{row.oficina}}</td>
-      </ng-container>
-  
-      <!-- Equipo  -->
-      <ng-container matColumnDef="nombre">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.TEAM' | translate }}</th>
-        <!-- <td mat-cell *matCellDef="let row">{{row.nombre}}</td> -->
-        <td mat-cell *matCellDef="let row"><nombre-proyecto [dataImput] = "row.nombre"></nombre-proyecto></td>
-      </ng-container>
-  
-      <!-- Nombre  -->
-      <ng-container matColumnDef="assessmentName">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.ASSESSMENT' | translate }}</th>
-        <td mat-cell *matCellDef="let row">{{row.assessmentName}}</td>
-      </ng-container>
-  
-      <ng-container matColumnDef="equipo">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.PT_TEAM' | translate }}</th>
-        <td mat-cell *matCellDef="let row">{{row.sectionsInfo[0].puntuacion}} %</td>
-      </ng-container>
-  
-      <ng-container matColumnDef="eventos">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.PT_EVENTS' | translate }}</th>
-        <td mat-cell *matCellDef="let row">{{row.sectionsInfo[1].puntuacion}} %</td>
-      </ng-container>
-  
-      <ng-container matColumnDef="herramientas">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.PT_TOOLS' | translate }}</th>
-        <td mat-cell *matCellDef="let row">{{row.sectionsInfo[2].puntuacion}} %</td>
-      </ng-container>
-  
-      <ng-container matColumnDef="mindset">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.PT_MINDSET' | translate }}</th>
-        <td mat-cell *matCellDef="let row">{{row.sectionsInfo[3].puntuacion}} %</td>
-      </ng-container>
-  
-      <ng-container matColumnDef="aplicacion">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.PT_APPLICATION' | translate }}</th>
-        <td mat-cell *matCellDef="let row">{{row.sectionsInfo[4].puntuacion}} %</td>
-      </ng-container>
-  
-      <!--  Puntuacion -->
-      <ng-container matColumnDef="puntuacion">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.SCORE' | translate }}</th>
-        <td mat-cell *matCellDef="let row">{{row.puntuacion}}%</td>
-      </ng-container>
-  
-      <!--  Estado -->
-      <ng-container matColumnDef="estado">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.STATE' | translate }}</th>
-        <td mat-cell *matCellDef="let row">
-          <img class="estado" *ngIf="row.estado" src="assets/completed.png"
-            title="{{ 'SORTED_TABLE.COMPLETED' | translate }}" />
-          <div hidden="true" *ngIf="row.estado">{{ 'SORTED_TABLE.COMPLETED' | translate }}</div>
-          <img class="estado" *ngIf="!row.estado" src="assets/incompleted.png"
-            title="{{ 'SORTED_TABLE.DONT_COMPLETED' | translate }}" />
-        </td>
-      </ng-container>
-  
-      <!--  Notas -->
-      <ng-container matColumnDef="notas">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disabled>{{ 'SORTED_TABLE.NOTES' | translate }}</th>
-        <td mat-cell *matCellDef="let row">
-          <img class="comment"
-            *ngIf="(row.notasEvaluacion != null && row.notasEvaluacion != '') || (row.notasObjetivos != null && row.notasObjetivos != '')"
-            src="assets/comment_filled.png" title="{{ 'SORTED_TABLE.ICONS_NOTES_FILLED' | translate }}" />
-          <img class="comment"
-            *ngIf="(row.notasEvaluacion == null || row.notasEvaluacion == '') && (row.notasObjetivos == null || row.notasObjetivos == '')"
-            src="assets/comment_empty.png" title="{{ 'SORTED_TABLE.ICONS_NOTES_EMPTY' | translate }}" />
-        </td>
-      </ng-container>
-  
-      <!--  Notas evaluacion -->
-      <!--  Informe -->
-      <ng-container matColumnDef="informe">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header disabled>{{ 'SORTED_TABLE.RESULTS' | translate }}</th>
-        <td mat-cell *matCellDef="let row">
-          <button class="transparente" (click)="SaveDataToPDF(row)">
-            <img class="informe" src="assets/report.png" title="{{ 'SORTED_TABLE.SHOW_RESULTS' | translate }}" />
-          </button>
-        </td>
-      </ng-container>
-  
-  
-      <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-      <ng-container matColumnDef="expandedDetail">
-        <td mat-cell *matCellDef="let element" [attr.colspan]="14">
-          <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-            <div class="example-element-description">
-              <mat-form-field class="comments-form-field">
-                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"
-                  cdkAutosizeMaxRows="6" placeholder="{{ 'SORTED_TABLE.EVALUATION_NOTES' | translate }}"
-                  [(ngModel)]="element.notasEvaluacion" [debounce]="1000" (ngModelChange)="saveNotas(element)"
-                  [readonly]="userRole != 'Evaluador' && userRole != 'Administrador'">
-              </textarea>
-              </mat-form-field>
-            </div>
-            <div class="example-element-description">
-              <mat-form-field class="comments-form-field">
-                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"
-                  cdkAutosizeMaxRows="6" placeholder="{{ 'SORTED_TABLE.OBJETIVES_NOTES' | translate }}"
-                  [(ngModel)]="element.notasObjetivos" [debounce]="1000" (ngModelChange)="saveNotas(element)"
-                  [readonly]="userRole != 'Evaluador' && userRole != 'Administrador'">
-              </textarea>
-              </mat-form-field>
-            </div>
-  
-          </div>
-        </td>
-      </ng-container>
-      <tr mat-header-row *matHeaderRowDef="displayedColumnsMerge"></tr>
-      <tr mat-row *matRowDef="let element; columns: displayedColumnsMerge;" class="example-element-row"
-        [class.example-expanded-row]="expandedElement === element"
-        (click)="expandedElement = (expandedElement == element ? null : element)">
-      </tr>
-      <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-      <!-- texto -->
-    </table>
-
 
   <mat-paginator #paginator [length]="dataSource.data.length" [pageIndex]="0" [pageSize]="10"
     [pageSizeOptions]="[10, 20, 50]">

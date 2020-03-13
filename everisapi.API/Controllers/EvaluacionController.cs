@@ -291,9 +291,9 @@ namespace everisapi.API.Controllers
             }
         }
 
-        [HttpPost("proyecto/{id}/sectionsinfo/{codigoIdioma}")]
+        [HttpPost("proyecto/{id}/sectionsinfo/{codigoIdioma}/{idAsessment}")]
         public IActionResult GetEvaluationsWithSectionsInfo(int id, int codigoIdioma,
-                [FromBody] EvaluacionInfoPaginationDto EvaluacionParaFiltrar)
+                [FromBody] EvaluacionInfoPaginationDto EvaluacionParaFiltrar, int idAsessment)
         {
             try
             {
@@ -313,7 +313,7 @@ namespace everisapi.API.Controllers
 
                 var EvaluacionesFiltradas = new List<EvaluacionInfoWithSectionsDto>();
 
-                var Evals = _evaluacionInfoRepository.GetEvaluationsWithSectionsInfo(id, EvaluacionParaFiltrar, codigoIdioma);
+                var Evals = _evaluacionInfoRepository.GetEvaluationsWithSectionsInfo(id, EvaluacionParaFiltrar, codigoIdioma,idAsessment);
                 EvaluacionesFiltradas = Evals.ToList();
 
                 //Hacemos un mapeo de la pregunta que recogimos
