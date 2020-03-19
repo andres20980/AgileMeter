@@ -1,6 +1,7 @@
+import { map } from 'rxjs/operators';
 import { Assessment } from './../Models/Assessment';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit, Input, Output,ViewChild, EventEmitter, Renderer,OnChanges, SimpleChanges} from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChild, EventEmitter, Renderer, OnChanges, SimpleChanges} from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Evaluacion } from 'app/Models/Evaluacion';
 import { AppComponent } from 'app/app.component';
@@ -22,12 +23,11 @@ import { DatePipe } from '@angular/common';
   ],
 })
 
-export class SortedTableComponent implements OnInit{
+export class SortedTableComponent implements OnInit {
 
   @Input() dataInput: any
   @Input() dataInputMerged: any
   @Input() recoverProject: string;
-  @Input() enableScrumColums: boolean = false;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('mySelectAssessment') mySelectAssessment: any;
@@ -62,7 +62,7 @@ export class SortedTableComponent implements OnInit{
         ["userNombre", "EXCEL_USER",20,"", "String"],
         ["oficina", "EXCEL_OFFICE", 25,"", "String"],
         ["nombre", "EXCEL_TEAM", 50,"##?##", "String"],
-        ["equipo", "EXCEL_PT_TEAM",  12,"0.00%", "Percentage"], 
+        ["equipo", "EXCEL_PT_TEAM",  12,"", "String"], 
         ["eventos", "EXCEL_PT_EVENTS",  12,"0.00%", "Percentage"], 
         ["herramientas", "EXCEL_PT_TOOLS", 12,"0.00%", "Percentage"], 
         ["mindset", "EXCEL_PT_MINDSET", 12,"0.00%", "Percentage"],
@@ -162,7 +162,7 @@ export class SortedTableComponent implements OnInit{
         this.displayedColumns = ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','equipo','eventos','herramientas','mindset','aplicacion','puntuacion', 'notas', 'informe'];
         this.scrumassmnt = true;
       } else if(this.assessmentSeleccionado[0] === "DEVOPS") {
-        this.displayedColumns = ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','orgequipo','ciclovida','construccion','testing','despligue','monitorizacion','aprovisionamiento','puntuacion', 'notas', 'informe'];
+        this.displayedColumns = ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','orgequipo','ciclovida','construccion','testing','despliegue','monitorizacion','aprovisionamiento','puntuacion', 'notas', 'informe'];
         this.devopsassmnt = true;
       }
 

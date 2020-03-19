@@ -75,7 +75,7 @@ table {
     border:none;
   }
   
-  // tr.example-element-row:not(.example-expanded-row):hover {
+  // tr.example-element-row:not(.example-expanded-row):tr:hover {
   //   background: #f5f5f5;
   // }
   
@@ -149,6 +149,30 @@ table {
       }
     }
   }
+}
+
+.mat-row {
+  height: auto;
+  width: auto;
+
+}
+
+.mat-header-cell, td.mat-cell {
+  box-sizing: border-box;
+  width: 100%;  
+  padding: 13px 20px 13px 20px;
+  white-space:nowrap;
+}
+
+tr:hover .evaluation-column{
+  background-color: transparent;
+}
+
+.evaluation-column {
+  background-color:#F0FFFA;
+}
+td.cdk-column-expandedDetail {
+  padding: 0
 }
 
 .table-container {

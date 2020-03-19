@@ -233,14 +233,25 @@
 		"DATE": "Fecha",
 		"USER": "Usuario",
 		"OFFICE": "Oficina",
-		"TEAM": "Equipo",
-		"PT_TEAM": "Porcentaje Equipo",
-		"PT_EVENTS":"Eventos",
-		"PT_MINDSET":"Mindset",
-		"PT_TOOLS":"Herramientas",
-		"PT_APPLICATION":"Aplicación Práctica",
-		"ASSESSMENT": "Evaluación",
-		"SCORE": "Puntuación",
+		"TEAM": "Nombre Equipo",
+		"PT_SCRM": {
+			"TEAM": "Equipo",
+			"EVENTS":"Eventos",
+			"MINDSET":"Mindset",
+			"TOOLS":"Herramientas",
+			"APPLICATION":"Aplicación práctica"
+		},
+		"PT_DEVOPS": {
+			"ORG_TEAM": "Organización Equipos",
+			"LIFECYCLE":"Ciclo de Vida",
+			"BUILDING":"Construcción",
+			"TESTING":"Testing y Calidad",
+			"DEPLOYMENT":"Despliegue",
+			"MONITORING": "Monitorización",
+			"PROVISIONING": "Aprovisionamiento"
+		},
+		"ASSESSMENT": "Assessment",
+		"SCORE": "Valoración Global",
 		"STATE": "Estado",
 		"COMPLETED": "Completada",
 		"DONT_COMPLETED": "No completada",
@@ -253,7 +264,7 @@
 		"OBJETIVES_NOTES": "Notas Objetivos",
 		"FILTER_OFFICE" :"Oficina",
 		"FILTER_TEAM" :"Equipo",
-		"FILTER_ASSESSMENT" :"Evaluación"
+		"FILTER_ASSESSMENT" :"Assessment"
 	},
 	"COMENTARIOS_TABLE": {
 		"FILTER": " Filtro",

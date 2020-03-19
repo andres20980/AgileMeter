@@ -7,11 +7,11 @@
 
         </div>
         <div class="col-sm-3 mt-4 mr-8 text-right">
-          <button (click)="activaGrafica()" class="transparente botonGrafica" [ngStyle]="{'opacity': setGreyOut()}">
-            <img src="assets/chart.png" title="{{'PREVIOUS_EVALUATION.SHOW_GRAPH' | translate }}" />
-          </button>
-          <button (click)="desGrafica()" class="transparente botonTabla" style="margin-right: 8px">
+          <button (click)="desGrafica()" class="transparente botonTabla" style="margin-right: 8px" [ngStyle]="{'opacity': setGreyOut('tabla')}">
             <img  src="assets/table.png" title="{{ 'PREVIOUS_EVALUATION.SHOW_TABLE' | translate }}" />
+          </button>
+          <button (click)="activaGrafica()" class="transparente botonGrafica"  [ngStyle]="{'opacity': setGreyOut(), 'filter': setBrightness()}">
+            <img src="assets/chart.png" title="{{'PREVIOUS_EVALUATION.SHOW_GRAPH' | translate }}" />
           </button>
         </div>       
     </div>
@@ -27,9 +27,7 @@
   <div id="sortedtable">
      <sorted-table *ngIf="ListaDeEvaluacionesPaginada && !activateChart" 
      [dataInput]="ListaDeEvaluacionesPaginada"
-     [enableScrumColums]="enableColumns"
-     (propagar)="procesaPropagar($event)"
-     (propagar2)="procesaMerge($event)">
+     (propagar)="procesaPropagar($event)">
       {{ 'PREVIOUS_EVALUATION.LOADING' | translate }}
     </sorted-table>
   </div>

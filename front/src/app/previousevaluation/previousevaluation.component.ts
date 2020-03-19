@@ -53,6 +53,7 @@ export class PreviousevaluationComponent implements OnInit {
           this.prevResult = res.evaluacionesResult;
           this.ListaDeEvaluacionesPaginada = res.evaluacionesResult.reduce((acc, item) => {
             item.oficina = item.oficina.trim()
+            item.sectionsInfo.map(x => x.puntuacion = Number(x.puntuacion.toFixed(2)))
             return [...acc, item]
           },[]);
           this.sectionsInfoNombres$ = res.evaluacionesResult.sectionsInfo
@@ -80,28 +81,7 @@ export class PreviousevaluationComponent implements OnInit {
       this.enableColumns = true;
       this.uniqueSelectTeam = true;
      }
-
-
-      // if(!mensaje) {
-      //   this.uniqueSelectTeam = false;
-      //   this.enableColumns = false;
-      //   return
-      // } else {
-      //   //this.uniqueSelectTeam = true;
-      // }
-      // this.ProjectSelectName = mensaje.nombre;
-      // this.sectionsInfoProject$ = {nombre: mensaje.nombre, fecha: mensaje.fecha};
-      // let filterEvaluation: EvaluacionFilterInfo = new EvaluacionFilterInfo("","","","","true",  mensaje.idAssessment,[],[],[]);
-      // this.evaluacionService.GetEvaluationsWithSectionsInfo(2, filterEvaluation, 0)
-      //   .subscribe(res => {
-      //     console.log("wininfo2");
-      //     console.log(res);
-      //     this.prevResult = res.evaluacionesResult;
-      //     this.ListaDeEvaluacionesPaginada = res.evaluacionesResult;
-      //     this.sectionsInfoNombres$ = res.evaluacionesResult.sectionsInfo
-      //     this.sectionsInfoPuntuacion$ = res.evaluacionesResult.sectionsInfo
-      //   });
-      }
+    }
 
 
     procesaMerge(mensaje: any){
@@ -110,35 +90,33 @@ export class PreviousevaluationComponent implements OnInit {
       let filterEvaluation: EvaluacionFilterInfo = new EvaluacionFilterInfo("","","","","true",  mensaje.idAssessment,[],[],[]);
       let obm = this.evaluacionService.getAllEvaluacionInfoFilteredToMerge(0, this.EvaluacionFiltrar)//.subscribe(s => console.log(s))
       let obm2 = this.evaluacionService.GetEvaluationsWithSectionsInfoToMerge(mensaje.idProyecto,filterEvaluation)//.subscribe(s => console.log(s))
-      // obm.pipe(mergeMap((j) => obm2.pipe(filter(f => f['id'] === j['id']),map(h => {
-      //   Object.assign(j,{ sectionsInfo: h['sectionsInfo']})
-      //   return j
-      //   })))).subscribe((r: any) => {
-      //     console.log(r);
-      //     r.nombre = r.nombre.replace("##?##", " - ")
-      //     r.sectionsInfo.map(x => {
-      //       let decimal = x.puntuacion.toString().indexOf(".")
-      //       x.puntuacion = x.puntuacion.toString().substring(0, decimal + 2);
-      //       return x;
-      //     })
-      //     this.ListaDeEvaluacionesMerge.push(r);
-      //   },
-      //   error => {},
-      //   () => {
-      //     this.finishMerge = true;
-      //     this.enableColumns = true;
-      //     this.uniqueSelectTeam = true;
-      //   })
     }
  
-    setGreyOut()
+    setGreyOut(ent: string)
+    {
+      if(this.activateChart){
+        if(ent === "tabla") {
+         return 0.5
+        }
+        return 1
+      }
+       else {
+       if(ent === "tabla") {
+          return 1
+        }
+        this.setBrightness();
+        return 0.5
+       }
+
+    }
+
+    setBrightness()
     {
       if(this.uniqueSelectTeam){
-        return 1
+        return  'brightness(100%)'
       } else {
-        return 0.5
+        return  'brightness(50%)';
       }
-
     }
 
     activaGrafica()

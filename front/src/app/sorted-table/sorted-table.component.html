@@ -128,28 +128,28 @@
 
     <div *ngIf="scrumassmnt">
       <ng-container matColumnDef="equipo"> 
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Equipo</th>
-        <td mat-cell *matCellDef="let row">{{row.sectionsInfo[0].puntuacion}} - N{{row.sectionsInfo[0].nivelAlcanzado}}</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.PT_SCRM.TEAM' | translate }}</th>
+        <td mat-cell *matCellDef="let row" class="evaluation-column">{{row.sectionsInfo[0].puntuacion}}% - N{{row.sectionsInfo[0].nivelAlcanzado}}</td>
       </ng-container>
 
       <ng-container matColumnDef="eventos">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Eventos</th>
-        <td mat-cell *matCellDef="let row">{{row.sectionsInfo[1].puntuacion}}% - N{{row.sectionsInfo[1].nivelAlcanzado}}</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.PT_SCRM.EVENTS' | translate }}</th>
+        <td mat-cell *matCellDef="let row"  class="evaluation-column">{{row.sectionsInfo[1].puntuacion}}% - N{{row.sectionsInfo[1].nivelAlcanzado}}</td>
       </ng-container>
 
       <ng-container matColumnDef="herramientas">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Herramientas</th>
-        <td mat-cell *matCellDef="let row">{{row.sectionsInfo[2].puntuacion}}% - N{{row.sectionsInfo[2].nivelAlcanzado}}</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.PT_SCRM.MINDSET' | translate }}</th>
+        <td mat-cell *matCellDef="let row"  class="evaluation-column">{{row.sectionsInfo[2].puntuacion}}% - N{{row.sectionsInfo[2].nivelAlcanzado}}</td>
       </ng-container>
 
       <ng-container matColumnDef="mindset">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Mindset</th>
-        <td mat-cell *matCellDef="let row">{{row.sectionsInfo[3].puntuacion}}% - N{{row.sectionsInfo[3].nivelAlcanzado}}</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.PT_SCRM.TOOLS' | translate }}</th>
+        <td mat-cell *matCellDef="let row"  class="evaluation-column">{{row.sectionsInfo[3].puntuacion}}% - N{{row.sectionsInfo[3].nivelAlcanzado}}</td>
       </ng-container>
 
       <ng-container matColumnDef="aplicacion">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Aplicacion Práctica</th>
-        <td mat-cell *matCellDef="let row">{{row.sectionsInfo[4].puntuacion}}% - N{{row.sectionsInfo[4].nivelAlcanzado}}</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.PT_SCRM.APPLICATION' | translate }}</th>
+        <td mat-cell *matCellDef="let row"  class="evaluation-column">{{row.sectionsInfo[4].puntuacion}}% - N{{row.sectionsInfo[4].nivelAlcanzado}}</td>
       </ng-container>
     </div>
 
@@ -157,38 +157,38 @@
 
     <div *ngIf="devopsassmnt">
       <ng-container matColumnDef="orgequipo"> 
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Organizacion Equipos</th>
-        <td mat-cell *matCellDef="let row">{{row.sectionsInfo[0].puntuacion}}% - N{{row.sectionsInfo[0].nivelAlcanzado}}</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.PT_DEVOPS.ORG_TEAM' | translate }}</th>
+        <td mat-cell *matCellDef="let row" class="evaluation-column">{{row.sectionsInfo[0].puntuacion}}% - N{{row.sectionsInfo[0].nivelAlcanzado}}</td>
       </ng-container>
 
       <ng-container matColumnDef="ciclovida">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ciclo de Vida</th>
-        <td mat-cell *matCellDef="let row">{{row.sectionsInfo[1].puntuacion}}% - N{{row.sectionsInfo[1].nivelAlcanzado}}</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.PT_DEVOPS.LIFECYCLE' | translate }}</th>
+        <td mat-cell *matCellDef="let row" class="evaluation-column">{{row.sectionsInfo[1].puntuacion}}% - N{{row.sectionsInfo[1].nivelAlcanzado}}</td>
       </ng-container>
 
       <ng-container matColumnDef="construccion">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Construcción</th>
-        <td mat-cell *matCellDef="let row">{{row.sectionsInfo[2].puntuacion}}% - N{{row.sectionsInfo[2].nivelAlcanzado}}</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.PT_DEVOPS.BUILDING' | translate }}</th>
+        <td mat-cell *matCellDef="let row" class="evaluation-column">{{row.sectionsInfo[2].puntuacion}}% - N{{row.sectionsInfo[2].nivelAlcanzado}}</td>
       </ng-container>
 
       <ng-container matColumnDef="testing">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Testing y Calidad</th>
-        <td mat-cell *matCellDef="let row">{{row.sectionsInfo[3].puntuacion}}% - N{{row.sectionsInfo[3].nivelAlcanzado}}</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.PT_DEVOPS.TESTING' | translate }}</th>
+        <td mat-cell *matCellDef="let row" class="evaluation-column">{{row.sectionsInfo[3].puntuacion}}% - N{{row.sectionsInfo[3].nivelAlcanzado}}</td>
       </ng-container>
 
-      <ng-container matColumnDef="despligue">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Despliuege</th>
-        <td mat-cell *matCellDef="let row">{{row.sectionsInfo[4].puntuacion}}% - N{{row.sectionsInfo[4].nivelAlcanzado}}</td>
+      <ng-container matColumnDef="despliegue">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.PT_DEVOPS.DEPLOYMENT' | translate }}</th>
+        <td mat-cell *matCellDef="let row" class="evaluation-column">{{row.sectionsInfo[4].puntuacion}}% - N{{row.sectionsInfo[4].nivelAlcanzado}}</td>
       </ng-container>
 
       <ng-container matColumnDef="monitorizacion">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Monitorización</th>
-        <td mat-cell *matCellDef="let row">{{row.sectionsInfo[5].puntuacion}}% - N{{row.sectionsInfo[5].nivelAlcanzado}}</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.PT_DEVOPS.MONITORING' | translate }}</th>
+        <td mat-cell *matCellDef="let row" class="evaluation-column">{{row.sectionsInfo[5].puntuacion}}% - N{{row.sectionsInfo[5].nivelAlcanzado}}</td>
       </ng-container>
 
       <ng-container matColumnDef="aprovisionamiento">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>Aprovisionamiento</th>
-        <td mat-cell *matCellDef="let row">{{row.sectionsInfo[6].puntuacion}}% - N{{row.sectionsInfo[6].nivelAlcanzado}}</td>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.PT_DEVOPS.PROVISIONING' | translate }}</th>
+        <td mat-cell *matCellDef="let row" class="evaluation-column">{{row.sectionsInfo[6].puntuacion}}% - N{{row.sectionsInfo[6].nivelAlcanzado}}</td>
       </ng-container>
     </div>
 

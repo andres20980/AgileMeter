@@ -48,37 +48,43 @@ export class SectionResultsComponent implements OnInit {
   }
 
   public checkRespuestaCorrecta(row): string {
+
     let classString: string;
     let respuestaString: string = this.displayRespuesta(row);
-    if (respuestaString == "Sí"){
+
+    if (respuestaString === "Sí"){
       respuestaString = "Si"}
 
     //Si (habilitante)
-    if (row.correcta == null) {
+    // if (row.correcta == null) {
       //Contestado -> Si
       switch (row.estado) {
         case 0:
           classString = "respuesta-no-contestada";
           break
         case 1:
-          classString = "respuesta-correcta";
+          (row.correcta) === "Si" ? classString = "respuesta-correcta" : classString = "respuesta-incorrecta"
+          //classString = "respuesta-correcta";   
           break
         case 2:
-          classString = "respuesta-incorrecta";
+          (row.correcta) === "No" ?  classString = "respuesta-correcta" : classString = "respuesta-incorrecta"
+          //classString = "respuesta-incorrecta";
           break
-      }
-    } else {
-      if (respuestaString == row.correcta) {
-        classString = "respuesta-correcta";
-      } else {
-                //No contestada
-        if (row.estado == 0) {
-          classString = "respuesta-no-contestada";
-        } else {
-          classString = "respuesta-incorrecta";
-        }
-      }
-    }
+      // }
+    // } else {
+    //   if (respuestaString === row.correcta) {
+    //     classString = "respuesta-correcta";
+    //   } else {
+    //             //No contestada
+    //     if (row.estado == 0) {
+    //       classString = "respuesta-no-contestada";
+    //     } else {
+    //       classString = "respuesta-incorrecta";
+    //     }
+    //   }
+     }
+    console.log(classString, row.pregunta, row.correcta, row.estado)
+    
     return classString;
   }
   
