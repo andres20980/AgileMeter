@@ -36,6 +36,7 @@ export class PendingevaluationTableComponent implements OnInit, DoCheck {
   @ViewChild('mySelectTeam') mySelectTeam: any;
   @ViewChild('mySelectAssessment') mySelectAssessment: any;
   @Input() listaDeEvaluaciones: any;
+  @Input() pendientesSelect: any;
   @Output() reloadData = new EventEmitter<boolean>();
   dataSource: MatTableDataSource<EvaluacionInfoWithProgress>;
   userRole: number;
@@ -87,7 +88,15 @@ export class PendingevaluationTableComponent implements OnInit, DoCheck {
     this.listaDeAssessment = this.dataSource.data.map(x => x).reduce((x,y) => x.includes(y.assessmentName) ? x : [...x, y.assessmentName],[]);
     this.ListaDeEquipos = this.dataSource.data.map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
 
-  }
+    console.log(this.pendientesSelect) // this.pendientesSelect['oficina'] && this.pendientesSelect['equipo'] && this.pendientesSelect['assessment']
+    if(this.pendientesSelect){
+      this.OficinaSeleccionada.push(this.pendientesSelect['oficina'])
+      this.EquipoSeleccionado.push(this.pendientesSelect['equipo']);
+      this.assessmentSeleccionado.push(this.pendientesSelect['assessment'])
+      this.filterData('equipo')
+    }
+    
+   }
 
   ngDoCheck()
   {

@@ -7,7 +7,7 @@
 
         </div>
         <div class="col-sm-3 mt-4 mr-8 text-right">
-          <button (click)="desGrafica()" class="transparente botonTabla" style="margin-right: 8px" [ngStyle]="{'opacity': setGreyOut('tabla')}">
+          <button (click)="desGrafica()" class="transparente botonTabla" style="margin-right: 18px" [ngStyle]="{'opacity': setGreyOut('tabla')}">
             <img  src="assets/table.png" title="{{ 'PREVIOUS_EVALUATION.SHOW_TABLE' | translate }}" />
           </button>
           <button (click)="activaGrafica()" class="transparente botonGrafica"  [ngStyle]="{'opacity': setGreyOut('notable'), 'filter': setBrightness()}">
@@ -27,6 +27,8 @@
   <div id="sortedtable">
      <sorted-table *ngIf="ListaDeEvaluacionesPaginada && !activateChart" 
      [dataInput]="ListaDeEvaluacionesPaginada"
+     [nombreEquipo]="ProjectSelectName"
+     [nombreAssessment]="AssessmentSelectName"
      (propagar)="procesaPropagar($event)">
       {{ 'PREVIOUS_EVALUATION.LOADING' | translate }}
     </sorted-table>

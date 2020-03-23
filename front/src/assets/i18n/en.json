@@ -216,11 +216,23 @@
 		"EXCEL_USER": "User",
 		"EXCEL_OFFICE": "Office",
 		"EXCEL_TEAM": "Team",
-		"EXCEL_PT_TEAM": "Team Percentage ",
-		"EXCEL_PT_EVENTS": "Events Percentage ",
-		"EXCEL_PT_TOOLS": "Tools Percentage",
-		"EXCEL_PT_MINDSET": "Mindset Percentage",
-		"EXCEL_PT_APP": "Practical Application Percentage",
+		"EXCEL_PT_SCRUM" : {
+			"TEAM": "Team Percentage ",
+			"EVENTS": "Events Percentage ",
+			"TOOLS": "Tools Percentage",
+			"MINDSET": "Mindset Percentage",
+			"APP": "Practical Application Percentage"
+		},
+		"EXCEL_PT_DEVOPS" : {
+			"ORG_TEAM": "Team Organization",
+			"LIFECYCLE": "Life Cycle",
+			"BUILDING": "Building",
+			"TESTING": "Testing & Quality",
+			"DEPLOYMENT": "Deployment",
+			"MONITORING": "Monitoring",
+			"PROVISIONING": "Provisioning"
+		},
+
 		"EXCEL_ASSESSMENT": "Assessment",
 		"EXCEL_SCORE": "Score",
 		"LEVEL": "Level",

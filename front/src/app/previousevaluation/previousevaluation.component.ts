@@ -33,6 +33,7 @@ export class PreviousevaluationComponent implements OnInit {
   public finishMerge: boolean = true;
   public enableColumns: boolean = false;
 
+
   constructor(private _proyectoService: ProyectoService, public evaluacionService: EvaluacionService, 
     private _router: Router, private _appComponent: AppComponent ) { 
   }
@@ -53,7 +54,7 @@ export class PreviousevaluationComponent implements OnInit {
           this.prevResult = res.evaluacionesResult;
           this.ListaDeEvaluacionesPaginada = res.evaluacionesResult.reduce((acc, item) => {
             item.oficina = item.oficina.trim()
-            item.sectionsInfo.map(x => x.puntuacion = Number(x.puntuacion.toFixed(2)))
+            item.sectionsInfo.map(x => x.puntuacion = Math.round(x.puntuacion))
             return [...acc, item]
           },[]);
           this.sectionsInfoNombres$ = res.evaluacionesResult.sectionsInfo

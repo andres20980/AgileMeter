@@ -55,8 +55,7 @@ export class PendingevaluationComponent implements OnInit {
     public AgileComplianceTotal: number = 100;
     public ListaSeccionesAgileCompliance: number[] = [];
     public ListaPuntuacion: { label: string, backgroundColor: string, borderColor: string, data: Array<any>, fill: string, lineTension: number, pointRadius: number, pointHoverRadius: number, borderWidth: number }[] = [];
-    public ListaNombres: string[] = [];
-    public MaxLevelReached: number;
+    public ListaPending: Object
     public barChartOptions: any;
     public ListaAssessments : string[] = [];
     public selectedAssessment: string[] = [];
@@ -78,6 +77,13 @@ export class PendingevaluationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    if(this._appComponent._storageDataService.ProjectSelected && this._appComponent._storageDataService.AssessmentsSelected &&this._appComponent._storageDataService.OfficeSelected){
+      this.ListaPending = {oficina: this._appComponent._storageDataService.OfficeSelected, equipo: this._appComponent._storageDataService.ProjectSelected.proyecto + " - "+ this._appComponent._storageDataService.ProjectSelected.nombre, assessment: this._appComponent._storageDataService.AssessmentSelected.assessmentName}
+      } else {
+        this.ListaPending = null
+      }
+    
 
     if (!this._proyectoService.verificarUsuario()) {
       this._router.navigate(['/login']);

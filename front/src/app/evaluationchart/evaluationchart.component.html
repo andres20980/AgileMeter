@@ -7,7 +7,7 @@
     </div>
   </div>
     <div id="chart-container"> 
-      <canvas id="line-chart" width="700" height="350"></canvas>
+      <canvas id="line-chart" width="600" height="450" #mychart></canvas>
   </div>
   <br />
   <div>
@@ -16,7 +16,28 @@
          <div class="row">
          <div class="col-xs" [ngStyle]="{'width': '15px', 'height': '15px', 'border-radius': '50%','background-color': info.color }"></div>
 
-         <div class="col ml-2"><h6> {{info.name}} - {{info.data}}</h6></div>
+         <div class="legend-global" >
+          <div class ="legend-global-item" [ngClass]="{'legend-item-disabled': chart && chart.chart.config.data.datasets[chart.chart.config.data.datasets.length - 1].hidden}" (click)="toggleGlobalData()">
+          <div class ="legend-global-bullet">
+              <svg width="40" height="25" xmlns="http://www.w3.org/2000/svg">
+                <g>
+                 <!-- <title>background</title> -->
+                 <rect fill="none" id="canvas_background" height="27" width="42" y="-1" x="-1"/>
+                 <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
+                  <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>
+                 </g>
+                </g>
+                <g>
+                 <!-- <title>Layer 1</title> -->
+                 <rect stroke="#000" id="svg_3" height="12.499951" width="8.999964" y="12.559378" x="2.125053" stroke-opacity="null" stroke-width="0" fill="#07cc2e"/>
+                 <rect stroke="#000" id="svg_4" height="25.499898" width="9.249963" y="-0.44057" x="14.125004" stroke-opacity="null" stroke-width="0" fill="#07cc2e"/>
+                 <rect stroke="#000" id="svg_5" height="17.999929" width="8.999965" y="7.059399" x="26.624956" stroke-opacity="null" stroke-width="0" fill="#07cc2e"/>
+                </g>
+               </svg>
+          </div>
+          <div class ="legend-global-label">GLOBAL</div>
+      </div>
+    </div>
         </div></li>
     </ul>
   </div>

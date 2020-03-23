@@ -83,8 +83,6 @@ export class SectionResultsComponent implements OnInit {
     //     }
     //   }
      }
-    console.log(classString, row.pregunta, row.correcta, row.estado)
-    
     return classString;
   }
   

@@ -1,0 +1,44 @@
+.canvas-con {
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    min-height: 365px;
+    position: relative;
+}
+
+.canvas-con-inner {
+    height: 100%;
+}
+
+.canvas-con-inner, .legend-con {
+    display: inline-block;
+}
+
+.legend-con {
+    font-family: Roboto;
+    display: inline-block;
+
+    ul {
+        list-style: none;
+    }
+
+    li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 4px;
+
+        span {
+            display: inline-block;
+        }
+
+        span.chart-legend {
+            width: 25px;
+            height: 25px;
+            margin-right: 10px;
+        }
+    }
+}
+
+#image-morgen {
+    width: 300px;
+}

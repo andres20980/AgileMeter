@@ -11,7 +11,7 @@
       <app-loading></app-loading>
     </div>
     <div id="sortedtable" *ngIf="MostrarTabla">
-      <pendingevaluation-table [listaDeEvaluaciones]="listaDeEvaluacionesPaginada"
+      <pendingevaluation-table [listaDeEvaluaciones]="listaDeEvaluacionesPaginada" [pendientesSelect] = "ListaPending"
        (reloadData)="reloadDataInput($event)">
         {{ 'PENDING_EVALUATION.LOADING' | translate }}
       </pendingevaluation-table>

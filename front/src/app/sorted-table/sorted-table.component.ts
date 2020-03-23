@@ -1,7 +1,7 @@
 import { map } from 'rxjs/operators';
 import { Assessment } from './../Models/Assessment';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit, Input, Output, ViewChild, EventEmitter, Renderer, OnChanges, SimpleChanges} from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChild, ViewChildren, EventEmitter, ElementRef, Renderer, OnChanges, SimpleChanges} from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Evaluacion } from 'app/Models/Evaluacion';
 import { AppComponent } from 'app/app.component';
@@ -27,15 +27,20 @@ export class SortedTableComponent implements OnInit {
 
   @Input() dataInput: any
   @Input() dataInputMerged: any
-  @Input() recoverProject: string;
+  @Input() nombreEquipo: string;
+  @Input() nombreAssessment: string;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  @ViewChild('mySelectAssessment') mySelectAssessment: any;
+  @ViewChildren('mySelectAssessment') generalAssessment
+  @ViewChild('mySelectAssessment') mySelectAssessment;
   @ViewChild('mySelectTeam') mySelectTeam: any;
   @ViewChild('mySelectOffice') mySelectOffice: any;
   dataSource: MatTableDataSource<Evaluacion>;
-  dataSourceMerge: MatTableDataSource<Evaluacion>;
+  dataSourceMerge: MatTableDataSource<Evaluacion>;s
   displayedColumns = ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','puntuacion', 'notas', 'informe'];
+
+  public excelScrum = [["equipo", "EXCEL_PT_SRUM.TEAM",  12,"", "String"], ["eventos", "EXCEL_PT_SRUM.EVENTS",  12,"", "String"], ["herramientas", "EXCEL_PT_SRUM.TOOLS", 12,"", "String"], ["mindset", "EXCEL_PT_SRUM.MINDSET", 12,"", "String"],["aplicacion", "EXCEL_PT_SRUM.APP", 12,"", "String"]]
+  public excelDevops = [["orgequipo", "EXCEL_PT_DEVOPS.ORG_TEAM",  12,"", "String"], ["ciclovida", "EXCEL_PT_DEVOPS.LIFECYCLE",  12,"", "String"], ["construccion", "EXCEL_PT_DEVOPS.BUILDING", 12,"", "String"], ["testing", "EXCEL_PT_DEVOPS.TESTING", 12,"", "String"],["'despliegue", "EXCEL_PT_DEVOPS.DEPLOYMENT", 12,"", "String"], ["monitorizacion", "EXCEL_PT_DEVOPS.MONITORING", 12,"", "String"], ["aprovisionamiento", "EXCEL_PT_DEVOPS.", 12,"", "String"]];
   public ListaDeOficinas: string[] = [];
   public OficinaSeleccionada: string[] = [];
   public ListaDeEquipos: string[] = [];
@@ -62,11 +67,6 @@ export class SortedTableComponent implements OnInit {
         ["userNombre", "EXCEL_USER",20,"", "String"],
         ["oficina", "EXCEL_OFFICE", 25,"", "String"],
         ["nombre", "EXCEL_TEAM", 50,"##?##", "String"],
-        ["equipo", "EXCEL_PT_TEAM",  12,"", "String"], 
-        ["eventos", "EXCEL_PT_EVENTS",  12,"0.00%", "Percentage"], 
-        ["herramientas", "EXCEL_PT_TOOLS", 12,"0.00%", "Percentage"], 
-        ["mindset", "EXCEL_PT_MINDSET", 12,"0.00%", "Percentage"],
-        ["aplicacion", "EXCEL_PT_APP", 12,"0.00%", "Percentage"],
         ["assessmentName", "EXCEL_ASSESSMENT", 20,"", "String"],
         ["puntuacion", "EXCEL_SCORE", 12,"0.00%", "Percentage"]];
       
@@ -81,8 +81,16 @@ export class SortedTableComponent implements OnInit {
     this.ListaDeOficinas= this.dataInput.map(x => x.oficina).reduce((x,y) => x.includes(y) ? x : [...x, y],[]);
     this.listaDeAssessment = this.dataInput.map(x => x).reduce((x,y) => x.includes(y.assessmentName) ? x : [...x, y.assessmentName],[]);
     this.ListaDeEquipos = this.dataInput.map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+      
+    if(this.nombreEquipo) {
+      this.EquipoSeleccionado.push(this.nombreEquipo);
+      this.assessmentSeleccionado.push(this.nombreAssessment);
+      this.filterData('equipo');
+    } 
 
-    this.propagar.emit(false)
+    //this.propagar.emit(false)
+
+
   }
 
   public GetPagination()
@@ -143,16 +151,28 @@ export class SortedTableComponent implements OnInit {
     }
 
     this.dataSource.data = nuevo;
-
+    this.autoticFilter(origen);
+    console.log("autofilter", this.OficinaSeleccionada, this.EquipoSeleccionado, this.assessmentSeleccionado, "lis", this.listaDeAssessment)
     if(this.OficinaSeleccionada.length === 0 && this.EquipoSeleccionado.length === 0 && this.assessmentSeleccionado.length === 0) {
+      alert("cleaning...")
       this.dataSource.data = this.originDataSource;
       this.ListaDeEquipos = this.originDataSource.reduce((x,y) => x.includes(y.nombre) ? x : [...x, y.nombre],[]);
       this.ListaDeOficinas = this.originDataSource.reduce((x,y) => x.includes(y.oficina) ? x : [...x, y.oficina],[]);
       this.listaDeAssessment = this.originDataSource.reduce((x,y) => x.includes(y.assessmentName) ? x : [...x, y.assessmentName],[])
       
     }
+
     this.showColumnAssessment();
     this.activateChartToParent();
+  }
+
+
+  autoticFilter(origin: string)
+  {   
+    if(this.listaDeAssessment.length === 1)this.assessmentSeleccionado = this.listaDeAssessment
+
+    if(origin === "assessment" && this.listaDeAssessment.length === 1) this.assessmentSeleccionado = [];
+    return;
   }
 
   showColumnAssessment()
@@ -166,10 +186,13 @@ export class SortedTableComponent implements OnInit {
         this.devopsassmnt = true;
       }
 
+      this.addColumnExcel(this.assessmentSeleccionado[0]);
+      
     } else {
       this.displayedColumns = ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','puntuacion', 'notas', 'informe'];
       this.scrumassmnt = false;
       this.devopsassmnt = false;
+      this.popColumnExcel()
       this.propagar.emit(false);
     } 
   }
@@ -181,5 +204,23 @@ export class SortedTableComponent implements OnInit {
     } else {
       this.propagar.emit(false);
     }
+  }
+
+  addColumnExcel(assessment: string)
+  {
+    this.fieldsTable.map((x, i) => {
+      if(x[0].includes("assessmentName")) {
+        if(assessment === "SCRUM") this.fieldsTable.splice(i, 0, ...this.excelScrum)
+        if(assessment === "DEVOPS") this.fieldsTable.splice(i, 0, ...this.excelDevops)
+      }
+    })
+  }
+
+  popColumnExcel()
+  {
+    this.fieldsTable.map((x, i) => {
+      if(x[0].includes("equipo")) this.fieldsTable.splice(i, this.excelScrum.length)
+      if(x[0].includes("orgequipo"))this.fieldsTable.splice(i, this.excelDevops.length)
+    })
   }
 }
