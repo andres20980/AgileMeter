@@ -38,9 +38,11 @@ export class SortedTableComponent implements OnInit {
   dataSource: MatTableDataSource<Evaluacion>;
   dataSourceMerge: MatTableDataSource<Evaluacion>;s
   displayedColumns = ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','puntuacion', 'notas', 'informe'];
+  displayedColumnsScrum =  ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','equipo','eventos','herramientas','mindset','aplicacion','puntuacion', 'notas', 'informe'];
+  displayedColumnsDevops =  ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','orgequipo','ciclovida','construccion','testing','despliegue','monitorizacion','aprovisionamiento','puntuacion', 'notas', 'informe'];
 
-  public excelScrum = [["equipo", "EXCEL_PT_SRUM.TEAM",  12,"", "String"], ["eventos", "EXCEL_PT_SRUM.EVENTS",  12,"", "String"], ["herramientas", "EXCEL_PT_SRUM.TOOLS", 12,"", "String"], ["mindset", "EXCEL_PT_SRUM.MINDSET", 12,"", "String"],["aplicacion", "EXCEL_PT_SRUM.APP", 12,"", "String"]]
-  public excelDevops = [["orgequipo", "EXCEL_PT_DEVOPS.ORG_TEAM",  12,"", "String"], ["ciclovida", "EXCEL_PT_DEVOPS.LIFECYCLE",  12,"", "String"], ["construccion", "EXCEL_PT_DEVOPS.BUILDING", 12,"", "String"], ["testing", "EXCEL_PT_DEVOPS.TESTING", 12,"", "String"],["'despliegue", "EXCEL_PT_DEVOPS.DEPLOYMENT", 12,"", "String"], ["monitorizacion", "EXCEL_PT_DEVOPS.MONITORING", 12,"", "String"], ["aprovisionamiento", "EXCEL_PT_DEVOPS.", 12,"", "String"]];
+  public excelScrum: any[];
+  public excelDevops: any[];
   public ListaDeOficinas: string[] = [];
   public OficinaSeleccionada: string[] = [];
   public ListaDeEquipos: string[] = [];
@@ -58,7 +60,45 @@ export class SortedTableComponent implements OnInit {
   @Output() propagar = new EventEmitter<any>();
   @Output() propagar2 = new EventEmitter<any>();
 
-  constructor(private _appComponent: AppComponent,  private _router: Router, private renderer: Renderer) { }
+  constructor(private _appComponent: AppComponent,  private _router: Router, private renderer: Renderer) { 
+    this.fieldsTable = [
+      ["fecha", "EXCEL_DATE", 12,"dd/mm/yyyy", "Date"],
+      ["userNombre", "EXCEL_USER",20,"", "String"],
+      ["oficina", "EXCEL_OFFICE", 25,"", "String"],
+      ["nombre", "EXCEL_TEAM", 50,"##?##", "String"],
+      ["assessmentName", "EXCEL_ASSESSMENT", 20,"", "String"],
+      ["puntuacion", "EXCEL_SCORE", 12,"0.00%", "Percentage"]];
+
+      this.excelScrum = [
+      ["fecha", "EXCEL_DATE", 12,"dd/mm/yyyy", "Date"],
+      ["userNombre", "EXCEL_USER",20,"", "String"],
+      ["oficina", "EXCEL_OFFICE", 25,"", "String"],
+      ["nombre", "EXCEL_TEAM", 50,"##?##", "String"],
+      ["assessmentName", "EXCEL_ASSESSMENT", 20,"", "String"],
+      ["equipo", "EXCEL_PT_SCRUM.TEAM", 20,"", "String"],
+      ["eventos", "EXCEL_PT_SCRUM.EVENTS",20,"", "String"], 
+      ["herramientas", "EXCEL_PT_SCRUM.TOOLS",20,"", "String"],
+      ["mindset", "EXCEL_PT_SCRUM.MINDSET", 20,"", "String"],
+      ["aplicacion", "EXCEL_PT_SCRUM.APP",20,"", "String"],
+      ["puntuacion", "EXCEL_SCORE", 12,"0.00%", "Percentage"]]
+
+      this.excelDevops =  [
+      ["fecha", "EXCEL_DATE", 12,"dd/mm/yyyy", "Date"],
+      ["userNombre", "EXCEL_USER",20,"", "String"],
+      ["oficina", "EXCEL_OFFICE", 25,"", "String"],
+      ["nombre", "EXCEL_TEAM", 50,"##?##", "String"],
+      ["assessmentName", "EXCEL_ASSESSMENT", 20,"", "String"],
+      ["orgequipo", "EXCEL_PT_DEVOPS.ORG_TEAM", 20,"", "String"],
+      ["ciclovida", "EXCEL_PT_DEVOPS.LIFECYCLE", 20,"", "String"],
+      ["construccion", "EXCEL_PT_DEVOPS.BUILDING", 20,"", "String"],
+      ["testing", "EXCEL_PT_DEVOPS.TESTING", 20,"", "String"],
+      ["'despliegue", "EXCEL_PT_DEVOPS.DEPLOYMENT", 20,"", "String"],
+      ["monitorizacion", "EXCEL_PT_DEVOPS.MONITORING", 20,"", "String"],
+      ["aprovisionamiento", "EXCEL_PT_DEVOPS.", 20,"", "String"],
+      ["puntuacion", "EXCEL_SCORE", 12,"0.00%", "Percentage"]];
+  }
+
+
 
   ngOnInit()
   {
@@ -124,6 +164,7 @@ export class SortedTableComponent implements OnInit {
 
   filterData(origen: string)
   {
+  
     let oficinaSel = this.OficinaSeleccionada.length !== 0 ? this.OficinaSeleccionada : this.originListOficina;
     let equipoSel = this.EquipoSeleccionado.length !== 0 ? this.EquipoSeleccionado : this.origingListEquipos;
     let assessmentSel = this.assessmentSeleccionado.length !== 0 ? this.assessmentSeleccionado : this.originListaAssessment;
@@ -179,10 +220,12 @@ export class SortedTableComponent implements OnInit {
   {
     if(this.assessmentSeleccionado.length === 1) {
       if( this.assessmentSeleccionado[0] === "SCRUM") {
-        this.displayedColumns = ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','equipo','eventos','herramientas','mindset','aplicacion','puntuacion', 'notas', 'informe'];
+        this.displayedColumns = this.displayedColumnsScrum;
+        this.fieldsTable = this.excelScrum
         this.scrumassmnt = true;
       } else if(this.assessmentSeleccionado[0] === "DEVOPS") {
-        this.displayedColumns = ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','orgequipo','ciclovida','construccion','testing','despliegue','monitorizacion','aprovisionamiento','puntuacion', 'notas', 'informe'];
+        this.displayedColumns = this.displayedColumnsDevops;
+        this.fieldsTable = this.excelDevops
         this.devopsassmnt = true;
       }
 
@@ -190,6 +233,12 @@ export class SortedTableComponent implements OnInit {
       
     } else {
       this.displayedColumns = ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','puntuacion', 'notas', 'informe'];
+      this.fieldsTable = [["fecha", "EXCEL_DATE", 12,"dd/mm/yyyy", "Date"],
+      ["userNombre", "EXCEL_USER",20,"", "String"],
+      ["oficina", "EXCEL_OFFICE", 25,"", "String"],
+      ["nombre", "EXCEL_TEAM", 50,"##?##", "String"],
+      ["assessmentName", "EXCEL_ASSESSMENT", 20,"", "String"],
+      ["puntuacion", "EXCEL_SCORE", 12,"0.00%", "Percentage"]];
       this.scrumassmnt = false;
       this.devopsassmnt = false;
       this.popColumnExcel()

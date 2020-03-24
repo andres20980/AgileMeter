@@ -28,7 +28,7 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
   public ctx_labels = new Array();
   public arrayScrum = new Array();
   public arrayDevops = new Array();
-  public auxColors = ["#37bf5940", "#0fb3d440", "#c1de5d40"] //rgba(135,169,0,0.1)
+  public auxColors = [ "#c1de5d40","#37bf5940","#0fb3d440"] //rgba(135,169,0,0.1)
   public chartOptions: any
   public infoResult: Array<Object> = [];
   public previous: any;
@@ -59,6 +59,7 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+
     this.hiddenGlobal = true;
     this._appComponent.pushBreadcrumb(this.nombreProyecto, "/evaluationresults");
     this.previous = this.result.map(x => x.sectionsInfo);
@@ -120,26 +121,84 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
 
   createAux(levels: [])
   {
-    let fillevels = levels.filter((a, b) => levels.indexOf(a) === b)
-    let follow = [1,1,1,1,1,1,1]
-    fillevels.map((col, i) => {
-      console.log(i)
+    // let fillevels = levels.filter((a, b) => levels.indexOf(a) === b)
+    // let follow = [1,1,1,1,1,1,1]
+    // fillevels.forEach((col, i) => {
+    //   console.log(follow.map(x => x * (col * 100)))
+    //   if(i === 0) {
+    //     this.ctx_datasets.push({
+    //       type: "line",
+    //       data: follow.map(x => x * (col * 100)), 
+    //       label:"aux1",// + (col - 1),
+    //       backgroundColor: this.auxColors[0],
+    //       fill: "origin",
+    //       lineTension: 0.1,
+    //       borderColor: this.auxColors[0],
+    //       pointRadius: 0,
+    //       pointHoverRadius: 0,
+    //       borderWidth:0.1
+    //     })
+    //   } else {        
+    //     this.ctx_datasets.push({
+    //     type: "line",
+    //     data: follow.map(x => x * (col * 100)), 
+    //     label:"aux1",// + (col - 1),
+    //     backgroundColor: this.auxColors[i],
+    //     fill: "-1",
+    //     lineTension: 0.1,
+    //     borderColor: this.auxColors[i],
+    //     pointRadius: 0,
+    //     pointHoverRadius: 0,
+    //     borderWidth:0.1
+    //   }) 
+    // }
+    //   })
+        
+        this.ctx_datasets.push({
+          type: "line",
+          data:[100,100,100,100,100,100,100], //follow.map(x => x * (col * 100)), 
+          label:"aux1",// + (col - 1),
+          backgroundColor: this.auxColors[0],
+          fill: "origin",
+          lineTension: 0.1,
+          borderColor: this.auxColors[0],
+          pointRadius: 0,
+          pointHoverRadius: 0,
+          borderWidth:0.1
+        })
+
 
         this.ctx_datasets.push({
           type: "line",
-          data: follow.map(x => x * (col * 100)), 
-          label:"aux" + (col - 1),
-          backgroundColor: this.auxColors[i],
-          fill: "origin",
+          data: [200,200,200,200,200,200,200],//follow.map(x => x * (col * 100)), 
+          label:"aux1",// + (col - 1),
+          backgroundColor: this.auxColors[1],
+          fill: "-1",
           lineTension: 0.1,
-          borderColor: this.auxColors[i],
+          borderColor: this.auxColors[1],
           pointRadius: 0,
           pointHoverRadius: 0,
-          borderWidth:0.1})
-      
+          borderWidth:0.1
+        }) 
 
-    })
-  }
+
+        
+        this.ctx_datasets.push({
+          type: "line",
+          data: [300,300,300,300,300,300,300],//follow.map(x => x * (col * 100)), 
+          label:"aux2",// + (col - 1),
+          backgroundColor: this.auxColors[2],
+          fill: "-1",
+          lineTension: 0.1,
+          borderColor: this.auxColors[2],
+          pointRadius: 0,
+          pointHoverRadius: 0,
+          borderWidth:0.1
+        }) 
+
+}
+    
+  
 
   
   ngAfterViewInit(){
@@ -179,10 +238,8 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
                   // Logic to remove a particular legend item goes her
                   // const myImage = new Image(50, 50);
                   // myImage.src = "https://banner2.cleanpng.com/20180329/gve/kisspng-computer-icons-chart-icon-design-diagram-finance-5abc92600af0c5.8926903915223076800448.jpg"
-                  console.log(item);
                   if(item.text.includes('Global')){
-                    console.log(item.hidden)
-                    self.hiddenGlobal = item.hidden
+                    //self.hiddeGlobal(item.hidden)
                   }
                  if(item.text.includes('Global')){ 
                    item.pointStyle = "cirlce"
@@ -253,7 +310,7 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
                   return "";
                 }
                 else{
-                  return value + "%"
+                  return value+'%'
                 }
                 
               }
@@ -289,5 +346,10 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
   {
     let ndate = date.indexOf('T');
     return  date.substr(0, ndate).split("-").reverse().join(" / ");
+  }
+
+  hiddeGlobal(v: boolean){
+    this.hiddenGlobal = v
+    return v
   }
 }

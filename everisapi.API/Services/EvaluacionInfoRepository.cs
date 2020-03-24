@@ -574,20 +574,70 @@ namespace everisapi.API.Services
             return EvaluacionesInformativasFiltradas.ToList();
         }
 
-        public List<EvaluacionInfoWithSectionsDto> GetEvaluationsWithSectionsInfo(int IdProject, EvaluacionInfoPaginationDto Evaluacion, int codigoIdioma, int PidAssessment)
+
+
+
+        /*    nuevo con sectionsinfo  */
+
+
+
+
+
+
+        public List<EvaluacionInfoWithSectionsDto> GetEvaluationsWithSectionsInfo(int IdProject, EvaluacionInfoPaginationDto Evaluacion, int codigoIdioma, string UsuarioLogado)
         {
             //Recogemos las evaluaciones y la paginamos
             List<EvaluacionInfoWithSectionsDto> EvaluacionesInformativas = new List<EvaluacionInfoWithSectionsDto>();
+            UserEntity user = _context.Users.Where(u => u.Nombre == UsuarioLogado).FirstOrDefault();
+            List<UserProyectoEntity> equiposUsuario = new List<UserProyectoEntity>();
+            List<int> equipos = new List<int>();
             List<EvaluacionEntity> Evaluaciones;
             
-            if(PidAssessment == 1 || PidAssessment == 2)
+            if(UsuarioLogado.Length > 0)
             {
+       
+                if (user.RoleId == (int)Roles.User)
+                {
+                    equiposUsuario = _context.UserProyectos.Where(up => up.UserNombre == UsuarioLogado).ToList();
+                    foreach (var eu in equiposUsuario)
+                    {
+                        equipos.Add(eu.ProyectoId);
+                    }
+                }
+
+                //Recogemos las evaluaciones y la paginamos
+                //List<EvaluacionInfoDto> EvaluacionesInformativas = new List<EvaluacionInfoDto>();
+           
 
                 Evaluaciones = _context.Evaluaciones.
                 Include(r => r.ProyectoEntity).
                 ThenInclude(p => p.UserEntity).
                 Include(a => a.Assessment).
-                Where(e => e.ProyectoEntity.TestProject == false && e.Estado == true).OrderByDescending(e => e.Fecha).ToList();
+                Where(e =>
+                (equipos.Count > 0 ? (equipos.Contains(e.ProyectoId)) : 1 == 1) &&
+                e.Estado == Boolean.Parse(Evaluacion.Estado) &&
+                ((user.RoleId == (int)Roles.Admin || user.RoleId == (int)Roles.Evaluator) ? (e.ProyectoEntity.TestProject == false) : 1 == 1) &&
+                (Evaluacion.Oficinas.Length > 0 ? (Array.Exists(Evaluacion.Oficinas, element => element == e.ProyectoEntity.Oficina)) : 1 == 1) &&
+                (Evaluacion.Equipos.Length > 0 ? (Array.Exists(Evaluacion.Equipos, element => element == e.ProyectoId)) : 1 == 1) &&
+                (Evaluacion.IdAssessment.Length > 0 ? (Array.Exists(Evaluacion.IdAssessment, element => element == e.AssessmentId)) : 1 == 1) &&
+                e.Fecha.Date.ToString("dd/MM/yyyy").Contains(Evaluacion.Fecha)
+                ).OrderByDescending(e => e.Fecha).ToList();
+
+               /* Evaluaciones = _context.Evaluaciones.
+                Include(r => r.ProyectoEntity).
+                ThenInclude(p => p.UserEntity).
+                Include(a => a.Assessment).
+                Where(e => e.ProyectoId == IdProject &&
+                e.Estado == Boolean.Parse(Evaluacion.Estado) &&
+                (Evaluacion.AssessmentId == 0 || e.AssessmentId == Evaluacion.AssessmentId) &&
+                e.Fecha.Date.ToString("dd/MM/yyyy").Contains(Evaluacion.Fecha) // && e.ProyectoEntity.UserNombre.ToLower().Contains(Evaluacion.UserNombre.ToLower())
+                ).OrderByDescending(e => e.Fecha).ToList();*/
+
+                /*Evaluaciones = _context.Evaluaciones.
+                Include(r => r.ProyectoEntity).
+                ThenInclude(p => p.UserEntity).
+                Include(a => a.Assessment).
+                Where(e => e.ProyectoEntity.TestProject == false && e.Estado == true).OrderByDescending(e => e.Fecha).ToList();*/
 
             } else
             {

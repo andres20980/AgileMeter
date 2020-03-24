@@ -153,7 +153,7 @@ export class EvaluacionService {
       'Authorization': Token
     });
     
-    return this._http.post(this.url + 'evaluaciones/proyecto/' + idProject + '/sectionsinfo/' + codigoIdioma + '/' + idAsessment, params, { headers: headers }).pipe(
+    return this._http.post(this.url + 'evaluaciones/proyecto/' + idProject + '/sectionsinfo/' + codigoIdioma + '/' + this.UsuarioLogeado, params, { headers: headers }).pipe(
       map(res => res.json()),
       // tap(r => console.log("OBSERVAAAAAAAAAAAAABLE",r)),
       catchError(this.errorHandler));
