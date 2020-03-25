@@ -7,7 +7,7 @@
 
         </div>
         <div class="col-sm-3 mt-4 mr-8 text-right">
-          <button (click)="desGrafica()" class="transparente botonTabla" style="margin-right: 18px" [ngStyle]="{'opacity': setGreyOut('tabla')}">
+          <button (click)="desGrafica()" class="transparente botonTabla" style="margin-right: 6px" [ngStyle]="{'margin-left':'6px','opacity': setGreyOut('tabla')}">
             <img  src="assets/table.png" title="{{ 'PREVIOUS_EVALUATION.SHOW_TABLE' | translate }}" />
           </button>
           <button (click)="activaGrafica()" class="transparente botonGrafica"  [ngStyle]="{'opacity': setGreyOut('notable'), 'filter': setBrightness()}">
