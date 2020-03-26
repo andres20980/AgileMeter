@@ -700,7 +700,7 @@ export class PdfgeneratorComponent implements OnInit {
     let classString: string;
     let respuestaString: string = this.displayRespuesta(row);
 
-
+    
     //Si (habilitante)
     if (row.correcta == null) {
       //Contestado -> Si
@@ -727,9 +727,7 @@ export class PdfgeneratorComponent implements OnInit {
         }
       }
     }
-
-
-    return "material-icons " + classString;
+    return classString;
   }
 
   displayRespuesta(row: RespuestaConNotasTabla): string {
