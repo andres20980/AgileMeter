@@ -35,31 +35,34 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
   public post: any;
   public levels: any;
   public hiddenGlobal: boolean;
+  public allLegendsHidden: boolean;
+  public displayPercentage: boolean;
   public genericResult: Array<number>
+  public legend = new Array();
   constructor(private _appComponent: AppComponent) {
     
 
    this.arrayScrum = [
-      {nombre: "EQUIPO", color: "red"},
-      {nombre: "EVENTOS", color: "pink"},
-      {nombre: "HERRAMIENTAS",color: "purple"},
-      {nombre: "MINDSET", color: "green"},
-      {nombre: "APLICACIÓN PRÁCTICA", color: "blue"}
+      {nombre: "EQUIPO", color: "#E74C3C"},
+      {nombre: "EVENTOS", color: "#3498DB"},
+      {nombre: "HERRAMIENTAS",color: "#F1C40F"},
+      {nombre: "MINDSET", color: "#9B59B6"},
+      {nombre: "APLICACIÓN PRÁCTICA", color: "#ef56b4"}
     ]
   
     this.arrayDevops = [
-      {nombre: "ORGANIZACION EQUIPOS", color: "red"},
-      {nombre: "CICLO DE VIDA", color: "pink"},
-      {nombre: "CONSTRUCCIÓN",color: "purple"},
-      {nombre: "TESTING Y CALIDAD", color: "green"},
-      {nombre: "DESPLIEGUE", color: "blue"},
-      {nombre: "MONITORIZACION", color: "lavender"},
-      {nombre: "APROVISIONAMIENTO", color: "orange"}
+      {nombre: "ORGANIZACION EQUIPOS", color: "#E74C3C"},
+      {nombre: "CICLO DE VIDA", color:"#3498DB"},
+      {nombre: "CONSTRUCCIÓN",color:  "#F1C40F"},
+      {nombre: "TESTING Y CALIDAD", color: "#9B59B6"},
+      {nombre: "DESPLIEGUE", color: "#ef56b4"},
+      {nombre: "MONITORIZACION", color: "#33CCCC"},
+      {nombre: "APROVISIONAMIENTO", color: "#F39C12"}
     ];
   }
 
   ngOnInit() {
-
+    this.displayPercentage = true;
     this.hiddenGlobal = true;
     this._appComponent.pushBreadcrumb(this.nombreProyecto, "/evaluationresults");
     this.previous = this.result.map(x => x.sectionsInfo);
@@ -112,7 +115,7 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
         })
       }
      
-   this.ctx_datasets.push({type: 'bar', yAxisID: "y-axis-1", data: [NaN,...this.genericResult,NaN], label: "Global", backgroundColor: "#2ECC71AA", padding: 200, borderColor: "#2ECC71", hoverBackgroundColor: "#2ECC71", borderWidth:"2", hidden:"false"})
+   this.ctx_datasets.push({type: 'bar', yAxisID: "y-axis-1", data: [NaN,...this.genericResult,NaN], label: "Global", backgroundColor: "#2ECC71AA", padding: 200, borderColor: "#2ECC71", hoverBackgroundColor: "#2ECC71", borderWidth:"2", hidden:"true"})
 
    this.createAux(this.levels);
    
@@ -197,11 +200,10 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
         }) 
 
 }
-    
   
-
   
   ngAfterViewInit(){
+
     const self = this
     this.chart =  new Chart(document.getElementById("line-chart"), {
       type: 'bar',
@@ -229,25 +231,13 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
         caleShowVerticalLines: false,
         showLines: true,
         legend: {
-          align:"start",
-
+          align:"center",
+          display: false,
           labels: {
+            
             padding: 40,
             usePointStyle: true,
             filter: function(item, chart) {
-                  // Logic to remove a particular legend item goes her
-                  // const myImage = new Image(50, 50);
-                  // myImage.src = "https://banner2.cleanpng.com/20180329/gve/kisspng-computer-icons-chart-icon-design-diagram-finance-5abc92600af0c5.8926903915223076800448.jpg"
-                  if(item.text.includes('Global')){
-                    //self.hiddeGlobal(item.hidden)
-                  }
-                 if(item.text.includes('Global')){ 
-                   item.pointStyle = "cirlce"
-                  }
-                   else {
-                    item.pointStyle = "rect"
-                    item.lineWidth = 10
-                   }
                   return !item.text.includes('aux');
               },
           },
@@ -257,14 +247,18 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
         responsive: true,
         legendCallback: function(chart) {
 
-          console.log(chart)
-          let legend : any[] = [];
-          for (var i=0; i<chart.data.datasets.length; i++) {  
-            if(!chart.data.datasets[i].label.includes('aux') && !chart.data.datasets[i].label.includes('Global')) {  
-                legend.push({label: chart.data.datasets[i].label, color: chart.data.datasets[i].backgroundColor});
-            }
-          }
-          return legend;
+          console.log("legend chart",chart)
+           let legend2 = [];
+          // for (var i=0; i<chart.data.datasets.length; i++) {  
+          //   if(!chart.data.datasets[i].label.includes('aux') && !chart.data.datasets[i].label.includes('Global')) {  
+          //       this.legend.push({label: chart.data.datasets[i].label, color: chart.data.datasets[i].backgroundColor});
+          //   }
+          // }
+          chart.data.datasets.map((v,i) => {
+            if(!chart.data.datasets[i].label.includes('aux') ) //&& !chart.data.datasets[i].label.includes('Global')
+            legend2.push({label: v.label, color: v.backgroundColor})
+          })
+          return legend2;
       
       },
         scales: {
@@ -300,18 +294,19 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
           {
             position: "right",
             id: "y-axis-1",
+            display: false,
             ticks: {
               steps: 100,
               stepValue: 10,
               min: 0,
               max: 100,
               callback: function(value, index, values) {           
-                if(false){
-                  return "";
-                }
-                else{
+                // if(false){
+                //   return "";
+                // }
+                // else{
                   return value+'%'
-                }
+              //  }
                 
               }
             },
@@ -330,6 +325,7 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
       }
      
     });
+    this.legend = this.chart.generateLegend();
   }
 
   extracData(y: string, p: Array<any>)
@@ -352,4 +348,36 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
     this.hiddenGlobal = v
     return v
   }
+
+  toggleChartData(i: number){
+
+    this.chart.config.data.datasets[i].hidden = !this.chart.config.data.datasets[i].hidden;
+    
+    this.allLegendsHidden = true;
+    for(var j: number = 0; j < this.legend.length; j++) {
+      this.allLegendsHidden = this.allLegendsHidden &&  (this.chart.config.data.datasets[j].hidden);
+    }
+    this.chart.options.scales.yAxes[0].gridLines.display  = !this.allLegendsHidden;
+    this.chart.options.scales.yAxes[1].gridLines.display = this.allLegendsHidden;
+
+    for(var j: number = 0; j < this.chart.config.data.datasets.length; j++) {
+      if(this.chart.config.data.datasets[j].label.includes('aux')){
+        this.chart.config.data.datasets[j].hidden = this.allLegendsHidden;
+      }
+
+      if(this.chart.config.data.datasets[j].label.includes('Global')){
+        this.chart.options.scales.yAxes[1].display = !this.chart.config.data.datasets[j].hidden
+      }
+      
+    } 
+    this.chart.update();
+  }
+
+  public toggleGlobalData(){
+
+    this.chart.config.data.datasets[this.chart.config.data.datasets.length - 1].hidden = !this.chart.config.data.datasets[this.chart.config.data.datasets.length - 1].hidden;
+    this.chart.update();
+  }
+
+
 }

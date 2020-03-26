@@ -2,7 +2,7 @@ import { map } from 'rxjs/operators';
 import { Assessment } from './../Models/Assessment';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit, Input, Output, ViewChild, ViewChildren, EventEmitter, ElementRef, Renderer, OnChanges, SimpleChanges} from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, SELECT_PANEL_INDENT_PADDING_X } from '@angular/material';
 import { Evaluacion } from 'app/Models/Evaluacion';
 import { AppComponent } from 'app/app.component';
 import { EvaluacionInfo } from 'app/Models/EvaluacionInfo';
@@ -144,6 +144,7 @@ export class SortedTableComponent implements OnInit {
   public SaveDataToPDF(evaluacion: EvaluacionInfo)
   {
     this._appComponent._storageDataService.EvaluacionToPDF = evaluacion;
+    this._appComponent.pushBreadcrumb(evaluacion.nombre, null);
     this._appComponent.pushBreadcrumb(evaluacion.assessmentName, null);
     let pipe = new DatePipe('en-US');
     this._appComponent.pushBreadcrumb(pipe.transform(evaluacion.fecha, 'dd/MM/yyyy'), null);
@@ -160,6 +161,7 @@ export class SortedTableComponent implements OnInit {
   applyFilter(filterValue: string)
   {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    console.log(this.dataSource)
   }
 
   filterData(origen: string)
@@ -170,32 +172,43 @@ export class SortedTableComponent implements OnInit {
     let assessmentSel = this.assessmentSeleccionado.length !== 0 ? this.assessmentSeleccionado : this.originListaAssessment;
 
     let selected = {oficina: oficinaSel , team: equipoSel, assessment: assessmentSel};
-    let nuevo = this.originDataSource.filter(x =>selected.oficina.includes(x.oficina) && selected.team.includes(x.nombre) && selected.assessment.includes(x.assessmentName));
-
+    
+   
+    
     if(origen === 'oficina') {
       this.ListaDeEquipos = this.originDataSource.filter(x => selected.oficina.includes(x.oficina)).map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
       this.listaDeAssessment = this.originDataSource.filter(x => selected.oficina.includes(x.oficina)).map(x => x.assessmentName).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
-      if(this.ListaDeEquipos.length === 1 && this.EquipoSeleccionado.length > 1) {
-        this.ListaDeEquipos = this.EquipoSeleccionado;
-      }
-    }
-    if(origen === 'equipo') {
-      this.ListaDeOficinas = this.originDataSource.filter(x => selected.team.includes(x.nombre)).map(x => x.oficina).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
-      this.listaDeAssessment = this.originDataSource.filter(x => selected.team.includes(x.nombre)).map(x => x.assessmentName).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
-      if(this.ListaDeOficinas.length === 1 && this.OficinaSeleccionada.length > 1) {
-        this.ListaDeOficinas = this.OficinaSeleccionada;
-      }
-    }
-    if(origen === 'assessment') {
-      this.ListaDeOficinas = this.originDataSource.filter(x => selected.assessment.includes(x.assessmentName)).map(x => x.oficina).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
-      this.ListaDeEquipos = this.originDataSource.filter(x => selected.assessment.includes(x.assessmentName)).map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
     }
 
+    if(origen === 'equipo') {
+      // Si pusla equipo nos da igual lo que tenga (por el momento)
+       //selected.oficina = [];
+      //   alert(this.EquipoSeleccionado.length)
+       if(this.EquipoSeleccionado.length === 0)
+       {  
+        //  selected.oficina = [];
+        //  this.OficinaSeleccionada = [];
+
+       } else {
+        this.assessmentSeleccionado = this.originDataSource.filter(x => selected.team.includes(x.nombre)).map(x => x.assessmentName).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+        this.OficinaSeleccionada= this.originDataSource.filter(x => selected.team.includes(x.nombre)).map(x => x.oficina).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+        selected.oficina = this.originDataSource.filter(x => selected.team.includes(x.nombre)).map(x => x.oficina).reduce((x,y) => x.includes(y) ? x :  [...x, y],[])
+       }
+
+      
+     // this.OficinaSeleccionada = this.originDataSource.filter(x => selected.team.includes(x.nombre)).map(x => x.oficina).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+    }
+    // if(origen === 'assessment') {
+    //   this.ListaDeOficinas = this.originDataSource.filter(x => selected.assessment.includes(x.assessmentName)).map(x => x.oficina).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+    //   this.ListaDeEquipos = this.originDataSource.filter(x => selected.assessment.includes(x.assessmentName)).map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+    // }
+   
+     // viejo nuevo
+    let nuevo = this.originDataSource.filter(x =>selected.oficina.includes(x.oficina) && selected.team.includes(x.nombre) && selected.assessment.includes(x.assessmentName));
     this.dataSource.data = nuevo;
-    this.autoticFilter(origen);
+
     console.log("autofilter", this.OficinaSeleccionada, this.EquipoSeleccionado, this.assessmentSeleccionado, "lis", this.listaDeAssessment)
     if(this.OficinaSeleccionada.length === 0 && this.EquipoSeleccionado.length === 0 && this.assessmentSeleccionado.length === 0) {
-      alert("cleaning...")
       this.dataSource.data = this.originDataSource;
       this.ListaDeEquipos = this.originDataSource.reduce((x,y) => x.includes(y.nombre) ? x : [...x, y.nombre],[]);
       this.ListaDeOficinas = this.originDataSource.reduce((x,y) => x.includes(y.oficina) ? x : [...x, y.oficina],[]);
