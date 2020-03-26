@@ -114,7 +114,7 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
           })
         })
       }
-     
+   this.genericResult.reverse();
    this.ctx_datasets.push({type: 'bar', yAxisID: "y-axis-1", data: [NaN,...this.genericResult,NaN], label: "Global", backgroundColor: "#2ECC71AA", padding: 200, borderColor: "#2ECC71", hoverBackgroundColor: "#2ECC71", borderWidth:"2", hidden:"true"})
 
    this.createAux(this.levels);

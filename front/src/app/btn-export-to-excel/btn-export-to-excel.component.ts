@@ -91,9 +91,17 @@ export class BtnExportToExcelComponent implements OnInit {
 
       var rowData: any[] = [];
       var data : any;
+      
+      let array = new Array
+      if (!d.sectionsInfo == undefined){
+      d.sectionsInfo.map((x)=>{
+      let p = x.puntuacion +"% - N"+ x.nivelAlcanzado
+        array.push(p)
+      })
+    }
 
       for(var i = 0; i < this.fields.length; i++)
-      {
+      { 
         switch (this.fields[i][4]) {
           case "Date":
             data = new Date(d[field[i]]);
@@ -108,18 +116,24 @@ export class BtnExportToExcelComponent implements OnInit {
               case "##?##":
                 data = d[field[i]].replace("##?##"," - ");
                 break;
-
+              case "SCRUM":
+                data = array[i-4];
+                break;
+              
+              case "DEVOPS":
+                data = array[i-4];
+                break;
               default:
                   data =  d[field[i]];
-                  break;
+                break;
             }
             break;
         
           default:
             data =  d[field[i]];
             break;
-        }
-        rowData.push(data);
+         }
+         rowData.push(data);
       }
       
       //worksheet.addRow([new Date(d[field[0]]), d[field[1]], d[field[2]], d[field[3]], d[field[4]], d[field[5]]]);

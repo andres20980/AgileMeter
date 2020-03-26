@@ -70,32 +70,20 @@ export class SortedTableComponent implements OnInit {
       ["puntuacion", "EXCEL_SCORE", 12,"0.00%", "Percentage"]];
 
       this.excelScrum = [
-      ["fecha", "EXCEL_DATE", 12,"dd/mm/yyyy", "Date"],
-      ["userNombre", "EXCEL_USER",20,"", "String"],
-      ["oficina", "EXCEL_OFFICE", 25,"", "String"],
-      ["nombre", "EXCEL_TEAM", 50,"##?##", "String"],
-      ["assessmentName", "EXCEL_ASSESSMENT", 20,"", "String"],
-      ["equipo", "EXCEL_PT_SCRUM.TEAM", 20,"", "String"],
-      ["eventos", "EXCEL_PT_SCRUM.EVENTS",20,"", "String"], 
-      ["herramientas", "EXCEL_PT_SCRUM.TOOLS",20,"", "String"],
-      ["mindset", "EXCEL_PT_SCRUM.MINDSET", 20,"", "String"],
-      ["aplicacion", "EXCEL_PT_SCRUM.APP",20,"", "String"],
-      ["puntuacion", "EXCEL_SCORE", 12,"0.00%", "Percentage"]]
-
+      ["equipo", "EXCEL_PT_SCRUM.TEAM", 20,"SCRUM", "String"],
+      ["eventos", "EXCEL_PT_SCRUM.EVENTS",20,"SCRUM", "String"], 
+      ["herramientas", "EXCEL_PT_SCRUM.TOOLS",20,"SCRUM", "String"],
+      ["mindset", "EXCEL_PT_SCRUM.MINDSET", 20,"SCRUM", "String"],
+      ["aplicacion", "EXCEL_PT_SCRUM.APP",20,"SCRUM", "String"]];
+    
       this.excelDevops =  [
-      ["fecha", "EXCEL_DATE", 12,"dd/mm/yyyy", "Date"],
-      ["userNombre", "EXCEL_USER",20,"", "String"],
-      ["oficina", "EXCEL_OFFICE", 25,"", "String"],
-      ["nombre", "EXCEL_TEAM", 50,"##?##", "String"],
-      ["assessmentName", "EXCEL_ASSESSMENT", 20,"", "String"],
-      ["orgequipo", "EXCEL_PT_DEVOPS.ORG_TEAM", 20,"", "String"],
-      ["ciclovida", "EXCEL_PT_DEVOPS.LIFECYCLE", 20,"", "String"],
-      ["construccion", "EXCEL_PT_DEVOPS.BUILDING", 20,"", "String"],
-      ["testing", "EXCEL_PT_DEVOPS.TESTING", 20,"", "String"],
-      ["'despliegue", "EXCEL_PT_DEVOPS.DEPLOYMENT", 20,"", "String"],
-      ["monitorizacion", "EXCEL_PT_DEVOPS.MONITORING", 20,"", "String"],
-      ["aprovisionamiento", "EXCEL_PT_DEVOPS.", 20,"", "String"],
-      ["puntuacion", "EXCEL_SCORE", 12,"0.00%", "Percentage"]];
+      ["orgequipo", "EXCEL_PT_DEVOPS.ORG_TEAM", 20,"DEVOPS", "String"],
+      ["ciclovida", "EXCEL_PT_DEVOPS.LIFECYCLE", 20,"DEVOPS", "String"],
+      ["construccion", "EXCEL_PT_DEVOPS.BUILDING", 20,"DEVOPS", "String"],
+      ["testing", "EXCEL_PT_DEVOPS.TESTING", 20,"DEVOPS", "String"],
+      ["despliegue", "EXCEL_PT_DEVOPS.DEPLOYMENT", 20,"DEVOPS", "String"],
+      ["monitorizacion", "EXCEL_PT_DEVOPS.MONITORING", 20,"DEVOPS", "String"],
+      ["aprovisionamiento", "EXCEL_PT_DEVOPS.PROVISIONING", 20,"DEVOPS", "String"]];
   }
 
 
@@ -234,29 +222,19 @@ export class SortedTableComponent implements OnInit {
     if(this.assessmentSeleccionado.length === 1) {
       if( this.assessmentSeleccionado[0] === "SCRUM") {
         this.displayedColumns = this.displayedColumnsScrum;
-        this.fieldsTable = this.excelScrum
-        this.scrumassmnt = true;
       } else if(this.assessmentSeleccionado[0] === "DEVOPS") {
         this.displayedColumns = this.displayedColumnsDevops;
-        this.fieldsTable = this.excelDevops
-        this.devopsassmnt = true;
       }
 
       this.addColumnExcel(this.assessmentSeleccionado[0]);
-      
+
     } else {
       this.displayedColumns = ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','puntuacion', 'notas', 'informe'];
-      this.fieldsTable = [["fecha", "EXCEL_DATE", 12,"dd/mm/yyyy", "Date"],
-      ["userNombre", "EXCEL_USER",20,"", "String"],
-      ["oficina", "EXCEL_OFFICE", 25,"", "String"],
-      ["nombre", "EXCEL_TEAM", 50,"##?##", "String"],
-      ["assessmentName", "EXCEL_ASSESSMENT", 20,"", "String"],
-      ["puntuacion", "EXCEL_SCORE", 12,"0.00%", "Percentage"]];
+      this.popColumnExcel();
       this.scrumassmnt = false;
       this.devopsassmnt = false;
-      this.popColumnExcel()
       this.propagar.emit(false);
-    } 
+    }  
   }
 
   activateChartToParent()
@@ -270,19 +248,29 @@ export class SortedTableComponent implements OnInit {
 
   addColumnExcel(assessment: string)
   {
-    this.fieldsTable.map((x, i) => {
-      if(x[0].includes("assessmentName")) {
-        if(assessment === "SCRUM") this.fieldsTable.splice(i, 0, ...this.excelScrum)
-        if(assessment === "DEVOPS") this.fieldsTable.splice(i, 0, ...this.excelDevops)
-      }
+    if (!(this.scrumassmnt||this.devopsassmnt)){
+      this.fieldsTable.map((x, i) => {
+        if(x[0].includes("assessmentName")) {
+          if(assessment === "SCRUM") {
+            this.fieldsTable.splice(i, 0, ...this.excelScrum);
+            this.scrumassmnt = true;
+          }
+          if(assessment === "DEVOPS") {
+            this.fieldsTable.splice(i, 0, ...this.excelDevops)
+            this.devopsassmnt = true;
+          }
+        }
+       
     })
+  }
+    
   }
 
   popColumnExcel()
   {
     this.fieldsTable.map((x, i) => {
-      if(x[0].includes("equipo")) this.fieldsTable.splice(i, this.excelScrum.length)
-      if(x[0].includes("orgequipo"))this.fieldsTable.splice(i, this.excelDevops.length)
+      if(x[0]=="equipo") this.fieldsTable.splice(i, this.excelScrum.length)
+      if(x[0]=="orgequipo") this.fieldsTable.splice(i, this.excelDevops.length) 
     })
   }
 }

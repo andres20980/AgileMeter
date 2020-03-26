@@ -1,15 +1,20 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md">
+  <div class="row ml-3">
+    <div class="col-xs ml-3">
       <mat-form-field class="ml-3">
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="{{ 'SORTED_TABLE.FILTER' | translate }}"
           [value]=this.dataSource.filter>
       </mat-form-field>
 
+        <btn-export-to-excel
+        [dataTableInput]="dataSource.filteredData"  
+        [fieldsInput] = "fieldsTable"
+        [objectTranslateInput] = "objectTranslate">
+        </btn-export-to-excel>
     </div>
     <div class="col-md-8">
 
-      <mat-form-field class="col-sm-3">
+      <mat-form-field class="ml-4 col-xs-3">
         <mat-select #mySelectOffice placeholder="{{ 'SORTED_TABLE.FILTER_OFFICE' | translate }}"
           [(value)]="OficinaSeleccionada"
            multiple >
@@ -31,8 +36,9 @@
         </div>
         </mat-select>
       </mat-form-field>
+
       <!-- class="ml-2 col-3" -->
-      <mat-form-field class="ml-2 col-sm-3">
+      <mat-form-field class="ml-5 col-xs-4">
         <mat-select #mySelectTeam placeholder="{{ 'SORTED_TABLE.FILTER_TEAM' | translate }}"
         [(value)]="EquipoSeleccionado"
         multiple>
@@ -55,7 +61,7 @@
         </mat-select>
       </mat-form-field>
 
-      <mat-form-field class="ml-2 col-sm-3">
+      <mat-form-field class="ml-5 col-xs-4">
         <mat-select #mySelectAssessment placeholder="{{ 'SORTED_TABLE.FILTER_ASSESSMENT' | translate }}"
         [(value)]="assessmentSeleccionado"
         multiple>
@@ -77,15 +83,6 @@
         </div>
         </mat-select>
       </mat-form-field>
-    </div>
-
-    <div class="col-sm text-center mt-3">
-      <btn-export-to-excel
-      [dataTableInput]="dataSource.filteredData"  
-      [fieldsInput] = "fieldsTable"
-      [objectTranslateInput] = "objectTranslate">
-      </btn-export-to-excel>
-
     </div>
 
   </div>
