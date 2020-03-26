@@ -199,43 +199,65 @@ export class PendingevaluationTableComponent implements OnInit, DoCheck {
       );
     }
 
+
+
     filterData(origen: string)
-  {
-    let oficinaSel = this.OficinaSeleccionada.length !== 0 ? this.OficinaSeleccionada : this.originListOficina;
-    let equipoSel = this.EquipoSeleccionado.length !== 0 ? this.EquipoSeleccionado : this.origingListEquipos;
-    let assessmentSel = this.assessmentSeleccionado.length !== 0 ? this.assessmentSeleccionado : this.originListaAssessment;
-
-    let selected = {oficina: oficinaSel , team: equipoSel, assessment: assessmentSel};
-    let nuevo = this.originDataSource.filter(x =>selected.oficina.includes(x.oficina) && selected.team.includes(x.nombre) && selected.assessment.includes(x.assessmentName));
-
-    if(origen === 'oficina') {
-      this.ListaDeEquipos = this.originDataSource.filter(x => selected.oficina.includes(x.oficina)).map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
-      this.listaDeAssessment = this.originDataSource.filter(x => selected.oficina.includes(x.oficina)).map(x => x.assessmentName).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
-      if(this.ListaDeEquipos.length === 1 && this.EquipoSeleccionado.length > 1) {
-        this.ListaDeEquipos = this.EquipoSeleccionado;
+    {
+    
+      let oficinaSel = this.OficinaSeleccionada.length !== 0 ? this.OficinaSeleccionada : this.originListOficina;
+      let equipoSel = this.EquipoSeleccionado.length !== 0 ? this.EquipoSeleccionado : this.origingListEquipos;
+      let assessmentSel = this.assessmentSeleccionado.length !== 0 ? this.assessmentSeleccionado : this.originListaAssessment;
+  
+      let selected = {oficina: oficinaSel , team: equipoSel, assessment: assessmentSel};
+      
+     
+      
+      if(origen === 'oficina') {
+  
+        //selected.team = [];
+        if(this.EquipoSeleccionado.length >= 1) this.EquipoSeleccionado = [];
+        if(this.assessmentSeleccionado.length >= 1) this.assessmentSeleccionado = [];
+  
+        this.ListaDeEquipos = this.originDataSource.filter(x => selected.oficina.includes(x.oficina)).map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+        this.listaDeAssessment = this.originDataSource.filter(x => selected.oficina.includes(x.oficina)).map(x => x.assessmentName).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+  
+        selected.team = this.ListaDeEquipos;
+        selected.assessment = this.listaDeAssessment
+      }
+  
+      if(origen === 'equipo') {
+         
+        if(this.EquipoSeleccionado.length === 0) {
+          // cuando no hay equipo seleccionado se queda a 0
+          this.assessmentSeleccionado = []
+        } else  {
+          let currentAssessment = this.originDataSource.filter(x => selected.team.includes(x.nombre)).map(x => x.assessmentName).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+          if(currentAssessment.length === 1) this.assessmentSeleccionado = currentAssessment
+          selected.assessment = [];
+          selected.assessment = this.assessmentSeleccionado;
+        }
+  
+        
+       // this.OficinaSeleccionada = this.originDataSource.filter(x => selected.team.includes(x.nombre)).map(x => x.oficina).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+      }
+      if(origen === 'assessment') {
+        this.ListaDeOficinas = this.originDataSource.filter(x => selected.assessment.includes(x.assessmentName)).map(x => x.oficina).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+        this.ListaDeEquipos = this.originDataSource.filter(x => selected.assessment.includes(x.assessmentName)).map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+      }
+      
+       // viejo nuevo
+       console.log(selected);
+      let nuevo = this.originDataSource.filter(x =>selected.oficina.includes(x.oficina) && selected.team.includes(x.nombre) && selected.assessment.includes(x.assessmentName));
+      this.dataSource.data = nuevo;
+  
+      if(this.OficinaSeleccionada.length === 0 && this.EquipoSeleccionado.length === 0 && this.assessmentSeleccionado.length === 0) {
+        this.dataSource.data = this.originDataSource;
+        this.ListaDeEquipos = this.originDataSource.reduce((x,y) => x.includes(y.nombre) ? x : [...x, y.nombre],[]);
+        this.ListaDeOficinas = this.originDataSource.reduce((x,y) => x.includes(y.oficina) ? x : [...x, y.oficina],[]);
+        this.listaDeAssessment = this.originDataSource.reduce((x,y) => x.includes(y.assessmentName) ? x : [...x, y.assessmentName],[])
+        
       }
     }
-    if(origen === 'equipo') {
-      this.ListaDeOficinas = this.originDataSource.filter(x => selected.team.includes(x.nombre)).map(x => x.oficina).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
-      this.listaDeAssessment = this.originDataSource.filter(x => selected.team.includes(x.nombre)).map(x => x.assessmentName).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
-      if(this.ListaDeOficinas.length === 1 && this.OficinaSeleccionada.length > 1) {
-        this.ListaDeOficinas = this.OficinaSeleccionada;
-      }
-    }
-    if(origen === 'assessment') {
-      this.ListaDeOficinas = this.originDataSource.filter(x => selected.assessment.includes(x.assessmentName)).map(x => x.oficina).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
-      this.ListaDeEquipos = this.originDataSource.filter(x => selected.assessment.includes(x.assessmentName)).map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
-    }
-
-    this.dataSource.data = nuevo;
-
-    if(this.OficinaSeleccionada.length === 0 && this.EquipoSeleccionado.length === 0 && this.assessmentSeleccionado.length === 0) {
-      this.dataSource.data = this.originDataSource;
-      this.ListaDeEquipos = this.originDataSource.reduce((x,y) => x.includes(y.nombre) ? x : [...x, y.nombre],[]);
-      this.ListaDeOficinas = this.originDataSource.reduce((x,y) => x.includes(y.oficina) ? x : [...x, y.oficina],[]);
-      this.listaDeAssessment = this.originDataSource.reduce((x,y) => x.includes(y.assessmentName) ? x : [...x, y.assessmentName],[])
-    }
-  }
 
   closingSelect(){
     this.mySelectTeam.close();

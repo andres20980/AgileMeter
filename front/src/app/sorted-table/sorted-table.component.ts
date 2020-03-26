@@ -58,7 +58,6 @@ export class SortedTableComponent implements OnInit {
   public scrumassmnt: boolean = false;
   public devopsassmnt: boolean = false;
   @Output() propagar = new EventEmitter<any>();
-  @Output() propagar2 = new EventEmitter<any>();
 
   constructor(private _appComponent: AppComponent,  private _router: Router, private renderer: Renderer) { 
     this.fieldsTable = [
@@ -90,7 +89,7 @@ export class SortedTableComponent implements OnInit {
 
   ngOnInit()
   {
-      this.fieldsTable = [
+    this.fieldsTable = [
         ["fecha", "EXCEL_DATE", 12,"dd/mm/yyyy", "Date"],
         ["userNombre", "EXCEL_USER",20,"", "String"],
         ["oficina", "EXCEL_OFFICE", 25,"", "String"],
@@ -98,7 +97,7 @@ export class SortedTableComponent implements OnInit {
         ["assessmentName", "EXCEL_ASSESSMENT", 20,"", "String"],
         ["puntuacion", "EXCEL_SCORE", 12,"0.00%", "Percentage"]];
       
-  this.objectTranslate = "PREVIOUS_EVALUATION";
+    this.objectTranslate = "PREVIOUS_EVALUATION";
 
     this.GetPagination();
     this._appComponent.pushBreadcrumb("BREADCRUMB.FINISHED_EVALUATIONS", "/finishedevaluations");
@@ -110,6 +109,11 @@ export class SortedTableComponent implements OnInit {
     this.listaDeAssessment = this.dataInput.map(x => x).reduce((x,y) => x.includes(y.assessmentName) ? x : [...x, y.assessmentName],[]);
     this.ListaDeEquipos = this.dataInput.map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
       
+    // this.dataSource.filterPredicate = function(data, filter: string): boolean {
+    //   return data.nombre.toLowerCase().includes(filter) || data.puntuacion.toString().toLowerCase().includes(filter) || data.fecha.includes(filter) || data.oficina.includes(filter) || data.assessmentName.includes(filter) || data.userNombre.includes(filter)
+    // }
+
+
     if(this.nombreEquipo) {
       this.EquipoSeleccionado.push(this.nombreEquipo);
       this.assessmentSeleccionado.push(this.nombreAssessment);
@@ -149,7 +153,6 @@ export class SortedTableComponent implements OnInit {
   applyFilter(filterValue: string)
   {
     this.dataSource.filter = filterValue.trim().toLowerCase();
-    console.log(this.dataSource)
   }
 
   filterData(origen: string)
@@ -164,38 +167,43 @@ export class SortedTableComponent implements OnInit {
    
     
     if(origen === 'oficina') {
+
+      //selected.team = [];
+      if(this.EquipoSeleccionado.length >= 1) this.EquipoSeleccionado = [];
+      if(this.assessmentSeleccionado.length >= 1) this.assessmentSeleccionado = [];
+
       this.ListaDeEquipos = this.originDataSource.filter(x => selected.oficina.includes(x.oficina)).map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
       this.listaDeAssessment = this.originDataSource.filter(x => selected.oficina.includes(x.oficina)).map(x => x.assessmentName).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+
+      selected.team = this.ListaDeEquipos;
+      selected.assessment = this.listaDeAssessment
     }
 
     if(origen === 'equipo') {
-      // Si pusla equipo nos da igual lo que tenga (por el momento)
-       //selected.oficina = [];
-      //   alert(this.EquipoSeleccionado.length)
-       if(this.EquipoSeleccionado.length === 0)
-       {  
-        //  selected.oficina = [];
-        //  this.OficinaSeleccionada = [];
-
-       } else {
-        this.assessmentSeleccionado = this.originDataSource.filter(x => selected.team.includes(x.nombre)).map(x => x.assessmentName).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
-        this.OficinaSeleccionada= this.originDataSource.filter(x => selected.team.includes(x.nombre)).map(x => x.oficina).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
-        selected.oficina = this.originDataSource.filter(x => selected.team.includes(x.nombre)).map(x => x.oficina).reduce((x,y) => x.includes(y) ? x :  [...x, y],[])
-       }
+       
+      if(this.EquipoSeleccionado.length === 0) {
+        // cuando no hay equipo seleccionado se queda a 0
+        this.assessmentSeleccionado = []
+      } else  {
+        let currentAssessment = this.originDataSource.filter(x => selected.team.includes(x.nombre)).map(x => x.assessmentName).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+        if(currentAssessment.length === 1) this.assessmentSeleccionado = currentAssessment
+        selected.assessment = [];
+        selected.assessment = this.assessmentSeleccionado;
+      }
 
       
      // this.OficinaSeleccionada = this.originDataSource.filter(x => selected.team.includes(x.nombre)).map(x => x.oficina).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
     }
-    // if(origen === 'assessment') {
-    //   this.ListaDeOficinas = this.originDataSource.filter(x => selected.assessment.includes(x.assessmentName)).map(x => x.oficina).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
-    //   this.ListaDeEquipos = this.originDataSource.filter(x => selected.assessment.includes(x.assessmentName)).map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
-    // }
-   
+    if(origen === 'assessment') {
+      this.ListaDeOficinas = this.originDataSource.filter(x => selected.assessment.includes(x.assessmentName)).map(x => x.oficina).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+      this.ListaDeEquipos = this.originDataSource.filter(x => selected.assessment.includes(x.assessmentName)).map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+    }
+    
      // viejo nuevo
+     console.log(selected);
     let nuevo = this.originDataSource.filter(x =>selected.oficina.includes(x.oficina) && selected.team.includes(x.nombre) && selected.assessment.includes(x.assessmentName));
     this.dataSource.data = nuevo;
 
-    console.log("autofilter", this.OficinaSeleccionada, this.EquipoSeleccionado, this.assessmentSeleccionado, "lis", this.listaDeAssessment)
     if(this.OficinaSeleccionada.length === 0 && this.EquipoSeleccionado.length === 0 && this.assessmentSeleccionado.length === 0) {
       this.dataSource.data = this.originDataSource;
       this.ListaDeEquipos = this.originDataSource.reduce((x,y) => x.includes(y.nombre) ? x : [...x, y.nombre],[]);
