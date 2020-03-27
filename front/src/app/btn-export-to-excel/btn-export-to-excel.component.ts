@@ -92,9 +92,9 @@ export class BtnExportToExcelComponent implements OnInit {
       var rowData: any[] = [];
       var data : any;
       
-      let array = new Array
-      if (!d.sectionsInfo == undefined){
-      d.sectionsInfo.map((x)=>{
+      let array = new Array;
+      if (!(d.sectionsInfo == undefined)){
+      d.sectionsInfo.forEach(x =>{
       let p = x.puntuacion +"% - N"+ x.nivelAlcanzado
         array.push(p)
       })
