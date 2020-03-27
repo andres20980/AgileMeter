@@ -189,6 +189,34 @@
       </ng-container>
     </div>
 
+    <div *ngIf="kanbanassmnt">
+      <ng-container matColumnDef="kbnequipo"> 
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.PT_KANBAN.TEAM' | translate }}</th>
+        <td mat-cell *matCellDef="let row" class="evaluation-column">{{row.sectionsInfo[0].puntuacion}}% - N{{row.sectionsInfo[0].nivelAlcanzado}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="kbnkanbanboard">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.PT_KANBAN.BOARD' | translate }}</th>
+        <td mat-cell *matCellDef="let row" class="evaluation-column">{{row.sectionsInfo[1].puntuacion}}% - N{{row.sectionsInfo[1].nivelAlcanzado}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="kbnpracticas">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.PT_KANBAN.PRACTICES' | translate }}</th>
+        <td mat-cell *matCellDef="let row" class="evaluation-column">{{row.sectionsInfo[2].puntuacion}}% - N{{row.sectionsInfo[2].nivelAlcanzado}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="kbnmindset">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.PT_KANBAN.MINDSET' | translate }}</th>
+        <td mat-cell *matCellDef="let row" class="evaluation-column">{{row.sectionsInfo[3].puntuacion}}% - N{{row.sectionsInfo[3].nivelAlcanzado}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="kbnaplicacion">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.PT_KANBAN.PRACT_APL' | translate }}</th>
+        <td mat-cell *matCellDef="let row" class="evaluation-column">{{row.sectionsInfo[4].puntuacion}}% - N{{row.sectionsInfo[4].nivelAlcanzado}}</td>
+      </ng-container>
+
+    </div>
+
     <!--  Puntuacion -->
     <ng-container matColumnDef="puntuacion">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.SCORE' | translate }}</th>

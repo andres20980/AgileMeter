@@ -233,6 +233,15 @@
 			"PROVISIONING": "Provisioning"
 		},
 
+		"EXCEL_PT_KANBAN" : {
+			"TEAM": "Team",
+			"BOARD":"Kanban Board",
+			"PRACTICES":"General Practices",
+			"MINDSET":"Mindset",
+			"PRACT_APL":"Practical Application"
+		},
+
+
 		"EXCEL_ASSESSMENT": "Assessment",
 		"EXCEL_SCORE": "Score",
 		"LEVEL": "Level",
@@ -262,6 +271,13 @@
 			"DEPLOYMENT":"Deployment",
 			"MONITORING": "Monitoring",
 			"PROVISIONING": "Provisioning"
+		},
+		"PT_KANBAN": {
+			"TEAM": "Team",
+			"BOARD":"Kanban Board",
+			"PRACTICES":"General Practices",
+			"MINDSET":"Mindset",
+			"PRACT_APL":"Practical Application"
 		},
 		"SCORE": "Global Score",
 		"STATE": "Status",

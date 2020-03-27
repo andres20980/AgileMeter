@@ -40,9 +40,10 @@ export class SortedTableComponent implements OnInit {
   displayedColumns = ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','puntuacion', 'notas', 'informe'];
   displayedColumnsScrum =  ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','equipo','eventos','herramientas','mindset','aplicacion','puntuacion', 'notas', 'informe'];
   displayedColumnsDevops =  ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','orgequipo','ciclovida','construccion','testing','despliegue','monitorizacion','aprovisionamiento','puntuacion', 'notas', 'informe'];
-
+  displayedColumnsKanban =  ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','kbnequipo','kbnkanbanboard','kbnpracticas','kbnmindset','kbnaplicacion','puntuacion', 'notas', 'informe'];
   public excelScrum: any[];
   public excelDevops: any[];
+  public excelKanban: any[];
   public ListaDeOficinas: string[] = [];
   public OficinaSeleccionada: string[] = [];
   public ListaDeEquipos: string[] = [];
@@ -57,6 +58,7 @@ export class SortedTableComponent implements OnInit {
   public objectTranslate : string;
   public scrumassmnt: boolean = false;
   public devopsassmnt: boolean = false;
+  public kanbanassmnt: boolean = false;
   @Output() propagar = new EventEmitter<any>();
 
   constructor(private _appComponent: AppComponent,  private _router: Router, private renderer: Renderer) { 
@@ -83,6 +85,13 @@ export class SortedTableComponent implements OnInit {
       ["despliegue", "EXCEL_PT_DEVOPS.DEPLOYMENT", 20,"DEVOPS", "String"],
       ["monitorizacion", "EXCEL_PT_DEVOPS.MONITORING", 20,"DEVOPS", "String"],
       ["aprovisionamiento", "EXCEL_PT_DEVOPS.PROVISIONING", 20,"DEVOPS", "String"]];
+
+      this.excelKanban =  [
+      ["kbnequipo", "EXCEL_PT_KANBAN.TEAM", 20,"KANBAN", "String"],
+      ["kbnkanbanboard", "EXCEL_PT_KANBAN.BOARD", 20,"KANBAN", "String"],
+      ["kbnpracticas", "EXCEL_PT_KANBAN.PRACTICES", 20,"KANBAN", "String"],
+      ["kbnmindset", "EXCEL_PT_KANBAN.MINDSET", 20,"KANBAN", "String"],
+      ["kbnaplicacion", "EXCEL_PT_KANBAN.PRACT_APL", 20,"KANBAN", "String"]];
   }
 
 
@@ -184,15 +193,21 @@ export class SortedTableComponent implements OnInit {
        
       if(this.EquipoSeleccionado.length === 0) {
         // cuando no hay equipo seleccionado se queda a 0
-        this.assessmentSeleccionado = []
+        this.assessmentSeleccionado = [];
       } else  {
         this.assessmentSeleccionado = this.originDataSource.filter(x => selected.team.includes(x.nombre)).map(x => x.assessmentName).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
         selected.assessment = [];
-        selected.assessment = this.assessmentSeleccionado;
-        if( this.assessmentSeleccionado.includes("SCRUM") && this.assessmentSeleccionado.includes("DEVOPS")) this.assessmentSeleccionado = [];
+        if(this.assessmentSeleccionado.length == 1){
+          selected.assessment = this.assessmentSeleccionado;
+        }else
+        {
+          selected.assessment = this.assessmentSeleccionado;
+          this.assessmentSeleccionado = [];
+        }
       }
+      console.log("Filtro assesment", selected.assessment);
 
-      
+ 
      // this.OficinaSeleccionada = this.originDataSource.filter(x => selected.team.includes(x.nombre)).map(x => x.oficina).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
     }
     if(origen === 'assessment') {
@@ -233,6 +248,8 @@ export class SortedTableComponent implements OnInit {
         this.displayedColumns = this.displayedColumnsScrum;
       } else if(this.assessmentSeleccionado[0] === "DEVOPS") {
         this.displayedColumns = this.displayedColumnsDevops;
+      }else if(this.assessmentSeleccionado[0] === "KANBAN") {
+        this.displayedColumns = this.displayedColumnsKanban;
       }
 
       this.addColumnExcel(this.assessmentSeleccionado[0]);
@@ -242,6 +259,7 @@ export class SortedTableComponent implements OnInit {
       this.popColumnExcel();
       this.scrumassmnt = false;
       this.devopsassmnt = false;
+      this.kanbanassmnt = false;
       this.propagar.emit(false);
     }  
   }
@@ -257,7 +275,7 @@ export class SortedTableComponent implements OnInit {
 
   addColumnExcel(assessment: string)
   {
-    if (!(this.scrumassmnt||this.devopsassmnt)){
+    if (!(this.scrumassmnt||this.devopsassmnt||this.kanbanassmnt)){
       this.fieldsTable.map((x, i) => {
         if(x[0].includes("assessmentName")) {
           if(assessment === "SCRUM") {
@@ -267,6 +285,10 @@ export class SortedTableComponent implements OnInit {
           if(assessment === "DEVOPS") {
             this.fieldsTable.splice(i, 0, ...this.excelDevops)
             this.devopsassmnt = true;
+          }
+          if(assessment === "KANBAN") {
+            this.fieldsTable.splice(i, 0, ...this.excelKanban)
+            this.kanbanassmnt = true;
           }
         }
        
@@ -280,6 +302,7 @@ export class SortedTableComponent implements OnInit {
     this.fieldsTable.map((x, i) => {
       if(x[0]=="equipo") this.fieldsTable.splice(i, this.excelScrum.length)
       if(x[0]=="orgequipo") this.fieldsTable.splice(i, this.excelDevops.length) 
+      if(x[0]=="kbnequipo") this.fieldsTable.splice(i, this.excelKanban.length) 
     })
   }
 }

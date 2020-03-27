@@ -28,6 +28,7 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
   public ctx_labels = new Array();
   public arrayScrum = new Array();
   public arrayDevops = new Array();
+  public arrayKanban = new Array();
   public auxColors = [ "#c1de5d40","#37bf5940","#0fb3d440"] //rgba(135,169,0,0.1)
   public chartOptions: any
   public infoResult: Array<Object> = [];
@@ -48,7 +49,7 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
       {nombre: "HERRAMIENTAS",color: "#F1C40F"},
       {nombre: "MINDSET", color: "#9B59B6"},
       {nombre: "APLICACIÓN PRÁCTICA", color: "#ef56b4"}
-    ]
+    ];
   
     this.arrayDevops = [
       {nombre: "ORGANIZACION EQUIPOS", color: "#E74C3C"},
@@ -58,6 +59,14 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
       {nombre: "DESPLIEGUE", color: "#ef56b4"},
       {nombre: "MONITORIZACION", color: "#33CCCC"},
       {nombre: "APROVISIONAMIENTO", color: "#F39C12"}
+    ];
+
+    this.arrayKanban = [
+      {nombre: "EQUIPO", color: "#E74C3C"},
+      {nombre: "KANBAN BOARD", color: "#3498DB"},
+      {nombre: "PRÁCTICAS GENERALES",color: "#F1C40F"},
+      {nombre: "MINDSET", color: "#9B59B6"},
+      {nombre: "APLICACIÓN PRÁCTICA", color: "#ef56b4"}
     ];
   }
 
@@ -114,6 +123,24 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
           })
         })
       }
+
+      if(this.nombreAssessment === "KANBAN") {
+        this.arrayKanban.forEach((v,c) => {
+          this.ctx_datasets.push({
+            type: "line",
+            data: this.post[c],
+            label: v.nombre,
+            backgroundColor: v.color,
+            fill: "false",
+            lineTension: 0.1,
+            borderColor: v.color,
+            pointRadius: 2,
+            pointHoverRadius: 4,
+            borderWidth: 3
+          })
+        })
+      }
+
    this.genericResult.reverse();
    this.ctx_datasets.push({type: 'bar', yAxisID: "y-axis-1", data: [NaN,...this.genericResult,NaN], label: "Global", backgroundColor: "#2ECC71AA", padding: 200, borderColor: "#2ECC71", hoverBackgroundColor: "#2ECC71", borderWidth:"2", hidden:"true"})
 
