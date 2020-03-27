@@ -109,9 +109,9 @@ export class SortedTableComponent implements OnInit {
     this.listaDeAssessment = this.dataInput.map(x => x).reduce((x,y) => x.includes(y.assessmentName) ? x : [...x, y.assessmentName],[]);
     this.ListaDeEquipos = this.dataInput.map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
       
-    // this.dataSource.filterPredicate = function(data, filter: string): boolean {
-    //   return data.nombre.toLowerCase().includes(filter) || data.puntuacion.toString().toLowerCase().includes(filter) || data.fecha.includes(filter) || data.oficina.includes(filter) || data.assessmentName.includes(filter) || data.userNombre.includes(filter)
-    // }
+    this.dataSource.filterPredicate = function(data, filter: string): boolean { 
+       return String(data.puntuacion).toLowerCase().includes(filter) || data.assessmentName.toLowerCase().includes(filter) || data.nombre.toLowerCase().includes(filter) || data.userNombre.toLowerCase().includes(filter) || data.oficina.toLowerCase().includes(filter) || data.fecha.toLowerCase().includes(filter)
+    }
 
 
     if(this.nombreEquipo) {
