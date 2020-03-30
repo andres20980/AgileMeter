@@ -27,6 +27,13 @@ namespace everisapi.API.Services
         //Recoge una lista de evaluaciones con datos de información de muchas tablas filtrandola por paginado y los datos de una evaluación
         List<EvaluacionInfoDto> GetEvaluationInfoAndPageFiltered(int IdProject, int pageNumber, EvaluacionInfoPaginationDto Evaluation);
 
+        //Recoge una lista de evaluaciones(todas las de los de los equipos del usuario) con datos de información de muchas tablas filtrandola por paginado y los datos de una evaluación
+        List<EvaluacionInfoDto> GetAllEvaluationInfoAndPageFiltered(int pageNumber, EvaluacionInfoPaginationDto Evaluation, string UsuarioLogeado);
+
+        //Recoge una lista de evaluaciones(todas las de los de los equipos del usuario) con datos de información de muchas tablas filtrandola por paginado y los datos de una evaluación
+        //teniendo presente el codigoIdioma
+        List<EvaluacionInfoDto> GetAllEvaluationInfoAndPageFiltered(int codigoIdioma, int pageNumber, EvaluacionInfoPaginationDto Evaluation, string UsuarioLogeado);
+
         //Devuelve todas las evaluaciones de un proyecto
         IEnumerable<EvaluacionEntity> GetEvaluacionesFromProject(int IdProject);
 
@@ -41,10 +48,13 @@ namespace everisapi.API.Services
         //Devuelve una lista de evaluaciones filtrada por una evaluacion de modelo y un paginado
         List<EvaluacionInfoDto> GetEvaluationInfoAndPageFilteredAdmin(int pageNumber, EvaluacionInfoPaginationDto Evaluacion);
 
-        List<EvaluacionInfoWithSectionsDto> GetEvaluationsWithSectionsInfo(int IdProject, EvaluacionInfoPaginationDto Evaluacion, int codigoIdioma);
+        List<EvaluacionInfoWithSectionsDto> GetEvaluationsWithSectionsInfo(int IdProject, EvaluacionInfoPaginationDto Evaluacion, int codigoIdioma, string UsuarioLogado);
 
         List<EvaluacionInfoWithProgressDto> GetEvaluationsWithProgress(int IdProject, EvaluacionInfoPaginationDto Evaluacion);
+        List<EvaluacionInfoWithProgressDto> GetAllEvaluationsWithProgress(EvaluacionInfoPaginationDto Evaluacion, string userNombre);
 
+        //Listado de Evaluaciones en progreso atendiendo al idioma
+        List<EvaluacionInfoWithProgressDto> GetAllEvaluationsWithProgress(EvaluacionInfoPaginationDto Evaluacion, string userNombre, int codigoIdioma);
         //Devuelve un número entero de las evaluaciones por proyecto o todas las evaluaciones
         int GetNumEval(int idProject);
 

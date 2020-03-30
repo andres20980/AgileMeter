@@ -1,0 +1,66 @@
+Suite/Test/Step Name,Browser,Description,Tag,Start time,End time,Duration,Status
+PruebasRegresion,Firefox 68.0,,,2019-08-14 08:45:38,2019-08-14 08:46:29,"51,458s",PASSED
+,,,,,,,
+Test Cases/ValoracionGlobal,Firefox 68.0,,,2019-08-14 08:45:38,2019-08-14 08:45:59,"20,850s",PASSED
+"openBrowser("""")",Firefox 68.0,Abrir el navegador,,2019-08-14 08:45:38,2019-08-14 08:45:44,"5,306s",PASSED
+maximizeWindow(),Firefox 68.0,Maximizar el navegador,,2019-08-14 08:45:44,2019-08-14 08:45:44,"0,028s",PASSED
+navigateToUrl(url),Firefox 68.0,Navegar a la url del sistema,,2019-08-14 08:45:44,2019-08-14 08:45:46,"2,060s",PASSED
+"setText(findTestObject(""Login/input_Usuario""), user)",Firefox 68.0,Informar el usuario,,2019-08-14 08:45:46,2019-08-14 08:45:46,"0,158s",PASSED
+"setText(findTestObject(""Login/input_Pass""), pass)",Firefox 68.0,Informar la contraseña,,2019-08-14 08:45:46,2019-08-14 08:45:46,"0,062s",PASSED
+"click(findTestObject(""Login/input_Acceder""))",Firefox 68.0,Pulsar sobre el botón Acceder,,2019-08-14 08:45:46,2019-08-14 08:45:46,"0,289s",PASSED
+waitForPageLoad(20),Firefox 68.0,Esperar a que cargue la pantalla,,2019-08-14 08:45:46,2019-08-14 08:45:46,"0,082s",PASSED
+"click(findTestObject(""Home/span_Equipo""))",Firefox 68.0,Hacer click el seleccionable equipo,,2019-08-14 08:45:46,2019-08-14 08:45:47,"0,804s",PASSED
+"waitForElementPresent(findTestObject(""Home/div_SelectorEquipo""), 5)",Firefox 68.0,Esperar que se muestren las opciones de equipo,,2019-08-14 08:45:47,2019-08-14 08:45:47,"0,032s",PASSED
+"click(findTestObject(""Home/div_SelectorEquipo""))",Firefox 68.0,Seleccionar la opción para el equipo,,2019-08-14 08:45:47,2019-08-14 08:45:48,"0,275s",PASSED
+"waitForElementClickable(findTestObject(""Home/a_EvaFinalizadas""), 5)",Firefox 68.0,Esperar que el botón Evaluaciones Finalizadas esté habilitado,,2019-08-14 08:45:48,2019-08-14 08:45:48,"0,068s",PASSED
+"click(findTestObject(""Home/a_EvaFinalizadas""))",Firefox 68.0,Hacer click sobre el botón Evaluaciones Finalizadas,,2019-08-14 08:45:48,2019-08-14 08:45:48,"0,600s",PASSED
+waitForPageLoad(20),Firefox 68.0,Esperar a que cargue la pantalla,,2019-08-14 08:45:48,2019-08-14 08:45:48,"0,013s",PASSED
+delay(5),Firefox 68.0,,,2019-08-14 08:45:48,2019-08-14 08:45:53,"5,045s",PASSED
+"columnaPuntuacion = getText(findTestObject(""EvaluacionesFinalizadas/tbody_ValorColumna"", [""columna"":colPuntuacion]))",Firefox 68.0,Obtener el texto de la columna puntuación,,2019-08-14 08:45:53,2019-08-14 08:45:53,"0,103s",PASSED
+"click(findTestObject(""EvaluacionesFinalizadas/button_ColResultados"", [""columna"":colResultados]))",Firefox 68.0,,,2019-08-14 08:45:53,2019-08-14 08:45:54,"0,366s",PASSED
+waitForPageLoad(20),Firefox 68.0,,,2019-08-14 08:45:54,2019-08-14 08:45:54,"0,063s",PASSED
+delay(5),Firefox 68.0,,,2019-08-14 08:45:54,2019-08-14 08:45:59,"5,009s",PASSED
+"columnaValoracion = getText(findTestObject(""EvaluacionesResultados/tspan_ValoracionGlobal""))",Firefox 68.0,,,2019-08-14 08:45:59,2019-08-14 08:45:59,"0,061s",PASSED
+"columnaValoracion = columnaValoracion + ""%""",Firefox 68.0,,,2019-08-14 08:45:59,2019-08-14 08:45:59,"0,001s",PASSED
+"verifyEqual(columnaPuntuacion, columnaValoracion)",Firefox 68.0,Se verifican que los datos de la tabla y los resultados son los mismos,,2019-08-14 08:45:59,2019-08-14 08:45:59,"0,007s",PASSED
+,,,,,,,
+Test Cases/NuevaEvaluacion,Firefox 68.0,,,2019-08-14 08:45:59,2019-08-14 08:46:27,"27,703s",PASSED
+"openBrowser("""")",Firefox 68.0,Abrir el navegador,,2019-08-14 08:45:59,2019-08-14 08:46:06,"6,633s",PASSED
+maximizeWindow(),Firefox 68.0,Maximizar el navegador,,2019-08-14 08:46:06,2019-08-14 08:46:06,"0,011s",PASSED
+navigateToUrl(url),Firefox 68.0,Navegar a la url del sistema,,2019-08-14 08:46:06,2019-08-14 08:46:08,"1,643s",PASSED
+"setText(findTestObject(""Login/input_Usuario""), user)",Firefox 68.0,Informar el usuario,,2019-08-14 08:46:08,2019-08-14 08:46:08,"0,143s",PASSED
+"setText(findTestObject(""Login/input_Pass""), pass)",Firefox 68.0,Informar la contraseña,,2019-08-14 08:46:08,2019-08-14 08:46:08,"0,069s",PASSED
+"click(findTestObject(""Login/input_Acceder""))",Firefox 68.0,Pulsar sobre el botón Acceder,,2019-08-14 08:46:08,2019-08-14 08:46:08,"0,318s",PASSED
+waitForPageLoad(20),Firefox 68.0,Esperar a que cargue la pantalla,,2019-08-14 08:46:08,2019-08-14 08:46:08,"0,015s",PASSED
+"click(findTestObject(""Home/span_Equipo""))",Firefox 68.0,Hacer click en el seleccionable equipo,,2019-08-14 08:46:08,2019-08-14 08:46:09,"0,769s",PASSED
+"waitForElementPresent(findTestObject(""Home/div_SelectorEquipo""), 5)",Firefox 68.0,Esperar que se muestren las opciones de equipo,,2019-08-14 08:46:09,2019-08-14 08:46:09,"0,016s",PASSED
+"click(findTestObject(""Home/div_SelectorEquipo""))",Firefox 68.0,Seleccionar la opción para el equipo,,2019-08-14 08:46:09,2019-08-14 08:46:09,"0,262s",PASSED
+"click(findTestObject(""Home/span_Evaluacion""))",Firefox 68.0,Hacer click en el seleccionable equipo,,2019-08-14 08:46:09,2019-08-14 08:46:09,"0,270s",PASSED
+"waitForElementPresent(findTestObject(""Home/span_SelectorEvaluacion""), 5)",Firefox 68.0,Esperar que se muestren las opciones de evaluaciones,,2019-08-14 08:46:09,2019-08-14 08:46:09,"0,036s",PASSED
+"click(findTestObject(""Home/span_SelectorEvaluacion""))",Firefox 68.0,Seleccionar el tipo de evaluación,,2019-08-14 08:46:09,2019-08-14 08:46:10,"0,245s",PASSED
+"waitForElementClickable(findTestObject(""Home/a_NuevaEvaluacion""), 5)",Firefox 68.0,"Esperar que el botón ""Nueva evaluación"" esté disponible",,2019-08-14 08:46:10,2019-08-14 08:46:10,"0,026s",PASSED
+"click(findTestObject(""Home/a_NuevaEvaluacion""))",Firefox 68.0,"Pulsar el botón ""Nueva evaluación""",,2019-08-14 08:46:10,2019-08-14 08:46:10,"0,250s",PASSED
+"waitForElementPresent(findTestObject(""Home/button_Nueva""), 5, OPTIONAL)",Firefox 68.0,,,2019-08-14 08:46:10,2019-08-14 08:46:10,"0,025s",PASSED
+"click(findTestObject(""Home/button_Nueva""), OPTIONAL)",Firefox 68.0,"Si hay evaluaciones pendientes, se mostrará un mensaje y se aceptará",,2019-08-14 08:46:10,2019-08-14 08:46:10,"0,257s",PASSED
+delay(5),Firefox 68.0,,,2019-08-14 08:46:10,2019-08-14 08:46:15,"5,002s",PASSED
+waitForPageLoad(20),Firefox 68.0,Esperar a que cargue la pantalla,,2019-08-14 08:46:15,2019-08-14 08:46:15,"0,017s",PASSED
+"click(findTestObject(""Home/a_Inicio""))",Firefox 68.0,Volver al inicio,,2019-08-14 08:46:15,2019-08-14 08:46:16,"0,281s",PASSED
+waitForPageLoad(20),Firefox 68.0,Esperar a que cargue la pantalla,,2019-08-14 08:46:16,2019-08-14 08:46:16,"0,011s",PASSED
+delay(5),Firefox 68.0,,,2019-08-14 08:46:16,2019-08-14 08:46:21,"5,005s",PASSED
+"waitForElementClickable(findTestObject(""Home/span_Equipo""), 0)",Firefox 68.0,Esperar que el desplegable equipo esté disponible,,2019-08-14 08:46:21,2019-08-14 08:46:21,"0,035s",PASSED
+"click(findTestObject(""Home/span_Equipo""))",Firefox 68.0,Hacer click en el seleccionable equipo,,2019-08-14 08:46:21,2019-08-14 08:46:21,"0,274s",PASSED
+"waitForElementPresent(findTestObject(""Home/div_SelectorEquipo""), 5)",Firefox 68.0,Esperar que se muestren las opciones de equipo,,2019-08-14 08:46:21,2019-08-14 08:46:21,"0,017s",PASSED
+"click(findTestObject(""Home/div_SelectorEquipo""))",Firefox 68.0,Seleccionar la opción para el equipo,,2019-08-14 08:46:21,2019-08-14 08:46:21,"0,267s",PASSED
+"waitForElementClickable(findTestObject(""Home/a_EvaPendientes""), 5)",Firefox 68.0,"Esperar que el botón ""Evaluaciones pendientes"" esté disponible",,2019-08-14 08:46:21,2019-08-14 08:46:21,"0,027s",PASSED
+"click(findTestObject(""Home/a_EvaPendientes""))",Firefox 68.0,"Hacer click sobre el botón ""Evaluaciones pendientes""",,2019-08-14 08:46:21,2019-08-14 08:46:21,"0,294s",PASSED
+waitForPageLoad(20),Firefox 68.0,Esperar a que cargue la pantalla,,2019-08-14 08:46:21,2019-08-14 08:46:21,"0,013s",PASSED
+delay(5),Firefox 68.0,,,2019-08-14 08:46:21,2019-08-14 08:46:26,"5,003s",PASSED
+"valorFecha = getText(findTestObject(""EvaluacionesFinalizadas/tbody_ValorColumna"", [""columna"":colFecha]))",Firefox 68.0,Obtener el valor de fecha del primer registro,,2019-08-14 08:46:26,2019-08-14 08:46:27,"0,040s",PASSED
+"valorEvaluacion = getText(findTestObject(""EvaluacionesFinalizadas/tbody_ValorColumna"", [""columna"":colEvaluacion]))",Firefox 68.0,Obtener el valor de evaluación del primer registro,,2019-08-14 08:46:27,2019-08-14 08:46:27,"0,023s",PASSED
+"valorProgreso = getText(findTestObject(""EvaluacionesFinalizadas/tbody_ValorColumna"", [""columna"":colProgreso]))",Firefox 68.0,Obtener el valor de progreso del primer registro,,2019-08-14 08:46:27,2019-08-14 08:46:27,"0,022s",PASSED
+dateFormat = new java.text.SimpleDateFormat(dd/MM/yyyy),Firefox 68.0,,,2019-08-14 08:46:27,2019-08-14 08:46:27,"0,011s",PASSED
+date = new java.util.Date(),Firefox 68.0,,,2019-08-14 08:46:27,2019-08-14 08:46:27,"0,005s",PASSED
+today = dateFormat.format(date),Firefox 68.0,Recuperar la fecha del sistema en el formato dd/MM/yyyy,,2019-08-14 08:46:27,2019-08-14 08:46:27,"0,002s",PASSED
+"verifyMatch(valorFecha, today, false, CONTINUE_ON_FAILURE)",Firefox 68.0,"Verificar que la columna ""Fecha"" es igual a la fecha del sistema",,2019-08-14 08:46:27,2019-08-14 08:46:27,"0,010s",PASSED
+"verifyEqual(valorEvaluacion, ""SCRUM"", CONTINUE_ON_FAILURE)",Firefox 68.0,"Verificar que la columna ""Evaluación"" tiene el valor ""SCRUM""",,2019-08-14 08:46:27,2019-08-14 08:46:27,"0,005s",PASSED
+"verifyEqual(valorProgreso, ""0 %"", CONTINUE_ON_FAILURE)",Firefox 68.0,"Verificar que la columna ""Progreso"" está al 0%",,2019-08-14 08:46:27,2019-08-14 08:46:27,"0,004s",PASSED

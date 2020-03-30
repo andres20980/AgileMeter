@@ -1,0 +1,34 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: agilemeter-nodeexporter-ingress
+  namespace: monitoring
+  annotations:
+    kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+  rules:
+  - host: agilemeter-nodeexporter.14f2c135264448be9c42.westeurope.aksapp.io
+    http:
+      paths:
+      - backend:
+          serviceName: nodeexporter
+          servicePort: 9100
+        path: /
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodeexporter
+  namespace: monitoring
+  labels:
+    service: nodeexporter
+spec:
+  ports:
+  - name: "9100"
+    protocol: "TCP"
+    port: 9100
+    targetPort: 9100
+  selector:
+    service: nodeexporter
+status:
+  loadBalancer: {}

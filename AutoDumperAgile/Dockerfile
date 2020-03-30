@@ -85,3 +85,4 @@ RUN chmod +x entrypoint.sh
 ENTRYPOINT ["docker-entrypoint.sh"]
 EXPOSE 3306
 CMD ["mysqld" , "--lower-case-table-names=1"]
+

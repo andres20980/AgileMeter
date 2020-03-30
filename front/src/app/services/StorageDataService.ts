@@ -18,7 +18,7 @@ import { Asignacion } from 'app/Models/Asignacion';
 @Injectable()
 export class StorageDataService {
   public UserProjects: any = [];
-  public UserProjectSelected: Proyecto = { id: -1, fecha: null, nombre: '',codigo: null, numFinishedEvals:0, numPendingEvals: 0 };
+  public UserProjectSelected: Proyecto = { id: -1, fecha: null, nombre: '',codigo: null, numFinishedEvals:0, numPendingEvals: 0,oficina:null, proyecto: '' };
   public UserData: User;
   public DataUnfinished: boolean = false;
   public SectionSelected: Section = null;
@@ -29,7 +29,8 @@ export class StorageDataService {
   public TokenUser: string = "";
   public UserLongName: string = "";
   public subscriptionTimer: Subscription;
-  public AssessmentSelected: Assessment = null;
+  public dataInputTable: any;
+
   public RoleAdmin: boolean;
   public Role: number;
   public nextSection : SectionInfo = null;
@@ -38,6 +39,15 @@ export class StorageDataService {
   public currentAssignation: Asignacion = { 'id': 0, 'nombre': "undefined" };
   public breadcrumbList: Array<any> = [];
   public codigoIdioma:number = 1;
+  public OfficesSelected: string[];
+  public ProjectsSelected: Proyecto[] = [];
+  public AssessmentsSelected: Assessment[] = [];
+
+  //Necesarios para acceder a las evaluaciones pendientes, una vez que se intenta crear una nueva evaluación
+  //si se opta por acceder a las pendientes
+  public OfficeSelected: string = "";
+  public ProjectSelected: Proyecto = null;
+  public AssessmentSelected: Assessment = null;
 
 
   public GetToken() {

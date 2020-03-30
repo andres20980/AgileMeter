@@ -1,0 +1,28 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    service: db
+  name: db
+  namespace: ci-cd
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: db
+    spec:
+      containers:
+      - env:
+        - name: POSTGRES_PASSWORD
+          value: sonar
+        - name: POSTGRES_USER
+          value: sonar
+        image: postgres
+        name: agilemeter-postgres
+        resources: {}
+      restartPolicy: Always
+status: {}

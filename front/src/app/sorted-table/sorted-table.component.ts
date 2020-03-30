@@ -1,23 +1,13 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { EvaluacionInfo } from 'app/Models/EvaluacionInfo';
+import { map } from 'rxjs/operators';
+import { Assessment } from './../Models/Assessment';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { PreviousevaluationComponent } from 'app/previousevaluation/previousevaluation.component'
-import { AppComponent } from 'app/app.component';
+import { Component, OnInit, Input, Output, ViewChild, ViewChildren, EventEmitter, ElementRef, Renderer, OnChanges, SimpleChanges} from '@angular/core';
+import { MatPaginator, MatSort, MatTableDataSource, SELECT_PANEL_INDENT_PADDING_X } from '@angular/material';
 import { Evaluacion } from 'app/Models/Evaluacion';
-import { EnumRol } from 'app/Models/EnumRol';
-
-// export interface Evaluacion {
-//   id: number,
-//   fecha: string;
-//   nombre: string,
-//   userNombre: string;
-//   puntuacion: number;
-//   estado: boolean;
-//   notasEv: string;
-//   notasOb: string;
-//   assessmentName: string;
-// }
+import { AppComponent } from 'app/app.component';
+import { EvaluacionInfo } from 'app/Models/EvaluacionInfo';
+import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'sorted-table',
@@ -34,72 +24,262 @@ import { EnumRol } from 'app/Models/EnumRol';
 })
 
 export class SortedTableComponent implements OnInit {
+
+  @Input() dataInput: any
+  @Input() dataInputMerged: any
+  @Input() nombreEquipo: string;
+  @Input() nombreAssessment: string;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  @Input() dataInput: any;//Array<EvaluacionInfo>;
+  @ViewChildren('mySelectAssessment') generalAssessment
+  @ViewChild('mySelectAssessment') mySelectAssessment;
+  @ViewChild('mySelectTeam') mySelectTeam: any;
+  @ViewChild('mySelectOffice') mySelectOffice: any;
   dataSource: MatTableDataSource<Evaluacion>;
-  userRole: number;
-  expandedElement: Evaluacion;
-  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['fecha', 'userNombre', 'assessmentName', 'puntuacion', 'notas', 'informe'];
-  public rol: EnumRol = new EnumRol();
+  dataSourceMerge: MatTableDataSource<Evaluacion>;s
+  displayedColumns = ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','puntuacion', 'notas', 'informe'];
+  displayedColumnsScrum =  ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','equipo','eventos','herramientas','mindset','aplicacion','puntuacion', 'notas', 'informe'];
+  displayedColumnsDevops =  ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','orgequipo','ciclovida','construccion','testing','despliegue','monitorizacion','aprovisionamiento','puntuacion', 'notas', 'informe'];
 
-  ngOnInit() {
+  public excelScrum: any[];
+  public excelDevops: any[];
+  public ListaDeOficinas: string[] = [];
+  public OficinaSeleccionada: string[] = [];
+  public ListaDeEquipos: string[] = [];
+  public EquipoSeleccionado: string[] = [];
+  public assessmentSeleccionado: string[] = [];
+  public listaDeAssessment: string[] = [];
+  public originDataSource: any;
+  public originListOficina: string[] = [];
+  public origingListEquipos: string[] = [];
+  public originListaAssessment: string[] = [];
+  public fieldsTable : any[];
+  public objectTranslate : string;
+  public scrumassmnt: boolean = false;
+  public devopsassmnt: boolean = false;
+  @Output() propagar = new EventEmitter<any>();
+
+  constructor(private _appComponent: AppComponent,  private _router: Router, private renderer: Renderer) { 
+    this.fieldsTable = [
+      ["fecha", "EXCEL_DATE", 12,"dd/mm/yyyy", "Date"],
+      ["userNombre", "EXCEL_USER",20,"", "String"],
+      ["oficina", "EXCEL_OFFICE", 25,"", "String"],
+      ["nombre", "EXCEL_TEAM", 50,"##?##", "String"],
+      ["assessmentName", "EXCEL_ASSESSMENT", 20,"", "String"],
+      ["puntuacion", "EXCEL_SCORE", 12,"0.00%", "Percentage"]];
+
+      this.excelScrum = [
+      ["equipo", "EXCEL_PT_SCRUM.TEAM", 20,"SCRUM", "String"],
+      ["eventos", "EXCEL_PT_SCRUM.EVENTS",20,"SCRUM", "String"], 
+      ["herramientas", "EXCEL_PT_SCRUM.TOOLS",20,"SCRUM", "String"],
+      ["mindset", "EXCEL_PT_SCRUM.MINDSET", 20,"SCRUM", "String"],
+      ["aplicacion", "EXCEL_PT_SCRUM.APP",20,"SCRUM", "String"]];
+    
+      this.excelDevops =  [
+      ["orgequipo", "EXCEL_PT_DEVOPS.ORG_TEAM", 20,"DEVOPS", "String"],
+      ["ciclovida", "EXCEL_PT_DEVOPS.LIFECYCLE", 20,"DEVOPS", "String"],
+      ["construccion", "EXCEL_PT_DEVOPS.BUILDING", 20,"DEVOPS", "String"],
+      ["testing", "EXCEL_PT_DEVOPS.TESTING", 20,"DEVOPS", "String"],
+      ["despliegue", "EXCEL_PT_DEVOPS.DEPLOYMENT", 20,"DEVOPS", "String"],
+      ["monitorizacion", "EXCEL_PT_DEVOPS.MONITORING", 20,"DEVOPS", "String"],
+      ["aprovisionamiento", "EXCEL_PT_DEVOPS.PROVISIONING", 20,"DEVOPS", "String"]];
+  }
+
+
+
+  ngOnInit()
+  {
+    this.fieldsTable = [
+        ["fecha", "EXCEL_DATE", 12,"dd/mm/yyyy", "Date"],
+        ["userNombre", "EXCEL_USER",20,"", "String"],
+        ["oficina", "EXCEL_OFFICE", 25,"", "String"],
+        ["nombre", "EXCEL_TEAM", 50,"##?##", "String"],
+        ["assessmentName", "EXCEL_ASSESSMENT", 20,"", "String"],
+        ["puntuacion", "EXCEL_SCORE", 12,"0.00%", "Percentage"]];
+      
+    this.objectTranslate = "PREVIOUS_EVALUATION";
+
+    this.GetPagination();
+    this._appComponent.pushBreadcrumb("BREADCRUMB.FINISHED_EVALUATIONS", "/finishedevaluations");
+    this.originDataSource = this.dataInput
+    this.originListOficina = this.dataInput.map(x => x.oficina).reduce((x,y) => x.includes(y) ? x : [...x, y],[]);
+    this.origingListEquipos = this.dataInput.map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+    this.originListaAssessment = this.dataInput.map(x => x).reduce((x,y) => x.includes(y.assessmentName) ? x : [...x, y.assessmentName],[]);
+    this.ListaDeOficinas= this.dataInput.map(x => x.oficina).reduce((x,y) => x.includes(y) ? x : [...x, y],[]);
+    this.listaDeAssessment = this.dataInput.map(x => x).reduce((x,y) => x.includes(y.assessmentName) ? x : [...x, y.assessmentName],[]);
+    this.ListaDeEquipos = this.dataInput.map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+      
+    // this.dataSource.filterPredicate = function(data, filter: string): boolean {
+    //   return data.nombre.toLowerCase().includes(filter) || data.puntuacion.toString().toLowerCase().includes(filter) || data.fecha.includes(filter) || data.oficina.includes(filter) || data.assessmentName.includes(filter) || data.userNombre.includes(filter)
+    // }
+
+
+    if(this.nombreEquipo) {
+      this.EquipoSeleccionado.push(this.nombreEquipo);
+      this.assessmentSeleccionado.push(this.nombreAssessment);
+      this.filterData('equipo');
+    } 
+
+    //this.propagar.emit(false)
+
+
+  }
+
+  public GetPagination()
+  {
     this.dataSource = new MatTableDataSource(this.dataInput);
+    console.log(this.dataSource);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
-    this.userRole = this._appComponent._storageDataService.Role;
-    this.prevEval.TableFilteredData = this.dataSource.filteredData;
-
-    this.dataSource.filterPredicate = function (data, filter: string): boolean {
-      let date = new Date(data.fecha);
-      //console.log ((date.getDate()<10?"0":"")+date.getDate()+"/"+(date.getMonth()<10?"0":"")+(date.getMonth()+1)+"/"+date.getFullYear());
-      return data.nombre.toLowerCase().includes(filter)
-        || data.assessmentName.toLowerCase().includes(filter)
-        || data.userNombre.toLowerCase().includes(filter)
-        || data.puntuacion.toString().concat("%").includes(filter)
-        || (data.notasEvaluacion != null && data.notasEvaluacion.toLowerCase().includes(filter))
-        || (data.notasObjetivos != null && data.notasObjetivos.toLowerCase().includes(filter))
-        || ((date.getDate() < 10 ? "0" : "") + date.getDate() + "/" + (date.getMonth() < 10 ? "0" : "") + (date.getMonth() + 1) + "/" + date.getFullYear()).includes(filter)
-        ;
-    };
   }
 
-  applyFilter(filterValue: string) {
+  public SaveDataToPDF(evaluacion: EvaluacionInfo)
+  {
+    this._appComponent._storageDataService.EvaluacionToPDF = evaluacion;
+    this._appComponent.pushBreadcrumb(evaluacion.nombre, null);
+    this._appComponent.pushBreadcrumb(evaluacion.assessmentName, null);
+    let pipe = new DatePipe('en-US');
+    this._appComponent.pushBreadcrumb(pipe.transform(evaluacion.fecha, 'dd/MM/yyyy'), null);
+    this._appComponent.pushBreadcrumb("BREADCRUMB.RESULTS", "/evaluationresults");
+    this._router.navigate(['/evaluationresults']);
+  }
+
+  closingSelect(){
+    this.mySelectTeam.close();
+    this.mySelectOffice.close();
+    this.mySelectAssessment.close();
+  }
+
+  applyFilter(filterValue: string)
+  {
     this.dataSource.filter = filterValue.trim().toLowerCase();
-    this.prevEval.TableFilteredData = this.dataSource.filteredData;
+  }
+
+  filterData(origen: string)
+  {
+  
+    let oficinaSel = this.OficinaSeleccionada.length !== 0 ? this.OficinaSeleccionada : this.originListOficina;
+    let equipoSel = this.EquipoSeleccionado.length !== 0 ? this.EquipoSeleccionado : this.origingListEquipos;
+    let assessmentSel = this.assessmentSeleccionado.length !== 0 ? this.assessmentSeleccionado : this.originListaAssessment;
+
+    let selected = {oficina: oficinaSel , team: equipoSel, assessment: assessmentSel};
+    
+   
+    
+    if(origen === 'oficina') {
+
+      //selected.team = [];
+      if(this.EquipoSeleccionado.length >= 1) this.EquipoSeleccionado = [];
+      if(this.assessmentSeleccionado.length >= 1) this.assessmentSeleccionado = [];
+
+      this.ListaDeEquipos = this.originDataSource.filter(x => selected.oficina.includes(x.oficina)).map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+      this.listaDeAssessment = this.originDataSource.filter(x => selected.oficina.includes(x.oficina)).map(x => x.assessmentName).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+
+      selected.team = this.ListaDeEquipos;
+      selected.assessment = this.listaDeAssessment
+    }
+
+    if(origen === 'equipo') {
+       
+       
+      if(this.EquipoSeleccionado.length === 0) {
+        // cuando no hay equipo seleccionado se queda a 0
+        this.assessmentSeleccionado = []
+      } else  {
+        this.assessmentSeleccionado = this.originDataSource.filter(x => selected.team.includes(x.nombre)).map(x => x.assessmentName).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+        selected.assessment = [];
+        selected.assessment = this.assessmentSeleccionado;
+        if( this.assessmentSeleccionado.includes("SCRUM") && this.assessmentSeleccionado.includes("DEVOPS")) this.assessmentSeleccionado = [];
+      }
+
+      
+     // this.OficinaSeleccionada = this.originDataSource.filter(x => selected.team.includes(x.nombre)).map(x => x.oficina).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+    }
+    if(origen === 'assessment') {
+      this.ListaDeOficinas = this.originDataSource.filter(x => selected.assessment.includes(x.assessmentName)).map(x => x.oficina).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+      this.ListaDeEquipos = this.originDataSource.filter(x => selected.assessment.includes(x.assessmentName)).map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+    }
+    
+     // viejo nuevo
+     console.log(selected);
+    let nuevo = this.originDataSource.filter(x =>selected.oficina.includes(x.oficina) && selected.team.includes(x.nombre) && selected.assessment.includes(x.assessmentName));
+    this.dataSource.data = nuevo;
+
+    if(this.OficinaSeleccionada.length === 0 && this.EquipoSeleccionado.length === 0 && this.assessmentSeleccionado.length === 0) {
+      this.dataSource.data = this.originDataSource;
+      this.ListaDeEquipos = this.originDataSource.reduce((x,y) => x.includes(y.nombre) ? x : [...x, y.nombre],[]);
+      this.ListaDeOficinas = this.originDataSource.reduce((x,y) => x.includes(y.oficina) ? x : [...x, y.oficina],[]);
+      this.listaDeAssessment = this.originDataSource.reduce((x,y) => x.includes(y.assessmentName) ? x : [...x, y.assessmentName],[])
+      
+    }
+
+    this.showColumnAssessment();
+    this.activateChartToParent();
   }
 
 
-  public parseDate(value: string): string {
-    let date = new Date(value);
-    console.log(date.getDay() + "/" + date.getMonth() + "/" + date.getFullYear());
-    return date.getDay() + "/" + date.getMonth() + 1 + "/" + date.getFullYear();
+  autoticFilter(origin: string)
+  {   
+    if(this.listaDeAssessment.length === 1)this.assessmentSeleccionado = this.listaDeAssessment
+
+    if(origin === "assessment" && this.listaDeAssessment.length === 1) this.assessmentSeleccionado = [];
+    return;
   }
 
-  constructor(
-    public prevEval: PreviousevaluationComponent,
-    private _appComponent: AppComponent
-  ) {
+  showColumnAssessment()
+  {
+    if(this.assessmentSeleccionado.length === 1) {
+      if( this.assessmentSeleccionado[0] === "SCRUM") {
+        this.displayedColumns = this.displayedColumnsScrum;
+      } else if(this.assessmentSeleccionado[0] === "DEVOPS") {
+        this.displayedColumns = this.displayedColumnsDevops;
+      }
+
+      this.addColumnExcel(this.assessmentSeleccionado[0]);
+
+    } else {
+      this.displayedColumns = ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','puntuacion', 'notas', 'informe'];
+      this.popColumnExcel();
+      this.scrumassmnt = false;
+      this.devopsassmnt = false;
+      this.propagar.emit(false);
+    }  
   }
 
-  SaveDataToPDF(evaluacion: EvaluacionInfo): void {
-    this.prevEval.SaveDataToPDF(evaluacion);
-  }
-
-  saveNotas(model: Evaluacion): void {
-    if (this.userRole == this.rol.Administrador || this.userRole == this.rol.Evaluador) {
-      this.prevEval._evaluacionService.updateEvaluacion(model).subscribe(
-        res => {
-          // console.log("success");
-        },
-        error => {
-          // console.log("error");
-        },
-        () => {
-          // this.Mostrar = true;
-        });
+  activateChartToParent()
+  {
+    if(this.EquipoSeleccionado.length === 1 && this.assessmentSeleccionado.length === 1) {
+      this.propagar.emit(this.dataSource.data)
+    } else {
+      this.propagar.emit(false);
     }
   }
 
+  addColumnExcel(assessment: string)
+  {
+    if (!(this.scrumassmnt||this.devopsassmnt)){
+      this.fieldsTable.map((x, i) => {
+        if(x[0].includes("assessmentName")) {
+          if(assessment === "SCRUM") {
+            this.fieldsTable.splice(i, 0, ...this.excelScrum);
+            this.scrumassmnt = true;
+          }
+          if(assessment === "DEVOPS") {
+            this.fieldsTable.splice(i, 0, ...this.excelDevops)
+            this.devopsassmnt = true;
+          }
+        }
+       
+    })
+  }
+    
+  }
+
+  popColumnExcel()
+  {
+    this.fieldsTable.map((x, i) => {
+      if(x[0]=="equipo") this.fieldsTable.splice(i, this.excelScrum.length)
+      if(x[0]=="orgequipo") this.fieldsTable.splice(i, this.excelDevops.length) 
+    })
+  }
 }

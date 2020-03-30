@@ -17,12 +17,12 @@ RUN chmod 644 /root/.ssh/id_rsa.pub
 RUN chmod 644 /root/.ssh/known_hosts
 RUN chmod 600 /root/.ssh/id_rsa
 
-RUN mkdir ${JENKINS_HOME}/.ssh
-COPY /configs/credentials/.ssh/ ${JENKINS_HOME}/.ssh/
-RUN chmod 644 ${JENKINS_HOME}/.ssh/id_rsa.pub
-RUN chmod 644 ${JENKINS_HOME}/.ssh/known_hosts
-RUN chmod 600 ${JENKINS_HOME}/.ssh/id_rsa
-RUN chown -R jenkins:jenkins ${JENKINS_HOME}/.ssh/
+#RUN mkdir ${JENKINS_HOME}/.ssh
+#COPY /configs/credentials/.ssh/ ${JENKINS_HOME}/.ssh/
+#RUN chmod 644 ${JENKINS_HOME}/.ssh/id_rsa.pub
+#RUN chmod 644 ${JENKINS_HOME}/.ssh/known_hosts
+#RUN chmod 600 ${JENKINS_HOME}/.ssh/id_rsa
+#RUN chown -R jenkins:jenkins ${JENKINS_HOME}/.ssh/
 
 
 ####################################################  CONFIG JENKINS ####################################################
@@ -38,7 +38,7 @@ USER jenkins
 COPY /configs/plugins.txt /usr/share/jenkins/ref/plugins.txt
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 # Add the admin user  
-COPY /volumes/users/ ${JENKINS_HOME}/users/
+COPY /volumes/home/ ${JENKINS_HOME}/
 # Add the main config file to the jenkins path  
 COPY /configs/jenkins_home_config.xml /usr/share/jenkins/ref/config.xml.override
 
@@ -46,6 +46,33 @@ COPY /configs/jenkins_home_config.xml /usr/share/jenkins/ref/config.xml.override
 ####################################################  CONFIG .NET ####################################################
 # Change to user root for execute the following sentences
 USER root
+
+# Install docker
+RUN printf "deb http://deb.debian.org/debian stretch main\ndeb http://security.debian.org/debian-security stretch/updates main\ndeb http://deb.debian.org/debian stretch-updates main\ndeb http://ftp.us.debian.org/debian stretch main contrib non-free" > /etc/apt/sources.list
+
+RUN apt-get update
+
+RUN apt-get install apt-transport-https ca-certificates curl gnupg2 software-properties-common --assume-yes
+
+RUN curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg | apt-key add -
+
+RUN add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") $(lsb_release -cs) stable"
+RUN echo "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") $(lsb_release -cs) stable"
+RUN apt-get update
+
+RUN apt-get install docker-ce --assume-yes
+
+# Install docker-compose
+RUN curl -L "https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+RUN chmod +x /usr/local/bin/docker-compose
+
+#Install Azure cli
+RUN curl -sL https://aka.ms/InstallAzureCLIDeb | bash
+RUN curl -sL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | tee /etc/apt/trusted.gpg.d/microsoft.asc.gpg > /dev/null
+RUN AZ_REPO=$(lsb_release -cs)
+RUN echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/azure-cli.list
+RUN apt-get update
+RUN apt-get install azure-cli
 
 # Install .NET CLI dependencies
 RUN apt-get install -y --no-install-recommends \

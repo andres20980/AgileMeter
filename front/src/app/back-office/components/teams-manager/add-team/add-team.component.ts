@@ -18,8 +18,8 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AddTeamComponent implements OnInit {
   public addTeamsForm: FormGroup;
+  public officeList: Office[];
   /*eliminado temporalmente hasta tener la lista de oficinas, unidades y proyectos
-    public officeList: Office[];
     public unityList: Unity[];
     public lineaList: Linea[];*/
   public UserNombre: User;
@@ -27,11 +27,11 @@ export class AddTeamComponent implements OnInit {
   public MensajeNotificacion: string = null;
   public idEquipo: number = 0;
   public equipo: Equipo;
+  public oficina: Office;
+  public compareOficina(o1: any, o2: any): boolean {
+    return o1.oficinaId === o2.oficinaId;
+  }
   /*//eliminado temporalmente hasta tener la lista de oficinas, unidades y proyectos
-    oficina: Office;
-    compareOficina(o1: any, o2: any): boolean {
-      return o1.oficinaId === o2.oficinaId;
-    }
     unidad: Unity;
     compareUnidad(o1: any, o2: any): boolean {
       return o1.unidadId === o2.unidadId;
@@ -61,7 +61,7 @@ export class AddTeamComponent implements OnInit {
       this._router.navigate(['/login']);
     }
     this.getUserNombre();
-    //this.getAllOficinas(); //eliminado temporalmente hasta tener la lista de oficinas, unidades y proyectos
+    this.getAllOficinas();
     this.formValidate();
     if (this._teamsService.equipo != undefined) {
       this.getEquipo();
@@ -75,8 +75,8 @@ export class AddTeamComponent implements OnInit {
   public formValidate() {//form validate
     this.addTeamsForm = new FormGroup({
       UserNombre: new FormControl(this.UserNombre.nombre),
-      /* Eliminados temporalmente hasta tener la lista de oficinas, unidades y proyectos 
       OficinaEntity: new FormControl('', Validators.required), //officina
+      /* Eliminados temporalmente hasta tener la lista de oficinas, unidades y proyectos 
       UnidadEntity: new FormControl('', Validators.required),//unidad
       LineaEntity: new FormControl('', Validators.required),//linea
       */
@@ -86,7 +86,7 @@ export class AddTeamComponent implements OnInit {
       ProjectSize: new FormControl("", [Validators.pattern('[0-9 ]{1,6}'), Validators.required]),
 
       //campos temporales hasta tener la lista de oficinas, unidades y proyectos
-      Oficina: new FormControl('', Validators.required),
+      //Oficina: new FormControl('', Validators.required),
       Unidad: new FormControl('', Validators.required),
       Proyecto: new FormControl('', Validators.required)
 
@@ -97,6 +97,25 @@ export class AddTeamComponent implements OnInit {
   public hasError = (controlName: string, errorName: string) => {
     return this.addTeamsForm.controls[controlName].hasError(errorName);
   }
+
+  public getAllOficinas() {
+    this._teamsService.getAllOficinas().subscribe(
+      res => {
+        this.officeList = res;
+      },
+      error => {
+        if (error == 404) {
+          this.ErrorMessage = "Error: " + error + " Oficinas List Not Found.";
+        } else if (error == 500) {
+          this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+        } else if (error == 401) {
+          this.ErrorMessage = "Error: " + error + " El usuario es incorrecto o no tiene permisos, intente introducir su usuario nuevamente.";
+        } else {
+          this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
+        }
+      });
+  }
+
   /* eliminado temporalmente hasta tener la lista de oficinas, unidades y proyectos
     //Solo se llama cuando se modifica un equipo
     public cargarCombosUnidadesYLineas() {
@@ -104,23 +123,7 @@ export class AddTeamComponent implements OnInit {
       this.getAllLineasDe(this.equipo.unidadEntity);
     }
   
-    public getAllOficinas() {
-      this._teamsService.getAllOficinas().subscribe(
-        res => {
-          this.officeList = res;
-        },
-        error => {
-          if (error == 404) {
-            this.ErrorMessage = "Error: " + error + " Oficinas List Not Found.";
-          } else if (error == 500) {
-            this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
-          } else if (error == 401) {
-            this.ErrorMessage = "Error: " + error + " El usuario es incorrecto o no tiene permisos, intente introducir su usuario nuevamente.";
-          } else {
-            this.ErrorMessage = "Error: " + error + " Ocurrio un error en el servidor, contacte con el servicio técnico.";
-          }
-        });
-    }
+
   
     public getAllUnidadesDe(oficina) {
       this.addTeamsForm.removeControl('UnidadEntity');
@@ -201,14 +204,15 @@ export class AddTeamComponent implements OnInit {
     // 2º Cargamos los combos para ese equipo
     //this.cargarCombosUnidadesYLineas(); //eliminado temporalmente hasta tener la lista de oficinas, unidades y proyectos
 
+    this.addTeamsForm.get('OficinaEntity').setValue(this.equipo.oficinaEntity);
+
     // 3º Creamos el form control para las validaciones
     /*//eliminado temporalmente hasta tener la lista de oficinas, unidades y proyectos
-    this.addTeamsForm.get('OficinaEntity').setValue(this.equipo.oficinaEntity);
     this.addTeamsForm.get('UnidadEntity').setValue(this.equipo.unidadEntity);
     this.addTeamsForm.get('LineaEntity').setValue(this.equipo.lineaEntity);*/
 
     //eliminar cuando se pongan los desplegables
-    this.addTeamsForm.get('Oficina').setValue("");
+    //this.addTeamsForm.get('Oficina').setValue("");
     this.addTeamsForm.get('Unidad').setValue("");
     this.addTeamsForm.get('Proyecto').setValue("");
 
@@ -220,14 +224,15 @@ export class AddTeamComponent implements OnInit {
     this.addTeamsForm.addControl('Evaluaciones', new FormControl(this.equipo.evaluaciones));
 
     //campos temporales hasta tener la lista de oficinas, unidades y proyectos
-    this.addTeamsForm.get('Oficina').setValue(this.equipo.oficina);
+    //this.addTeamsForm.get('Oficina').setValue(this.equipo.oficina);
     this.addTeamsForm.get('Unidad').setValue(this.equipo.unidad);
     this.addTeamsForm.get('Proyecto').setValue(this.equipo.proyecto);
 
 
     //4º recogemos los objetos que marcaremos por defecto en los select
-    /*//eliminado temporalmente hasta tener la lista de oficinas, unidades y proyectos
     this.oficina = this.equipo.oficinaEntity;
+
+    /*//eliminado temporalmente hasta tener la lista de oficinas, unidades y proyectos
     this.unidad = this.equipo.unidadEntity;
     this.linea = this.equipo.lineaEntity;*/
   }

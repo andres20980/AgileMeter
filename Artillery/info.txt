@@ -1,0 +1,28 @@
+Os adjunto el script de artillery para lanzar las pruebas de rendimiento de Agilemeter. Está basado en la colección de Postman que me mandó Beltrán:
+
+1.	Obtención del token.
+2.	Obtener preguntas de una asignación.
+3.	Obtener pregunta concreta.
+4.	Insertar pregunta.
+5.	Modificar pregunta.
+6.	Obtener proyectos de un usuario.
+7.	Obtener todas las secciones.
+8.	Borrar pregunta creada en el paso 4.
+
+Todos los datos como la url del entorno, el usuario, el id de la asignación y de la pregunta, etc. están parametrizados con variables al principio, de forma que se puede modificar fácilmente para utilizar otros datos o apuntar a otro entorno.
+
+El problema es que ahora mismo la url a la que está apuntando no funciona correctamente, fallan el Insert (POST), el Update (PUT) y el Borrado (DELETE), por lo que sólo está ejecutando hasta el paso 4, y como este paso falla omite el resto. Necesitaría una url que funcione correctamente para poder comprobar que todos los pasos se ejecutan bien.
+
+El script está configurado con una fase de “calentamiento” donde en los 10 primeros segundos se conectan 200 usuarios de 10 en 10, y en la siguiente fase de carga sostenida se van agregando grupos de 200 usuarios hasta que todos finalizan.
+
+Os adjunto también el informe generado en html, donde se ven los resultados de la ejecución con el nº de llamadas totales y por cada código de respuesta, latencia, gráfica con el nº de usuarios concurrentes (alcanzando un pico de más de 2k). Como veis hay código 200 (Ok), 500 (el insert que está fallando) y 404 cuando no encuentra la asignación o la pregunta. Esto último es porque he incluido 5 posibles id’s de asignaciones y otros 5 posibles id’s de preguntas, para que haga un total de 25 combinaciones posibles al azar y no use siempre la misma, pero entiendo que no todas existen. Se podría dejar sólo un ID (el “1”), o poner otros id’s que conozcamos, incluso utilizar un CSV.
+
+Por último, para lanzar el script basta con ejecutar este comando:
+
+artillery run agilemeter-performance.yaml -o report1
+
+Y para generar el informe:
+
+artillery report report1
+
+PD: Previamente hay que instalar NodeJS, y desde el gestor de paquetes de Node instalar Artillery (npm install -g artillery).

@@ -11,5 +11,6 @@ namespace everisapi.API.Services
   {
     //Return all Oficinas
     IEnumerable<OficinaEntity> GetOficinas();
+    IEnumerable<Oficina> GetOficinas(int language);
   }
 }

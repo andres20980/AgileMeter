@@ -7,27 +7,41 @@ services:
     hostname: jenkins
     environment:  
       #JAVA_OPTS: "-Djava.awt.headless=true"  
-      JAVA_OPTS: "-Djenkins.install.runSetupWizard=false" # Start jenkins unlocked 
+      JAVA_OPTS: "-Djenkins.install.runSetupWizard=false" # Start jenkins unlocked
+      JENKINS_HOME: "/var/jenkins_home"
     ports:
-      - 8081:8080
-      - 50001:50001
+      - 8082:8080
+      - 50002:50000
     expose:
-      - 8080
-      - 50000
+      - 8082
+      - 50002
     volumes:
-      - ./jenkins/volumes/users:/var/jenkins_home/users
-      - ./jenkins/volumes/jobs:/var/jenkins_home/jobs
+      - ./jenkins/configs/credentials/credentials.xml:/var/jenkins_home/credentials.xml
+      #- ./jenkins/configs/credentials/.ssh:/root/.ssh/
+      - ./jenkins/configs/credentials/.ssh/:/var/jenkins_home/.ssh/
+      - ./jenkins/volumes/home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
     networks: 
       - sonarnet
+  db:
+    container_name: agilemeter_postgres
+    image: postgres
+    networks:
+      - sonarnet
+    environment:
+      - POSTGRES_USER=sonar
+      - POSTGRES_PASSWORD=sonar
+    #volumes:
+    #  - pgdata:/var/lib/postgresql/data
   sonarqube:
     container_name: agilemeter_sonarqube 
     depends_on: 
       - db
     image: sonarqube:lts
     expose:
-      - 9000
+      - 9001
     ports:
-      - 9000:9000
+      - 9001:9000
     networks: 
       - sonarnet
     environment:
@@ -39,19 +53,8 @@ services:
      - ./sonarqube/data:/opt/sonarqube/data
     # - ./sonarqube/extensions/plugins:/opt/sonarqube/extensions/plugins
     # - ./sonarqube/bundled-plugins:/opt/sonarqube/lib/bundled-plugins
-  db:
-    container_name: agilemeter_postgres 
-    build: ./postgresql
-    image: postgres
-    networks:
-      - sonarnet
-    environment:
-      - POSTGRES_USER=sonar
-      - POSTGRES_PASSWORD=sonar
-    volumes:
-      - pgdata:/var/lib/postgresql/data
 networks:
   sonarnet:
-volumes:
-  pgdata:
-    external: true
+#volumes:
+#  pgdata:
+#    external: true

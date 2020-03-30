@@ -1,8 +1,11 @@
+/* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { DebugElement } from '@angular/core';
 
 import { PreviousevaluationComponent } from './previousevaluation.component';
 
-describe('PreviousevaluationComponent', () => {
+describe('Previousevaluation2Component', () => {
   let component: PreviousevaluationComponent;
   let fixture: ComponentFixture<PreviousevaluationComponent>;
 

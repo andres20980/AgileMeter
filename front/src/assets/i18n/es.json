@@ -12,15 +12,19 @@
 		"PENDING_ASSESSMENTS": "Evaluaciones pendientes"
 	},
 	"HOME": {
+		"SELECT_OFFICE": "Seleccione una oficina",
 		"SELECT_TEAM": "Seleccione un equipo",
 		"SELECT_ASSESSMENT": "Seleccione un tipo de evaluación",
+		"CREATE_ASSESSMENT": "Crear nueva evaluación",
 		"FINISHED_ASSESSMENTS": "EVALUACIONES FINALIZADAS",
 		"PENDING_ASSESSMENTS": "EVALUACIONES PENDIENTES",
 		"PENDING_ASSESSMENTS_MODAL": "PENDIENTES",
 		"NEW_ASSESSMENT": "NUEVA EVALUACIÓN",
 		"NEW_ASSESSMENT_MODAL": "NUEVA",
 		"MODAL_HEADER": "Importante",
-		"MODAL_BODY": "Este equipo tiene evaluaciones pendientes, ¿Desea crear una nueva o gestionar las pendientes?"
+		"MODAL_BODY": "Este equipo tiene evaluaciones pendientes, ¿Desea crear una nueva o gestionar las pendientes?",
+		"ASSESSMENT_CONSULT": "Consultar evaluaciones"
+
 	},
 	"BACKOFFICE": {
 		"BTN_USER_MANAGEMENT": "GESTIÓN DE USUARIOS",
@@ -100,7 +104,10 @@
 		"MODAL_BTN_ACEPT": "Aceptar",
 		"MODAL_BTN_CANCEL": "Cancelar",
 		"NOTIFICATION_DELETE_TEAM": "Equipo eliminado correctamente",
-		"NOTIFICATION_ERROR_DELETE_TEAM": "Ups , tuvimos problemas técnicos para eliminar el equipo, disculpe las molestias"
+		"NOTIFICATION_ERROR_DELETE_TEAM": "Ups , tuvimos problemas técnicos para eliminar el equipo, disculpe las molestias",
+		"EXCEL_WORKSHEET": "Equipos",
+		"EXCEL_TITLE": "Listado de Equipos",
+		"EXCEL_DOCUMENT_NAME":"Listado_Equipos"
 	},
 	"ADD_TEAM": {
 		"ADD_TEAM": "Alta de Equipo",
@@ -133,15 +140,28 @@
 		"MODAL1_BTN_CANCEL": "Cancelar",
 		"MODAL2_TITLE": "Notas Objetivos",
 		"MODAL2_BTN_SAVE": "Guardar",
-		"MODAL2_BTN_CANCEL": "Cancelar"
+		"MODAL2_BTN_CANCEL": "Cancelar",
+		"EXCEL_WORKSHEET": "Evaluaciones pendientes",
+		"EXCEL_TITLE": "Evaluaciones pendientes",
+		"EXCEL_DATE": "Fecha",
+		"EXCEL_USER": "Usuario",
+		"EXCEL_OFFICE": "Oficina",
+		"EXCEL_TEAM": "Equipo",
+		"EXCEL_PROGRESS": "Progreso",
+		"EXCEL_DOCUMENT_NAME": "Evaluaciones_pendientes_"
 	},
 	"PENDING_EVALUATION_TABLE": {
 		"TABLE_COL_DATE": "Fecha",
 		"TABLE_COL_USER": "Usuario",
 		"TABLE_COL_ASSESSMENT": "Evaluación",
 		"TABLE_COL_PROGRESS": "Progreso",
+		"TABLE_COL_TEAM": "Equipo",
+		"TABLE_COL_OFFICE": "Oficina",
 		"TABLE_COL_ACTIONS": "Acciones",
 		"FILTER": "Filtro",
+		"FILTER_OFFICE": "Oficina",
+		"FILTER_TEAM": "Equipo",
+		"FILTER_ASSESSMENT": "Evaluación",
 		"ICON_CONTINUE": "Continuar evaluación",
 		"ICON_DELETE": "Descartar evaluación",
 		"MODAL_TITLE": "Importante",
@@ -191,9 +211,27 @@
 		"MODAL_BTN_SAVE": "Guardar",
 		"MODAL_BTN_CANCEL": "Cancelar",
 		"EXCEL_WORKSHEET": "Evaluaciones finalizadas",
-		"EXCEL_TITLE": "Evaluaciones finalizadas del equipo",
+		"EXCEL_TITLE": "Evaluaciones finalizadas",
 		"EXCEL_DATE": "Fecha",
 		"EXCEL_USER": "Usuario",
+		"EXCEL_OFFICE": "Oficina",
+		"EXCEL_TEAM": "Nombre Equipo",
+		"EXCEL_PT_SCRUM" : {
+			"TEAM": "Equipo",
+			"EVENTS": "Eventos",
+			"TOOLS": "Herramientas",
+			"MINDSET": "Mindset",
+			"APP": "Aplicación Práctica"
+		},
+		"EXCEL_PT_DEVOPS" : {
+			"ORG_TEAM": "Organización de equipo",
+			"LIFECYCLE": "Ciclo de vida",
+			"BUILDING": "Construcción",
+			"TESTING": "Testing y Calidad",
+			"DEPLOYMENT": "Despliegue",
+			"MONITORING": "Monitorización",
+			"PROVISIONING": "Aprovisionamiento"
+		},
 		"EXCEL_ASSESSMENT": "Evaluación",
 		"EXCEL_SCORE": "Puntuación",
 		"LEVEL": "Nivel",
@@ -205,8 +243,26 @@
 		"EXCEL_EXPORT": "Exportar a Excel",
 		"DATE": "Fecha",
 		"USER": "Usuario",
-		"ASSESSMENT": "Evaluación",
-		"SCORE": "Puntuación",
+		"OFFICE": "Oficina",
+		"TEAM": "Nombre Equipo",
+		"PT_SCRM": {
+			"TEAM": "Equipo",
+			"EVENTS":"Eventos",
+			"MINDSET":"Mindset",
+			"TOOLS":"Herramientas",
+			"APPLICATION":"Aplicación práctica"
+		},
+		"PT_DEVOPS": {
+			"ORG_TEAM": "Organización Equipos",
+			"LIFECYCLE":"Ciclo de Vida",
+			"BUILDING":"Construcción",
+			"TESTING":"Testing y Calidad",
+			"DEPLOYMENT":"Despliegue",
+			"MONITORING": "Monitorización",
+			"PROVISIONING": "Aprovisionamiento"
+		},
+		"ASSESSMENT": "Assessment",
+		"SCORE": "Valoración Global",
 		"STATE": "Estado",
 		"COMPLETED": "Completada",
 		"DONT_COMPLETED": "No completada",
@@ -216,7 +272,10 @@
 		"RESULTS": "Resultados",
 		"SHOW_RESULTS": "Ver Resultados",
 		"EVALUATION_NOTES": "Notas Evaluación",
-		"OBJETIVES_NOTES": "Notas Objetivos"
+		"OBJETIVES_NOTES": "Notas Objetivos",
+		"FILTER_OFFICE" :"Oficina",
+		"FILTER_TEAM" :"Equipo",
+		"FILTER_ASSESSMENT" :"Assessment"
 	},
 	"COMENTARIOS_TABLE": {
 		"FILTER": " Filtro",
@@ -318,5 +377,9 @@
 		"RANGE_PAGE_LABEL_1": "0 de {{length}}",
 		"RANGE_PAGE_LABEL_2": "{{startIndex}} - {{endIndex}} de {{length}}",
 		"OF": "de"
+	},
+	"CUSTOM_SELECT": {
+		"OTHER": "otro",
+		"OTHERS": "otros"
 	}
 }

@@ -6,12 +6,42 @@
     </div>
   </div> 
 -->
-
-  <div *ngIf="MostrarInfo">
-
+      
     <div class="container">
       <app-breadcrumb></app-breadcrumb>
-      <div class="row ng-card-box p-5 br-2 mat-elevation-z5 mx-0">
+      <div *ngIf="MostrarInfo">
+        <div class="row ng-card-box p-5 br-2 mat-elevation-z5 mx-0">
+          <div class="col" id="proyectSelectorContainer">
+            <div class="row">
+              <div class="col">
+                <h3> {{ 'HOME.ASSESSMENT_CONSULT' | translate }}</h3>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-4">
+                <div class="main-button border-curve bajarmedia eval-ant mat-elevation-z5 w-85 m-auto"
+                  [class.card-disabled]="!evaluacionesFinalizadas" (click)="EvaluacionesAnteriores()">
+                  <a>{{ 'HOME.FINISHED_ASSESSMENTS' | translate }}</a>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="secondary-button border-curve bajarmedia eval-ant mat-elevation-z5 w-85 m-auto"
+                  [class.card-disabled]="!evaluacionesPendientes" (click)="EvaluacionesPendientes()">
+                  <a>{{ 'HOME.PENDING_ASSESSMENTS' | translate }}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+<!-- 
+
+          <button (click)="goToRefactor()">
+            TO REFACTOR
+          </button>
+          <button (click)="goToRefactor2()">
+            TO PEDING REFACTOR
+          </button> -->
+      <!-- <div class="row ng-card-box p-5 br-2 mat-elevation-z5 mx-0">
         <div class="col" id="proyectSelectorContainer">
           <div class="row">
             <div class="col">
@@ -47,16 +77,42 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="row ng-card-box p-5 br-2 mt-4 mat-elevation-z5 mx-0"
-        [class.card-disabled]="!this.ProyectoSeleccionado">
+      </div> -->
+
+      <div class="row ng-card-box p-5 br-2 mt-4 mat-elevation-z5 mx-0">
         <div class="col" id="assessmentSelectorContainer">
           <div class="row">
             <div class="col">
-              <h3>{{ 'HOME.SELECT_ASSESSMENT' | translate }}</h3>
+              <h3>{{ 'HOME.CREATE_ASSESSMENT' | translate }}</h3>
             </div>
           </div>
           <div class="row mt-3">
+            <div class="col-4">
+              <mat-form-field class="dropdown-material">
+                <mat-select [(value)]="OficinaSeleccionada" placeholder="{{ 'HOME.SELECT_OFFICE' | translate }}"
+                  (selectionChange)="SeleccionDeOficina()">
+                  <mat-option>--</mat-option>
+                  <mat-option class="dropdown-content" *ngFor="let oficina of ListaDeOficinas; let i = index"
+                    [value]="oficina">
+                    {{oficina}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-4">
+              <mat-form-field class="dropdown-material">
+                <mat-select [(value)]="ProyectoSeleccionado" placeholder="{{ 'HOME.SELECT_TEAM' | translate }}"
+                  (selectionChange)="SeleccionDeProyecto()">
+                  <mat-option class="dropdown-content" *ngFor="let proyecto of ListaDeProyectos; let i = index"
+                    [value]="proyecto">
+                    <div *ngIf="!proyecto.testProject">{{proyecto.proyecto}} - {{proyecto.nombre}}</div>
+                    <div *ngIf="proyecto.testProject">{{proyecto.nombre}}</div>
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
             <div class="col-4">
               <mat-form-field class="dropdown-material">
                 <mat-select [(value)]="AssessmentSelected" placeholder="{{ 'HOME.SELECT_ASSESSMENT' | translate }}"
@@ -68,7 +124,7 @@
             </div>
             <div class="col-4">
               <div class="main-button border-curve mat-elevation-z5 new-eval w-85 m-auto"
-                [class.card-disabled]="!this.AssessmentSelected" (click)="showModal(content)">
+                [class.card-disabled]="!this.AssessmentSelected || ProyectoSeleccionado == null" (click)="showModal(content)">
                 <a>{{ 'HOME.NEW_ASSESSMENT' | translate }}</a>
               </div>
             </div>
@@ -112,3 +168,4 @@
     </div>
   </ng-template>
 </div>
+

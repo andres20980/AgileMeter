@@ -1,0 +1,33 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    service: alertmanager
+  name: alertmanager
+  namespace: monitoring  
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: alertmanager
+    spec:
+      containers:
+      - args:
+        - --config.file=/etc/alertmanager/config.yml
+        - --storage.path=/alertmanager
+        image: prom/alertmanager:v0.18.0
+        name: alertmanager
+        volumeMounts:
+        - name: alertmanager-config-files
+          mountPath: /etc/alertmanager/config.yml
+          subPath: config.yml
+        resources: {}
+      restartPolicy: Always
+      volumes:  
+        - name: alertmanager-config-files  
+          configMap:  
+            name: alertmanager-configmap  
+status: {}

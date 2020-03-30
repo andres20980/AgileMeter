@@ -71,11 +71,34 @@ export class ProyectoService {
 
   //Este metodo recoge todos los proyectos de un usuario de la base de datos
   getProyectosDeUsuario() {
+    var codigoIdioma = this._appComponent._storageDataService.codigoIdioma;
     let Token = this._appComponent.ComprobarUserYToken();
     let headers = new Headers({
       'Authorization': Token
     });
-    return this._http.get(this.url + 'proyectos/' + this.UsuarioLogeado + '/proyectos', { headers: headers }).pipe(
+    return this._http.get(this.url + 'proyectos/' + this.UsuarioLogeado + '/proyectos/' + codigoIdioma, { headers: headers }).pipe(
+      map((response: Response) => response.json()),
+      catchError(this.errorHandler));
+  }
+
+  getProyectosDeUsuarioConEvaluacionesPendientes() {
+    var codigoIdioma = this._appComponent._storageDataService.codigoIdioma;
+    let Token = this._appComponent.ComprobarUserYToken();
+    let headers = new Headers({
+      'Authorization': Token
+    });
+    return this._http.get(this.url + 'proyectos/' + this.UsuarioLogeado + '/proyectosConEvaluacionesPendientes/' + codigoIdioma, { headers: headers }).pipe(
+      map((response: Response) => response.json()),
+      catchError(this.errorHandler));
+  }
+
+  getProyectosDeUsuarioConEvaluacionesFinalizadas() {
+    var codigoIdioma = this._appComponent._storageDataService.codigoIdioma;
+    let Token = this._appComponent.ComprobarUserYToken();
+    let headers = new Headers({
+      'Authorization': Token
+    });
+    return this._http.get(this.url + 'proyectos/' + this.UsuarioLogeado + '/proyectosConEvaluacionesFinalizadas/' + codigoIdioma, { headers: headers }).pipe(
       map((response: Response) => response.json()),
       catchError(this.errorHandler));
   }
@@ -102,12 +125,14 @@ export class ProyectoService {
   }
 
   //Devuelve un listado con todos los proyectos dados de alta en el sistema que no pertenezca al grupo de pruebas de los usuarios
+  //y con las oficinas traducidas
   GetAllNotTestProjects() {
+    var codigoIdioma = this._appComponent._storageDataService.codigoIdioma;
     let Token = this._appComponent.ComprobarUserYToken();
     let headers = new Headers({
       'Authorization': Token
     });
-    return this._http.get(this.url + 'proyectos/allnottestprojects', { headers: headers }).pipe(
+    return this._http.get(this.url + 'proyectos/allnottestprojects/'+codigoIdioma, { headers: headers }).pipe(
       map((response: Response) => response.json()),
       catchError(this.errorHandler));
   }
@@ -129,11 +154,12 @@ export class ProyectoService {
   }
 
   public getAllOficinas() {
+    var codigoIdioma = this._appComponent._storageDataService.codigoIdioma;
     let Token = this._appComponent.ComprobarUserYToken();
     let headers = new Headers({
       'Authorization': Token
     });
-    return this._http.get(this.url + 'oficina/allOficina', { headers: headers }).pipe(
+    return this._http.get(this.url + 'oficina/allOficina/'+codigoIdioma, { headers: headers }).pipe(
       map((response: Response) => response.json()),
       catchError(this.errorHandler));
   }

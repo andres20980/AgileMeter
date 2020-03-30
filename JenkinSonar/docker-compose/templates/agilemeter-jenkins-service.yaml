@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service: agilemeter-jenkins
+  name: agilemeter-jenkins
+  namespace: ci-cd
+spec:
+  ports:
+  - name: "8082"
+    port: 8082
+    targetPort: 8080
+  - name: "50002"
+    port: 50002
+    targetPort: 50000
+  selector:
+    service: agilemeter-jenkins
+status:
+  loadBalancer: {}

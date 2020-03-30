@@ -80,17 +80,17 @@ namespace everisapiTest
             //Arrange            
             _controller = new ProyectosController(_logger, _userInfoRepository);
 
-            var proyectosEntities = new List<everisapi.API.Entities.ProyectoEntity>()
+            var proyectosDtos = new List<everisapi.API.Models.ProyectoDto>()
             {
-                new everisapi.API.Entities.ProyectoEntity {
+                new everisapi.API.Models.ProyectoDto {
                     Nombre = "Proyecto prueba 1"
                 },
-                new everisapi.API.Entities.ProyectoEntity {
+                new everisapi.API.Models.ProyectoDto {
                     Nombre = "Proyecto prueba 2"
                 }
             };
 
-            mockRepository.Setup(r => r.GetAllNotTestProjects()).Returns(proyectosEntities);
+            mockRepository.Setup(r => r.GetAllNotTestProjects()).Returns(proyectosDtos);
 
             //Act
             var okResult = _controller.GetAllNotTestProjects();

@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  backendHost: window.location.hostname, 
-  backendPort: 60406,
+  backendHost: "agilemeter-test-back.23.97.158.29.nip.io", 
+  backendPort: 80
 };

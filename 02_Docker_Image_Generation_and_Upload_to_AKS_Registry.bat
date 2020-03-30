@@ -1,11 +1,13 @@
 @ECHO OFF 
 set http_proxy=
 set https_proxy=
-CALL az login -u alberto.muriel.devops@hotmail.com -p Passw0rd10!
 
-for /f %%i in ('CALL az acr credential show -g AgileMeterRG -n amapifront --query passwords[0].value') do set amapifrontPassword=%%i
-for /f %%i in ('CALL az acr credential show -g AgileMeterRG -n amapiback --query passwords[0].value') do set amapibackPassword=%%i
-for /f %%i in ('CALL az acr credential show -g AgileMeterRG -n amapidatabase --query passwords[0].value') do set amapidatabasePassword=%%i
+REM ## Logging in through command line is not supported. Is required to use 'az login' to authenticate through browser.
+REM CALL az login -u alberto.muriel.devops@hotmail.com -p Passw0rd10!
+
+for /f %%i in ('CALL az acr credential show -g AgileMeterResourceGroup -n amapifront --query passwords[0].value') do set amapifrontPassword=%%i
+for /f %%i in ('CALL az acr credential show -g AgileMeterResourceGroup -n amapiback --query passwords[0].value') do set amapibackPassword=%%i
+for /f %%i in ('CALL az acr credential show -g AgileMeterResourceGroup -n amapidatabase --query passwords[0].value') do set amapidatabasePassword=%%i
 
 ECHO %amapifrontPassword%
 ECHO %amapibackPassword%
@@ -42,7 +44,8 @@ CALL az acr repository list --name amapiback
 
 
 REM ## AKS CLUSTER ROLE BINDING AND SERVICE ACCOUNT CREATION KUBE-SYSTEM
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/recommended/kubernetes-dashboard.yaml
+REM ## kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/recommended/kubernetes-dashboard.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/alternative.yaml
 kubectl create clusterrolebinding kubernetes-dashboard -n kube-system --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
 
 REM ########## CREATE REGISTRY REPOSITORIES SECRETS IN AKS (REPLACE THE CREDENTIALS AND EMAIL) ##########
@@ -58,10 +61,10 @@ kubectl apply -f "docker-compose-AKS\templates\AgileMeter Unified Yamls\agilemet
 kubectl get all
 
 REM ## SHOW RESOUCE GROUP DNS ZONE
-CALL az aks show --resource-group AgileMeterRG --name AgileMeterCluster --query addonProfiles.httpApplicationRouting.config.HTTPApplicationRoutingZoneName -o table
+CALL az aks show --resource-group AgileMeterResourceGroup --name AgileMeterClusterResource --query addonProfiles.httpApplicationRouting.config.HTTPApplicationRoutingZoneName -o table
 
 REM ##BROWSE AKS KUBERNETES DASHBOARDBrowse
-CALL az aks browse --resource-group AgileMeterRG --name AgileMeterCluster --listen-port 8010
+CALL az aks browse --resource-group AgileMeterResourceGroup --name AgileMeterClusterResource --listen-port 8010
 
 REM #################  OPEN FRONTEND <SERVICENAME.DNS> IN  WEB BROWSER  #################  
 REM #################  SEE THE MAGIC  #################  
