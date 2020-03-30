@@ -229,12 +229,18 @@ export class PendingevaluationTableComponent implements OnInit, DoCheck {
          
         if(this.EquipoSeleccionado.length === 0) {
           // cuando no hay equipo seleccionado se queda a 0
-          this.assessmentSeleccionado = []
+          this.assessmentSeleccionado = [];
         } else  {
           this.assessmentSeleccionado = this.originDataSource.filter(x => selected.team.includes(x.nombre)).map(x => x.assessmentName).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
           selected.assessment = [];
-          selected.assessment = this.assessmentSeleccionado;
-          if( this.assessmentSeleccionado.includes("SCRUM") && this.assessmentSeleccionado.includes("DEVOPS")) this.assessmentSeleccionado = [];
+          if(this.assessmentSeleccionado.length == 1){
+            selected.assessment = this.assessmentSeleccionado;
+          }else
+          {
+            selected.assessment = this.assessmentSeleccionado;
+            this.assessmentSeleccionado = [];
+          }
+        
         }
   
         

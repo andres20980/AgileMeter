@@ -123,6 +123,11 @@ export class BtnExportToExcelComponent implements OnInit {
               case "DEVOPS":
                 data = array[i-4];
                 break;
+
+              case "KANBAN":
+                data = array[i-4];
+                break;
+                
               default:
                   data =  d[field[i]];
                 break;

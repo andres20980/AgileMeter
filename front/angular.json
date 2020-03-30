@@ -51,8 +51,8 @@
                 {
                   "type": "initial",
                   "baseline": "1mb",
-                  "maximumWarning": "4.5mb",
-                  "maximumError": "4mb"
+                  "maximumWarning": "6.5mb",
+                  "maximumError": "6mb"
                 },
                 {
                   "type": "all",
