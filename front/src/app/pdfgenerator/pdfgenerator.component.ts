@@ -618,7 +618,7 @@ export class PdfgeneratorComponent implements OnInit {
 
   saveNotas(model: Evaluacion): void {
     if (this.UserRole == this.rol.Administrador || this.UserRole == this.rol.Evaluador) {
-      this.prevEval._evaluacionService.updateEvaluacion(model).subscribe(
+      this.prevEval.evaluacionService.updateEvaluacion(model).subscribe(
         res => {
           // console.log("success");
         },
@@ -700,7 +700,7 @@ export class PdfgeneratorComponent implements OnInit {
     let classString: string;
     let respuestaString: string = this.displayRespuesta(row);
 
-
+    
     //Si (habilitante)
     if (row.correcta == null) {
       //Contestado -> Si
@@ -727,9 +727,7 @@ export class PdfgeneratorComponent implements OnInit {
         }
       }
     }
-
-
-    return "material-icons " + classString;
+    return classString;
   }
 
   displayRespuesta(row: RespuestaConNotasTabla): string {
@@ -851,7 +849,7 @@ export class PdfgeneratorComponent implements OnInit {
     let workbook = new Workbook();
 
     var correct = workbook.addImage({
-      base64: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAFoSURBVHja7NivTsQwHMDx7w5e4AQJ4kJIgIQ/AcsbnMEgwICAYDA8AAKHQOAwJOAgIRMoDJo7EKA4RUh4AEDgSYBifqK5rF23tewS+jNL2zT9rGv7a5YopRikaDBgEUERFEGhY7i/IrlfCTneEDAHvALvAGrxsrYZmgGegR7wBhzU+cnmgTtgQqvbBbbqAC0BN0Azo205dw15jjZwZXnxz7+coTZwbRlDAYdFQCPAguyMEJhN4MEVtC/bsgc8AbMBMGeuu2wd2NPKU8AtMO0BA3BqwphAqxl1TaCTgxp3wJwA20VTx4dlTXWASQOmWxVjAh0BPxZUVwD9mFZVjAn0KOvIdNke1VBeMbaDMZXnBZBktLfk9G34xOSd1HmoMUtf69YuC3JBmTBrWl/vF7RUBlChMUVymQuqMqZocrWhvGDKZPsU2AC+tLpvuWhVxpS9D50DL8COlI8l13mJJP5siKAI+m+g3wEASotSPg/rK5YAAAAASUVORK5CYII=",
+      base64:  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAFoSURBVHja7NivTsQwHMDx7w5e4AQJ4kJIgIQ/AcsbnMEgwICAYDA8AAKHQOAwJOAgIRMoDJo7EKA4RUh4AEDgSYBifqK5rF23tewS+jNL2zT9rGv7a5YopRikaDBgEUERFEGhY7i/IrlfCTneEDAHvALvAGrxsrYZmgGegR7wBhzU+cnmgTtgQqvbBbbqAC0BN0Azo205dw15jjZwZXnxz7+coTZwbRlDAYdFQCPAguyMEJhN4MEVtC/bsgc8AbMBMGeuu2wd2NPKU8AtMO0BA3BqwphAqxl1TaCTgxp3wJwA20VTx4dlTXWASQOmWxVjAh0BPxZUVwD9mFZVjAn0KOvIdNke1VBeMbaDMZXnBZBktLfk9G34xOSd1HmoMUtf69YuC3JBmTBrWl/vF7RUBlChMUVymQuqMqZocrWhvGDKZPsU2AC+tLpvuWhVxpS9D50DL8COlI8l13mJJP5siKAI+m+g3wEASotSPg/rK5YAAAAASUVORK5CYII=",
       extension: 'png',
     });
 

@@ -18,6 +18,8 @@ namespace everisapi.API.Models
     public DateTime Fecha { get; set; }
 
     public bool Estado { get; set; }
+
+    public string Oficina { get; set; }
     
     public int AssessmentId {get;set;}
 

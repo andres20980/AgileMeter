@@ -1,13 +1,3 @@
-<!-- mensajes de error y al añadir notas
-  <div class="espacio">
-  <div *ngIf="(ErrorMessage != null || ErrorMessage != undefined )" class="alert alert-danger" id="danger">
-    <strong>{{ErrorMessage}}</strong>
-  </div>
-  <div *ngIf="anadeNota != null" class=" alert alert-success">
-    {{anadeNota}}
-  </div>
-</div> -->
-
 <div class="container">
   <app-breadcrumb></app-breadcrumb>
   <div class="ng-card-box p-2 pt-4 br-2 mat-elevation-z5">
@@ -17,61 +7,17 @@
       </div>
     </div>
 
-
-    <!-- <div class="botonesTablaOGrafica">
-        <button class="transparente botonTabla" (click)="MostrarGrafica = false; MostrarTabla = true">
-            <img [class.button-disabled]="!MostrarTabla" src="assets/table.png" title="Ver tabla" />
-          </button>
-        <button class="transparente botonGrafica" (click)="MostrarGrafica = true; MostrarTabla = false">
-            <img [class.button-disabled]="!MostrarGrafica" src="assets/chart.png" title="Ver gráfica" />
-          </button>         
-    </div> -->
-
-    <div *ngIf="!ListaDeEvaluacionesPaginada" class="loading mt-4">
+    <div *ngIf="!listaDeEvaluacionesPaginada" class="loading mt-4">
       <app-loading></app-loading>
     </div>
-
     <div id="sortedtable" *ngIf="MostrarTabla">
-      <pendingevaluation-table *ngIf="ListaDeEvaluacionesPaginada && ListaDeEvaluacionesPaginada.length >= 0"
-        [ListaDeEvaluacionesPaginada]="ListaDeEvaluacionesPaginada">
+      <pendingevaluation-table [listaDeEvaluaciones]="listaDeEvaluacionesPaginada" [pendientesSelect] = "ListaPending"
+       (reloadData)="reloadDataInput($event)">
         {{ 'PENDING_EVALUATION.LOADING' | translate }}
       </pendingevaluation-table>
-
     </div>
-
-    <!--Grafica-->
-    <!-- <div class="container-grafica" [hidden]="!MostrarGrafica">
-        <mat-form-field>
-            <mat-select [(value)]="selectedAssessment" placeholder="Assessment" (selectionChange)="changeChartAssessment($event)">
-                <mat-option *ngFor="let a of ListaAssessments" [value]="a">{{a.name}} </mat-option>
-              </mat-select>
-            </mat-form-field>
-    <div class="mat-elevation-z8 panelGrafica">
-    <div id="Grafica" *ngIf="ListaPuntuacion && ListaPuntuacion.length > 0" class="mx-auto">
-      <canvas *ngIf="barChartData" id="canvas" baseChart #chart
-              [datasets]="barChartData"
-              [labels]="ListaNombres"
-              [options]="barChartOptions"
-              [legend]="barChartLegend"
-              [chartType]="barChartType"
-              [colors]="chartColors"></canvas>
-    </div>
-    </div>
-    </div> -->
-
-    <!-- <div class="wrapper" *ngIf="NumMax > 1">
-      <button type="button" class="btn btn-success cambiar" (click)="NextPreviousButton(false)">Anterior</button>
-      <strong>
-        {{PageNow}}/{{NumMax}}
-      </strong>
-      <button type="button" class="btn btn-success cambiar" (click)="NextPreviousButton(true)">Siguiente</button>
-    </div>
-  </div> -->
-
-
-
   </div>
-
+</div>
 
   <ng-template #notasEv let-cl="close" let-di="dismiss">
     <div class="modal-content">

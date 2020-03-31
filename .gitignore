@@ -265,3 +265,16 @@ __pycache__/
 
 #VisualCode Settings
 .vscode
+
+#Katalon
+KatalonAgileMeter/bin
+KatalonAgileMeter/Libs
+KatalonAgileMeter/.settings
+KatalonAgileMeter/.classpath
+KatalonAgileMeter/.svn
+
+#Jenkins
+JenkinSonar/jenkins/volumes/jobs/*/workspace
+JenkinSonar/jenkins/volumes/jobs/*/builds
+JenkinSonar/jenkins/volumes/jobs/*/workspace@tmp
+JenkinSonar/jenkins/volumes/home/plugins/*

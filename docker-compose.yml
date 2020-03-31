@@ -8,20 +8,14 @@ services:
     build: 
       context: ./AutoDumperAgile
       dockerfile: Dockerfile
-#    networks:
-#      - AgilemeterNetwork
+    command: "--default-authentication-plugin=mysql_native_password --skip-mysqlx"
     ports:
       - "3306:3306"
     container_name: agiledatabase
     hostname: agiledatabase
-    environment:
-      MYSQL_ROOT_PASSWORD:
-      MYSQL_USER: root
-      MYSQL_PASSWORD:
-      MYSQL_DATABASE: agilemeter
     volumes:
       - mysql:/var/lib/mysql
-    restart: always
+    restart: always 
 
 # Front
   agilemeterfront:

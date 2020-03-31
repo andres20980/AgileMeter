@@ -10,6 +10,10 @@ import { Team } from 'app/Models/Team';
 import { EventEmitterService } from 'app/services/event-emitter.service';
 import { TranslateService } from '@ngx-translate/core';
 
+//Excel
+import * as fs from 'file-saver';
+import { Workbook } from 'exceljs';
+
 @Component({
   selector: 'app-teams-manager',
   templateUrl: './teams-manager.component.html',
@@ -31,6 +35,10 @@ export class TeamsManagerComponent implements OnInit {
   public teamsListString = new Array();
   public teamString: Team;
 
+  public fieldsTable : any[];
+  public objectTranslate : string;
+  public datosFiltrados: any[];
+
 
   constructor(
     private _proyectoService: ProyectoService,
@@ -41,25 +49,31 @@ export class TeamsManagerComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.datosFiltrados = [];
     this.getTeams();
+
+    //fieldsTable = [data, translate, size, formato(date, percentage), tipo]
+    this.fieldsTable = [
+      ["oficina", "TABLE_COL_OFICCE", 30,"", "String"],
+      ["unidad", "TABLE_COL_UNIT",20,"", "String"],
+      ["codigo", "TABLE_COL_CODE", 30,"", "String"],
+      ["proyecto", "TABLE_COL_PROJECT", 40,"", "String"],
+      ["nombre", "TABLE_COL_TEAM", 40,"", "String"], 
+      ["projectSize", "TABLE_COL_SIZE", 10,"", "String"]];
+
+    this.objectTranslate = "TEAM_MANAGER";
   }
   public getTeams() {
     this.teamsListString = [];
     this._proyectoService.GetAllNotTestProjects().subscribe(
       res => {
-        //eliminado temporalmente hasta tener la lista de oficinas, unidades y proyectos 
-        //this.teamList = res;        
-        //this.teamsListString = this.getTeamsString(res);        
-        //this.dataSource = new MatTableDataSource(this.teamsListString);
-
-        console.log(res);
-
         this.dataSource = new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
         if ((res.length / this.paginator.pageSize) <= this.paginator.pageIndex) {
           this.paginator.pageIndex--;
         }
         this.dataSource.sort = this.sort;
+        this.datosFiltrados = this.dataSource.data;
       },
       error => {
         if (error == 404) {
@@ -135,9 +149,6 @@ export class TeamsManagerComponent implements OnInit {
   }
 
   public modificarEquipo(row) {
-    //this.selectedTeam = this.teamList.filter(team => team.id == row.id);    
-    //this._proyectoService.modificarEquipo(this.selectedTeam[0]);
-    //this._proyectoService.modificarEquipo(row);
     this._proyectoService.equipo = row;
     this.router.navigate(['backoffice/teamsmanager/addteam']);
 
@@ -145,6 +156,7 @@ export class TeamsManagerComponent implements OnInit {
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.datosFiltrados = this.dataSource.filteredData;
   }
 
   btnAddClick() {

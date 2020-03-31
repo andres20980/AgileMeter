@@ -52,5 +52,26 @@ namespace everisapi.API.Controllers
       }
 
     }
+
+    //Return all Oficinas segun idioma
+    [Authorize]
+    [HttpGet("allOficina/{codigoIdioma}")]
+    public IActionResult GetOficinasIdioma(int codigoIdioma)
+    {
+      try
+      {
+        var results = _oficinaInfoRepository.GetOficinas(codigoIdioma);
+
+        _logger.LogInformation("Returns Oficinas OK");
+
+        return Ok(results);
+      }
+      catch (Exception ex)
+      {
+        _logger.LogCritical($"Se recogio un error al recibir todos los datos de las Oficinas traducidas: " + ex);
+        return StatusCode(500, "Un error ha ocurrido mientras se procesaba su petición.");
+      }
+
+    }
   }
 }

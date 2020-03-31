@@ -45,6 +45,12 @@ img.edit{
   width: 35px;
   height: 35px;
 }
+
+img.excel{
+  width: 60%;
+  height: 60%;
+}
+
 button.transparenteAdd{
   background-color: Transparent;
   background-repeat: no-repeat;
@@ -80,4 +86,15 @@ button.transparente{
   font-weight: bold;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+}
+
+
+button.transparente{
+  background-color: Transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+  width: 60px;
 }

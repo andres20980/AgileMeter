@@ -260,7 +260,7 @@ CREATE TABLE `oficina` (
 
 LOCK TABLES `oficina` WRITE;
 /*!40000 ALTER TABLE `oficina` DISABLE KEYS */;
-INSERT INTO `oficina` VALUES (1),(2),(3),(4),(5),(6);
+	INSERT INTO agilemeter.oficina VALUES (1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12),(13),(14),(15),(16),(17),(18),(19),(20),(21),(22),(23),(24),(25),(26),(27),(28),(29),(30),(31),(32),(33),(34),(35),(36),(37),(38),(39),(40),(41),(42),(43),(44),(45),(46),(47),(48),(49),(50),(51),(52),(53),(54),(55),(56),(57),(58),(59),(60),(61),(62),(63),(64),(65),(66),(67);
 /*!40000 ALTER TABLE `oficina` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -508,6 +508,10 @@ CREATE TABLE `traduccionesoficinas` (
 
 LOCK TABLES `traduccionesoficinas` WRITE;
 /*!40000 ALTER TABLE `traduccionesoficinas` DISABLE KEYS */;
+INSERT INTO agilemeter.traduccionesoficinas VALUES (1,1,1,'Oficina de Prueba'),(2,1,2,'A Coruña'),(3,1,3,'Alicante'),(4,1,4,'Amsterdam'),(5,1,5,'Andorra'),(6,1,6,'Barcelona'),(7,1,7,'Barueri'),(8,1,8,'Belo Horizonte'),(9,1,9,'Bilbao'),(10,1,10,'Birmingham'),(11,1,11,'Bogota'),(12,1,12,'Boston'),(13,1,13,'Bruselas'),(14,1,14,'Buenos Aires'),(15,1,15,'Cádiz'),(16,1,16,'Ciudad Real'),(17,1,17,'Curitiba'),(18,1,18,'Dallas'),(19,1,19,'Estrasburgo'),(20,1,20,'Frankfurt'),(21,1,21,'Ginebra'),(22,1,22,'Glasgow'),(23,1,23,'Gran Canaria'),(24,1,24,'Houston'),(25,1,25,'Huesca'),(26,1,26,'La Haya'),(27,1,27,'Lima'),(28,1,28,'Lisboa'),(29,1,29,'Londres'),(30,1,30,'Luxemburgo'),(31,1,31,'Lyon'),(32,1,32,'Madrid'),(33,1,33,'Medellín'),(34,1,34,'Mendoza'),(35,1,35,'México DF'),(36,1,36,'Miami'),(37,1,37,'Milán'),(38,1,38,'Milton Keynes'),(39,1,39,'Munich'),(40,1,40,'Murcia'),(41,1,41,'Popayán'),(42,1,42,'Puebla'),(43,1,43,'Queretaro'),(44,1,44,'Rio de Janeiro'),(45,1,45,'Roma'),(46,1,46,'Salamanca'),(47,1,47,'San Juan de Puerto Rico'),(48,1,48,'Santander'),(49,1,49,'Santiago de Chile'),(50,1,50,'Santiago de Compostela'),(51,1,51,'Santo Andre'),(52,1,52,'São Paulo'),(53,1,53,'SAP Latam'),(54,1,54,'Sevilla'),(55,1,55,'Temuco'),(56,1,56,'Tenerife'),(57,1,57,'Tetuán'),(58,1,58,'Trujillo'),(59,1,59,'Tucumán'),(60,1,60,'Uberlandia'),(61,1,61,'Valencia'),(62,1,62,'Valladolid'),(63,1,63,'Varsovia'),(64,1,64,'Viena'),(65,1,65,'Vitoria'),(66,1,66,'Washington'),(67,1,67,'Zaragoza');
+    
+/*Inglés*/;
+INSERT INTO agilemeter.traduccionesoficinas VALUES (68,2,1,'Test office'),(69,2,2,'A Coruña'),(70,2,3,'Alicante'),(71,2,4,'Amsterdam'),(72,2,5,'Andorra'),(73,2,6,'Barcelona'),(74,2,7,'Barueri'),(75,2,8,'Belo Horizonte'),(76,2,9,'Bilbao'),(77,2,10,'Birmingham'),(78,2,11,'Bogota'),(79,2,12,'Boston'),(80,2,13,'Bruselas'),(81,2,14,'Buenos Aires'),(82,2,15,'Cádiz'),(83,2,16,'Ciudad Real'),(84,2,17,'Curitiba'),(85,2,18,'Dallas'),(86,2,19,'Estrasburgo'),(87,2,20,'Frankfurt'),(88,2,21,'Ginebra'),(89,2,22,'Glasgow'),(90,2,23,'Gran Canaria'),(91,2,24,'Houston'),(92,2,25,'Huesca'),(93,2,26,'La Haya'),(94,2,27,'Lima'),(95,2,28,'Lisbon'),(96,2,29,'Londres'),(97,2,30,'Luxemburgo'),(98,2,31,'Lyon'),(99,2,32,'Madrid'),(100,2,33,'Medellín'),(101,2,34,'Mendoza'),(102,2,35,'México DF'),(103,2,36,'Miami'),(104,1,37,'Milán'),(105,2,38,'Milton Keynes'),(106,2,39,'Munich'),(107,2,40,'Murcia'),(108,2,41,'Popayán'),(109,2,42,'Puebla'),(110,2,43,'Queretaro'),(111,2,44,'Rio de Janeiro'),(112,2,45,'Roma'),(113,2,46,'Salamanca'),(114,2,47,'San Juan de Puerto Rico'),(115,2,48,'Santander'),(116,2,49,'Santiago de Chile'),(117,2,50,'Santiago de Compostela'),(118,2,51,'Santo Andre'),(119,2,52,'São Paulo'),(120,2,53,'SAP Latam'),(121,2,54,'Seville'),(122,2,55,'Temuco'),(123,2,56,'Tenerife'),(124,2,57,'Tetuán'),(125,2,58,'Trujillo'),(126,2,59,'Tucumán'),(127,2,60,'Uberlandia'),(128,2,61,'Valencia'),(129,2,62,'Valladolid'),(130,2,63,'Varsovia'),(131,2,64,'Viena'),(132,2,65,'Vitoria'),(133,2,66,'Washington'),(134,2,67,'Zaragoza');
 /*!40000 ALTER TABLE `traduccionesoficinas` ENABLE KEYS */;
 UNLOCK TABLES;
 

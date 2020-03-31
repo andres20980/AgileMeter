@@ -2,12 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using everisapi.API.Entities;
-using Microsoft.EntityFrameworkCore;
 using AutoMapper;
+using everisapi.API.Entities;
 using everisapi.API.Models;
-
-
+using Microsoft.EntityFrameworkCore;
 
 namespace everisapi.API.Services
 {
@@ -27,15 +25,16 @@ namespace everisapi.API.Services
         {
             var proyectoDeUsuario = _context.Proyectos.Where(p => p.UserNombre == userNombre && p.Id == proyectoId).FirstOrDefault();
 
-                    //Creamos un proyecto nuevo con los  datos estrictamente necesarios
-            var ProyectoEncontrado = new everisapi.API.Models.ProyectoDto {
-                        Id = proyectoDeUsuario.Id,
-                        Nombre = proyectoDeUsuario.Nombre,
-                        Fecha = proyectoDeUsuario.Fecha,
-                        Proyecto = proyectoDeUsuario.Proyecto,
-                        numFinishedEvals = _context.Evaluaciones.Where(e => e.ProyectoId == proyectoDeUsuario.Id && e.Estado).Count(),
-                        numPendingEvals = _context.Evaluaciones.Where(e => e.ProyectoId == proyectoDeUsuario.Id && !e.Estado).Count(),
-                        TestProject = proyectoDeUsuario.TestProject
+            //Creamos un proyecto nuevo con los  datos estrictamente necesarios
+            var ProyectoEncontrado = new everisapi.API.Models.ProyectoDto
+            {
+                Id = proyectoDeUsuario.Id,
+                Nombre = proyectoDeUsuario.Nombre,
+                Fecha = proyectoDeUsuario.Fecha,
+                Proyecto = proyectoDeUsuario.Proyecto,
+                numFinishedEvals = _context.Evaluaciones.Where(e => e.ProyectoId == proyectoDeUsuario.Id && e.Estado).Count(),
+                numPendingEvals = _context.Evaluaciones.Where(e => e.ProyectoId == proyectoDeUsuario.Id && !e.Estado).Count(),
+                TestProject = proyectoDeUsuario.TestProject
             };
 
             return ProyectoEncontrado;
@@ -50,7 +49,7 @@ namespace everisapi.API.Services
 
             if (usuario.RoleId != (int)Roles.User)
             {
-                var proyectosE = _context.Proyectos.Include(r => r.LineaEntity).Where(p => p.TestProject == false /* || p.UserNombre == userNombre*/).OrderBy(p => p.Proyecto).ToList();
+                var proyectosE = _context.Proyectos.Include(r => r.LineaEntity).Where(p => p.TestProject == false /* || p.UserNombre == userNombre*/ ).OrderBy(p => p.Proyecto).ToList();
                 foreach (ProyectoEntity pe in proyectosE)
                 {
                     ProyectoDto p = new ProyectoDto();
@@ -62,6 +61,7 @@ namespace everisapi.API.Services
                     p.numFinishedEvals = _context.Evaluaciones.Where(e => e.ProyectoId == pe.Id && e.Estado).Count();
                     p.numPendingEvals = _context.Evaluaciones.Where(e => e.ProyectoId == pe.Id && !e.Estado).Count();
                     p.TestProject = pe.TestProject;
+                    p.Oficina = pe.Oficina;
                     proyectos.Add(p);
                 }
             }
@@ -80,6 +80,7 @@ namespace everisapi.API.Services
                     p.numFinishedEvals = _context.Evaluaciones.Where(e => e.ProyectoId == pe.Id && e.Estado).Count();
                     p.numPendingEvals = _context.Evaluaciones.Where(e => e.ProyectoId == pe.Id && !e.Estado).Count();
                     p.TestProject = pe.TestProject;
+                    p.Oficina = pe.Oficina;
                     proyectos.Add(p);
                 }
                 proyectos = proyectos.OrderBy(pro => pro.Proyecto).ToList();
@@ -87,6 +88,131 @@ namespace everisapi.API.Services
 
             return proyectos;
 
+        }
+
+        //Recoge todos los proyectos de un usuario atendiendo al idioma
+        public IEnumerable<ProyectoDto> GetProyectosDeUsuario(string userNombre, int codigoIdioma)
+        {
+            List<ProyectoDto> proyectos = new List<ProyectoDto>();
+
+            UserEntity usuario = _context.Users.Where(u => u.Nombre == userNombre).FirstOrDefault();
+
+            if (usuario.RoleId != (int)Roles.User)
+            {
+                var proyectosE = _context.Proyectos.Include(r => r.LineaEntity).Include(o => o.OficinaEntity).Where(p => p.TestProject == false /* || p.UserNombre == userNombre*/ ).OrderBy(p => p.Proyecto).ToList();
+                foreach (ProyectoEntity pe in proyectosE)
+                {
+                    ProyectoDto p = new ProyectoDto();
+                    p.Id = pe.Id;
+                    //p.Nombre = pe.TestProject ? pe.Nombre : String.Concat(pe.Nombre, " - " , pe.LineaEntity.LineaNombre);
+                    p.Nombre = pe.Nombre;
+                    p.Fecha = pe.Fecha;
+                    p.Proyecto = pe.Proyecto;
+                    p.numFinishedEvals = _context.Evaluaciones.Where(e => e.ProyectoId == pe.Id && e.Estado).Count();
+                    p.numPendingEvals = _context.Evaluaciones.Where(e => e.ProyectoId == pe.Id && !e.Estado).Count();
+                    p.TestProject = pe.TestProject;
+                    //p.Oficina = pe.Oficina;
+                    p.Oficina = (string) _context.TraduccionesOficinas
+                                    .Where(t => t.OficinaId == pe.OficinaEntity.OficinaId 
+                                                &&
+                                                t.IdiomaId == codigoIdioma)
+                                    .Select(s => s.Traduccion).First();
+                    proyectos.Add(p);
+                }
+            }
+            else
+            {
+                var ProyectosUsuario = _context.UserProyectos.Where(up => up.UserNombre == userNombre).ToList();
+
+                foreach (UserProyectoEntity userProyecto in ProyectosUsuario)
+                {
+                    var pe = _context.Proyectos.Include(o => o.OficinaEntity).Where(pr => pr.Id == userProyecto.ProyectoId).FirstOrDefault();
+                    ProyectoDto p = new ProyectoDto();
+                    p.Id = pe.Id;
+                    p.Nombre = pe.Nombre;
+                    p.Proyecto = pe.Proyecto;
+                    p.Fecha = pe.Fecha;
+                    p.numFinishedEvals = _context.Evaluaciones.Where(e => e.ProyectoId == pe.Id && e.Estado).Count();
+                    p.numPendingEvals = _context.Evaluaciones.Where(e => e.ProyectoId == pe.Id && !e.Estado).Count();
+                    p.TestProject = pe.TestProject;
+                    //p.Oficina = pe.Oficina;
+                    p.Oficina = (string) _context.TraduccionesOficinas
+                                    .Where(t => t.OficinaId == pe.OficinaEntity.OficinaId 
+                                                &&
+                                                t.IdiomaId == codigoIdioma)
+                                    .Select(s => s.Traduccion).First();
+                    proyectos.Add(p);
+                }
+                proyectos = proyectos.OrderBy(pro => pro.Proyecto).ToList();
+            }
+
+            return proyectos;
+
+        }
+
+        //Recoge todos los proyectos de un usuario con evaluaciones pendientes
+        public IEnumerable<ProyectoDto> GetProyectosDeUsuarioConEvaluacionesPendientes(string userNombre)
+        {
+            var user = this.GetUser(userNombre, false);
+            var proyectos = this.GetProyectosDeUsuario(userNombre);
+            if (user.RoleId == (int)Roles.User)
+            {
+                proyectos = proyectos.Where(p => p.numPendingEvals > 0).ToList();
+            }
+            else
+            {
+                proyectos = proyectos.Where(p => p.numPendingEvals > 0 && p.TestProject == false).ToList();
+            }
+            return proyectos;
+        }
+
+        //Recoge todos los proyectos de un usuario con evaluaciones pendientes atendiendo al idioma
+        public IEnumerable<ProyectoDto> GetProyectosDeUsuarioConEvaluacionesPendientes(string userNombre, int codigoIdioma)
+        {
+            var user = this.GetUser(userNombre, false);
+            var proyectos = this.GetProyectosDeUsuario(userNombre, codigoIdioma);
+            if (user.RoleId == (int)Roles.User)
+            {
+                proyectos = proyectos.Where(p => p.numPendingEvals > 0).ToList();
+            }
+            else
+            {
+                proyectos = proyectos.Where(p => p.numPendingEvals > 0 && p.TestProject == false).ToList();
+            }
+            return proyectos;
+        }
+
+        //Recoge todos los proyectos de un usuario con evaluaciones finalizadas
+        public IEnumerable<ProyectoDto> GetProyectosDeUsuarioConEvaluacionesFinalizadas(string userNombre)
+        {
+            var user = this.GetUser(userNombre, false);
+            var proyectos = this.GetProyectosDeUsuario(userNombre);
+            if (user.RoleId != (int)Roles.Admin || user.RoleId != (int)Roles.Evaluator)
+            {
+                proyectos = proyectos.Where(p => p.numFinishedEvals > 0).ToList();
+            }
+            else
+            {
+                proyectos = proyectos.Where(p => p.numFinishedEvals > 0 && p.TestProject == false).ToList();
+            }
+            return proyectos;
+        }
+
+        //Recoge todos los proyectos de un usuario con evaluaciones finalizadas atendiendo al codigoIdioma
+        public IEnumerable<ProyectoDto> GetProyectosDeUsuarioConEvaluacionesFinalizadas(string userNombre, int codigoIdioma)
+        {
+            var user = this.GetUser(userNombre, false);
+            var proyectos = this.GetProyectosDeUsuario(userNombre, codigoIdioma);
+            if (user.RoleId != (int)Roles.Admin || user.RoleId != (int)Roles.Evaluator)
+            {
+                proyectos = proyectos.Where(p => p.numFinishedEvals > 0).ToList();
+            }
+            else
+            {
+                proyectos = proyectos.Where(p => p.numFinishedEvals > 0 && p.TestProject == false).ToList();
+            }
+
+            return proyectos;
         }
 
         //Recoge todos los proyectos de todos los usuarios que no sean de tipo test
@@ -113,14 +239,52 @@ namespace everisapi.API.Services
         }
 
         //Devuelve un listado con todos los proyectos dados de alta en el sistema que no pertenezcan al grupo de pruebas de usuario
-        public IEnumerable<ProyectoEntity> GetAllNotTestProjects()
+        // y la traducción de la oficina se obtiene la primera por defecto.
+        public IEnumerable<ProyectoDto> GetAllNotTestProjects()
         {
-            return _context.Proyectos
-                  .Include(r => r.OficinaEntity)
-                  .Include(r => r.UnidadEntity)
-                  .Include(r => r.LineaEntity)
-                  .Include(r => r.Evaluaciones)
-                  .Where(p => !p.TestProject).OrderBy(p => p.Proyecto).ToList();
+            var proyectos =  _context.Proyectos
+                .Include(r => r.OficinaEntity)
+                .Include(r => r.UnidadEntity)
+                .Include(r => r.LineaEntity)
+                .Include(r => r.Evaluaciones)
+                .Where(p => !p.TestProject).OrderBy(p => p.Proyecto).ToList();
+            
+            var proyectoDtos = Mapper.Map<IEnumerable<ProyectoDto>>(proyectos);
+
+            //Actualizamos las traducciones de las oficinas
+            foreach(var item in proyectoDtos)
+            {
+                item.Oficina = (string) _context.TraduccionesOficinas
+                                    .Where(t => t.OficinaId == item.OficinaEntity.OficinaId)
+                                    .Select(s => s.Traduccion).First();
+            }
+
+            return proyectoDtos;
+        }
+
+        //Devuelve un listado con todos los proyectos dados de alta en el sistema que no pertenezcan al grupo de pruebas de usuario
+        public IEnumerable<ProyectoDto> GetAllNotTestProjects(int codigoIdioma)
+        {
+            var proyectos =  _context.Proyectos
+                .Include(r => r.OficinaEntity)
+                .Include(r => r.UnidadEntity)
+                .Include(r => r.LineaEntity)
+                .Include(r => r.Evaluaciones)
+                .Where(p => !p.TestProject).OrderBy(p => p.Proyecto).ToList();
+            
+            var proyectoDtos = Mapper.Map<IEnumerable<ProyectoDto>>(proyectos);
+
+            //Actualizamos las traducciones de las oficinas
+            foreach(var item in proyectoDtos)
+            {
+                item.Oficina = (string) _context.TraduccionesOficinas
+                                    .Where(t => t.OficinaId == item.OficinaEntity.OficinaId 
+                                                &&
+                                                t.IdiomaId == codigoIdioma)
+                                    .Select(s => s.Traduccion).First();
+            }
+
+            return proyectoDtos;
         }
 
         public IEnumerable<AssessmentEntity> GetAllAssessments()
@@ -136,7 +300,7 @@ namespace everisapi.API.Services
                 //Si se quiere incluir los proyectos del usuario entrara aquí
                 //Incluimos los proyectos del usuario especificada (Include extiende de Microsoft.EntityFrameworkCore)
                 return _context.Users.Include(u => u.ProyectosDeUsuario).
-                    Where(u => u.Nombre == userNombre).FirstOrDefault();
+                Where(u => u.Nombre == userNombre).FirstOrDefault();
             }
             else
             {
@@ -202,12 +366,12 @@ namespace everisapi.API.Services
         public ProyectoEntity GetFullProject(int id)
         {
             return _context.Proyectos
-                    .Include(r => r.OficinaEntity)
-                    .Include(r => r.UnidadEntity)
-                    .Include(r => r.LineaEntity)
-                    .Include(p => p.Evaluaciones)
-                    .ThenInclude(Evaluacion => Evaluacion.Respuestas)
-                    .Where(p => p.Id == id).FirstOrDefault();
+                .Include(r => r.OficinaEntity)
+                .Include(r => r.UnidadEntity)
+                .Include(r => r.LineaEntity)
+                .Include(p => p.Evaluaciones)
+                .ThenInclude(Evaluacion => Evaluacion.Respuestas)
+                .Where(p => p.Id == id).FirstOrDefault();
         }
 
         //Devuelve si el usuario esta bien logeado o no
@@ -328,14 +492,14 @@ namespace everisapi.API.Services
             AlterProject.Codigo = proyecto.Codigo;
             AlterProject.Fecha = System.DateTime.Now;
             AlterProject.UserNombre = proyecto.UserNombre;
-            AlterProject.Oficina = proyecto.Oficina.Trim();
             AlterProject.Unidad = proyecto.Unidad;
+            //AlterProject.Oficina = proyecto.Oficina.Trim();  
             AlterProject.Proyecto = proyecto.Proyecto.Trim();
-            AlterProject.OficinaEntity = _context.Oficina.Where(o => o.OficinaId == 1).FirstOrDefault();
+            //AlterProject.OficinaEntity = _context.Oficina.Where(o => o.OficinaId == 1).FirstOrDefault();
             AlterProject.UnidadEntity = _context.Unidad.Where(u => u.UnidadId == 1).FirstOrDefault();
             AlterProject.LineaEntity = _context.Linea.Where(l => l.LineaId == 1).FirstOrDefault();
 
-            // AlterProject.OficinaEntity = _context.Oficina.Where(o => o.OficinaId == proyecto.OficinaEntity.OficinaId).FirstOrDefault();     
+            AlterProject.OficinaEntity = _context.Oficina.Where(o => o.OficinaId == proyecto.OficinaEntity.OficinaId).FirstOrDefault();     
             //AlterProject.UnidadEntity = _context.Unidad.Where(u => u.UnidadId == proyecto.UnidadEntity.UnidadId).FirstOrDefault();
             //AlterProject.LineaEntity = _context.Linea.Where(l => l.LineaId == proyecto.LineaEntity.LineaId).FirstOrDefault();      
             AlterProject.ProjectSize = proyecto.ProjectSize;
@@ -400,17 +564,17 @@ namespace everisapi.API.Services
             proyecto.UserNombre = equipo.UserNombre;
             proyecto.ProjectSize = equipo.ProjectSize;
             proyecto.TestProject = false;
-            proyecto.Oficina = equipo.Oficina.Trim();
+            proyecto.Oficina = "";
             proyecto.Unidad = equipo.Unidad;
             proyecto.Proyecto = equipo.Proyecto.Trim();
             proyecto.Codigo = equipo.Codigo;
 
-            proyecto.OficinaEntity = _context.Oficina.Where(o => o.OficinaId == 1).FirstOrDefault();
+            proyecto.OficinaEntity = _context.Oficina.Where(o => o.OficinaId == equipo.OficinaEntity.OficinaId).FirstOrDefault();  
             proyecto.UnidadEntity = _context.Unidad.Where(u => u.UnidadId == 1).FirstOrDefault();
             proyecto.LineaEntity = _context.Linea.Where(l => l.LineaId == 1).FirstOrDefault();
 
-            /*//eliminado temporalmente hasta tener la lista de oficinas, unidades y proyectos
-            proyecto.OficinaEntity = _context.Oficina.Where(o => o.OficinaId == equipo.OficinaEntity.OficinaId).FirstOrDefault();     
+
+            /*//eliminado temporalmente hasta tener la lista de oficinas, unidades y proyectos   
             proyecto.UnidadEntity = _context.Unidad.Where(u => u.UnidadId == equipo.UnidadEntity.UnidadId).FirstOrDefault();
             proyecto.LineaEntity = _context.Linea.Where(l => l.LineaId == equipo.LineaEntity.LineaId).FirstOrDefault();*/
 
@@ -439,5 +603,3 @@ namespace everisapi.API.Services
 
     }
 }
-
-

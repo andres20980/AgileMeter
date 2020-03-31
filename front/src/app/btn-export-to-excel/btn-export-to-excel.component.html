@@ -1,0 +1,5 @@
+<button class="transparente botonExcel" (click)="ExportToExcel()">
+  <img
+    class="excel" [class.button-disabled]="!dataTable || dataTable.length == 0"
+    src="assets/excel.png" title="{{ 'SORTED_TABLE.EXCEL_EXPORT' | translate }}" />
+</button>

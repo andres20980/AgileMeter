@@ -1,0 +1,44 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    service: jiravars-exporter
+  name: jiravars-exporter
+  namespace: monitoring
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: jiravars-exporter
+    spec:
+      containers:
+      - image: jiravars.azurecr.io/jiravars-exporter:latest
+        name: jiravars-exporter
+      imagePullSecrets:
+      - name: jiravars-exporter-regsecret
+#        ports:
+#        - containerPort: 9300
+      hostname: jiravars-exporter
+      restartPolicy: Always
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jiravars-exporter
+  namespace: monitoring
+  labels:
+    service: jiravars-exporter
+spec:
+  ports:
+  - name: "9300"
+    protocol: "TCP"
+    port: 9300
+    targetPort: 9300
+  selector:
+    service: jiravars-exporter
+status:
+  loadBalancer: {}

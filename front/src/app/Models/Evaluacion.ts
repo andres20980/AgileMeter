@@ -11,6 +11,8 @@ export class Evaluacion {
     public nombre: string,
     public assessmentName: string,
     public userNombre: string,
-    public assessmentId?: number
+    public oficina: string,
+    public assessmentId?: number,
+    public proyectoId?: number
   ) { }
 }

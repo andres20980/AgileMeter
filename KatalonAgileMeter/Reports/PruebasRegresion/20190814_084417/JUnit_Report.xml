@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="PruebasRegresion" time="53" tests="2" failures="0" errors="0">
+   <testsuite name="PruebasRegresion" tests="2" failures="0" errors="0" time="53" timestamp="2019-08-14 08:44:20" hostname="dvelezbr - SVQ-BXXXMC2.mshome.net" id="Test Suites/PruebasRegresion">
+      <properties>
+         <property name="deviceName" value=""/>
+         <property name="devicePlatform" value=""/>
+         <property name="logFolder" value="C:\\dev\\ScrumMeter\\KatalonAgileMeter\\Reports\\PruebasRegresion\\20190814_084417"/>
+         <property name="logFiles" value="C:\\dev\\ScrumMeter\\KatalonAgileMeter\\Reports\\PruebasRegresion\\20190814_084417\\execution0.log"/>
+         <property name="attachments" value=""/>
+         <property name="hostName" value="dvelezbr - SVQ-BXXXMC2.mshome.net"/>
+         <property name="os" value="Windows 10 64bit"/>
+         <property name="katalonVersion" value="6.1.2.2"/>
+         <property name="browser" value="Firefox 68.0"/>
+         <property name="hostAddress" value="172.20.230.65"/>
+         <property name="sessionId" value="584a52cc-d877-4746-b2dc-d7fbfbadeb67"/>
+         <property name="seleniumVersion" value="3.7.1"/>
+         <property name="proxyInformation" value="ProxyInformation{proxyOption=NO_PROXY, proxyServerType=HTTP, password=, proxyServerAddress=, proxyServerPort=0}"/>
+         <property name="platform" value="Windows 10"/>
+      </properties>
+      <testcase name="Test Cases/NuevaEvaluacion" classname="Test Cases/NuevaEvaluacion" status="PASSED">
+         <system-out><![CDATA[2019-08-14 08:44:20 - [TEST_CASE][PASSED] - Test Cases/NuevaEvaluacion: Test Cases/NuevaEvaluacion
+
+2019-08-14 08:44:21 - [TEST_STEP][PASSED] - openBrowser(""): Browser is opened with url: ''
+
+2019-08-14 08:44:21 - [MESSAGE][INFO] - Starting 'Firefox' driver
+
+2019-08-14 08:44:21 - [MESSAGE][INFO] - Action delay is set to 0 seconds
+
+2019-08-14 08:44:27 - [MESSAGE][PASSED] - Browser is opened with url: ''
+
+2019-08-14 08:44:27 - [TEST_STEP][PASSED] - maximizeWindow(): Current window maximized
+
+2019-08-14 08:44:27 - [MESSAGE][PASSED] - Current window maximized
+
+2019-08-14 08:44:27 - [TEST_STEP][PASSED] - navigateToUrl(url): Navigate to 'http://agilemeterfront.4fad901eba544c68aeb3.westeurope.aksapp.io/' successfully
+
+2019-08-14 08:44:29 - [MESSAGE][PASSED] - Navigate to 'http://agilemeterfront.4fad901eba544c68aeb3.westeurope.aksapp.io/' successfully
+
+2019-08-14 08:44:29 - [TEST_STEP][PASSED] - setText(findTestObject("Login/input_Usuario"), user): Text 'jbeltrma' is set on object 'Object Repository/Login/input_Usuario'
+
+2019-08-14 08:44:30 - [MESSAGE][PASSED] - Text 'jbeltrma' is set on object 'Object Repository/Login/input_Usuario'
+
+2019-08-14 08:44:30 - [TEST_STEP][PASSED] - setText(findTestObject("Login/input_Pass"), pass): Text '1234' is set on object 'Object Repository/Login/input_Pass'
+
+2019-08-14 08:44:30 - [MESSAGE][PASSED] - Text '1234' is set on object 'Object Repository/Login/input_Pass'
+
+2019-08-14 08:44:30 - [TEST_STEP][PASSED] - click(findTestObject("Login/input_Acceder")): Object: 'Object Repository/Login/input_Acceder' is clicked on
+
+2019-08-14 08:44:30 - [MESSAGE][PASSED] - Object: 'Object Repository/Login/input_Acceder' is clicked on
+
+2019-08-14 08:44:30 - [TEST_STEP][PASSED] - waitForPageLoad(20): Wait for page load successfully
+
+2019-08-14 08:44:30 - [MESSAGE][PASSED] - Wait for page load successfully
+
+2019-08-14 08:44:30 - [TEST_STEP][PASSED] - click(findTestObject("Home/span_Equipo")): Object: 'Object Repository/Home/span_Equipo' is clicked on
+
+2019-08-14 08:44:31 - [MESSAGE][PASSED] - Object: 'Object Repository/Home/span_Equipo' is clicked on
+
+2019-08-14 08:44:31 - [TEST_STEP][PASSED] - waitForElementPresent(findTestObject("Home/div_SelectorEquipo"), 5): Object 'Object Repository/Home/div_SelectorEquipo' is present
+
+2019-08-14 08:44:31 - [MESSAGE][PASSED] - Object 'Object Repository/Home/div_SelectorEquipo' is present
+
+2019-08-14 08:44:31 - [TEST_STEP][PASSED] - click(findTestObject("Home/div_SelectorEquipo")): Object: 'Object Repository/Home/div_SelectorEquipo' is clicked on
+
+2019-08-14 08:44:31 - [MESSAGE][PASSED] - Object: 'Object Repository/Home/div_SelectorEquipo' is clicked on
+
+2019-08-14 08:44:31 - [TEST_STEP][PASSED] - click(findTestObject("Home/span_Evaluacion")): Object: 'Object Repository/Home/span_Evaluacion' is clicked on
+
+2019-08-14 08:44:31 - [MESSAGE][PASSED] - Object: 'Object Repository/Home/span_Evaluacion' is clicked on
+
+2019-08-14 08:44:31 - [TEST_STEP][PASSED] - waitForElementPresent(findTestObject("Home/span_SelectorEvaluacion"), 5): Object 'Object Repository/Home/span_SelectorEvaluacion' is present
+
+2019-08-14 08:44:32 - [MESSAGE][PASSED] - Object 'Object Repository/Home/span_SelectorEvaluacion' is present
+
+2019-08-14 08:44:32 - [TEST_STEP][PASSED] - click(findTestObject("Home/span_SelectorEvaluacion")): Object: 'Object Repository/Home/span_SelectorEvaluacion' is clicked on
+
+2019-08-14 08:44:32 - [MESSAGE][PASSED] - Object: 'Object Repository/Home/span_SelectorEvaluacion' is clicked on
+
+2019-08-14 08:44:32 - [TEST_STEP][PASSED] - waitForElementClickable(findTestObject("Home/a_NuevaEvaluacion"), 5): Object 'Object Repository/Home/a_NuevaEvaluacion' is clickable
+
+2019-08-14 08:44:32 - [MESSAGE][PASSED] - Object 'Object Repository/Home/a_NuevaEvaluacion' is clickable
+
+2019-08-14 08:44:32 - [TEST_STEP][PASSED] - click(findTestObject("Home/a_NuevaEvaluacion")): Object: 'Object Repository/Home/a_NuevaEvaluacion' is clicked on
+
+2019-08-14 08:44:32 - [MESSAGE][PASSED] - Object: 'Object Repository/Home/a_NuevaEvaluacion' is clicked on
+
+2019-08-14 08:44:32 - [TEST_STEP][PASSED] - waitForElementPresent(findTestObject("Home/button_Nueva"), 5, OPTIONAL): Object 'Object Repository/Home/button_Nueva' is present
+
+2019-08-14 08:44:32 - [MESSAGE][PASSED] - Object 'Object Repository/Home/button_Nueva' is present
+
+2019-08-14 08:44:32 - [TEST_STEP][PASSED] - click(findTestObject("Home/button_Nueva"), OPTIONAL): Object: 'Object Repository/Home/button_Nueva' is clicked on
+
+2019-08-14 08:44:32 - [MESSAGE][PASSED] - Object: 'Object Repository/Home/button_Nueva' is clicked on
+
+2019-08-14 08:44:32 - [TEST_STEP][PASSED] - delay(5): Delayed 5 second(s)
+
+2019-08-14 08:44:37 - [MESSAGE][PASSED] - Delayed 5 second(s)
+
+2019-08-14 08:44:37 - [TEST_STEP][PASSED] - waitForPageLoad(20): Wait for page load successfully
+
+2019-08-14 08:44:38 - [MESSAGE][PASSED] - Wait for page load successfully
+
+2019-08-14 08:44:38 - [TEST_STEP][PASSED] - click(findTestObject("Home/a_Inicio")): Object: 'Object Repository/Home/a_Inicio' is clicked on
+
+2019-08-14 08:44:38 - [MESSAGE][PASSED] - Object: 'Object Repository/Home/a_Inicio' is clicked on
+
+2019-08-14 08:44:38 - [TEST_STEP][PASSED] - waitForPageLoad(20): Wait for page load successfully
+
+2019-08-14 08:44:38 - [MESSAGE][PASSED] - Wait for page load successfully
+
+2019-08-14 08:44:38 - [TEST_STEP][PASSED] - delay(5): Delayed 5 second(s)
+
+2019-08-14 08:44:43 - [MESSAGE][PASSED] - Delayed 5 second(s)
+
+2019-08-14 08:44:43 - [TEST_STEP][PASSED] - waitForElementClickable(findTestObject("Home/span_Equipo"), 0): Object 'Object Repository/Home/span_Equipo' is clickable
+
+2019-08-14 08:44:43 - [MESSAGE][WARNING] - Timeout '0' is invalid. Using default page load timeout: '30'
+
+2019-08-14 08:44:43 - [MESSAGE][PASSED] - Object 'Object Repository/Home/span_Equipo' is clickable
+
+2019-08-14 08:44:43 - [TEST_STEP][PASSED] - click(findTestObject("Home/span_Equipo")): Object: 'Object Repository/Home/span_Equipo' is clicked on
+
+2019-08-14 08:44:43 - [MESSAGE][PASSED] - Object: 'Object Repository/Home/span_Equipo' is clicked on
+
+2019-08-14 08:44:43 - [TEST_STEP][PASSED] - waitForElementPresent(findTestObject("Home/div_SelectorEquipo"), 5): Object 'Object Repository/Home/div_SelectorEquipo' is present
+
+2019-08-14 08:44:43 - [MESSAGE][PASSED] - Object 'Object Repository/Home/div_SelectorEquipo' is present
+
+2019-08-14 08:44:43 - [TEST_STEP][PASSED] - click(findTestObject("Home/div_SelectorEquipo")): Object: 'Object Repository/Home/div_SelectorEquipo' is clicked on
+
+2019-08-14 08:44:43 - [MESSAGE][PASSED] - Object: 'Object Repository/Home/div_SelectorEquipo' is clicked on
+
+2019-08-14 08:44:43 - [TEST_STEP][PASSED] - waitForElementClickable(findTestObject("Home/a_EvaPendientes"), 5): Object 'Object Repository/Home/a_EvaPendientes' is clickable
+
+2019-08-14 08:44:44 - [MESSAGE][PASSED] - Object 'Object Repository/Home/a_EvaPendientes' is clickable
+
+2019-08-14 08:44:44 - [TEST_STEP][PASSED] - click(findTestObject("Home/a_EvaPendientes")): Object: 'Object Repository/Home/a_EvaPendientes' is clicked on
+
+2019-08-14 08:44:44 - [MESSAGE][PASSED] - Object: 'Object Repository/Home/a_EvaPendientes' is clicked on
+
+2019-08-14 08:44:44 - [TEST_STEP][PASSED] - waitForPageLoad(20): Wait for page load successfully
+
+2019-08-14 08:44:44 - [MESSAGE][PASSED] - Wait for page load successfully
+
+2019-08-14 08:44:44 - [TEST_STEP][PASSED] - delay(5): Delayed 5 second(s)
+
+2019-08-14 08:44:49 - [MESSAGE][PASSED] - Delayed 5 second(s)
+
+2019-08-14 08:44:49 - [TEST_STEP][PASSED] - valorFecha = getText(findTestObject("EvaluacionesFinalizadas/tbody_ValorColumna", ["columna":colFecha])): Text of object 'Object Repository/EvaluacionesFinalizadas/tbody_ValorColumna' is: '14/08/2019'
+
+2019-08-14 08:44:49 - [MESSAGE][PASSED] - Text of object 'Object Repository/EvaluacionesFinalizadas/tbody_ValorColumna' is: '14/08/2019'
+
+2019-08-14 08:44:49 - [TEST_STEP][PASSED] - valorEvaluacion = getText(findTestObject("EvaluacionesFinalizadas/tbody_ValorColumna", ["columna":colEvaluacion])): Text of object 'Object Repository/EvaluacionesFinalizadas/tbody_ValorColumna' is: 'SCRUM'
+
+2019-08-14 08:44:49 - [MESSAGE][PASSED] - Text of object 'Object Repository/EvaluacionesFinalizadas/tbody_ValorColumna' is: 'SCRUM'
+
+2019-08-14 08:44:49 - [TEST_STEP][PASSED] - valorProgreso = getText(findTestObject("EvaluacionesFinalizadas/tbody_ValorColumna", ["columna":colProgreso])): Text of object 'Object Repository/EvaluacionesFinalizadas/tbody_ValorColumna' is: '0 %'
+
+2019-08-14 08:44:49 - [MESSAGE][PASSED] - Text of object 'Object Repository/EvaluacionesFinalizadas/tbody_ValorColumna' is: '0 %'
+
+2019-08-14 08:44:49 - [TEST_STEP][PASSED] - dateFormat = new java.text.SimpleDateFormat(dd/MM/yyyy): null
+
+2019-08-14 08:44:49 - [TEST_STEP][PASSED] - date = new java.util.Date(): null
+
+2019-08-14 08:44:49 - [TEST_STEP][PASSED] - today = dateFormat.format(date): null
+
+2019-08-14 08:44:49 - [TEST_STEP][PASSED] - verifyMatch(valorFecha, today, false, CONTINUE_ON_FAILURE): Actual text '14/08/2019' and expected text '14/08/2019' are matched 
+
+2019-08-14 08:44:49 - [MESSAGE][PASSED] - Actual text '14/08/2019' and expected text '14/08/2019' are matched 
+
+2019-08-14 08:44:49 - [TEST_STEP][PASSED] - verifyEqual(valorEvaluacion, "SCRUM", CONTINUE_ON_FAILURE): Actual object 'SCRUM' and expected object 'SCRUM' are equal
+
+2019-08-14 08:44:49 - [MESSAGE][PASSED] - Actual object 'SCRUM' and expected object 'SCRUM' are equal
+
+2019-08-14 08:44:49 - [TEST_STEP][PASSED] - verifyEqual(valorProgreso, "0 %", CONTINUE_ON_FAILURE): Actual object '0 %' and expected object '0 %' are equal
+
+2019-08-14 08:44:49 - [MESSAGE][PASSED] - Actual object '0 %' and expected object '0 %' are equal]]></system-out>
+         <system-err><![CDATA[]]></system-err>
+      </testcase>
+      <testcase name="Test Cases/ValoracionGlobal" classname="Test Cases/ValoracionGlobal" status="PASSED">
+         <system-out><![CDATA[2019-08-14 08:44:49 - [TEST_CASE][PASSED] - Test Cases/ValoracionGlobal: Test Cases/ValoracionGlobal
+
+2019-08-14 08:44:49 - [TEST_STEP][PASSED] - openBrowser(""): Browser is opened with url: ''
+
+2019-08-14 08:44:49 - [MESSAGE][WARNING] - A browser is already opened. Closing browser and opening a new one
+
+2019-08-14 08:44:52 - [MESSAGE][INFO] - Starting 'Firefox' driver
+
+2019-08-14 08:44:56 - [MESSAGE][PASSED] - Browser is opened with url: ''
+
+2019-08-14 08:44:56 - [TEST_STEP][PASSED] - maximizeWindow(): Current window maximized
+
+2019-08-14 08:44:56 - [MESSAGE][PASSED] - Current window maximized
+
+2019-08-14 08:44:56 - [TEST_STEP][PASSED] - navigateToUrl(url): Navigate to 'http://agilemeterfront.4fad901eba544c68aeb3.westeurope.aksapp.io/' successfully
+
+2019-08-14 08:44:58 - [MESSAGE][PASSED] - Navigate to 'http://agilemeterfront.4fad901eba544c68aeb3.westeurope.aksapp.io/' successfully
+
+2019-08-14 08:44:58 - [TEST_STEP][PASSED] - setText(findTestObject("Login/input_Usuario"), user): Text 'jbeltrma' is set on object 'Object Repository/Login/input_Usuario'
+
+2019-08-14 08:44:58 - [MESSAGE][PASSED] - Text 'jbeltrma' is set on object 'Object Repository/Login/input_Usuario'
+
+2019-08-14 08:44:58 - [TEST_STEP][PASSED] - setText(findTestObject("Login/input_Pass"), pass): Text '1234' is set on object 'Object Repository/Login/input_Pass'
+
+2019-08-14 08:44:58 - [MESSAGE][PASSED] - Text '1234' is set on object 'Object Repository/Login/input_Pass'
+
+2019-08-14 08:44:58 - [TEST_STEP][PASSED] - click(findTestObject("Login/input_Acceder")): Object: 'Object Repository/Login/input_Acceder' is clicked on
+
+2019-08-14 08:44:59 - [MESSAGE][PASSED] - Object: 'Object Repository/Login/input_Acceder' is clicked on
+
+2019-08-14 08:44:59 - [TEST_STEP][PASSED] - waitForPageLoad(20): Wait for page load successfully
+
+2019-08-14 08:44:59 - [MESSAGE][PASSED] - Wait for page load successfully
+
+2019-08-14 08:44:59 - [TEST_STEP][PASSED] - click(findTestObject("Home/span_Equipo")): Object: 'Object Repository/Home/span_Equipo' is clicked on
+
+2019-08-14 08:45:00 - [MESSAGE][PASSED] - Object: 'Object Repository/Home/span_Equipo' is clicked on
+
+2019-08-14 08:45:00 - [TEST_STEP][PASSED] - waitForElementPresent(findTestObject("Home/div_SelectorEquipo"), 5): Object 'Object Repository/Home/div_SelectorEquipo' is present
+
+2019-08-14 08:45:00 - [MESSAGE][PASSED] - Object 'Object Repository/Home/div_SelectorEquipo' is present
+
+2019-08-14 08:45:00 - [TEST_STEP][PASSED] - click(findTestObject("Home/div_SelectorEquipo")): Object: 'Object Repository/Home/div_SelectorEquipo' is clicked on
+
+2019-08-14 08:45:00 - [MESSAGE][PASSED] - Object: 'Object Repository/Home/div_SelectorEquipo' is clicked on
+
+2019-08-14 08:45:00 - [TEST_STEP][PASSED] - waitForElementClickable(findTestObject("Home/a_EvaFinalizadas"), 5): Object 'Object Repository/Home/a_EvaFinalizadas' is clickable
+
+2019-08-14 08:45:00 - [MESSAGE][PASSED] - Object 'Object Repository/Home/a_EvaFinalizadas' is clickable
+
+2019-08-14 08:45:00 - [TEST_STEP][PASSED] - click(findTestObject("Home/a_EvaFinalizadas")): Object: 'Object Repository/Home/a_EvaFinalizadas' is clicked on
+
+2019-08-14 08:45:00 - [MESSAGE][PASSED] - Object: 'Object Repository/Home/a_EvaFinalizadas' is clicked on
+
+2019-08-14 08:45:00 - [TEST_STEP][PASSED] - waitForPageLoad(20): Wait for page load successfully
+
+2019-08-14 08:45:00 - [MESSAGE][PASSED] - Wait for page load successfully
+
+2019-08-14 08:45:00 - [TEST_STEP][PASSED] - delay(5): Delayed 5 second(s)
+
+2019-08-14 08:45:05 - [MESSAGE][PASSED] - Delayed 5 second(s)
+
+2019-08-14 08:45:05 - [TEST_STEP][PASSED] - columnaPuntuacion = getText(findTestObject("EvaluacionesFinalizadas/tbody_ValorColumna", ["columna":colPuntuacion])): Text of object 'Object Repository/EvaluacionesFinalizadas/tbody_ValorColumna' is: '16.2%'
+
+2019-08-14 08:45:05 - [MESSAGE][PASSED] - Text of object 'Object Repository/EvaluacionesFinalizadas/tbody_ValorColumna' is: '16.2%'
+
+2019-08-14 08:45:05 - [TEST_STEP][PASSED] - click(findTestObject("EvaluacionesFinalizadas/button_ColResultados", ["columna":colResultados])): Object: 'Object Repository/EvaluacionesFinalizadas/button_ColResultados' is clicked on
+
+2019-08-14 08:45:06 - [MESSAGE][PASSED] - Object: 'Object Repository/EvaluacionesFinalizadas/button_ColResultados' is clicked on
+
+2019-08-14 08:45:06 - [TEST_STEP][PASSED] - waitForPageLoad(20): Wait for page load successfully
+
+2019-08-14 08:45:06 - [MESSAGE][PASSED] - Wait for page load successfully
+
+2019-08-14 08:45:06 - [TEST_STEP][PASSED] - delay(5): Delayed 5 second(s)
+
+2019-08-14 08:45:11 - [MESSAGE][PASSED] - Delayed 5 second(s)
+
+2019-08-14 08:45:11 - [TEST_STEP][PASSED] - columnaValoracion = getText(findTestObject("EvaluacionesResultados/tspan_ValoracionGlobal")): Text of object 'Object Repository/EvaluacionesResultados/tspan_ValoracionGlobal' is: '16.2'
+
+2019-08-14 08:45:11 - [MESSAGE][PASSED] - Text of object 'Object Repository/EvaluacionesResultados/tspan_ValoracionGlobal' is: '16.2'
+
+2019-08-14 08:45:11 - [TEST_STEP][PASSED] - columnaValoracion = columnaValoracion + "%": null
+
+2019-08-14 08:45:11 - [TEST_STEP][PASSED] - verifyEqual(columnaPuntuacion, columnaValoracion): Actual object '16.2%' and expected object '16.2%' are equal
+
+2019-08-14 08:45:11 - [MESSAGE][PASSED] - Actual object '16.2%' and expected object '16.2%' are equal]]></system-out>
+         <system-err><![CDATA[]]></system-err>
+      </testcase>
+      <system-out><![CDATA[2019-08-14 08:44:20 - [TEST_SUITE][PASSED] - PruebasRegresion: Test Cases/ValoracionGlobal]]></system-out>
+      <system-err><![CDATA[]]></system-err>
+   </testsuite>
+</testsuites>

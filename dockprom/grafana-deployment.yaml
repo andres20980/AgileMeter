@@ -1,0 +1,60 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    service: grafana
+  name: grafana
+  namespace: monitoring
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: grafana
+    spec:
+      containers:
+      - command:
+        - /etc/grafana/setup.sh
+        env:
+        - name: GF_INSTALL_PLUGINS
+          value: grafana-simple-json-datasource,grafana-clock-panel,jdbranham-diagram-panel
+        - name: GF_SECURITY_ADMIN_PASSWORD
+          value: admin
+        - name: GF_SECURITY_ADMIN_USER
+          value: admin
+        - name: GF_USERS_ALLOW_SIGN_UP
+          value: "false"
+        image: grafana/grafana:6.2.5
+        name: grafana
+        volumeMounts:
+        - name: grafana-config-files
+          mountPath: /etc/grafana/setup.sh
+          subPath: setup.sh
+        - name: grafana-config-files
+          mountPath: /etc/grafana/datasources/Prometheus.json
+          subPath: Prometheus.json
+        - name: grafana-config-files
+          mountPath: /etc/grafana/dashboards/docker_containers.json
+          subPath: docker_containers.json
+        - name: grafana-config-files
+          mountPath: /etc/grafana/dashboards/docker_host.json
+          subPath: docker_host.json
+        - name: grafana-config-files
+          mountPath: /etc/grafana/dashboards/monitor_services.json
+          subPath: monitor_services.json
+        - name: grafana-config-files
+          mountPath: /etc/grafana/dashboards/nginx_container.json
+          subPath: nginx_container.json
+#TO BE FIXED        - name: grafana-config-files
+#TO BE FIXED          mountPath: /etc/grafana/dashboards/GrafanaGitlab.json
+#TO BE FIXED          subPath: GrafanaGitlab.json
+        resources: {}
+      restartPolicy: Always
+      volumes:  
+        - name: grafana-config-files  
+          configMap:  
+            name: grafana-configmap
+            defaultMode: 0755
+status: {}

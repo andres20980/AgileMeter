@@ -8,6 +8,7 @@ export class EvaluacionInfoWithProgress {
     public assessmentId: number,
     public assessmentName: string,
     public progress: number,
-    public numQuestions: number
+    public numQuestions: number,
+    public oficina: string
   ) { }
 }

@@ -1,0 +1,43 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    service: agilemeter-jenkins
+  name: agilemeter-jenkins
+  namespace: ci-cd
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        service: agilemeter-jenkins
+    spec:
+      containers:
+      - env:
+        - name: JAVA_OPTS
+          value: -Djenkins.install.runSetupWizard=false
+        - name: JENKINS_HOME
+          value: /var/jenkins_home
+        image: jenkinsonar.azurecr.io/jenkinsonar:latest
+        name: agilemeter-jenkins
+        ports:
+        - containerPort: 8080
+        - containerPort: 50000
+        resources: {}
+        volumeMounts:
+        - mountPath: /var/run/docker.sock
+          name: docker-socket-volume
+        securityContext:
+          privileged: true
+      imagePullSecrets:
+        - name: jenkinsonar-regsecret
+      hostname: jenkins
+      restartPolicy: Always
+      volumes:
+      - name: docker-socket-volume
+        hostPath:
+          path: /var/run/docker.sock
+          type: File
+status: {}

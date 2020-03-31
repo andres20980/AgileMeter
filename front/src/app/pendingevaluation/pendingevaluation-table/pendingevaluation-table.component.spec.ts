@@ -1,24 +1,28 @@
+/* tslint:disable:no-unused-variable */
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { DebugElement } from '@angular/core';
 
-import { fakeAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { PendingevaluationTableComponent } from './pendingevaluation-table.component';
 
-import { PendingEvaluationTableComponent } from './pendingevaluation-table.component';
+describe('Pendingevaluation2TableComponent', () => {
+  let component: PendingevaluationTableComponent;
+  let fixture: ComponentFixture<PendingevaluationTableComponent>;
 
-describe('SortedTableComponent', () => {
-  let component: PendingEvaluationTableComponent;
-  let fixture: ComponentFixture<PendingEvaluationTableComponent>;
-
-  beforeEach(fakeAsync(() => {
+  beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PendingEvaluationTableComponent ]
+      declarations: [ PendingevaluationTableComponent ]
     })
     .compileComponents();
-
-    fixture = TestBed.createComponent(PendingEvaluationTableComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
   }));
 
-  it('should compile', () => {
+  beforeEach(() => {
+    fixture = TestBed.createComponent(PendingevaluationTableComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 });

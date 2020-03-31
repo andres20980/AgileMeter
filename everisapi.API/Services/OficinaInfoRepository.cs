@@ -23,6 +23,17 @@ namespace everisapi.API.Services
     {
       return _context.Oficina.ToList();
     }
+
+    //Take all translate offices
+    public IEnumerable<Oficina> GetOficinas(int language)
+    {
+      return _context.TraduccionesOficinas
+                                .Where(e => e.IdiomaId == language)
+                                .Select(o => new Oficina(){
+                                  OficinaId = o.OficinaId,
+                                  OficinaNombre = o.Traduccion
+                                }).ToList();
+    }
     
     //Este metodo nos permite persistir los cambios en las entidades
     public bool SaveChanges()

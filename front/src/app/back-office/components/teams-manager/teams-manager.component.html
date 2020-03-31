@@ -10,8 +10,13 @@
         <input matInput (keyup)="applyFilter($event.target.value)"
           placeholder="{{ 'TEAM_MANAGER.LIST_FILTER' | translate }}">
       </mat-form-field>
-    </div>
-    <div class="col-9">
+      <btn-export-to-excel 
+        [dataTableInput]="datosFiltrados"  
+        [fieldsInput] = "fieldsTable"
+        [objectTranslateInput] = "objectTranslate">
+      </btn-export-to-excel>
+  </div>
+    <div class="col-8 ml-4">
       <button class="transparenteAdd col-3 float-right pt-3" (click)="btnAddClick();">
         <img class="add" src="assets/team_add.png" title="{{ 'TEAM_MANAGER.ICON_ADD_TEAM' | translate }}" />
       </button>
