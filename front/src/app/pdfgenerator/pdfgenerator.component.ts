@@ -176,7 +176,6 @@ export class PdfgeneratorComponent implements OnInit {
       sumSections += sectionTotalValue;
 
     });
-
     return sumSections;
   }
   public getTotalColor = (sc: any): string => {
@@ -354,7 +353,7 @@ export class PdfgeneratorComponent implements OnInit {
 
       this._sectionService.GetPreguntasNivelOrganizadas(this.Evaluacion.id, this.Evaluacion.assessmentId).subscribe(
         res => {
-
+          res.map(x => x.puntuacion = Math.round(x.puntuacion))
           this.ListaSectionConAsignaciones = res;
         },
         error => {

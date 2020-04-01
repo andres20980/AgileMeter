@@ -205,9 +205,7 @@ export class SortedTableComponent implements OnInit {
           this.assessmentSeleccionado = [];
         }
       }
-      console.log("Filtro assesment", selected.assessment);
 
- 
      // this.OficinaSeleccionada = this.originDataSource.filter(x => selected.team.includes(x.nombre)).map(x => x.oficina).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
     }
     if(origen === 'assessment') {
