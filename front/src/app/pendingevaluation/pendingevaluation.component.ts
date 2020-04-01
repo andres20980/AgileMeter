@@ -77,12 +77,14 @@ export class PendingevaluationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
-    if(this._appComponent._storageDataService.ProjectSelected && this._appComponent._storageDataService.AssessmentsSelected &&this._appComponent._storageDataService.OfficeSelected){
-      this.ListaPending = {oficina: this._appComponent._storageDataService.OfficeSelected, equipo: this._appComponent._storageDataService.ProjectSelected.proyecto + " - "+ this._appComponent._storageDataService.ProjectSelected.nombre, assessment: this._appComponent._storageDataService.AssessmentSelected.assessmentName}
-      } else {
-        this.ListaPending = null
-      }
+    
+    if(this._appComponent._storageDataService.AssessmentSelected != null){
+      if(this._appComponent._storageDataService.ProjectSelected && this._appComponent._storageDataService.AssessmentsSelected &&this._appComponent._storageDataService.OfficeSelected){
+        this.ListaPending = {oficina: this._appComponent._storageDataService.OfficeSelected, equipo: this._appComponent._storageDataService.ProjectSelected.proyecto + " - "+ this._appComponent._storageDataService.ProjectSelected.nombre, assessment: this._appComponent._storageDataService.AssessmentSelected.assessmentName}
+        } else {
+          this.ListaPending = null
+        }
+    }
     
 
     if (!this._proyectoService.verificarUsuario()) {

@@ -224,10 +224,10 @@
 			"APP": "Practical Application Percentage"
 		},
 		"EXCEL_PT_DEVOPS" : {
-			"ORG_TEAM": "Team Organization",
+			"ORG_TEAM": "Teams Organization",
 			"LIFECYCLE": "Life Cycle",
 			"BUILDING": "Building",
-			"TESTING": "Testing & Quality",
+			"TESTING": "QA",
 			"DEPLOYMENT": "Deployment",
 			"MONITORING": "Monitoring",
 			"PROVISIONING": "Provisioning"
@@ -264,10 +264,10 @@
 			"APPLICATION":"Practical Application"
 		},
 		"PT_DEVOPS": {
-			"ORG_TEAM": "Team Organization",
+			"ORG_TEAM": "Teams Organization",
 			"LIFECYCLE":"Lifecycle",
 			"BUILDING":"Building",
-			"TESTING":"Testing & Quality",
+			"TESTING":"QA",
 			"DEPLOYMENT":"Deployment",
 			"MONITORING": "Monitoring",
 			"PROVISIONING": "Provisioning"
@@ -344,7 +344,7 @@
 		"EXCEL_ANSWER": "Answers",
 		"EXCEL_YES": "Yes",
 		"EXCEL_NO": "No",
-		"EXCEL_NC": "Not answered",
+		"EXCEL_NC": "NA",
 		"CIRCLE_PROGRESS_LEVEL": "Level ",
 		"CIRCLE_PROGRESS_MIN_LEVEL": "of the level minimum",
 		"CIRCLE_PROGRESS_MAX_LEVEL": "of the level maximum",
@@ -357,7 +357,7 @@
 		"ANSWER": "Answer",
 		"ICONS_CORRECT": "Correct",
 		"ICONS_INCORRECT": "Incorrect",
-		"ICONS_NOT_ANSWERED": "Not answered",
+		"ICONS_NOT_ANSWERED": "NA",
 		"QUESTION_NOTES": "Notes",
 		"NO_NOTES": "No notes added",
 		"YES": "Yes",
@@ -370,7 +370,7 @@
 		"QUESTION": "Question",
 		"ANSWER": "Answer",
 		"ICONS_CORRECT": "Correct",
-		"ICONS_NOT_ANSWERED": "Not answered",
+		"ICONS_NOT_ANSWERED": "NA",
 		"ICONS_INCORRECT": "Incorrect",
 		"NOTES": "Notes",
 		"ICONS_NOTES_FILLED": "Notes available",
