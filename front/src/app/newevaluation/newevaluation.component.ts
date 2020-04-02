@@ -67,10 +67,29 @@ export class NewevaluationComponent implements OnInit {
   private InitialiseComponent() {
 
     this.PageNow = 1;
+    let allSections = this._appComponent._storageDataService.Sections;
+    let lengthAllSections = this._appComponent._storageDataService.Sections.length
     this.SectionSelected = this._appComponent._storageDataService.SectionSelectedInfo;
-    this.nextSection = this._appComponent._storageDataService.nextSection;
-    this.prevSection = this._appComponent._storageDataService.prevSection;
+
+  
+    if(allSections != null && this.SectionSelected != null){
+      let p = allSections.map(x => x['nombre']).indexOf(this.SectionSelected['nombre'])
+      if(p < lengthAllSections  -1)  {
+        this.nextSection = allSections[p + 1]
+      } else {
+        this.nextSection = null
+      }
+
+      if(p != 0)  {
+        this.prevSection = allSections[p - 1]
+      } else {
+        this.prevSection = null
+      }
+    }
+    
+   // this.prevSection = this._appComponent._storageDataService.prevSection;
     this.AreaAsignada = this._appComponent._storageDataService.currentAssignation;
+
     //Recogemos el proyecto y el usuario si no coincide alguno lo redirigiremos
     this.Project = this._appComponent._storageDataService.UserProjectSelected;
     this.Evaluation = this._appComponent._storageDataService.Evaluacion;
@@ -86,7 +105,7 @@ export class NewevaluationComponent implements OnInit {
     } else {
       this.UserName = this._appComponent._storageDataService.UserData.nombre;
     }
-
+    console.log("next section",this.nextSection)
     this.MostrarInfo = true;
 
     if (this.Evaluation != null) {
