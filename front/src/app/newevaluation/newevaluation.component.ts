@@ -185,7 +185,7 @@ export class NewevaluationComponent implements OnInit {
       : null;
 
     //console.log( this._appComponent._storageDataService.prevSection);
-
+    window.scroll(0,0);
     this.InitialiseComponent();
   }
 
@@ -201,7 +201,7 @@ export class NewevaluationComponent implements OnInit {
     this._appComponent._storageDataService.nextSection = (index + 1) != this._appComponent._storageDataService.Sections.length
       ? this._appComponent._storageDataService.Sections[index + 1]
       : null;
-
+      window.scroll(0,0);
     this.InitialiseComponent();
   }
 
@@ -296,6 +296,7 @@ export class NewevaluationComponent implements OnInit {
     } else if (Option == 0) {
       this._router.navigate(['/menunuevaevaluacion']);
     }
+    window.scroll(0,0);
   }
 
   //Para abrir las notas de preguntas
