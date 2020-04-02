@@ -452,14 +452,16 @@ namespace everisapiTest
 
             mockRepository.Setup(r => r.GetEvaluationsWithSectionsInfo(It.IsAny<int>(),
                                                 It.IsAny<everisapi.API.Models.EvaluacionInfoPaginationDto>(),
-                                                It.IsAny<int>() 
+                                                It.IsAny<int>(),
+                                                It.IsAny<String>()
                                             )).Returns(evaluaciones);
 
             //Act
             var okResult = _controller.GetEvaluationsWithSectionsInfo(
                             1,
                             1,
-                            new everisapi.API.Models.EvaluacionInfoPaginationDto());
+                            new everisapi.API.Models.EvaluacionInfoPaginationDto(),
+                            "Admin");
 
             //Assert
             Assert.IsType<OkObjectResult>(okResult);
@@ -478,14 +480,16 @@ namespace everisapiTest
 
             mockRepository.Setup(r => r.GetEvaluationsWithSectionsInfo(It.IsAny<int>(),
                                                 It.IsAny<everisapi.API.Models.EvaluacionInfoPaginationDto>(),
-                                                It.IsAny<int>()
+                                                It.IsAny<int>(),
+                                                It.IsAny<String>()
                                             )).Returns(evaluaciones);
 
             //Act
             var okResult = _controller.GetEvaluationsWithSectionsInfo(
                             1,
                             1,
-                            new everisapi.API.Models.EvaluacionInfoPaginationDto());
+                            new everisapi.API.Models.EvaluacionInfoPaginationDto(),
+                            "Admin");
 
             //Assert
             Assert.IsType<BadRequestObjectResult>(okResult);
@@ -505,14 +509,16 @@ namespace everisapiTest
 
             mockRepository.Setup(r => r.GetEvaluationsWithSectionsInfo(It.IsAny<int>(),
                                                 evaluacionInfoPaginationDto,
-                                                It.IsAny<int>() 
+                                                It.IsAny<int>(),
+                                                It.IsAny<String>()
                                             )).Returns(evaluaciones);
 
             //Act
             var okResult = _controller.GetEvaluationsWithSectionsInfo(
                             1,
                             1,
-                            evaluacionInfoPaginationDto);
+                            evaluacionInfoPaginationDto,
+                            "Admin");
 
             //Assert
             Assert.IsType<BadRequestResult>(okResult);
@@ -526,14 +532,16 @@ namespace everisapiTest
 
             mockRepository.Setup(r => r.GetEvaluationsWithSectionsInfo(It.IsAny<int>(),
                                                 It.IsAny<everisapi.API.Models.EvaluacionInfoPaginationDto>(),
-                                                It.IsAny<int>()  
+                                                It.IsAny<int>() ,
+                                                It.IsAny<String>()
                                             )).Throws(new Exception());
 
             //Act
             var okResult = _controller.GetEvaluationsWithSectionsInfo(
                             1,
                             1,
-                            new everisapi.API.Models.EvaluacionInfoPaginationDto());
+                            new everisapi.API.Models.EvaluacionInfoPaginationDto(),
+                            "Admin");
 
             //Assert
             Assert.IsType<ObjectResult>(okResult);
