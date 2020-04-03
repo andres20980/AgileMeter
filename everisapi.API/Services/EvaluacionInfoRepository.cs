@@ -610,6 +610,7 @@ namespace everisapi.API.Services
            
 
                 Evaluaciones = _context.Evaluaciones.
+                Include("ProyectoEntity.OficinaEntity").
                 Include(r => r.ProyectoEntity).
                 ThenInclude(p => p.UserEntity).
                 Include(a => a.Assessment).
@@ -675,14 +676,17 @@ namespace everisapi.API.Services
                     Id = evaluacion.Id,
                     Fecha = evaluacion.Fecha,
                     Estado = evaluacion.Estado,
-                    Oficina = evaluacion.ProyectoEntity.Oficina,
+                    Oficina = (string) _context.TraduccionesOficinas
+                                    .Where(t => t.OficinaId == evaluacion.ProyectoEntity.OficinaEntity.OficinaId
+                                                &&
+                                                t.IdiomaId == codigoIdioma)
+                                    .Select(s => s.Traduccion).First(),
                     Nombre = String.IsNullOrEmpty(evaluacion.ProyectoEntity.Proyecto)? evaluacion.ProyectoEntity.Nombre : evaluacion.ProyectoEntity.Proyecto + " - " + evaluacion.ProyectoEntity.Nombre,
                     UserNombre = evaluacion.UserNombre,
                     NotasEvaluacion = evaluacion.NotasEvaluacion,
+                    NotasObjetivos = evaluacion.NotasObjetivos,
                     AssessmentName = evaluacion.Assessment.AssessmentName,
                     AssessmentId = evaluacion.AssessmentId,
-                    //NotasEvaluacion = evaluacion.NotasEvaluacion
-                    //NotasObjetivos = evaluacion.NotasObjetivos
                 };
 
 

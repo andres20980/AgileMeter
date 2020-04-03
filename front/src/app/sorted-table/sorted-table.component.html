@@ -271,7 +271,7 @@
               <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"
                 cdkAutosizeMaxRows="6" placeholder="{{ 'SORTED_TABLE.EVALUATION_NOTES' | translate }}"
                 [(ngModel)]="element.notasEvaluacion" [debounce]="1000" (ngModelChange)="saveNotas(element)"
-                [readonly]="userRole != 'Evaluador' && userRole != 'Administrador'">
+                [readonly]="UserRole != '2' && UserRole != '3'">
             </textarea>
             </mat-form-field>
           </div>
@@ -280,7 +280,7 @@
               <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"
                 cdkAutosizeMaxRows="6" placeholder="{{ 'SORTED_TABLE.OBJETIVES_NOTES' | translate }}"
                 [(ngModel)]="element.notasObjetivos" [debounce]="1000" (ngModelChange)="saveNotas(element)"
-                [readonly]="userRole != 'Evaluador' && userRole != 'Administrador'">
+                [readonly]="UserRole != '2' && UserRole != '3'">
             </textarea>
             </mat-form-field>
           </div>
