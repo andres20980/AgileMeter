@@ -73,7 +73,6 @@ export class PdfgeneratorComponent implements OnInit {
   public ListaSectionLevels: Array<SectionsLevel> = [];
   public ListaSectionConAsignaciones: any;
   public UserName: string = "";
-  public Project: Proyecto = null;
   public Evaluacion: EvaluacionInfo;
   public Mostrar = false;
   public ErrorMessage = null;
@@ -247,12 +246,11 @@ export class PdfgeneratorComponent implements OnInit {
     private modalService: NgbModal) {
 
     //Recupera los datos y los comprueba
-    this.Project = this._appComponent._storageDataService.UserProjectSelected;
     this.Evaluacion = this._appComponent._storageDataService.EvaluacionToPDF;
     this._proyectoService.verificarUsuario();
     this.UserName = this._proyectoService.UsuarioLogeado;
 
-    if (this.Evaluacion == null || this.Evaluacion == undefined || this.Project == null || this.Project == undefined) {
+    if (this.Evaluacion == null || this.Evaluacion == undefined) {
 
       this._router.navigate(['/home']);
 
@@ -273,9 +271,6 @@ export class PdfgeneratorComponent implements OnInit {
           if (ArrayRoles[num].role == "Administrador") {
             this.AdminOn = true;
           }
-        }
-        if (this.Project.id == null && !this.AdminOn) {
-          this._router.navigate(['/home']);
         }
       },
       error => {
@@ -697,34 +692,19 @@ export class PdfgeneratorComponent implements OnInit {
 
 
     let classString: string;
-    let respuestaString: string = this.displayRespuesta(row);
-
-    
     //Si (habilitante)
-    if (row.correcta == null) {
-      //Contestado -> Si
-      switch (row.estado) {
-        case 0:
-          classString = "respuesta-no-contestada";
-          break
-        case 1:
-          classString = "respuesta-correcta";
-          break
-        case 2:
-          classString = "respuesta-incorrecta";
-          break
-      }
-    } else {
-      if (respuestaString == row.correcta) {
-        classString = "respuesta-correcta";
-      } else {
-        //No contestada
-        if (row.estado == 0) {
-          classString = "respuesta-no-contestada";
-        } else {
-          classString = "respuesta-incorrecta";
-        }
-      }
+    switch (row.estado) {
+      case 0:
+        classString = "respuesta-no-contestada";
+        break
+      case 1:
+        (row.correcta) === "Si" ? classString = "respuesta-correcta" : classString = "respuesta-incorrecta"
+        //classString = "respuesta-correcta";   
+        break
+      case 2:
+        (row.correcta) === "No" ?  classString = "respuesta-correcta" : classString = "respuesta-incorrecta"
+        //classString = "respuesta-incorrecta";
+        break
     }
     return classString;
   }
@@ -867,7 +847,8 @@ export class PdfgeneratorComponent implements OnInit {
 
     this._translateService.get('PDF_GENERATOR.EXCEL_TITLE').subscribe(value => { txt = value; });
     this._translateService.get('PDF_GENERATOR.EXCEL_TITLE_1').subscribe(value => { txt1 = value; });
-    let titleRow = worksheet.addRow(['', txt + this.datePipe.transform(this.Evaluacion.fecha, 'dd-MM-yyyy') + txt1 + this.Project.nombre]);
+
+    let titleRow = worksheet.addRow(['', txt + this.datePipe.transform(this.Evaluacion.fecha, 'dd-MM-yyyy') + txt1 + this.Evaluacion.nombre]);
     titleRow.font = { name: 'Arial', family: 4, size: 16, color: { argb: '555555' }, bold: true }
     worksheet.addRow([]);
 
@@ -1224,7 +1205,7 @@ export class PdfgeneratorComponent implements OnInit {
           right: { style: 'thin', color: { argb: 'dfdfdf' } }
         };
 
-        cell.value = "VALORACIÓN GLOBAL";
+        this._translateService.get('PDF_GENERATOR.EXCEL_GLOBAL_VALORATION').subscribe(value => { cell.value = value; });
 
 
         /////// NOTAS EVALUACIÓN /////
@@ -1286,7 +1267,7 @@ export class PdfgeneratorComponent implements OnInit {
           var nombre:string;
           this._translateService.get('PDF_GENERATOR.EXCEL_DOCUMENT_NAME').subscribe(value => { nombre = value; });
           let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-          fs.saveAs(blob, nombre + this.Project.nombre + '.xlsx');
+          fs.saveAs(blob, nombre + this.Evaluacion.nombre + '.xlsx');
 
         });
       });
