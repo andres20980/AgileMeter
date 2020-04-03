@@ -307,8 +307,8 @@ namespace everisapi.API.Services
             EvaluacionEntity evaluacionAnterior = _context.Evaluaciones.Where(e => e.Id == evaluacion.Id).FirstOrDefault();
             evaluacionAnterior.NotasEvaluacion = evaluacion.NotasEvaluacion;
             evaluacionAnterior.NotasObjetivos = evaluacion.NotasObjetivos;
-            evaluacionAnterior.UserNombre = evaluacion.UserNombre;
-            evaluacionAnterior.Fecha = DateTime.Now;
+            //evaluacionAnterior.UserNombre = evaluacion.UserNombre;
+            //evaluacionAnterior.Fecha = DateTime.Now;
 
             //Se finaliza una evaluacion y se calcula su puntuacion
             if (evaluacionAnterior.Estado == false && evaluacion.Estado == true)
