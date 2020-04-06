@@ -132,7 +132,10 @@ export class HomeComponent implements OnInit {
   public RecogerProyectos() {
     this._proyectoService.getProyectosDeUsuario().subscribe(
       res => {
-        this.ListaDeProyectos = res;
+        this.ListaDeProyectos = res.sort((a: any, b: any) => this.sortedNameTeams(a,b)).reduce((x: any, z) =>  x['includes'](z['proyecto'].charAt(0)) ? x : [...x, z.proyecto.charAt(0)], []).reduce((x: any , y: any) => {
+          let guard = res.filter(x => x.proyecto.charAt(0) === y).sort((a, b) => this.sortedTeam(a,b))
+          return [...x, guard]
+          },[]).flatMap(x => x)
         this.ProyectosUser = res;
         this.comprobarEvaluaciones();
         this.getListaDeOficinas(res);
@@ -154,6 +157,35 @@ export class HomeComponent implements OnInit {
         }, 2000);
       });
   }
+
+  public sortedNameTeams(a: any,b: any)
+  {
+    if (a["proyecto"] > b["proyecto"]) {
+      return 1;
+    }
+    if (a["proyecto"] < b["proyecto"]) {
+      return -1;
+    }
+
+    return 0;
+
+  }
+  
+  public sortedTeam(a: any, b: any) {
+    if(a["proyecto"] === b["proyecto"]) {
+      if (a["nombre"] > b["nombre"]) {
+        return 1;
+      }
+      if (a["nombre"] < b["nombre"]) {
+        return -1;
+      }
+    return 0;
+
+    } else {
+      return 0
+    }
+   
+}
 
   public getListaDeOficinas(res) {
     var oficinas = [];

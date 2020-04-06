@@ -44,7 +44,7 @@ import { AddUpdateUserComponent } from './back-office/components/user-management
 import { UserListComponent } from './back-office/components/user-management/user-list/user-list.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatTreeModule} from '@angular/material/tree';
-
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 //Add custom paginator
 import { MatPaginatorIntl } from '@angular/material';
 import { MatPaginationIntlService } from './services/MatPaginationIntlService ';
@@ -122,6 +122,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       MatIconModule,
       MatSidenavModule,
       MatTreeModule,
+      MatAutocompleteModule,
       DragDropModule,
       HttpClientModule,
       TranslateModule.forRoot({

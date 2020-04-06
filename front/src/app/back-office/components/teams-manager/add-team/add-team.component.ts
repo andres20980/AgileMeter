@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ProyectoService } from 'app/services/ProyectoService';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EventEmitterService } from 'app/services/event-emitter.service';
@@ -10,6 +10,8 @@ import { Linea } from 'app/Models/Linea';
 import { User } from 'app/Models/User';
 import { Equipo } from 'app/Models/Equipo';
 import { TranslateService } from '@ngx-translate/core';
+import { Observable } from "rxjs";
+import { startWith, map } from "rxjs/operators";
 
 @Component({
   selector: 'app-add-team',
@@ -28,6 +30,8 @@ export class AddTeamComponent implements OnInit {
   public idEquipo: number = 0;
   public equipo: Equipo;
   public oficina: Office;
+  OficinaEntity = new FormControl('', Validators.required)
+  filteredOficinas: Observable<Office[]>;
   public compareOficina(o1: any, o2: any): boolean {
     return o1.oficinaId === o2.oficinaId;
   }
@@ -68,6 +72,23 @@ export class AddTeamComponent implements OnInit {
     }
   }// end onInit
 
+  private _filterOficinas(val: any): Office[] | any{
+    console.log(val['oficinaNombre'])
+    let filterValue: any;
+    if(typeof val === "object"){ 
+      filterValue= val['oficinaNombre'].toLowerCase() } 
+    else {
+      filterValue= val.toLowerCase()
+      }
+    
+    return this.officeList.filter(s => s['oficinaNombre'].toLowerCase().indexOf(filterValue) === 0)
+  }
+
+  displayFn(ofi: Office[]): string {
+    return ofi ? ofi['oficinaNombre'] : ofi;
+  }
+
+
   public getUserNombre() {
     this.UserNombre = new User(this._teamsService.UsuarioLogeado);
   }
@@ -75,7 +96,8 @@ export class AddTeamComponent implements OnInit {
   public formValidate() {//form validate
     this.addTeamsForm = new FormGroup({
       UserNombre: new FormControl(this.UserNombre.nombre),
-      OficinaEntity: new FormControl('', Validators.required), //officina
+      OficinaEntity: this.OficinaEntity,
+      // OficinaEntity: new FormControl('', Validators.required), //officina
       /* Eliminados temporalmente hasta tener la lista de oficinas, unidades y proyectos 
       UnidadEntity: new FormControl('', Validators.required),//unidad
       LineaEntity: new FormControl('', Validators.required),//linea
@@ -102,6 +124,11 @@ export class AddTeamComponent implements OnInit {
     this._teamsService.getAllOficinas().subscribe(
       res => {
         this.officeList = res;
+        this.filteredOficinas = this.OficinaEntity.valueChanges
+        .pipe(
+          startWith(''),
+          map(ofi => ofi ? this._filterOficinas(ofi) : this.officeList.slice())
+        );
       },
       error => {
         if (error == 404) {
