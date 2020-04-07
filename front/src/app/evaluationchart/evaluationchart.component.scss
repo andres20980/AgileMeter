@@ -38,9 +38,6 @@
         }
     }
 }
-#Grafica {
-  height: 50px;
-}
 
 .legend{
     display: flex;
@@ -54,26 +51,30 @@
   
 
   .legend-global{
+    position: absolute;
+    bottom: 0;
     display: flex;
     width: 12%;
     margin-left: 17%;
     font-size: 12px;
-    margin-bottom: 22px;
     font-weight: bold;
   }
   
   .legend-item{
-    margin-left: 20px;
     display: flex;
     cursor: pointer;
     user-select: none;
+  }
+
+  .legend-items-container {
+    margin-bottom: 15px;
   }
   
   .legend-global-item{
     display: flex;
     cursor: pointer;
     user-select: none;
-    margin-left: 70px;
+    margin-left: 85px;
     margin-bottom: 15px;
   }
   

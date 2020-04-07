@@ -251,14 +251,14 @@ export class AddTeamComponent implements OnInit {
     this.addTeamsForm.addControl('Evaluaciones', new FormControl(this.equipo.evaluaciones));
 
     //campos temporales hasta tener la lista de oficinas, unidades y proyectos
-    //this.addTeamsForm.get('Oficina').setValue(this.equipo.oficina);
+    this.addTeamsForm.get('OficinaEntity').setValue({oficinaId: this.equipo.oficinaEntity.oficinaId, oficinaNombre: this.equipo.oficina});
     this.addTeamsForm.get('Unidad').setValue(this.equipo.unidad);
     this.addTeamsForm.get('Proyecto').setValue(this.equipo.proyecto);
 
 
     //4º recogemos los objetos que marcaremos por defecto en los select
     this.oficina = this.equipo.oficinaEntity;
-
+    
     /*//eliminado temporalmente hasta tener la lista de oficinas, unidades y proyectos
     this.unidad = this.equipo.unidadEntity;
     this.linea = this.equipo.lineaEntity;*/
