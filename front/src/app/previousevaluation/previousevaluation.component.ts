@@ -54,6 +54,7 @@ export class PreviousevaluationComponent implements OnInit {
           this.prevResult = res.evaluacionesResult;
           this.ListaDeEvaluacionesPaginada = res.evaluacionesResult.reduce((acc, item) => {
             item.oficina = item.oficina.trim()
+            item.puntuacion= Math.round(item.puntuacion)
             item.sectionsInfo.map(x => x.puntuacion = Math.round(x.puntuacion))
             return [...acc, item]
           },[]);

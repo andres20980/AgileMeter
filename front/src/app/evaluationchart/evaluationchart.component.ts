@@ -71,6 +71,7 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+
     this.displayPercentage = true;
     this.hiddenGlobal = true;
     this._appComponent.pushBreadcrumb(this.nombreProyecto, "/evaluationresults");
@@ -377,6 +378,13 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
   }
 
   toggleChartData(i: number){
+    let h;
+    if(i === null) {
+      this.chart.config.data.datasets.map((x, indx) => {if(x.label === "Global") h = indx})
+      i = h
+      if(this.hiddenGlobal) this.hiddenGlobal = false;
+      else this.hiddenGlobal = true;
+    }
 
     this.chart.config.data.datasets[i].hidden = !this.chart.config.data.datasets[i].hidden;
     
@@ -405,6 +413,5 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
     this.chart.config.data.datasets[this.chart.config.data.datasets.length - 1].hidden = !this.chart.config.data.datasets[this.chart.config.data.datasets.length - 1].hidden;
     this.chart.update();
   }
-
 
 }

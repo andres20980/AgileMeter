@@ -104,31 +104,19 @@ export class PreguntasTableComponent implements OnInit {
     let respuestaString: string = this.displayRespuesta(row);
 
     //Si (habilitante)
-    if (row.correcta == null) {
-      //Contestado -> Si
-      switch (row.estado) {
-        case 0:
-          classString = "respuesta-no-contestada";
-          break
-        case 1:
-          classString = "respuesta-correcta";
-          break
-        case 2:
-          classString = "respuesta-incorrecta";
-          break
+    switch (row.estado) {
+      case 0:
+        classString = "respuesta-no-contestada";
+        break
+      case 1:
+        (row.correcta) === "Si" ? classString = "respuesta-correcta" : classString = "respuesta-incorrecta"
+        //classString = "respuesta-correcta";   
+        break
+      case 2:
+        (row.correcta) === "No" ?  classString = "respuesta-correcta" : classString = "respuesta-incorrecta"
+        //classString = "respuesta-incorrecta";
+        break
       }
-    } else {
-      if (respuestaString == row.correcta) {
-        classString = "respuesta-correcta";
-      } else {
-        //No contestada
-        if (row.estado == 0) {
-          classString = "respuesta-no-contestada";
-        } else {
-          classString = "respuesta-incorrecta";
-        }
-      }
-    }
     return classString;
   }
 

@@ -8,17 +8,33 @@
       </div>
 
       <!--COMBO PARA LAS OFICINAS-->
-      <div class="col-4">
-        <mat-form-field class="col-12">
-          <mat-select [compareWith]="compareOficina" [value]="oficina" formControlName="OficinaEntity">
-            <mat-option *ngFor="let office of officeList" [value]="office"> <!--(click)="getAllUnidadesDe(office)"> -->
-              {{ office.oficinaNombre }}
+      <div class="col-3">
+        <mat-form-field class="example-full-width">
+          <input matInput
+                 id="Oficina"
+                 aria-label="Office"
+                 [matAutocomplete]="auto"
+                 formControlName="OficinaEntity">
+          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngFor="let oficina of filteredOficinas | async" [value]="oficina">
+              <span>{{oficina.oficinaNombre}}</span>
+            </mat-option>
+          </mat-autocomplete>
+          <mat-label>{{ 'ADD_TEAM.FORM_OFFICE' | translate }}</mat-label>
+          <mat-error *ngIf="hasError('OficinaEntity','required')">{{ 'ADD_TEAM.FORM_OFFICE_REQUIRED' | translate }}</mat-error>
+        </mat-form-field>
+    </div>
+
+
+
+            <!-- <mat-option *ngFor="let office of officeList" [value]="office"> (click)="getAllUnidadesDe(office)"> -->
+              <!-- {{ office.oficinaNombre }}
             </mat-option>
           </mat-select>
           <mat-label>{{ 'ADD_TEAM.FORM_OFFICE' | translate }}</mat-label>
           <mat-error *ngIf="hasError('OficinaEntity','required')">{{ 'ADD_TEAM.FORM_OFFICE_REQUIRED' | translate }}</mat-error>
         </mat-form-field>
-      </div>
+      </div> -->
 <!--
     <!--COMBO PARA LAS UNIDADES-- >
     <div class="col-4">

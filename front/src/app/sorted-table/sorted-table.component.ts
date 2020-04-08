@@ -8,10 +8,13 @@ import { AppComponent } from 'app/app.component';
 import { EvaluacionInfo } from 'app/Models/EvaluacionInfo';
 import { Router } from '@angular/router';
 import { DatePipe } from '@angular/common';
+import { EvaluacionService } from '../services/EvaluacionService';
+import { EnumRol } from 'app/Models/EnumRol';
 
 @Component({
   selector: 'sorted-table',
   templateUrl: './sorted-table.component.html',
+  providers: [EvaluacionService],
   styleUrls: ['./sorted-table.component.scss'],
   animations: [
     trigger('detailExpand', [
@@ -60,8 +63,10 @@ export class SortedTableComponent implements OnInit {
   public devopsassmnt: boolean = false;
   public kanbanassmnt: boolean = false;
   @Output() propagar = new EventEmitter<any>();
+  public UserRole: number = 0;
+  public rol: EnumRol = new EnumRol();
 
-  constructor(private _appComponent: AppComponent,  private _router: Router, private renderer: Renderer) { 
+  constructor(private _appComponent: AppComponent,  private _router: Router, private renderer: Renderer, private evaluacion: EvaluacionService) { 
     this.fieldsTable = [
       ["fecha", "EXCEL_DATE", 12,"dd/mm/yyyy", "Date"],
       ["userNombre", "EXCEL_USER",20,"", "String"],
@@ -92,12 +97,15 @@ export class SortedTableComponent implements OnInit {
       ["kbnpracticas", "EXCEL_PT_KANBAN.PRACTICES", 20,"KANBAN", "String"],
       ["kbnmindset", "EXCEL_PT_KANBAN.MINDSET", 20,"KANBAN", "String"],
       ["kbnaplicacion", "EXCEL_PT_KANBAN.PRACT_APL", 20,"KANBAN", "String"]];
+
+
   }
 
 
 
   ngOnInit()
   {
+    this.UserRole = this._appComponent._storageDataService.Role;
     this.fieldsTable = [
         ["fecha", "EXCEL_DATE", 12,"dd/mm/yyyy", "Date"],
         ["userNombre", "EXCEL_USER",20,"", "String"],
@@ -132,6 +140,21 @@ export class SortedTableComponent implements OnInit {
     //this.propagar.emit(false)
 
 
+  }
+
+  saveNotas(model: Evaluacion): void {
+    if (this.UserRole == this.rol.Administrador || this.UserRole == this.rol.Evaluador) {
+      this.evaluacion.updateEvaluacion(model).subscribe(
+        res => {
+          // console.log("success");
+        },
+        error => {
+          // console.log("error");
+        },
+        () => {
+          // this.Mostrar = true;
+        });
+    }
   }
 
   public GetPagination()
@@ -205,9 +228,7 @@ export class SortedTableComponent implements OnInit {
           this.assessmentSeleccionado = [];
         }
       }
-      console.log("Filtro assesment", selected.assessment);
 
- 
      // this.OficinaSeleccionada = this.originDataSource.filter(x => selected.team.includes(x.nombre)).map(x => x.oficina).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
     }
     if(origen === 'assessment') {

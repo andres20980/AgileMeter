@@ -50,11 +50,6 @@ export class SectionResultsComponent implements OnInit {
   public checkRespuestaCorrecta(row): string {
 
     let classString: string;
-    let respuestaString: string = this.displayRespuesta(row);
-
-    if (respuestaString === "Sí"){
-      respuestaString = "Si"}
-
     //Si (habilitante)
     // if (row.correcta == null) {
       //Contestado -> Si
@@ -90,7 +85,7 @@ export class SectionResultsComponent implements OnInit {
     let respuesta: string = "";
     switch (row.estado) {
       case 0:
-        respuesta = "NC";
+        this._translateService.get('SECTION_RESULTS.ICONS_NOT_ANSWERED').subscribe(value => { respuesta = value; });
         break
       case 1:        
         this._translateService.get('SECTION_RESULTS.YES').subscribe(value => { respuesta = value; });
