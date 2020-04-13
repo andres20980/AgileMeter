@@ -1,68 +1,115 @@
-<g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
-  <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%" />
-</g>
-</g>
-<g>
-  <rect stroke="#000" id="svg_3" height="12.499951" width="8.999964" y="12.559378" x="2.125053" stroke-opacity="null"
-    stroke-width="0" fill="#07cc2e" />
-  <rect stroke="#000" id="svg_4" height="25.499898" width="9.249963" y="-0.44057" x="14.125004" stroke-opacity="null"
-    stroke-width="0" fill="#07cc2e" />
-  <rect stroke="#000" id="svg_5" height="17.999929" width="8.999965" y="7.059399" x="26.624956" stroke-opacity="null"
-    stroke-width="0" fill="#07cc2e" />
-</g>
-</svg>
-</div>
-<div class="legend-global-label">GLOBAL</div>
-</div> -->
-
-<!-- Fin del Global -->
-
-<!-- </div> -->
-</div>
-
-</ng-container>
-</div> <!-- xs- 8  -->
-
-<div class="legend-item col-3 text-right" (click)="toggleChartData(null)"
-  [ngClass]="{'legend-item-disabled':hiddenGlobal}">
-  <div class="legend-global">
-    <!--  *ngIf="item.label == 'Global'"-->
-    <div class="legend-global-item" (click)="toggleGlobalData()">
-      <div class="legend-global-bullet">
-        <svg width="40" height="25" xmlns="http://www.w3.org/2000/svg">
-          <g>
-            <rect fill="none" id="canvas_background" height="27" width="42" y="-1" x="-1" />
-            <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
-              <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%" />
-            </g>
-          </g>
-          <g>
-            <rect stroke="#000" id="svg_3" height="12.499951" width="8.999964" y="12.559378" x="2.125053"
-              stroke-opacity="null" stroke-width="0" fill="#07cc2e" />
-            <rect stroke="#000" id="svg_4" height="25.499898" width="9.249963" y="-0.44057" x="14.125004"
-              stroke-opacity="null" stroke-width="0" fill="#07cc2e" />
-            <rect stroke="#000" id="svg_5" height="17.999929" width="8.999965" y="7.059399" x="26.624956"
-              stroke-opacity="null" stroke-width="0" fill="#07cc2e" />
-          </g>
-        </svg>
+<div class="container">
+  <div class="col-xs" style="padding-bottom: 25px">
+    <div class="row-xs d-flex flex-column"
+      style="height: 20%; border-bottom: 3px solid #5c981b; margin-left: 40px; width: 180px">
+      <div style="font-size: 14px; color: grey; margin-bottom: 6px;">Evaluación</div>
+      <div>
+        <div>{{nombreAssessment}}</div>
       </div>
-      <div class="legend-global-label">GLOBAL</div>
     </div>
-
-    <!-- Fin del Global -->
-
   </div>
-</div>
+  <div id="chart-container">
+    <div class="panelGrafica">
+      <div id="Grafica" class="mx-auto">
+          <div class="legend">
+            <!-- For en el ngContent-->
+            <!-- xs- 8 -->
+            <div class="col-8 legend-items-container">
+              <ng-container *ngFor="let item of legend; let i = index">
+                <div class="legend-item"
+                  [ngClass]="{'legend-item-disabled': chart.config.data.datasets[i].hidden, 'col-8' :item.label !== 'Global'}"
+                  (click)="toggleChartData(i)">
+                  <div class="legend-bullet" *ngIf="item.label != 'Global'">
+                    <svg width="50" height="25" xmlns="http://www.w3.org/2000/svg">
+                      <g>
+                        <rect fill="none" id="canvas_background" height="27" width="52" y="-1" x="-1" />
+                        <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
+                          <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%" />
+                        </g>
+                      </g>
+                      <g>
 
-<!-- Fin for en el content-->
+                        <ellipse [attr.stroke]="item.color" ry="2" rx="2" id="svg_1" cy="12.559423" cx="26.375093"
+                          stroke-width="8" fill="#fff" />
+                        <!--<rect [attr.stroke]="item.color" id="svg_2" height="1.749993" width="47" y="12" x="1.125196" fill-opacity="null" stroke-opacity="null" stroke-width="4" fill="#fff"/>-->
+                      </g>
+                    </svg>
+                  </div>
+
+                  <div *ngIf="item.label != 'Global'">
+                    <div class="legend-label">{{item.label}}</div>
+                  </div>
+
+                  <!--       Aqui empieza el Global       -->
+                  <!-- <div class="legend-global" *ngIf="item.label == 'Global'">
+                  <div class="legend-global-item" (click)="toggleGlobalData()">
+                    <div class="legend-global-bullet">
+                      <svg width="40" height="25" xmlns="http://www.w3.org/2000/svg">
+                        <g>
+                          <rect fill="none" id="canvas_background" height="27" width="42" y="-1" x="-1" />
+                          <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
+                            <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%" />
+                          </g>
+                        </g>
+                        <g>
+                          <rect stroke="#000" id="svg_3" height="12.499951" width="8.999964" y="12.559378" x="2.125053"
+                            stroke-opacity="null" stroke-width="0" fill="#07cc2e" />
+                          <rect stroke="#000" id="svg_4" height="25.499898" width="9.249963" y="-0.44057" x="14.125004"
+                            stroke-opacity="null" stroke-width="0" fill="#07cc2e" />
+                          <rect stroke="#000" id="svg_5" height="17.999929" width="8.999965" y="7.059399" x="26.624956"
+                            stroke-opacity="null" stroke-width="0" fill="#07cc2e" />
+                        </g>
+                      </svg>
+                    </div>
+                    <div class="legend-global-label">GLOBAL</div>
+                  </div> -->
+
+                  <!-- Fin del Global -->
+
+                <!-- </div> -->
+            </div>
+
+            </ng-container>
+          </div> <!-- xs- 8  -->
+
+          <div class="legend-item col-3 text-right" (click)="toggleChartData(null)" [ngClass]="{'legend-item-disabled':hiddenGlobal}">
+            <div class="legend-global"> <!--  *ngIf="item.label == 'Global'"-->
+              <div class="legend-global-item" (click)="toggleGlobalData()">
+                <div class="legend-global-bullet">
+                  <svg width="40" height="25" xmlns="http://www.w3.org/2000/svg">
+                    <g>
+                      <rect fill="none" id="canvas_background" height="27" width="42" y="-1" x="-1" />
+                      <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
+                        <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%" />
+                      </g>
+                    </g>
+                    <g>
+                      <rect stroke="#000" id="svg_3" height="12.499951" width="8.999964" y="12.559378" x="2.125053"
+                        stroke-opacity="null" stroke-width="0" fill="#07cc2e" />
+                      <rect stroke="#000" id="svg_4" height="25.499898" width="9.249963" y="-0.44057" x="14.125004"
+                        stroke-opacity="null" stroke-width="0" fill="#07cc2e" />
+                      <rect stroke="#000" id="svg_5" height="17.999929" width="8.999965" y="7.059399" x="26.624956"
+                        stroke-opacity="null" stroke-width="0" fill="#07cc2e" />
+                    </g>
+                  </svg>
+                </div>
+                <div class="legend-global-label">GLOBAL</div>
+              </div>
+
+              <!-- Fin del Global -->
+
+            </div>
+          </div>
+
+          <!-- Fin for en el content-->
 
 
-</div>
+        </div>
 
 
-</div>
-</div>
-<canvas id="line-chart" width="600" height="450" #mychart></canvas>
+    </div>
+  </div>
+  <canvas id="line-chart" width="600" height="450" #mychart></canvas>
 
 </div>
 <br />
