@@ -29,17 +29,17 @@
           <img class="" src="assets/comment_empty.png" title="{{ 'PDF_GENERATOR.NOTES' | translate }}" />
           <p>{{datos.numNotas}}</p>
         </div> -->
-
-        <circle-progress [percent]="ListaSectionConAsignaciones[i].puntuacion" [toFixed]="1"
+        
+        <circle-progress [percent]="ListaSectionConAsignaciones[i].puntuacion"
           [subtitle]="[formatSubtitle(ListaSectionConAsignaciones[i])]" [subtitleFontSize]="14" [titleFontSize]="26"
           [unitsFontSize]="14" [radius]="74" [space]="-10" [outerStrokeWidth]="10" [innerStrokeWidth]="10"
           [innerStrokeColor]="getLevelColorInner(ListaSectionConAsignaciones[i])"
           [outerStrokeColor]="getLevelColorOuter(ListaSectionConAsignaciones[i])" [outerStrokeLinecap]="'square'"
           [animation]="true" [renderOnClick]="false" [animationDuration]="300"></circle-progress>
-        <div class="text-center circle-progress-title" data-html2canvas-ignore="true"><b>{{datos.nombre}}</b></div>
+        <div class="text-center circle-progress-title" data-html2canvas-ignore="true"><b>{{datos.nombre}}</b></div> <!--  [toFixed]="1"  -->
       </div>
-      <div [ngClass]="formatTotalLevel(ListaSectionConAsignaciones)" [attr.id]="'total'">
-        <circle-progress [percent]="getTotalPercent(ListaSectionConAsignaciones)" [toFixed]="1" [showSubtitle]="false"
+      <div [ngClass]="formatTotalLevel(ListaSectionConAsignaciones)" [attr.id]="'total'"> <!--  [toFixed]="1"-->
+        <circle-progress [percent]="getTotalPercent(ListaSectionConAsignaciones)" [showSubtitle]="false"
           [subtitle]="[formatTotalSubtitle(ListaSectionConAsignaciones)]" [subtitleFontSize]="14" [titleFontSize]="26"
           [unitsFontSize]="14" [radius]="74" [space]="-10" [outerStrokeWidth]="10" [innerStrokeWidth]="10"
           [innerStrokeColor]="'#b8457a30'" [outerStrokeColor]="'#b8457a'" [outerStrokeLinecap]="'square'"
@@ -48,7 +48,6 @@
           <b>{{ 'PDF_GENERATOR.GLOBAL'| translate }}</b></div>
         <!-- <div class="text-center"><b>GLOBAL</b></div> -->
       </div>
-
     </div>
 
   </div>
