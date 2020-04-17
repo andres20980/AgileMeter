@@ -10,8 +10,13 @@
         <input matInput (keyup)="applyFilter($event.target.value)"
           placeholder="{{ 'USER_LIST.LIST_FILTER' | translate }}">
       </mat-form-field>
+      <btn-export-to-excel 
+        [dataTableInput]="datosFiltrados" 
+        [fieldsInput]="fieldsTable"
+        [objectTranslateInput]="objectTranslate">
+      </btn-export-to-excel>
     </div>
-    <div class="col-9">
+    <div class="col-8 ml-4">
       <button class="transparente col-3 float-right pt-3" (click)="btnAddClick()">
         <img class="informe" src="assets/user_add.png" title="{{ 'USER_LIST.ICON_ADD_USER' | translate }}" />
       </button>
