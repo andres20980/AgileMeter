@@ -1,6 +1,6 @@
 import { ProyectoService } from 'app/services/ProyectoService';
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
+import { Component, OnInit, ViewChild, ViewEncapsulation, ElementRef } from '@angular/core';
+import { MatSort, MatTableDataSource, MatPaginator, Sort, MatInput } from '@angular/material';
 import { UserService } from 'app/services/UserService';
 
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { UserWithRole } from 'app/Models/UserWithRole';
 import { UserString } from 'app/Models/UserString';
 import { EventEmitterService } from 'app/services/event-emitter.service';
+import { StorageDataService } from 'app/services/StorageDataService'
 import {TranslateService} from '@ngx-translate/core';
 
 @Component({
@@ -20,6 +21,8 @@ export class UserListComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatInput) matinp: MatInput;
+  @ViewChild('inputFilter') inpFilt: ElementRef
 
   public ErrorMessage: string = null;
 
@@ -34,17 +37,30 @@ export class UserListComponent implements OnInit {
   selectedUsuarioInfoWithProgress;
   public MensajeNotificacion: string = null;
 
+  public datosFiltrados: any[];
+  public fieldsTable : any[];
+  public objectTranslate : string;
+
   constructor(
     private _userService: UserService,
     private modalService: NgbModal,
     private _router: Router,
     private _proyectoService: ProyectoService,
+    private _storageService: StorageDataService,
     private _eventService: EventEmitterService,
     private _translateService : TranslateService
   ) { }
 
   ngOnInit() {
     this.getUsers();
+
+    //Inicializar componentes de export table to excel
+    this.datosFiltrados = [];
+    this.fieldsTable = [
+      ["nombre", "TABLE_COL_USER", 30,"", "String"],
+      ["nombreCompleto", "TABLE_COL_NAME",20,"", "String"],
+      ["nombreRole", "TABLE_COL_ROLE", 30,"", "String"]];
+    this.objectTranslate = "USER_LIST";
   }
 
   public btnAsigTeamsClick(row) {
@@ -67,6 +83,8 @@ export class UserListComponent implements OnInit {
   //Método para el filtrado
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    this._storageService.officeTeams = filterValue;
+    this.datosFiltrados = this.dataSource.filteredData;
   }
 
   //Metodo encargado de eliminar la evaluacion pasandole una evaluacionId
@@ -136,6 +154,12 @@ export class UserListComponent implements OnInit {
           this.paginator.pageIndex--;
         }
         this.dataSource.sort = this.sort;
+
+        if(this._storageService.officeTeams){
+            this.matinp.value = this._storageService.officeTeams
+            this.applyFilter(this._storageService.officeTeams)
+         }
+        this.datosFiltrados = this.dataSource.data;
       },
       error => {
         if (error == 404) {

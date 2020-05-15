@@ -50,7 +50,10 @@
 		"NOTIFICATION_DELETE_USER_ERROR": "Sorry, we couldn't remove user",
 		"ICON_TEAM_ASSIGN": "Assign teams",
 		"ICON_EDIT_USER": "Edit user",
-		"ICON_REMOVED_USER": "Delete user"
+		"ICON_REMOVED_USER": "Delete user",
+		"EXCEL_WORKSHEET": "Users",
+		"EXCEL_TITLE": "Users List",
+		"EXCEL_DOCUMENT_NAME":"Users_List"
 	},
 	"TEAM_MANAGEMENT": {
 		"TEAM_ASSIGN": "Teams assignment",
