@@ -34,11 +34,9 @@ export class AppComponent {
     public translate: TranslateService
   ) {
     this.ScreenWidth = window.innerWidth;
-
     translate.addLangs(['es', 'en']);
-    translate.setDefaultLang('es');
-
-    const browserLang = translate.getBrowserLang();
+ //   translate.setDefaultLang('en');
+    const browserLang = 'es'//translate.getBrowserLang();
     translate.use(browserLang.match(/es|en/) ? browserLang : 'es');
     this.obtenerCodigoIdioma(browserLang);
   }
@@ -47,7 +45,7 @@ export class AppComponent {
     this.translate.use(lang);
     this.refreshBreadCrumb();
     this.obtenerCodigoIdioma(lang);
-    this._router.navigate(["/login"]);
+    this._router.navigate(["/home"]);
   }
 
   public obtenerCodigoIdioma(lang) {

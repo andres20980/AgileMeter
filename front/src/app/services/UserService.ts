@@ -40,6 +40,17 @@ export class UserService {
       catchError(this.errorHandler));
   }
 
+  getUser(){
+    let nombre = "Admin";
+    let Token = this._appComponent.ComprobarUserYToken();
+    let headers = new Headers({
+      'Authorization': Token
+    });
+    return this._http.get(this.url + 'users/' + nombre, { headers: headers }).pipe(
+      map((response: Response) => response.json()),
+      catchError(this.errorHandler));
+  }
+
   //Este metodo recoge todos los roles de la base de datos
   getAllRoles() {
     var codigoIdioma = this._appComponent._storageDataService.codigoIdioma;
@@ -111,7 +122,6 @@ export class UserService {
   }
 
   addUser(user: UserCreateUpdate) {
-    //console.log(user);
     let Token = this._appComponent.ComprobarUserYToken();
     let params = JSON.stringify(user);
     let headers = new Headers({

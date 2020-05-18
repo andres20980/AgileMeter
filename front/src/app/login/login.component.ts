@@ -3,6 +3,7 @@ import { UserService } from '../services/UserService';
 import { AppComponent } from '../app.component';
 import { User } from 'app/Models/User';
 import { Router } from "@angular/router";
+import { map } from "rxjs/operators";
 
 
 @Component({
@@ -52,7 +53,7 @@ export class LoginComponent implements OnInit {
       var User = { 'nombre': this.nombreDeUsuario, 'password': this.passwordDeUsuario };
       this._userService.SignUpMe(User).subscribe(
         res => {
-
+          
           //Si no existe muestra un error
           if (!res) {
             this.ErrorMessage = "No existe el usuario especificado"
@@ -60,6 +61,7 @@ export class LoginComponent implements OnInit {
             //Si existe comprueba si la contraseña es correcta y es redirigido
             if (this.Recuerdame) {
               //Si el usuario quiere ser recordado lo guardara en el localStorage
+           
               localStorage.setItem("user", this.nombreDeUsuario);
               localStorage.setItem("passuser", this.passwordDeUsuario);
               localStorage.setItem("tokenuser", res.access_token);
@@ -73,6 +75,8 @@ export class LoginComponent implements OnInit {
             }
             this._router.navigate(['/home']);
           }
+
+          this.getFavoriteLang();
         },
         error => {
           //Si el servidor tiene algún tipo de problema mostraremos este error
@@ -113,6 +117,16 @@ export class LoginComponent implements OnInit {
     } else {
       //this.Recuerdame = true;
     }
+  }
+
+  public getFavoriteLang()
+  {
+    this._userService.getUser().pipe(map(x => x)).subscribe( r => {
+      console.log("datos del usuario postlogin", r)
+      setTimeout(() => {
+        this._app.ChangeLang("es")
+      },9000)
+    });
   }
 
 }
