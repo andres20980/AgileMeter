@@ -76,6 +76,7 @@
 		"FORM_NAME": "Nombre",
 		"FORM_FULL_NAME_REQUIRED": "El campo nombre no puede estar vacio.",
 		"FORM_ROL": "Rol",
+		"FORM_IDIOMA": "Idioma",
 		"BTN_GUARDAR": "Guardar",
 		"BTN_BACK": "Volver",
 		"MODAL_HEADER": "Importante",

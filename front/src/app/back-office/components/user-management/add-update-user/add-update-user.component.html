@@ -29,7 +29,7 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="col-8">
+        <mat-form-field class="col-6">
           <input matInput type="text" formControlName="NombreCompleto" id="NombreCompleto"
             placeholder="{{ 'ADD_UPDATE_USER.FORM_NAME' | translate }}" value="{{this.user?.nombreCompleto}}">
           <mat-error *ngIf="hasError('NombreCompleto','required')">
@@ -44,6 +44,19 @@
             </mat-option>
           </mat-select>
           <mat-label>{{ 'ADD_UPDATE_USER.FORM_ROL' | translate }}</mat-label>
+        </mat-form-field>
+
+        <!--COMBO PARA LOS IDIOMAS-->
+        <mat-form-field class="col-2">
+          <mat-select [(value)]="idiomaFavorito" formControlName="IdiomaFavorito">
+            <mat-option value="es">
+              ES
+            </mat-option>
+            <mat-option value="en">
+              EN
+            </mat-option>
+          </mat-select>
+          <mat-label>{{ 'ADD_UPDATE_USER.FORM_IDIOMA' | translate }}</mat-label>
         </mat-form-field>
       </div>
 

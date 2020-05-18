@@ -387,8 +387,12 @@ namespace everisapi.API.Services
         {
             usuario.Role = _context.Roles.Where(r => r.Id == usuario.Role.Id).FirstOrDefault();
             usuario.Activo = true;
+            if(usuario.IdiomaFavorito == null){
+                usuario.IdiomaFavorito = "es";
+            }
             _context.Users.Add(usuario);
             this.AddProjectTest(usuario.Nombre);
+
             return SaveChanges();
         }
 
