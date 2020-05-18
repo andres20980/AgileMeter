@@ -423,6 +423,7 @@ namespace everisapi.API.Services
             UserAlter.RoleId = usuario.RoleId;
             UserAlter.NombreCompleto = usuario.NombreCompleto;
             UserAlter.Password = usuario.Password;
+            UserAlter.IdiomaFavorito = usuario.IdiomaFavorito;
 
             return SaveChanges();
         }

@@ -201,6 +201,7 @@ namespace everisapi.API.Controllers
             userEntity.Activo = UsuarioUpdate.Activo;
             userEntity.RoleId = UsuarioUpdate.Role.Id;
             userEntity.NombreCompleto = UsuarioUpdate.NombreCompleto;
+            userEntity.IdiomaFavorito = UsuarioUpdate.IdiomaFavorito;
 
             if (UsuarioUpdate.Password != null)
             {             
