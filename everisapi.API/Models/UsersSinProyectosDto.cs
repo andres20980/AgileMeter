@@ -11,5 +11,11 @@ namespace everisapi.API.Models
 
         public string Password { get; set; }
         public string NombreCompleto { get; set; }
+
+        public int RoleId { get; set; }
+
+         public bool Activo { get; set; }
+
+        public string IdiomaFavorito { get; set;}
     }
 }

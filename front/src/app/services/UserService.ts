@@ -22,7 +22,6 @@ export class UserService {
 
   constructor(private _http: Http, private _router: Router,
     private _appComponent: AppComponent) {
-
     //this.url = window.location.protocol +"//"+ window.location.hostname + ":60406/api/";    
     this.url = StaticHelper.ReturnUrlByEnvironment();
 
@@ -31,6 +30,7 @@ export class UserService {
   //Este metodo recoge todos los usuarios de la base de datos
   getUsers() {
     var codigoIdioma = this._appComponent._storageDataService.codigoIdioma;
+
     let Token = this._appComponent.ComprobarUserYToken();
     let headers = new Headers({
       'Authorization': Token
@@ -40,8 +40,9 @@ export class UserService {
       catchError(this.errorHandler));
   }
 
-  getUser(){
-    let nombre = "Admin";
+  getUser(userName: string){
+    console.log("veamos verdaderamente user",userName)
+    let nombre = userName;
     let Token = this._appComponent.ComprobarUserYToken();
     let headers = new Headers({
       'Authorization': Token
@@ -50,6 +51,7 @@ export class UserService {
       map((response: Response) => response.json()),
       catchError(this.errorHandler));
   }
+
 
   //Este metodo recoge todos los roles de la base de datos
   getAllRoles() {

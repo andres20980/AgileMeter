@@ -1,16 +1,18 @@
-import { Component, HostListener } from '@angular/core';
+import { UserPermission } from './login/login.component';
+import { Component, HostListener, Injectable, Inject } from '@angular/core';
 import { StorageDataService } from './services/StorageDataService';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { ProyectoService } from './services/ProyectoService';
 import { TranslateService } from '@ngx-translate/core';
 import { EnumIdiomas } from './Models/EnumIdiomas';
+import { ChangeLangService } from './services/ChangeLang.service'
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  providers: [StorageDataService]
+  providers: [StorageDataService, ChangeLangService]
 })
 export class AppComponent {
   public NombreDeUsuario: string = null;
@@ -29,9 +31,10 @@ export class AppComponent {
 
 
   constructor(
+    private _chng: ChangeLangService,
     public _storageDataService: StorageDataService,
     public _router: Router,
-    public translate: TranslateService
+    public translate: TranslateService,
   ) {
     this.ScreenWidth = window.innerWidth;
     translate.addLangs(['es', 'en']);
@@ -41,7 +44,8 @@ export class AppComponent {
     this.obtenerCodigoIdioma(browserLang);
   }
 
-  public ChangeLang(lang: string) {
+  public ChangeLang(lang: string, user: UserPermission) {
+    this._chng.updateLangUser(this.NombreDeUsuario,lang, user)
     this.translate.use(lang);
     this.refreshBreadCrumb();
     this.obtenerCodigoIdioma(lang);

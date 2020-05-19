@@ -200,7 +200,7 @@
               {{i + 1}}. {{preguntaDada.pregunta}}
             </div>
             <div class="col-md-2 yes-no-centered" id="yes_no_btn_{{i}}">
-            <!--   <div class="row m-0 yes-no-width">
+              <div class="row m-0 yes-no-width">
                 <div class="col p-0">
                   <button class="w-100 h-100 questions-yes-btn mat-elevation-z3 item-not-selected"
                     [class.first-item]="preguntaDada.esHabilitante"
@@ -217,12 +217,7 @@
                     [class.item-disable-no-color]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
                     (click)="AnswerQuestion(preguntaDada,i,2)">{{ 'NEW_EVALUATION.NO' | translate }}</button>
                 </div>
-              </div> -->
-            <div class="row m-0 yes-no-width">
-               <app-nobinary></app-nobinary>
-            </div>
-
-
+              </div>
             </div>
             
 

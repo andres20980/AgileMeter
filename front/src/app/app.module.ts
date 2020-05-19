@@ -63,7 +63,6 @@ import { BtnExportToExcelComponent } from './btn-export-to-excel/btn-export-to-e
 import { EvaluationchartComponent } from './evaluationchart/evaluationchart.component';
 import { SubsProjectPipe }  from './sorted-table/subsProject.pipe';
 import { OverrideDirective } from './back-office/components/teams-manager/override.directive';
-import { NobinaryComponent } from './nobinary/nobinary.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -102,8 +101,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       BtnExportToExcelComponent,
       EvaluationchartComponent,
       SubsProjectPipe,
-      OverrideDirective,
-      NobinaryComponent
+      OverrideDirective
    ],
    imports: [
       BrowserModule,
