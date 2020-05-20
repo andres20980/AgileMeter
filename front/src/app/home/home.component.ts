@@ -62,9 +62,8 @@ export class HomeComponent implements OnInit {
     //Cargamos cargando el usuario en el componente mientras verificamos si esta logueado
     //En casao de no estar logeado nos enviara devuelta al login
     if (!this._proyectoService.verificarUsuario()) {
-      this._router.navigate(['/login']);
+      this._router.navigate(['/home']);
     }
-    //console.log(this._proyectoService.UserLongName);
 
     this._appComponent.popBreadcrumb(0);
     this._appComponent.pushBreadcrumb("BREADCRUMB.HOME", "/home");
@@ -238,13 +237,11 @@ export class HomeComponent implements OnInit {
 
   //Este metodo guarda el proyecto que a sido seleccionado en el front
   public SeleccionDeProyecto() {
-    console.log(this.OficinaSeleccionada);
     //Actualizamos la oficina en el caso de que no esté asignada
     if (this.OficinaSeleccionada === undefined)
     {
       this.OficinaSeleccionada = this.ProyectoSeleccionado.oficina;
     }
-    console.log(this.OficinaSeleccionada);
 
     this._appComponent._storageDataService.UserProjectSelected = this.ProyectoSeleccionado;
     this._appComponent._storageDataService.ProjectSelected = this.ProyectoSeleccionado;

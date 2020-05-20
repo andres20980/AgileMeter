@@ -125,6 +125,6 @@ export class PendingevaluationComponent implements OnInit {
         }, () => {
           this.MostrarTabla = true
         })
-        this._appComponent.pushBreadcrumb("BREADCRUMB.PENDING_ASSESSMENTS", "/finishpending");
+        this._appComponent.pushBreadcrumb("BREADCRUMB.PENDING_ASSESSMENTS", "/pendingevaluations");
     }
   }

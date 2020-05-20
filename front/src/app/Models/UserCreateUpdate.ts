@@ -5,7 +5,8 @@ export class UserCreateUpdate {
 		public nombre: string,
 		public password: string,
 		public nombreCompleto: string,
-		public role: Role
+		public role: Role,
+		public idiomaFavorito: string
 	) {
 	}
 }

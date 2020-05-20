@@ -51,7 +51,10 @@
 		"NOTIFICATION_DELETE_USER_ERROR": "Ups, lo sentimos, no pudimos eliminar al usuario",
 		"ICON_TEAM_ASSIGN": "Asignar equipos",
 		"ICON_EDIT_USER": "Editar usuario",
-		"ICON_REMOVED_USER": "Eliminar usuario"
+		"ICON_REMOVED_USER": "Eliminar usuario",
+		"EXCEL_WORKSHEET": "Usuarios",
+		"EXCEL_TITLE": "Listado de Usuarios",
+		"EXCEL_DOCUMENT_NAME":"Listado_Usuarios"
 	},
 	"TEAM_MANAGEMENT": {
 		"TEAM_ASSIGN": "Asignación de equipos",
@@ -73,6 +76,7 @@
 		"FORM_NAME": "Nombre",
 		"FORM_FULL_NAME_REQUIRED": "El campo nombre no puede estar vacio.",
 		"FORM_ROL": "Rol",
+		"FORM_IDIOMA": "Idioma",
 		"BTN_GUARDAR": "Guardar",
 		"BTN_BACK": "Volver",
 		"MODAL_HEADER": "Importante",

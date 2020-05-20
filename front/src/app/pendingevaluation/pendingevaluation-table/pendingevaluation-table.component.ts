@@ -81,14 +81,13 @@ export class PendingevaluationTableComponent implements OnInit, DoCheck {
     this.objectTranslate = "PENDING_EVALUATION";
     this.LoadDataSource();
     this.originDataSource = this.dataSource.data;
-    this.originListOficina = this.dataSource.data.map(x => x).reduce((x,y) => x.includes(y.oficina) ? x : [...x, y.oficina],[]);
+    this.originListOficina = this.dataSource.data.map(x => x).reduce((x,y) => x.includes(y.oficina) ? x : [...x, y.oficina],[]).sort();
     this.origingListEquipos = this.dataSource.data.map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
     this.originListaAssessment = this.dataSource.data.map(x => x).reduce((x,y) => x.includes(y.assessmentName) ? x : [...x, y.assessmentName],[]);
-    this.ListaDeOficinas= this.dataSource.data.map(x => x).reduce((x,y) => x.includes(y.oficina) ? x : [...x, y.oficina],[]);
-    this.listaDeAssessment = this.dataSource.data.map(x => x).reduce((x,y) => x.includes(y.assessmentName) ? x : [...x, y.assessmentName],[]);
-    this.ListaDeEquipos = this.dataSource.data.map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+    this.ListaDeOficinas= this.dataSource.data.map(x => x).reduce((x,y) => x.includes(y.oficina) ? x : [...x, y.oficina],[]).sort();
+    this.listaDeAssessment = this.dataSource.data.map(x => x).reduce((x,y) => x.includes(y.assessmentName) ? x : [...x, y.assessmentName],[]).sort();
+    this.ListaDeEquipos = this.dataSource.data.map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]).sort();
 
-    console.log(this.pendientesSelect) // this.pendientesSelect['oficina'] && this.pendientesSelect['equipo'] && this.pendientesSelect['assessment']
     if(this.pendientesSelect){
       this.OficinaSeleccionada.push(this.pendientesSelect['oficina'])
       this.EquipoSeleccionado.push(this.pendientesSelect['equipo']);
@@ -218,10 +217,10 @@ export class PendingevaluationTableComponent implements OnInit, DoCheck {
         if(this.EquipoSeleccionado.length >= 1) this.EquipoSeleccionado = [];
         if(this.assessmentSeleccionado.length >= 1) this.assessmentSeleccionado = [];
   
-        this.ListaDeEquipos = this.originDataSource.filter(x => selected.oficina.includes(x.oficina)).map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
-        this.listaDeAssessment = this.originDataSource.filter(x => selected.oficina.includes(x.oficina)).map(x => x.assessmentName).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+        this.ListaDeEquipos = this.originDataSource.filter(x => selected.oficina.includes(x.oficina)).map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]).sort();
+        this.listaDeAssessment = this.originDataSource.filter(x => selected.oficina.includes(x.oficina)).map(x => x.assessmentName).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]).sort();
   
-        selected.team = this.ListaDeEquipos;
+        selected.team = this.ListaDeEquipos
         selected.assessment = this.listaDeAssessment
       }
   
@@ -231,7 +230,7 @@ export class PendingevaluationTableComponent implements OnInit, DoCheck {
           // cuando no hay equipo seleccionado se queda a 0
           this.assessmentSeleccionado = [];
         } else  {
-          this.assessmentSeleccionado = this.originDataSource.filter(x => selected.team.includes(x.nombre)).map(x => x.assessmentName).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+          this.assessmentSeleccionado = this.originDataSource.filter(x => selected.team.includes(x.nombre)).map(x => x.assessmentName).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]).sort();
           selected.assessment = [];
           if(this.assessmentSeleccionado.length == 1){
             selected.assessment = this.assessmentSeleccionado;
@@ -247,8 +246,8 @@ export class PendingevaluationTableComponent implements OnInit, DoCheck {
        // this.OficinaSeleccionada = this.originDataSource.filter(x => selected.team.includes(x.nombre)).map(x => x.oficina).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
       }
       if(origen === 'assessment') {
-        this.ListaDeOficinas = this.originDataSource.filter(x => selected.assessment.includes(x.assessmentName)).map(x => x.oficina).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
-        this.ListaDeEquipos = this.originDataSource.filter(x => selected.assessment.includes(x.assessmentName)).map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
+        this.ListaDeOficinas = this.originDataSource.filter(x => selected.assessment.includes(x.assessmentName)).map(x => x.oficina).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]).sort();
+        this.ListaDeEquipos = this.originDataSource.filter(x => selected.assessment.includes(x.assessmentName)).map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]).sort();
       }
       
        // viejo nuevo
@@ -258,9 +257,9 @@ export class PendingevaluationTableComponent implements OnInit, DoCheck {
   
       if(this.OficinaSeleccionada.length === 0 && this.EquipoSeleccionado.length === 0 && this.assessmentSeleccionado.length === 0) {
         this.dataSource.data = this.originDataSource;
-        this.ListaDeEquipos = this.originDataSource.reduce((x,y) => x.includes(y.nombre) ? x : [...x, y.nombre],[]);
-        this.ListaDeOficinas = this.originDataSource.reduce((x,y) => x.includes(y.oficina) ? x : [...x, y.oficina],[]);
-        this.listaDeAssessment = this.originDataSource.reduce((x,y) => x.includes(y.assessmentName) ? x : [...x, y.assessmentName],[])
+        this.ListaDeEquipos = this.originDataSource.reduce((x,y) => x.includes(y.nombre) ? x : [...x, y.nombre],[]).sort();
+        this.ListaDeOficinas = this.originDataSource.reduce((x,y) => x.includes(y.oficina) ? x : [...x, y.oficina],[]).sort();
+        this.listaDeAssessment = this.originDataSource.reduce((x,y) => x.includes(y.assessmentName) ? x : [...x, y.assessmentName],[]).sort()
         
       }
     }
