@@ -96,7 +96,6 @@ namespace everisapi.API.Controllers
         {
 
             UserEntity userEntity = _userInfoRepository.GetUser(Nombre, false);
-            _logger.LogInformation("changrilaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
             userEntity.IdiomaFavorito = Idioma;
 
             //Comprueba que se guardo bien y lo envia

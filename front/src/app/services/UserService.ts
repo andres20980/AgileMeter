@@ -41,7 +41,6 @@ export class UserService {
   }
 
   getUser(userName: string){
-    console.log("veamos verdaderamente user",userName)
     let nombre = userName;
     let Token = this._appComponent.ComprobarUserYToken();
     let headers = new Headers({

@@ -26,7 +26,7 @@ updateLangUser(nombre: string, lang: string, user: UserPermission )
     'Authorization': Token
   });
   return this._http.put(this.url + 'users/'+nombre+'/idioma/'+lang , params, { headers: headers }).pipe(
-    map(res => res)).subscribe(x => console.log("terminando changi"))
+    map(res => res)).subscribe(x => x)
 }
 
 

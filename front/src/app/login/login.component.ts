@@ -129,9 +129,7 @@ export class LoginComponent implements OnInit {
 
   public getFavoriteLang(userName: string)
   {
-    console.log();
     this._userService.getUser(userName).pipe(map(x => x)).subscribe( r => {
-      console.log("usuario completo",r)
       let currentUser: UserPermission = {NombreCompleto: r.nombreCompleto, Password: r.password} 
       this._app.ChangeLang(r.idiomaFavorito,currentUser)
     });
