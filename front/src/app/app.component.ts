@@ -49,7 +49,6 @@ export class AppComponent {
     this.translate.use(lang);
     this.refreshBreadCrumb();
     this.obtenerCodigoIdioma(lang);
-    this._router.navigate(["/home"]);
   }
 
   public obtenerCodigoIdioma(lang) {
