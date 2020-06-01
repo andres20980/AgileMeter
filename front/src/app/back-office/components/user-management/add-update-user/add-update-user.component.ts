@@ -24,6 +24,7 @@ export class AddUpdateUserComponent implements OnInit {
 
   public rolList: Role[];
   rol: Role = { id: 1, role: "Usuario" };
+  idiomaFavorito = "es";
   compareRol(o1: any, o2: any): boolean {
     return o1.id === o2.id;
   }
@@ -53,7 +54,8 @@ export class AddUpdateUserComponent implements OnInit {
         NombreCompleto: new FormControl(this.user.nombreCompleto, Validators.required),
         Password: new FormControl(null),
         Role: new FormControl(this.rol),
-        Activo: new FormControl(true)
+        Activo: new FormControl(true),
+        IdiomaFavorito: new FormControl(this.idiomaFavorito),
       });
       this.userForm.controls['Nombre'].disable();
     } else {
@@ -62,6 +64,7 @@ export class AddUpdateUserComponent implements OnInit {
         NombreCompleto: new FormControl('', Validators.required),
         Password: new FormControl('', Validators.required),
         Role: new FormControl(this.rol),
+        IdiomaFavorito: new FormControl(this.idiomaFavorito),
       });
     }
   }
@@ -166,6 +169,7 @@ export class AddUpdateUserComponent implements OnInit {
 
     //2º recogemos los objetos que marcaremos por defecto en los select
     this.rol = this.user.role;
+    this.idiomaFavorito = this.user.idiomaFavorito;
   }
 
   public AbrirModal(content, form) {

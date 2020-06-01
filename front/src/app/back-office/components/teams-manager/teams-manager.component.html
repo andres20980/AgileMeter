@@ -63,7 +63,7 @@
           <mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'TEAM_MANAGER.TABLE_COL_TEAM' | translate }}
           </mat-header-cell>
           -->
-          <mat-cell *matCellDef="let row">{{row.nombre}} </mat-cell>
+          <mat-cell class="team-manager-nombre" *matCellDef="let row " [textoverride]>{{row.nombre}} </mat-cell>
         </ng-container>
 
         <!-- tamaño  -->

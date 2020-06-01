@@ -49,6 +49,9 @@ export class StorageDataService {
   public ProjectSelected: Proyecto = null;
   public AssessmentSelected: Assessment = null;
 
+  //
+  public officeTeams: any;
+
 
   public GetToken() {
     if (this.TokenUser == null || this.TokenUser == undefined || this.TokenUser == "") {

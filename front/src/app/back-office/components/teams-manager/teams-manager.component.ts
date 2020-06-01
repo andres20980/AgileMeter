@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild, Input, ViewEncapsulation } from '@angular/core';
-import { MatSort, MatTableDataSource, MatPaginator, Sort } from '@angular/material';
+import { Office } from 'app/Models/Office';
+import { Component, OnInit, ViewChild, Input, ViewEncapsulation, ElementRef } from '@angular/core';
+import { MatSort, MatTableDataSource, MatPaginator, Sort, MatInput } from '@angular/material';
 import { AppComponent } from 'app/app.component';
 import { ProyectoService } from 'app/services/ProyectoService';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -13,6 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
 //Excel
 import * as fs from 'file-saver';
 import { Workbook } from 'exceljs';
+import { StorageDataService } from 'app/services/StorageDataService';
 
 @Component({
   selector: 'app-teams-manager',
@@ -23,6 +25,8 @@ export class TeamsManagerComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatInput) matinp: MatInput;
+  @ViewChild('inputFilter') inpFilt: ElementRef
   public ErrorMessage: string = null;
   public MensajeNotificacion: string = null;
   dataSource: MatTableDataSource<any>;
@@ -42,6 +46,7 @@ export class TeamsManagerComponent implements OnInit {
 
   constructor(
     private _proyectoService: ProyectoService,
+    private _storageService: StorageDataService,
     private modalService: NgbModal,
     private router: Router,
     private _eventService: EventEmitterService,
@@ -51,7 +56,6 @@ export class TeamsManagerComponent implements OnInit {
   ngOnInit() {
     this.datosFiltrados = [];
     this.getTeams();
-
     //fieldsTable = [data, translate, size, formato(date, percentage), tipo]
     this.fieldsTable = [
       ["oficina", "TABLE_COL_OFICCE", 30,"", "String"],
@@ -73,6 +77,10 @@ export class TeamsManagerComponent implements OnInit {
           this.paginator.pageIndex--;
         }
         this.dataSource.sort = this.sort;
+        if(this._storageService.officeTeams){
+          this.matinp.value = this._storageService.officeTeams
+          this.applyFilter(this._storageService.officeTeams)
+        } 
         this.datosFiltrados = this.dataSource.data;
       },
       error => {
@@ -156,6 +164,7 @@ export class TeamsManagerComponent implements OnInit {
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
+    this._storageService.officeTeams = filterValue;
     this.datosFiltrados = this.dataSource.filteredData;
   }
 

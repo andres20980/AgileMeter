@@ -91,6 +91,26 @@ namespace everisapi.API.Controllers
             }
         }
 
+        [HttpPut("{Nombre}/idioma/{Idioma}")]
+        public IActionResult UpdateIdiomaUsuario(String Nombre, String Idioma)
+        {
+
+            UserEntity userEntity = _userInfoRepository.GetUser(Nombre, false);
+            userEntity.IdiomaFavorito = Idioma;
+
+            //Comprueba que se guardo bien y lo envia
+            if (_userInfoRepository.AlterUserRole(userEntity))
+            {
+                return Ok("El usuario fue modificado correctamente.");
+            }
+            else
+            {
+                return BadRequest();
+            }
+
+        }
+
+
         //Introduciendo el nombre del usuario recogemos todos sus roles
         [HttpGet("{Nombre}/roles")]
         public IActionResult GetRoles(String Nombre)
@@ -201,6 +221,7 @@ namespace everisapi.API.Controllers
             userEntity.Activo = UsuarioUpdate.Activo;
             userEntity.RoleId = UsuarioUpdate.Role.Id;
             userEntity.NombreCompleto = UsuarioUpdate.NombreCompleto;
+            userEntity.IdiomaFavorito = UsuarioUpdate.IdiomaFavorito;
 
             if (UsuarioUpdate.Password != null)
             {             
