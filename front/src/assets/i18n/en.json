@@ -1,6 +1,7 @@
 {
 	"APP": {
-		"HI": "Hi"
+		"HI": "Hi",
+		"ABOUT": "About AgileMeter"
 	},
 	"BREADCRUMB": {
 		"HOME": "Home",
@@ -9,7 +10,9 @@
 		"RESULTS": "Results",
 		"SECTIONS": "Sections",
 		"QUESTIONS": "Questions",
-		"PENDING_ASSESSMENTS": "Pending assessments"
+		"PENDING_ASSESSMENTS": "Pending assessments",
+		"ABOUT": "About AgileMeter"
+
 	},
 	"HOME": {
 		"SELECT_TEAM": "Select a team",
@@ -402,5 +405,13 @@
 	"CUSTOM_SELECT": {
 		"OTHER": "other",
 		"OTHERS": "others"
+	},
+	"ABOUT":{
+		"TITLE": "What is AgileMeter?",
+		"DESCRIPTION1": "It is an everis beAgile asset that aims to measure the Agile Maturity Level of teams, serving as a lever for transformation in organizations.",
+		"DESCRIPTION2": "It has different transformation dimensions and for each of them, it emits a Maturity Level as a result of an assessment.",
+		"DESCRIPTION3": "The purpose of this platform is to provide a tool to evolve the level of Agile adoption in teams of an organization.",
+		"DESCRIPTION4": "The use of this tool is through the Agile Coach of BeAgile and CoE.",
+		"DESCRIPTION5": "For more information, you can send us an email to: "
 	}
 }

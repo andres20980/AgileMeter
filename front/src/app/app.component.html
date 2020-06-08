@@ -8,18 +8,9 @@
             <div *ngIf="this._storageDataService.RoleAdmin == true" class="col p-0 us-none" id="backoffice">
                 <a routerLink="/backoffice" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Backoffice</a>
               </div>
-              
-          <div class="col-5 p-0 us-none" id="inicio">
-            <!-- <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a> -->
+          <div class="text-center col evaluacion p-0">
+            <a routerLink="/about" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">{{ 'APP.ABOUT' | translate }}</a>
           </div>
-          
-
-          <div class="text-center col evaluacion p-0" *ngIf="this._storageDataService.RoleAdmin != true && AssessmentName != null && NombreDeProyecto != null">
-            <!-- <strong>
-              {{NombreDeProyecto}} - {{this._storageDataService.AssessmentSelected.assessmentName}}
-            </strong> -->
-          </div>
-
         </div>
       </div>
 
@@ -27,11 +18,7 @@
         <div class="row p-0">
           <div *ngIf="AssessmentName == null || NombreDeProyecto == null || this._storageDataService.RoleAdmin != true" class="col-3"></div>
                  
-          <div class="text-center col-3 evaluacion p-0" *ngIf="AssessmentName != null && NombreDeProyecto != null && this._storageDataService.RoleAdmin == true">
-            <!-- <strong>
-              {{NombreDeProyecto}} - {{this._storageDataService.AssessmentSelected.assessmentName}}
-            </strong> -->
-          </div>
+        
           <!-- <div class="text-center col-6 title-center us-none title-agile">AgileMeter</div> -->
           <div class="col-6 col-centered"> 
             <div class="logo-container" id="logo"> 

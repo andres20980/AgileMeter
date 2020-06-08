@@ -19,11 +19,13 @@ import { AddTeamComponent } from './back-office/components/teams-manager/add-tea
 import { AddUpdateUserComponent } from './back-office/components/user-management/add-update-user/add-update-user.component';
 import { TeamManagementComponent } from './back-office/components/user-management/team-management/team-management.component'
 import { UserListComponent } from './back-office/components/user-management/user-list/user-list.component';
+import { AboutComponent } from './about/about.component';
 
 const appRoutes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'about', component: AboutComponent },
   {
     path: 'backoffice', component: BackOfficeComponent,
     children: [
