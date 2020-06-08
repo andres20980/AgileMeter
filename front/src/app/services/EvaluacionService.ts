@@ -245,10 +245,12 @@ export class EvaluacionService {
       catchError(this.errorHandler));
   }
 
-  //Nos permite realizar un update de una evaluacion en la base de datos
-  updateEvaluacion(evaluacion: Evaluacion) {
+  //Nos permite realizar un update de una evaluacion en la base de datos //tocar aquiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+  updateEvaluacion(evaluacion: Evaluacion, final: boolean) {
     //evaluacion.userNombre = this._proyectoService.UsuarioLogeado;
     let Token = this._appComponent.ComprobarUserYToken();
+    Object.assign(evaluacion, {finish: final});
+    console.log(evaluacion)
     let params = JSON.stringify(evaluacion);
     let headers = new Headers({
       'Content-Type': 'application/json',

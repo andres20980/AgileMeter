@@ -15,6 +15,8 @@ namespace everisapi.API.Models
 
     [Required]
     public bool Estado { get; set; }
+
+    public bool Finish { get; set; }
     
     public string NotasObjetivos { get; set; }
 
@@ -30,6 +32,8 @@ namespace everisapi.API.Models
 
     [Required]
     public string UserNombre { get; set; }
+
+    public int CodigoIdioma { get; set; }
 
   }
 }

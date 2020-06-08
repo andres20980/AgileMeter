@@ -64,7 +64,9 @@ namespace everisapi.API
       services.AddScoped<IEvaluacionInfoRepository, EvaluacionInfoRepository>();
       services.AddScoped<IOficinaInfoRepository, OficinaInfoRepository>();   
       services.AddScoped<IUnidadInfoRepository, UnidadInfoRepository>();  
-      services.AddScoped<ILineaInfoRepository, LineaInfoRepository>();  
+      services.AddScoped<ILineaInfoRepository, LineaInfoRepository>();
+
+      services.AddScoped<IPuntuacionSectionRepository, PuntuacionSectionRepository>();  
 
       //Incluimos swagger
       services.AddSwaggerGen(c =>
@@ -125,10 +127,12 @@ namespace everisapi.API
         cfg.CreateMap<UnidadEntity, Models.Unidad>();
         cfg.CreateMap<LineaEntity, Models.Linea>();        
         cfg.CreateMap<ProyectoEntity, Models.Equipos>();
+        cfg.CreateMap<PuntuacionSectionEntity, Models.PuntuacionSection>();
 
         cfg.CreateMap<Models.EvaluacionCreateUpdateDto, EvaluacionEntity>();
         cfg.CreateMap<Models.PreguntaCreateDto, PreguntaEntity>();
         cfg.CreateMap<Models.PreguntaUpdateDto, PreguntaEntity>();
+        
       });
 
       //Incluimos todos los cors

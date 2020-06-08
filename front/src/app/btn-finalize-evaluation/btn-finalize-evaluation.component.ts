@@ -56,7 +56,7 @@ export class BtnFinalizeEvaluationComponent {
   public FinishEvaluation(evaluation: Evaluacion) {
     evaluation.userNombre = this._proyectoService.UsuarioLogeado;
     this.evaluacion.estado = true;
-    this._evaluacionService.updateEvaluacion(evaluation).subscribe(
+    this._evaluacionService.updateEvaluacion(evaluation, true).subscribe(
       res => {
         this.goToPdfGenerator(evaluation.id);
       },
