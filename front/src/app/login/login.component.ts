@@ -3,6 +3,7 @@ import { UserService } from '../services/UserService';
 import { AppComponent } from '../app.component';
 import { Router } from "@angular/router";
 import { map } from "rxjs/operators";
+import { environment } from "../../environments/environment.prod"
 
 export interface UserPermission {
   NombreCompleto: string,
@@ -28,6 +29,7 @@ export class LoginComponent implements OnInit {
   public enviando: boolean = false;
   public date = new Date();
   public user: UserPermission;
+  public loginEnabled: boolean = environment.loginEnabled;
 
   constructor(private _userService: UserService,
     private _router: Router,
