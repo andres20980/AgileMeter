@@ -289,24 +289,6 @@ namespace everisapi.API.Services
                 }
 
             }
-            /*
-            
-            
-            *
-            
-            
-            *
-            
-            
-            *
-
-            
-            */
-            
-            Console.WriteLine("sectionnnnnnnnnnnnnnnnssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
-            sectionsConAsignaciones.ToList().ForEach( x => {
-                Console.WriteLine("Antes con un id  "+  x.SectionId +"Puntuacion:  "+x.Puntuacion + "  " + "Nivel Alcanzado:  " + x.NivelAlcanzado + " Seccion: " + x.Nombre);  
-            });
 
             if(final) {
                 sectionsConAsignaciones.ToList().ForEach( x => {
