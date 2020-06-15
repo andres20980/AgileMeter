@@ -66,6 +66,7 @@ import { SubsProjectPipe }  from './sorted-table/subsProject.pipe';
 import { OverrideDirective } from './back-office/components/teams-manager/override.directive';
 import { NoBinaryComponent } from './no-binary/no-binary.component';
 import { AboutComponent } from './about/about.component';
+import { EditUserComponent } from './edit-user/edit-user.component'
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -108,7 +109,8 @@ export function HttpLoaderFactory(http: HttpClient) {
       NoBinaryComponent,
       SubsProjectPipe,
       OverrideDirective,
-      AboutComponent
+      AboutComponent,
+      EditUserComponent
    ],
    imports: [
       BrowserModule,

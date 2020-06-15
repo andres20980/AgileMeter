@@ -11,7 +11,8 @@
 		"SECTIONS": "Secciones",
 		"QUESTIONS": "Preguntas",
 		"PENDING_ASSESSMENTS": "Evaluaciones pendientes",
-		"ABOUT": "Sobre AgileMeter"
+		"ABOUT": "Sobre AgileMeter",
+		"EDITUSER": "Editar Usuario"
 	},
 	"HOME": {
 		"SELECT_OFFICE": "Seleccione una oficina",
