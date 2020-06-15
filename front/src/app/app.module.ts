@@ -46,6 +46,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatTreeModule} from '@angular/material/tree';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatTooltipModule} from '@angular/material/tooltip'
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 //Add custom paginator
 import { MatPaginatorIntl } from '@angular/material';
 import { MatPaginationIntlService } from './services/MatPaginationIntlService ';
@@ -63,6 +64,7 @@ import { BtnExportToExcelComponent } from './btn-export-to-excel/btn-export-to-e
 import { EvaluationchartComponent } from './evaluationchart/evaluationchart.component';
 import { SubsProjectPipe }  from './sorted-table/subsProject.pipe';
 import { OverrideDirective } from './back-office/components/teams-manager/override.directive';
+import { NoBinaryComponent } from './no-binary/no-binary.component';
 import { AboutComponent } from './about/about.component';
 
 // AoT requires an exported function for factories
@@ -101,6 +103,9 @@ export function HttpLoaderFactory(http: HttpClient) {
       NombreProyectoComponent,
       BtnExportToExcelComponent,
       EvaluationchartComponent,
+      OverrideDirective,
+      AboutComponent,
+      NoBinaryComponent,
       SubsProjectPipe,
       OverrideDirective,
       AboutComponent
@@ -119,6 +124,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       ReactiveFormsModule,
       MatInputModule,
       MatButtonToggleModule,
+      MatSlideToggleModule,
       MatSelectModule,
       MatFormFieldModule,
       NgxMatSelectSearchModule,
