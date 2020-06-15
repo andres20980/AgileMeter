@@ -44,7 +44,7 @@
 
       <div class="col-3 p-0 right-navbar">
         <div class="row p-0 m-0">
-          <div class="text-right col p-0 hello-customer" *ngIf="NombreDeUsuario != null">{{ 'APP.HI' | translate }}, <b>{{UserLongName}}</b></div>
+          <div class="text-right col p-0 hello-customer"> <a routerLink="/editUser" *ngIf="NombreDeUsuario != null" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">{{ 'APP.HI' | translate }}, <b>{{UserLongName}}</b></a></div>
           <div class="text-right col-2 p-0" id="cerrarsesion"><a routerLink="/login"><i class="material-icons icon35">
                 exit_to_app
               </i></a></div>

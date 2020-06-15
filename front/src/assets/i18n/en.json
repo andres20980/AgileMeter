@@ -11,7 +11,8 @@
 		"SECTIONS": "Sections",
 		"QUESTIONS": "Questions",
 		"PENDING_ASSESSMENTS": "Pending assessments",
-		"ABOUT": "About AgileMeter"
+		"ABOUT": "About AgileMeter",
+		"EDITUSER": "Edit User"
 
 	},
 	"HOME": {
