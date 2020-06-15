@@ -1,3 +1,17 @@
+<div class="d-flex justify-content-center notificacion">
+  <div *ngIf="!MensajeNotificacionError" class="position-fixed text-center notificacion">
+    <div *ngIf="MensajeNotificacion != null" class="alert alert-success">
+      <b>{{MensajeNotificacion}}</b>
+    </div>
+  </div>
+
+  <div *ngIf="MensajeNotificacionError" class="position-fixed text-center notificacion">
+    <div *ngIf="MensajeNotificacion != null" class="alert alert-danger">
+      <b>{{MensajeNotificacion}}</b>
+    </div>
+  </div>
+</div>
+
 <div class="container">
   <app-breadcrumb></app-breadcrumb>
   <div *ngIf="Error =='400'" class="alert alert-danger alert-login" id="danger">
