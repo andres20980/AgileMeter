@@ -21,6 +21,7 @@ export class AddUpdateUserComponent implements OnInit {
   public userForm: FormGroup;
   public user: UserCreateUpdate;
   public MensajeNotificacion: string = null;
+  public visible = false;
 
   @ViewChild('inputpass') typeInput: ElementRef;
 
@@ -206,6 +207,7 @@ export class AddUpdateUserComponent implements OnInit {
 
   public visiblePassword()
   {
+    this.visible = !this.visible;
     if(this.typeInput.nativeElement.type == "password") this.typeInput.nativeElement.type = "nombre";
     else this.typeInput.nativeElement.type = "password";
   }
