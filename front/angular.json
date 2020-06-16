@@ -50,15 +50,15 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "baseline": "1mb",
+                  "baseline": "2mb",
                   "maximumWarning": "6.5mb",
-                  "maximumError": "6mb"
+                  "maximumError": "7mb"
                 },
                 {
                   "type": "all",
                   "baseline": "2mb",
-                  "maximumWarning": "4.5mb",
-                  "maximumError": "3.5mb"
+                  "maximumWarning": "6.5mb",
+                  "maximumError": "7mb"
 
                 }
               ]
