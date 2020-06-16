@@ -34,6 +34,7 @@
     </ItemGroup>
     <ItemGroup>
         <None Include="appsettings.json" CopyToPublishDirectory="Always" />
+        <None Include="agilemeter_email.png" CopyToPublishDirectory="Always" />
     </ItemGroup>
     <ItemGroup>
         <!-- <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.1" /><DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" /> -->

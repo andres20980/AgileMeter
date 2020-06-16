@@ -13,7 +13,7 @@ public static class Helper
     {
 
         var builder = new BodyBuilder();
-        var image = builder.LinkedResources.Add(@"Controllers/agilemeter_email.png");
+        var image = builder.LinkedResources.Add(@"agilemeter_email.png");
         image.ContentId = MimeUtils.GenerateMessageId();
 
         // Set the html version of the message text
