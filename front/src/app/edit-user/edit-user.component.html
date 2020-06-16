@@ -26,7 +26,7 @@
           <h3 *ngIf="this.user != undefined">{{ 'ADD_UPDATE_USER.MODIFY_USER' | translate }}</h3>
         </div>
   
-        <div class="col-12">
+        <div class="row">
           <mat-form-field class="col-6">
             <input matInput type="text" formControlName="Nombre" id="Nombre"
               placeholder="{{ 'ADD_UPDATE_USER.FORM_USER' | translate }}" value="{{this.user?.nombre}}">
@@ -36,14 +36,19 @@
             </mat-error>
           </mat-form-field>
   
-          <mat-form-field class="col-6">
-            <input *ngIf="this.user!=null" matInput type="password" formControlName="Password" id="Password"
-              placeholder="{{ 'ADD_UPDATE_USER.FORM_PASSWORD' | translate }}" value="®®®®®®®">
-            <input *ngIf="this.user==null" matInput type="password" formControlName="Password" id="Password"
+          <mat-form-field class="col-5">
+            <input *ngIf="this.user!=null" #inputpass matInput type="password" formControlName="Password" id="Password"
+              placeholder="{{ 'ADD_UPDATE_USER.FORM_PASSWORD' | translate }}" value="******">
+            <input *ngIf="this.user==null" #inputpass matInput type="password" formControlName="Password" id="Password"
               placeholder="{{ 'ADD_UPDATE_USER.FORM_PASSWORD' | translate }}" value="">
             <mat-error *ngIf="hasError('Password','required')">{{ 'ADD_UPDATE_USER.FORM_PASSWORD_REQUIRED' | translate }}
             </mat-error>
           </mat-form-field>
+
+          <div class='col-1' style="margin-left: -6%;" (click)="visiblePassword()">
+            <i *ngIf="!visible" style="margin-left: -2px;" class="fas fa-eye-slash password-visible"></i>
+            <i *ngIf="visible" class="fas fa-eye password-visible"></i>
+          </div>
   
           <mat-form-field class="col-6">
             <input matInput type="text" formControlName="NombreCompleto" id="NombreCompleto"

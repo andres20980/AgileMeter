@@ -1,5 +1,5 @@
 import { ProyectoService } from 'app/services/ProyectoService';
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild, ElementRef} from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Role } from 'app/Models/Role';
 import { UserService } from 'app/services/UserService';
@@ -25,7 +25,10 @@ export class EditUserComponent implements OnInit {
   public user: any = null;
   public MensajeNotificacion: string = null;
   public MensajeNotificacionError: boolean = false;
-  public disable = true;
+  public visible = false;
+
+
+  @ViewChild('inputpass') typeInput: ElementRef;
 
   
   public rolList: Role[];
@@ -166,6 +169,13 @@ export class EditUserComponent implements OnInit {
 
   public volver() {
     this._router.navigate(["/home"]);
+  }
+
+  public visiblePassword()
+  {
+    this.visible = !this.visible;
+    if(this.typeInput.nativeElement.type == "password") this.typeInput.nativeElement.type = "nombre";
+    else this.typeInput.nativeElement.type = "password";
   }
 
   

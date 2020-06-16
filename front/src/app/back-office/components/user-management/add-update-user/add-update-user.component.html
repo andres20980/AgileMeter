@@ -23,7 +23,7 @@
 
           <mat-form-field class="col-5">
             <input *ngIf="this.user!=null" #inputpass matInput type="password" formControlName="Password" id="Password"
-              placeholder="{{ 'ADD_UPDATE_USER.FORM_PASSWORD' | translate }}" value="®®®®®®®">
+              placeholder="{{ 'ADD_UPDATE_USER.FORM_PASSWORD' | translate }}" value="******">
             <input *ngIf="this.user==null" #inputpass matInput type="password" formControlName="Password" id="Password"
               placeholder="{{ 'ADD_UPDATE_USER.FORM_PASSWORD' | translate }}" value="">
             <mat-error *ngIf="hasError('Password','required')">{{ 'ADD_UPDATE_USER.FORM_PASSWORD_REQUIRED' | translate }}
@@ -37,7 +37,7 @@
           </div>
     
 
-          <div class='col-1' (click)="generatePassword()">
+          <div title="Autogenerar contraseña" class='col-1' (click)="generatePassword()">
             <i class="fas fa-key password-key"></i>
           </div>
 
