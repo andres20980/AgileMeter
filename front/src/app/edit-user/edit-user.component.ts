@@ -24,6 +24,7 @@ export class EditUserComponent implements OnInit {
   public userForm: FormGroup;
   public user: any = null;
   public MensajeNotificacion: string = null;
+  public MensajeNotificacionError: boolean = false;
   public disable = true;
 
   
