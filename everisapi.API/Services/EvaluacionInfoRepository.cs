@@ -697,7 +697,8 @@ namespace everisapi.API.Services
                 sectionsEval.ForEach(section => {
                     SectionInfoDto sect = new SectionInfoDto();
                     sect.Puntuacion = section.Puntuacion;
-                    sect.NivelAlcanzado = section.NivelAlcanzado;
+                    sect.NivelAlcanzado = section.NivelAlcanzado; // (sectionsEval.Select(s => s.SectionId).Where(we => we == section.Id))
+                    sect.Nombre = _context.TraduccionesSections.Where(w => w.SectionsId == section.SectionId && w.IdiomaId == 1).Select(s => s.Traduccion).SingleOrDefault();
                     EvaluacionInfo.SectionsInfo.Add(sect);
                 });
 

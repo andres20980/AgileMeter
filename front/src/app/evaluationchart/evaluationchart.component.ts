@@ -187,7 +187,7 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
         
         this.ctx_datasets.push({
           type: "line",
-          data:[100,100,100,100,100,100,100], //follow.map(x => x * (col * 100)), 
+          data:[100,100,100,100,100,100,100,100,100], //follow.map(x => x * (col * 100)), 
           label:"aux1",// + (col - 1),
           backgroundColor: this.auxColors[0],
           fill: "origin",
@@ -201,7 +201,7 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
 
         this.ctx_datasets.push({
           type: "line",
-          data: [200,200,200,200,200,200,200],//follow.map(x => x * (col * 100)), 
+          data: [200,200,200,200,200,200,200,200,200],//follow.map(x => x * (col * 100)), 
           label:"aux1",// + (col - 1),
           backgroundColor: this.auxColors[1],
           fill: "-1",
@@ -216,7 +216,7 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
         
         this.ctx_datasets.push({
           type: "line",
-          data: [300,300,300,300,300,300,300],//follow.map(x => x * (col * 100)), 
+          data: [300,300,300,300,300,300,300,300,300],//follow.map(x => x * (col * 100)), 
           label:"aux2",// + (col - 1),
           backgroundColor: this.auxColors[2],
           fill: "-1",

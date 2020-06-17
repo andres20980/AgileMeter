@@ -20,6 +20,7 @@ import { ProyectoService } from 'app/services/ProyectoService';
 import { EvaluacionService } from 'app/services/EvaluacionService';
 import { PreguntaInfo } from 'app/Models/PreguntaInfo';
 import { BtnFinalizeEvaluationComponent } from 'app/btn-finalize-evaluation/btn-finalize-evaluation.component';
+import { environment } from "../../environments/environment.prod"
 
 @Component({
   selector: 'app-newevaluation',
@@ -47,6 +48,8 @@ export class NewevaluationComponent implements OnInit {
   public prevSection: SectionInfo = null;
   public changedQuestion: number;
   public changedAnswer: number;
+
+  public binaryEnabled: boolean = environment.binaryEnabled;
 
   private autoRenew = new FormControl();
   private checkBinaryToggle: boolean = false;
