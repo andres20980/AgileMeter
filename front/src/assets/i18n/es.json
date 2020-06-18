@@ -1,6 +1,7 @@
 ﻿{
 	"APP": {
-		"HI": "Hola"
+		"HI": "Hola",
+		"ABOUT": "Sobre AgileMeter"
 	},
 	"BREADCRUMB": {
 		"HOME": "Inicio",
@@ -9,7 +10,9 @@
 		"RESULTS": "Resultados",
 		"SECTIONS": "Secciones",
 		"QUESTIONS": "Preguntas",
-		"PENDING_ASSESSMENTS": "Evaluaciones pendientes"
+		"PENDING_ASSESSMENTS": "Evaluaciones pendientes",
+		"ABOUT": "Sobre AgileMeter",
+		"EDITUSER": "Modificar Usuario"
 	},
 	"HOME": {
 		"SELECT_OFFICE": "Seleccione una oficina",
@@ -402,5 +405,13 @@
 	"CUSTOM_SELECT": {
 		"OTHER": "otro",
 		"OTHERS": "otros"
+	},
+	"ABOUT":{
+		"TITLE": "¿Qué es AgileMeter?",
+		"DESCRIPTION1": "Se trata de un activo de everis beAgile que tiene por objetivo medir el Nivel de Madurez Agile de los equipos, sirviendo como palanca de transformación en las organizaciones.",
+		"DESCRIPTION2": "Dispone de diferentes dimensiones de transformación y para cada una de ellas, emite un nivel de madurez como resultado de un assessment.",
+		"DESCRIPTION3": "El propósito de esta plataforma es proporcionar una herramienta para evolucionar el nivel de adopción de Agile en los equipos de una organización.",
+		"DESCRIPTION4": "El uso de esta herramienta es a través de los Agile Coach de Be Agile y CoE.",
+		"DESCRIPTION5": "Para más información nos puedes contactar a: "
 	}
 }

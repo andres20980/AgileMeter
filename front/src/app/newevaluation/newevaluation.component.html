@@ -1,4 +1,5 @@
 <div class="d-flex justify-content-center notificacion">
+  
   <!-- Mensajes de error y al añadir notas
     <div class="position-fixed text-center notificacion">
     <div *ngIf="(ErrorMessage != null || ErrorMessage != undefined )" class="alert alert-danger" id="danger">
@@ -112,7 +113,10 @@
             </button>
 
           </div>
-  
+
+          <div *ngIf="binaryEnabled">
+            <mat-slide-toggle class="mb-2" [formControl]="autoRenew" (change)="onChange()">Binary</mat-slide-toggle>
+          </div>
 
         </div>
       </div>
@@ -190,36 +194,42 @@
       <!-- End of pagination -->
 
 
-      <div class="container-fluid p-0 pt-0 px-0 pl-0 pb-0">
+      <div class="container-fluid p-0 pt-0 px-5 pb-0">
         <!-- Inicio preguntas  -->
         <div class="questions-box mt-1">
           <div class="row m-0" [class.mb-3]="i == (InfoAsignacion.preguntas.length-1)" id="preguntas{{i}}"
             *ngFor="let preguntaDada of InfoAsignacion.preguntas; let i = index">
-            <div class="col-1"></div>
-            <div class="col-xs-12 col-sm-5 col-md-7 pt-1 pb-2">
-              {{i + 1}}. {{preguntaDada.pregunta}}
+             <div class="col-1"></div>
+            <div class="col-xs-12 col-sm-5 col-md-7 pt-1 pb-2"> 
+              {{i + 1}}. {{preguntaDada.pregunta}} 
             </div>
-            <div class="col-md-2 yes-no-centered" id="yes_no_btn_{{i}}">
-              <div class="row m-0 yes-no-width">
-                <div class="col p-0">
-                  <button class="w-100 h-100 questions-yes-btn mat-elevation-z3 item-not-selected"
-                    [class.first-item]="preguntaDada.esHabilitante"
-                    [class.item-full-disabled]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
-                    [class.item-not-selected]="(preguntaDada.respuesta.estado == 2) || (preguntaDada.respuesta.estado == 0 )"
-                    [class.item-disable-no-color]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
-                    (click)="AnswerQuestion(preguntaDada,i,1)">{{ 'NEW_EVALUATION.YES' | translate }}</button>
-                </div>
-                <div class="col p-0">
-                  <button class="w-100 h-100 questions-no-btn mat-elevation-z3"
-                    [class.first-item]="preguntaDada.esHabilitante"
-                    [class.item-full-disabled]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
-                    [class.item-not-selected]="(preguntaDada.respuesta.estado == 1) || (preguntaDada.respuesta.estado == 0)"
-                    [class.item-disable-no-color]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
-                    (click)="AnswerQuestion(preguntaDada,i,2)">{{ 'NEW_EVALUATION.NO' | translate }}</button>
+
+              <div *ngIf="!checkBinaryToggle" class="col-md-2 yes-no-centered" id="yes_no_btn_{{i}}">
+                <div class="row m-0 yes-no-width">
+                  <div class="col p-0">
+                    <button class="w-100 h-100 questions-yes-btn mat-elevation-z3 item-not-selected"
+                      [class.first-item]="preguntaDada.esHabilitante"
+                      [class.item-full-disabled]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
+                      [class.item-not-selected]="(preguntaDada.respuesta.estado == 2) || (preguntaDada.respuesta.estado == 0 )"
+                      [class.item-disable-no-color]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
+                      (click)="AnswerQuestion(preguntaDada,i,1)">{{ 'NEW_EVALUATION.YES' | translate }}</button>
+                  </div>
+                  <div class="col p-0">
+                    <button class="w-100 h-100 questions-no-btn mat-elevation-z3"
+                      [class.first-item]="preguntaDada.esHabilitante"
+                      [class.item-full-disabled]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
+                      [class.item-not-selected]="(preguntaDada.respuesta.estado == 1) || (preguntaDada.respuesta.estado == 0)"
+                      [class.item-disable-no-color]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
+                      (click)="AnswerQuestion(preguntaDada,i,2)">{{ 'NEW_EVALUATION.NO' | translate }}</button>
+                  </div>
                 </div>
               </div>
-            </div>
-            
+
+
+
+         <div *ngIf="checkBinaryToggle">
+            <app-no-binary></app-no-binary>
+          </div>
 
             <div class="col-xs-12 col-sm-1 col-md-1 pb-1 pl-13 yes-no-centered">
               <button *ngIf="checkHabilitante(preguntaDada)" class="transparente position-relative"

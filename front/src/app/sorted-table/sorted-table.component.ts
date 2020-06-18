@@ -120,7 +120,6 @@ export class SortedTableComponent implements OnInit {
     this._appComponent.pushBreadcrumb("BREADCRUMB.FINISHED_EVALUATIONS", "/finishedevaluations");
     this.originDataSource = this.dataInput
     this.originListOficina = this.dataInput.map(x => x.oficina).reduce((x,y) => x.includes(y) ? x : [...x, y],[]).sort();
-    console.log("vamos a ver la oficina", this.originListOficina)
     this.origingListEquipos = this.dataInput.map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]);
     this.originListaAssessment = this.dataInput.map(x => x).reduce((x,y) => x.includes(y.assessmentName) ? x : [...x, y.assessmentName],[]).sort();
     this.ListaDeOficinas= this.dataInput.map(x => x.oficina).reduce((x,y) => x.includes(y) ? x : [...x, y],[]).sort();
@@ -145,7 +144,7 @@ export class SortedTableComponent implements OnInit {
 
   saveNotas(model: Evaluacion): void {
     if (this.UserRole == this.rol.Administrador || this.UserRole == this.rol.Evaluador) {
-      this.evaluacion.updateEvaluacion(model).subscribe(
+      this.evaluacion.updateEvaluacion(model, false).subscribe(
         res => {
           // console.log("success");
         },

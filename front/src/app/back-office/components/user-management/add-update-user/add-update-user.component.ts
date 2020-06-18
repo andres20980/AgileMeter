@@ -1,6 +1,6 @@
 import { ProyectoService } from 'app/services/ProyectoService';
 import { UserCreateUpdate } from './../../../../Models/UserCreateUpdate';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Role } from 'app/Models/Role';
 import { UserService } from 'app/services/UserService';
@@ -21,6 +21,9 @@ export class AddUpdateUserComponent implements OnInit {
   public userForm: FormGroup;
   public user: UserCreateUpdate;
   public MensajeNotificacion: string = null;
+  public visible = false;
+
+  @ViewChild('inputpass') typeInput: ElementRef;
 
   public rolList: Role[];
   rol: Role = { id: 1, role: "Usuario" };
@@ -184,7 +187,28 @@ export class AddUpdateUserComponent implements OnInit {
       })
   }
 
+  public generatePassword()
+  {
+    let pass: string = "";
+    let i = 0;
+    const reg = new RegExp(/[A-Z]/,'i')  
+     while(i <= 8){
+       let ch = String.fromCharCode(Math.floor(Math.random() * (90 - 48 + 1)) + 48);
+       if(ch.match(reg) && Math.round(Math.random())) ch = ch.toLowerCase()
+       pass += ch
+       i++
+     }
+     this.userForm.patchValue({Password: pass})
+  }
+
   public volver() {
     this._router.navigate(['/backoffice/usermanagement']);
+  }
+
+  public visiblePassword()
+  {
+    this.visible = !this.visible;
+    if(this.typeInput.nativeElement.type == "password") this.typeInput.nativeElement.type = "nombre";
+    else this.typeInput.nativeElement.type = "password";
   }
 }

@@ -13,10 +13,13 @@ namespace everisapi.API.Services
 
         private AsignacionInfoContext _context;
 
+        private IPuntuacionSectionRepository _puntuacionSection;
+
         //Le damos un contexto en el constructor
-        public RespuestasInfoRepository(AsignacionInfoContext context)
+        public RespuestasInfoRepository(AsignacionInfoContext context, IPuntuacionSectionRepository puntuacionSection)
         {
             _context = context;
+            _puntuacionSection = puntuacionSection;
         }
 
         //Recoge una unica respuesta filtrada por id
@@ -149,7 +152,7 @@ namespace everisapi.API.Services
             return lista;
         }
 
-        public IEnumerable<SectionConAsignacionesDto> GetPreguntasNivelOrganizadas(int idEvaluacion, int assessmentId, int codigoIdioma)
+        public IEnumerable<SectionConAsignacionesDto> GetPreguntasNivelOrganizadas(int idEvaluacion, int assessmentId, int codigoIdioma, bool final = false)
         {
 
             List<SectionConAsignacionesDto> sectionsConAsignaciones = new List<SectionConAsignacionesDto>();
@@ -287,7 +290,12 @@ namespace everisapi.API.Services
 
             }
 
-
+            if(final) {
+                sectionsConAsignaciones.ToList().ForEach( x => {
+                    //Console.WriteLine("Antes con un id  "+  x.SectionId +"Puntuacion:  "+x.Puntuacion + "  " + "Nivel Alcanzado:  " + x.NivelAlcanzado + " Seccion: " + x.Nombre); 
+                _puntuacionSection.setPuntuacionSection(idEvaluacion, x.SectionId, x.NivelAlcanzado, x.Puntuacion);
+            });
+            }
 
             return sectionsConAsignaciones;
         }

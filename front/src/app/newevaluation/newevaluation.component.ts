@@ -1,5 +1,6 @@
+import { FormControl } from '@angular/forms';
 import { StorageDataService } from './../services/StorageDataService';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { SectionService } from '../services/SectionService';
 import { RespuestasService } from '../services/RespuestasService';
 import { AppComponent } from '../app.component';
@@ -19,6 +20,7 @@ import { ProyectoService } from 'app/services/ProyectoService';
 import { EvaluacionService } from 'app/services/EvaluacionService';
 import { PreguntaInfo } from 'app/Models/PreguntaInfo';
 import { BtnFinalizeEvaluationComponent } from 'app/btn-finalize-evaluation/btn-finalize-evaluation.component';
+import { environment } from "../../environments/environment.prod"
 
 @Component({
   selector: 'app-newevaluation',
@@ -47,6 +49,11 @@ export class NewevaluationComponent implements OnInit {
   public changedQuestion: number;
   public changedAnswer: number;
 
+  public binaryEnabled: boolean = environment.binaryEnabled;
+
+  private autoRenew = new FormControl();
+  private checkBinaryToggle: boolean = false;
+
   //Recogemos todos los datos de la primera area segun su id y las colocamos en la lista
   constructor(
     private _sectionService: SectionService,
@@ -56,13 +63,20 @@ export class NewevaluationComponent implements OnInit {
     private modalService: NgbModal,
     private _proyectoService: ProyectoService,
     private _evaluacionService: EvaluacionService) {
-    this.InitialiseComponent();
+      this.InitialiseComponent();
+
+  }
+  
+  onChange() {
+    this.checkBinaryToggle = this.autoRenew.value;
   }
 
+  
   ngOnInit() {
 
     this.Evaluation = this._appComponent._storageDataService.Evaluacion;
   }
+
 
   private InitialiseComponent() {
 
@@ -409,7 +423,7 @@ export class NewevaluationComponent implements OnInit {
               // setTimeout(() => { this.anadeNota = null }, 4000);
 
               this.Evaluation.userNombre = this.UserName;
-              this._evaluacionService.updateEvaluacion(this.Evaluation).subscribe(
+              this._evaluacionService.updateEvaluacion(this.Evaluation, false).subscribe(
                 res => {
                   //usuario modificado correctamente                  
                 },
@@ -486,7 +500,7 @@ export class NewevaluationComponent implements OnInit {
               // setTimeout(() => { this.anadeNota = null }, 4000);
 
               this.Evaluation.userNombre = this.UserName;
-              this._evaluacionService.updateEvaluacion(this.Evaluation).subscribe(
+              this._evaluacionService.updateEvaluacion(this.Evaluation, false).subscribe(
                 res => {
                   //usuario modificado correctamente
                 },

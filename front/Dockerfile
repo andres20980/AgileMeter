@@ -15,10 +15,12 @@ ENV PATH /app/node_modules/.bin:$PATH
 #Get host environment variables
 ARG BACKEND_HOST
 ARG BACKEND_PORT
+ARG LOGIN_ENABLED
+ARG BINARY_ENABLED
 
 #Create environment.prod.ts file
-ENV JSON_FMT 'export const environment = { \n\t production:true, \n\t backendHost:"%s", \n\t backendPort: %s \n };'
-RUN printf "$JSON_FMT" "$BACKEND_HOST" "$BACKEND_PORT" > src/environments/environment.prod.ts
+ENV JSON_FMT 'export const environment = { \n\t production:true, \n\t backendHost:"%s", \n\t backendPort: %s, \n\t loginEnabled: %s \n, \n\t binaryEnabled: %s \n};'
+RUN printf "$JSON_FMT" "$BACKEND_HOST" "$BACKEND_PORT" "$LOGIN_ENABLED" "$BINARY_ENABLED" > src/environments/environment.prod.ts
 
 # Install and cache app dependencies
 RUN npm config set registry http://registry.npmjs.org/
