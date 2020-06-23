@@ -65,7 +65,7 @@ export class AddUpdateUserComponent implements OnInit {
       this.userForm = new FormGroup({
         Nombre: new FormControl('', [Validators.required, Validators.maxLength(127)]),
         NombreCompleto: new FormControl('', Validators.required),
-        Password: new FormControl('', Validators.required),
+        Password: new FormControl(null, Validators.required),
         Role: new FormControl(this.rol),
         IdiomaFavorito: new FormControl(this.idiomaFavorito),
       });
