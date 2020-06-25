@@ -189,16 +189,13 @@ export class AddUpdateUserComponent implements OnInit {
 
   public generatePassword()
   {
-    let pass: string = "";
-    let i = 0;
-    const reg = new RegExp(/[A-Z]/,'i')  
-     while(i <= 8){
-       let ch = String.fromCharCode(Math.floor(Math.random() * (90 - 48 + 1)) + 48);
-       if(ch.match(reg) && Math.round(Math.random())) ch = ch.toLowerCase()
-       pass += ch
-       i++
-     }
-     this.userForm.patchValue({Password: pass})
+    var length = 8,
+        charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+        retVal = "";
+    for (var i = 0, n = charset.length; i < length; ++i) {
+        retVal += charset.charAt(Math.floor(Math.random() * n));
+    }
+    this.userForm.patchValue({Password: retVal});
   }
 
   public volver() {
