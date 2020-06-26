@@ -100,12 +100,7 @@ export class EditUserComponent implements OnInit {
 
   public formValidate() {
 
-    this.user.idiomaFavorito = this._storageDataService.codigoIdioma;
-    if (this._storageDataService.codigoIdioma == 1){
-      this.user.idiomaFavorito = 'es'
-    }else{
-      this.user.idiomaFavorito = 'en'
-    }
+    this.user.idiomaFavorito = this._translateService.currentLang;
 
     this.userForm = new FormGroup({
       Nombre: new FormControl(this._proyectoService.UsuarioLogeado, Validators.required),
