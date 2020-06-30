@@ -151,7 +151,6 @@ export class NewevaluationComponent implements OnInit {
             } else {
               this.AreaAsignada = this.ListaAsignaciones[0]
             }
-
             this.getAsignacionActual(this.Evaluation.id, this.AreaAsignada.id);
             this.Deshabilitar = false;
 
@@ -282,6 +281,7 @@ export class NewevaluationComponent implements OnInit {
       );
     } else {
       if (optionAnswered != pregunta.respuesta.estado) {
+        console.log("ahora estoy en alter respuesta", pregunta.respuesta.estado)
         this.InfoAsignacion.preguntas[index].respuesta.estado = optionAnswered;
         let respuesta = this.InfoAsignacion.preguntas[index].respuesta;
         respuesta.userName = this.UserName;
@@ -423,7 +423,7 @@ export class NewevaluationComponent implements OnInit {
               // setTimeout(() => { this.anadeNota = null }, 4000);
 
               this.Evaluation.userNombre = this.UserName;
-              this._evaluacionService.updateEvaluacion(this.Evaluation, false).subscribe(
+              this._evaluacionService.updateEvaluacion(this.Evaluation, false, this.checkBinaryToggle).subscribe(
                 res => {
                   //usuario modificado correctamente                  
                 },
@@ -500,7 +500,7 @@ export class NewevaluationComponent implements OnInit {
               // setTimeout(() => { this.anadeNota = null }, 4000);
 
               this.Evaluation.userNombre = this.UserName;
-              this._evaluacionService.updateEvaluacion(this.Evaluation, false).subscribe(
+              this._evaluacionService.updateEvaluacion(this.Evaluation, false, this.checkBinaryToggle).subscribe(
                 res => {
                   //usuario modificado correctamente
                 },
@@ -539,7 +539,14 @@ export class NewevaluationComponent implements OnInit {
             });
 
         }
-        //Else, Click fuera, no se guarda
+        //Else, Click fuera, no se guarda -> no jodas ...
       })
+  }
+
+  noBinaryButtonStyle(inx: number)
+  {
+    if(inx == 3) return {background: "#A4EA44", borderTopLeftRadius: "0px",borderBottomLeftRadius: "0px", border: "1px solid #A4EA44"}
+    if(inx == 2) return {background: "#44EA9F",  borderTopRightRadius: "0px",  borderBottomRightRadius: "0px", border: "1px solid #44EA9F"}
+    return {background: "tomato"}
   }
 }
