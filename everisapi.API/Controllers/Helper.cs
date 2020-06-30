@@ -29,6 +29,7 @@ public static class Helper
             Para comenzar, te facilitamos las credenciales que tendrás que usar para acceder a nuestra plataforma:
             </p>
             <ul>
+                <li>URL: <a href='https://agilemeter.everis.com/'>https://agilemeter.everis.com/</a></li>
                 <li>Usuario: {1}</li>
                 <li>Contraseña: {2}</li>
             </ul> 

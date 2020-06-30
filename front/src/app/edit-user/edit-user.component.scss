@@ -26,8 +26,23 @@
 }  
 
 .password-visible{
-  color: #5c981b; 
+  margin-right: 1.3px ;
+  color: #5c981b ; 
   padding-top: 30%; 
   font-size: 25px; 
-  cursor: pointer;
+  cursor: pointer ;
+}
+
+.password-invisible{
+  color: #5c981b ; 
+  padding-top: 30%; 
+  font-size: 25px; 
+  cursor: pointer ;
+}
+
+.password-locked{
+  color: #999999;
+  padding-top: 30%; 
+  font-size: 25px; 
+  pointer-events:none;
 }
