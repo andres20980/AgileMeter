@@ -251,7 +251,7 @@ namespace everisapi.API.Services
             {
                 
                 float sumaNoBinary = 0;
-                int MaxRange = 3; // HARDCODE. CONTROLA EL RANGO MÁXIMO DE PREGUNTAS
+                int MaxRange = 4; // HARDCODE. CONTROLA EL RANGO MÁXIMO DE PREGUNTAS
 
                 //calculamos los niveles individuales para cada asignacion
                 foreach (AsignacionConPreguntaNivelDto asignacion in seccion.Asignaciones)

@@ -545,8 +545,10 @@ export class NewevaluationComponent implements OnInit {
 
   noBinaryButtonStyle(inx: number)
   {
-    if(inx == 3) return {background: "#A4EA44", borderTopLeftRadius: "0px",borderBottomLeftRadius: "0px", border: "1px solid #A4EA44"}
-    if(inx == 2) return {background: "#44EA9F",  borderTopRightRadius: "0px",  borderBottomRightRadius: "0px", border: "1px solid #44EA9F"}
+    if(inx == 4) return {background: "#10ad9f", borderTopLeftRadius: "0px",borderBottomLeftRadius: "0px", color: "white", border: "1px solid #10ad9f"}
+    if(inx == 3) return {background: "#1b5e20",  borderTopRightRadius: "0px",  borderBottomRightRadius: "0px", color: "white", border: "1px solid #1b5e20"}
+    if(inx == 2) return {background: "#388e3c",  borderTopRightRadius: "0px",  borderBottomRightRadius: "0px", border: "1px solid #388e3c"}
+    if(inx == 1) return {background: "#87a900", border: "1px solid #87a900"}
     return {background: "tomato"}
   }
 }
