@@ -123,8 +123,8 @@ export class AddUpdateUserComponent implements OnInit {
     var form = this.userForm.value;
     //le asignamos el nombre al form ( como el campo nombre esta deshabilitado se recoge como null)
     form.nombre = this._userService.user.nombre;
-    if (form.password == "") {
-      form.password = null;
+    if (form.Password == "") {
+      form.Password = null;
     }
     //si el usuario logueado es el usuario a modificar y le cambias el roll te muestra una ventana de advertencia indicando que te redirige al home
     if (this._proyectoService.UsuarioLogeado == form.nombre && this._userService.user.role.id != form.Role.id) {

@@ -128,18 +128,14 @@ export class EditUserComponent implements OnInit {
     var form = this.userForm.value;
     //le asignamos el nombre al form ( como el campo nombre esta deshabilitado se recoge como null)
     form.nombre = this._proyectoService.UsuarioLogeado;
-    if (form.password == "") {
-      form.password = null;
+    if (form.Password == "") {
+      form.Password = null;
     }
-
     //si no se modifica
-    else {
-      this.updateUsuario(form);
-    }
+      this.updateUsuario(form); 
   }
 
   public updateUsuario(form) {
-    console.log("form: ", form);
     this._userService.updateUser(form).subscribe(
       res => {
         this._translateService.get('ADD_UPDATE_USER.NOTIFICATION_UPDATE_USER').subscribe(value => { this.MensajeNotificacion = value; });
