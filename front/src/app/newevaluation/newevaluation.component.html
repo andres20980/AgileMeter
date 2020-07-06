@@ -271,11 +271,10 @@
             </div>
           </div>
 
-            <!-- <app-no-binary [pregunta]="preguntaDada" [evaluation]="Evaluation"></app-no-binary> -->
           </div>
 
             <div class="col-xs-12 col-sm-1 col-md-1 pb-1 pl-13 yes-no-centered">
-              <button *ngIf="checkHabilitante(preguntaDada)" class="transparente position-relative"
+              <button *ngIf="checkHabilitante(preguntaDada)" class="transparente position-relative" [ngStyle]="{paddingLeft: (checkBinaryToggle && preguntaDada.esHabilitante) ? '110px': 'initial' }"
                 (click)="AbrirModalPreg(notasPreg, i)">
 
                 <!-- <span *ngIf="preguntaDada.respuesta.notas != null" class="one-badge">1</span>
