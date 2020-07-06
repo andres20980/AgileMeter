@@ -204,13 +204,13 @@
               {{i + 1}}. {{preguntaDada.pregunta}} 
             </div>
 
-              <div *ngIf="!checkBinaryToggle" class="col-md-2 yes-no-centered" id="yes_no_btn_{{i}}">
+              <div style="flex: 0 0 16%;" *ngIf="!checkBinaryToggle || preguntaDada.esHabilitante" class="yes-no-centered" id="yes_no_btn_{{i}}">
                 <div class="row m-0 yes-no-width">
                   <div class="col p-0">
                     <button class="w-100 h-100 questions-yes-btn mat-elevation-z3 item-not-selected"
                       [class.first-item]="preguntaDada.esHabilitante"
                       [class.item-full-disabled]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
-                      [class.item-not-selected]="(preguntaDada.respuesta.estado == 2) || (preguntaDada.respuesta.estado == 0 )"
+                      [class.item-not-selected]="(preguntaDada.respuesta.estado != 1)"
                       [class.item-disable-no-color]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
                       (click)="AnswerQuestion(preguntaDada,i,1)">{{ 'NEW_EVALUATION.YES' | translate }}</button>
                   </div>
@@ -218,21 +218,63 @@
                     <button class="w-100 h-100 questions-no-btn mat-elevation-z3"
                       [class.first-item]="preguntaDada.esHabilitante"
                       [class.item-full-disabled]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
-                      [class.item-not-selected]="(preguntaDada.respuesta.estado == 1) || (preguntaDada.respuesta.estado == 0)"
+                      [class.item-not-selected]="(preguntaDada.respuesta.estado != 2) && (preguntaDada.respuesta.estado != 3) && (preguntaDada.respuesta.estado != 4)"
                       [class.item-disable-no-color]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
                       (click)="AnswerQuestion(preguntaDada,i,2)">{{ 'NEW_EVALUATION.NO' | translate }}</button>
                   </div>
                 </div>
               </div>
 
+             <!-- (preguntaDada.respuesta.estado != 1)
+            [class.item-not-selected]="(preguntaDada.respuesta.estado != 2) && (preguntaDada.respuesta.estado != 3)"-->
 
+         <div class="yes-no-centered" *ngIf="checkBinaryToggle && !preguntaDada.esHabilitante">
+          <div class="row m-0 ">
+            <div>
+              <button class="w-200 h-100 questions-yes-btn mat-elevation-z3 item-not-selected nobinary-button"
+                [class.first-item]="preguntaDada.esHabilitante"
+                [class.item-full-disabled]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
+                [class.item-not-selected]="preguntaDada.respuesta.estado != 1"
+                [class.item-disable-no-color]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
+                (click)="AnswerQuestion(preguntaDada,i,1)">1
+              </button>
+            </div>
+          
+            <div>
+              <button class="w-200 h-100 questions-no-btn mat-elevation-z3 item-not-selected nobinary-button"
+                [class.first-item]="preguntaDada.esHabilitante"
+                [class.item-full-disabled]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
+                [class.item-not-selected]="preguntaDada.respuesta.estado != 2"
+                [class.item-disable-no-color]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
+                (click)="AnswerQuestion(preguntaDada,i,2)" [ngStyle]="noBinaryButtonStyle(2)">2
+              </button>
+            </div>
 
-         <div *ngIf="checkBinaryToggle">
-            <app-no-binary></app-no-binary>
+            <div>
+              <button class="w-200 h-100 questions-middle-btn mat-elevation-z3 item-not-selected nobinary-button"
+                [class.first-item]="preguntaDada.esHabilitante"
+                [class.item-full-disabled]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
+                [class.item-not-selected]="preguntaDada.respuesta.estado != 3"
+                [class.item-disable-no-color]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
+                (click)="AnswerQuestion(preguntaDada,i,3)" [ngStyle]="noBinaryButtonStyle(3)">3
+              </button>
+            </div>
+
+            <div>
+              <button class="w-200 h-100 questions-middle-btn mat-elevation-z3 item-not-selected nobinary-button"
+                [class.first-item]="preguntaDada.esHabilitante"
+                [class.item-full-disabled]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
+                [class.item-not-selected]="preguntaDada.respuesta.estado != 4"
+                [class.item-disable-no-color]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
+                (click)="AnswerQuestion(preguntaDada,i,4)" [ngStyle]="noBinaryButtonStyle(4)">4
+              </button>
+            </div>
+          </div>
+
           </div>
 
             <div class="col-xs-12 col-sm-1 col-md-1 pb-1 pl-13 yes-no-centered">
-              <button *ngIf="checkHabilitante(preguntaDada)" class="transparente position-relative"
+              <button *ngIf="checkHabilitante(preguntaDada)" class="transparente position-relative" [ngStyle]="{paddingLeft: (checkBinaryToggle && preguntaDada.esHabilitante) ? '110px': 'initial' }"
                 (click)="AbrirModalPreg(notasPreg, i)">
 
                 <!-- <span *ngIf="preguntaDada.respuesta.notas != null" class="one-badge">1</span>
@@ -330,7 +372,7 @@
                       </div> -->
         </div>
         <div class="col-3">
-          <app-btn-finalize-evaluation [evaluacion]="Evaluation" [changedQuestion]="changedQuestion"
+          <app-btn-finalize-evaluation [evaluacion]="Evaluation" [changedQuestion]="changedQuestion" [checkNoBinary]="checkBinaryToggle"
             [changedAnswer]="changedAnswer">
           </app-btn-finalize-evaluation>
         </div>

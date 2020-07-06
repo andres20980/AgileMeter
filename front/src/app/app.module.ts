@@ -64,7 +64,6 @@ import { BtnExportToExcelComponent } from './btn-export-to-excel/btn-export-to-e
 import { EvaluationchartComponent } from './evaluationchart/evaluationchart.component';
 import { SubsProjectPipe }  from './sorted-table/subsProject.pipe';
 import { OverrideDirective } from './back-office/components/teams-manager/override.directive';
-import { NoBinaryComponent } from './no-binary/no-binary.component';
 import { AboutComponent } from './about/about.component';
 import { EditUserComponent } from './edit-user/edit-user.component'
 
@@ -106,7 +105,6 @@ export function HttpLoaderFactory(http: HttpClient) {
       EvaluationchartComponent,
       OverrideDirective,
       AboutComponent,
-      NoBinaryComponent,
       SubsProjectPipe,
       OverrideDirective,
       AboutComponent,

@@ -11,7 +11,7 @@
       </div>
 
       <div class="row">
-        <mat-form-field class="col-5">
+        <mat-form-field class="col-6">
           <input matInput type="text" formControlName="Nombre" id="Nombre"
             placeholder="{{ 'ADD_UPDATE_USER.FORM_USER' | translate }}" value="{{this.user?.nombre}}">
           <mat-error *ngIf="hasError('Nombre','required')">{{ 'ADD_UPDATE_USER.FORM_USER_REQUIRED' | translate }}
@@ -28,14 +28,11 @@
               placeholder="{{ 'ADD_UPDATE_USER.FORM_PASSWORD' | translate }}" value="">
             <mat-error *ngIf="hasError('Password','required')">{{ 'ADD_UPDATE_USER.FORM_PASSWORD_REQUIRED' | translate }}
             </mat-error>
+
+            <i matSuffix [class.password-locked]="userForm.get('Password').value == null" [class.password-invisible]="userForm.get('Password').value != null" *ngIf="!visible" class="fas fa-eye-slash" (click)="visiblePassword()"></i>
+            <i matSuffix [class.password-locked]="userForm.get('Password').value == null" [class.password-visible]="userForm.get('Password').value != null" *ngIf="visible" class="fas fa-eye" (click)="visiblePassword()"></i>
           </mat-form-field>
 
-
-          <div class='col-1' style="margin-left: -6%;" (click)="visiblePassword()">
-            <i *ngIf="!visible" style="margin-left: -2px;" class="fas fa-eye-slash password-visible"></i>
-            <i *ngIf="visible" class="fas fa-eye password-visible"></i>
-          </div>
-    
 
           <div title="Autogenerar contraseña" class='col-1' (click)="generatePassword()">
             <i class="fas fa-key password-key"></i>

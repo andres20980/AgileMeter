@@ -157,7 +157,7 @@ namespace everisapi.API.Controllers
                     Subject = "Bienvenido/a a AgileMeter",
                     
                 };
-            Helper.emailBuilder(messageToSend, UsuarioAdd.Nombre, UsuarioAdd.Password);
+            Helper.emailBuilder(messageToSend, UsuarioAdd.Nombre, UsuarioAdd.Password, UsuarioAdd.NombreCompleto, UsuarioAdd.IdiomaFavorito);
             messageToSend.From.Add(new MailboxAddress("AgileMeter", "agile.meter@everis.com"));
             messageToSend.To.Add(new MailboxAddress(UsuarioAdd.NombreCompleto, UsuarioAdd.Nombre + "@everis.com"));
             

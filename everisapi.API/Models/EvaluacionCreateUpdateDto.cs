@@ -17,6 +17,8 @@ namespace everisapi.API.Models
     public bool Estado { get; set; }
 
     public bool Finish { get; set; }
+
+    public bool NoBinary { get; set; }
     
     public string NotasObjetivos { get; set; }
 

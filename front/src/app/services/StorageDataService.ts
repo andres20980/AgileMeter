@@ -51,6 +51,7 @@ export class StorageDataService {
 
   //
   public officeTeams: any;
+  public checkNoBinary: boolean
 
 
   public GetToken() {
