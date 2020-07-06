@@ -3,6 +3,6 @@ export const environment = {
   backendHost: "agilemeter.23.97.158.29.nip.io", 
   backendPort: 80,
   loginEnabled: true,
-  binaryEnabled: false
+  binaryEnabled: true
 };
 //agilemeter-pre-back.23.97.158.29.nip.io
