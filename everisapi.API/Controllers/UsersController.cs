@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Authorization;
 using everisapi.API.Entities;
 using System.Text;
 using System.Security.Cryptography;
+using MimeKit;
+using MailKit.Security;
 
 namespace everisapi.API.Controllers
 {
@@ -22,6 +24,9 @@ namespace everisapi.API.Controllers
         //Creamos un logger
         private ILogger<UsersController> _logger;
         private IUsersInfoRepository _userInfoRepository;
+        private String key = "b14ca5898a4e4133bbce2ea2315a1916";
+        private String emailAddress = "vVQX1AeXsspZ9I4yqM3LbBV3+uurCdLUtB+VZ2k2ALY=";
+        private String emailPassword = "xyx2ddsDtk58rIVfLE5Z6w==";
 
         public UsersController(ILogger<UsersController> logger, IUsersInfoRepository userInfoRepository)
         {
@@ -91,6 +96,26 @@ namespace everisapi.API.Controllers
             }
         }
 
+        [HttpPut("{Nombre}/idioma/{Idioma}")]
+        public IActionResult UpdateIdiomaUsuario(String Nombre, String Idioma)
+        {
+
+            UserEntity userEntity = _userInfoRepository.GetUser(Nombre, false);
+            userEntity.IdiomaFavorito = Idioma;
+
+            //Comprueba que se guardo bien y lo envia
+            if (_userInfoRepository.AlterUserRole(userEntity))
+            {
+                return Ok("El usuario fue modificado correctamente.");
+            }
+            else
+            {
+                return BadRequest();
+            }
+
+        }
+
+
         //Introduciendo el nombre del usuario recogemos todos sus roles
         [HttpGet("{Nombre}/roles")]
         public IActionResult GetRoles(String Nombre)
@@ -126,6 +151,16 @@ namespace everisapi.API.Controllers
         [HttpPost("add")]
         public IActionResult AddUsers([FromBody] UsersWithRolesDto UsuarioAdd)
         {
+            var messageToSend = new MimeMessage
+                {
+                    Sender = new MailboxAddress("AgileMeter", "agile.meter@everis.com"),
+                    Subject = "Bienvenido/a a AgileMeter",
+                    
+                };
+            Helper.emailBuilder(messageToSend, UsuarioAdd.Nombre, UsuarioAdd.Password, UsuarioAdd.NombreCompleto, UsuarioAdd.IdiomaFavorito);
+            messageToSend.From.Add(new MailboxAddress("AgileMeter", "agile.meter@everis.com"));
+            messageToSend.To.Add(new MailboxAddress(UsuarioAdd.NombreCompleto, UsuarioAdd.Nombre + "@everis.com"));
+            
             //Si los datos son validos los guardara
             if (UsuarioAdd == null)
             {
@@ -154,6 +189,7 @@ namespace everisapi.API.Controllers
                     UsuarioAdd.Activo = true;
                     if (_userInfoRepository.AlterUserRole(Mapper.Map<UserEntity>(UsuarioAdd)))
                     {
+                        this.sendMail(messageToSend);
                         return Ok("El usuario fue creado.");
                     }
                     else
@@ -172,6 +208,7 @@ namespace everisapi.API.Controllers
                 //Comprueba que se guardo bien y lo envia
                 if (_userInfoRepository.AddUser(Mapper.Map<UserEntity>(UsuarioAdd)))
                 {
+                    this.sendMail(messageToSend);
                     return Ok("El usuario fue creado.");
                 }
                 else
@@ -201,6 +238,7 @@ namespace everisapi.API.Controllers
             userEntity.Activo = UsuarioUpdate.Activo;
             userEntity.RoleId = UsuarioUpdate.Role.Id;
             userEntity.NombreCompleto = UsuarioUpdate.NombreCompleto;
+            userEntity.IdiomaFavorito = UsuarioUpdate.IdiomaFavorito;
 
             if (UsuarioUpdate.Password != null)
             {             
@@ -318,6 +356,18 @@ namespace everisapi.API.Controllers
             }
         }
 
+        public async void sendMail (MimeMessage message){
+            using (var client = new MailKit.Net.Smtp.SmtpClient())
+            {
+
+                client.ServerCertificateValidationCallback = (s, c, h, e) => true;
+                await client.ConnectAsync("smtp-mail.outlook.com", 587, SecureSocketOptions.StartTls);    ;
+                // Note: only needed if the SMTP server requires authentication
+                await client.AuthenticateAsync(Helper.DecryptString(key,emailAddress), Helper.DecryptString(key,emailPassword));
+                await client.SendAsync(message);
+                await client.DisconnectAsync(true);
+            }
+        }    
     }
 
 }

@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../services/UserService';
 import { AppComponent } from '../app.component';
-import { User } from 'app/Models/User';
 import { Router } from "@angular/router";
+import { map } from "rxjs/operators";
+import { environment } from "../../environments/environment.prod"
+
+export interface UserPermission {
+  NombreCompleto: string,
+  Password: string,
+  //{NombreCompleto:"admin",Password:"Admin" , Role: {id:2,role:"Administrador"}, Activo:true,IdiomaFavorito:"en",nombre:"Admin"}
+}
 
 
 @Component({
@@ -11,6 +18,8 @@ import { Router } from "@angular/router";
   styleUrls: ['./login.component.scss'],
   providers: [UserService]
 })
+
+
 export class LoginComponent implements OnInit {
 
   public ErrorMessage: string = null;
@@ -19,6 +28,8 @@ export class LoginComponent implements OnInit {
   public Recuerdame: boolean = false;
   public enviando: boolean = false;
   public date = new Date();
+  public user: UserPermission;
+  public loginEnabled: boolean = environment.loginEnabled;
 
   constructor(private _userService: UserService,
     private _router: Router,
@@ -52,7 +63,7 @@ export class LoginComponent implements OnInit {
       var User = { 'nombre': this.nombreDeUsuario, 'password': this.passwordDeUsuario };
       this._userService.SignUpMe(User).subscribe(
         res => {
-
+          
           //Si no existe muestra un error
           if (!res) {
             this.ErrorMessage = "No existe el usuario especificado"
@@ -60,6 +71,7 @@ export class LoginComponent implements OnInit {
             //Si existe comprueba si la contraseña es correcta y es redirigido
             if (this.Recuerdame) {
               //Si el usuario quiere ser recordado lo guardara en el localStorage
+           
               localStorage.setItem("user", this.nombreDeUsuario);
               localStorage.setItem("passuser", this.passwordDeUsuario);
               localStorage.setItem("tokenuser", res.access_token);
@@ -73,6 +85,8 @@ export class LoginComponent implements OnInit {
             }
             this._router.navigate(['/home']);
           }
+
+          this.getFavoriteLang(this.nombreDeUsuario);
         },
         error => {
           //Si el servidor tiene algún tipo de problema mostraremos este error
@@ -113,6 +127,14 @@ export class LoginComponent implements OnInit {
     } else {
       //this.Recuerdame = true;
     }
+  }
+
+  public getFavoriteLang(userName: string)
+  {
+    this._userService.getUser(userName).pipe(map(x => x)).subscribe( r => {
+      let currentUser: UserPermission = {NombreCompleto: r.nombreCompleto, Password: r.password} 
+      this._app.ChangeLang(r.idiomaFavorito,currentUser)
+    });
   }
 
 }

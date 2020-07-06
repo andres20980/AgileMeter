@@ -197,6 +197,26 @@ $small: 40em;
 
 }
 
+/* No binary Styles*/
+.questions-middle-btn {
+  @extend .yes-no-animation;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border: 1px solid #fae71b;
+  // background: #fae71b;
+  color: black;
+  cursor: pointer;
+
+  &:focus{
+    outline:none;
+  }
+
+}
+
+.nobinary-button {
+  width: 50px;
+}
+
 .questions-no-btn {
   @extend .yes-no-animation;
   border-top-right-radius: 5px;
@@ -612,6 +632,7 @@ $small: 40em;
 
 .section-title{
   display: inline-flex;
+  align-items: center;
 }
 
 .centered{

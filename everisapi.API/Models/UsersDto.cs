@@ -14,5 +14,11 @@ namespace everisapi.API.Models
         public ICollection<ProyectoDto> ProyectosDeUsuario { get; set; }
         = new List<ProyectoDto>();
         public string NombreCompleto { get; set; }
+
+        public int RoleId { get; set; }
+
+        public bool Activo { get; set; }
+
+        public string IdiomaFavorito { get; set;}
     }
 }

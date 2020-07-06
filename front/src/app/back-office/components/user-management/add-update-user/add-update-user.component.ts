@@ -1,6 +1,6 @@
 import { ProyectoService } from 'app/services/ProyectoService';
 import { UserCreateUpdate } from './../../../../Models/UserCreateUpdate';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Role } from 'app/Models/Role';
 import { UserService } from 'app/services/UserService';
@@ -21,9 +21,13 @@ export class AddUpdateUserComponent implements OnInit {
   public userForm: FormGroup;
   public user: UserCreateUpdate;
   public MensajeNotificacion: string = null;
+  public visible = false;
+
+  @ViewChild('inputpass') typeInput: ElementRef;
 
   public rolList: Role[];
   rol: Role = { id: 1, role: "Usuario" };
+  idiomaFavorito = "es";
   compareRol(o1: any, o2: any): boolean {
     return o1.id === o2.id;
   }
@@ -53,15 +57,17 @@ export class AddUpdateUserComponent implements OnInit {
         NombreCompleto: new FormControl(this.user.nombreCompleto, Validators.required),
         Password: new FormControl(null),
         Role: new FormControl(this.rol),
-        Activo: new FormControl(true)
+        Activo: new FormControl(true),
+        IdiomaFavorito: new FormControl(this.idiomaFavorito),
       });
       this.userForm.controls['Nombre'].disable();
     } else {
       this.userForm = new FormGroup({
         Nombre: new FormControl('', [Validators.required, Validators.maxLength(127)]),
         NombreCompleto: new FormControl('', Validators.required),
-        Password: new FormControl('', Validators.required),
+        Password: new FormControl(null, Validators.required),
         Role: new FormControl(this.rol),
+        IdiomaFavorito: new FormControl(this.idiomaFavorito),
       });
     }
   }
@@ -117,8 +123,8 @@ export class AddUpdateUserComponent implements OnInit {
     var form = this.userForm.value;
     //le asignamos el nombre al form ( como el campo nombre esta deshabilitado se recoge como null)
     form.nombre = this._userService.user.nombre;
-    if (form.password == "") {
-      form.password = null;
+    if (form.Password == "") {
+      form.Password = null;
     }
     //si el usuario logueado es el usuario a modificar y le cambias el roll te muestra una ventana de advertencia indicando que te redirige al home
     if (this._proyectoService.UsuarioLogeado == form.nombre && this._userService.user.role.id != form.Role.id) {
@@ -166,6 +172,7 @@ export class AddUpdateUserComponent implements OnInit {
 
     //2º recogemos los objetos que marcaremos por defecto en los select
     this.rol = this.user.role;
+    this.idiomaFavorito = this.user.idiomaFavorito;
   }
 
   public AbrirModal(content, form) {
@@ -180,7 +187,25 @@ export class AddUpdateUserComponent implements OnInit {
       })
   }
 
+  public generatePassword()
+  {
+    var length = 8,
+        charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+        retVal = "";
+    for (var i = 0, n = charset.length; i < length; ++i) {
+        retVal += charset.charAt(Math.floor(Math.random() * n));
+    }
+    this.userForm.patchValue({Password: retVal});
+  }
+
   public volver() {
     this._router.navigate(['/backoffice/usermanagement']);
+  }
+
+  public visiblePassword()
+  {
+    this.visible = !this.visible;
+    if(this.typeInput.nativeElement.type == "password") this.typeInput.nativeElement.type = "nombre";
+    else this.typeInput.nativeElement.type = "password";
   }
 }

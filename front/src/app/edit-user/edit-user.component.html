@@ -1,0 +1,111 @@
+<div class="d-flex justify-content-center notificacion">
+  <div *ngIf="!MensajeNotificacionError" class="position-fixed text-center notificacion">
+    <div *ngIf="MensajeNotificacion != null" class="alert alert-success">
+      <b>{{MensajeNotificacion}}</b>
+    </div>
+  </div>
+
+  <div *ngIf="MensajeNotificacionError" class="position-fixed text-center notificacion">
+    <div *ngIf="MensajeNotificacion != null" class="alert alert-danger">
+      <b>{{MensajeNotificacion}}</b>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <app-breadcrumb></app-breadcrumb>
+  <div *ngIf="Error =='400'" class="alert alert-danger alert-login" id="danger">
+    <strong>{{ErrorMessage}}</strong>
+  </div>
+  
+  <div class="ng-card-box p-5 br-2 mat-elevation-z5">
+    <form [formGroup]="userForm" autocomplete="off" class="col-12">
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <h3 *ngIf="this.user == undefined">{{ 'ADD_UPDATE_USER.ADD_USERS' | translate }}</h3>
+          <h3 *ngIf="this.user != undefined">{{ 'ADD_UPDATE_USER.MODIFY_USER' | translate }}</h3>
+        </div>
+  
+        <div class="row">
+          <mat-form-field class="col-6">
+            <input matInput type="text" formControlName="Nombre" id="Nombre"
+              placeholder="{{ 'ADD_UPDATE_USER.FORM_USER' | translate }}" value="{{this.user?.nombre}}">
+            <mat-error *ngIf="hasError('Nombre','required')">{{ 'ADD_UPDATE_USER.FORM_USER_REQUIRED' | translate }}
+            </mat-error>
+            <mat-error *ngIf="hasError('Nombre','maxlength')">{{ 'ADD_UPDATE_USER.FORM_USER_MAX_LENGTH' | translate }}
+            </mat-error>
+          </mat-form-field>
+  
+          <mat-form-field class="col-6">
+            <input #inputpass matInput type="password" formControlName="Password" id="Password"
+              placeholder="{{ 'ADD_UPDATE_USER.FORM_PASSWORD' | translate }}" value="******">
+
+            <mat-error *ngIf="hasError('Password','required')">{{ 'ADD_UPDATE_USER.FORM_PASSWORD_REQUIRED' | translate }}
+            </mat-error>
+
+
+              <i matSuffix [class.password-locked]="userForm.get('Password').value == null" [class.password-invisible]="userForm.get('Password').value != null" *ngIf="!visible" class="fas fa-eye-slash" (click)="visiblePassword()"></i>
+              <i matSuffix [class.password-locked]="userForm.get('Password').value == null" [class.password-visible]="userForm.get('Password').value != null" *ngIf="visible" class="fas fa-eye" (click)="visiblePassword()"></i>
+
+          </mat-form-field>
+
+          <mat-form-field class="col-6">
+            <input matInput type="text" formControlName="NombreCompleto" id="NombreCompleto"
+              placeholder="{{ 'ADD_UPDATE_USER.FORM_NAME' | translate }}" value="{{this.user?.nombreCompleto}}">
+            <mat-error *ngIf="hasError('NombreCompleto','required')">
+              {{ 'ADD_UPDATE_USER.FORM_FULL_NAME_REQUIRED' | translate }} </mat-error>
+          </mat-form-field>
+          
+          <!--COMBO PARA LOS ROL-->
+          <mat-form-field class="col-4">
+            <mat-select [value]="rol" formControlName="Role" [disabled]='true'>
+              <mat-option *ngFor="let r of rolList" [value]="r">
+                {{ r.role }}
+              </mat-option>
+            </mat-select>
+            <mat-label>{{ 'ADD_UPDATE_USER.FORM_ROL' | translate }}</mat-label>
+          </mat-form-field>
+
+          <mat-form-field class="col-2">
+            <mat-select [(value)]="idiomaFavorito" formControlName="IdiomaFavorito">
+              <mat-option value="es">
+                ES
+              </mat-option>
+              <mat-option value="en">
+                EN
+              </mat-option>
+            </mat-select>
+            <mat-label>{{ 'ADD_UPDATE_USER.FORM_IDIOMA' | translate }}</mat-label>
+          </mat-form-field>
+  
+        </div>
+  
+        <!--BUTTONS-->
+        <div class="row btns col-12 justify-content-center">
+          
+          <div _ngcontent-blt-c4="" *ngIf="this.user == undefined" class="col-4">
+            <div _ngcontent-blt-c4="" class="main-button border-curve bajarmedia eval-ant mat-elevation-z5 w-85 m-auto"
+              [class.card-disabled]="userForm.invalid" (click)="altaUsuario()">
+              <a _ngcontent-blt-c4="">{{ 'ADD_UPDATE_USER.BTN_GUARDAR' | translate }}</a>
+            </div>
+          </div>
+  
+          <div _ngcontent-blt-c4="" *ngIf="this.user != undefined" class="col-4">
+            <div _ngcontent-blt-c4="" class="main-button border-curve bajarmedia eval-ant mat-elevation-z5 w-85 m-auto"
+              [class.card-disabled]="userForm.invalid" (click)="comprobarDatos(content)">
+              <a _ngcontent-blt-c4="">{{ 'ADD_UPDATE_USER.BTN_GUARDAR' | translate }}</a>
+            </div>
+          </div>
+  
+          <div _ngcontent-blt-c4="" class="col-4">
+            <div _ngcontent-blt-c4=""
+              class="secondary-button border-curve bajarmedia eval-ant mat-elevation-z5 w-85 m-auto" (click)="volver()">
+              <a _ngcontent-blt-c4="">{{ 'ADD_UPDATE_USER.BTN_BACK' | translate }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <br />
+</div> 

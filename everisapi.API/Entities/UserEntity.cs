@@ -30,5 +30,7 @@ namespace everisapi.API.Entities
         [Required]
         public bool Activo { get; set; }
 
+        public string IdiomaFavorito { get; set; }
+
     }
 }

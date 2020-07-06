@@ -10,7 +10,7 @@
         <h3 *ngIf="this.user != undefined">{{ 'ADD_UPDATE_USER.MODIFY_USER' | translate }}</h3>
       </div>
 
-      <div class="col-12">
+      <div class="row">
         <mat-form-field class="col-6">
           <input matInput type="text" formControlName="Nombre" id="Nombre"
             placeholder="{{ 'ADD_UPDATE_USER.FORM_USER' | translate }}" value="{{this.user?.nombre}}">
@@ -20,16 +20,29 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field class="col-6">
-          <input *ngIf="this.user!=null" matInput type="password" formControlName="Password" id="Password"
-            placeholder="{{ 'ADD_UPDATE_USER.FORM_PASSWORD' | translate }}" value="®®®®®®®">
-          <input *ngIf="this.user==null" matInput type="password" formControlName="Password" id="Password"
-            placeholder="{{ 'ADD_UPDATE_USER.FORM_PASSWORD' | translate }}" value="">
-          <mat-error *ngIf="hasError('Password','required')">{{ 'ADD_UPDATE_USER.FORM_PASSWORD_REQUIRED' | translate }}
-          </mat-error>
-        </mat-form-field>
 
-        <mat-form-field class="col-8">
+          <mat-form-field class="col-5">
+            <input *ngIf="this.user!=null" #inputpass matInput type="password" formControlName="Password" id="Password"
+              placeholder="{{ 'ADD_UPDATE_USER.FORM_PASSWORD' | translate }}" value="******">
+            <input *ngIf="this.user==null" #inputpass matInput type="password" formControlName="Password" id="Password"
+              placeholder="{{ 'ADD_UPDATE_USER.FORM_PASSWORD' | translate }}" value="">
+            <mat-error *ngIf="hasError('Password','required')">{{ 'ADD_UPDATE_USER.FORM_PASSWORD_REQUIRED' | translate }}
+            </mat-error>
+
+            <i matSuffix [class.password-locked]="userForm.get('Password').value == null" [class.password-invisible]="userForm.get('Password').value != null" *ngIf="!visible" class="fas fa-eye-slash" (click)="visiblePassword()"></i>
+            <i matSuffix [class.password-locked]="userForm.get('Password').value == null" [class.password-visible]="userForm.get('Password').value != null" *ngIf="visible" class="fas fa-eye" (click)="visiblePassword()"></i>
+          </mat-form-field>
+
+
+          <div title="Autogenerar contraseña" class='col-1' (click)="generatePassword()">
+            <i class="fas fa-key password-key"></i>
+          </div>
+
+       
+          
+
+
+        <mat-form-field class="col-6">
           <input matInput type="text" formControlName="NombreCompleto" id="NombreCompleto"
             placeholder="{{ 'ADD_UPDATE_USER.FORM_NAME' | translate }}" value="{{this.user?.nombreCompleto}}">
           <mat-error *ngIf="hasError('NombreCompleto','required')">
@@ -44,6 +57,19 @@
             </mat-option>
           </mat-select>
           <mat-label>{{ 'ADD_UPDATE_USER.FORM_ROL' | translate }}</mat-label>
+        </mat-form-field>
+
+        <!--COMBO PARA LOS IDIOMAS-->
+        <mat-form-field class="col-2">
+          <mat-select [(value)]="idiomaFavorito" formControlName="IdiomaFavorito">
+            <mat-option value="es">
+              ES
+            </mat-option>
+            <mat-option value="en">
+              EN
+            </mat-option>
+          </mat-select>
+          <mat-label>{{ 'ADD_UPDATE_USER.FORM_IDIOMA' | translate }}</mat-label>
         </mat-form-field>
       </div>
 

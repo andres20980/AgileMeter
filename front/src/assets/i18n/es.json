@@ -1,6 +1,7 @@
 ﻿{
 	"APP": {
-		"HI": "Hola"
+		"HI": "Hola",
+		"ABOUT": "Sobre AgileMeter"
 	},
 	"BREADCRUMB": {
 		"HOME": "Inicio",
@@ -9,7 +10,9 @@
 		"RESULTS": "Resultados",
 		"SECTIONS": "Secciones",
 		"QUESTIONS": "Preguntas",
-		"PENDING_ASSESSMENTS": "Evaluaciones pendientes"
+		"PENDING_ASSESSMENTS": "Evaluaciones pendientes",
+		"ABOUT": "Sobre AgileMeter",
+		"EDITUSER": "Modificar Usuario"
 	},
 	"HOME": {
 		"SELECT_OFFICE": "Seleccione una oficina",
@@ -51,7 +54,10 @@
 		"NOTIFICATION_DELETE_USER_ERROR": "Ups, lo sentimos, no pudimos eliminar al usuario",
 		"ICON_TEAM_ASSIGN": "Asignar equipos",
 		"ICON_EDIT_USER": "Editar usuario",
-		"ICON_REMOVED_USER": "Eliminar usuario"
+		"ICON_REMOVED_USER": "Eliminar usuario",
+		"EXCEL_WORKSHEET": "Usuarios",
+		"EXCEL_TITLE": "Listado de Usuarios",
+		"EXCEL_DOCUMENT_NAME":"Listado_Usuarios"
 	},
 	"TEAM_MANAGEMENT": {
 		"TEAM_ASSIGN": "Asignación de equipos",
@@ -73,6 +79,7 @@
 		"FORM_NAME": "Nombre",
 		"FORM_FULL_NAME_REQUIRED": "El campo nombre no puede estar vacio.",
 		"FORM_ROL": "Rol",
+		"FORM_IDIOMA": "Idioma",
 		"BTN_GUARDAR": "Guardar",
 		"BTN_BACK": "Volver",
 		"MODAL_HEADER": "Importante",
@@ -398,5 +405,13 @@
 	"CUSTOM_SELECT": {
 		"OTHER": "otro",
 		"OTHERS": "otros"
+	},
+	"ABOUT":{
+		"TITLE": "¿Qué es AgileMeter?",
+		"DESCRIPTION1": "Se trata de un activo de everis, creado por el equipo beAgile, que tiene por objetivo medir el Nivel de Madurez de los equipos que trabajan con la agilidad, sirviendo como palanca de transformación y evolución para las organizaciones.",
+		"DESCRIPTION2": "Agile Meter dispone de diferentes evaluaciones para distintos Métodos, Frameworks y Prácticas Ágiles. Cada evaluación está dividida en diferentes secciones que cuentan con una serie de preguntas con respuesta baremada, que da como resultado la obtención del nivel de madurez tanto a nivel sección como de forma global.",
+		"DESCRIPTION3": "Más allá del valor numérico obtenido en el nivel de madurez, AgileMeter ayuda a evolucionar a los equipos en la de adopción de Agile. Realizando las evaluaciones de forma periódica, se puede observar gráficamente la evolución en el tiempo para cada equipo, y registrar el plan de acción y los objetivos planteados tras cada una de las evaluaciones.",
+		"DESCRIPTION4": "Esta herramienta, que no tiene coste a proyecto, será utilizada a través de los Agile Coach de Be Agile y CoE.",
+		"DESCRIPTION5": "Para más información nos puedes contactar a: "
 	}
 }

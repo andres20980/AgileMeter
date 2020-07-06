@@ -1,5 +1,6 @@
+import { FormControl } from '@angular/forms';
 import { StorageDataService } from './../services/StorageDataService';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { SectionService } from '../services/SectionService';
 import { RespuestasService } from '../services/RespuestasService';
 import { AppComponent } from '../app.component';
@@ -19,6 +20,7 @@ import { ProyectoService } from 'app/services/ProyectoService';
 import { EvaluacionService } from 'app/services/EvaluacionService';
 import { PreguntaInfo } from 'app/Models/PreguntaInfo';
 import { BtnFinalizeEvaluationComponent } from 'app/btn-finalize-evaluation/btn-finalize-evaluation.component';
+import { environment } from "../../environments/environment.prod"
 
 @Component({
   selector: 'app-newevaluation',
@@ -48,6 +50,11 @@ export class NewevaluationComponent implements OnInit {
   public changedAnswer: number;
   modalOption: NgbModalOptions = {};
 
+  public binaryEnabled: boolean = environment.binaryEnabled;
+
+  private autoRenew = new FormControl();
+  private checkBinaryToggle: boolean = false;
+
   //Recogemos todos los datos de la primera area segun su id y las colocamos en la lista
   constructor(
     private _sectionService: SectionService,
@@ -57,16 +64,20 @@ export class NewevaluationComponent implements OnInit {
     private modalService: NgbModal,
     private _proyectoService: ProyectoService,
     private _evaluacionService: EvaluacionService) {
-    this.InitialiseComponent();
+      this.InitialiseComponent();
 
-    this.modalOption.backdrop = 'static';
-    this.modalOption.keyboard = false;
+  }
+  
+  onChange() {
+    this.checkBinaryToggle = this.autoRenew.value;
   }
 
+  
   ngOnInit() {
 
     this.Evaluation = this._appComponent._storageDataService.Evaluacion;
   }
+
 
   private InitialiseComponent() {
 
@@ -141,7 +152,6 @@ export class NewevaluationComponent implements OnInit {
             } else {
               this.AreaAsignada = this.ListaAsignaciones[0]
             }
-
             this.getAsignacionActual(this.Evaluation.id, this.AreaAsignada.id);
             this.Deshabilitar = false;
 
@@ -272,6 +282,7 @@ export class NewevaluationComponent implements OnInit {
       );
     } else {
       if (optionAnswered != pregunta.respuesta.estado) {
+        console.log("ahora estoy en alter respuesta", pregunta.respuesta.estado)
         this.InfoAsignacion.preguntas[index].respuesta.estado = optionAnswered;
         let respuesta = this.InfoAsignacion.preguntas[index].respuesta;
         respuesta.userName = this.UserName;
@@ -413,7 +424,7 @@ export class NewevaluationComponent implements OnInit {
               // setTimeout(() => { this.anadeNota = null }, 4000);
 
               this.Evaluation.userNombre = this.UserName;
-              this._evaluacionService.updateEvaluacion(this.Evaluation).subscribe(
+              this._evaluacionService.updateEvaluacion(this.Evaluation, false, this.checkBinaryToggle).subscribe(
                 res => {
                   //usuario modificado correctamente                  
                 },
@@ -490,7 +501,7 @@ export class NewevaluationComponent implements OnInit {
               // setTimeout(() => { this.anadeNota = null }, 4000);
 
               this.Evaluation.userNombre = this.UserName;
-              this._evaluacionService.updateEvaluacion(this.Evaluation).subscribe(
+              this._evaluacionService.updateEvaluacion(this.Evaluation, false, this.checkBinaryToggle).subscribe(
                 res => {
                   //usuario modificado correctamente
                 },
@@ -529,7 +540,16 @@ export class NewevaluationComponent implements OnInit {
             });
 
         }
-        //Else, Click fuera, no se guarda
+        //Else, Click fuera, no se guarda -> no jodas ...
       })
+  }
+
+  noBinaryButtonStyle(inx: number)
+  {
+    if(inx == 4) return {background: "#10ad9f", borderTopLeftRadius: "0px",borderBottomLeftRadius: "0px", color: "white", border: "1px solid #10ad9f"}
+    if(inx == 3) return {background: "#1b5e20",  borderTopRightRadius: "0px",  borderBottomRightRadius: "0px", color: "white", border: "1px solid #1b5e20"}
+    if(inx == 2) return {background: "#388e3c",  borderTopRightRadius: "0px",  borderBottomRightRadius: "0px", border: "1px solid #388e3c"}
+    if(inx == 1) return {background: "#87a900", border: "1px solid #87a900"}
+    return {background: "tomato"}
   }
 }

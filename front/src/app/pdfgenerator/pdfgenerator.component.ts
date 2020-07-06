@@ -346,7 +346,8 @@ export class PdfgeneratorComponent implements OnInit {
         }
       );
 
-      this._sectionService.GetPreguntasNivelOrganizadas(this.Evaluacion.id, this.Evaluacion.assessmentId).subscribe(
+      this._sectionService.GetPreguntasNivelOrganizadas(this.Evaluacion.id, this.Evaluacion.assessmentId, false, this._appComponent._storageDataService.checkNoBinary)
+      .subscribe(
         res => {
           res.map(x => x.puntuacion = Math.round(x.puntuacion))
           this.ListaSectionConAsignaciones = res;
@@ -612,7 +613,7 @@ export class PdfgeneratorComponent implements OnInit {
 
   saveNotas(model: Evaluacion): void {
     if (this.UserRole == this.rol.Administrador || this.UserRole == this.rol.Evaluador) {
-      this.prevEval.evaluacionService.updateEvaluacion(model).subscribe(
+      this.prevEval.evaluacionService.updateEvaluacion(model,false,this._appComponent._storageDataService.checkNoBinary).subscribe(
         res => {
           // console.log("success");
         },

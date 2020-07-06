@@ -55,6 +55,8 @@ namespace everisapi.API.Entities
         public DbSet<TraduccionesOficinasEntity> TraduccionesOficinas {get;set;}
         public DbSet<TraduccionesIdiomasEntity> TraduccionesIdiomas {get;set;}
 
+        public DbSet<PuntuacionSectionEntity> PuntuacionSection {get;set;} //probar a cambiar la entidad
+
 
   }
 }

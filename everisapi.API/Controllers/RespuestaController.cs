@@ -211,12 +211,17 @@ namespace everisapi.API.Controllers
       }
     }
 
-     [HttpGet("evaluacion/preguntas/{idevaluacion}/assessment/{assessmentid}/{codigoIdioma}")]
-    public IActionResult GetPreguntasNivelOrganizadas(int idevaluacion,int assessmentid, int codigoIdioma)
+     [HttpGet("evaluacion/preguntas/{idevaluacion}/assessment/{assessmentid}/{codigoIdioma}/{final}/{nobinary}")]
+    public IActionResult GetPreguntasNivelOrganizadas(int idevaluacion,int assessmentid, int codigoIdioma, bool final, bool nobinary)
     {
+
+      //por defecto no accede a no-binarias
+      // bool final = false;
+      // bool noBinary = true;
+
       try
       {
-        var respuestas = _respuestasInfoRepository.GetPreguntasNivelOrganizadas(idevaluacion,assessmentid,codigoIdioma);
+        var respuestas = _respuestasInfoRepository.GetPreguntasNivelOrganizadas(idevaluacion,assessmentid,codigoIdioma, final, nobinary);
 
         _logger.LogInformation("Mandamos correctamente todas las preguntas organizadas.");
 

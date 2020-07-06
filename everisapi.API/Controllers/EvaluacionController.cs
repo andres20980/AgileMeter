@@ -21,13 +21,18 @@ namespace everisapi.API.Controllers
         private ILogger<EvaluacionController> _logger;
         private IEvaluacionInfoRepository _evaluacionInfoRepository;
         private IUsersInfoRepository _userInfoRepository;
+        private IPuntuacionSectionRepository _puntuacionSection;
+
+        private IRespuestasInfoRepository _respuestasInfoRepository;
 
         //Utilizamos el constructor para inicializar el logger
-        public EvaluacionController(ILogger<EvaluacionController> logger, IEvaluacionInfoRepository evaluacionInfoRepository, IUsersInfoRepository userInfoRepository)
+        public EvaluacionController(ILogger<EvaluacionController> logger, IEvaluacionInfoRepository evaluacionInfoRepository, IUsersInfoRepository userInfoRepository, IPuntuacionSectionRepository puntuacionSection, IRespuestasInfoRepository respuestasInfoRepository)
         {
             _logger = logger;
             _evaluacionInfoRepository = evaluacionInfoRepository;
             _userInfoRepository = userInfoRepository;
+            _puntuacionSection =  puntuacionSection;
+            _respuestasInfoRepository = respuestasInfoRepository;
         }
 
         [HttpGet()]
@@ -318,7 +323,7 @@ namespace everisapi.API.Controllers
 
                 //Hacemos un mapeo de la pregunta que recogimos
                 var EvaluacionesResult = Mapper.Map<List<EvaluacionInfoWithSectionsDto>>(EvaluacionesFiltradas);
-
+                
                 return Ok(new { EvaluacionesResult });
             }
             catch (Exception ex)
@@ -515,6 +520,7 @@ namespace everisapi.API.Controllers
         [HttpPost()]
         public IActionResult CreateEvaluacion([FromBody] EvaluacionCreateUpdateDto EvaluacionRecogida)
         {
+             _logger.LogInformation("finishhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
             try
             {
                 //Comprueba que el body del json es correcto sino devolvera null
@@ -556,7 +562,7 @@ namespace everisapi.API.Controllers
         public IActionResult UpdateEvaluacion([FromBody] EvaluacionCreateUpdateDto EvaluacionRecogida)
         {
             try
-            {
+            {       
                 //Comprueba que el body del json es correcto sino devolvera null
                 //Si esto ocurre devolveremos un error
                 if (EvaluacionRecogida == null)
@@ -581,6 +587,10 @@ namespace everisapi.API.Controllers
                 {
                     _logger.LogCritical("Ocurrio un error al guardar los cambios cuando intentamos modificar una evaluacion con id: " + ModificarEvaluacion.Id);
                     return StatusCode(500, "Ocurrio un problema en la petición.");
+                }
+
+                if(EvaluacionRecogida.Finish) {
+                    _respuestasInfoRepository.GetPreguntasNivelOrganizadas(EvaluacionRecogida.Id, EvaluacionRecogida.AssessmentId, EvaluacionRecogida.CodigoIdioma, true,true);
                 }
 
 

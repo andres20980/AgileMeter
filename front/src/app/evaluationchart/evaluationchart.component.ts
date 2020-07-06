@@ -73,7 +73,7 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
   ngOnInit() {
 
     this.displayPercentage = true;
-    this.hiddenGlobal = true;
+    this.hiddenGlobal = false;
     this._appComponent.pushBreadcrumb(this.nombreProyecto, "/evaluationresults");
     this.previous = this.result.map(x => x.sectionsInfo);
     this.genericResult = this.result.map(x => x.puntuacion)
@@ -143,7 +143,7 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
       }
 
    this.genericResult.reverse();
-   this.ctx_datasets.push({type: 'bar', yAxisID: "y-axis-1", data: [NaN,...this.genericResult,NaN], label: "Global", backgroundColor: "#2ECC71AA", padding: 200, borderColor: "#2ECC71", hoverBackgroundColor: "#2ECC71", borderWidth:"2", hidden:"true"})
+   this.ctx_datasets.push({type: 'bar', yAxisID: "y-axis-1", data: [NaN,...this.genericResult,NaN], label: "Global", backgroundColor: "#2ECC71AA", padding: 200, borderColor: "#2ECC71", hoverBackgroundColor: "#2ECC71", borderWidth:"2"}) // hidden:"false"
 
    this.createAux(this.levels);
    
@@ -187,7 +187,7 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
         
         this.ctx_datasets.push({
           type: "line",
-          data:[100,100,100,100,100,100,100], //follow.map(x => x * (col * 100)), 
+          data:[100,100,100,100,100,100,100,100,100], //follow.map(x => x * (col * 100)), 
           label:"aux1",// + (col - 1),
           backgroundColor: this.auxColors[0],
           fill: "origin",
@@ -201,7 +201,7 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
 
         this.ctx_datasets.push({
           type: "line",
-          data: [200,200,200,200,200,200,200],//follow.map(x => x * (col * 100)), 
+          data: [200,200,200,200,200,200,200,200,200],//follow.map(x => x * (col * 100)), 
           label:"aux1",// + (col - 1),
           backgroundColor: this.auxColors[1],
           fill: "-1",
@@ -216,7 +216,7 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
         
         this.ctx_datasets.push({
           type: "line",
-          data: [300,300,300,300,300,300,300],//follow.map(x => x * (col * 100)), 
+          data: [300,300,300,300,300,300,300,300,300],//follow.map(x => x * (col * 100)), 
           label:"aux2",// + (col - 1),
           backgroundColor: this.auxColors[2],
           fill: "-1",
@@ -322,7 +322,7 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
           {
             position: "right",
             id: "y-axis-1",
-            display: false,
+            display: true,
             ticks: {
               steps: 100,
               stepValue: 10,
@@ -372,18 +372,13 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
     return  date.substr(0, ndate).split("-").reverse().join(" / ");
   }
 
-  hiddeGlobal(v: boolean){
-    this.hiddenGlobal = v
-    return v
-  }
-
   toggleChartData(i: number){
     let h;
     if(i === null) {
       this.chart.config.data.datasets.map((x, indx) => {if(x.label === "Global") h = indx})
       i = h
-      if(this.hiddenGlobal) this.hiddenGlobal = false;
-      else this.hiddenGlobal = true;
+      if(!this.hiddenGlobal) this.hiddenGlobal = true;
+      else this.hiddenGlobal = false;
     }
 
     this.chart.config.data.datasets[i].hidden = !this.chart.config.data.datasets[i].hidden;

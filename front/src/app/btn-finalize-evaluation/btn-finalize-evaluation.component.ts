@@ -20,6 +20,7 @@ export class BtnFinalizeEvaluationComponent {
   @Input() evaluacion: Evaluacion;
   @Input() changedQuestion: number;
   @Input() changedAnswer: number;
+  @Input() checkNoBinary: boolean;
   @Output() Click = new EventEmitter<any>();
 
   public ErrorMessage: string = null;
@@ -56,7 +57,8 @@ export class BtnFinalizeEvaluationComponent {
   public FinishEvaluation(evaluation: Evaluacion) {
     evaluation.userNombre = this._proyectoService.UsuarioLogeado;
     this.evaluacion.estado = true;
-    this._evaluacionService.updateEvaluacion(evaluation).subscribe(
+    this._appComponent._storageDataService.checkNoBinary = this.checkNoBinary;
+    this._evaluacionService.updateEvaluacion(evaluation, true, this.checkNoBinary).subscribe(
       res => {
         this.goToPdfGenerator(evaluation.id);
       },

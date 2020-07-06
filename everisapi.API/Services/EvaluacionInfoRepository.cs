@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
@@ -7,6 +8,7 @@ using everisapi.API.Entities;
 using everisapi.API.Models;
 using Microsoft.EntityFrameworkCore;
 using MySql.Data.MySqlClient;
+using Microsoft.Extensions.Logging;
 
 namespace everisapi.API.Services
 {
@@ -14,11 +16,16 @@ namespace everisapi.API.Services
     {
 
         private AsignacionInfoContext _context;
+        private ILogger<EvaluacionInfoRepository> _logger;
+
+        private IPuntuacionSectionRepository _puntuacionSection;
 
         //Le damos un contexto en el constructor
-        public EvaluacionInfoRepository(AsignacionInfoContext context)
+        public EvaluacionInfoRepository(ILogger<EvaluacionInfoRepository> logger, AsignacionInfoContext context, IPuntuacionSectionRepository puntuacionSection)
         {
+            _logger = logger;
             _context = context;
+            _puntuacionSection = puntuacionSection;
         }
 
         //Recoge una evaluación incluyendo o no las respuestas
@@ -573,17 +580,6 @@ namespace everisapi.API.Services
             //return EvaluacionesInformativas.ToList();
             return EvaluacionesInformativasFiltradas.ToList();
         }
-
-
-
-
-        /*    nuevo con sectionsinfo  */
-
-
-
-
-
-
         public List<EvaluacionInfoWithSectionsDto> GetEvaluationsWithSectionsInfo(int IdProject, EvaluacionInfoPaginationDto Evaluacion, int codigoIdioma, string UsuarioLogado)
         {
             //Recogemos las evaluaciones y la paginamos
@@ -592,6 +588,8 @@ namespace everisapi.API.Services
             List<UserProyectoEntity> equiposUsuario = new List<UserProyectoEntity>();
             List<int> equipos = new List<int>();
             List<EvaluacionEntity> Evaluaciones;
+
+            //List<String> pts = new List<String>();
             
             if(UsuarioLogado.Length > 0)
             {
@@ -668,14 +666,17 @@ namespace everisapi.API.Services
                   ).OrderByDescending(e => e.Fecha).ToList();
               }
              }
+             
             //Encuentra la informacion de la evaluacion y lo introduce en un objeto
             foreach (var evaluacion in Evaluaciones)
             {
+                //float pnt = Convert.ToSingle(evaluacion.Puntuacion);
                 EvaluacionInfoWithSectionsDto EvaluacionInfo = new EvaluacionInfoWithSectionsDto
                 {
                     Id = evaluacion.Id,
                     Fecha = evaluacion.Fecha,
                     Estado = evaluacion.Estado,
+                    Puntuacion = Convert.ToSingle(evaluacion.Puntuacion),
                     Oficina = (string) _context.TraduccionesOficinas
                                     .Where(t => t.OficinaId == evaluacion.ProyectoEntity.OficinaEntity.OficinaId
                                                 &&
@@ -690,145 +691,188 @@ namespace everisapi.API.Services
                 };
 
 
-                EvaluacionInfo.SectionsInfo = new List<SectionInfoDto>();
+                List<PuntuacionSectionEntity> sectionsEval = new List<PuntuacionSectionEntity>();
+               
+                sectionsEval = _puntuacionSection.GetPuntuacionSection().Where(w => w.EvaluacionId == evaluacion.Id).ToList();
+                sectionsEval.ForEach(section => {
+                    SectionInfoDto sect = new SectionInfoDto();
+                    sect.Puntuacion = section.Puntuacion;
+                    sect.NivelAlcanzado = section.NivelAlcanzado; // (sectionsEval.Select(s => s.SectionId).Where(we => we == section.Id))
+                    sect.Nombre = _context.TraduccionesSections.Where(w => w.SectionsId == section.SectionId && w.IdiomaId == 1).Select(s => s.Traduccion).SingleOrDefault();
+                    EvaluacionInfo.SectionsInfo.Add(sect);
+                });
+
+                
+                // Evaluaciones.ForEach(eval =>{
+                //     EvaluacionInfo.SectionsInfo.ToList().ForEach(si => {
+                //         Console.WriteLine("aQuí hay una evaluación existeeeeeeee de estado:  "+ si.Nombre + " con point "+ si.Puntuacion);
+                //     });
+                // });
 
 
-                List<SectionConAsignacionesDto> sectionsConAsignaciones = new List<SectionConAsignacionesDto>();
+                 //  EvaluacionInfo.SectionsInfo = new List<SectionInfoDto>();
+            
+                // List<SectionConAsignacionesDto> sectionsConAsignaciones = new List<SectionConAsignacionesDto>();
 
-                // calculo de puntuaciones por seccion
+                    // calculo de puntuaciones por seccion
 
-                List<SectionEntity> sections = _context.Sections.Where(r => r.AssessmentId == evaluacion.AssessmentId).ToList();
-                foreach (var s in sections)
-                {
-                    SectionConAsignacionesDto sectionConAsignacion = new SectionConAsignacionesDto();
-                    sectionConAsignacion.EvaluacionId = evaluacion.Id;
-                    sectionConAsignacion.SectionId = s.Id;
-                    // sectionConAsignacion.Nombre = s.Nombre;
-                    sectionConAsignacion.Nombre = "";
-                    sectionConAsignacion.Peso = s.Peso;
-                    sectionConAsignacion.PesoNivel1 = s.PesoNivel1;
-                    sectionConAsignacion.PesoNivel2 = s.PesoNivel2;
-                    sectionConAsignacion.PesoNivel3 = s.PesoNivel3;
+                    // List<SectionEntity> sections = _context.Sections.Where(r => r.AssessmentId == evaluacion.AssessmentId).ToList();
+                    // foreach (var s in sections)
+                    // {
+                    //     SectionConAsignacionesDto sectionConAsignacion = new SectionConAsignacionesDto();
+                    //     sectionConAsignacion.EvaluacionId = evaluacion.Id;
+                    //     sectionConAsignacion.SectionId = s.Id;
+                    //     // sectionConAsignacion.Nombre = s.Nombre;
+                    //     sectionConAsignacion.Nombre = "";
+                    //     sectionConAsignacion.Peso = s.Peso;
+                    //     sectionConAsignacion.PesoNivel1 = s.PesoNivel1;
+                    //     sectionConAsignacion.PesoNivel2 = s.PesoNivel2;
+                    //     sectionConAsignacion.PesoNivel3 = s.PesoNivel3;
 
-                    List<AsignacionConPreguntaNivelDto> asignacionesConPreguntaNivel = new List<AsignacionConPreguntaNivelDto>();
+                    //     List<AsignacionConPreguntaNivelDto> asignacionesConPreguntaNivel = new List<AsignacionConPreguntaNivelDto>();
 
-                    List<AsignacionEntity> asignaciones = _context.Asignaciones.Where(a => a.SectionId == s.Id).ToList();
-                    foreach (var a in asignaciones)
-                    {
-                        AsignacionConPreguntaNivelDto asignacionConPreguntaNivel = new AsignacionConPreguntaNivelDto();
-                        asignacionConPreguntaNivel.Id = a.Id;
-                        //asignacionConPreguntaNivel.Nombre = a.Nombre;
-                        asignacionConPreguntaNivel.Nombre = "";
-                        asignacionConPreguntaNivel.Peso = a.Peso;
+                    //     List<AsignacionEntity> asignaciones = _context.Asignaciones.Where(a => a.SectionId == s.Id).ToList();
+                    //     foreach (var a in asignaciones)
+                    //     {
+                    //         AsignacionConPreguntaNivelDto asignacionConPreguntaNivel = new AsignacionConPreguntaNivelDto();
+                    //         asignacionConPreguntaNivel.Id = a.Id;
+                    //         //asignacionConPreguntaNivel.Nombre = a.Nombre;
+                    //         asignacionConPreguntaNivel.Nombre = "";
+                    //         asignacionConPreguntaNivel.Peso = a.Peso;
 
-                        List<PreguntaRespuestaNivelDto> preguntasRespuestaNivel = new List<PreguntaRespuestaNivelDto>();
-                        List<RespuestaEntity> preguntas = new List<RespuestaEntity>();
-                        preguntas = _context.Respuestas.
-                        Include(r => r.PreguntaEntity).Where(p => p.EvaluacionId == evaluacion.Id && p.PreguntaEntity.AsignacionId == a.Id).ToList();
+                    //         List<PreguntaRespuestaNivelDto> preguntasRespuestaNivel = new List<PreguntaRespuestaNivelDto>();
+                    //         List<RespuestaEntity> preguntas = new List<RespuestaEntity>();
+                    //         preguntas = _context.Respuestas.
+                    //         Include(r => r.PreguntaEntity).Where(p => p.EvaluacionId == evaluacion.Id && p.PreguntaEntity.AsignacionId == a.Id).ToList();
 
-                        foreach (RespuestaEntity p in preguntas)
-                        {
-                            PreguntaRespuestaNivelDto preguntaRespuestaNivel = new PreguntaRespuestaNivelDto();
-                            preguntaRespuestaNivel.Id = p.PreguntaEntity.Id;
-                            preguntaRespuestaNivel.Nivel = p.PreguntaEntity.Nivel;
-                            preguntaRespuestaNivel.Peso = p.PreguntaEntity.Peso;
-                            preguntaRespuestaNivel.Estado = p.Estado;
-                            preguntaRespuestaNivel.Correcta = p.PreguntaEntity.Correcta;
+                    //         foreach (RespuestaEntity p in preguntas)
+                    //         {
+                    //             PreguntaRespuestaNivelDto preguntaRespuestaNivel = new PreguntaRespuestaNivelDto();
+                    //             preguntaRespuestaNivel.Id = p.PreguntaEntity.Id;
+                    //             preguntaRespuestaNivel.Nivel = p.PreguntaEntity.Nivel;
+                    //             preguntaRespuestaNivel.Peso = p.PreguntaEntity.Peso;
+                    //             preguntaRespuestaNivel.Estado = p.Estado;
+                    //             preguntaRespuestaNivel.Correcta = p.PreguntaEntity.Correcta;
 
-                            preguntasRespuestaNivel.Add(preguntaRespuestaNivel);
-                        }
-                        asignacionConPreguntaNivel.Preguntas = preguntasRespuestaNivel;
+                    //             preguntasRespuestaNivel.Add(preguntaRespuestaNivel);
+                    //         }
+                    //         asignacionConPreguntaNivel.Preguntas = preguntasRespuestaNivel;
 
-                        asignacionesConPreguntaNivel.Add(asignacionConPreguntaNivel);
-                    }
-                    sectionConAsignacion.Asignaciones = asignacionesConPreguntaNivel;
+                    //         asignacionesConPreguntaNivel.Add(asignacionConPreguntaNivel);
+                    //     }
+                    //     sectionConAsignacion.Asignaciones = asignacionesConPreguntaNivel;
 
-                    sectionsConAsignaciones.Add(sectionConAsignacion);
-                }
+                    //     sectionsConAsignaciones.Add(sectionConAsignacion);
+                    // }
 
-                float sumSections = 0;
-                foreach (SectionConAsignacionesDto seccion in sectionsConAsignaciones)
-                {
-                    //calculamos los niveles individuales para cada asignacion
-                    foreach (AsignacionConPreguntaNivelDto asignacion in seccion.Asignaciones)
-                    {
-                        var maxLevel = asignacion.Preguntas.Max(x => x.Nivel);
-                        bool nivelCompleto = true;
-                        for (int i = 1; i <= maxLevel && nivelCompleto; i++)
-                        {
-                            nivelCompleto = false;
-                            var preguntas = asignacion.Preguntas.Where(p => p.Nivel == i);
+                    
+                    // float sumSections = 0;
+                    // foreach (SectionConAsignacionesDto seccion in sectionsConAsignaciones)
+                    // {    
+                    //     //calculamos los niveles individuales para cada asignacion
+                    //     foreach (AsignacionConPreguntaNivelDto asignacion in seccion.Asignaciones)
+                    //     {
+                    //         var maxLevel = asignacion.Preguntas.Max(x => x.Nivel);
+                    //         bool nivelCompleto = true;
+                    //         for (int i = 1; i <= maxLevel && nivelCompleto; i++)
+                    //         {
+                    //             nivelCompleto = false;
+                    //             var preguntas = asignacion.Preguntas.Where(p => p.Nivel == i);
 
-                            var preguntasCorrectas = asignacion.Preguntas
-                            .Where(p => p.Nivel == i && ((p.Estado == 1 && p.Correcta == "Si") || (p.Estado == 2 && p.Correcta == "No")));
+                    //             var preguntasCorrectas = asignacion.Preguntas
+                    //             .Where(p => p.Nivel == i && ((p.Estado == 1 && p.Correcta == "Si") || (p.Estado == 2 && p.Correcta == "No")));
 
-                            if (preguntas.Count() == preguntasCorrectas.Count())
-                            {
-                                nivelCompleto = true;
-                            }
+                    //             if (preguntas.Count() == preguntasCorrectas.Count())
+                    //             {
+                    //                 nivelCompleto = true;
+                    //             }
 
-                            asignacion.NivelAlcanzado = i;
-                            asignacion.Puntuacion = preguntasCorrectas.Sum(x => x.Peso);
-                        }
-                    }
+                    //             asignacion.NivelAlcanzado = i;
+                    //             asignacion.Puntuacion = preguntasCorrectas.Sum(x => x.Peso);
+                    //         }
+                        
+                    //     }
 
-                    //comparamos los niveles de cada asignacion y cogemos el mas bajo
-                    var minLevel = seccion.Asignaciones.Min(x => x.NivelAlcanzado);
-                    float sumaPesosAsignaciones = 0;
-                    foreach (AsignacionConPreguntaNivelDto asignacion in seccion.Asignaciones)
-                    {
-                        asignacion.NivelAlcanzado = minLevel;
-                        asignacion.Puntuacion = asignacion.Preguntas
-                        .Where(p => p.Nivel == minLevel && ((p.Estado == 1 && p.Correcta == "Si") || (p.Estado == 2 && p.Correcta == "No")))
-                        .Sum(p => p.Peso);
+                    //     //comparamos los niveles de cada asignacion y cogemos el mas bajo
+                    //     var minLevel = seccion.Asignaciones.Min(x => x.NivelAlcanzado);
+                    //     float sumaPesosAsignaciones = 0;
+                    //     foreach (AsignacionConPreguntaNivelDto asignacion in seccion.Asignaciones)
+                    //     {
+                    //         asignacion.NivelAlcanzado = minLevel;
+                    //         asignacion.Puntuacion = asignacion.Preguntas
+                    //         .Where(p => p.Nivel == minLevel && ((p.Estado == 1 && p.Correcta == "Si") || (p.Estado == 2 && p.Correcta == "No")))
+                    //         .Sum(p => p.Peso);
 
-                        sumaPesosAsignaciones += asignacion.Puntuacion * asignacion.Peso;
-                    }
+                    //         sumaPesosAsignaciones += asignacion.Puntuacion * asignacion.Peso;
+                    //     }
 
-                    seccion.NivelAlcanzado = minLevel;
-                    seccion.Puntuacion = sumaPesosAsignaciones;
+                    //     seccion.NivelAlcanzado = minLevel;
+                    //     seccion.Puntuacion = sumaPesosAsignaciones;
 
-                    if (seccion.Puntuacion == 0 && seccion.NivelAlcanzado > 1)
-                    {
-                        seccion.NivelAlcanzado = seccion.NivelAlcanzado - 1;
-                        seccion.Puntuacion = 100;
-                    }
+                    //     if (seccion.Puntuacion == 0 && seccion.NivelAlcanzado > 1)
+                    //     {
+                    //         seccion.NivelAlcanzado = seccion.NivelAlcanzado - 1;
+                    //         seccion.Puntuacion = 100;
+                    //     }
 
-                    SectionInfoDto sec = new SectionInfoDto();
-                    sec.Puntuacion = seccion.Puntuacion;
-                    sec.NivelAlcanzado = seccion.NivelAlcanzado;
-                    //sec.Nombre = seccion.Nombre;
-                    sec.Nombre = _context.TraduccionesSections.Where(t => t.SectionsId == seccion.SectionId && t.IdiomaId == codigoIdioma).Select(t => t.Traduccion).FirstOrDefault();
-                    EvaluacionInfo.SectionsInfo.Add(sec);
-                    Console.WriteLine("SOY" + seccion.SectionId);
-                    if (seccion.NivelAlcanzado == 3)
-                    {
-                        seccion.Puntuacion = seccion.PesoNivel1 + seccion.PesoNivel2 + (seccion.Puntuacion * ((float)seccion.PesoNivel3 / 100));
-                        seccion.Puntuacion = (seccion.Puntuacion * seccion.Peso) / 100;
-                    }
+                    //     SectionInfoDto sec = new SectionInfoDto();
+                    //     sec.Puntuacion = seccion.Puntuacion;
+                    //     sec.NivelAlcanzado = seccion.NivelAlcanzado;
+                    //     //sec.Nombre = seccion.Nombre;
+                    //     sec.Nombre = _context.TraduccionesSections.Where(t => t.SectionsId == seccion.SectionId && t.IdiomaId == codigoIdioma).Select(t => t.Traduccion).FirstOrDefault();
+                    //     EvaluacionInfo.SectionsInfo.Add(sec);
+                    //     Console.WriteLine("SOY" + seccion.SectionId);
+                    //     Console.WriteLine("SOY punsction  " + seccion.Puntuacion);
+                    //     pts.Add(evaluacion.Id + "-" + seccion.SectionId + "-"+ seccion.Puntuacion+"-"+seccion.NivelAlcanzado);
+                    //     if (seccion.NivelAlcanzado == 3)
+                    //     {
+                    //         seccion.Puntuacion = seccion.PesoNivel1 + seccion.PesoNivel2 + (seccion.Puntuacion * ((float)seccion.PesoNivel3 / 100));
+                    //         seccion.Puntuacion = (seccion.Puntuacion * seccion.Peso) / 100;
+                    //     }
 
-                    if (seccion.NivelAlcanzado == 2)
-                    {
-                        seccion.Puntuacion = seccion.PesoNivel1 + (seccion.Puntuacion * ((float)seccion.PesoNivel2 / 100));
-                        seccion.Puntuacion = (seccion.Puntuacion * seccion.Peso) / 100;
-                    }
+                    //     if (seccion.NivelAlcanzado == 2)
+                    //     {
+                    //         seccion.Puntuacion = seccion.PesoNivel1 + (seccion.Puntuacion * ((float)seccion.PesoNivel2 / 100));
+                    //         seccion.Puntuacion = (seccion.Puntuacion * seccion.Peso) / 100;
+                    //     }
 
-                    if (seccion.NivelAlcanzado == 1)
-                    {
-                        seccion.Puntuacion = ((float)seccion.PesoNivel1 / 100) * seccion.Puntuacion;
-                        seccion.Puntuacion = (seccion.Puntuacion * seccion.Peso) / 100;
-                    }
+                    //     if (seccion.NivelAlcanzado == 1)
+                    //     {
+                    //         seccion.Puntuacion = ((float)seccion.PesoNivel1 / 100) * seccion.Puntuacion;
+                    //         seccion.Puntuacion = (seccion.Puntuacion * seccion.Peso) / 100;
+                    //     }
+                    //     ;
+                    //     sumSections = 18.76F; //+= seccion.Puntuacion;
 
-                    sumSections += seccion.Puntuacion;
-                }
+                    //     //var string d = String.Add(sumSections.ToString());
+                        
+                    //}
+                     
+                    // EvaluacionInfo.Puntuacion = (float)Math.Round(sumSections, 1); // este es el añadido de la puntuacion generica
+                    // Console.WriteLine("id eval"+ evaluacion.Id + " vieja puntuacion"+ (float)Math.Round(sumSections, 1));
 
-                EvaluacionInfo.Puntuacion = (float)Math.Round(sumSections, 1);
+                    //Añade el objeto en la lista
+                        EvaluacionesInformativas.Add(EvaluacionInfo);
 
+                      
+             }
+            
+            
 
-                //Añade el objeto en la lista
-                EvaluacionesInformativas.Add(EvaluacionInfo);
-            }
+            //   EvaluacionesInformativas.ForEach(f => {
+            //       f.SectionsInfo.ToList().ForEach(e => {
+            //          Console.WriteLine("ID evaluacion: "+ f.Id +" ID seccion: "+ e.Nombre +"Puntuacion de la section"+ e.Puntuacion);
+            //       });
+            //   });
 
+            // var path =@"C:\Users\jfrancom\ScrumMeter\everisapi.API\seccioneseval.txt"; 
+            // using (StreamWriter writerTxt = File.CreateText(path))
+            // {
+            //     writerTxt.WriteLine("ID EVAL -- ID SECCION -- PUNTUACION -- LVL");
+            //     pts.ForEach(p => {
+            //         writerTxt.WriteLine("("+p+")+");
+            //     });
+             //}	
 
             return EvaluacionesInformativas.ToList();
         }
@@ -884,7 +928,7 @@ namespace everisapi.API.Services
                 //Añade el objeto en la lista
                 EvaluacionesInformativas.Add(EvaluacionInfo);
             }
-
+            
 
             return EvaluacionesInformativas.ToList();
         }

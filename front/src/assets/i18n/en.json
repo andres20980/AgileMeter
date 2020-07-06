@@ -1,6 +1,7 @@
 {
 	"APP": {
-		"HI": "Hi"
+		"HI": "Hi",
+		"ABOUT": "About AgileMeter"
 	},
 	"BREADCRUMB": {
 		"HOME": "Home",
@@ -9,7 +10,10 @@
 		"RESULTS": "Results",
 		"SECTIONS": "Sections",
 		"QUESTIONS": "Questions",
-		"PENDING_ASSESSMENTS": "Pending assessments"
+		"PENDING_ASSESSMENTS": "Pending assessments",
+		"ABOUT": "About AgileMeter",
+		"EDITUSER": "Modify User"
+
 	},
 	"HOME": {
 		"SELECT_TEAM": "Select a team",
@@ -50,7 +54,10 @@
 		"NOTIFICATION_DELETE_USER_ERROR": "Sorry, we couldn't remove user",
 		"ICON_TEAM_ASSIGN": "Assign teams",
 		"ICON_EDIT_USER": "Edit user",
-		"ICON_REMOVED_USER": "Delete user"
+		"ICON_REMOVED_USER": "Delete user",
+		"EXCEL_WORKSHEET": "Users",
+		"EXCEL_TITLE": "Users List",
+		"EXCEL_DOCUMENT_NAME":"Users_List"
 	},
 	"TEAM_MANAGEMENT": {
 		"TEAM_ASSIGN": "Teams assignment",
@@ -72,6 +79,7 @@
 		"FORM_NAME": "Name",
 		"FORM_FULL_NAME_REQUIRED": "Name field can't be empty",
 		"FORM_ROL" :"Role",
+		"FORM_IDIOMA": "Language",
 		"BTN_GUARDAR": "Save",
 		"BTN_BACK": "Back",
 		"MODAL_HEADER": "Important",
@@ -398,5 +406,13 @@
 	"CUSTOM_SELECT": {
 		"OTHER": "other",
 		"OTHERS": "others"
+	},
+	"ABOUT":{
+		"TITLE": "What is AgileMeter?",
+		"DESCRIPTION1": "It is an everis’ asset, developed by the beAgile team, that aims to measure the Agile Maturity Level of teams working on agility, serving as a lever for transformation and evolution in organizations.",
+		"DESCRIPTION2": "AgileMeter has several assessments for different Agile Methods, Frameworks and Practices. Each assessment is divided in sections with some scored questions, and it gives a maturity level as a result of the given answers for each section and in a global way too.",
+		"DESCRIPTION3": "Besides the value of the maturity level, AgileMeter helps teams to evolve in their Agile adoption plan. Making the assessments in a regular basis, it can be obtained an evolution graphical view over the time, for each team, and to register the action plan and objectives established after each assessment.",
+		"DESCRIPTION4": "This tool, which is free for projects, will be used through the Agile Coaches of BeAgile and CoE.",
+		"DESCRIPTION5": "For more information, you can send us an email to: "
 	}
 }
