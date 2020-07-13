@@ -63,13 +63,25 @@
                   <ng-container matColumnDef="estado">
                     <th mat-header-cell *matHeaderCellDef>{{ 'SECTION_RESULTS.ANSWER' | translate }}</th>
                     <td mat-cell *matCellDef="let row">
-                      {{displayRespuesta(row)}}
-                      <img class="answerIcon" *ngIf="checkRespuestaCorrecta(row) == 'respuesta-correcta'"
-                        src="assets/correct.png" title="{{ 'SECTION_RESULTS.ICONS_CORRECT' | translate }}" />
-                      <img class="answerIcon" *ngIf="checkRespuestaCorrecta(row) == 'respuesta-incorrecta'"
-                        src="assets/incorrect.png" title="{{ 'SECTION_RESULTS.ICONS_INCORRECT' | translate }}" />
-                      <img class="answerIcon" *ngIf="checkRespuestaCorrecta(row) == 'respuesta-no-contestada'"
-                        src="assets/incompleted.png" title="{{ 'SECTION_RESULTS.ICONS_NOT_ANSWERED' | translate }}" />
+
+                      <div *ngIf="getCheckBinary" style="display: flex; flex-flow: row">
+                        <div [ngStyle]="{'backgroundColor': displayColorEstado(row), 'color': 'white', 'borderRadius': '20px', 'width': '30%', 'padding':'6px', 'textAlign': 'center'}">
+                          {{displayRespuesta(row)}}
+                        </div>
+                        <i class="answerIcon" class="material-icons" [ngStyle]="{'color': '#FF3636', 'position': 'relative', 'display': displayFailed(row), 'opacity': setOpacity}">feedback</i> 
+                      </div>
+
+
+                      <div *ngIf="!getCheckBinary">
+                        {{displayRespuesta(row)}}
+                        <img class="answerIcon" *ngIf="checkRespuestaCorrecta(row) == 'respuesta-correcta'"
+                            src="assets/correct.png" title="{{ 'SECTION_RESULTS.ICONS_CORRECT' | translate }}" />
+                          <img class="answerIcon" *ngIf="checkRespuestaCorrecta(row) == 'respuesta-incorrecta'"
+                            src="assets/incorrect.png" title="{{ 'SECTION_RESULTS.ICONS_INCORRECT' | translate }}" />
+                          <img class="answerIcon" *ngIf="checkRespuestaCorrecta(row) == 'respuesta-no-contestada'"
+                            src="assets/incompleted.png" title="{{ 'SECTION_RESULTS.ICONS_NOT_ANSWERED' | translate }}" />
+                      </div>
+
                     </td>
                   </ng-container>
 

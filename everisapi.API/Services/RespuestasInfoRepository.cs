@@ -91,13 +91,12 @@ namespace everisapi.API.Services
             List<RespuestaEntity> disabledsAnswers = GetAnswersByEnablingQuestion(evaluationId, enablingQuestionId).ToList();
             RespuestaEntity enablingAnswer = _context.Respuestas.First(r => r.PreguntaEntity.Id == enablingQuestionId && r.EvaluacionId == evaluationId);
             EvaluacionEntity evaluation = _context.Evaluaciones.First(e => e.Id == evaluationId);
-
             if (disabledsAnswers != null)
             {
                 disabledsAnswers.ForEach(r => r.Estado = 0);
                 enablingAnswer.Estado = 2;
                 evaluation.LastQuestionUpdated = enablingQuestionId;
-                evaluation.Fecha = new DateTime();
+                evaluation.Fecha = DateTime.Now; //new DateTime();
 
                 return SaveChanges();
             }
