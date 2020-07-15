@@ -153,8 +153,7 @@ namespace everisapi.API.Controllers
         {
             var messageToSend = new MimeMessage
                 {
-                    Sender = new MailboxAddress("AgileMeter", "agile.meter@everis.com"),
-                    Subject = "Bienvenido/a a AgileMeter",
+                    Sender = new MailboxAddress("AgileMeter", "agile.meter@everis.com"), 
                     
                 };
             Helper.emailBuilder(messageToSend, UsuarioAdd.Nombre, UsuarioAdd.Password, UsuarioAdd.NombreCompleto, UsuarioAdd.IdiomaFavorito);

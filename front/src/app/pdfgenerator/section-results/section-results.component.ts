@@ -20,6 +20,8 @@ export class SectionResultsComponent implements OnInit {
   userRole: number = this._appComponent._storageDataService.Role;
   dataSource: MatTableDataSource<any>;
   expandedElement: RespuestaConNotas;
+  setOpacity: number;
+  getCheckBinary: boolean = this._appComponent._storageDataService.checkNoBinary
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['pregunta', 'estado', 'notas'];
@@ -81,21 +83,31 @@ export class SectionResultsComponent implements OnInit {
     return classString;
   }
   
-  displayRespuesta(row: RespuestaConNotasTabla): string {
-    let respuesta: string = "";
-    switch (row.estado) {
-      case 0:
-        this._translateService.get('SECTION_RESULTS.ICONS_NOT_ANSWERED').subscribe(value => { respuesta = value; });
-        break
-      case 1:        
-        this._translateService.get('SECTION_RESULTS.YES').subscribe(value => { respuesta = value; });
-        break;
-      case 2:        
-        this._translateService.get('SECTION_RESULTS.NO').subscribe(value => { respuesta = value; });
-        break;
+  displayRespuesta(row: RespuestaConNotasTabla): number {
+    let respuesta: any;
+    if(this.getCheckBinary){
 
-      default:
-        break;
+      respuesta = row.estado.toString();
+      if(row.estado == 0) {
+        this._translateService.get('SECTION_RESULTS.ICONS_NOT_ANSWERED').subscribe(value => { respuesta = value; 
+        return});
+      }
+
+    } else {
+      switch (row.estado) {
+        case 0:
+          this._translateService.get('SECTION_RESULTS.ICONS_NOT_ANSWERED').subscribe(value => { respuesta = value; });
+          break
+        case 1:        
+          this._translateService.get('SECTION_RESULTS.YES').subscribe(value => { respuesta = value; });
+          break;
+        case 2:        
+          this._translateService.get('SECTION_RESULTS.NO').subscribe(value => { respuesta = value; });
+          break;
+
+        default:
+          break;
+      }
     }
     return respuesta;
   }
@@ -123,4 +135,49 @@ export class SectionResultsComponent implements OnInit {
     
     return returnedText;
   }
+
+  displayColorEstado(row): string
+  {
+    switch (row.estado) {
+      case 0:
+        return "black"
+        break
+      case 1:        
+        return "#87a900"
+        break;
+      case 2:        
+        return "#388e3c"
+        break;
+
+      case 3:        
+        return "#1b5e20"
+        break;
+
+      case 4:        
+        return "#10ad9f"
+        break;
+
+      default:
+        return "black"
+        break;
+    }
+  }
+
+  displayFailed(row): string
+  {
+    let correcta = (row.correcta == "Si" && row.estado == 1 || row.correcta == "Si" && row.estado == 2) 
+    let nocorrecta =  (row.correcta == "No" && row.estado == 3 || row.correcta == "No" && row.estado == 4)
+
+    if(correcta || nocorrecta) {
+
+      if(row.estado == 2 || row.estado == 3) this.setOpacity = 0.5
+      else this.setOpacity = 1;
+      return "block"
+    } 
+
+    else return "none"
+  }
+
+
+
 }

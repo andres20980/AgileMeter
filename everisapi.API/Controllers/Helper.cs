@@ -18,6 +18,7 @@ public static class Helper
 
         if(idiomaFavorito.Equals("es")){
         // Set the html version of the message text
+                message.Subject = "Bienvenido/a a AgileMeter";
                 builder.HtmlBody = string.Format(@"
                     <div style='padding-bottom:20px;font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;font-size:18px;width: 620px;margin: 0 auto;'>
                     <center><a style='margin-right:10px;margin-top:2px' href='https://agilemeter.everis.com/'><img alt='AgileMeter' src=""cid:{0}""></a></center>
@@ -48,6 +49,7 @@ public static class Helper
         }
         else{
             // Set the html version of the message text
+                message.Subject = "Welcome to Agilemeter!";
                 builder.HtmlBody = string.Format(@"
                     <div style='padding-bottom:20px;font-family: Calibri,Candara,Segoe,Segoe UI,Optima,Arial,sans-serif;font-size:18px;width: 620px;margin: 0 auto;'>
                     <center><a style='margin-right:10px;margin-top:2px' href='https://agilemeter.everis.com/'><img alt='AgileMeter' src=""cid:{0}""></a></center>
