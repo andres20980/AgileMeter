@@ -144,7 +144,7 @@ export class SortedTableComponent implements OnInit {
 
   saveNotas(model: Evaluacion): void {
     if (this.UserRole == this.rol.Administrador || this.UserRole == this.rol.Evaluador) {
-      this.evaluacion.updateEvaluacion(model, false, false).subscribe(
+      this.evaluacion.updateEvaluacion(model, false).subscribe(
         res => {
           // console.log("success");
         },

@@ -153,7 +153,7 @@ namespace everisapi.API.Services
             return lista;
         }
 
-        public IEnumerable<SectionConAsignacionesDto> GetPreguntasNivelOrganizadas(int idEvaluacion, int assessmentId, int codigoIdioma, bool final = false, bool noBinary = false)
+        public IEnumerable<SectionConAsignacionesDto> GetPreguntasNivelOrganizadas(int idEvaluacion, int assessmentId, int codigoIdioma, bool final = false)
         {
 
             List<SectionConAsignacionesDto> sectionsConAsignaciones = new List<SectionConAsignacionesDto>();
@@ -241,16 +241,17 @@ namespace everisapi.API.Services
 
                 sectionsConAsignaciones.Add(sectionConAsignacion);
             }
-
+            
             // var path =@"C:\Users\jfrancom\ScrumMeter\everisapi.API\seccioneseval.txt"; 
             // using (StreamWriter writerTxt = File.CreateText(path))
             // {
-            //   writerTxt.WriteLine("\t  No Binar " + noBinary);
+
             foreach (SectionConAsignacionesDto seccion in sectionsConAsignaciones)
             {
                 
                 float sumaNoBinary = 0;
                 int MaxRange = 4; // HARDCODE. CONTROLA EL RANGO MÁXIMO DE PREGUNTAS
+                
 
                 //calculamos los niveles individuales para cada asignacion
                 foreach (AsignacionConPreguntaNivelDto asignacion in seccion.Asignaciones)
@@ -266,12 +267,14 @@ namespace everisapi.API.Services
                          var preguntasCorrectas = asignacion.Preguntas // preguntas noBinary
                             .Where(p => p.Nivel == i && ((p.Estado == MaxRange && p.Correcta == "Si") || ( p.Estado == 1 && p.Correcta == "No")));
 
-                        if(!noBinary){ // probar una vez más
-                            preguntasCorrectas = asignacion.Preguntas
-                            .Where(p => p.Nivel == i && ((p.Estado == 1 && p.Correcta == "Si") || ( p.Estado >= 2 && p.Correcta == "No")));
+                        // if(!noBinary){ // probar una vez más
+                        //     writerTxt.WriteLine("\t \t ENTRANDO JUNTO BINARYSSS");
+                        //     preguntasCorrectas = asignacion.Preguntas
+                        //     .Where(p => p.Nivel == i && ((p.Estado == 1 && p.Correcta == "Si") || ( p.Estado == 2 && p.Correcta == "No")));
                 
-                            asignacion.Puntuacion = preguntasCorrectas.Sum(x => x.Peso);   
-                        }
+                        //     asignacion.Puntuacion = preguntasCorrectas.Sum(x => x.Peso);   
+                        //     writerTxt.WriteLine("\t \t " + asignacion.Puntuacion);
+                        // }
 
 
                         if (preguntas.Count() == preguntasCorrectas.Count())
@@ -294,14 +297,14 @@ namespace everisapi.API.Services
                  
                     // asignacion.Preguntas.ToList().ForEach(f => {
                     //      var noCorrecta = f.Correcta == "Si" ? 1 : MaxRange;
-                    //  //   writerTxt.WriteLine("-->Pregunta - Correcta: "+f.Correcta+"  Estado " + f.Estado +"  Peso: "+f.Peso + " Nivel " + f.Nivel + "resultado final: "+ ((Math.Abs((f.Estado - noCorrecta) / (MaxRange - 1 ))) * f.Peso));
+                    //      writerTxt.WriteLine("-->Pregunta - Correcta: "+f.Correcta+"  Estado " + f.Estado +"  Peso: "+f.Peso + " Nivel " + f.Nivel + "resultado final: "+ ((Math.Abs((f.Estado - noCorrecta) / (MaxRange - 1 ))) * f.Peso));
                     // });
   
                     
                     asignacion.NivelAlcanzado = minLevel;
-                    asignacion.Puntuacion = asignacion.Preguntas
-                    .Where(p => p.Nivel == minLevel && ((p.Estado == 1 && p.Correcta == "Si") || (p.Estado >= 2 && p.Correcta == "No")))
-                    .Sum(p => p.Peso);
+                    // asignacion.Puntuacion = asignacion.Preguntas
+                    // .Where(p => p.Nivel == minLevel && ((p.Estado == 1 && p.Correcta == "Si") || (p.Estado == 2 && p.Correcta == "No")))
+                    // .Sum(p => p.Peso);
 
                     
                     asignacion.Preguntas.ToList().ForEach(f => {
@@ -311,12 +314,11 @@ namespace everisapi.API.Services
                         }
                     });
 
+                    //sumaNoBinary para puntuación
+                    asignacion.Puntuacion = sumaNoBinary;
+                    //writerTxt.WriteLine("\t \t Incluye el noBinary!");
 
-                    if(noBinary) {   
-                        //sumaNoBinary para puntuación
-                        asignacion.Puntuacion = sumaNoBinary;
-                       //  writerTxt.WriteLine("\t \t Incluye el noBinary!");
-                    }              
+
                     sumaPesosAsignaciones += asignacion.Peso * asignacion.Puntuacion;
                 }
 
@@ -327,18 +329,21 @@ namespace everisapi.API.Services
                     seccion.NivelAlcanzado = seccion.NivelAlcanzado - 1;
                     seccion.Puntuacion = 100;
                 }
-                
-             
+      
+
+            //writerTxt.WriteLine("puntuacion "+ seccion.Puntuacion);
+          
+            }
+
+            
+
+                if(final) {
+                sectionsConAsignaciones.ToList().ForEach( x => { 
+                    _puntuacionSection.setPuntuacionSection(idEvaluacion, x.SectionId, x.NivelAlcanzado,x.Puntuacion);
+                });
+            }
+            // fin using writer 
             //}
-            }
-
-            if(final) {
-                sectionsConAsignaciones.ToList().ForEach( x => {
-                    //Console.WriteLine("Antes con un id  "+  x.SectionId +"Puntuacion:  "+x.Puntuacion + "  " + "Nivel Alcanzado:  " + x.NivelAlcanzado + " Seccion: " + x.Nombre); 
-                _puntuacionSection.setPuntuacionSection(idEvaluacion, x.SectionId, x.NivelAlcanzado, x.Puntuacion);
-            });
-            }
-
             return sectionsConAsignaciones;
         }
 

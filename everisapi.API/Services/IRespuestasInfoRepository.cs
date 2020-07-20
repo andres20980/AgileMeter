@@ -42,7 +42,7 @@ namespace everisapi.API.Services
     //Introduciendo la id de evaluacion sacaremos una lista con todas las respuestas que tengan notas
     IEnumerable<RespuestaConNotasDto> GetRespuestasConNotas(int idEvaluacion,int? assessmentId);
 
-    IEnumerable<SectionConAsignacionesDto> GetPreguntasNivelOrganizadas(int idEvaluacion, int assessmentId, int codigoIdiom, bool final, bool noBinary);
+    IEnumerable<SectionConAsignacionesDto> GetPreguntasNivelOrganizadas(int idEvaluacion, int assessmentId, int codigoIdiom, bool final);
 
     //Este metodo se usa cuando se quiere poner todas las respuestas de una asignacion a No Contestado
     //Excepto la primera, que se pone a No

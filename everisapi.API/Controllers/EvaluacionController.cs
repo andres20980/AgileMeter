@@ -590,7 +590,7 @@ namespace everisapi.API.Controllers
                 }
 
                 if(EvaluacionRecogida.Finish) {
-                    _respuestasInfoRepository.GetPreguntasNivelOrganizadas(EvaluacionRecogida.Id, EvaluacionRecogida.AssessmentId, EvaluacionRecogida.CodigoIdioma, true,true);
+                    _respuestasInfoRepository.GetPreguntasNivelOrganizadas(EvaluacionRecogida.Id, EvaluacionRecogida.AssessmentId, EvaluacionRecogida.CodigoIdioma, true);
                 }
 
 

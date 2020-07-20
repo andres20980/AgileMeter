@@ -216,12 +216,12 @@ namespace everisapi.API.Controllers
     {
 
       //por defecto no accede a no-binarias
-      // bool final = false;
+       bool finale = true;
       // bool noBinary = true;
 
       try
       {
-        var respuestas = _respuestasInfoRepository.GetPreguntasNivelOrganizadas(idevaluacion,assessmentid,codigoIdioma, final, nobinary);
+        var respuestas = _respuestasInfoRepository.GetPreguntasNivelOrganizadas(idevaluacion,assessmentid,codigoIdioma, finale);
 
         _logger.LogInformation("Mandamos correctamente todas las preguntas organizadas.");
 

@@ -153,7 +153,7 @@ export class PdfgeneratorComponent implements OnInit {
   public getTotalPercent = (sc: any): number => {
     var sumSections = 0;
     sc.forEach(element => {
-
+      console.log("listo of elements", element)
       let sectionTotalValue;
 
       if (element.nivelAlcanzado == 1) {
@@ -613,7 +613,7 @@ export class PdfgeneratorComponent implements OnInit {
 
   saveNotas(model: Evaluacion): void {
     if (this.UserRole == this.rol.Administrador || this.UserRole == this.rol.Evaluador) {
-      this.prevEval.evaluacionService.updateEvaluacion(model,false,this._appComponent._storageDataService.checkNoBinary).subscribe(
+      this.prevEval.evaluacionService.updateEvaluacion(model,false).subscribe(
         res => {
           // console.log("success");
         },

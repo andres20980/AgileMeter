@@ -246,10 +246,10 @@ export class EvaluacionService {
   }
 
   //Nos permite realizar un update de una evaluacion en la base de datos // finaliza evaluación
-  updateEvaluacion(evaluacion: Evaluacion, final: boolean, nbinary: boolean) {
+  updateEvaluacion(evaluacion: Evaluacion, final: boolean) {
     //evaluacion.userNombre = this._proyectoService.UsuarioLogeado;
     let Token = this._appComponent.ComprobarUserYToken();
-    Object.assign(evaluacion, {finish: final, noBinary: nbinary});
+    Object.assign(evaluacion, {finish: final});
     let params = JSON.stringify(evaluacion);
     let headers = new Headers({
       'Content-Type': 'application/json',

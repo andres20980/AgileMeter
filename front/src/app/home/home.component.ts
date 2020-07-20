@@ -420,7 +420,7 @@ export class HomeComponent implements OnInit {
     Evaluacion.estado = true;
     Evaluacion.userNombre = localStorage.getItem("user");
     //La envia a la base de datos ya terminada
-    this._evaluacionService.updateEvaluacion(Evaluacion, false, false).subscribe(
+    this._evaluacionService.updateEvaluacion(Evaluacion, false).subscribe(
       res => {
         //Una vez terminado guarda una nueva evaluación
         this.GuardarEvaluacion();

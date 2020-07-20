@@ -49,10 +49,7 @@ export class NewevaluationComponent implements OnInit {
   public changedQuestion: number;
   public changedAnswer: number;
 
-  public binaryEnabled: boolean = environment.binaryEnabled;
-
   private autoRenew = new FormControl();
-  private checkBinaryToggle: boolean = false;
 
   //Recogemos todos los datos de la primera area segun su id y las colocamos en la lista
   constructor(
@@ -67,9 +64,9 @@ export class NewevaluationComponent implements OnInit {
 
   }
   
-  onChange() {
-    this.checkBinaryToggle = this.autoRenew.value;
-  }
+  // onChange() {
+   //this.checkBinaryToggle = this.autoRenew.value;
+  // }
 
   
   ngOnInit() {
@@ -423,7 +420,7 @@ export class NewevaluationComponent implements OnInit {
               // setTimeout(() => { this.anadeNota = null }, 4000);
 
               this.Evaluation.userNombre = this.UserName;
-              this._evaluacionService.updateEvaluacion(this.Evaluation, false, this.checkBinaryToggle).subscribe(
+              this._evaluacionService.updateEvaluacion(this.Evaluation, false).subscribe(
                 res => {
                   //usuario modificado correctamente                  
                 },
@@ -500,7 +497,7 @@ export class NewevaluationComponent implements OnInit {
               // setTimeout(() => { this.anadeNota = null }, 4000);
 
               this.Evaluation.userNombre = this.UserName;
-              this._evaluacionService.updateEvaluacion(this.Evaluation, false, this.checkBinaryToggle).subscribe(
+              this._evaluacionService.updateEvaluacion(this.Evaluation, false).subscribe(
                 res => {
                   //usuario modificado correctamente
                 },
