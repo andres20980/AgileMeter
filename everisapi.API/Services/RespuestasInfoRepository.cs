@@ -250,7 +250,7 @@ namespace everisapi.API.Services
             {
                 
                 float sumaNoBinary = 0;
-                int MaxRange = _context.Assessment.Where(w => w.AssessmentId == assessmentId).Select(x => x.Range).FirstOrDefault();
+                int MaxRange = _context.Assessment.Where(w => w.AssessmentId == assessmentId).Select(x => x.AssessmentRange).FirstOrDefault();
                 
 
                 //calculamos los niveles individuales para cada asignacion

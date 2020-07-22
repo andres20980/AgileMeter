@@ -520,7 +520,6 @@ namespace everisapi.API.Controllers
         [HttpPost()]
         public IActionResult CreateEvaluacion([FromBody] EvaluacionCreateUpdateDto EvaluacionRecogida)
         {
-             _logger.LogInformation("finishhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
             try
             {
                 //Comprueba que el body del json es correcto sino devolvera null

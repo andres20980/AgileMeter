@@ -688,7 +688,7 @@ namespace everisapi.API.Services
                     NotasObjetivos = evaluacion.NotasObjetivos,
                     AssessmentName = evaluacion.Assessment.AssessmentName,
                     AssessmentId = evaluacion.AssessmentId,
-                    AssessmentRange = evaluacion.Assessment.Range
+                    AssessmentRange = evaluacion.Assessment.AssessmentRange
                 };
 
 
@@ -1035,7 +1035,7 @@ namespace everisapi.API.Services
                     UserNombre = evaluacion.UserNombre,
                     AssessmentName = evaluacion.Assessment.AssessmentName,
                     AssessmentId = evaluacion.AssessmentId,
-                    AssessmentRange = evaluacion.Assessment.Range,
+                    AssessmentRange = evaluacion.Assessment.AssessmentRange,
                     //oficina = evaluacion.ProyectoEntity.Oficina,
                     oficina = (string) _context.TraduccionesOficinas
                                     .Where(t => t.OficinaId == evaluacion.ProyectoEntity.OficinaEntity.OficinaId

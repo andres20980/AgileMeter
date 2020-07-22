@@ -65,6 +65,7 @@ export class NewevaluationComponent implements OnInit {
     private _proyectoService: ProyectoService,
     private _evaluacionService: EvaluacionService) {
       this.InitialiseComponent();
+      console.log("assessment sel", this._appComponent._storageDataService.AssessmentSelected)
       this.assmentRange = new AssessmentRange(this._appComponent._storageDataService.AssessmentSelected.assessmentRange);
 
   }

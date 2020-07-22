@@ -281,8 +281,8 @@
           </div>
 
             <div class="col-xs-12 col-sm-1 col-md-1 pb-1 pl-13 yes-no-centered">
-              <button *ngIf="checkHabilitante(preguntaDada)" class="transparente position-relative" [ngStyle]="{paddingLeft: (preguntaDada.esHabilitante) ? '110px': 'initial' }"
-                (click)="AbrirModalPreg(notasPreg, i)">
+              <button *ngIf="checkHabilitante(preguntaDada)" class="transparente position-relative" [ngStyle]="{paddingLeft: (preguntaDada.esHabilitante) ? '80px': 'initial' }"
+               >
 
                 <!-- <span *ngIf="preguntaDada.respuesta.notas != null" class="one-badge">1</span>
                       <i *ngIf="preguntaDada.respuesta.notas != null" class="material-icons comment-added" title="Añadir notas">
@@ -292,9 +292,9 @@
                       <i class="material-icons add-comment" alt="Añadir comentario">add_circle</i> -->
 
                 <img class="comment-yes-no" *ngIf="preguntaDada.respuesta.notas != null" src="assets/comment_filled.png"
-                  title="{{ 'NEW_EVALUATION.ICONS_NOTES_FILLED' | translate }}" />
+                  title="{{ 'NEW_EVALUATION.ICONS_NOTES_FILLED' | translate }}" (click)="AbrirModalPreg(notasPreg, i)"/>
                 <img class="comment-yes-no" *ngIf="preguntaDada.respuesta.notas == null" src="assets/comment_empty.png"
-                  title="{{ 'NEW_EVALUATION.ICONS_NOTES_EMPTY' | translate }}" />
+                  title="{{ 'NEW_EVALUATION.ICONS_NOTES_EMPTY' | translate }}" (click)="AbrirModalPreg(notasPreg, i)"/>
 
               </button>
 

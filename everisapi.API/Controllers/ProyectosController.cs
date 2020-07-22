@@ -3,6 +3,7 @@ using everisapi.API.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -103,6 +104,8 @@ namespace everisapi.API.Controllers
                 //Transformamos la lista anterior en una nueva con los datos que necesitamos
                 //Ya que otros son relevantes
                 var FullResult = Mapper.Map<IEnumerable<AssessmentDto>>(allAssessments);
+
+                
                 return Ok(FullResult);
             }
             catch (Exception ex)
