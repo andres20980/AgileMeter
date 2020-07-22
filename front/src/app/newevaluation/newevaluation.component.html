@@ -228,7 +228,16 @@
 
          <div class="yes-no-centered" *ngIf="!preguntaDada.esHabilitante">
           <div class="row m-0 ">
-            <div>
+            <div *ngFor="let j of range">
+              <button class="w-200 h-100 questions-middle-btn mat-elevation-z3 item-not-selected nobinary-button"
+                [class.first-item]="preguntaDada.esHabilitante"
+                [class.item-full-disabled]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
+                [class.item-not-selected]="preguntaDada.respuesta.estado != j"
+                [class.item-disable-no-color]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
+                (click)="AnswerQuestion(preguntaDada,i,j)" [ngStyle]="noBinaryButtonStyle(j)">{{j}}
+              </button>
+            </div>
+            <!-- <div>
               <button class="w-200 h-100 questions-yes-btn mat-elevation-z3 item-not-selected nobinary-button"
                 [class.first-item]="preguntaDada.esHabilitante"
                 [class.item-full-disabled]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
@@ -266,7 +275,7 @@
                 [class.item-disable-no-color]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
                 (click)="AnswerQuestion(preguntaDada,i,4)" [ngStyle]="noBinaryButtonStyle(4)">4
               </button>
-            </div>
+            </div> -->
           </div>
 
           </div>

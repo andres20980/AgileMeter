@@ -250,7 +250,7 @@ namespace everisapi.API.Services
             {
                 
                 float sumaNoBinary = 0;
-                int MaxRange = 4; // HARDCODE. CONTROLA EL RANGO MÁXIMO DE PREGUNTAS
+                int MaxRange = _context.Assessment.Where(w => w.AssessmentId == assessmentId).Select(x => x.Range).FirstOrDefault();
                 
 
                 //calculamos los niveles individuales para cada asignacion

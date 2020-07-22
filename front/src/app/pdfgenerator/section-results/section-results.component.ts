@@ -1,3 +1,4 @@
+import { AssessmentRange } from './../../Models/AssessmentRange';
 import { Component, OnInit, ViewChild, Input, ViewEncapsulation } from '@angular/core';
 import { MatSort, MatTableDataSource } from '@angular/material';
 import { AppComponent } from 'app/app.component';
@@ -25,6 +26,10 @@ export class SectionResultsComponent implements OnInit {
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['pregunta', 'estado', 'notas'];
+
+  rangeColors = ["#10ad9f","#1b5e20","#388e3c","#87a900"]
+  maxRange: number;
+  assmentRange: AssessmentRange;
   
   constructor(
     private _appComponent: AppComponent,
@@ -40,6 +45,10 @@ export class SectionResultsComponent implements OnInit {
     }
 
   ngOnInit() {
+    // se usa ?
+     this.maxRange = 4
+    this.assmentRange = new AssessmentRange(this._appComponent._storageDataService.EvaluacionToPDF.AssessmentRange);
+      
   }
   
   //Metodo para dar formato a la fecha introducida
@@ -85,7 +94,7 @@ export class SectionResultsComponent implements OnInit {
   
   displayRespuesta(row: RespuestaConNotasTabla): number {
     let respuesta: any;
-    if(this.getCheckBinary){
+    if(true){ // adaptar para resultados anteriores con binary
 
       respuesta = row.estado.toString();
       if(row.estado == 0) {
@@ -138,39 +147,17 @@ export class SectionResultsComponent implements OnInit {
 
   displayColorEstado(row): string
   {
-    switch (row.estado) {
-      case 0:
-        return "black"
-        break
-      case 1:        
-        return "#87a900"
-        break;
-      case 2:        
-        return "#388e3c"
-        break;
-
-      case 3:        
-        return "#1b5e20"
-        break;
-
-      case 4:        
-        return "#10ad9f"
-        break;
-
-      default:
-        return "black"
-        break;
-    }
+    return row.estado ? this.assmentRange.rangeColors[row.estado - 1] : "black";
   }
 
   displayFailed(row): string
   {
     let correcta = (row.correcta == "Si" && row.estado == 1 || row.correcta == "Si" && row.estado == 2) 
-    let nocorrecta =  (row.correcta == "No" && row.estado == 3 || row.correcta == "No" && row.estado == 4)
+    let nocorrecta =  (row.correcta == "No" && row.estado == (this.assmentRange.maxRange - 1) || row.correcta == "No" && row.estado == this.assmentRange.maxRange)
 
     if(correcta || nocorrecta) {
 
-      if(row.estado == 2 || row.estado == 3) this.setOpacity = 0.5
+      if(row.estado == 2 || row.estado == (this.assmentRange.maxRange - 1)) this.setOpacity = 0.5
       else this.setOpacity = 1;
       return "block"
     } 
