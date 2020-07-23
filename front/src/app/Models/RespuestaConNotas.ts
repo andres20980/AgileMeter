@@ -9,6 +9,7 @@ export class RespuestaConNotas {
     public section: string,
     public asignacion: string,
     public peso:number,
-    public nivel:number
+    public nivel:number,
+    public esHabilitante: boolean
   ) { }
 }
