@@ -44,7 +44,8 @@ export interface RespuestaConNotasTabla {
   notas: string,
   notasAdmin: string,
   section: string,
-  asignacion: string
+  asignacion: string,
+  esHabilitante: boolean
 
 }
 

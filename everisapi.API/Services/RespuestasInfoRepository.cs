@@ -224,6 +224,7 @@ namespace everisapi.API.Services
                         preguntaRespuestaNivel.Pregunta = traducciones.Where(tra => tra.PreguntaId == p.PreguntaId && tra.IdiomaId == codigoIdioma).Select(tra => tra.Traduccion).FirstOrDefault();
                         preguntaRespuestaNivel.Estado = p.Estado;
                         preguntaRespuestaNivel.Correcta = p.PreguntaEntity.Correcta;
+                        preguntaRespuestaNivel.EsHabilitante = p.PreguntaEntity.EsHabilitante;
 
                         if (p.Notas != null && p.Notas.Trim() != "")
                         {

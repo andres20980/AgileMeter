@@ -27,7 +27,6 @@ export class SectionResultsComponent implements OnInit {
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
   displayedColumns = ['pregunta', 'estado', 'notas'];
 
-  rangeColors = ["#10ad9f","#1b5e20","#388e3c","#87a900"]
   maxRange: number;
   assmentRange: AssessmentRange;
   
@@ -45,10 +44,7 @@ export class SectionResultsComponent implements OnInit {
     }
 
   ngOnInit() {
-    // se usa ?
-     this.maxRange = 4
-    this.assmentRange = new AssessmentRange(this._appComponent._storageDataService.EvaluacionToPDF.AssessmentRange);
-      
+    this.assmentRange = new AssessmentRange(this._appComponent._storageDataService.EvaluacionToPDF.AssessmentRange);    
   }
   
   //Metodo para dar formato a la fecha introducida
@@ -94,7 +90,7 @@ export class SectionResultsComponent implements OnInit {
   
   displayRespuesta(row: RespuestaConNotasTabla): number {
     let respuesta: any;
-    if(true){ // adaptar para resultados anteriores con binary
+    if(!row.esHabilitante){ // adaptar para resultados anteriores con binary
 
       respuesta = row.estado.toString();
       if(row.estado == 0) {
@@ -147,7 +143,7 @@ export class SectionResultsComponent implements OnInit {
 
   displayColorEstado(row): string
   {
-    return row.estado ? this.assmentRange.rangeColors[row.estado - 1] : "black";
+    return row.estado ? this.assmentRange.rangeColors[row.estado - 1] : "#F0F0F0";
   }
 
   displayFailed(row): string
