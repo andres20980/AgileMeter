@@ -688,6 +688,7 @@ namespace everisapi.API.Services
                     NotasObjetivos = evaluacion.NotasObjetivos,
                     AssessmentName = evaluacion.Assessment.AssessmentName,
                     AssessmentId = evaluacion.AssessmentId,
+                    AssessmentRange = evaluacion.Assessment.AssessmentRange
                 };
 
 
@@ -1034,6 +1035,7 @@ namespace everisapi.API.Services
                     UserNombre = evaluacion.UserNombre,
                     AssessmentName = evaluacion.Assessment.AssessmentName,
                     AssessmentId = evaluacion.AssessmentId,
+                    AssessmentRange = evaluacion.Assessment.AssessmentRange,
                     //oficina = evaluacion.ProyectoEntity.Oficina,
                     oficina = (string) _context.TraduccionesOficinas
                                     .Where(t => t.OficinaId == evaluacion.ProyectoEntity.OficinaEntity.OficinaId
@@ -1244,6 +1246,8 @@ namespace everisapi.API.Services
                 sectionsConAsignaciones.Add(sectionConAsignacion);
             }
 
+            int MaxRange = 4;
+
             float sumSections = 0;
             foreach (SectionConAsignacionesDto seccion in sectionsConAsignaciones)
             {
@@ -1257,8 +1261,13 @@ namespace everisapi.API.Services
                         nivelCompleto = false;
                         var preguntas = asignacion.Preguntas.Where(p => p.Nivel == i);
 
-                        var preguntasCorrectas = asignacion.Preguntas
-                        .Where(p => p.Nivel == i && ((p.Estado == 1 && p.Correcta == "Si") || (p.Estado == 2 && p.Correcta == "No")));
+                        // var preguntasCorrectas = asignacion.Preguntas
+                        // .Where(p => p.Nivel == i && ((p.Estado == 1 && p.Correcta == "Si") || (p.Estado == 2 && p.Correcta == "No")));
+
+
+                         // preguntas noBinary
+                         var preguntasCorrectas = asignacion.Preguntas
+                            .Where(p => p.Nivel == i && ((p.Estado == MaxRange && p.Correcta == "Si") || ( p.Estado == 1 && p.Correcta == "No")));
 
                         if (preguntas.Count() == preguntasCorrectas.Count())
                         {
@@ -1273,14 +1282,39 @@ namespace everisapi.API.Services
                 //comparamos los niveles de cada asignacion y cogemos el mas bajo
                 var minLevel = seccion.Asignaciones.Min(x => x.NivelAlcanzado);
                 float sumaPesosAsignaciones = 0;
+                
+                float sumaNoBinary = 0;
                 foreach (AsignacionConPreguntaNivelDto asignacion in seccion.Asignaciones)
                 {
-                    asignacion.NivelAlcanzado = minLevel;
-                    asignacion.Puntuacion = asignacion.Preguntas
-                    .Where(p => p.Nivel == minLevel && ((p.Estado == 1 && p.Correcta == "Si") || (p.Estado == 2 && p.Correcta == "No")))
-                    .Sum(p => p.Peso);
+                    // asignacion.NivelAlcanzado = minLevel;
+                    // asignacion.Puntuacion = asignacion.Preguntas
+                    // .Where(p => p.Nivel == minLevel && ((p.Estado == 1 && p.Correcta == "Si") || (p.Estado == 2 && p.Correcta == "No")))
+                    // .Sum(p => p.Peso);
 
-                    sumaPesosAsignaciones += asignacion.Puntuacion * asignacion.Peso;
+
+                    sumaNoBinary = 0;              
+                    asignacion.NivelAlcanzado = minLevel;
+                    // asignacion.Puntuacion = asignacion.Preguntas
+                    // .Where(p => p.Nivel == minLevel && ((p.Estado == 1 && p.Correcta == "Si") || (p.Estado == 2 && p.Correcta == "No")))
+                    // .Sum(p => p.Peso);
+
+                    
+                    asignacion.Preguntas.ToList().ForEach(f => {
+                        var noCorrecta = f.Correcta == "Si" ? 1 : MaxRange;
+                        if(f.Nivel == minLevel && f.Estado != 0){
+                            sumaNoBinary += ((Math.Abs((f.Estado - noCorrecta) / (MaxRange - 1 ))) * f.Peso);
+                        }
+                    });
+
+                    //sumaNoBinary para puntuación
+                    asignacion.Puntuacion = sumaNoBinary;
+      
+
+
+
+                     sumaPesosAsignaciones += asignacion.Puntuacion * asignacion.Peso;
+
+
                 }
 
                 seccion.NivelAlcanzado = minLevel;

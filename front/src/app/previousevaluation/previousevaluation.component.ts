@@ -7,8 +7,6 @@ import { ProyectoService } from 'app/services/ProyectoService';
 import { Proyecto } from 'app/Models/Proyecto';
 import { AppComponent } from 'app/app.component';
 import { Router } from '@angular/router';
-import { mergeMap, filter, map } from 'rxjs/operators'
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-previousevaluation',
@@ -49,8 +47,6 @@ export class PreviousevaluationComponent implements OnInit {
     let filterEvaluation: EvaluacionFilterInfo = new EvaluacionFilterInfo("","","","","true",  1,[],[],[]);
       this.evaluacionService.GetEvaluationsWithSectionsInfo(2, filterEvaluation, 1)
         .subscribe(res => {
-          console.log("wininfo");
-          console.log(res);
           this.prevResult = res.evaluacionesResult;
           this.ListaDeEvaluacionesPaginada = res.evaluacionesResult.reduce((acc, item) => {
             item.oficina = item.oficina.trim()
@@ -61,14 +57,6 @@ export class PreviousevaluationComponent implements OnInit {
           this.sectionsInfoNombres$ = res.evaluacionesResult.sectionsInfo
           this.sectionsInfoPuntuacion$ = res.evaluacionesResult.sectionsInfo
         });
-    // this.evaluacionService.getAllEvaluacionInfoFiltered(0, this.EvaluacionFiltrar)
-    //   .subscribe(
-    //     res => {
-    //       this.ListaDeEvaluacionesPaginada = res.evaluacionesResult.reduce((acc, item) => {
-    //       item.nombre = item.nombre.replace("##?##", " - ")
-    //       return [...acc, item]
-    //     },[])
-    //     })
     }
 
     procesaPropagar(mensaje: any) {
@@ -85,14 +73,6 @@ export class PreviousevaluationComponent implements OnInit {
      }
     }
 
-
-    procesaMerge(mensaje: any){
-      this.ListaDeEvaluacionesMerge = [];
-      this.finishMerge = false;
-      let filterEvaluation: EvaluacionFilterInfo = new EvaluacionFilterInfo("","","","","true",  mensaje.idAssessment,[],[],[]);
-      let obm = this.evaluacionService.getAllEvaluacionInfoFilteredToMerge(0, this.EvaluacionFiltrar)//.subscribe(s => console.log(s))
-      let obm2 = this.evaluacionService.GetEvaluationsWithSectionsInfoToMerge(mensaje.idProyecto,filterEvaluation)//.subscribe(s => console.log(s))
-    }
  
     setGreyOut(ent: string)
     {

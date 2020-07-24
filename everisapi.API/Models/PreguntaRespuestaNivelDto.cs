@@ -22,5 +22,7 @@ namespace everisapi.API.Models
         public float Peso { get; set; }
 
         public int Nivel { get; set; }
+
+        public bool EsHabilitante { get; set; }
     }
 }

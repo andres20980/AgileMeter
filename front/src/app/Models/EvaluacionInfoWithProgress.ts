@@ -9,6 +9,7 @@ export class EvaluacionInfoWithProgress {
     public assessmentName: string,
     public progress: number,
     public numQuestions: number,
-    public oficina: string
+    public oficina: string,
+    public assessmentRange: number
   ) { }
 }

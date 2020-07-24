@@ -10,5 +10,6 @@ namespace everisapi.API.Models
     {
         public int AssessmentId { get; set; }
         public string AssessmentName { get; set; }
+        public int AssessmentRange{ get; set; }
     }
 }

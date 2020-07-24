@@ -351,11 +351,12 @@ export class HomeComponent implements OnInit {
   //Este metodo crea una nueva evaluación y la manda para guardarla en la base de datos
   public GuardarEvaluacion() {
 
-    var NuevaEvaluacion: EvaluacionCreate = { 'estado': false, 'proyectoid': this.ProyectoSeleccionado.id, 'userNombre': this._proyectoService.UsuarioLogeado, 'assessmentId': this.AssessmentSelected.assessmentId, 'assesmentName': this.AssessmentSelected.assessmentName };    // console.log("assessmeeeent", this.AssessmentSelected);
+    var NuevaEvaluacion: EvaluacionCreate = { 'estado': false, 'proyectoid': this.ProyectoSeleccionado.id, 'userNombre': this._proyectoService.UsuarioLogeado, 'assessmentId': this.AssessmentSelected.assessmentId, 'assesmentName': this.AssessmentSelected.assessmentName, 'assessmentRange': 4 };    // console.log("assessmeeeent", this.AssessmentSelected);
     // console.log(NuevaEvaluacion);
 
     this._evaluacionService.addEvaluacion(NuevaEvaluacion).subscribe(
       res => {
+        console.log("resultado de añadoir ",res)
         this._appComponent._storageDataService.Evaluacion = res;
         this._appComponent._storageDataService.Evaluacion.assessmentName = this.AssessmentSelected.assessmentName;
         this.SendingInfo = false;
@@ -420,7 +421,7 @@ export class HomeComponent implements OnInit {
     Evaluacion.estado = true;
     Evaluacion.userNombre = localStorage.getItem("user");
     //La envia a la base de datos ya terminada
-    this._evaluacionService.updateEvaluacion(Evaluacion, false, false).subscribe(
+    this._evaluacionService.updateEvaluacion(Evaluacion, false).subscribe(
       res => {
         //Una vez terminado guarda una nueva evaluación
         this.GuardarEvaluacion();

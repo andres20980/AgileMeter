@@ -17,6 +17,6 @@ namespace everisapi.API.Entities
         [MaxLength(50)]
         public string AssessmentName { get; set; }
 
-       
+       public int AssessmentRange{ get; set; }
   }
 }

@@ -57,8 +57,7 @@ export class BtnFinalizeEvaluationComponent {
   public FinishEvaluation(evaluation: Evaluacion) {
     evaluation.userNombre = this._proyectoService.UsuarioLogeado;
     this.evaluacion.estado = true;
-    this._appComponent._storageDataService.checkNoBinary = this.checkNoBinary;
-    this._evaluacionService.updateEvaluacion(evaluation, true, this.checkNoBinary).subscribe(
+    this._evaluacionService.updateEvaluacion(evaluation, false).subscribe(
       res => {
         this.goToPdfGenerator(evaluation.id);
       },

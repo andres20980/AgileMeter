@@ -25,6 +25,8 @@ namespace everisapi.API.Models
 
     public string AssessmentName {get;set;}
 
+    public int AssessmentRange {get;set;}
+
     public string UserNombre { get; set; }
 
     public string NotasEvaluacion {get;set;}

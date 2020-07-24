@@ -134,7 +134,7 @@ export class PendingevaluationTableComponent implements OnInit, DoCheck {
       res => {
         this._appComponent._storageDataService.Evaluacion = res;
         this._appComponent._storageDataService.Evaluacion.assessmentName = evaluation.assessmentName;
-        this._appComponent._storageDataService.AssessmentSelected = { 'assessmentId': evaluation.assessmentId, 'assessmentName': evaluation.assessmentName };
+        this._appComponent._storageDataService.AssessmentSelected = { 'assessmentId': evaluation.assessmentId, 'assessmentName': evaluation.assessmentName, "assessmentRange": evaluation.assessmentRange };
         this.GetAssignation(evaluation.id);
       }
     );

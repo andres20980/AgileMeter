@@ -1,3 +1,4 @@
+import { AssessmentRange } from './../Models/AssessmentRange';
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { EvaluacionInfo } from 'app/Models/EvaluacionInfo';
@@ -43,7 +44,8 @@ export interface RespuestaConNotasTabla {
   notas: string,
   notasAdmin: string,
   section: string,
-  asignacion: string
+  asignacion: string,
+  esHabilitante: boolean
 
 }
 
@@ -153,7 +155,6 @@ export class PdfgeneratorComponent implements OnInit {
   public getTotalPercent = (sc: any): number => {
     var sumSections = 0;
     sc.forEach(element => {
-
       let sectionTotalValue;
 
       if (element.nivelAlcanzado == 1) {
@@ -233,6 +234,9 @@ export class PdfgeneratorComponent implements OnInit {
   public iteracionResultados: number = 0;
   public rol: EnumRol = new EnumRol();
 
+  // resultado
+  public assmentRange: AssessmentRange
+
   constructor(
     private _proyectoService: ProyectoService,
     private _appComponent: AppComponent,
@@ -276,8 +280,9 @@ export class PdfgeneratorComponent implements OnInit {
       error => {
         this._router.navigate(['/home']);
       });
+      console.log(this.Evaluacion)
 
-
+    //  this.assmentRange = new AssessmentRange(this._appComponent)
   }
 
   // private getSectionLevels() {
@@ -327,6 +332,7 @@ export class PdfgeneratorComponent implements OnInit {
       this._sectionService.getSectionInfo(this.Evaluacion.id, this.Evaluacion.assessmentId).subscribe( //this._appComponent._storageDataService.AssessmentSelected.assessmentId
         res => {
           this.ListaDeDatos = res;
+    
 
           //this.getSectionLevels();
           this.cambiarMostrarNotasPreg();
@@ -351,6 +357,7 @@ export class PdfgeneratorComponent implements OnInit {
         res => {
           res.map(x => x.puntuacion = Math.round(x.puntuacion))
           this.ListaSectionConAsignaciones = res;
+          console.log("a ver section info ", res)
         },
         error => {
           if (error == 404) {
@@ -613,7 +620,7 @@ export class PdfgeneratorComponent implements OnInit {
 
   saveNotas(model: Evaluacion): void {
     if (this.UserRole == this.rol.Administrador || this.UserRole == this.rol.Evaluador) {
-      this.prevEval.evaluacionService.updateEvaluacion(model,false,this._appComponent._storageDataService.checkNoBinary).subscribe(
+      this.prevEval.evaluacionService.updateEvaluacion(model,false).subscribe(
         res => {
           // console.log("success");
         },

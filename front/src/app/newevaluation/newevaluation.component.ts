@@ -1,3 +1,4 @@
+import { AssessmentRange } from './../Models/AssessmentRange';
 import { FormControl } from '@angular/forms';
 import { StorageDataService } from './../services/StorageDataService';
 import { Component, OnInit, OnChanges } from '@angular/core';
@@ -20,7 +21,7 @@ import { ProyectoService } from 'app/services/ProyectoService';
 import { EvaluacionService } from 'app/services/EvaluacionService';
 import { PreguntaInfo } from 'app/Models/PreguntaInfo';
 import { BtnFinalizeEvaluationComponent } from 'app/btn-finalize-evaluation/btn-finalize-evaluation.component';
-import { environment } from "../../environments/environment.prod"
+
 
 @Component({
   selector: 'app-newevaluation',
@@ -49,10 +50,10 @@ export class NewevaluationComponent implements OnInit {
   public changedQuestion: number;
   public changedAnswer: number;
 
-  public binaryEnabled: boolean = environment.binaryEnabled;
+  public range: any
+  public assmentRange: AssessmentRange;
 
-  private autoRenew = new FormControl();
-  private checkBinaryToggle: boolean = false;
+  //private autoRenew = new FormControl();
 
   //Recogemos todos los datos de la primera area segun su id y las colocamos en la lista
   constructor(
@@ -64,17 +65,14 @@ export class NewevaluationComponent implements OnInit {
     private _proyectoService: ProyectoService,
     private _evaluacionService: EvaluacionService) {
       this.InitialiseComponent();
+      console.log("assessment sel", this._appComponent._storageDataService.AssessmentSelected)
+      this.assmentRange = new AssessmentRange(this._appComponent._storageDataService.AssessmentSelected.assessmentRange);
 
   }
-  
-  onChange() {
-    this.checkBinaryToggle = this.autoRenew.value;
-  }
-
   
   ngOnInit() {
-
     this.Evaluation = this._appComponent._storageDataService.Evaluacion;
+    this.range = this.assmentRange.range
   }
 
 
@@ -423,7 +421,7 @@ export class NewevaluationComponent implements OnInit {
               // setTimeout(() => { this.anadeNota = null }, 4000);
 
               this.Evaluation.userNombre = this.UserName;
-              this._evaluacionService.updateEvaluacion(this.Evaluation, false, this.checkBinaryToggle).subscribe(
+              this._evaluacionService.updateEvaluacion(this.Evaluation, false).subscribe(
                 res => {
                   //usuario modificado correctamente                  
                 },
@@ -500,7 +498,7 @@ export class NewevaluationComponent implements OnInit {
               // setTimeout(() => { this.anadeNota = null }, 4000);
 
               this.Evaluation.userNombre = this.UserName;
-              this._evaluacionService.updateEvaluacion(this.Evaluation, false, this.checkBinaryToggle).subscribe(
+              this._evaluacionService.updateEvaluacion(this.Evaluation, false).subscribe(
                 res => {
                   //usuario modificado correctamente
                 },
@@ -545,10 +543,8 @@ export class NewevaluationComponent implements OnInit {
 
   noBinaryButtonStyle(inx: number)
   {
-    if(inx == 4) return {background: "#10ad9f", borderTopLeftRadius: "0px",borderBottomLeftRadius: "0px", color: "white", border: "1px solid #10ad9f"}
-    if(inx == 3) return {background: "#1b5e20",  borderTopRightRadius: "0px",  borderBottomRightRadius: "0px", color: "white", border: "1px solid #1b5e20"}
-    if(inx == 2) return {background: "#388e3c",  borderTopRightRadius: "0px",  borderBottomRightRadius: "0px", border: "1px solid #388e3c"}
-    if(inx == 1) return {background: "#87a900", border: "1px solid #87a900"}
-    return {background: "tomato"}
+    if(inx == 1) return {background: this.assmentRange.rangeColors[inx - 1], borderBottomLeftRadius:"5px", borderTopLeftRadius:"5px",color: "white", border: `1px solid ${this.assmentRange.rangeColors[inx - 1]}`}
+    if(inx > 1 && inx < this.assmentRange.maxRange) return {background:this.assmentRange.rangeColors[inx - 1],  borderTopRightRadius: "0px",  borderBottomRightRadius: "0px", color: "white", border: `1px solid ${this.assmentRange.rangeColors[inx - 1]}`}
+    if(inx == this.assmentRange.maxRange) return {background: this.assmentRange.rangeColors[inx - 1], borderTopLeftRadius: "0px",borderBottomLeftRadius: "0px", borderTopRightRadius: "5px", borderBottomRightRadius: "5px",color: "white", border:`1px solid ${this.assmentRange.rangeColors[inx - 1]}`}  
   }
 }
