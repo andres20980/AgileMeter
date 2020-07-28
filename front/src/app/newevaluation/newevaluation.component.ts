@@ -52,6 +52,8 @@ export class NewevaluationComponent implements OnInit {
 
   public range: any
   public assmentRange: AssessmentRange;
+  public rangeLabel = [];
+  public rangeColors = [];
 
   //private autoRenew = new FormControl();
 
@@ -65,14 +67,14 @@ export class NewevaluationComponent implements OnInit {
     private _proyectoService: ProyectoService,
     private _evaluacionService: EvaluacionService) {
       this.InitialiseComponent();
-      console.log("assessment sel", this._appComponent._storageDataService.AssessmentSelected)
       this.assmentRange = new AssessmentRange(this._appComponent._storageDataService.AssessmentSelected.assessmentRange);
 
   }
   
   ngOnInit() {
     this.Evaluation = this._appComponent._storageDataService.Evaluacion;
-    this.range = this.assmentRange.range
+    this.range = this.assmentRange.range;
+    this.rangeColors = this.assmentRange.rangeColors;
   }
 
 

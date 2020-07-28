@@ -1,6 +1,6 @@
 export class AssessmentRange{
     maxRange: number;
-    rangeColors = ["#10ad9f","#1b5e20","#388e3c","#87a900"];
+    rangeColors = ["#A8C651","#68C651","#4BB15A","#4BB18A"];
     
     constructor(private max: number)
     {
