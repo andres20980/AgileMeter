@@ -156,7 +156,7 @@
       <!-- Start of pagination -->
       <div class="row dots m-4 ">
         <div class="col">
-          <div class="d-flex justify-content-center">
+          <div class="d-flex justify-content-center offset-5">
             <div class="position-relative">
               <ul class="d-flex justify-content-center">
                 <li *ngFor="let page of pagesArray; let i = index" [class.current]="i==PageNow-1"><a
@@ -189,6 +189,16 @@
 
             </div>
           </div>
+        </div>
+
+        <div class="d-flex flex-row col align-items-center justify-content-center"  [ngStyle]="{marginRight: '-10px'}">
+
+            <div [ngStyle]="{width: '15px', height: '15px', borderRadius:'15px', backgroundColor: rangeColors[0], marginLeft: '20px', marginBottom: '3px'}"> </div>
+            <div [ngStyle]="{ marginLeft: '10px'}">Nada de acuerdo</div>
+            <span [ngStyle]="{ marginLeft: '5px', marginRight: '5px', color: '#5c981b'}" class="material-icons">settings_ethernet</span>
+            <div [ngStyle]="{ marginLeft: '5px'}">Muy de acuerdo</div>
+            <div [ngStyle]="{width: '15px', height: '15px', borderRadius:'15px', backgroundColor: rangeColors[rangeColors.length-1], marginLeft: '10px', marginRight: '-40px', marginBottom: '3px'}"></div>
+        
         </div>
       </div>
       <!-- End of pagination -->

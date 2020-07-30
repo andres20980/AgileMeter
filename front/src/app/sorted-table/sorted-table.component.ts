@@ -1,3 +1,4 @@
+import { SectionInfo } from './../Models/SectionInfo';
 import { map } from 'rxjs/operators';
 import { Assessment } from './../Models/Assessment';
 import { animate, state, style, transition, trigger } from '@angular/animations';

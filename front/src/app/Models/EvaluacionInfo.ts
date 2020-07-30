@@ -10,6 +10,7 @@ export class EvaluacionInfo {
     public notasEvaluacion: string,
     public notasObjetivos: string,
     public estado: boolean,
+    public isBinary: boolean,
     public flagNotasSec: boolean,
     public flagNotasAsig: boolean,
     public assessmentId: number,

@@ -161,6 +161,8 @@ export class PdfgeneratorComponent implements OnInit {
         sectionTotalValue = (element.pesoNivel1 / 100) * element.puntuacion;
         sectionTotalValue = (sectionTotalValue * element.peso) / 100;
 
+        // console.log("pesonivel, puntuacion, peso", element.pesoNivel1, element.puntuacion, element.peso)
+
       }
       if (element.nivelAlcanzado == 2) {
         sectionTotalValue = element.pesoNivel1 + ((element.pesoNivel2 / 100) * element.puntuacion);
@@ -175,8 +177,10 @@ export class PdfgeneratorComponent implements OnInit {
       }
       sumSections += sectionTotalValue;
 
+
     });
-    return sumSections;
+    return this.Evaluacion.puntuacion
+    //return sumSections;
   }
   public getTotalColor = (sc: any): string => {
     if (sc.nivelAlcanzado == 1) {
@@ -280,7 +284,7 @@ export class PdfgeneratorComponent implements OnInit {
       error => {
         this._router.navigate(['/home']);
       });
-      console.log(this.Evaluacion)
+      console.log("es esta", this.Evaluacion)
 
     //  this.assmentRange = new AssessmentRange(this._appComponent)
   }
@@ -352,12 +356,15 @@ export class PdfgeneratorComponent implements OnInit {
         }
       );
 
-      this._sectionService.GetPreguntasNivelOrganizadas(this.Evaluacion.id, this.Evaluacion.assessmentId, false, this._appComponent._storageDataService.checkNoBinary)
+      this._sectionService.GetPreguntasNivelOrganizadas(this.Evaluacion.id, this.Evaluacion.assessmentId, false)
       .subscribe(
         res => {
           res.map(x => x.puntuacion = Math.round(x.puntuacion))
+
           this.ListaSectionConAsignaciones = res;
-          console.log("a ver section info ", res)
+          console.log(this.Evaluacion['sectionsInfo'])
+          if(!this.Evaluacion['sectionsInfo']) this.Evaluacion['sectionsInfo'] = res
+           console.log("a ver section info ", res)
         },
         error => {
           if (error == 404) {

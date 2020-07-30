@@ -21,6 +21,8 @@ namespace everisapi.API.Models
 
     public int Peso { get; set; }
 
+    public Boolean isBinary {get; set;}
+
     public int PesoNivel1 { get; set; }
 
     public int PesoNivel2 { get; set; }

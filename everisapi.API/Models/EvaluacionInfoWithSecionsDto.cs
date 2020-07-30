@@ -25,6 +25,7 @@ namespace everisapi.API.Models
 
     public string AssessmentName {get;set;}
 
+    public Boolean IsBinary {get; set;}
     public int AssessmentRange {get;set;}
 
     public string UserNombre { get; set; }

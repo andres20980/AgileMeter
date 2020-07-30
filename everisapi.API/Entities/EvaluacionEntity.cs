@@ -32,6 +32,8 @@ namespace everisapi.API.Entities
 
     public double Puntuacion { get; set; }
 
+    public Boolean IsBinary { get; set; }
+
     public int ProyectoId { get; set; }
     //AsignacionEntity esta relacionando la pregunta con la asignación
     //Mediante esta Foreign Key estamos relacionando AsignacionEntity con su Id
