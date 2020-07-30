@@ -64,7 +64,7 @@
                     <th mat-header-cell *matHeaderCellDef>{{ 'SECTION_RESULTS.ANSWER' | translate }}</th>
                     <td mat-cell *matCellDef="let row">
 
-                      <div *ngIf="!row.esHabilitante" style="display: flex; flex-flow: row">
+                      <div *ngIf="!(isBinary) && !row.esHabilitante" style="display: flex; flex-flow: row">
                         <div [ngStyle]="{'backgroundColor': displayColorEstado(row), 'color': (row.estado == 0 ?'black':'white') , 'borderRadius': '20px', 'width': '30%', 'padding':'6px', 'textAlign': 'center'}">
                           {{displayRespuesta(row)}}
                         </div>
@@ -72,7 +72,7 @@
                       </div>
 
                       <!-- solo para mostrar habilitantes -->
-                     <div *ngIf="row.esHabilitante">
+                     <div *ngIf="isBinary || row.esHabilitante">
                         {{displayRespuesta(row)}}
                         <img class="answerIcon" *ngIf="checkRespuestaCorrecta(row) == 'respuesta-correcta'"
                             src="assets/correct.png" title="{{ 'SECTION_RESULTS.ICONS_CORRECT' | translate }}" />

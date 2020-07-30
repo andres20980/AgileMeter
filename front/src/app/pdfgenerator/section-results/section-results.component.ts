@@ -18,6 +18,7 @@ export class SectionResultsComponent implements OnInit {
 
   @ViewChild(MatSort) sort: MatSort;
   @Input() lSectionConAsignacionesDto: any; //IEnumerable<SectionConAsignacionesDto>
+  @Input() isBinary: boolean;
   userRole: number = this._appComponent._storageDataService.Role;
   dataSource: MatTableDataSource<any>;
   expandedElement: RespuestaConNotas;
@@ -44,9 +45,11 @@ export class SectionResultsComponent implements OnInit {
     }
 
   ngOnInit() {
-    this.assmentRange = new AssessmentRange(this._appComponent._storageDataService.EvaluacionToPDF.AssessmentRange);    
+    this.assmentRange = new AssessmentRange(this._appComponent._storageDataService.EvaluacionToPDF.AssessmentRange);
+    console.log("is bin", this.isBinary)
   }
-  
+
+
   //Metodo para dar formato a la fecha introducida
   public parseDate(value: string): string{
     let date = new Date(value);
@@ -90,7 +93,7 @@ export class SectionResultsComponent implements OnInit {
   
   displayRespuesta(row: RespuestaConNotasTabla): number {
     let respuesta: any;
-    if(!row.esHabilitante){ // adaptar para resultados anteriores con binary
+    if(!(this.isBinary) && !row.esHabilitante){ // adaptar para resultados anteriores con binary
 
       respuesta = row.estado.toString();
       if(row.estado == 0) {

@@ -301,6 +301,7 @@ namespace everisapi.API.Services
         //Incluye una nueva evaluación a la base de datos
         public void IncluirEvaluacion(EvaluacionEntity evaluacion)
         {
+            evaluacion.IsBinary = false;
             evaluacion.Respuestas = _context.Preguntas.Where(p => p.AsignacionEntity.SectionEntity.AssessmentId == evaluacion.AssessmentId)
             .Select(p => new RespuestaEntity { EvaluacionId = evaluacion.Id, PreguntaId = p.Id }).ToList();
 
@@ -676,6 +677,7 @@ namespace everisapi.API.Services
                     Id = evaluacion.Id,
                     Fecha = evaluacion.Fecha,
                     Estado = evaluacion.Estado,
+                    IsBinary = evaluacion.IsBinary,
                     Puntuacion = Convert.ToSingle(evaluacion.Puntuacion),
                     Oficina = (string) _context.TraduccionesOficinas
                                     .Where(t => t.OficinaId == evaluacion.ProyectoEntity.OficinaEntity.OficinaId

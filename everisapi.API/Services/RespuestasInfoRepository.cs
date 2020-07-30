@@ -175,6 +175,7 @@ namespace everisapi.API.Services
                 sectionConAsignacion.Nombre = _context.TraduccionesSections.Where(sec => sec.IdiomaId == codigoIdioma && s.section.Id == sec.SectionsId).Select(sec => sec.Traduccion).FirstOrDefault();
                 sectionConAsignacion.Notas = s.notas;
                 sectionConAsignacion.Peso = s.section.Peso;
+                sectionConAsignacion.isBinary = true;
                 sectionConAsignacion.PesoNivel1 = s.section.PesoNivel1;
                 sectionConAsignacion.PesoNivel2 = s.section.PesoNivel2;
                 sectionConAsignacion.PesoNivel3 = s.section.PesoNivel3;

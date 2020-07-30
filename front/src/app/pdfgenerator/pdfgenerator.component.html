@@ -21,8 +21,8 @@
     </div>
 
     <div class="circle-progress-container" *ngIf="ListaSectionConAsignaciones && ListaSectionConAsignaciones.length>0">
-      <div *ngFor="let datos of ListaSectionConAsignaciones; let i = index" [attr.data-index]="i"
-        [attr.id]="datos.nombre" [ngClass]="formatLevel(ListaSectionConAsignaciones[i])" class="circle-progress">
+      <div *ngFor="let datos of Evaluacion.sectionsInfo; let i = index" [attr.data-index]="i"
+        [attr.id]="datos.nombre" [ngClass]="formatLevel(Evaluacion.sectionsInfo[i])" class="circle-progress">
 
         <!-- Eliminamos el comentario con el número de notas -->
         <!-- <div *ngIf="datos.numNotas > 0" class="top-comment" data-html2canvas-ignore="true">
@@ -30,17 +30,17 @@
           <p>{{datos.numNotas}}</p>
         </div> -->
         
-        <circle-progress [percent]="ListaSectionConAsignaciones[i].puntuacion"
-          [subtitle]="[formatSubtitle(ListaSectionConAsignaciones[i])]" [subtitleFontSize]="14" [titleFontSize]="26"
+        <circle-progress [percent]="Evaluacion.sectionsInfo[i].puntuacion"
+          [subtitle]="[formatSubtitle(Evaluacion.sectionsInfo[i])]" [subtitleFontSize]="14" [titleFontSize]="26"
           [unitsFontSize]="14" [radius]="74" [space]="-10" [outerStrokeWidth]="10" [innerStrokeWidth]="10"
-          [innerStrokeColor]="getLevelColorInner(ListaSectionConAsignaciones[i])"
-          [outerStrokeColor]="getLevelColorOuter(ListaSectionConAsignaciones[i])" [outerStrokeLinecap]="'square'"
-          [animation]="true" [renderOnClick]="false" [animationDuration]="300"></circle-progress>
+          [innerStrokeColor]="getLevelColorInner(Evaluacion.sectionsInfo[i])"
+          [outerStrokeColor]="getLevelColorOuter(Evaluacion.sectionsInfo[i])" [outerStrokeLinecap]="'square'"
+          [animation]="true" [renderOnClick]="false" [animationDuration]="500"></circle-progress>
         <div class="text-center circle-progress-title" data-html2canvas-ignore="true"><b>{{datos.nombre}}</b></div> <!--  [toFixed]="1"  -->
       </div>
-      <div [ngClass]="formatTotalLevel(ListaSectionConAsignaciones)" [attr.id]="'total'"> <!--  [toFixed]="1"-->
-        <circle-progress [percent]="getTotalPercent(ListaSectionConAsignaciones)" [showSubtitle]="false"
-          [subtitle]="[formatTotalSubtitle(ListaSectionConAsignaciones)]" [subtitleFontSize]="14" [titleFontSize]="26"
+      <div [ngClass]="formatTotalLevel(Evaluacion.sectionsInfo)" [attr.id]="'total'"> <!--  [toFixed]="1"-->
+        <circle-progress [percent]="getTotalPercent(Evaluacion.sectionsInfo)" [showSubtitle]="false"
+          [subtitle]="[formatTotalSubtitle(Evaluacion.sectionsInfo)]" [subtitleFontSize]="14" [titleFontSize]="26"
           [unitsFontSize]="14" [radius]="74" [space]="-10" [outerStrokeWidth]="10" [innerStrokeWidth]="10"
           [innerStrokeColor]="'#b8457a30'" [outerStrokeColor]="'#b8457a'" [outerStrokeLinecap]="'square'"
           [animation]="true" [renderOnClick]="false" [animationDuration]="300"></circle-progress>
@@ -94,6 +94,7 @@
 
   <div class="table-row" *ngIf="true">
     <app-section-results *ngIf="MostrarPreguntas && ListaDeRespuestas && ListaDeRespuestas.length > 0"
+      [isBinary] ="Evaluacion.isBinary"
       [lSectionConAsignacionesDto]="ListaSectionConAsignaciones">
       {{ 'PDF_GENERATOR.LOADING'| translate }}
     </app-section-results>
