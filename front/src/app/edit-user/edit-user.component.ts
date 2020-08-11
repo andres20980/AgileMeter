@@ -141,6 +141,9 @@ export class EditUserComponent implements OnInit {
         this._translateService.get('ADD_UPDATE_USER.NOTIFICATION_UPDATE_USER').subscribe(value => { this.MensajeNotificacion = value; });
         this._eventService.displayMessage(this.MensajeNotificacion, false);
         setTimeout(() => { this.MensajeNotificacion = null }, 4000);
+    
+        //window.localStorage.setItem("userlongname", form.NombreCompleto)
+        this._router.navigate(['/home'])
       },
       error => {
         if (error == 400) {

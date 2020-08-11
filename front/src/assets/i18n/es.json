@@ -89,7 +89,10 @@
 		"NOTIFICATION_ADD_USER": "Usuario creado correctamente",
 		"NOTIFICATION_ERROR_ADD_USER": "Ups, lo sentimos, no hemos podido crear el usuario",
 		"NOTIFICATION_UPDATE_USER": "Usuario modificado correctamente",
-		"NOTIFICATION_ERROR_UPDATE_USER": "Ups, lo sentimos,no pudimos modificar el usuario."
+		"NOTIFICATION_ERROR_UPDATE_USER": "Ups, lo sentimos,no pudimos modificar el usuario.",
+		"AUTOGEN_PASSWORD":"Autogenerar contraseña",
+		"SHOW_PASSWORD": "Mostrar contraseña",
+		"HIDE_PASSWORD": "Ocultar contraseña"
 	},
 	"TEAM_MANAGER": {
 		"TEAM_MANAGEMENT": "Gestión de Equipos",

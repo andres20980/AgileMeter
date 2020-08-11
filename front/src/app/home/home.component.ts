@@ -121,8 +121,8 @@ export class HomeComponent implements OnInit {
   }
 
 
-  public GetAssessments(): any {
-    this._proyectoService.getAllAssessments().subscribe(
+  public async GetAssessments() {
+    return await this._proyectoService.getAllAssessments().subscribe(
       res => { this.AllAssessments = res; }
     )
   }

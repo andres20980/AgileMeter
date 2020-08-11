@@ -44,8 +44,8 @@
             </mat-error>
 
 
-              <i matSuffix [class.password-locked]="userForm.get('Password').value == null" [class.password-invisible]="userForm.get('Password').value != null" *ngIf="!visible" class="fas fa-eye-slash" (click)="visiblePassword()"></i>
-              <i matSuffix [class.password-locked]="userForm.get('Password').value == null" [class.password-visible]="userForm.get('Password').value != null" *ngIf="visible" class="fas fa-eye" (click)="visiblePassword()"></i>
+              <i matSuffix [class.password-locked]="userForm.get('Password').value == null" [class.password-invisible]="userForm.get('Password').value != null" *ngIf="!visible" class="fas fa-eye-slash" (click)="visiblePassword()" title="{{'ADD_UPDATE_USER.SHOW_PASSWORD' | translate}}"></i>
+              <i matSuffix [class.password-locked]="userForm.get('Password').value == null" [class.password-visible]="userForm.get('Password').value != null" *ngIf="visible" class="fas fa-eye" (click)="visiblePassword()" title="{{'ADD_UPDATE_USER.HIDE_PASSWORD' | translate}}"></i>
 
           </mat-form-field>
 
