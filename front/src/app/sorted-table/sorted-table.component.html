@@ -124,6 +124,7 @@
     </ng-container>
 
 
+
     <div *ngIf="scrumassmnt">
       <ng-container matColumnDef="equipo"> 
         <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.PT_SCRM.TEAM' | translate }}</th>
@@ -149,7 +150,7 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.PT_SCRM.APPLICATION' | translate }}</th>
         <td mat-cell *matCellDef="let row"  class="evaluation-column">{{row.sectionsInfo[4].puntuacion}}% - N{{row.sectionsInfo[4].nivelAlcanzado}}</td>
       </ng-container>
-    </div>
+  </div>
 
 
 
@@ -218,6 +219,30 @@
 
     </div>
 
+
+  <div *ngIf="remoteassmnt">
+    <ng-container matColumnDef="rmtespacio"> 
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.PT_REMOTE.WORKSPACE' | translate }}</th>
+        <td mat-cell *matCellDef="let row" class="evaluation-column">{{row.sectionsInfo[0].puntuacion}}% - N{{row.sectionsInfo[0].nivelAlcanzado}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="rmtcomunicacion">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.PT_REMOTE.COMMUNICATION' | translate }}</th>
+        <td mat-cell *matCellDef="let row" class="evaluation-column">{{row.sectionsInfo[1].puntuacion}}% - N{{row.sectionsInfo[1].nivelAlcanzado}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="rmtliderazgo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.PT_REMOTE.LEADING' | translate }}</th>
+        <td mat-cell *matCellDef="let row" class="evaluation-column">{{row.sectionsInfo[2].puntuacion}}% - N{{row.sectionsInfo[2].nivelAlcanzado}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="rmtcorporativo">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.PT_REMOTE.CORPORATIVE' | translate }}</th>
+        <td mat-cell *matCellDef="let row" class="evaluation-column">{{row.sectionsInfo[3].puntuacion}}% - N{{row.sectionsInfo[3].nivelAlcanzado}}</td>
+      </ng-container>
+
+    </div>
+ 
     <!--  Puntuacion -->
     <ng-container matColumnDef="puntuacion">
       <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ 'SORTED_TABLE.SCORE' | translate }}</th>

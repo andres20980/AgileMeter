@@ -28,6 +28,7 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
   public ctx_labels = new Array();
   public arrayScrum = new Array();
   public arrayDevops = new Array();
+  public arrayRemote = new Array();
   public arrayKanban = new Array();
   public auxColors = [ "#c1de5d40","#37bf5940","#0fb3d440"] //rgba(135,169,0,0.1)
   public chartOptions: any
@@ -68,7 +69,14 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
       {nombre: "MINDSET", color: "#9B59B6"},
       {nombre: "APLICACIÓN PRÁCTICA", color: "#ef56b4"}
     ];
-  }
+
+  this.arrayRemote = [
+    {nombre: "ESPACIO DE TRABAJO", color: "#E74C3C"},
+    {nombre: "COMUNICACIÓN Y COLABORACIÓN", color: "#3498DB"},
+    {nombre: "LIDERAZGO Y SEGUIMIENTO",color: "#F1C40F"},
+    {nombre: "CORPORATIVO", color: "#9B59B6"}
+  ];
+}
 
   ngOnInit() {
 
@@ -127,6 +135,24 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
 
       if(this.nombreAssessment === "KANBAN") {
         this.arrayKanban.forEach((v,c) => {
+          this.ctx_datasets.push({
+            type: "line",
+            data: this.post[c],
+            label: v.nombre,
+            backgroundColor: v.color,
+            fill: "false",
+            lineTension: 0.1,
+            borderColor: v.color,
+            pointRadius: 2,
+            pointHoverRadius: 4,
+            borderWidth: 3
+          })
+        })
+      }
+
+
+      if(this.nombreAssessment === "REMOTO") {
+        this.arrayRemote.forEach((v,c) => {
           this.ctx_datasets.push({
             type: "line",
             data: this.post[c],

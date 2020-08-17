@@ -250,6 +250,13 @@
 			"MINDSET":"Mindset",
 			"PRACT_APL":"Aplicación Práctica"
 		},
+
+		"EXCEL_PT_REMOTE":{
+			"WORKSPACE": "Espacio de trabajo",
+			"COMMUNICATION":"Comunicacion y colaboración",
+			"LEADING":"Liderazgo y seguimiento",
+			"CORPORATIVE":"Corporativo"
+		},
 		"EXCEL_ASSESSMENT": "Assessment",
 		"EXCEL_SCORE": "Puntuación",
 		"LEVEL": "Nivel",
@@ -286,6 +293,13 @@
 			"PRACTICES":"Prácticas Generales",
 			"MINDSET":"Mindset",
 			"PRACT_APL":"Aplicación Práctica"
+		},
+
+		"PT_REMOTE": {
+			"WORKSPACE": "Espacio de trabajo",
+			"COMMUNICATION":"Comunicacion y colaboración",
+			"LEADING":"Liderazgo y seguimiento",
+			"CORPORATIVE":"Corporativo"
 		},
 		
 		"ASSESSMENT": "Assessment",

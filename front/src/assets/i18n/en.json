@@ -252,6 +252,13 @@
 			"PRACT_APL":"Practical Application"
 		},
 
+		"EXCEL_PT_REMOTE" : {
+			"WORKSPACE": "Workspace",
+			"COMMUNICATION":"Communication & Collaboration",
+			"LEADING":"Leading & Monitoring",
+			"CORPORATIVE":"Corporative"
+		},
+
 
 		"EXCEL_ASSESSMENT": "Assessment",
 		"EXCEL_SCORE": "Score",
@@ -290,6 +297,14 @@
 			"MINDSET":"Mindset",
 			"PRACT_APL":"Practical Application"
 		},
+
+		"PT_REMOTE": {
+			"WORKSPACE": "Workspace",
+			"COMMUNICATION":"Communication & Collaboration",
+			"LEADING":"Leading & Monitoring",
+			"CORPORATIVE":"Corporative"
+		},
+		
 		"SCORE": "Global Score",
 		"STATE": "Status",
 		"COMPLETED": "Completed",
