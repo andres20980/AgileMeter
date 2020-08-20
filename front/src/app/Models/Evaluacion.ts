@@ -13,6 +13,7 @@ export class Evaluacion {
     public userNombre: string,
     public oficina: string,
     public assessmentId?: number,
+    public sectionsInfo?: Array<any>,
     public proyectoId?: number
   ) { }
 }

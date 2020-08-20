@@ -1,9 +1,8 @@
 import { AssessmentColumns } from './../Models/AssessmentColumns';
 import { SectionInfo } from './../Models/SectionInfo';
-import { map } from 'rxjs/operators';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit, Input, Output, ViewChild, ViewChildren, EventEmitter, ElementRef, Renderer, OnChanges, SimpleChanges} from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource, SELECT_PANEL_INDENT_PADDING_X } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Evaluacion } from 'app/Models/Evaluacion';
 import { AppComponent } from 'app/app.component';
 import { EvaluacionInfo } from 'app/Models/EvaluacionInfo';
@@ -85,14 +84,12 @@ export class SortedTableComponent implements OnInit {
       this.excelDevops = this.assessmentColumns.excelDevops
       this.excelKanban = this.assessmentColumns.execelKanban
       this.excelRemote = this.assessmentColumns.execelRemote
-
-
   }
-
 
 
   ngOnInit()
   {
+
     this.UserRole = this._appComponent._storageDataService.Role;
     this.fieldsTable = [
         ["fecha", "EXCEL_DATE", 12,"dd/mm/yyyy", "Date"],
@@ -112,12 +109,7 @@ export class SortedTableComponent implements OnInit {
     this.originListaAssessment = this.dataInput.map(x => x).reduce((x,y) => x.includes(y.assessmentName) ? x : [...x, y.assessmentName],[]).sort();
     this.ListaDeOficinas= this.dataInput.map(x => x.oficina).reduce((x,y) => x.includes(y) ? x : [...x, y],[]).sort();
     this.listaDeAssessment = this.dataInput.map(x => x).reduce((x,y) => x.includes(y.assessmentName) ? x : [...x, y.assessmentName],[]).sort();
-    this.ListaDeEquipos = this.dataInput.map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]).sort();
-      
-    // this.dataSource.filterPredicate = function(data, filter: string): boolean { 
-    //    return String(data.puntuacion).toLowerCase().includes(filter) || data.assessmentName.toLowerCase().includes(filter) || data.nombre.toLowerCase().includes(filter) || data.userNombre.toLowerCase().includes(filter) || data.oficina.toLowerCase().includes(filter) || data.fecha.toLowerCase().includes(filter)
-    // }
-
+    this.ListaDeEquipos = this.dataInput.map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]).sort();     
 
     if(this.nombreEquipo) {
       this.EquipoSeleccionado.push(this.nombreEquipo);
@@ -132,6 +124,7 @@ export class SortedTableComponent implements OnInit {
       return data.nombre.toLowerCase().includes(filter)
         || data.assessmentName.toLowerCase().includes(filter)
         || data.oficina.toLowerCase().includes(filter)
+        || data.sectionsInfo.find(x => x.puntuacion.toString().toLowerCase().includes(filter))
         || (data.userNombre != null && data.userNombre.toLowerCase().includes(filter))
         || ((date.getDate() < 10 ? "0" : "") + date.getDate() + "/" + (date.getMonth() < 10 ? "0" : "") + (date.getMonth() + 1) + "/" + date.getFullYear()).includes(filter)
         ;
@@ -158,7 +151,6 @@ export class SortedTableComponent implements OnInit {
   public GetPagination()
   {
     this.dataSource = new MatTableDataSource(this.dataInput);
-    console.log(this.dataSource);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
@@ -235,7 +227,6 @@ export class SortedTableComponent implements OnInit {
     }
     
      // viejo nuevo
-     console.log(selected);
     let nuevo = this.originDataSource.filter(x =>selected.oficina.includes(x.oficina) && selected.team.includes(x.nombre) && selected.assessment.includes(x.assessmentName));
     this.dataSource.data = nuevo;
 

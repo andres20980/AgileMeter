@@ -1,9 +1,7 @@
-import { style } from '@angular/animations';
-import { Component, OnInit, Input, AfterViewInit ,ViewChild, ViewChildren, ElementRef } from '@angular/core';
+import { forEach } from '@angular/router/src/utils/collection';
+import { Component, OnInit, Input, AfterViewInit, ViewChildren, ElementRef } from '@angular/core';
 import { AppComponent } from 'app/app.component';
 import { Chart } from 'chart.js';
-import { ThrowStmt } from '@angular/compiler';
-
 
 @Component({
   selector: 'app-evaluationchart',
@@ -18,6 +16,7 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
   @Input() nombreProyecto: string;
   @Input() nombreAssessment: string;
   @Input() result: any;
+  @Input() sectionsNombres: Array<string>
   public chartType: string = 'bar';
   public maxLevel: number;
   public chartLabels: Array<string>;
@@ -31,6 +30,7 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
   public arrayRemote = new Array();
   public arrayKanban = new Array();
   public auxColors = [ "#c1de5d40","#37bf5940","#0fb3d440"] //rgba(135,169,0,0.1)
+  public labelsColor = ["#E74C3C","#3498DB", "#F1C40F","#9B59B6","#ef56b4", "#33CCCC", "#F39C12"]
   public chartOptions: any
   public infoResult: Array<Object> = [];
   public previous: any;
@@ -41,42 +41,9 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
   public displayPercentage: boolean;
   public genericResult: Array<number>
   public legend = new Array();
-  constructor(private _appComponent: AppComponent) {
-    
 
-   this.arrayScrum = [
-      {nombre: "EQUIPO", color: "#E74C3C"},
-      {nombre: "EVENTOS", color: "#3498DB"},
-      {nombre: "HERRAMIENTAS",color: "#F1C40F"},
-      {nombre: "MINDSET", color: "#9B59B6"},
-      {nombre: "APLICACIÓN PRÁCTICA", color: "#ef56b4"}
-    ];
   
-    this.arrayDevops = [
-      {nombre: "ORGANIZACION EQUIPOS", color: "#E74C3C"},
-      {nombre: "CICLO DE VIDA", color:"#3498DB"},
-      {nombre: "CONSTRUCCIÓN",color:  "#F1C40F"},
-      {nombre: "TESTING Y CALIDAD", color: "#9B59B6"},
-      {nombre: "DESPLIEGUE", color: "#ef56b4"},
-      {nombre: "MONITORIZACION", color: "#33CCCC"},
-      {nombre: "APROVISIONAMIENTO", color: "#F39C12"}
-    ];
-
-    this.arrayKanban = [
-      {nombre: "EQUIPO", color: "#E74C3C"},
-      {nombre: "KANBAN BOARD", color: "#3498DB"},
-      {nombre: "PRÁCTICAS GENERALES",color: "#F1C40F"},
-      {nombre: "MINDSET", color: "#9B59B6"},
-      {nombre: "APLICACIÓN PRÁCTICA", color: "#ef56b4"}
-    ];
-
-  this.arrayRemote = [
-    {nombre: "ESPACIO DE TRABAJO", color: "#E74C3C"},
-    {nombre: "COMUNICACIÓN Y COLABORACIÓN", color: "#3498DB"},
-    {nombre: "LIDERAZGO Y SEGUIMIENTO",color: "#F1C40F"},
-    {nombre: "CORPORATIVO", color: "#9B59B6"}
-  ];
-}
+  constructor(private _appComponent: AppComponent) {}
 
   ngOnInit() {
 
@@ -89,84 +56,30 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
     this.ctx_labels.reverse();
     this.ctx_labels.push("");
     this.ctx_labels.unshift("");
-    console.log(this.previous)
     this.levels = this.previous.flatMap(c => c).map(x => x.nivelAlcanzado)
     this.maxLevel = Math.max(...this.levels)
     this.post = this.previous.flatMap(c => c).reduce((x, y) => {
                 this.arr.includes(y.nombre) ? false : x.push(this.extracData(y.nombre,this.previous))                       
                 this.arr.push(y.nombre);
-                return x },[])
+                return x },[])      
+  
+   let assessmntSel = this.sectionsNombres.map((x,i) => {  return {nombre: x, color: this.labelsColor[i]}  })
 
 
-      if(this.nombreAssessment === "SCRUM") {
-       
-        this.arrayScrum.forEach((v,c) => {
-          this.ctx_datasets.push({
-            type: "line",
-            data: this.post[c],
-            label: v.nombre,
-            backgroundColor: v.color,
-            fill: "false",
-            lineTension: 0.1,
-            borderColor: v.color,
-            pointRadius: 2,
-            pointHoverRadius: 4,
-            borderWidth: 3
-          })
+   assessmntSel.forEach((v,c) => {
+        this.ctx_datasets.push({
+          type: "line",
+          data: this.post[c],
+          label: v.nombre,
+          backgroundColor: v.color,
+          fill: "false",
+          lineTension: 0.1,
+          borderColor: v.color,
+          pointRadius: 2,
+          pointHoverRadius: 4,
+          borderWidth: 3
         })
-      }
-
-      if(this.nombreAssessment === "DEVOPS") {
-        this.arrayDevops.forEach((v,c) => {
-          this.ctx_datasets.push({
-            type: "line",
-            data: this.post[c],
-            label: v.nombre,
-            backgroundColor: v.color,
-            fill: "false",
-            lineTension: 0.1,
-            borderColor: v.color,
-            pointRadius: 2,
-            pointHoverRadius: 4,
-            borderWidth: 3
-          })
-        })
-      }
-
-      if(this.nombreAssessment === "KANBAN") {
-        this.arrayKanban.forEach((v,c) => {
-          this.ctx_datasets.push({
-            type: "line",
-            data: this.post[c],
-            label: v.nombre,
-            backgroundColor: v.color,
-            fill: "false",
-            lineTension: 0.1,
-            borderColor: v.color,
-            pointRadius: 2,
-            pointHoverRadius: 4,
-            borderWidth: 3
-          })
-        })
-      }
-
-
-      if(this.nombreAssessment === "REMOTO") {
-        this.arrayRemote.forEach((v,c) => {
-          this.ctx_datasets.push({
-            type: "line",
-            data: this.post[c],
-            label: v.nombre,
-            backgroundColor: v.color,
-            fill: "false",
-            lineTension: 0.1,
-            borderColor: v.color,
-            pointRadius: 2,
-            pointHoverRadius: 4,
-            borderWidth: 3
-          })
-        })
-      }
+      })
 
    this.genericResult.reverse();
    this.ctx_datasets.push({type: 'bar', yAxisID: "y-axis-1", data: [NaN,...this.genericResult,NaN], label: "Global", backgroundColor: "#2ECC71AA", padding: 200, borderColor: "#2ECC71", hoverBackgroundColor: "#2ECC71", borderWidth:"2"}) // hidden:"false"
@@ -210,10 +123,13 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
     //   }) 
     // }
     //   })
-        
+    
+    const lngthRange = this.post.length + 4
+    
+        const rangeY = new Array(lngthRange);
         this.ctx_datasets.push({
           type: "line",
-          data:[100,100,100,100,100,100,100,100,100], //follow.map(x => x * (col * 100)), 
+          data: rangeY.fill(100),//[100,100,100,100,100,100,100,100,100], //follow.map(x => 1* 100), 
           label:"aux1",// + (col - 1),
           backgroundColor: this.auxColors[0],
           fill: "origin",
@@ -224,10 +140,10 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
           borderWidth:0.1
         })
 
-
+        const rangeY2 = new Array(lngthRange);
         this.ctx_datasets.push({
           type: "line",
-          data: [200,200,200,200,200,200,200,200,200],//follow.map(x => x * (col * 100)), 
+          data:rangeY2.fill(200), //[200,200,200,200,200,200,200,200,200],////follow.map(x => x * (col * 100)), 
           label:"aux1",// + (col - 1),
           backgroundColor: this.auxColors[1],
           fill: "-1",
@@ -238,11 +154,10 @@ export class EvaluationchartComponent implements OnInit, AfterViewInit {
           borderWidth:0.1
         }) 
 
-
-        
+        const rangeY3 = new Array(lngthRange);
         this.ctx_datasets.push({
           type: "line",
-          data: [300,300,300,300,300,300,300,300,300],//follow.map(x => x * (col * 100)), 
+          data: rangeY3.fill(300),//[300,300,300,300,300,300,300,300,300],////follow.map(x => x * (col * 100)), 
           label:"aux2",// + (col - 1),
           backgroundColor: this.auxColors[2],
           fill: "-1",
