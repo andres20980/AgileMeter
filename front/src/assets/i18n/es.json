@@ -270,7 +270,7 @@
 		"USER": "Usuario",
 		"OFFICE": "Oficina",
 		"TEAM": "Nombre Equipo",
-		"PT_SCRM": {
+		"PT_SCRUM": {
 			"TEAM": "Equipo",
 			"EVENTS":"Eventos",
 			"MINDSET":"Mindset",
@@ -295,7 +295,7 @@
 			"PRACT_APL":"Aplicación Práctica"
 		},
 
-		"PT_REMOTE": {
+		"PT_REMOTO": {
 			"WORKSPACE": "Espacio de trabajo",
 			"COMMUNICATION":"Comunicacion y colaboración",
 			"LEADING":"Liderazgo y seguimiento",

@@ -46,7 +46,6 @@ export class SectionResultsComponent implements OnInit {
 
   ngOnInit() {
     this.assmentRange = new AssessmentRange(this._appComponent._storageDataService.EvaluacionToPDF.AssessmentRange);
-    console.log("is bin", this.isBinary)
   }
 
 

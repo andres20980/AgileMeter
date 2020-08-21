@@ -274,7 +274,7 @@
 		"ASSESSMENT": "Assessment",
 		"OFFICE": "Office",
 		"TEAM": "Team Name",
-		"PT_SCRM": {
+		"PT_SCRUM": {
 			"TEAM": "Team",
 			"EVENTS":"Events",
 			"MINDSET":"Mindset",
@@ -298,7 +298,7 @@
 			"PRACT_APL":"Practical Application"
 		},
 
-		"PT_REMOTE": {
+		"PT_REMOTO": {
 			"WORKSPACE": "Workspace",
 			"COMMUNICATION":"Communication & Collaboration",
 			"LEADING":"Leading & Monitoring",

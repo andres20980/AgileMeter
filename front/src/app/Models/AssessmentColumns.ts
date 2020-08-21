@@ -1,28 +1,68 @@
+const sorttable_json = require("../../assets/i18n/es.json");
+
 export class AssessmentColumns {
-    constructor(){}
+
+    private mapColums = new Map([
+        ["SCRUM", ["equipo","eventos","herramientas", "mindset", "aplicacion"]],
+        ["DEVOPS",["orgequipo","ciclovida","construccion", "testing","despliegue","monitorizacion","aprovisionamiento"]],
+        ["KANBAN",["kbnequipo","kbnkanbanboard","kbnpracticas","kbnmindset","kbnaplicacion"]],
+        ["REMOTO",["rmtespacio", "rmtcomunicacion","rmtliderazgo","rmtcorporativo"]]
+    ]);
+
+    private sortTableNames 
+    private excelTableNames;
+
+    constructor(){
+        this.sortTableNames = sorttable_json.SORTED_TABLE
+        this.excelTableNames = sorttable_json.PREVIOUS_EVALUATION
+
+    }
 
 
-    public get displayedScrumColumns(): Array<any>{ 
+
+    public columnSection(assessment: string)
+    {
+        let columns = Object.keys(this.sortTableNames["PT_"+assessment])
+        let sg = "SORTED_TABLE.PT_"+assessment+"."
+        return this.mapColums.get(assessment).map((x, i) => { return {name: x, colth: sg+columns[i]} })
+        
+    } 
+
+
+    public columnExcel(assessment: string)
+    {   
+        let columns = Object.keys(this.excelTableNames["EXCEL_PT_"+assessment])
+        let sg = "EXCEL_PT_"+assessment+"."
+        return this.mapColums.get(assessment).map((x, i) => { return [x, sg+columns[i], 20, assessment, "String" ] })
+    }
+
+
+    public get displayedScrumColumns(): Array<any>
+    { 
         return  ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','equipo','eventos','herramientas','mindset','aplicacion','puntuacion', 'notas', 'informe'];
     }
 
 
-    public get displayedDevopsColumns(): Array<any>{ 
+    public get displayedDevopsColumns(): Array<any>
+    { 
     return ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','orgequipo','ciclovida','construccion','testing','despliegue','monitorizacion','aprovisionamiento','puntuacion', 'notas', 'informe'];
     }
 
-    public get displayedKanbanColumns(): Array<any>{
+    public get displayedKanbanColumns(): Array<any>
+    {
         return  ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','kbnequipo','kbnkanbanboard','kbnpracticas','kbnmindset','kbnaplicacion','puntuacion', 'notas', 'informe'];
      }
 
      
-    public get displayedRemoteColumns(): Array<any>{
+    public get displayedRemoteColumns(): Array<any>
+    {
         return  ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','rmtespacio','rmtcomunicacion','rmtliderazgo','rmtcorporativo','puntuacion', 'notas', 'informe'];
      }
 
 
 
-    public get excelScrum(): Array<any>{
+    public get excelScrum(): Array<any>
+    {
         return [
             ["equipo", "EXCEL_PT_SCRUM.TEAM", 20,"SCRUM", "String"],
             ["eventos", "EXCEL_PT_SCRUM.EVENTS",20,"SCRUM", "String"], 

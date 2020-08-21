@@ -1,7 +1,6 @@
 import { AssessmentColumns } from './../Models/AssessmentColumns';
-import { SectionInfo } from './../Models/SectionInfo';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit, Input, Output, ViewChild, ViewChildren, EventEmitter, ElementRef, Renderer, OnChanges, SimpleChanges} from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChild, ViewChildren, EventEmitter, Renderer} from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Evaluacion } from 'app/Models/Evaluacion';
 import { AppComponent } from 'app/app.component';
@@ -41,7 +40,7 @@ export class SortedTableComponent implements OnInit {
   dataSource: MatTableDataSource<Evaluacion>;
   dataSourceMerge: MatTableDataSource<Evaluacion>;
   assessmentColumns = new AssessmentColumns();
-  displayedColumns = ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','puntuacion', 'notas', 'informe'];
+  displayedColumns: Array<any> = ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','puntuacion', 'notas', 'informe'];
   displayedColumnsScrum = this.assessmentColumns.displayedScrumColumns
   displayedColumnsDevops = this.assessmentColumns.displayedDevopsColumns
   displayedColumnsKanban = this.assessmentColumns.displayedKanbanColumns
@@ -63,13 +62,12 @@ export class SortedTableComponent implements OnInit {
   public originListaAssessment: string[] = [];
   public fieldsTable : any[];
   public objectTranslate : string;
-  public scrumassmnt: boolean = false;
-  public devopsassmnt: boolean = false;
-  public kanbanassmnt: boolean = false;
-  public remoteassmnt: boolean = false;
   @Output() propagar = new EventEmitter<any>();
   public UserRole: number = 0;
   public rol: EnumRol = new EnumRol();
+
+  public columnInfoAssmnt: Array<any>
+  public sectionColumn: boolean = false;
 
   constructor(private _appComponent: AppComponent,  private _router: Router, private renderer: Renderer, private evaluacion: EvaluacionService) { 
     this.fieldsTable = [
@@ -91,13 +89,13 @@ export class SortedTableComponent implements OnInit {
   {
 
     this.UserRole = this._appComponent._storageDataService.Role;
-    this.fieldsTable = [
-        ["fecha", "EXCEL_DATE", 12,"dd/mm/yyyy", "Date"],
-        ["userNombre", "EXCEL_USER",20,"", "String"],
-        ["oficina", "EXCEL_OFFICE", 25,"", "String"],
-        ["nombre", "EXCEL_TEAM", 50,"##?##", "String"],
-        ["assessmentName", "EXCEL_ASSESSMENT", 20,"", "String"],
-        ["puntuacion", "EXCEL_SCORE", 12,"0.00%", "Percentage"]];
+    // this.fieldsTable = [
+    //     ["fecha", "EXCEL_DATE", 12,"dd/mm/yyyy", "Date"],
+    //     ["userNombre", "EXCEL_USER",20,"", "String"],
+    //     ["oficina", "EXCEL_OFFICE", 25,"", "String"],
+    //     ["nombre", "EXCEL_TEAM", 50,"##?##", "String"],
+    //     ["assessmentName", "EXCEL_ASSESSMENT", 20,"", "String"],
+    //     ["puntuacion", "EXCEL_SCORE", 12,"0.00%", "Percentage"]];
       
     this.objectTranslate = "PREVIOUS_EVALUATION";
 
@@ -254,25 +252,25 @@ export class SortedTableComponent implements OnInit {
   showColumnAssessment()
   {
     if(this.assessmentSeleccionado.length === 1) {
-      if( this.assessmentSeleccionado[0] === "SCRUM") {
-        this.displayedColumns = this.displayedColumnsScrum;
-      } else if(this.assessmentSeleccionado[0] === "DEVOPS") {
-        this.displayedColumns = this.displayedColumnsDevops;
-      }else if(this.assessmentSeleccionado[0] === "KANBAN") {
-        this.displayedColumns = this.displayedColumnsKanban;
-      }else if(this.assessmentSeleccionado[0] === "REMOTO") {
-        this.displayedColumns = this.displayedColumnsRemote;
-      }
+      // if( this.assessmentSeleccionado[0] === "SCRUM") {
+      //   this.displayedColumns = this.displayedColumnsScrum;
+      // } else if(this.assessmentSeleccionado[0] === "DEVOPS") {
+      //   this.displayedColumns = this.displayedColumnsDevops;
+      // }else if(this.assessmentSeleccionado[0] === "KANBAN") {
+      //   this.displayedColumns = this.displayedColumnsKanban;
+      // }else if(this.assessmentSeleccionado[0] === "REMOTO") {
+      //   this.displayedColumns = this.displayedColumnsRemote;
+      // }
+
+      this.displayedColumns = this.assessmentColumns.columnExcel(this.assessmentSeleccionado[0])
+      this.columnInfoAssmnt = this.assessmentColumns.columnSection(this.assessmentSeleccionado[0])
 
       this.addColumnExcel(this.assessmentSeleccionado[0]);
 
     } else {
       this.displayedColumns = ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','puntuacion', 'notas', 'informe'];
       this.popColumnExcel();
-      this.scrumassmnt = false;
-      this.devopsassmnt = false;
-      this.kanbanassmnt = false;
-      this.remoteassmnt = false;
+      this.sectionColumn = false;
       this.propagar.emit(false);
     }  
   }
@@ -288,27 +286,29 @@ export class SortedTableComponent implements OnInit {
 
   addColumnExcel(assessment: string)
   {
-
-    if (!(this.scrumassmnt||this.devopsassmnt||this.kanbanassmnt || this.remoteassmnt)){
+    // if (!(this.scrumassmnt||this.devopsassmnt||this.kanbanassmnt || this.remoteassmnt)) {
+    if (!(this.sectionColumn)) {
       this.fieldsTable.map((x, i) => {
         if(x[0].includes("assessmentName")) {
           if(assessment === "SCRUM") {
             this.fieldsTable.splice(i, 0, ...this.excelScrum);
-            this.scrumassmnt = true;
+            //this.scrumassmnt = true;
           }
           if(assessment === "DEVOPS") {
             this.fieldsTable.splice(i, 0, ...this.excelDevops)
-            this.devopsassmnt = true;
+            //this.devopsassmnt = true;
           }
           if(assessment === "KANBAN") {
             this.fieldsTable.splice(i, 0, ...this.excelKanban)
-            this.kanbanassmnt = true;
+            //this.kanbanassmnt = true;
           }
           if(assessment === "REMOTO") {
             this.fieldsTable.splice(i, 0, ...this.excelRemote)
-            this.remoteassmnt = true;
+            //this.remoteassmnt = true;
           }
         }
+
+        this.sectionColumn = true;
        
     })
   }
