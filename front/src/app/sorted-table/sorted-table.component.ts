@@ -252,17 +252,17 @@ export class SortedTableComponent implements OnInit {
   showColumnAssessment()
   {
     if(this.assessmentSeleccionado.length === 1) {
-      // if( this.assessmentSeleccionado[0] === "SCRUM") {
-      //   this.displayedColumns = this.displayedColumnsScrum;
-      // } else if(this.assessmentSeleccionado[0] === "DEVOPS") {
-      //   this.displayedColumns = this.displayedColumnsDevops;
-      // }else if(this.assessmentSeleccionado[0] === "KANBAN") {
-      //   this.displayedColumns = this.displayedColumnsKanban;
-      // }else if(this.assessmentSeleccionado[0] === "REMOTO") {
-      //   this.displayedColumns = this.displayedColumnsRemote;
-      // }
+      if( this.assessmentSeleccionado[0] === "SCRUM") {
+        this.displayedColumns = this.displayedColumnsScrum;
+      } else if(this.assessmentSeleccionado[0] === "DEVOPS") {
+        this.displayedColumns = this.displayedColumnsDevops;
+      }else if(this.assessmentSeleccionado[0] === "KANBAN") {
+        this.displayedColumns = this.displayedColumnsKanban;
+      }else if(this.assessmentSeleccionado[0] === "REMOTO") {
+        this.displayedColumns = this.displayedColumnsRemote;
+      }
 
-      this.displayedColumns = this.assessmentColumns.columnExcel(this.assessmentSeleccionado[0])
+     //this.displayedColumns = this.assessmentColumns.columnExcel(this.assessmentSeleccionado[0])
       this.columnInfoAssmnt = this.assessmentColumns.columnSection(this.assessmentSeleccionado[0])
 
       this.addColumnExcel(this.assessmentSeleccionado[0]);

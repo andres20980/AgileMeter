@@ -30,7 +30,7 @@ export class AssessmentColumns {
 
 
     public columnExcel(assessment: string)
-    {   
+    { 
         let columns = Object.keys(this.excelTableNames["EXCEL_PT_"+assessment])
         let sg = "EXCEL_PT_"+assessment+"."
         return this.mapColums.get(assessment).map((x, i) => { return [x, sg+columns[i], 20, assessment, "String" ] })
