@@ -127,10 +127,14 @@ export class BtnExportToExcelComponent implements OnInit {
               case "KANBAN":
                 data = array[i-4];
                 break;
+
+              case "REMOTO":
+                data = array[i-4];
+              break;
                 
               default:
-                  data =  d[field[i]];
-                break;
+                data =  d[field[i]];
+              break;
             }
             break;
         
