@@ -97,9 +97,9 @@ export class AssessmentColumns {
     public get execelRemote(): Array<any>
     {
         return  [
-            ["rmtespacio", "EXCEL_PT_REMOTE.SPACEWORK", 20,"REMOTE", "String"],
-            ["rmtcomunicacion", "EXCEL_PT_REMOTE.COMUNICATION", 20,"REMOTE", "String"],
-            ["mtliderazgo", "EXCEL_PT_REMOTE.LEADING", 20,"REMOTE", "String"],
-            ["rmtcorporativo", "EXCEL_PT_REMOTE.CORPORATIVE", 20,"REMOTE", "String"]];
+            ["rmtespacio", "EXCEL_PT_REMOTE.WORKSPACE", 20,"REMOTO", "String"],
+            ["rmtcomunicacion", "EXCEL_PT_REMOTE.COMMUNICATION", 20,"REMOTO", "String"],
+            ["mtliderazgo", "EXCEL_PT_REMOTE.LEADING", 20,"REMOTO", "String"],
+            ["rmtcorporativo", "EXCEL_PT_REMOTE.CORPORATIVE", 20,"REMOTO", "String"]];
     }
 }
