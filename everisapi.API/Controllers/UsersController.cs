@@ -360,9 +360,9 @@ namespace everisapi.API.Controllers
             {
 
                 client.ServerCertificateValidationCallback = (s, c, h, e) => true;
-                await client.ConnectAsync("smtp-mail.outlook.com", 587, SecureSocketOptions.StartTls);    ;
+                await client.ConnectAsync("mail.everisreports.com", 25, SecureSocketOptions.Auto);    ;
                 // Note: only needed if the SMTP server requires authentication
-                await client.AuthenticateAsync(Helper.DecryptString(key,emailAddress), Helper.DecryptString(key,emailPassword));
+                await client.AuthenticateAsync("Agile.Meter.07070@everisreports.com", "jGTF5688hy.");
                 await client.SendAsync(message);
                 await client.DisconnectAsync(true);
             }
