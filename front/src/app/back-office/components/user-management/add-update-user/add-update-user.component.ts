@@ -1,6 +1,6 @@
 import { ProyectoService } from 'app/services/ProyectoService';
 import { UserCreateUpdate } from './../../../../Models/UserCreateUpdate';
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Renderer2 } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Role } from 'app/Models/Role';
 import { UserService } from 'app/services/UserService';
@@ -15,7 +15,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './add-update-user.component.html',
   styleUrls: ['./add-update-user.component.scss']
 })
-export class AddUpdateUserComponent implements OnInit {
+export class AddUpdateUserComponent implements OnInit, AfterViewInit{
   public ErrorMessage: string = null;
   public Error: string = null;
   public userForm: FormGroup;
@@ -24,6 +24,7 @@ export class AddUpdateUserComponent implements OnInit {
   public visible = false;
 
   @ViewChild('inputpass') typeInput: ElementRef;
+  @ViewChild('eyepass') elEye: ElementRef;
 
   public rolList: Role[];
   rol: Role = { id: 1, role: "Usuario" };
@@ -32,6 +33,7 @@ export class AddUpdateUserComponent implements OnInit {
     return o1.id === o2.id;
   }
   constructor(
+    private renderer: Renderer2,
     private _userService: UserService,
     private _router: Router,
     private _proyectoService: ProyectoService,
@@ -47,6 +49,13 @@ export class AddUpdateUserComponent implements OnInit {
       this.getUser();
     }
     this.formValidate();
+
+
+  }
+
+  ngAfterViewInit()
+  {
+
   }
 
   //form validate

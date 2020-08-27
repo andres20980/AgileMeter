@@ -244,9 +244,9 @@ namespace everisapi.API.Services
                 sectionsConAsignaciones.Add(sectionConAsignacion);
             }
             
-            // var path =@"C:\Users\jfrancom\ScrumMeter\everisapi.API\seccioneseval.txt"; 
-            // using (StreamWriter writerTxt = File.CreateText(path))
-            // {
+             var path =@"C:\Users\jfrancom\ScrumMeter\everisapi.API\seccioneseval.txt"; 
+             using (StreamWriter writerTxt = File.CreateText(path))
+             {
 
             foreach (SectionConAsignacionesDto seccion in sectionsConAsignaciones)
             {
@@ -268,6 +268,8 @@ namespace everisapi.API.Services
 
                          var preguntasCorrectas = asignacion.Preguntas // preguntas noBinary
                             .Where(p => p.Nivel == i && ((p.Estado == MaxRange && p.Correcta == "Si") || ( p.Estado == 1 && p.Correcta == "No")));
+
+                           // writerTxt.WriteLine("\t \t " + "Preguntas " + preguntasCorrectas.Count());
 
                         // if(!noBinary){ // probar una vez más
                         //     writerTxt.WriteLine("\t \t ENTRANDO JUNTO BINARYSSS");
@@ -312,13 +314,21 @@ namespace everisapi.API.Services
                     asignacion.Preguntas.ToList().ForEach(f => {
                         var noCorrecta = f.Correcta == "Si" ? 1 : MaxRange;
                         if(f.Nivel == minLevel && f.Estado != 0){
-                            sumaNoBinary += ((Math.Abs((f.Estado - noCorrecta) / (MaxRange - 1 ))) * f.Peso);
+                            var div = Math.Abs( (float) (f.Estado - noCorrecta) / (MaxRange - 1 ) );
+                            sumaNoBinary += (div * f.Peso);
+                            writerTxt.WriteLine("\t \t \t  "+ f.Pregunta +" NIVEL: "+f.Nivel+"  Con PESO   " + f.Peso  +" ESTADO: " +f.Estado + " VALOR NO CORRECTO: " + noCorrecta +  "Y MAXRANGE: "+ MaxRange +" -->   RESULTADO:  "+(div * f.Peso));
+                            writerTxt.WriteLine(" ");
+                        } else {
+                              writerTxt.WriteLine("\t \t \t  "+ f.Pregunta +" PESO:  " + f.Peso + "NIVEL: "+f.Nivel+"  NO COMPUTADA");
+                              writerTxt.WriteLine(" ");
                         }
+
+                      
                     });
 
                     //sumaNoBinary para puntuación
                     asignacion.Puntuacion = sumaNoBinary;
-                    //writerTxt.WriteLine("\t \t Incluye el noBinary!");
+                    writerTxt.WriteLine("\t \t ASIGNACION"+ asignacion.Nombre + " PESO  "+ asignacion.Peso +" Con puntuacion " + asignacion.Puntuacion);
 
 
                     sumaPesosAsignaciones += asignacion.Peso * asignacion.Puntuacion;
@@ -333,7 +343,7 @@ namespace everisapi.API.Services
                 }
       
 
-            //writerTxt.WriteLine("puntuacion "+ seccion.Puntuacion);
+            writerTxt.WriteLine("puntuacion final"+ seccion.Puntuacion);
           
             }
 
@@ -345,7 +355,7 @@ namespace everisapi.API.Services
                 });
             }
             // fin using writer 
-            //}
+            }
             return sectionsConAsignaciones;
         }
 
