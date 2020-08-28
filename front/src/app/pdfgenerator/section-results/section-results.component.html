@@ -68,9 +68,9 @@
                         <div [ngStyle]="{'backgroundColor': displayColorEstado(row), 'color': (row.estado == 0 ?'black':'white') , 'borderRadius': '20px', 'width': '30%', 'padding':'6px', 'textAlign': 'center'}">
                           {{displayRespuesta(row)}}
                         </div>
-                        <i class="answerIcon" class="material-icons" [ngStyle]="{'color': '#FF3636', 'position': 'relative', 'display': displayFailed(row), 'opacity': setOpacity}">feedback</i> 
+                        <i class="answerIcon" class="material-icons" [ngStyle]="{'color': '#FF3636', 'position': 'relative', 'display': 'block', 'opacity': displayFailed(row)}">feedback</i> 
                       </div>
-
+                      <!--  'display': displayFailed(row) -->
                       <!-- solo para mostrar habilitantes -->
                      <div *ngIf="isBinary || row.esHabilitante">
                         {{displayRespuesta(row)}}

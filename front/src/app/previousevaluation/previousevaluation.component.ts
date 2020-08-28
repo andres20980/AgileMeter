@@ -19,8 +19,8 @@ export class PreviousevaluationComponent implements OnInit {
   public ListaDeEvaluacionesPaginada: Array<EvaluacionInfo>;
   public ListaDeEvaluacionesMerge: Array<EvaluacionInfo>;
   public EvaluacionFiltrar: EvaluacionFilterInfo = { 'nombre': '', 'estado': 'true', 'fecha': '', 'userNombre': '', 'puntuacion': '', 'assessmentId': 0 , 'oficinas':[], equipos:[], 'idAssessment': [] };
-  public sectionsInfoNombres$: Array<any>;
-  public sectionsInfoPuntuacion$: Array<any>;
+  public sectionsInfoNombres: Array<any>;
+  public sectionsInfoPuntuacion: Array<any>;
   public sectionsInfoProject$: Object;
   public uniqueSelectTeam: boolean = false;
   public activeTable: boolean = true;
@@ -41,6 +41,7 @@ export class PreviousevaluationComponent implements OnInit {
       this._router.navigate(['/login']);
     }
     this.GetPaginacion();
+
   }
 
   public GetPaginacion() {
@@ -54,8 +55,7 @@ export class PreviousevaluationComponent implements OnInit {
             item.sectionsInfo.map(x => x.puntuacion = Math.round(x.puntuacion))
             return [...acc, item]
           },[]);
-          this.sectionsInfoNombres$ = res.evaluacionesResult.sectionsInfo
-          this.sectionsInfoPuntuacion$ = res.evaluacionesResult.sectionsInfo
+         // this.sectionsInfoNombres = res.evaluacionesResult.sectionsInfo
         });
     }
 
@@ -65,6 +65,7 @@ export class PreviousevaluationComponent implements OnInit {
          this.enableColumns = false;
         return
      } else {
+      this.sectionsInfoNombres = mensaje[0].sectionsInfo.map(x => x.nombre)
       this.ProjectSelectName = mensaje[0].nombre;
       this.AssessmentSelectName = mensaje[0].assessmentName
       this.prevResult = mensaje;

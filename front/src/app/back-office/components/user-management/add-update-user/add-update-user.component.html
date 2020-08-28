@@ -21,22 +21,22 @@
         </mat-form-field>
 
 
-          <mat-form-field class="col-5">
+          <mat-form-field class="col-6">
             <input *ngIf="this.user!=null" #inputpass matInput type="password" formControlName="Password" id="Password"
-              placeholder="{{ 'ADD_UPDATE_USER.FORM_PASSWORD' | translate }}" value="******">
+              placeholder="{{ 'ADD_UPDATE_USER.FORM_PASSWORD' | translate }}" value="******" >
             <input *ngIf="this.user==null" #inputpass matInput type="password" formControlName="Password" id="Password"
               placeholder="{{ 'ADD_UPDATE_USER.FORM_PASSWORD' | translate }}" value="">
             <mat-error *ngIf="hasError('Password','required')">{{ 'ADD_UPDATE_USER.FORM_PASSWORD_REQUIRED' | translate }}
             </mat-error>
-
-            <i matSuffix [class.password-locked]="userForm.get('Password').value == null" [class.password-invisible]="userForm.get('Password').value != null" *ngIf="!visible" class="fas fa-eye-slash" (click)="visiblePassword()"></i>
-            <i matSuffix [class.password-locked]="userForm.get('Password').value == null" [class.password-visible]="userForm.get('Password').value != null" *ngIf="visible" class="fas fa-eye" (click)="visiblePassword()"></i>
+              <i matSuffix #eyepass [class.password-locked]="userForm.get('Password').value == null" [class.password-invisible]="userForm.get('Password').value != null" *ngIf="!visible" class="fas fa-eye-slash" (click)="visiblePassword()" title="{{'ADD_UPDATE_USER.SHOW_PASSWORD' | translate}}"></i>
+              <i matSuffix #eyepass [class.password-locked]="userForm.get('Password').value == null" [class.password-visible]="userForm.get('Password').value != null" *ngIf="visible" class="fas fa-eye" (click)="visiblePassword()" title="{{'ADD_UPDATE_USER.HIDE_PASSWORD' | translate}}"></i>
+              <i matSuffix class="fas fa-key password-key" title="{{'ADD_UPDATE_USER.AUTOGEN_PASSWORD' | translate}}" (click)="generatePassword()"></i>
           </mat-form-field>
 
 
-          <div title="Autogenerar contraseña" class='col-1' (click)="generatePassword()">
+          <!-- <div title="{{'ADD_UPDATE_USER.AUTOGEN_PASSWORD' | translate}}" class='col-1' (click)="generatePassword()">
             <i class="fas fa-key password-key"></i>
-          </div>
+          </div> -->
 
        
           

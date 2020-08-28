@@ -45,7 +45,7 @@
       <div class="col-4 btn-container">
 
         <div class="main-button section-btn mat-elevation-z5 w-85 m-auto" (click)="RedirectToAsignaciones(dato,i)">
-          <a>{{dato.nombre}} </a>
+          <a  [ngStyle]="{fontSize: ((dato.nombre.length > 24 )? '14px': 'initial')}">{{dato.nombre}}</a>
           <!-- <span *ngIf="ScreenWidth <= 576">
             <img class="icon" *ngIf="dato.progreso!=100 && dato.progreso > 0" src="assets/green_no.png" alt="No completado">
             <img class="icon" *ngIf="dato.progreso==100" src="assets/green_si.png" alt="Completado">

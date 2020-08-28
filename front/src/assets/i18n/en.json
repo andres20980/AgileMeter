@@ -89,7 +89,10 @@
 		"NOTIFICATION_ADD_USER": "User added successfully",
 		"NOTIFICATION_ERROR_ADD_USER": "There was an error while creating the user",
 		"NOTIFICATION_UPDATE_USER": "User modified successfully",
-		"NOTIFICATION_ERROR_UPDATE_USER": "There was an error while modifying the user"
+		"NOTIFICATION_ERROR_UPDATE_USER": "There was an error while modifying the user",
+		"AUTOGEN_PASSWORD":"generate password",
+		"SHOW_PASSWORD": "show password",
+		"HIDE_PASSWORD": "Hide password"
 	},
 	"TEAM_MANAGER": {
 		"TEAM_MANAGEMENT": "Team Management",
@@ -249,6 +252,13 @@
 			"PRACT_APL":"Practical Application"
 		},
 
+		"EXCEL_PT_REMOTE" : {
+			"WORKSPACE": "Workspace",
+			"COMMUNICATION":"Communication & Collaboration",
+			"LEADING":"Leading & Monitoring",
+			"CORPORATIVE":"Corporative"
+		},
+
 
 		"EXCEL_ASSESSMENT": "Assessment",
 		"EXCEL_SCORE": "Score",
@@ -264,7 +274,7 @@
 		"ASSESSMENT": "Assessment",
 		"OFFICE": "Office",
 		"TEAM": "Team Name",
-		"PT_SCRM": {
+		"PT_SCRUM": {
 			"TEAM": "Team",
 			"EVENTS":"Events",
 			"MINDSET":"Mindset",
@@ -287,6 +297,14 @@
 			"MINDSET":"Mindset",
 			"PRACT_APL":"Practical Application"
 		},
+
+		"PT_REMOTO": {
+			"WORKSPACE": "Workspace",
+			"COMMUNICATION":"Communication & Collaboration",
+			"LEADING":"Leading & Monitoring",
+			"CORPORATIVE":"Corporative"
+		},
+		
 		"SCORE": "Global Score",
 		"STATE": "Status",
 		"COMPLETED": "Completed",

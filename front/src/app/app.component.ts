@@ -68,6 +68,10 @@ export class AppComponent {
     }
   }
 
+  public set userLongName(longname) {
+    this.UserLongName = longname
+  } 
+
   public ComprobarUserYToken() {
     //Recogemos los datos
     var Token = this._storageDataService.TokenUser;
@@ -96,7 +100,8 @@ export class AppComponent {
       this.NombreDeUsuario = nomUsu;
     }
     if (userlongname != null) {
-      this.UserLongName = userlongname;
+
+      this.UserLongName = userlongname; // window.localStorage.getItem("userlongname");
     }
     this.NombreDeProyecto = nomProy;
 

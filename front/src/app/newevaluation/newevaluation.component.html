@@ -88,7 +88,7 @@
       <div class="row">
         <div class="col section-title">
           <div class="section-title">
-            <h3>{{SectionSelected.nombre}}</h3>
+            <h3 [ngStyle]="{width: ((SectionSelected.nombre.length > 24)? '500px':initial)}">{{SectionSelected.nombre}} </h3>
             <button class="transparente" (click)="AbrirModalSec(notasSec)"
               title="{{ 'NEW_EVALUATION.BTNS_ADD_NOTES' | translate }}">
               <img class="comment" *ngIf="SectionSelected.notas != null" src="assets/comment_filled.png"
@@ -98,8 +98,7 @@
             </button>
           </div>
 
-          <h3 style="
-          margin-left: 0.5em"> > </h3>
+          <h3 style="margin-left: 0.5em"> > </h3>
           
           <div class="col-sm-6 section-title">
             <h3 >{{InfoAsignacion.nombre}}</h3>
@@ -191,12 +190,12 @@
           </div>
         </div>
 
-        <div class="d-flex flex-row col align-items-center justify-content-center"  [ngStyle]="{marginRight: '-10px'}">
+        <div class="d-flex flex-row col align-items-center justify-content-center"  [ngStyle]="{marginRight: '-10px', fontSize: '15px'}">
 
             <div [ngStyle]="{width: '15px', height: '15px', borderRadius:'15px', backgroundColor: rangeColors[0], marginLeft: '20px', marginBottom: '3px'}"> </div>
             <div [ngStyle]="{ marginLeft: '10px'}">Nada de acuerdo</div>
-            <span [ngStyle]="{ marginLeft: '5px', marginRight: '5px', color: '#5c981b'}" class="material-icons">settings_ethernet</span>
-            <div [ngStyle]="{ marginLeft: '5px'}">Muy de acuerdo</div>
+            <span [ngStyle]="{ marginLeft: '6px', marginRight: '5px', color: '#5c981b'}" class="material-icons">settings_ethernet</span>
+            <div>Muy de acuerdo</div>
             <div [ngStyle]="{width: '15px', height: '15px', borderRadius:'15px', backgroundColor: rangeColors[rangeColors.length-1], marginLeft: '10px', marginRight: '-40px', marginBottom: '3px'}"></div>
         
         </div>
@@ -247,52 +246,12 @@
                 (click)="AnswerQuestion(preguntaDada,i,j)" [ngStyle]="noBinaryButtonStyle(j)">{{j}}
               </button>
             </div>
-            <!-- <div>
-              <button class="w-200 h-100 questions-yes-btn mat-elevation-z3 item-not-selected nobinary-button"
-                [class.first-item]="preguntaDada.esHabilitante"
-                [class.item-full-disabled]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
-                [class.item-not-selected]="preguntaDada.respuesta.estado != 1"
-                [class.item-disable-no-color]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
-                (click)="AnswerQuestion(preguntaDada,i,1)">1
-              </button>
-            </div>
-          
-            <div>
-              <button class="w-200 h-100 questions-no-btn mat-elevation-z3 item-not-selected nobinary-button"
-                [class.first-item]="preguntaDada.esHabilitante"
-                [class.item-full-disabled]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
-                [class.item-not-selected]="preguntaDada.respuesta.estado != 2"
-                [class.item-disable-no-color]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
-                (click)="AnswerQuestion(preguntaDada,i,2)" [ngStyle]="noBinaryButtonStyle(2)">2
-              </button>
-            </div>
-
-            <div>
-              <button class="w-200 h-100 questions-middle-btn mat-elevation-z3 item-not-selected nobinary-button"
-                [class.first-item]="preguntaDada.esHabilitante"
-                [class.item-full-disabled]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
-                [class.item-not-selected]="preguntaDada.respuesta.estado != 3"
-                [class.item-disable-no-color]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
-                (click)="AnswerQuestion(preguntaDada,i,3)" [ngStyle]="noBinaryButtonStyle(3)">3
-              </button>
-            </div>
-
-            <div>
-              <button class="w-200 h-100 questions-middle-btn mat-elevation-z3 item-not-selected nobinary-button"
-                [class.first-item]="preguntaDada.esHabilitante"
-                [class.item-full-disabled]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
-                [class.item-not-selected]="preguntaDada.respuesta.estado != 4"
-                [class.item-disable-no-color]="!preguntaDada.esHabilitante && !checkHabilitante(preguntaDada)"
-                (click)="AnswerQuestion(preguntaDada,i,4)" [ngStyle]="noBinaryButtonStyle(4)">4
-              </button>
-            </div> -->
           </div>
 
           </div>
 
-            <div class="col-xs-12 col-sm-1 col-md-1 pb-1 pl-13 yes-no-centered">
-              <button *ngIf="checkHabilitante(preguntaDada)" class="transparente position-relative" [ngStyle]="{paddingLeft: (preguntaDada.esHabilitante) ? '80px': 'initial' }"
-               >
+            <div class="col yes-no-centered" [ngStyle]="{paddingLeft: (preguntaDada.esHabilitante) ? '54px': 'initial' }">
+              <button *ngIf="checkHabilitante(preguntaDada)" class="transparente position-relative">
 
                 <!-- <span *ngIf="preguntaDada.respuesta.notas != null" class="one-badge">1</span>
                       <i *ngIf="preguntaDada.respuesta.notas != null" class="material-icons comment-added" title="Añadir notas">
@@ -342,8 +301,8 @@
 
         <!-- Start of pagination -->
         <div class="row dots m-0 ">
-          <div class="col">
-            <div class="d-flex justify-content-center">
+          <div class="col-md-6 offset-2 mt-3"> <!-- anteriormente col -->
+            <div class="d-flex justify-content-center col-8">
               <div class="position-relative">
                 <ul class="d-flex justify-content-center">
                   <li *ngFor="let page of pagesArray; let i = index" [class.current]="i==PageNow-1"><a
@@ -376,6 +335,12 @@
               </div>
             </div>
           </div>
+
+          <div class="col-sm-4 pl-0"> <!-- Anteriorment col-3 -->
+            <app-btn-finalize-evaluation [evaluacion]="Evaluation" [changedQuestion]="changedQuestion" [checkNoBinary]="checkBinaryToggle"
+              [changedAnswer]="changedAnswer">
+            </app-btn-finalize-evaluation>
+          </div>
         </div>
         <!-- End of pagination -->
       </div>
@@ -388,11 +353,7 @@
                           </mat-icon>
                       </div> -->
         </div>
-        <div class="col-3">
-          <app-btn-finalize-evaluation [evaluacion]="Evaluation" [changedQuestion]="changedQuestion" [checkNoBinary]="checkBinaryToggle"
-            [changedAnswer]="changedAnswer">
-          </app-btn-finalize-evaluation>
-        </div>
+
         <div class="col-1">
           <!-- <div *ngIf="PageNow == NumMax">
                       <div *ngIf="nextSection != null" class="secondary-button rounded-btn next-section-box" title="Siguiente sección: {{nextSection.nombre}}"

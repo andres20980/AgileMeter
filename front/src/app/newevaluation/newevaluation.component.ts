@@ -119,7 +119,6 @@ export class NewevaluationComponent implements OnInit {
     } else {
       this.UserName = this._appComponent._storageDataService.UserData.nombre;
     }
-    console.log("next section",this.nextSection)
     this.MostrarInfo = true;
 
     if (this.Evaluation != null) {

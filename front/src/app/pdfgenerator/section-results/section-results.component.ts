@@ -46,7 +46,6 @@ export class SectionResultsComponent implements OnInit {
 
   ngOnInit() {
     this.assmentRange = new AssessmentRange(this._appComponent._storageDataService.EvaluacionToPDF.AssessmentRange);
-    console.log("is bin", this.isBinary)
   }
 
 
@@ -151,17 +150,25 @@ export class SectionResultsComponent implements OnInit {
 
   displayFailed(row): string
   {
-    let correcta = (row.correcta == "Si" && row.estado == 1 || row.correcta == "Si" && row.estado == 2) 
-    let nocorrecta =  (row.correcta == "No" && row.estado == (this.assmentRange.maxRange - 1) || row.correcta == "No" && row.estado == this.assmentRange.maxRange)
+    console.log(row)
+    let cor = row.correcta === "Si" ? 4 : 1;
+    console.log("resultoado abs", Math.abs(cor - row.estado))
+    let abs = (Math.abs(cor - row.estado))
+    
+    if (( abs + 1) / 4 == 1 ){ return (1).toString()}
+    if (( abs + 2) / 4 == 1) return (0.5).toString()
+    return (0).toString()
+  //   let correcta = (row.correcta == "Si" && row.estado == 1 || row.correcta == "Si" && row.estado == 2) 
+  //   let nocorrecta =  (row.correcta == "No" && row.estado == (this.assmentRange.maxRange - 1) || row.correcta == "No" && row.estado == this.assmentRange.maxRange)
 
-    if(correcta || nocorrecta) {
+  //   if(correcta || nocorrecta) {
 
-      if(row.estado == 2 || row.estado == (this.assmentRange.maxRange - 1)) this.setOpacity = 0.5
-      else this.setOpacity = 1;
-      return "block"
-    } 
+  //     if(row.estado == 2 || row.estado == (this.assmentRange.maxRange - 1)) this.setOpacity = 0.5
+  //     else this.setOpacity = 1;
+  //     return "block"
+  //   } 
 
-    else return "none"
+  //   else return "none"
   }
 
 

@@ -1,9 +1,7 @@
-import { SectionInfo } from './../Models/SectionInfo';
-import { map } from 'rxjs/operators';
-import { Assessment } from './../Models/Assessment';
+import { AssessmentColumns } from './../Models/AssessmentColumns';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit, Input, Output, ViewChild, ViewChildren, EventEmitter, ElementRef, Renderer, OnChanges, SimpleChanges} from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource, SELECT_PANEL_INDENT_PADDING_X } from '@angular/material';
+import { Component, OnInit, Input, Output, ViewChild, ViewChildren, EventEmitter, Renderer} from '@angular/core';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Evaluacion } from 'app/Models/Evaluacion';
 import { AppComponent } from 'app/app.component';
 import { EvaluacionInfo } from 'app/Models/EvaluacionInfo';
@@ -40,14 +38,18 @@ export class SortedTableComponent implements OnInit {
   @ViewChild('mySelectTeam') mySelectTeam: any;
   @ViewChild('mySelectOffice') mySelectOffice: any;
   dataSource: MatTableDataSource<Evaluacion>;
-  dataSourceMerge: MatTableDataSource<Evaluacion>;s
-  displayedColumns = ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','puntuacion', 'notas', 'informe'];
-  displayedColumnsScrum =  ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','equipo','eventos','herramientas','mindset','aplicacion','puntuacion', 'notas', 'informe'];
-  displayedColumnsDevops =  ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','orgequipo','ciclovida','construccion','testing','despliegue','monitorizacion','aprovisionamiento','puntuacion', 'notas', 'informe'];
-  displayedColumnsKanban =  ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','kbnequipo','kbnkanbanboard','kbnpracticas','kbnmindset','kbnaplicacion','puntuacion', 'notas', 'informe'];
+  dataSourceMerge: MatTableDataSource<Evaluacion>;
+  assessmentColumns = new AssessmentColumns();
+  displayedColumns: Array<any> = ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','puntuacion', 'notas', 'informe'];
+  displayedColumnsScrum = this.assessmentColumns.displayedScrumColumns
+  displayedColumnsDevops = this.assessmentColumns.displayedDevopsColumns
+  displayedColumnsKanban = this.assessmentColumns.displayedKanbanColumns
+  displayedColumnsRemote = this.assessmentColumns.displayedRemoteColumns
+
   public excelScrum: any[];
   public excelDevops: any[];
   public excelKanban: any[];
+  public excelRemote: any[];
   public ListaDeOficinas: string[] = [];
   public OficinaSeleccionada: string[] = [];
   public ListaDeEquipos: string[] = [];
@@ -60,12 +62,12 @@ export class SortedTableComponent implements OnInit {
   public originListaAssessment: string[] = [];
   public fieldsTable : any[];
   public objectTranslate : string;
-  public scrumassmnt: boolean = false;
-  public devopsassmnt: boolean = false;
-  public kanbanassmnt: boolean = false;
   @Output() propagar = new EventEmitter<any>();
   public UserRole: number = 0;
   public rol: EnumRol = new EnumRol();
+
+  public columnInfoAssmnt: Array<any>
+  public sectionColumn: boolean = false;
 
   constructor(private _appComponent: AppComponent,  private _router: Router, private renderer: Renderer, private evaluacion: EvaluacionService) { 
     this.fieldsTable = [
@@ -76,44 +78,24 @@ export class SortedTableComponent implements OnInit {
       ["assessmentName", "EXCEL_ASSESSMENT", 20,"", "String"],
       ["puntuacion", "EXCEL_SCORE", 12,"0.00%", "Percentage"]];
 
-      this.excelScrum = [
-      ["equipo", "EXCEL_PT_SCRUM.TEAM", 20,"SCRUM", "String"],
-      ["eventos", "EXCEL_PT_SCRUM.EVENTS",20,"SCRUM", "String"], 
-      ["herramientas", "EXCEL_PT_SCRUM.TOOLS",20,"SCRUM", "String"],
-      ["mindset", "EXCEL_PT_SCRUM.MINDSET", 20,"SCRUM", "String"],
-      ["aplicacion", "EXCEL_PT_SCRUM.APP",20,"SCRUM", "String"]];
-    
-      this.excelDevops =  [
-      ["orgequipo", "EXCEL_PT_DEVOPS.ORG_TEAM", 20,"DEVOPS", "String"],
-      ["ciclovida", "EXCEL_PT_DEVOPS.LIFECYCLE", 20,"DEVOPS", "String"],
-      ["construccion", "EXCEL_PT_DEVOPS.BUILDING", 20,"DEVOPS", "String"],
-      ["testing", "EXCEL_PT_DEVOPS.TESTING", 20,"DEVOPS", "String"],
-      ["despliegue", "EXCEL_PT_DEVOPS.DEPLOYMENT", 20,"DEVOPS", "String"],
-      ["monitorizacion", "EXCEL_PT_DEVOPS.MONITORING", 20,"DEVOPS", "String"],
-      ["aprovisionamiento", "EXCEL_PT_DEVOPS.PROVISIONING", 20,"DEVOPS", "String"]];
-
-      this.excelKanban =  [
-      ["kbnequipo", "EXCEL_PT_KANBAN.TEAM", 20,"KANBAN", "String"],
-      ["kbnkanbanboard", "EXCEL_PT_KANBAN.BOARD", 20,"KANBAN", "String"],
-      ["kbnpracticas", "EXCEL_PT_KANBAN.PRACTICES", 20,"KANBAN", "String"],
-      ["kbnmindset", "EXCEL_PT_KANBAN.MINDSET", 20,"KANBAN", "String"],
-      ["kbnaplicacion", "EXCEL_PT_KANBAN.PRACT_APL", 20,"KANBAN", "String"]];
-
-
+      this.excelScrum = this.assessmentColumns.excelScrum
+      this.excelDevops = this.assessmentColumns.excelDevops
+      this.excelKanban = this.assessmentColumns.execelKanban
+      this.excelRemote = this.assessmentColumns.execelRemote
   }
-
 
 
   ngOnInit()
   {
+
     this.UserRole = this._appComponent._storageDataService.Role;
-    this.fieldsTable = [
-        ["fecha", "EXCEL_DATE", 12,"dd/mm/yyyy", "Date"],
-        ["userNombre", "EXCEL_USER",20,"", "String"],
-        ["oficina", "EXCEL_OFFICE", 25,"", "String"],
-        ["nombre", "EXCEL_TEAM", 50,"##?##", "String"],
-        ["assessmentName", "EXCEL_ASSESSMENT", 20,"", "String"],
-        ["puntuacion", "EXCEL_SCORE", 12,"0.00%", "Percentage"]];
+    // this.fieldsTable = [
+    //     ["fecha", "EXCEL_DATE", 12,"dd/mm/yyyy", "Date"],
+    //     ["userNombre", "EXCEL_USER",20,"", "String"],
+    //     ["oficina", "EXCEL_OFFICE", 25,"", "String"],
+    //     ["nombre", "EXCEL_TEAM", 50,"##?##", "String"],
+    //     ["assessmentName", "EXCEL_ASSESSMENT", 20,"", "String"],
+    //     ["puntuacion", "EXCEL_SCORE", 12,"0.00%", "Percentage"]];
       
     this.objectTranslate = "PREVIOUS_EVALUATION";
 
@@ -125,12 +107,7 @@ export class SortedTableComponent implements OnInit {
     this.originListaAssessment = this.dataInput.map(x => x).reduce((x,y) => x.includes(y.assessmentName) ? x : [...x, y.assessmentName],[]).sort();
     this.ListaDeOficinas= this.dataInput.map(x => x.oficina).reduce((x,y) => x.includes(y) ? x : [...x, y],[]).sort();
     this.listaDeAssessment = this.dataInput.map(x => x).reduce((x,y) => x.includes(y.assessmentName) ? x : [...x, y.assessmentName],[]).sort();
-    this.ListaDeEquipos = this.dataInput.map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]).sort();
-      
-    this.dataSource.filterPredicate = function(data, filter: string): boolean { 
-       return String(data.puntuacion).toLowerCase().includes(filter) || data.assessmentName.toLowerCase().includes(filter) || data.nombre.toLowerCase().includes(filter) || data.userNombre.toLowerCase().includes(filter) || data.oficina.toLowerCase().includes(filter) || data.fecha.toLowerCase().includes(filter)
-    }
-
+    this.ListaDeEquipos = this.dataInput.map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]).sort();     
 
     if(this.nombreEquipo) {
       this.EquipoSeleccionado.push(this.nombreEquipo);
@@ -139,6 +116,17 @@ export class SortedTableComponent implements OnInit {
     } 
 
     //this.propagar.emit(false)
+
+    this.dataSource.filterPredicate = function (data, filter: string): boolean {
+      let date = new Date(data.fecha);
+      return data.nombre.toLowerCase().includes(filter)
+        || data.assessmentName.toLowerCase().includes(filter)
+        || data.oficina.toLowerCase().includes(filter)
+        || data.sectionsInfo.find(x => x.puntuacion.toString().toLowerCase().includes(filter))
+        || (data.userNombre != null && data.userNombre.toLowerCase().includes(filter))
+        || ((date.getDate() < 10 ? "0" : "") + date.getDate() + "/" + (date.getMonth() < 10 ? "0" : "") + (date.getMonth() + 1) + "/" + date.getFullYear()).includes(filter)
+        ;
+    };
 
 
   }
@@ -161,7 +149,6 @@ export class SortedTableComponent implements OnInit {
   public GetPagination()
   {
     this.dataSource = new MatTableDataSource(this.dataInput);
-    console.log(this.dataSource);
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
@@ -238,7 +225,6 @@ export class SortedTableComponent implements OnInit {
     }
     
      // viejo nuevo
-     console.log(selected);
     let nuevo = this.originDataSource.filter(x =>selected.oficina.includes(x.oficina) && selected.team.includes(x.nombre) && selected.assessment.includes(x.assessmentName));
     this.dataSource.data = nuevo;
 
@@ -272,16 +258,19 @@ export class SortedTableComponent implements OnInit {
         this.displayedColumns = this.displayedColumnsDevops;
       }else if(this.assessmentSeleccionado[0] === "KANBAN") {
         this.displayedColumns = this.displayedColumnsKanban;
+      }else if(this.assessmentSeleccionado[0] === "REMOTO") {
+        this.displayedColumns = this.displayedColumnsRemote;
       }
+
+     //this.displayedColumns = this.assessmentColumns.columnExcel(this.assessmentSeleccionado[0])
+      this.columnInfoAssmnt = this.assessmentColumns.columnSection(this.assessmentSeleccionado[0])
 
       this.addColumnExcel(this.assessmentSeleccionado[0]);
 
     } else {
       this.displayedColumns = ['fecha', 'userNombre', 'oficina', 'nombre', 'assessmentName','puntuacion', 'notas', 'informe'];
       this.popColumnExcel();
-      this.scrumassmnt = false;
-      this.devopsassmnt = false;
-      this.kanbanassmnt = false;
+      this.sectionColumn = false;
       this.propagar.emit(false);
     }  
   }
@@ -297,22 +286,29 @@ export class SortedTableComponent implements OnInit {
 
   addColumnExcel(assessment: string)
   {
-    if (!(this.scrumassmnt||this.devopsassmnt||this.kanbanassmnt)){
+    // if (!(this.scrumassmnt||this.devopsassmnt||this.kanbanassmnt || this.remoteassmnt)) {
+    if (!(this.sectionColumn)) {
       this.fieldsTable.map((x, i) => {
         if(x[0].includes("assessmentName")) {
           if(assessment === "SCRUM") {
             this.fieldsTable.splice(i, 0, ...this.excelScrum);
-            this.scrumassmnt = true;
+            //this.scrumassmnt = true;
           }
           if(assessment === "DEVOPS") {
             this.fieldsTable.splice(i, 0, ...this.excelDevops)
-            this.devopsassmnt = true;
+            //this.devopsassmnt = true;
           }
           if(assessment === "KANBAN") {
             this.fieldsTable.splice(i, 0, ...this.excelKanban)
-            this.kanbanassmnt = true;
+            //this.kanbanassmnt = true;
+          }
+          if(assessment === "REMOTO") {
+            this.fieldsTable.splice(i, 0, ...this.excelRemote)
+            //this.remoteassmnt = true;
           }
         }
+
+        this.sectionColumn = true;
        
     })
   }
@@ -324,7 +320,8 @@ export class SortedTableComponent implements OnInit {
     this.fieldsTable.map((x, i) => {
       if(x[0]=="equipo") this.fieldsTable.splice(i, this.excelScrum.length)
       if(x[0]=="orgequipo") this.fieldsTable.splice(i, this.excelDevops.length) 
-      if(x[0]=="kbnequipo") this.fieldsTable.splice(i, this.excelKanban.length) 
+      if(x[0]=="kbnequipo") this.fieldsTable.splice(i, this.excelKanban.length)
+      if(x[0]=="rmtespacio") this.fieldsTable.splice(i, this.excelRemote.length) 
     })
   }
 }
