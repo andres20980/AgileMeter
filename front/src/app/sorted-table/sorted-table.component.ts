@@ -221,7 +221,8 @@ export class SortedTableComponent implements OnInit {
     }
     if(origen === 'assessment') {
       this.ListaDeOficinas = this.originDataSource.filter(x => selected.assessment.includes(x.assessmentName)).map(x => x.oficina).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]).sort();
-      this.ListaDeEquipos = this.originDataSource.filter(x => selected.assessment.includes(x.assessmentName)).map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]).sort();;
+      //console.log("esto es del assessment",this.originDataSource.filter(x => selected.assessment.includes(x.assessmentName)))
+      this.ListaDeEquipos = this.originDataSource.filter(x => selected.assessment.includes(x.assessmentName) && selected.oficina.includes(x.oficina)).map(x => x.nombre).reduce((x,y) => x.includes(y) ? x :  [...x, y],[]).sort();;
     }
     
      // viejo nuevo

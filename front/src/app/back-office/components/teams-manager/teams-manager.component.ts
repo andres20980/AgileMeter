@@ -21,7 +21,7 @@ import { StorageDataService } from 'app/services/StorageDataService';
   templateUrl: './teams-manager.component.html',
   styleUrls: ['./teams-manager.component.scss']
 })
-export class TeamsManagerComponent implements OnInit {
+export class TeamsManagerComponent implements OnInit{
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -77,10 +77,11 @@ export class TeamsManagerComponent implements OnInit {
           this.paginator.pageIndex--;
         }
         this.dataSource.sort = this.sort;
-        if(this._storageService.officeTeams){
-          this.matinp.value = this._storageService.officeTeams
-          this.applyFilter(this._storageService.officeTeams)
-        } 
+        // if(this._storageService.officeTeams){
+        //   console.log(this._storageService.officeTeams)
+        //   this.matinp.value = this._storageService.officeTeams
+        //   this.applyFilter(this._storageService.officeTeams)
+        // } 
         this.datosFiltrados = this.dataSource.data;
       },
       error => {

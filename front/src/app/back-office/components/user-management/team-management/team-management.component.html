@@ -48,7 +48,7 @@
           *ngIf="MostrarPending && MostrarAsig">
           <div class="cdkDrag-box" *ngFor="let proyecto of proyectosPending" cdkDrag [cdkDragData]="proyecto">
             <div class="cdkDrag-custom-placeholder" *cdkDragPlaceholder></div>
-            {{proyecto.proyecto + "-" + proyecto.nombre}}
+            {{proyecto.proyecto + "-" + proyecto.nombre}} ({{proyecto.oficina}})
           </div>
         </div>
       </div>
