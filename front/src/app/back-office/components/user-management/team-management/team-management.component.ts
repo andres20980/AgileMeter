@@ -158,8 +158,10 @@ export class TeamManagementComponent implements OnInit {
   private getTeamsUser(usuario: UserWithRole) {
     this._proyectoService.getProyectosDeUsuarioSeleccionado(usuario).subscribe(
       res => {
+        console.log(res)
         //hay que añadirle el filtro porque el metodo este no distingue si el proyecto es de prueba o no
         this.proyectosAsig = res.filter(r => !r.testProject);
+        
 
         //Obtenemos los proyectos pendientes
         this.proyectosPending = this.proyectosAll.filter(e => function (proyecto: Equipo, proyestosAsignados: Equipo[]): boolean {

@@ -62,7 +62,6 @@ export class UserListComponent implements OnInit {
       ["nombreRole", "TABLE_COL_ROLE", 30,"", "String"]];
     this.objectTranslate = "USER_LIST";
   }
-
   public btnAsigTeamsClick(row) {
     this.selectedUser = this.userList.filter(u => u.nombre == row.nombre);
     this._userService.user = this.selectedUser[0];
@@ -155,10 +154,10 @@ export class UserListComponent implements OnInit {
         }
         this.dataSource.sort = this.sort;
 
-        if(this._storageService.officeTeams){
-            this.matinp.value = this._storageService.officeTeams
-            this.applyFilter(this._storageService.officeTeams)
-         }
+        // if(this._storageService.officeTeams){
+        //     this.matinp.value = this._storageService.officeTeams
+        //     this.applyFilter(this._storageService.officeTeams)
+        //  }
         this.datosFiltrados = this.dataSource.data;
       },
       error => {
