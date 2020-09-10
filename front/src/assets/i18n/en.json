@@ -91,7 +91,7 @@
 		"NOTIFICATION_UPDATE_USER": "User modified successfully",
 		"NOTIFICATION_ERROR_UPDATE_USER": "There was an error while modifying the user",
 		"AUTOGEN_PASSWORD":"generate password",
-		"SHOW_PASSWORD": "show password",
+		"SHOW_PASSWORD": "Show password",
 		"HIDE_PASSWORD": "Hide password"
 	},
 	"TEAM_MANAGER": {
