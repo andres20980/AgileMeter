@@ -1193,7 +1193,7 @@ namespace everisapi.API.Services
         private float CalculaPuntuacion(int idEvaluacion, int AssessmentId)
         {
             List<SectionConAsignacionesDto> sectionsConAsignaciones = new List<SectionConAsignacionesDto>();
-
+            List<PuntuacionSection> puntuacionSection = new List<PuntuacionSection>();
 
             // calculo de puntuaciones por seccion
 
@@ -1236,6 +1236,7 @@ namespace everisapi.API.Services
                         preguntaRespuestaNivel.Peso = p.PreguntaEntity.Peso;
                         preguntaRespuestaNivel.Estado = p.Estado;
                         preguntaRespuestaNivel.Correcta = p.PreguntaEntity.Correcta;
+                        preguntaRespuestaNivel.EsHabilitante = p.PreguntaEntity.EsHabilitante;
 
                         preguntasRespuestaNivel.Add(preguntaRespuestaNivel);
                     }
@@ -1249,43 +1250,52 @@ namespace everisapi.API.Services
             }
 
             int MaxRange = 4;
+           // var path =@"C:\Users\jfrancom\ScrumMeter\everisapi.API\valor_global.txt"; 
+           // using (StreamWriter writerTxt = File.CreateText(path))
+           // {
+                
 
             float sumSections = 0;
             foreach (SectionConAsignacionesDto seccion in sectionsConAsignaciones)
             {
                 //calculamos los niveles individuales para cada asignacion
-                foreach (AsignacionConPreguntaNivelDto asignacion in seccion.Asignaciones)
-                {
-                    var maxLevel = asignacion.Preguntas.Max(x => x.Nivel);
-                    bool nivelCompleto = true;
-                    for (int i = 1; i <= maxLevel && nivelCompleto; i++)
-                    {
-                        nivelCompleto = false;
-                        var preguntas = asignacion.Preguntas.Where(p => p.Nivel == i);
+                // foreach (AsignacionConPreguntaNivelDto asignacion in seccion.Asignaciones)
+                // {
+                //     var maxLevel = asignacion.Preguntas.Max(x => x.Nivel);
+                //     bool nivelCompleto = true;
+                //     for (int i = 1; i <= maxLevel && nivelCompleto; i++)
+                //     {
+                //         nivelCompleto = false;
+                //         var preguntas = asignacion.Preguntas.Where(p => p.Nivel == i);
 
-                        // var preguntasCorrectas = asignacion.Preguntas
-                        // .Where(p => p.Nivel == i && ((p.Estado == 1 && p.Correcta == "Si") || (p.Estado == 2 && p.Correcta == "No")));
+                //         // var preguntasCorrectas = asignacion.Preguntas
+                //         // .Where(p => p.Nivel == i && ((p.Estado == 1 && p.Correcta == "Si") || (p.Estado == 2 && p.Correcta == "No")));
 
 
-                         // preguntas noBinary
-                         var preguntasCorrectas = asignacion.Preguntas
-                            .Where(p => p.Nivel == i && ((p.Estado == MaxRange && p.Correcta == "Si") || ( p.Estado == 1 && p.Correcta == "No")));
+                //          // preguntas noBinary
+                //          var preguntasCorrectas = asignacion.Preguntas
+                //             .Where(p => p.Nivel == i && ((p.Estado == MaxRange && p.Correcta == "Si") || ( p.Estado == 1 && p.Correcta == "No")));
 
-                        if (preguntas.Count() == preguntasCorrectas.Count())
-                        {
-                            nivelCompleto = true;
-                        }
+                //         if (preguntas.Count() == preguntasCorrectas.Count())
+                //         {
+                //             nivelCompleto = true;
+                //         }
 
-                        asignacion.NivelAlcanzado = i;
-                        asignacion.Puntuacion = preguntasCorrectas.Sum(x => x.Peso);
-                    }
-                }
+                //         asignacion.NivelAlcanzado = i;
+                //         asignacion.Puntuacion = preguntasCorrectas.Sum(x => x.Peso);
+                //     }
+                // }
 
                 //comparamos los niveles de cada asignacion y cogemos el mas bajo
                 var minLevel = seccion.Asignaciones.Min(x => x.NivelAlcanzado);
                 float sumaPesosAsignaciones = 0;
                 
                 float sumaNoBinary = 0;
+
+
+                var nivel1Total = new float();
+                var nivel2Total = new float();
+                var nivel3Total = new float();
                 foreach (AsignacionConPreguntaNivelDto asignacion in seccion.Asignaciones)
                 {
                     // asignacion.NivelAlcanzado = minLevel;
@@ -1294,19 +1304,56 @@ namespace everisapi.API.Services
                     // .Sum(p => p.Peso);
 
 
-                    sumaNoBinary = 0;              
+                    sumaNoBinary = 0;
+                    
+                    List<float> sNivel1 = new List<float>();
+                    List<float> sNivel2 = new List<float>();
+                    List<float> sNivel3 = new List<float>();      
                     asignacion.NivelAlcanzado = minLevel;
                     // asignacion.Puntuacion = asignacion.Preguntas
                     // .Where(p => p.Nivel == minLevel && ((p.Estado == 1 && p.Correcta == "Si") || (p.Estado == 2 && p.Correcta == "No")))
                     // .Sum(p => p.Peso);
 
                     
+                    // asignacion.Preguntas.ToList().ForEach(f => {
+                    //     var noCorrecta = f.Correcta == "Si" ? 1 : MaxRange;
+                    //     if(f.Nivel == minLevel && f.Estado != 0){
+                    //         sumaNoBinary += ((Math.Abs((f.Estado - noCorrecta) / (MaxRange - 1 ))) * f.Peso);
+                    //     }
+                    // });
                     asignacion.Preguntas.ToList().ForEach(f => {
+
                         var noCorrecta = f.Correcta == "Si" ? 1 : MaxRange;
-                        if(f.Nivel == minLevel && f.Estado != 0){
-                            sumaNoBinary += ((Math.Abs((f.Estado - noCorrecta) / (MaxRange - 1 ))) * f.Peso);
+                        var div = Math.Abs( (float) (f.Estado - noCorrecta) / (MaxRange - 1 ) );
+
+                        //  if(f.Estado != 0){
+
+                        //     sumaNoBinary += (div * f.Peso);
+                        //     writerTxt.WriteLine("\t \t \t  ES HABILITANTE? "+f.EsHabilitante +  f.Pregunta +" NIVEL: "+f.Nivel+"  PESO   " + f.Peso  +"  ESTADO:  " +f.Estado + " VALOR NO CORRECTO: " + noCorrecta +  "Y MAXRANGE: "+ MaxRange +" -->   RESULTADO:  "+(div * f.Peso));
+                        //     writerTxt.WriteLine(" ");
+
+                        // } else {
+                        //     writerTxt.WriteLine("\t \t \t  "+ f.Pregunta +" NIVEL: "+f.Nivel+" PESO:   " +f.Peso+"  ESTADO:  " +f.Estado +"  NO COMPUTADA");
+                        //     writerTxt.WriteLine(" ");
+                        // }
+
+
+                        if(f.EsHabilitante) { 
+                            if(f.Nivel == 1) { sNivel1.Add( f.Estado == 1 ? f.Peso : 0); }
+                            if(f.Nivel == 2) { sNivel2.Add( f.Estado == 1 ? f.Peso : 0); }
+                            if(f.Nivel == 3) { sNivel3.Add( f.Estado == 1 ? f.Peso : 0); }
+
+                        } else {
+    
+
+                            if(f.Nivel == 1 && f.Estado != 0) {  Math.Abs( (float) (f.Estado - noCorrecta) / (MaxRange - 1 ) ); sNivel1.Add((div * f.Peso)); }
+                            if(f.Nivel == 2 && f.Estado != 0) {  Math.Abs( (float) (f.Estado - noCorrecta) / (MaxRange - 1 ) ); sNivel2.Add((div * f.Peso));}
+                            if(f.Nivel == 3 && f.Estado != 0) {  Math.Abs( (float) (f.Estado - noCorrecta) / (MaxRange - 1 ) ); sNivel3.Add((div * f.Peso));}
                         }
+
+                      
                     });
+
 
                     //sumaNoBinary para puntuación
                     asignacion.Puntuacion = sumaNoBinary;
@@ -1314,47 +1361,139 @@ namespace everisapi.API.Services
 
 
 
-                     sumaPesosAsignaciones += asignacion.Puntuacion * asignacion.Peso;
+                    sumaPesosAsignaciones += asignacion.Puntuacion * asignacion.Peso;
+
+                    nivel1Total += (sNivel1.Sum() * (float)asignacion.Peso);
+                    nivel2Total += (sNivel2.Sum() * (float)asignacion.Peso);
+                    nivel3Total += (sNivel3.Sum() * (float)asignacion.Peso);
 
 
                 }
+                      
 
-                seccion.NivelAlcanzado = minLevel;
-                seccion.Puntuacion = sumaPesosAsignaciones;
+                    
+                var valor1 = (int)Math.Round(nivel1Total);
+                var valor2 = (int)Math.Round(nivel2Total);
+                var valor3 = (int)Math.Round(nivel3Total);
 
-                if (seccion.Puntuacion == 0 && seccion.NivelAlcanzado > 1)
-                {
-                    seccion.NivelAlcanzado = seccion.NivelAlcanzado - 1;
-                    seccion.Puntuacion = 100;
+                var N1Final = new int();
+                var N2Final = new int();
+                var N3Final = new int();
+		
+            
+                if(valor1 < 100){
+                        
+                    var restante = (100 - valor1) ;
+                    var percentRes = restante * 0.5;
+                    
+                    var ponN2 = valor2 * 0.5;
+                    var ponN3 = valor3 * 0.5;
+                    
+                    var sumaOTROS = ponN2 + ponN3;
+                    var result = (sumaOTROS * percentRes) / 100;
+                    var suma = result + valor1;
+                    N1Final = (int)Math.Round(suma);
+                    N2Final = valor2;
+                    seccion.NivelAlcanzado = 1;
+
+                } else if(valor2 < 100) {
+                    N1Final = 100;
+                
+                    var restante = (100 - valor2) ;
+                    var percentRes = restante * 0.5;
+                    
+                    var ponN3 = valor3 * 0.5;
+                    
+                    var result = (ponN3 * percentRes) / 100;
+                    var suma = result + valor2;
+
+                    N2Final = (int)Math.Round(suma);
+                    seccion.NivelAlcanzado = 2;
+
+                    seccion.Puntuacion = N2Final;
+                    
+                } else {
+                    N1Final = 100;
+                    N2Final = 100;
+                    seccion.NivelAlcanzado = 3;
+                    N3Final = valor3;
+
+                    seccion.Puntuacion = valor3;
                 }
+            
+                // antigua forma de calcular el VALOR GLOBAL
 
-                //Calculamos el Total segun los pesos de los niveles
+                // seccion.NivelAlcanzado = minLevel;
+                // seccion.Puntuacion = sumaPesosAsignaciones;
 
-                if (seccion.NivelAlcanzado == 3)
+                // if (seccion.Puntuacion == 0 && seccion.NivelAlcanzado > 1)
+                // {
+                //     seccion.NivelAlcanzado = seccion.NivelAlcanzado - 1;
+                //     seccion.Puntuacion = 100;
+                // }
+
+                // //Calculamos el Total segun los pesos de los niveles
+
+                // if (seccion.NivelAlcanzado == 3)
+                // {
+                //     seccion.Puntuacion = seccion.PesoNivel1 + seccion.PesoNivel2 + (seccion.Puntuacion * ((float)seccion.PesoNivel3 / 100));
+                //     seccion.Puntuacion = (seccion.Puntuacion * seccion.Peso) / 100;
+                // }
+
+                // if (seccion.NivelAlcanzado == 2)
+                // {
+                //     seccion.Puntuacion = seccion.PesoNivel1 + (seccion.Puntuacion * ((float)seccion.PesoNivel2 / 100));
+                //     seccion.Puntuacion = (seccion.Puntuacion * seccion.Peso) / 100;
+                // }
+
+                // if (seccion.NivelAlcanzado == 1)
+                // {
+                //     seccion.Puntuacion = ((float)seccion.PesoNivel1 / 100) * seccion.Puntuacion;
+                //     seccion.Puntuacion = (seccion.Puntuacion * seccion.Peso) / 100;
+                // }
+
+               // sumSections += seccion.Puntuacion;
+
+                
+
+
+                // nueva forma noBinary junto con nuevo cálculo de niveles
+                
+                if (N1Final == 100 && N2Final == 100)
                 {
-                    seccion.Puntuacion = seccion.PesoNivel1 + seccion.PesoNivel2 + (seccion.Puntuacion * ((float)seccion.PesoNivel3 / 100));
+                    seccion.Puntuacion = seccion.PesoNivel1 + seccion.PesoNivel2 + (N3Final * ((float)seccion.PesoNivel3 / 100));
                     seccion.Puntuacion = (seccion.Puntuacion * seccion.Peso) / 100;
+                   // writerTxt.WriteLine("Nivel 3: " + seccion.Puntuacion);
                 }
 
-                if (seccion.NivelAlcanzado == 2)
+                if (N1Final == 100)
                 {
-                    seccion.Puntuacion = seccion.PesoNivel1 + (seccion.Puntuacion * ((float)seccion.PesoNivel2 / 100));
+                    seccion.Puntuacion = seccion.PesoNivel1 + (N2Final * ((float)seccion.PesoNivel2 / 100));
                     seccion.Puntuacion = (seccion.Puntuacion * seccion.Peso) / 100;
+                   // writerTxt.WriteLine("Nivel 2: " + seccion.Puntuacion);
                 }
 
-                if (seccion.NivelAlcanzado == 1)
+                if (N1Final < 100)
                 {
-                    seccion.Puntuacion = ((float)seccion.PesoNivel1 / 100) * seccion.Puntuacion;
+                    seccion.Puntuacion = ((float)seccion.PesoNivel1 / 100) * N1Final;
                     seccion.Puntuacion = (seccion.Puntuacion * seccion.Peso) / 100;
+                   // writerTxt.WriteLine("Nivel 1: " + seccion.Puntuacion);
                 }
 
+                
+                // writerTxt.WriteLine("\t \t  ");
+                // writerTxt.WriteLine("\t \t VALORES FINALES ");
+                // writerTxt.WriteLine("\t \t FINAL 1  :    "+N1Final+"%");
+                // writerTxt.WriteLine("\t \t FINAL 2  :    "+N2Final+"%");
+                // writerTxt.WriteLine("\t \t FINAL 3  :    "+N3Final+"%");            
                 sumSections += seccion.Puntuacion;
-
-
             }
 
+            
 
+          
             return (float)Math.Round(sumSections, 1);
+            //}
         }
 
         //Metodo encargado de calcular el porcentaje respondido de la evaluacion
