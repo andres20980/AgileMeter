@@ -22,7 +22,7 @@
     "@angular/router": "7.2.14",
     "@ng-bootstrap/ng-bootstrap": "^4.1.0",
     "bootstrap": "4.3.1",
-    "chart.js": "2.8.0",
+    "chart.js": "2.9.4",
     "core-js": "2.6.5",
     "exceljs": "1.7.0",
     "file-saver": "2.0.1",
